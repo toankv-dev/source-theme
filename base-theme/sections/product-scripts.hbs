@@ -1,0 +1,3 @@
+{{!-- Full variant list (id, option_values, price, compare_at_price, featured_image, available) for core.js.
+      Its presence also marks the page as a product page (ViewContent). --}}
+{{#if product.variants_list}}<script type="application/json" id="sf-variants-data">{{{json product.variants_list}}}</script>{{/if}}

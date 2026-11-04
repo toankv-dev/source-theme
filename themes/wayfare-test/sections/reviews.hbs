@@ -1,0 +1,81 @@
+{{!-- Customer reviews. Layout: title + average, star distribution, photo grid, Filters + sort, a masonry list
+      (long texts get "More"), Show more, a photo lightbox, and a "Write a review" form that posts to the
+      reviews API (multipart, X-CSRF-TOKEN) — new reviews wait for the store's approval.
+      ui.js loads the list from the API; the first page below is the no-JS fallback. With no reviews the
+      section shows only the form button (or nothing when the form is switched off). --}}
+{{#if product.reviews.summary.total_count}}
+<div class="b-wrap b-reviews" id="reviews" data-reviews data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
+  <p class="b-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
+  <p class="b-reviews__avg"><strong>{{product.reviews.summary.average_rating}}</strong> <span class="b-stars" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> <span>{{product.reviews.summary.total_count}} reviews</span></p>
+  <ul class="b-reviews__dist b-reviews__dist--full" data-reviews-dist aria-label="Rating distribution"></ul>
+
+  <div class="b-reviews__photos" data-reviews-photos hidden></div>
+
+  <div class="b-reviews__tools">
+    <details class="b-rfilter" data-review-filter>
+      <summary class="b-rtool">
+        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+        Filters
+      </summary>
+      <div class="b-rfilter__panel">
+        <p class="b-rfilter__title">Rating</p>
+        <label><input type="checkbox" value="5" data-filter-rating> 5 stars</label>
+        <label><input type="checkbox" value="4" data-filter-rating> 4 stars</label>
+        <label><input type="checkbox" value="3" data-filter-rating> 3 stars</label>
+        <label><input type="checkbox" value="2" data-filter-rating> 2 stars</label>
+        <label><input type="checkbox" value="1" data-filter-rating> 1 star</label>
+        <p class="b-rfilter__title">Media</p>
+        <label><input type="checkbox" data-filter-photos> With photos only</label>
+        <button type="button" class="b-facet__reset" data-filter-reset>Clear filters</button>
+      </div>
+    </details>
+    <div class="b-rtool b-rtool--select">
+      <select data-review-sort aria-label="Sort reviews">
+        <option value="recent">Most Recent</option>
+        <option value="high">Highest Rating</option>
+        <option value="low">Lowest Rating</option>
+        <option value="photos">Only Pictures first</option>
+      </select>
+      {{> icon-caret}}
+    </div>
+    {{#unless (eq section.settings.show_form false)}}<button type="button" class="b-btn b-btn--ghost b-reviews__write" data-review-write>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</button>{{/unless}}
+  </div>
+
+  <div class="b-reviews__grid" data-reviews-list>
+    {{#each (limit product.reviews.items 6)}}
+    <article class="b-review">
+      <span class="b-stars b-stars--outline" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>
+      <p class="b-review__who">{{name}}{{#if verified}} <span class="b-pill-verified">Verified</span>{{/if}}</p>
+      {{#if title}}<p class="b-review__title">{{title}}</p>{{/if}}
+      <p class="b-review__text" data-clamp>{{content}}</p>
+      {{#if image}}<img class="b-review__thumb" src="{{image}}" alt="Photo from {{name}}" loading="lazy">{{/if}}
+    </article>
+    {{/each}}
+  </div>
+  <p class="b-muted b-center" data-reviews-empty hidden>No reviews match these filters.</p>
+  <div class="b-center"><button type="button" class="b-link-btn" data-reviews-more hidden>Show more ⌄</button></div>
+  {{#unless (eq section.settings.show_bottom false)}}<p class="b-reviews__bottom"><span class="b-stars b-stars--outline" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> {{product.reviews.summary.total_count}} reviews</p>{{/unless}}
+
+  {{!-- Photo lightbox --}}
+  <div class="b-lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Review photo">
+    <div class="b-lightbox__overlay" data-lightbox-close></div>
+    <div class="b-lightbox__panel">
+      <button type="button" class="b-icon-btn b-lightbox__close" data-lightbox-close aria-label="Close">✕</button>
+      <button type="button" class="b-round-btn b-lightbox__nav b-lightbox__nav--prev" data-lightbox-step="-1" aria-label="Previous photo">‹</button>
+      <img class="b-lightbox__img" data-lightbox-img alt="">
+      <button type="button" class="b-round-btn b-lightbox__nav b-lightbox__nav--next" data-lightbox-step="1" aria-label="Next photo">›</button>
+      <div class="b-lightbox__info" data-lightbox-info></div>
+    </div>
+  </div>
+  {{#unless (eq section.settings.show_form false)}}{{> review-form}}{{/unless}}
+</div>
+{{else}}
+{{#unless (eq section.settings.show_form false)}}
+<div class="b-wrap b-reviews b-reviews--empty" id="reviews">
+  <p class="b-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
+  <p class="b-muted">No reviews yet. Be the first to share your thoughts.</p>
+  <button type="button" class="b-btn" data-review-write>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</button>
+  {{> review-form}}
+</div>
+{{/unless}}
+{{/if}}

@@ -1,0 +1,30 @@
+{
+  "name": "Size buttons (Shapermint)",
+  "description": "Lunara product page; Color / Size as compact buttons like Shapermint (\"Size: S\" label, picked = dark filled).",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "variant_style": "shapermint"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "related": {
+      "type": "related",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq",
+    "related"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Scrolling promises",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [],
+  "blocks": [
+    { "type": "item", "name": "Item", "limit": 8, "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free shipping" }] }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling promises", "category": "Trust", "description": "A navy strip of check-marked promises that scrolls sideways.",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Free shipping" } },
+        { "type": "item", "settings": { "text": "30-day risk-free trial" } },
+        { "type": "item", "settings": { "text": "Secure checkout" } },
+        { "type": "item", "settings": { "text": "Reusable materials" } }
+      ]
+    }
+  ]
+}

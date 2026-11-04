@@ -1,0 +1,15 @@
+{{!-- Product card for collection / search grids. sellingPrice and compareAtPrice are NUMBERS on these
+      cards, so they go through the engine's `money` helper; the raw values stay in data-* for sorting. --}}
+<a class="w-pcard" href="{{url}}" data-card-price-num="{{sellingPrice}}" data-card-title="{{title}}" data-card-rating="{{rating}}">
+  <span class="w-pcard__media">
+    {{#if imageUrl}}<img src="{{#if imageThumbUrl}}{{imageThumbUrl}}{{else}}{{imageUrl}}{{/if}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}{{#if imagePosterUrl}} poster="{{imagePosterUrl}}"{{/if}}>{{/if}}
+    {{#if offPct}}<span class="w-badge w-pcard__badge">Save {{offPct}}%</span>{{/if}}
+  </span>
+  <span class="w-pcard__info">
+    <span class="w-pcard__title">{{title}}</span>
+    <span class="w-pcard__prices">
+      <span class="w-pcard__price">{{money sellingPrice}}</span>
+      {{#if (gt compareAtPrice sellingPrice)}}<s class="w-pcard__was">{{money compareAtPrice}}</s>{{/if}}
+    </span>
+  </span>
+</a>

@@ -1,0 +1,10 @@
+{{!-- Custom HTML block — a "custom-html" block of the Product section
+      (sections/product.schema.json), printed in the product info column where
+      the other blocks go: the merchant's own HTML/CSS/JS, Shopify's "Custom
+      Liquid" block. Called as {{> custom-html-block this}} with the block, so
+      `settings` are the block's and {{{attributes}}} = the editor's data-block-id,
+      which the root element MUST print so the editor can select the block. The
+      HTML goes through applyTokens (store tokens resolve, other braces stay). --}}
+{{#if settings.css}}<style>{{{settings.css}}}</style>{{/if}}
+<div class="pd-custom-html" {{{attributes}}}>{{{applyTokens settings.html}}}</div>
+{{#if settings.js}}<script>{{{settings.js}}}</script>{{/if}}

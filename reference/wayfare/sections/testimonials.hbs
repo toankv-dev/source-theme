@@ -1,0 +1,18 @@
+{{!-- Three featured testimonials from REAL reviews: server-renders the first reviews, then theme.js swaps
+      in the product's photo reviews (photo on top, stars, title, text, name). Hidden with no reviews. --}}
+{{#if product.reviews.items.length}}
+<div class="w-wrap w-testi" data-testimonials="{{#if section.settings.count}}{{section.settings.count}}{{else}}3{{/if}}">
+  <h2 class="w-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}What our customers have to say{{/if}}</h2>
+  <div class="w-testi__grid" data-testi-grid>
+    {{#each (limit product.reviews.items 3)}}
+    <article class="w-testi__card">
+      {{#if image}}<img class="w-testi__img" src="{{image}}" alt="" loading="lazy">{{/if}}
+      <span class="w-stars" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>
+      {{#if title}}<p class="w-testi__title">{{title}}</p>{{/if}}
+      <p class="w-testi__text">{{content}}</p>
+      <p class="w-testi__who">– {{name}}</p>
+    </article>
+    {{/each}}
+  </div>
+</div>
+{{/if}}

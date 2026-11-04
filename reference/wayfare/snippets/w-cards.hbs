@@ -1,0 +1,41 @@
+{{!-- Pack cards. Two kinds, both server-rendered hidden; theme.js reveals the one the block's `source`
+      picks (auto = an option named Pack / Bundle / Set… if the product has one, else quantity packs):
+      - option cards: one card per value of an option group — each card IS a real variant (its own price);
+      - quantity packs: N units of the variant chosen in the pickers below, priced by theme.js with the live
+        automatic discounts and the checkout's formula (no discount live = unit price × N).
+      Per-card subtitle / badge / "what's included" come from the block settings (JSON below), because
+      Handlebars cannot index card_1…card_6 by position. --}}
+<div class="w-cards-block" {{{attributes}}} data-cards-block data-mode="{{#if settings.source}}{{settings.source}}{{else}}auto{{/if}}" data-option-index="{{settings.option_index}}" data-layout="{{#if settings.layout}}{{settings.layout}}{{else}}auto{{/if}}">
+  <script type="application/json" data-cards-settings>{{{json settings}}}</script>
+  {{!-- Shared price shown above compact variant tiles (variant cards keep the price outside the tiles). --}}
+  <p class="w-cards__price" data-cards-price hidden>
+    {{#if @root.product.compare_at_price}}<s data-compare>{{@root.product.compare_at_price}}</s>{{/if}}
+    <span data-price>{{@root.product.price}}</span>
+  </p>
+  {{#each @root.product.variants}}
+  <div class="w-cards" role="radiogroup" aria-label="{{name}}" data-cards="{{@index}}" data-cards-name="{{name}}" hidden>
+    {{#each options}}
+    <div class="w-card{{#if active}} is-selected{{/if}}" role="radio" tabindex="0" data-card="{{label}}" data-card-pos="{{@index}}" aria-checked="{{#if active}}true{{else}}false{{/if}}">
+      <span class="w-card__badge" data-card-badge hidden></span>
+      <span class="w-card__row">
+        <span class="w-card__img">{{#if image}}<img src="{{image}}" alt="" loading="lazy">{{else}}<img data-card-img alt="" hidden>{{/if}}</span>
+        <span class="w-card__text">
+          <span class="w-card__title">{{label}}</span>
+          <span class="w-card__sub" data-card-sub></span>
+        </span>
+        <span class="w-card__prices"><strong data-card-price></strong><s data-card-compare></s></span>
+      </span>
+      <div class="w-card__includes w-rte" data-card-includes hidden></div>
+    </div>
+    {{/each}}
+  </div>
+  {{/each}}
+  <div class="w-cards" role="radiogroup" aria-label="Choose a pack" data-qcards hidden>
+    {{> w-qcard n="1" qty=settings.card_1_qty title=settings.card_1_title img=settings.card_1_image sel=settings.selected}}
+    {{> w-qcard n="2" qty=settings.card_2_qty title=settings.card_2_title img=settings.card_2_image sel=settings.selected}}
+    {{> w-qcard n="3" qty=settings.card_3_qty title=settings.card_3_title img=settings.card_3_image sel=settings.selected}}
+    {{> w-qcard n="4" qty=settings.card_4_qty title=settings.card_4_title img=settings.card_4_image sel=settings.selected}}
+    {{> w-qcard n="5" qty=settings.card_5_qty title=settings.card_5_title img=settings.card_5_image sel=settings.selected}}
+    {{> w-qcard n="6" qty=settings.card_6_qty title=settings.card_6_title img=settings.card_6_image sel=settings.selected}}
+  </div>
+</div>

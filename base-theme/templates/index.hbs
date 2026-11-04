@@ -1,0 +1,151 @@
+{{!-- Home page. Settings-driven (Theme settings → Home …): the sections editor covers product pages only.
+      Blocks, top to bottom, each switchable: hero, promises strip, featured product, product grid (all products
+      or one grid per collection), image banner, comparison, customer reviews carousel, FAQ, newsletter, contact.
+      Lists typed into textareas (promises, comparison rows) are split into markup by ui.js. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="b-body b-body--home">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#unless (eq settings.home_hero_show false)}}
+  <section class="b-hero b-hero--{{#if settings.home_hero_align}}{{settings.home_hero_align}}{{else}}left{{/if}}" style="--overlay:{{#if settings.home_hero_overlay}}{{settings.home_hero_overlay}}{{else}}0{{/if}}">
+    {{#if settings.home_hero_image}}
+    <picture class="b-hero__media">
+      {{#if settings.home_hero_mobile_image}}<source media="(max-width: 749px)" srcset="{{settings.home_hero_mobile_image}}">{{/if}}
+      <img src="{{settings.home_hero_image}}" alt="" fetchpriority="high">
+    </picture>
+    {{/if}}
+    <div class="b-wrap b-hero__inner">
+      <div class="b-hero__copy">
+        {{#if settings.home_hero_eyebrow}}<p class="b-hero__eyebrow">{{settings.home_hero_eyebrow}}</p>{{/if}}
+        <h1 class="b-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
+        {{#if settings.home_hero_text}}<p class="b-hero__text">{{settings.home_hero_text}}</p>{{/if}}
+        <a class="b-btn b-btn--hero" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}} {{> icon-arrow}}</a>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#if settings.home_promises}}
+  <div class="b-marquee" aria-label="Store promises" data-split-marquee="{{settings.home_promises}}">
+    <div class="b-marquee__track"></div>
+  </div>
+  {{/if}}
+
+  {{#if settings.home_featured_show}}
+  {{!-- Featured product: the first product. ui.js loads its gallery + variants from its own product page
+        (#sf-config / #sf-variants-data), so Quantity + Add to cart work right here. --}}
+  {{#each (limit products 1)}}
+  <section class="b-wrap b-featured" data-featured="{{url}}" data-featured-handle="{{handle}}">
+    <h2 class="b-h2">{{#if @root.settings.home_featured_heading}}{{@root.settings.home_featured_heading}}{{else}}Our product{{/if}}</h2>
+    <div class="b-featured__grid">
+      <div class="b-featured__gallery">
+        <div class="b-featured__media">
+          {{#if imageUrl}}<img data-featured-main src="{{imageUrl}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}
+        </div>
+        <div class="b-featured__strip" data-featured-strip hidden>
+          <button type="button" class="b-round-btn" data-featured-step="-1" aria-label="Previous image">‹</button>
+          <div class="b-featured__thumbs" data-featured-thumbs></div>
+          <button type="button" class="b-round-btn" data-featured-step="1" aria-label="Next image">›</button>
+        </div>
+      </div>
+      <div class="b-featured__info">
+        <h3 class="b-featured__title">{{title}}</h3>
+        {{#if reviewCount}}<p class="b-featured__rating"><span class="b-stars" style="--r:{{rating}}" aria-hidden="true"></span> {{rating}} ({{reviewCount}} reviews)</p>{{/if}}
+        <p class="b-featured__price"><span data-featured-price>{{money sellingPrice}}</span>{{#if (gt compareAtPrice sellingPrice)}} <s data-featured-compare>{{money compareAtPrice}}</s>{{/if}}</p>
+        <div class="b-featured__variant" data-featured-variant hidden>
+          <label>Option<select class="b-select" data-featured-select></select></label>
+        </div>
+        <p class="b-featured__qty-label">Quantity</p>
+        <div class="b-qty" data-featured-qty>
+          <button type="button" data-featured-qty-step="-1" aria-label="Decrease quantity">−</button>
+          <input type="number" min="1" max="999" value="1" data-featured-qty-input aria-label="Quantity">
+          <button type="button" data-featured-qty-step="1" aria-label="Increase quantity">+</button>
+        </div>
+        <button type="button" class="b-btn b-btn--block b-btn--lg" data-testid="add-to-cart" data-featured-atc disabled>{{#if @root.settings.atc_label}}{{@root.settings.atc_label}}{{else}}Add to cart{{/if}}</button>
+        <a class="b-btn b-btn--block b-btn--ghost" href="{{url}}">More info</a>
+        <p class="b-form-msg" data-featured-msg role="status"></p>
+      </div>
+    </div>
+  </section>
+  {{/each}}
+  {{/if}}
+
+  {{#unless (eq settings.home_products_show false)}}
+  {{#if (eq settings.home_products_source "collections")}}
+  {{#each collections}}{{#if products.length}}
+  <section class="b-wrap b-home-grid">
+    <div class="b-home-grid__head">
+      <h2 class="b-h2 b-h2--left">{{title}}</h2>
+      <a class="b-link" href="/collections/{{handle}}" data-local-domain>View all {{> icon-arrow}}</a>
+    </div>
+    <div class="b-grid">{{#if @root.settings.home_products_limit}}{{#each (limit products @root.settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
+  </section>
+  {{/if}}{{/each}}
+  {{else}}
+  {{#if products.length}}
+  <section class="b-wrap b-home-grid" id="products">
+    <h2 class="b-h2">{{#if settings.home_products_heading}}{{settings.home_products_heading}}{{else}}Best sellers{{/if}}</h2>
+    <div class="b-grid">{{#if settings.home_products_limit}}{{#each (limit products settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
+    <div class="b-center b-home-grid__more"><a class="b-btn b-btn--ghost" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>View all</a></div>
+  </section>
+  {{/if}}
+  {{/if}}
+  {{/unless}}
+
+  {{#if settings.home_banner_show}}
+  <section class="b-wrap b-iwt b-iwt--image-{{#if settings.home_banner_side}}{{settings.home_banner_side}}{{else}}left{{/if}}">
+    <div class="b-iwt__media">{{#if settings.home_banner_image}}<img src="{{settings.home_banner_image}}" alt="" loading="lazy">{{else}}<div class="b-ph" aria-hidden="true"></div>{{/if}}</div>
+    <div class="b-iwt__text">
+      {{#if settings.home_banner_title}}<h2 class="b-h2 b-h2--left">{{settings.home_banner_title}}</h2>{{/if}}
+      {{#if settings.home_banner_text}}<div class="b-rte"><p>{{settings.home_banner_text}}</p></div>{{/if}}
+      <a class="b-btn" href="{{#if settings.home_banner_link}}{{settings.home_banner_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{#if settings.home_banner_button}}{{settings.home_banner_button}}{{else}}Shop now{{/if}}</a>
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if settings.home_compare_show}}
+  {{!-- Us vs. them. Rows come from a textarea (Feature|yes|no) and are built by ui.js. --}}
+  <section class="b-wrap b-compare" data-home-compare="{{settings.home_compare_rows}}" data-ours="{{#if settings.home_compare_ours}}{{settings.home_compare_ours}}{{else}}{{brand.name}}{{/if}}" data-theirs="{{#if settings.home_compare_theirs}}{{settings.home_compare_theirs}}{{else}}Others{{/if}}">
+    <h2 class="b-h2">{{#if settings.home_compare_heading}}{{settings.home_compare_heading}}{{else}}How we compare{{/if}}</h2>
+    <div class="b-compare__table" role="table" data-compare-table></div>
+  </section>
+  {{/if}}
+
+  {{#unless (eq settings.home_reviews_show false)}}
+  <section class="b-home-reviews" data-home-reviews hidden>
+    <div class="b-wrap">
+      <h2 class="b-h2 b-h2--tight">{{#if settings.home_reviews_heading}}{{settings.home_reviews_heading}}{{else}}What our customers are saying{{/if}}</h2>
+      {{#if settings.home_reviews_sub}}<p class="b-home-reviews__sub">{{settings.home_reviews_sub}}</p>{{/if}}
+      <div class="b-carousel" data-carousel>
+        <div class="b-carousel__track" data-carousel-track></div>
+      </div>
+      <div class="b-carousel__dots" data-carousel-dots role="tablist" aria-label="Choose reviews"></div>
+    </div>
+    <script type="application/json" data-home-product-ids>[{{#each (limit products 60)}}{{#unless @first}},{{/unless}}"{{id}}"{{/each}}]</script>
+  </section>
+  {{/unless}}
+
+  {{#if settings.home_faq_show}}{{> faq}}{{/if}}
+
+  {{#if settings.home_newsletter_show}}
+  <section class="b-newsletter-sec">
+    <div class="b-wrap b-newsletter-sec__inner">
+      <h2 class="b-h2">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Join our newsletter{{/if}}</h2>
+      {{#if settings.newsletter_text}}<p class="b-newsletter-sec__text">{{settings.newsletter_text}}</p>{{/if}}
+      {{> newsletter-form id="home"}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if settings.home_contact_show}}{{> contact-form-body heading=settings.home_contact_heading}}{{/if}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

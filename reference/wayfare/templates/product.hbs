@@ -1,0 +1,17 @@
+{{!-- Legacy (schema v1) entry: the upload validator renders this file, and a store without a template
+      document falls back to it. Same shell as layout/theme.hbs with the key sections inlined. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="w-body w-body--product">
+{{{trackingBody}}}
+<a class="w-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="w-main">{{> product}}{{> reviews}}{{> faq}}</main>
+{{> footer}}
+{{> product-scripts}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

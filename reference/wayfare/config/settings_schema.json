@@ -1,0 +1,419 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary (header, footer, buttons)",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "primary_text",
+        "label": "Text on primary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "check",
+        "label": "Check marks / positive",
+        "default": "#1fa463"
+      },
+      {
+        "type": "color",
+        "id": "badge",
+        "label": "Save badges",
+        "default": "#3b9dea"
+      },
+      {
+        "type": "color",
+        "id": "alert",
+        "label": "Stock dot / urgency",
+        "default": "#e0392b"
+      },
+      {
+        "type": "color",
+        "id": "star",
+        "label": "Stars",
+        "default": "#17b26a"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font",
+        "label": "Font (Google Fonts name)",
+        "default": "Manrope"
+      }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_topbar",
+        "label": "Show announcement bar",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "topbar_autoplay",
+        "label": "Rotate messages automatically",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Messages",
+        "default": "Holiday sale | Up to 50% off + free shipping||30-day risk-free trial",
+        "info": "Separate messages with || (two bars). A single | stays inside one message."
+      }
+    ]
+  },
+  {
+    "name": "Header & footer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_track_link",
+        "label": "Show Track order in the menu",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search icon",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_account",
+        "label": "Show the Your orders link in the mobile menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Support hours (footer)",
+        "default": "Mon–Fri, 9am–5pm EST"
+      }
+    ]
+  },
+  {
+    "name": "Payment icons",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shown under Add to cart, in the cart and in the footer. Turn off any method your store does not take."
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_visa",
+        "label": "Visa",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_mastercard",
+        "label": "Mastercard",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_amex",
+        "label": "American Express",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_discover",
+        "label": "Discover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_applepay",
+        "label": "Apple Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_googlepay",
+        "label": "Google Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_paypal",
+        "label": "PayPal",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "atc_label",
+        "label": "Add to cart label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "open_cart_on_add",
+        "label": "Open the cart drawer after Add to cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_text",
+        "label": "Empty cart text",
+        "default": "Your cart is empty."
+      },
+      {
+        "type": "header",
+        "content": "Shipping protection (cart footer)"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_upsells",
+        "label": "Protection product",
+        "info": "Pick per store domain the product you sell as protection (e.g. 'Shipping Protected'). It shows above the subtotal with its description, switched ON: added to the cart as a real item. The buyer can switch it off."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_as_line",
+        "label": "Also list it with the cart items",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Heading (empty = none)",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_bg",
+        "label": "Background",
+        "default": "#F4F5F7"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_color",
+        "label": "Text",
+        "default": "#15171C"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_accent",
+        "label": "Switch colour",
+        "default": "",
+        "info": "Empty = the theme primary colour."
+      }
+    ]
+  },
+  {
+    "name": "Home – hero & product",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "home_hero_image",
+        "label": "Hero image"
+      },
+      {
+        "type": "text",
+        "id": "home_hero_title",
+        "label": "Hero title",
+        "default": "Pack light. Travel further.",
+        "info": "Empty = store name."
+      },
+      {
+        "type": "text",
+        "id": "home_hero_text",
+        "label": "Hero text",
+        "default": "Limited-time offer"
+      },
+      {
+        "type": "text",
+        "id": "home_hero_button",
+        "label": "Hero button",
+        "default": "Shop now"
+      },
+      {
+        "type": "text",
+        "id": "home_featured_heading",
+        "label": "Featured product heading",
+        "default": "Our product"
+      }
+    ]
+  },
+  {
+    "name": "Home – comparison & why us",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_compare_show",
+        "label": "Show comparison table",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_compare_heading",
+        "label": "Comparison heading (line 1)",
+        "default": "Why TravelVac Pro"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_heading_2",
+        "label": "Comparison heading (line 2)",
+        "default": "CRUSHES Other Vacuum Sealers"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_ours",
+        "label": "Our column",
+        "default": "TravelVac Pro",
+        "info": "Empty = store name."
+      },
+      {
+        "type": "text",
+        "id": "home_compare_theirs",
+        "label": "Other column",
+        "default": "Other Vacuum Sealers"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_compare_ours_image",
+        "label": "Our column image"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_compare_theirs_image",
+        "label": "Other column image"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_mid",
+        "label": "Middle column heading",
+        "default": "Your Hotel Room Has No Vacuum. Does Your Bag System?"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_button",
+        "label": "Button under the table",
+        "default": "Get now"
+      },
+      {
+        "type": "textarea",
+        "id": "home_compare_rows",
+        "label": "Rows",
+        "default": "Use it anywhere - no plug needed|yes|no\nFully Cordless & Rechargeable|yes|no\n90 bags on a single charge|yes|no\n4500Pa - highest suction in category|yes|no\n10–15 sec per bag compression speed|yes|no\nBags stay sealed overnight|yes|no\nTriple-line PA+PE airtight seal|yes|no\n3 sizes: S / M / L included|yes|no\nBags re-inflate overnight|no|yes\nBags break after just 1-2 uses|no|yes\nUseless in hotel rooms - needs a wall outlet|no|yes\nManual pump is exhausting - and still doesn't fully work|no|yes",
+        "info": "One row per line: Feature|yes|no (us, then them)."
+      },
+      {
+        "type": "checkbox",
+        "id": "home_why_show",
+        "label": "Show Why us",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_why_heading",
+        "label": "Why us heading",
+        "default": "Why choose us?"
+      },
+      {
+        "type": "text",
+        "id": "home_why_button",
+        "label": "Why us button (opens the product page)",
+        "default": "FAQs"
+      },
+      {
+        "type": "textarea",
+        "id": "home_why_items",
+        "label": "Why us items",
+        "default": "Made for carry-on travel|Everything is sized to fit a cabin bag.\nWorks anywhere|No outlet needed — charge it like your phone.\nBuilt to last|Durable, reusable materials.",
+        "info": "One item per line: Title|Text."
+      }
+    ]
+  },
+  {
+    "name": "Home – banner, reviews, contact",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_banner_show",
+        "label": "Show banner",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "home_banner_image",
+        "label": "Banner image"
+      },
+      {
+        "type": "text",
+        "id": "home_banner_title",
+        "label": "Banner title (start)",
+        "default": "Our most popular pack"
+      },
+      {
+        "type": "text",
+        "id": "home_banner_highlight",
+        "label": "Banner title (red part)",
+        "default": "sells out fast"
+      },
+      {
+        "type": "text",
+        "id": "home_banner_suffix",
+        "label": "Banner title (end)",
+        "default": "⚠️",
+        "info": "Keep it true — only claim low stock when it is."
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Banner button",
+        "default": "Pack more. Pay less."
+      },
+      {
+        "type": "checkbox",
+        "id": "home_reviews_show",
+        "label": "Show real reviews",
+        "default": true,
+        "info": "Pulled from your products' published reviews; hidden when there are none."
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_heading",
+        "label": "Reviews heading",
+        "default": "What our customers are saying"
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_sub",
+        "label": "Reviews subheading",
+        "default": "Real reviews from real customers."
+      },
+      {
+        "type": "checkbox",
+        "id": "home_contact_show",
+        "label": "Show contact form",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_contact_heading",
+        "label": "Contact heading",
+        "default": "Contact form"
+      }
+    ]
+  }
+]

@@ -1,0 +1,467 @@
+{
+  "name": "Default",
+  "description": "Hero product page: pack cards, press logos, image row, promises, intro + specs, steps, feature rows, stats, photo testimonials, guarantee, FAQ and reviews.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {},
+      "blocks": {
+        "award": {
+          "type": "award",
+          "settings": {
+            "text": "Voted best travel gadget of the year",
+            "icon": "🏆"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "label": "happy travelers"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "sub1": {
+          "type": "subtitle",
+          "settings": {
+            "text": "Pack more and travel carry-on only"
+          }
+        },
+        "sub2": {
+          "type": "subtitle",
+          "settings": {
+            "text": "Try it risk-free with our 30-day guarantee"
+          }
+        },
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Frees up to 3x more space in any suitcase"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Stays sealed — no re-inflating overnight"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Cordless, charges over USB-C in any hotel room"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Skip checked-bag fees, travel carry-on only"
+          }
+        },
+        "b5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Compresses bulky jackets in seconds"
+          }
+        },
+        "stock": {
+          "type": "stock",
+          "settings": {
+            "text": "In stock – ships within 24 hours"
+          }
+        },
+        "offer": {
+          "type": "offer_heading",
+          "settings": {
+            "text": "Holiday sale – up to 50% off"
+          }
+        },
+        "cards": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "auto",
+            "option_index": 0,
+            "layout": "auto",
+            "selected": "2",
+            "currency_code": true,
+            "card_1_qty": 1,
+            "card_1_title": "1 Pack",
+            "card_1_sub": "",
+            "card_1_badge": "",
+            "card_1_includes": "",
+            "card_2_qty": 2,
+            "card_2_title": "2 Pack",
+            "card_2_sub": "",
+            "card_2_badge": "",
+            "card_2_includes": "",
+            "card_3_qty": 3,
+            "card_3_title": "3 Pack",
+            "card_3_sub": "",
+            "card_3_badge": "",
+            "card_3_includes": "",
+            "card_4_qty": 4,
+            "card_4_title": "4 Pack",
+            "card_4_sub": "",
+            "card_4_badge": "",
+            "card_4_includes": "",
+            "card_5_qty": 0,
+            "card_5_title": "",
+            "card_5_sub": "",
+            "card_5_badge": "",
+            "card_5_includes": "",
+            "card_6_qty": 0,
+            "card_6_title": "",
+            "card_6_sub": "",
+            "card_6_badge": "",
+            "card_6_includes": ""
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Add to cart",
+            "mode": "cart",
+            "show_qty": true,
+            "show_payments": true
+          }
+        },
+        "trust": {
+          "type": "trust_icons",
+          "settings": {
+            "label_1": "30-day risk-free trial",
+            "label_2": "Secure checkout",
+            "label_3": "Fast & free shipping"
+          }
+        },
+        "review": {
+          "type": "review",
+          "settings": {}
+        },
+        "acc1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Refunds & returns",
+            "source": "custom",
+            "body": "<p>30 days to return it if it isn't for you. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>",
+            "open": false
+          }
+        },
+        "acc2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & delivery",
+            "source": "custom",
+            "body": "<p>Orders ship within 1–3 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>",
+            "open": false
+          }
+        },
+        "acc3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Description",
+            "source": "description",
+            "body": "<p>Orders ship within 1–3 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>",
+            "open": false
+          }
+        }
+      },
+      "blockOrder": [
+        "award",
+        "rating",
+        "title",
+        "sub1",
+        "sub2",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "stock",
+        "offer",
+        "cards",
+        "buy",
+        "trust",
+        "review",
+        "acc1",
+        "acc2",
+        "acc3"
+      ]
+    },
+    "images": {
+      "type": "image-row",
+      "settings": {},
+      "blocks": {
+        "i1": {
+          "type": "video",
+          "settings": {}
+        },
+        "i2": {
+          "type": "video",
+          "settings": {}
+        },
+        "i3": {
+          "type": "video",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "i1",
+        "i2",
+        "i3"
+      ]
+    },
+    "promises": {
+      "type": "marquee",
+      "settings": {},
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Reusable materials"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "30-day risk-free trial"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        }
+      },
+      "blockOrder": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ]
+    },
+    "intro": {
+      "type": "spec-card",
+      "settings": {},
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {}
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "title": "Fast",
+            "text": "About 10 seconds per bag"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "title": "Long battery",
+            "text": "Many bags per charge"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "title": "Stays sealed",
+            "text": "For days"
+          }
+        },
+        "t5": {
+          "type": "tile",
+          "settings": {
+            "title": "3 sizes",
+            "text": "S, M and L"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "settings": {
+            "title": "No outlet needed",
+            "text": "Anywhere in the world"
+          }
+        }
+      },
+      "blockOrder": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6"
+      ]
+    },
+    "steps": {
+      "type": "steps",
+      "settings": {},
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {}
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "caption": "Seal it"
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "caption": "Open the valve"
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "caption": "Start the pump"
+          }
+        }
+      },
+      "blockOrder": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ]
+    },
+    "features": {
+      "type": "feature-rows",
+      "settings": {
+        "eyebrow": "",
+        "heading": ""
+      },
+      "blocks": {
+        "f1": {
+          "type": "row",
+          "settings": {
+            "heading": "Rechargeable and cordless for travel"
+          }
+        },
+        "f2": {
+          "type": "row",
+          "settings": {
+            "heading": "Fast and powerful compression"
+          }
+        },
+        "f3": {
+          "type": "row",
+          "settings": {
+            "heading": "Travel-size storage bags"
+          }
+        }
+      },
+      "blockOrder": [
+        "f1",
+        "f2",
+        "f3"
+      ]
+    },
+    "stats": {
+      "type": "stats",
+      "settings": {},
+      "blocks": {
+        "n1": {
+          "type": "stat",
+          "settings": {}
+        },
+        "n2": {
+          "type": "stat",
+          "settings": {
+            "value": "4 in 5",
+            "label": "use it on every trip"
+          }
+        },
+        "n3": {
+          "type": "stat",
+          "settings": {
+            "value": "2x",
+            "label": "more room in their suitcase"
+          }
+        }
+      },
+      "blockOrder": [
+        "n1",
+        "n2",
+        "n3"
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "guarantee": {
+      "type": "guarantee",
+      "settings": {}
+    },
+    "promises2": {
+      "type": "marquee",
+      "settings": {},
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Reusable materials"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "30-day risk-free trial"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        }
+      },
+      "blockOrder": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "show_form": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "images",
+    "promises",
+    "intro",
+    "steps",
+    "features",
+    "stats",
+    "testimonials",
+    "guarantee",
+    "promises2",
+    "faq",
+    "reviews"
+  ]
+}

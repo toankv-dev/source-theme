@@ -1,0 +1,5 @@
+<div class="w-wrap w-guarantee">
+  {{#if section.settings.eyebrow}}<p class="w-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="w-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  {{#if section.settings.body}}<div class="w-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+</div>

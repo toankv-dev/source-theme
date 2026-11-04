@@ -1,0 +1,16 @@
+{{!-- Image + text rows that alternate sides, optionally numbered 01, 02… --}}
+<div class="w-wrap w-features">
+  {{#if section.settings.eyebrow}}<p class="w-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="w-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  {{#if section.settings.intro}}<p class="w-features__intro">{{section.settings.intro}}</p>{{/if}}
+  {{#each section.blocks}}
+  <div class="w-feature" {{{this.attributes}}}>
+    <div class="w-feature__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.heading}}" loading="lazy">{{else}}<div class="w-feature__ph" aria-hidden="true"></div>{{/if}}</div>
+    <div class="w-feature__text">
+      {{#unless (eq ../section.settings.numbered false)}}<p class="w-feature__num" data-feature-num></p>{{/unless}}
+      <h3 class="w-feature__title">{{this.settings.heading}}</h3>
+      <div class="w-rte">{{{applyTokens this.settings.body}}}</div>
+    </div>
+  </div>
+  {{/each}}
+</div>

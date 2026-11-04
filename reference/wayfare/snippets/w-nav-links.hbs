@@ -1,0 +1,5 @@
+{{!-- Main menu links, shared by the desktop nav and the mobile drawer. theme.js marks the current page. --}}
+<a href="{{#if @root.config.homeUrl}}{{@root.config.homeUrl}}{{else}}{{#if @root.policyLinks.home}}{{@root.policyLinks.home}}{{else}}/{{/if}}{{/if}}" data-nav="home">Home</a>
+<a href="{{#if @root.config.allProductsUrl}}{{@root.config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-nav="shop" data-local-domain>Shop</a>
+<a href="{{#if @root.policyLinks.contact}}{{@root.policyLinks.contact}}{{else}}/contact{{/if}}" data-nav="contact" data-local-domain>Contact</a>
+{{#unless (eq @root.settings.show_track_link false)}}<a href="{{#if @root.config.trackUrl}}{{@root.config.trackUrl}}{{else}}{{#if @root.policyLinks.track}}{{@root.policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-nav="track" data-local-domain>Track order</a>{{/unless}}

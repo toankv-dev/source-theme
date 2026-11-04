@@ -1,0 +1,52 @@
+{{!-- TwinklingTree footer: black, four columns (Explore / Policies / newsletter / Get in touch), payment marks
+      and copyright centred. On phones the columns fold into accordions (details). Platform pages render it
+      too, so it reads only brand / config / policyLinks / settings / collections. --}}
+<footer class="b-footer tt-footer">
+  <div class="b-wrap tt-footer__grid">
+    <details class="tt-footer__col" open>
+      <summary class="tt-footer__title">Explore</summary>
+      <ul class="tt-footer__list">
+        {{#each (limit collections 4)}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/each}}
+        {{#if policyLinks.shipping}}<li><a href="{{policyLinks.shipping}}">Shipping Info</a></li>{{/if}}
+        <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track Order</a></li>
+        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact Us</a></li>{{/if}}
+      </ul>
+    </details>
+    <details class="tt-footer__col" open>
+      <summary class="tt-footer__title">Policies</summary>
+      <ul class="tt-footer__list">
+        {{#if policyLinks.privacy}}<li><a href="{{policyLinks.privacy}}">Privacy Policy</a></li>{{/if}}
+        {{#if policyLinks.terms}}<li><a href="{{policyLinks.terms}}">Terms of Service</a></li>{{/if}}
+        {{#if policyLinks.refund}}<li><a href="{{policyLinks.refund}}">Return Policy</a></li>{{/if}}
+        {{#if policyLinks.about}}<li><a href="{{policyLinks.about}}">About Us</a></li>{{/if}}
+      </ul>
+    </details>
+    {{#unless (eq settings.footer_newsletter false)}}
+    <details class="tt-footer__col" open>
+      <summary class="tt-footer__title">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Unlock Exclusive Access{{/if}}</summary>
+      <div class="tt-footer__body">
+        {{#if settings.newsletter_text}}<p>{{settings.newsletter_text}}</p>{{/if}}
+        <form class="b-news tt-news" data-newsletter novalidate>
+          <label class="b-sr" for="tt-news-footer">Email</label>
+          <input class="tt-news__input" id="tt-news-footer" type="email" name="email" placeholder="{{#if settings.newsletter_placeholder}}{{settings.newsletter_placeholder}}{{else}}Enter your email{{/if}}" autocomplete="email" required>
+          <button class="tt-news__btn" type="submit" aria-label="{{#if settings.newsletter_button}}{{settings.newsletter_button}}{{else}}Subscribe{{/if}}"><img src="{{assets_url}}/images/tt/mail.svg" alt="" width="22" height="16"></button>
+          <p class="b-form-msg" data-newsletter-msg role="status"></p>
+        </form>
+      </div>
+    </details>
+    {{/unless}}
+    <details class="tt-footer__col" open>
+      <summary class="tt-footer__title">Get in touch</summary>
+      <div class="tt-footer__body tt-footer__contact">
+        <p>To get in touch with our helpful Customer Service team, please <a href="{{#if policyLinks.contact}}{{policyLinks.contact}}{{else}}/pages/contact-us{{/if}}">click here</a> . They will respond to all your questions and enquiries ASAP.</p>
+        {{#if brand.email}}<p>Email: <a href="mailto:{{brand.email}}">{{brand.email}}</a></p>{{/if}}
+        {{#if brand.phone}}<p>Phone: <a href="tel:{{brand.phone}}">{{brand.phone}}</a></p>{{/if}}
+        {{#if brand.address}}<p>{{brand.address}}</p>{{/if}}
+      </div>
+    </details>
+  </div>
+  <div class="b-wrap tt-footer__bottom">
+    {{#unless (eq settings.footer_payment false)}}{{> pay-icons}}{{/unless}}
+    <p class="tt-footer__copy">© <span data-year></span> {{brand.name}}</p>
+  </div>
+</footer>

@@ -1,0 +1,58 @@
+{
+  "name": "Benefits marquee",
+  "tag": "div",
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "✔ Free shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits marquee",
+      "category": "Trust",
+      "description": "A slim scrolling strip of short benefit lines.",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "✔ Free shipping"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "✔ 45-day money-back guarantee"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "✔ Secure checkout"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "✔ Real support, real people"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "✔ Ships fast"
+          }
+        }
+      ]
+    }
+  ]
+}

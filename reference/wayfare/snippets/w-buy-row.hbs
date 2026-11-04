@@ -1,0 +1,13 @@
+{{!-- Quantity + the add-to-cart button. mode "checkout" goes straight to checkout after adding. --}}
+<div class="w-buy-row">
+  {{#unless (eq show_qty false)}}
+  <div class="w-qty" data-qty>
+    <button type="button" data-qty-step="-1" aria-label="Decrease quantity">−</button>
+    <input type="number" min="1" max="999" value="1" data-qty-input aria-label="Quantity">
+    <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+  </div>
+  {{/unless}}
+  <button type="button" class="w-btn w-btn--block w-btn--lg" id="addToCart" data-testid="add-to-cart" data-add-to-cart data-main-atc data-mode="{{#if mode}}{{mode}}{{else}}cart{{/if}}">
+    {{#if label}}{{label}}{{else}}{{#if @root.settings.atc_label}}{{@root.settings.atc_label}}{{else}}Add to cart{{/if}}{{/if}}
+  </button>
+</div>

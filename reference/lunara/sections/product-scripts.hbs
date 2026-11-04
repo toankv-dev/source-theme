@@ -1,0 +1,119 @@
+<script>window.__gsOpenCart = {{#if (eq settings.open_cart_on_add false)}}false{{else}}true{{/if}};</script>
+{{!-- Hanh vi nen tang chep tu Theme-Sale (#sf-variants-data, ViewContent, ?variant=); selector doi sang markup Mindsparkl. --}}
+{{!-- Full per-variant list (id + option_values + price + compare_at_price +
+display_name). #sf-config config.variants carries price only (no compare), so
+theme.js pv() reads this to update .pd-price-block on variant change — same
+data source as theme-softmuse's #sf-variants-data. --}}
+<script type="application/json" id="sf-variants-data">{{{json product.variants_list}}}</script>
+
+{{!-- ViewContent. The platform injects window.__adluxTrack (pixel + server-side
+      CAPI sharing one event_id); firing the events is the THEME's job. The
+      storefront half of theme.js carried no tracking of its own, so the product
+      page used to report nothing at all. Payload matches the softmuse reference
+      exactly so pixel data stays consistent across themes. AddToCart fires from
+      theme.js, on the branch where the line really enters the cart. ViewContent
+      is product-page only, hence here rather than in the script. --}}
+<script>
+  (function () {
+    var cfg = (function () {
+      try { return JSON.parse(document.getElementById('sf-config').textContent || '{}') || {}; }
+      catch (e) { return {}; }
+    })();
+    if (!cfg.productId && !cfg.handle) return;
+    function fire() {
+      try {
+        if (!window.__adluxTrack) return;
+        window.__adluxTrack('ViewContent', {
+          currency: cfg.currency || 'USD',
+          value: cfg.priceNum || 0,
+          content_ids: cfg.handle ? [cfg.handle] : [],
+          content_type: 'product',
+          content_name: cfg.title || '',
+        });
+      } catch (e) {}
+    }
+    // The runtime is injected in <head>, so it is normally already defined;
+    // retry briefly rather than drop the event if a pixel script is slow.
+    if (window.__adluxTrack) fire();
+    else {
+      var tries = 0;
+      var t = setInterval(function () {
+        if (window.__adluxTrack || ++tries > 20) { clearInterval(t); fire(); }
+      }, 150);
+    }
+  })();
+</script>
+
+{{!-- Variant <-> URL sync (?variant=<id>), nhu Theme-Sale; doi selector sang markup Mindsparkl:
+      nhom `.ms-variant-group` chua radio (input[type=radio]) hoac select. --}}
+<script>
+  (function () {
+    function pdp() { return document.querySelector('[data-ms-pdp]'); }
+    if (!pdp() || !window.history || !history.replaceState) return;
+    var variants = (function () {
+      try { return JSON.parse(document.getElementById('sf-variants-data').textContent || '[]') || []; }
+      catch (e) { return []; }
+    })();
+    if (!variants.length) return;
+    var norm = function (v) { return String(v == null ? '' : v).toLowerCase().trim(); };
+    function groups() { var s = pdp(); return s ? Array.prototype.slice.call(s.querySelectorAll('.ms-variant-group')) : []; }
+    function selected() {
+      return groups().map(function (g) {
+        var sel = g.querySelector('select');
+        if (sel) return norm(sel.value);
+        var on = g.querySelector('input[type=radio]:checked');
+        return on ? norm(on.value) : '';
+      }).filter(Boolean);
+    }
+    function findVariant(vals) {
+      if (!vals.length) return null;
+      for (var i = 0; i < variants.length; i++) {
+        var ov = (variants[i].option_values || []).map(norm).filter(Boolean);
+        if (ov.length !== vals.length) continue;
+        var ok = true;
+        for (var j = 0; j < vals.length; j++) if (ov.indexOf(vals[j]) === -1) { ok = false; break; }
+        if (ok) return variants[i];
+      }
+      return null;
+    }
+    function writeUrl() {
+      try {
+        var v = findVariant(selected());
+        var url = new URL(location.href);
+        if (v && v.id) url.searchParams.set('variant', v.id);
+        else url.searchParams.delete('variant');
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+    }
+    document.addEventListener('change', function (e) { if (e.target && e.target.closest && e.target.closest('[data-ms-pdp] .ms-variant-group')) setTimeout(writeUrl, 0); });
+    function restore() {
+      var id;
+      try { id = new URL(location.href).searchParams.get('variant'); } catch (e) { return; }
+      if (!id) return;
+      var target = null;
+      for (var i = 0; i < variants.length; i++) if (String(variants[i].id) === id) { target = variants[i]; break; }
+      if (!target) return;
+      (target.option_values || []).forEach(function (val) {
+        var want = norm(val);
+        groups().forEach(function (g) {
+          var sel = g.querySelector('select');
+          if (sel) {
+            for (var o = 0; o < sel.options.length; o++) if (norm(sel.options[o].value) === want && norm(sel.value) !== want) {
+              sel.value = sel.options[o].value; sel.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            return;
+          }
+          var rs = g.querySelectorAll('input[type=radio]');
+          for (var k = 0; k < rs.length; k++) if (norm(rs[k].value) === want && !rs[k].checked) {
+            rs[k].checked = true; rs[k].dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
+    }
+    var hadVariantParam = false;
+    try { hadVariantParam = new URL(location.href).searchParams.get('variant') !== null; } catch (e) { }
+    var onLoadSync = function () { restore(); if (hadVariantParam) setTimeout(writeUrl, 0); };
+    if (document.readyState === 'complete') onLoadSync();
+    else window.addEventListener('load', onLoadSync);
+  })();
+</script>

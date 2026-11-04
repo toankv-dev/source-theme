@@ -1,0 +1,29 @@
+{{!-- Policy / About pages (page.title + page.bodyHtml) and the order-tracking form. The form submits to the
+      platform's /pages/tracking/result, which shows the result inside this theme's header and footer. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="w-body w-body--page">
+{{{trackingBody}}}
+<a class="w-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="w-main">
+  <article class="w-wrap w-page">
+    <h1 class="w-page__title">{{page.title}}</h1>
+    {{#if (eq page.title "Order Tracking")}}
+    <form class="w-track" method="get" action="/pages/tracking/result" data-track-form>
+      {{#if config.domain}}<input type="hidden" name="domain" value="{{config.domain}}" data-local-only>{{/if}}
+      <label>Order number<input type="text" name="order" required></label>
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <button type="submit" class="w-btn">Track order</button>
+    </form>
+    {{/if}}
+    <div class="w-rte w-page__body">{{{page.bodyHtml}}}</div>
+  </article>
+</main>
+{{> footer}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

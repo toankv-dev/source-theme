@@ -1,0 +1,76 @@
+{{!-- TwinklingTree collection (/collections/<handle>): sale banner, press logos, underlined title, left
+      "Filter & Sort" column (sort radios + category links; on phones a toggle) and a 4-column grid. Sorting
+      uses the base hooks: the radios drive the hidden [data-sort] select that ui.js listens to. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="b-body b-body--collection tt-body">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#unless (eq settings.tt_collection_banner false)}}
+  <div class="tt-plp-banner">
+    <picture>
+      <source media="(max-width: 749px)" srcset="{{assets_url}}/images/tt/catalog-bg-mobile-ShG6cSOWcy6D5KAs1JHL6UV6UDPZ39.png">
+      <img class="tt-plp-banner__bg" src="{{#if settings.tt_collection_banner_image}}{{settings.tt_collection_banner_image}}{{else}}{{assets_url}}/images/tt/autumnfall-cat-bg-EGZIj9VDd1RLO7dJU4oGfHFKKRLQIG.png{{/if}}" alt="" width="1440" height="288">
+    </picture>
+    <img class="tt-plp-banner__text" src="{{assets_url}}/images/tt/autumnsale-category-E7e3Vmcs797aj1FRPN9FpRbbRSftxD.png" alt="Autumn sale ending soon – up to 50% off">
+  </div>
+  {{/unless}}
+  {{#unless (eq settings.tt_press_logos false)}}
+  <div class="tt-press"><picture><source media="(max-width: 749px)" srcset="{{assets_url}}/images/tt/catalog-logos-tablet-2.png"><img src="{{assets_url}}/images/tt/catalog-logos.png" alt="As seen in BuzzFeed, Forbes, Vogue and Business Insider" loading="lazy"></picture></div>
+  {{/unless}}
+
+  <section class="tt-plp" data-collection>
+    <h1 class="tt-plp__title">{{#if collection.title}}{{collection.title}}{{else}}All Products{{/if}}</h1>
+    {{#if collection.description}}<p class="tt-plp__desc">{{collection.description}}</p>{{/if}}
+    <div class="tt-plp__layout">
+      <aside class="tt-plp__side">
+        <details class="tt-plp__facets" open data-tt-facets>
+          <summary class="tt-plp__facets-head"><span>Filter &amp; Sort</span><span class="tt-plp__count" data-count></span></summary>
+          <div class="tt-plp__group">
+            <p class="tt-plp__group-title">Sort By</p>
+            <label class="tt-radio"><input type="radio" name="tt-sort" value="" checked data-tt-sort> Newest</label>
+            <label class="tt-radio"><input type="radio" name="tt-sort" value="title-asc" data-tt-sort> Name: A – Z</label>
+            <label class="tt-radio"><input type="radio" name="tt-sort" value="title-desc" data-tt-sort> Name: Z – A</label>
+            <label class="tt-radio"><input type="radio" name="tt-sort" value="price-asc" data-tt-sort> Price: Low to High</label>
+            <label class="tt-radio"><input type="radio" name="tt-sort" value="price-desc" data-tt-sort> Price: High to Low</label>
+            <select data-sort hidden aria-hidden="true" tabindex="-1">
+              <option value=""></option><option value="title-asc"></option><option value="title-desc"></option><option value="price-asc"></option><option value="price-desc"></option>
+            </select>
+          </div>
+          <details class="tt-plp__group tt-plp__cats">
+            <summary class="tt-plp__group-title">Category</summary>
+            <ul>{{#each collections}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/each}}</ul>
+          </details>
+        </details>
+      </aside>
+      <div>
+        {{#if collection.products.length}}
+        <div class="b-grid tt-grid tt-grid--plp" data-grid>{{#each collection.products}}{{> card-product}}{{/each}}</div>
+        {{else}}
+        <div class="b-grid tt-grid tt-grid--plp" data-grid>{{#each products}}{{> card-product}}{{/each}}</div>
+        {{/if}}
+        <div class="tt-plp__empty" data-empty hidden><p>No products found.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+{{> footer}}
+<script>
+  // Sort radios → the base's [data-sort] select (ui.js re-sorts the grid on its change event).
+  document.addEventListener('change', function (e) {
+    if (!e.target.matches('[data-tt-sort]')) return;
+    var sel = document.querySelector('[data-collection] [data-sort]');
+    if (!sel) return;
+    sel.value = e.target.value;
+    sel.dispatchEvent(new Event('change'));
+  });
+  if (window.matchMedia('(max-width: 749px)').matches) { var f = document.querySelector('[data-tt-facets]'); if (f) f.open = false; }
+</script>
+{{> scripts}}
+</body>
+</html>

@@ -1,0 +1,1042 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary (buttons, accents)",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "primary_text",
+        "label": "Text on primary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Accent",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Body text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "page_bg",
+        "label": "Page background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "check",
+        "label": "Check marks / success",
+        "default": "#1fa463"
+      },
+      {
+        "type": "color",
+        "id": "badge",
+        "label": "Badges",
+        "default": "#3b9dea"
+      },
+      {
+        "type": "color",
+        "id": "sale",
+        "label": "Sale price / discount",
+        "default": "#e0392b"
+      },
+      {
+        "type": "color",
+        "id": "alert",
+        "label": "Alerts",
+        "default": "#e0392b"
+      },
+      {
+        "type": "color",
+        "id": "star",
+        "label": "Stars",
+        "default": "#17b26a"
+      },
+      {
+        "type": "header",
+        "content": "Header & footer"
+      },
+      {
+        "type": "color",
+        "id": "header_bg",
+        "label": "Header background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_text",
+        "label": "Header text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer background",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Checkout"
+      },
+      {
+        "type": "color",
+        "id": "checkout_bg",
+        "label": "Checkout background",
+        "default": "#f7f7f7"
+      }
+    ]
+  },
+  {
+    "name": "Typography & shape",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font",
+        "label": "Body font (Google Fonts name)",
+        "default": "Manrope",
+        "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
+      },
+      {
+        "type": "text",
+        "id": "font_heading",
+        "label": "Heading font (optional)",
+        "default": "",
+        "info": "Empty = same as the body font."
+      },
+      {
+        "type": "text",
+        "id": "font_weights",
+        "label": "Google Fonts weights",
+        "default": "400;500;600;700;800",
+        "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
+      },
+      {
+        "type": "checkbox",
+        "id": "load_google_fonts",
+        "label": "Load the fonts from Google Fonts",
+        "default": true,
+        "info": "Off when the theme ships its own font files (@font-face in skin.css)."
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Corner radius (cards, images)",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "btn_radius",
+        "label": "Button corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "default": 8,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "btn_case",
+        "label": "Button text",
+        "default": "uppercase",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "UPPERCASE"
+          },
+          {
+            "value": "none",
+            "label": "As typed"
+          },
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 960,
+        "max": 1600,
+        "step": 20,
+        "default": 1200,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_topbar",
+        "label": "Show the top bar",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "topbar_style",
+        "label": "Style",
+        "default": "rotate",
+        "options": [
+          {
+            "value": "rotate",
+            "label": "Rotating messages"
+          },
+          {
+            "value": "countdown",
+            "label": "Sale countdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Messages (separate with ||)",
+        "default": "Free shipping on every order || 30-day money-back guarantee"
+      },
+      {
+        "type": "checkbox",
+        "id": "topbar_autoplay",
+        "label": "Rotate automatically",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "topbar_bg",
+        "label": "Background",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "topbar_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Countdown"
+      },
+      {
+        "type": "text",
+        "id": "countdown_title",
+        "label": "Title",
+        "default": "FLASH SALE"
+      },
+      {
+        "type": "text",
+        "id": "countdown_subtitle",
+        "label": "Subtitle",
+        "default": "Up to 50% off – today only"
+      },
+      {
+        "type": "number",
+        "id": "countdown_hours",
+        "label": "Restart every (hours)",
+        "default": 2,
+        "info": "The timer counts down and restarts for each visitor."
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Sticky header",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "logo_position",
+        "label": "Logo position (desktop)",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo height",
+        "min": 20,
+        "max": 90,
+        "step": 2,
+        "default": 40,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_account",
+        "label": "Show orders link",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_track_link",
+        "label": "Show Track order in the menu",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_collections",
+        "label": "Show collections in the menu",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_show_shop",
+        "label": "Show the Shop link in the menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "nav_home_label",
+        "label": "Menu: Home label",
+        "default": "Home"
+      },
+      {
+        "type": "text",
+        "id": "nav_shop_label",
+        "label": "Menu: Shop label",
+        "default": "Shop"
+      },
+      {
+        "type": "text",
+        "id": "nav_contact_label",
+        "label": "Menu: Contact label",
+        "default": "Contact"
+      },
+      {
+        "type": "text",
+        "id": "nav_track_label",
+        "label": "Menu: Track label",
+        "default": "Track order"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "footer_about",
+        "label": "About text",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "footer_links_title",
+        "label": "Links column title",
+        "default": "Customer care"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_collections",
+        "label": "Show a collections column",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Support hours",
+        "default": "Monday – Friday, 9 AM – 5 PM"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter",
+        "label": "Show newsletter in the footer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_heading",
+        "label": "Heading",
+        "default": "Join our newsletter"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Text",
+        "default": "Offers, new arrivals and tips. No spam."
+      },
+      {
+        "type": "text",
+        "id": "newsletter_placeholder",
+        "label": "Placeholder",
+        "default": "Your email"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_button",
+        "label": "Button",
+        "default": "Subscribe"
+      },
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      }
+    ]
+  },
+  {
+    "name": "Payment icons",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Methods the platform checkout processes; switch off the ones you do not offer."
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_visa",
+        "label": "Visa",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_mastercard",
+        "label": "Mastercard",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_amex",
+        "label": "American Express",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_discover",
+        "label": "Discover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_applepay",
+        "label": "Apple Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_googlepay",
+        "label": "Google Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_paypal",
+        "label": "PayPal",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product & cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "atc_label",
+        "label": "Add to cart label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "text",
+        "id": "card_badge_label",
+        "label": "Card badge text before %",
+        "default": "Save"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "Show stars on product cards",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "open_cart_on_add",
+        "label": "Open the cart after Add to cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Title",
+        "default": "Your cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_logo",
+        "label": "Show the logo instead of the title",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_notice",
+        "label": "Notice strip (empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_text",
+        "label": "Empty cart text",
+        "default": "Your cart is empty."
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_button",
+        "label": "Empty cart button",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "text",
+        "id": "cart_subtotal_label",
+        "label": "Subtotal label",
+        "default": "Subtotal"
+      },
+      {
+        "type": "text",
+        "id": "cart_footer_note",
+        "label": "Note under the subtotal",
+        "default": "Shipping is calculated at checkout."
+      },
+      {
+        "type": "text",
+        "id": "cart_checkout_label",
+        "label": "Checkout button",
+        "default": "Checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_1",
+        "label": "Trust line 1",
+        "default": "30-day money-back guarantee"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_2",
+        "label": "Trust line 2",
+        "default": "Secure, encrypted checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_3",
+        "label": "Trust line 3",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping protection / add-ons"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_upsells",
+        "label": "Products offered in the cart",
+        "info": "Added to the cart switched on; the buyer can switch them off."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_as_line",
+        "label": "Also list them as cart lines",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Heading",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_bg",
+        "label": "Background",
+        "default": "#f4f5f7"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_color",
+        "label": "Text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_accent",
+        "label": "Switch colour",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Discounts",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Pack cards and the cart are priced with the store's live automatic discounts, using the checkout's formula. Switch off a kind the checkout does not apply to this store."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_tiered_discount",
+        "label": "Tiered (buy more, save more)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_bxgy_discount",
+        "label": "Buy X get Y",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_amount_off_discount",
+        "label": "Amount off products",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Pages",
+    "settings": [
+      {
+        "type": "text",
+        "id": "track_heading",
+        "label": "Order tracking heading",
+        "default": "Track your order"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_heading",
+        "label": "Contact form heading",
+        "default": "Send us a message"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Search heading",
+        "default": "Search results"
+      }
+    ]
+  },
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Default questions shown by every FAQ that has no questions of its own."
+      },
+      {
+        "type": "text",
+        "id": "faq_1_q",
+        "label": "Question 1",
+        "default": "How long does shipping take?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_1_a",
+        "label": "Answer 1",
+        "default": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_2_q",
+        "label": "Question 2",
+        "default": "How can I track my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_2_a",
+        "label": "Answer 2",
+        "default": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_3_q",
+        "label": "Question 3",
+        "default": "Can I change or cancel my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_3_a",
+        "label": "Answer 3",
+        "default": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_4_q",
+        "label": "Question 4",
+        "default": "What is your return and refund policy?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_4_a",
+        "label": "Answer 4",
+        "default": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_5_q",
+        "label": "Question 5",
+        "default": "My item arrived damaged or isn't what I ordered"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_5_a",
+        "label": "Answer 5",
+        "default": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_6_q",
+        "label": "Question 6",
+        "default": "How can I reach customer support?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_6_a",
+        "label": "Answer 6",
+        "default": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>"
+      }
+    ]
+  },
+  {
+    "name": "Home – hero",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_hero_show",
+        "label": "Show the hero",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_mobile_image",
+        "label": "Phone image (optional)"
+      },
+      {
+        "type": "text",
+        "id": "home_hero_eyebrow",
+        "label": "Small text above",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_hero_title",
+        "label": "Heading",
+        "default": "Everyday essentials, made better"
+      },
+      {
+        "type": "textarea",
+        "id": "home_hero_text",
+        "label": "Text",
+        "default": "Free shipping and 30-day returns on every order."
+      },
+      {
+        "type": "text",
+        "id": "home_hero_button",
+        "label": "Button",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "home_hero_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "home_hero_align",
+        "label": "Text position",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "home_hero_overlay",
+        "label": "Dark overlay",
+        "min": 0,
+        "max": 0.8,
+        "step": 0.1,
+        "default": 0.2
+      },
+      {
+        "type": "textarea",
+        "id": "home_promises",
+        "label": "Promises strip (separate with ||, empty = hidden)",
+        "default": "Free shipping || 30-day returns || Secure checkout || 24/7 support"
+      }
+    ]
+  },
+  {
+    "name": "Home – products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_featured_show",
+        "label": "Show the featured product (first product)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_featured_heading",
+        "label": "Featured heading",
+        "default": "Our product"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_products_show",
+        "label": "Show the product grid",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "home_products_source",
+        "label": "Grid shows",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All products"
+          },
+          {
+            "value": "collections",
+            "label": "One grid per collection"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_products_heading",
+        "label": "Grid heading",
+        "default": "Best sellers"
+      },
+      {
+        "type": "number",
+        "id": "home_products_limit",
+        "label": "Products per grid",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Home – banner & comparison",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_banner_show",
+        "label": "Show the image banner",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "home_banner_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "home_banner_side",
+        "label": "Image side",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_banner_title",
+        "label": "Heading",
+        "default": "Our most popular pack"
+      },
+      {
+        "type": "textarea",
+        "id": "home_banner_text",
+        "label": "Text",
+        "default": "Save more when you buy more."
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Button",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "home_banner_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Comparison"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_compare_show",
+        "label": "Show the comparison table",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_compare_heading",
+        "label": "Heading",
+        "default": "How we compare"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_ours",
+        "label": "Our column (empty = store name)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_compare_theirs",
+        "label": "Other column",
+        "default": "Others"
+      },
+      {
+        "type": "textarea",
+        "id": "home_compare_rows",
+        "label": "Rows (one per line: Feature|yes|no)",
+        "default": "Free shipping|yes|no\nMoney-back guarantee|yes|no\nPremium materials|yes|no"
+      }
+    ]
+  },
+  {
+    "name": "Home – reviews, FAQ, newsletter, contact",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_reviews_show",
+        "label": "Show customer reviews",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_heading",
+        "label": "Reviews heading",
+        "default": "What our customers are saying"
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_sub",
+        "label": "Reviews subheading",
+        "default": "Real reviews from verified buyers."
+      },
+      {
+        "type": "checkbox",
+        "id": "home_faq_show",
+        "label": "Show the FAQ (Theme settings → FAQ)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_newsletter_show",
+        "label": "Show the newsletter band",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_contact_show",
+        "label": "Show the contact form",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_contact_heading",
+        "label": "Contact heading",
+        "default": "Contact us"
+      }
+    ]
+  }
+]

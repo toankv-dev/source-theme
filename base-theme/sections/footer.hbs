@@ -1,0 +1,51 @@
+{{!-- Footer: brand + contact, policy links, optional collections column, newsletter, payment icons. Rendered on
+      the platform's own pages too, so read only brand / config / policyLinks / settings / collections. --}}
+<footer class="b-footer">
+  <div class="b-wrap b-footer__grid">
+    <div class="b-footer__brand">
+      {{#if brand.logo}}<img class="b-footer__logo" src="{{brand.logo}}" alt="{{brand.name}}" loading="lazy">{{else}}<p class="b-footer__name">{{brand.name}}</p>{{/if}}
+      {{#if settings.footer_about}}<p class="b-footer__about">{{settings.footer_about}}</p>{{/if}}
+      <ul class="b-footer__contact">
+        {{#if brand.email}}<li>Email: <a href="mailto:{{brand.email}}">{{brand.email}}</a></li>{{/if}}
+        {{#if brand.store_email}}<li>Email: <a href="mailto:{{brand.store_email}}">{{brand.store_email}}</a></li>{{/if}}
+        {{#if brand.phone}}<li>Phone: {{brand.phone}}</li>{{/if}}
+        {{#if brand.address}}<li>Address: {{brand.address}}</li>{{/if}}
+        {{#if settings.support_hours}}<li>{{settings.support_hours}}</li>{{/if}}
+      </ul>
+    </div>
+    <div>
+      <p class="b-footer__title">{{#if settings.footer_links_title}}{{settings.footer_links_title}}{{else}}Customer care{{/if}}</p>
+      <ul>
+        {{#if policyLinks.about}}<li><a href="{{policyLinks.about}}">About us</a></li>{{/if}}
+        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact us</a></li>{{/if}}
+        <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track your order</a></li>
+        {{#if policyLinks.shipping}}<li><a href="{{policyLinks.shipping}}">Shipping policy</a></li>{{/if}}
+        {{#if policyLinks.refund}}<li><a href="{{policyLinks.refund}}">Return &amp; refund policy</a></li>{{/if}}
+        {{#if policyLinks.privacy}}<li><a href="{{policyLinks.privacy}}">Privacy policy</a></li>{{/if}}
+        {{#if policyLinks.terms}}<li><a href="{{policyLinks.terms}}">Terms of service</a></li>{{/if}}
+      </ul>
+    </div>
+    {{#if settings.footer_collections}}{{#if collections.length}}
+    <div>
+      <p class="b-footer__title">Shop</p>
+      <ul>
+        {{#each (limit collections 6)}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/each}}
+      </ul>
+    </div>
+    {{/if}}{{/if}}
+    {{#unless (eq settings.footer_newsletter false)}}
+    <div class="b-footer__news">
+      <p class="b-footer__title">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Join our newsletter{{/if}}</p>
+      {{#if settings.newsletter_text}}<p class="b-footer__about">{{settings.newsletter_text}}</p>{{/if}}
+      {{> newsletter-form}}
+      {{#if settings.social_facebook}}{{> social-links}}{{else}}{{#if settings.social_instagram}}{{> social-links}}{{else}}{{#if settings.social_tiktok}}{{> social-links}}{{/if}}{{/if}}{{/if}}
+    </div>
+    {{/unless}}
+  </div>
+  <div class="b-wrap b-footer__bottom">
+    {{#unless (eq settings.footer_payment false)}}{{> pay-icons}}{{/unless}}
+    <p class="b-footer__copy">
+      <small>© <span data-year></span>, <a href="{{#if config.homeUrl}}{{config.homeUrl}}{{else}}{{#if policyLinks.home}}{{policyLinks.home}}{{else}}/{{/if}}{{/if}}">{{brand.name}}</a></small>
+    </p>
+  </div>
+</footer>

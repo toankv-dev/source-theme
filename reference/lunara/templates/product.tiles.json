@@ -1,0 +1,30 @@
+{
+  "name": "Variant tiles (Walmart)",
+  "description": "Lunara product page; Color / Size as square tiles like Walmart (thin grey frame, thick dark frame + bold when picked).",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "variant_style": "walmart"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "related": {
+      "type": "related",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq",
+    "related"
+  ]
+}

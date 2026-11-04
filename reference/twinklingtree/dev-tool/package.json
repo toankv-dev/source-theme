@@ -1,0 +1,12 @@
+{
+  "name": "theme-bundles-preview-tool",
+  "version": "1.0.0",
+  "description": "Local preview and hot-reload tool for the theme-bundles theme",
+  "main": "preview-server.js",
+  "scripts": {
+    "dev": "node preview-server.js"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  }
+}

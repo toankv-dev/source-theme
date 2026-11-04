@@ -1,0 +1,26 @@
+{{!-- Video row (portrait 390 × 580). Desktop: the videos side by side, scrolling sideways when they don't
+      fit; phones: exactly one video per screen, swipe for the next. Each video plays muted and looped only
+      while it is on screen (theme.js), and tapping it pauses / resumes. Uploaded files only: the storefront
+      CSP blocks YouTube/Vimeo iframes. --}}
+<div class="w-reels" data-reels>
+  <div class="w-reels__track" data-reels-track>
+    {{#each section.blocks}}
+    <figure class="w-reel" {{{this.attributes}}}>
+      {{#if this.settings.video}}
+      <video class="w-reel__video" data-reel-video src="{{this.settings.video}}"{{#if this.settings.poster}} poster="{{this.settings.poster}}"{{/if}} muted loop playsinline preload="none" disablepictureinpicture aria-label="{{#if this.settings.alt}}{{this.settings.alt}}{{else}}Product video{{/if}}"></video>
+      <span class="w-reel__state" aria-hidden="true"></span>
+      {{else if this.settings.image}}
+      {{!-- Image block from the earlier image row. An uploaded MP4 here becomes a <video> in post-processing,
+            carrying data-reel-video, so it plays like the Video blocks. --}}
+      <img class="w-reel__video" data-reel-video src="{{this.settings.image}}" alt="{{this.settings.alt}}" loading="lazy">
+      {{else}}
+      <div class="w-reel__ph">{{#if @root.__designMode}}Upload a video (MP4 or WebM) for this slot{{/if}}</div>
+      {{/if}}
+    </figure>
+    {{/each}}
+  </div>
+  <div class="w-reels__nav" data-reels-nav hidden>
+    <button type="button" class="w-round-btn" data-reels-step="-1" aria-label="Previous video">‹</button>
+    <button type="button" class="w-round-btn" data-reels-step="1" aria-label="Next video">›</button>
+  </div>
+</div>

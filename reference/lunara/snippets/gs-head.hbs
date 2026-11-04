@@ -1,0 +1,72 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{{#if brand.favicon}}<link rel="icon" href="{{brand.favicon}}">{{/if}}
+<link rel="stylesheet" href="{{assets_url}}/css/base.css">
+<link rel="stylesheet" href="{{assets_url}}/css/custom.css">
+<script>window.__gsOpenCart = {{#if (eq settings.open_cart_on_add false)}}false{{else}}true{{/if}};</script>
+{{!-- Mau chu dao (Theme settings > Colors > Primary). Engine khong co helper doi mau -> script nho trong head (chay truoc
+      khi ve body) dat bien RGB ma CSS Shrine dung: rgb(var(--color-base-accent-1)). Mac dinh #124F9F (CSS cung san). --}}
+<script data-lu-colors="{{settings.primary}}|{{settings.primary_text}}|{{settings.footer_bg}}|{{settings.footer_text}}">(function(){try{
+var d=document.currentScript.getAttribute('data-lu-colors').split('|'),r=document.documentElement.style;
+function rgb(h){h=String(h||'').trim().replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');if(!/^[0-9a-f]{6}$/i.test(h))return null;
+return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)].join(', ');}
+var p=rgb(d[0]);if(p){r.setProperty('--color-base-accent-1',p);r.setProperty('--color-base-accent-2',p);r.setProperty('--lu-primary','#'+d[0].trim().replace('#',''));
+r.setProperty('--gradient-base-accent-1','#'+d[0].trim().replace('#',''));r.setProperty('--gradient-base-accent-2','#'+d[0].trim().replace('#',''));}
+var t=rgb(d[1]);if(t)r.setProperty('--color-base-solid-button-labels',t);
+var f=rgb(d[2]);if(f)r.setProperty('--lu-footer-rgb',f);
+var ft=rgb(d[3]);if(ft)r.setProperty('--lu-footer-text-rgb',ft);
+}catch(e){}})();</script>
+<script>(function(){
+/* Gia giam = CHINH cong thuc backend Adlux (apps/api/src/features/discounts/discount-engine.ts calculateDiscount)
+   + cach checkout chon (cart.service resolveBestDiscount): moi discount tu dong tinh rieng, lay MUC GIAM LON NHAT.
+   Du lieu backend gui: nextItemTiers ("2:10, 3:15" = TIERED_NEXT_ITEM) bxgyOffers (JSON BUY_X_GET_Y) va amountOffOffers (JSON AMOUNT_OFF_PRODUCTS, toi thieu so luong / tien).
+   Dong qua tang (gift) khong tinh: checkout bo dong qua truoc khi tinh giam.
+   lines: [{ pid, price, qty }] -> { total, per: [giam cua tung dong] }. Theme KHONG tu dat giam gia. */
+function r2(n){return Number(n.toFixed(2));}
+function tiers(s){var o=[];String(s||'').split(',').forEach(function(p){var kv=p.trim().split(':'),q=parseInt(kv[0],10)||0,pc=parseFloat(kv[1])||0;if(q>0&&pc>0)o.push({qty:q,percent:pc});});return o.sort(function(a,b){return a.qty-b.qty;});}
+function offers(s){try{var a=typeof s==='string'?JSON.parse(s||'[]'):s;return Array.isArray(a)?a:[];}catch(e){return [];}}
+function tiered(lines,ts){
+  if(!ts.length)return null;
+  var u=[],per=lines.map(function(){return 0;}),tot=0;
+  lines.forEach(function(l,i){if(l.gift)return;for(var k=0;k<l.qty;k++)u.push({i:i,p:l.price});});
+  if(!u.length)return null;
+  u.sort(function(a,b){return b.p-a.p;});
+  u.forEach(function(x,idx){var pc=0;ts.forEach(function(t){if(idx+1>=t.qty)pc=t.percent;});if(pc<=0)return;var a=r2(x.p*(pc/100));per[x.i]+=a;tot+=a;});
+  return tot>0?{total:r2(tot),per:per}:null;
+}
+function bxgy(lines,o){
+  var b=parseInt(o.buy,10)||1,g=parseInt(o.get,10)||1,x=o.x||[],y=o.y||[],v=Number(o.value)||0;
+  var buy=0;lines.forEach(function(l){if(!l.gift&&(o.all||x.indexOf(l.pid)>-1))buy+=l.qty;});
+  if(buy<b)return null;
+  var max=Math.floor(buy/b)*g,u=[];
+  lines.forEach(function(l,i){if(!l.gift&&y.indexOf(l.pid)>-1)for(var k=0;k<l.qty;k++)u.push({i:i,p:l.price});});
+  if(!u.length)return null;
+  u.sort(function(a,b){return a.p-b.p;});
+  var per=lines.map(function(){return 0;}),tot=0;
+  u.slice(0,max).forEach(function(x){var a=0;if(o.type==='FREE')a=x.p;else if(o.type==='PERCENTAGE')a=x.p*(v/100);else if(o.type==='FIXED_AMOUNT')a=Math.min(x.p,v);a=r2(a);per[x.i]+=a;tot+=a;});
+  return {total:r2(tot),per:per};
+}
+/* AMOUNT_OFF_PRODUCTS: % (hoac so tien) moi mon tren cac san pham x, khi du toi thieu (so luong / tien) cua cac san pham do.
+   Checkout tinh + lam tron theo tung dong bien the (productId:variantId) -> gom cac don vi cung bien the (vid; chua biet vid -> cung gia). */
+function amountOff(lines,o){
+  var v=Number(o.value)||0,x=o.x||[],el=[],q=0,sub=0;
+  lines.forEach(function(l,i){if(!l.gift&&(o.all||x.indexOf(l.pid)>-1)){el.push(i);q+=l.qty;sub+=l.price*l.qty;}});
+  if(!el.length||v<=0)return null;
+  if((Number(o.minQty)||0)>0&&q<Number(o.minQty))return null;
+  if((Number(o.minSubtotal)||0)>0&&sub<Number(o.minSubtotal))return null;
+  var g={},ks=[],per=lines.map(function(){return 0;}),tot=0;
+  el.forEach(function(i){var l=lines[i],k=l.pid+'|'+(l.vid||('$'+l.price));if(!g[k]){g[k]={p:l.price,q:0,ix:[]};ks.push(k);}g[k].q+=l.qty;g[k].ix.push(i);});
+  ks.forEach(function(k){var G=g[k],a=r2(o.type==='FIXED_AMOUNT'?Math.min(G.p,v)*G.q:G.p*(v/100)*G.q),left=a;tot+=a;
+    G.ix.forEach(function(i,n){var s=n===G.ix.length-1?r2(left):r2(a*lines[i].qty/G.q);per[i]+=s;left-=s;});});
+  return tot>0?{total:r2(tot),per:per}:null;
+}
+function best(lines,tierStr,offerStr,offStr){
+  var r={total:0,per:lines.map(function(){return 0;})},c=tiered(lines,tiers(tierStr));
+  if(c&&c.total>r.total)r=c;
+  offers(offerStr).forEach(function(o){var d=bxgy(lines,o);if(d&&d.total>r.total)r=d;});
+  offers(offStr).forEach(function(o){var d=amountOff(lines,o);if(d&&d.total>r.total)r=d;});
+  return r;
+}
+window.LuDisc={best:best,tiers:tiers,offers:offers,amountOff:amountOff};
+})();
+</script>

@@ -1,0 +1,16 @@
+{
+  "name": "adlux-theme-tools",
+  "private": true,
+  "description": "Preview, scaffold, capture, visual-diff and pack tools for Adlux Handlebars themes",
+  "scripts": {
+    "preview": "node preview-server.js ../base-theme",
+    "pack": "node pack.js ../base-theme"
+  },
+  "dependencies": {
+    "archiver": "7.0.1",
+    "handlebars": "4.7.8",
+    "pixelmatch": "5.3.0",
+    "playwright": "1.48.2",
+    "pngjs": "7.0.0"
+  }
+}

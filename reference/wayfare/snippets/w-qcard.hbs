@@ -1,0 +1,15 @@
+{{!-- One quantity-pack card (n = position 1–6). Hidden when its quantity is 0. --}}
+{{#if qty}}
+<div class="w-card{{#if (eq sel n)}} is-selected{{/if}}" role="radio" tabindex="0" data-qcard data-qty="{{qty}}" data-card-pos="{{n}}" aria-checked="{{#if (eq sel n)}}true{{else}}false{{/if}}">
+  <span class="w-card__badge" data-card-badge hidden></span>
+  <span class="w-card__row">
+    <span class="w-card__img">{{#if img}}<img src="{{img}}" alt="" loading="lazy">{{else}}<img data-qcard-img alt="" hidden>{{/if}}{{#unless img}}<span class="w-card__qty" aria-hidden="true">×{{qty}}</span>{{/unless}}</span>
+    <span class="w-card__text">
+      <span class="w-card__title">{{#if title}}{{title}}{{else}}{{qty}} Pack{{/if}}</span>
+      <span class="w-card__sub" data-card-sub></span>
+    </span>
+    <span class="w-card__prices"><strong data-card-price></strong><s data-card-compare></s></span>
+  </span>
+  <div class="w-card__includes w-rte" data-card-includes hidden></div>
+</div>
+{{/if}}

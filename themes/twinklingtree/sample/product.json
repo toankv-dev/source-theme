@@ -1,0 +1,558 @@
+{
+  "title": "Enchanted Evergreen Pine",
+  "price": "$39.99",
+  "compare_at_price": "$79.99",
+  "off_pct": 50,
+  "meta_description": "Bring gentle woodland charm home with Enchanted Evergreen Pine.",
+  "description_html": "<div class=\"elementor-widget-container\"> <div class=\"elementor-widget-container\"> <div> <div style=\"text-align: center;\"> <div> <div style=\"text-align: center;\"> <h3 style=\"text-align: center;\"><span style=\"color: #bc8d00;\"><strong>Magical Garland Gleam</strong></span></h3> </div> </div> <div style=\"text-align: center;\"> <p>Brighten your home with the Glistening Glow Garlands, featuring an array of beautiful ornaments intertwined with golden fairy lights. Their magical glow <strong>adds a festive charm to any room</strong>.</p> </div> </div> </div> <div style=\"text-align: center;\"><img src=\"/assets/sample/public\" width=\"450\" height=\"450\" alt=\"Glistening Glow Garlands\" draggable=\"false\" loading=\"lazy\" style=\"width: 100%;\"></div> <div style=\"text-align: center;\"> <div class=\"elementor-widget-container\"> <h3>Versatile and Stunning Decor</h3> <p>Ideal for any occasion, this garland's captivating design and soft lights create a warm and inviting atmosphere. The Glistening Glow Garlands <strong>enhances your decor with effortless elegance</strong>.</p> </div> <div style=\"text-align: center;\"><img src=\"/assets/sample/twinklingtree-garlands-copy.webp\" width=\"563\" height=\"450\" alt=\"Glistening Glow Garlands\" draggable=\"false\" loading=\"lazy\" style=\"width: 100%;\"></div> <div style=\"text-align: center;\"> <h3 style=\"text-align: center;\"><img src=\"/assets/sample/ICON---PAT.webp\" alt=\"Glistening Glow Garlands\" width=\"111\" height=\"126\" draggable=\"false\" loading=\"lazy\"></h3> <h3 style=\"text-align: center;\">Buy a Garland. Plant a Tree.</h3> </div> <div style=\"text-align: center;\"> <p><span style=\"font-weight: 400;\">For every TwinklingTree order, we pledge to plant a tree on your behalf. Join us in <strong>contributing to global reforestation</strong> one tree at a time.</span></p> </div> <div style=\"text-align: center;\"><img src=\"/assets/sample/ICON---MBG.webp\" alt=\"Glistening Glow Garlands\" width=\"121\" height=\"109\" draggable=\"false\" loading=\"lazy\"></div> <h3 style=\"text-align: center;\">30-Day Money-Back Guarantee</h3> <div style=\"text-align: center;\"> <p><span style=\"font-weight: 400;\">Since we are so confident that you will<strong>&nbsp;absolutely adore</strong></span><strong> your Glistening Glow Garlands</strong><span style=\"font-weight: 400;\">, we are offering a 30-day money-back guarantee. If you aren’t satisfied for any reason, simply contact us and ask for a full refund.</span></p> <p>&nbsp;</p> </div> </div>",
+  "media": {
+    "main_image": "/assets/sample/Autumn_Leafs__44632.jpg",
+    "gallery": [
+      {
+        "url": "/assets/sample/Autumn_Leafs__44632.jpg",
+        "alt": "Enchanted Evergreen Pine"
+      },
+      {
+        "url": "/assets/sample/GGG_-_WP9__39297.webp",
+        "alt": "Enchanted Evergreen Pine"
+      },
+      {
+        "url": "/assets/sample/New_Image_6_1__92134.webp",
+        "alt": "Enchanted Evergreen Pine"
+      },
+      {
+        "url": "/assets/sample/GGG_-_WP1__72064.webp",
+        "alt": "Enchanted Evergreen Pine"
+      },
+      {
+        "url": "/assets/sample/GGG_-_WP5__22402.webp",
+        "alt": "Enchanted Evergreen Pine"
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "Style",
+      "displayType": "swatches",
+      "options": [
+        {
+          "label": "Classic",
+          "active": true
+        },
+        {
+          "label": "Red Berry",
+          "active": false
+        },
+        {
+          "label": "Frosted",
+          "active": false
+        }
+      ]
+    },
+    {
+      "name": "Packs",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "1 Pack",
+          "active": true
+        },
+        {
+          "label": "2 Pack",
+          "active": false
+        },
+        {
+          "label": "3 Pack",
+          "active": false,
+          "badge_text": "Popular"
+        },
+        {
+          "label": "4 Pack",
+          "active": false
+        },
+        {
+          "label": "5 Pack",
+          "active": false
+        }
+      ]
+    }
+  ],
+  "variants_list": [
+    {
+      "id": "v-0-1",
+      "title": "Classic / 1 Pack",
+      "option_values": [
+        "Classic",
+        "1 Pack"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "$79.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-0-2",
+      "title": "Classic / 2 Pack",
+      "option_values": [
+        "Classic",
+        "2 Pack"
+      ],
+      "price": "$74.99",
+      "compare_at_price": "$159.98",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-0-3",
+      "title": "Classic / 3 Pack",
+      "option_values": [
+        "Classic",
+        "3 Pack"
+      ],
+      "price": "$109.99",
+      "compare_at_price": "$239.97",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-0-4",
+      "title": "Classic / 4 Pack",
+      "option_values": [
+        "Classic",
+        "4 Pack"
+      ],
+      "price": "$149.99",
+      "compare_at_price": "$319.96",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-0-5",
+      "title": "Classic / 5 Pack",
+      "option_values": [
+        "Classic",
+        "5 Pack"
+      ],
+      "price": "$199.99",
+      "compare_at_price": "$399.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-1-1",
+      "title": "Red Berry / 1 Pack",
+      "option_values": [
+        "Red Berry",
+        "1 Pack"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "$79.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-1-2",
+      "title": "Red Berry / 2 Pack",
+      "option_values": [
+        "Red Berry",
+        "2 Pack"
+      ],
+      "price": "$74.99",
+      "compare_at_price": "$159.98",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-1-3",
+      "title": "Red Berry / 3 Pack",
+      "option_values": [
+        "Red Berry",
+        "3 Pack"
+      ],
+      "price": "$109.99",
+      "compare_at_price": "$239.97",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-1-4",
+      "title": "Red Berry / 4 Pack",
+      "option_values": [
+        "Red Berry",
+        "4 Pack"
+      ],
+      "price": "$149.99",
+      "compare_at_price": "$319.96",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-1-5",
+      "title": "Red Berry / 5 Pack",
+      "option_values": [
+        "Red Berry",
+        "5 Pack"
+      ],
+      "price": "$199.99",
+      "compare_at_price": "$399.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-2-1",
+      "title": "Frosted / 1 Pack",
+      "option_values": [
+        "Frosted",
+        "1 Pack"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "$79.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-2-2",
+      "title": "Frosted / 2 Pack",
+      "option_values": [
+        "Frosted",
+        "2 Pack"
+      ],
+      "price": "$74.99",
+      "compare_at_price": "$159.98",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-2-3",
+      "title": "Frosted / 3 Pack",
+      "option_values": [
+        "Frosted",
+        "3 Pack"
+      ],
+      "price": "$109.99",
+      "compare_at_price": "$239.97",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-2-4",
+      "title": "Frosted / 4 Pack",
+      "option_values": [
+        "Frosted",
+        "4 Pack"
+      ],
+      "price": "$149.99",
+      "compare_at_price": "$319.96",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    },
+    {
+      "id": "v-2-5",
+      "title": "Frosted / 5 Pack",
+      "option_values": [
+        "Frosted",
+        "5 Pack"
+      ],
+      "price": "$199.99",
+      "compare_at_price": "$399.99",
+      "featured_image": "/assets/sample/Autumn_Leafs__44632.jpg"
+    }
+  ],
+  "bundles": [],
+  "reviews": {
+    "summary": {
+      "average_rating": 4.9,
+      "total_count": 1679
+    },
+    "items": [
+      {
+        "name": "Monique D.",
+        "rating": 5,
+        "title": "Right on time for decorating",
+        "content": "Honestly didn’t expect it so soon! The warm lights and red berries look so cozy around my window. I’d highly recommend it.",
+        "verified": true,
+        "date": "21/05/2026",
+        "image": "/assets/sample/Autumn_Leafs__44632.jpg"
+      },
+      {
+        "name": "Julianna D.",
+        "rating": 5,
+        "title": "just beautiful!!!!",
+        "content": "I cannot get over how warm and magical these garlands make my dining room feel. The golden lights glow softly, and the maple accents give it that perfect autumn touch. Hosting dinner suddenly feels like a little celebration just because of the ambiance they create. I’ve already had two guests ask me where I got them!",
+        "verified": true,
+        "date": "02/08/2026",
+        "image": "/assets/sample/GGG_-_WP9__39297.webp"
+      },
+      {
+        "name": "Carmen R.",
+        "rating": 5,
+        "title": "Full and festive",
+        "content": "It arrived looking clean and full, with plenty of greenery and red berries. I hung it around the windows right away.",
+        "verified": true,
+        "date": "01/05/2026",
+        "image": "/assets/sample/New_Image_6_1__92134.webp"
+      },
+      {
+        "name": "Lira I.",
+        "rating": 5,
+        "title": "warm cozy",
+        "content": "I didn’t expect them to be this pretty in person! The lighting is gorgeous, and they make my dining table look so inviting.",
+        "verified": true,
+        "date": "05/06/2026",
+        "image": "/assets/sample/GGG_-_WP1__72064.webp"
+      },
+      {
+        "name": "Jasmine O.",
+        "rating": 5,
+        "title": "love it",
+        "content": "Beautiful craftsmanship! ✨The way the light reflects makes it feel cozy but still modern.",
+        "verified": true,
+        "date": "27/03/2026",
+        "image": "/assets/sample/GGG_-_WP5__22402.webp"
+      },
+      {
+        "name": "Rachel H.",
+        "rating": 5,
+        "title": "cozy reading glow 📖",
+        "content": "Not too bright, not too dim. Just that perfect glow. It makes my evenings feel special, even when I’m just reading a book.",
+        "verified": true,
+        "date": "27/06/2026",
+        "image": ""
+      },
+      {
+        "name": "Thea F.",
+        "rating": 5,
+        "title": "BIG IMPACT",
+        "content": "Soft light, elegant design, and just enough sparkle to feel special. So glad I picked these up.",
+        "verified": true,
+        "date": "20/07/2026",
+        "image": ""
+      },
+      {
+        "name": "Holly J.",
+        "rating": 5,
+        "title": "Just the right glow",
+        "content": "I worried the lights might be a little too bright for the gift recipient’s space, but the warm glow looks soft around the doorway. The red berries stand out beautifully, and the whole gift was a hit.",
+        "verified": true,
+        "date": "27/07/2026",
+        "image": ""
+      },
+      {
+        "name": "Andrea J.",
+        "rating": 5,
+        "title": "Ready to hang",
+        "content": "It arrived quickly and everything looked to be in good condition. The greenery and red berries had a solid, full appearance right away. Once I draped it along the porch railing, the warm lights gave off an even glow and the setup looked finished.",
+        "verified": true,
+        "date": "17/03/2026",
+        "image": ""
+      },
+      {
+        "name": "Diego K.",
+        "rating": 5,
+        "title": "these are lovely!!",
+        "content": "These brighten up my space in the best way. They’re elegant without trying too hard, which I love.",
+        "verified": true,
+        "date": "07/03/2026",
+        "image": ""
+      },
+      {
+        "name": "Evan S.",
+        "rating": 5,
+        "title": "💯🙌",
+        "content": "Honestly, I wasn’t expecting much when I ordered these, but wow. They add the perfect sparkle to my living room without being over the top. Just right.",
+        "verified": true,
+        "date": "28/07/2026",
+        "image": ""
+      },
+      {
+        "name": "Olive W.",
+        "rating": 5,
+        "title": "festive yet chic",
+        "content": "Exactly what I was looking for. A nice balance of festive and stylish, and they feel well made too.",
+        "verified": true,
+        "date": "08/06/2026",
+        "image": ""
+      },
+      {
+        "name": "Noah C.",
+        "rating": 5,
+        "title": "Great buy",
+        "content": "I put these up for a small dinner party and everyone commented on how pretty they looked. Big win.",
+        "verified": true,
+        "date": "13/05/2026",
+        "image": ""
+      },
+      {
+        "name": "Maddie G.",
+        "rating": 5,
+        "title": "Will def buy again",
+        "content": "Exactly what I wanted! soft glow, clean look, and easy to style. They’re lightweight but feel durable.",
+        "verified": true,
+        "date": "15/05/2026",
+        "image": ""
+      },
+      {
+        "name": "Margaux A.",
+        "rating": 5,
+        "title": "LOVE AT FIRST SIGHT 💕",
+        "content": "If you’re debating these, just do it! They’re versatile and beautiful. I’ve moved them three times already and they look great everywhere.",
+        "verified": true,
+        "date": "05/06/2026",
+        "image": ""
+      },
+      {
+        "name": "Ashley W.",
+        "rating": 5,
+        "title": "So convincing in person",
+        "content": "Honestly impressed! The pine branches look much more natural than I expected, and the red berries mixed through them make the whole doorway look full and festive.",
+        "verified": true,
+        "date": "01/04/2026",
+        "image": ""
+      }
+    ]
+  },
+  "home_products": [
+    {
+      "id": 1,
+      "handle": "enchanted-evergreen-pine",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Enchanted_Evergreen_Pine_-_WP1__42583.jpg",
+      "title": "Enchanted Evergreen Pine",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 1679,
+      "description": ""
+    },
+    {
+      "id": 2,
+      "handle": "enchanted-evergreen-olive-branch",
+      "url": "/product",
+      "imageUrl": "/assets/sample/EEOB_-_WP1__96291.jpg",
+      "title": "Enchanted Evergreen Olive Branch",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 1247,
+      "description": ""
+    },
+    {
+      "id": 3,
+      "handle": "fairy-light-olive-vine",
+      "url": "/product",
+      "imageUrl": "/assets/sample/b-202610010917-0ebd47-3-view__60387.jpg",
+      "title": "Fairy Light Olive Vine",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 2010,
+      "description": ""
+    },
+    {
+      "id": 4,
+      "handle": "radiant-romantic-tulip-light",
+      "url": "/product",
+      "imageUrl": "/assets/sample/RRTL_-_WP1__71153.jpg",
+      "title": "Radiant Romantic Tulip Light",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 1015,
+      "description": ""
+    },
+    {
+      "id": 5,
+      "handle": "glimmering-glitter-glow-candle",
+      "url": "/product",
+      "imageUrl": "/assets/sample/GGGC_-_WP1__70703.jpg",
+      "title": "Glimmering Glitter Glow Candle",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 358,
+      "description": ""
+    },
+    {
+      "id": 6,
+      "handle": "sparkling-spooky-ghost",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Sparkling_Spooky_Ghost_-_WP1__16228.jpg",
+      "title": "Sparkling Spooky Ghost",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 1037,
+      "description": ""
+    },
+    {
+      "id": 7,
+      "handle": "radiant-ruby-poinsettia",
+      "url": "/product",
+      "imageUrl": "/assets/sample/RRP_-_WP1__80695.jpg",
+      "title": "Radiant Ruby Poinsettia",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 1157,
+      "description": ""
+    },
+    {
+      "id": 8,
+      "handle": "pine-paradise-wreath",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Pine_Paradise_Wreath_-_WP1__62426.jpg",
+      "title": "Pine Paradise Wreath",
+      "sellingPrice": 49.99,
+      "compareAtPrice": 99.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 242,
+      "description": ""
+    },
+    {
+      "id": 9,
+      "handle": "merry-magical-tree",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Merry_Magical_Tree_-_WP1__85341.jpg",
+      "title": "Merry Magical Tree",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 383,
+      "description": ""
+    },
+    {
+      "id": 10,
+      "handle": "flickering-flame-lantern",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Flickering_Flame_Lantern_-_WP1__35019.jpg",
+      "title": "Flickering Flame Lantern",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 79.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 477,
+      "description": ""
+    },
+    {
+      "id": 11,
+      "handle": "dazzling-diamond-lamp",
+      "url": "/product",
+      "imageUrl": "/assets/sample/Dazzling_Diamond_Lamp_-_WP4__06434.jpg",
+      "title": "Dazzling Diamond Lamp",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 421,
+      "description": ""
+    },
+    {
+      "id": 12,
+      "handle": "glowing-grace-lily-light",
+      "url": "/product",
+      "imageUrl": "/assets/sample/GGLL_-_WP1__34811.jpg",
+      "title": "Glowing Grace Lily Light",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 502,
+      "description": ""
+    }
+  ]
+}

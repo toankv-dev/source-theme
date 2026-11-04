@@ -1,0 +1,28 @@
+{{!-- /search?q=… — the platform passes every product (same data as the home page); theme.js filters the
+      cards by the query, so the result matches the title / description text the shopper typed. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="w-body w-body--collection">
+{{{trackingBody}}}
+<a class="w-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="w-main">
+  <section class="w-wrap w-collection" data-search-page>
+    <h1 class="w-page__title">Search results</h1>
+    <form class="w-search-page__form" method="get" role="search">
+      {{#if config.domain}}<input type="hidden" name="domain" value="{{config.domain}}" data-local-only>{{/if}}
+      <input type="search" name="q" placeholder="Search" data-search-page-input>
+      <button type="submit" class="w-btn">Search</button>
+    </form>
+    <p class="w-muted" data-count></p>
+    <div class="w-grid" data-grid>{{#each products}}<div class="w-search-hit" data-search-text="{{title}} {{description}}">{{> w-card-product}}</div>{{/each}}</div>
+    <p class="w-muted" data-search-empty hidden>No products match your search.</p>
+  </section>
+</main>
+{{> footer}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{#if product.title}}{{product.title}} – {{/if}}{{brand.name}}</title>
+<meta name="description" content="{{metaDesc}}">
+<link rel="canonical" href="{{canonical}}">
+{{#if brand.favicon}}<link rel="icon" href="{{brand.favicon}}">{{/if}}
+<meta property="og:site_name" content="{{brand.name}}">
+<meta property="og:title" content="{{#if product.title}}{{product.title}}{{else}}{{brand.name}}{{/if}}">
+<meta property="og:description" content="{{metaDesc}}">
+<meta property="og:url" content="{{canonical}}">
+{{#if product.media.main_image}}<meta property="og:type" content="product"><meta property="og:image" content="{{product.media.main_image}}">{{/if}}
+{{{productJsonLd}}}
+<script type="application/json" id="sf-config">{{{configJson}}}</script>
+{{!-- Live automatic discounts (the same ones the checkout applies). theme.js prices the quantity-pack cards
+      with them using the checkout's own formula; the theme never sets a price of its own. --}}
+{{!-- Spaces before the outer braces matter: "{{{x}}}}" does not parse in Handlebars. --}}
+<script type="application/json" id="w-offers">{ "tiers": {{{json nextItemTiers}}}, "bxgy": {{{json bxgyOffers}}}, "amountOff": {{{json amountOffOffers}}} }</script>
+{{!-- Colours + font are printed by the header (snippets/w-vars.hbs) so the platform's own pages get them too. --}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{!-- Every file in assets/css is also what the platform links on its own pages, EXCEPT one named theme.css
+      (the engine treats that name as a legacy inline bundle) — so the base styles live in base.css. --}}
+<link rel="stylesheet" href="{{assets_url}}/css/base.css">
+<link rel="stylesheet" href="{{assets_url}}/css/sections.css">
+<script>window.__wCart = { open: {{#if (eq settings.open_cart_on_add false)}}false{{else}}true{{/if}} };</script>
+{{{trackingHead}}}
+{{#if __designMode}}<style>html{scroll-behavior:auto!important}</style>{{/if}}

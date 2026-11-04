@@ -1,0 +1,12 @@
+{
+  "name": "Wayfare",
+  "version": "2026.11.03.1",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": ["assets/css/base.css", "assets/css/sections.css", "assets/js/theme.js"],
+  "description": "Hero-product theme (gadgets / travel): rotating sale bar, navy header, product page with award badge, benefit checklist, pack cards that are the product's real variants, trust icons, accordions, press logos, feature rows, stats, guarantee, FAQ and real reviews with a write-a-review form, sticky mobile buy bar; home with hero, featured product, comparison table, urgency banner, live reviews and a contact form.",
+  "supports": ["product", "home"]
+}

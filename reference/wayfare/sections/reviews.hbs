@@ -1,0 +1,70 @@
+{{!-- Customer reviews — written by the store in the admin only (product editor → Reviews → Add review,
+      with photos); there is no shopper review form. Layout: centred title + average, star distribution,
+      a photo grid, Filters + sort, a masonry list (long texts get "More"), Show more, and a photo lightbox.
+      theme.js loads the list from the reviews API; the first page below is the no-JS fallback.
+      With no published reviews the whole section renders nothing. --}}
+{{#if product.reviews.summary.total_count}}
+<div class="w-wrap w-reviews" id="reviews" data-reviews data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
+  <p class="w-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
+  <p class="w-reviews__avg"><strong>{{product.reviews.summary.average_rating}}</strong> <span>{{product.reviews.summary.total_count}} reviews</span></p>
+  <ul class="w-reviews__dist w-reviews__dist--full" data-reviews-dist aria-label="Rating distribution"></ul>
+
+  <div class="w-reviews__photos" data-reviews-photos hidden></div>
+
+  <div class="w-reviews__tools">
+    <details class="w-rfilter" data-review-filter>
+      <summary class="w-rtool">
+        <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
+        Filters
+      </summary>
+      <div class="w-rfilter__panel">
+        <p class="w-rfilter__title">Rating</p>
+        <label><input type="checkbox" value="5" data-filter-rating> 5 stars</label>
+        <label><input type="checkbox" value="4" data-filter-rating> 4 stars</label>
+        <label><input type="checkbox" value="3" data-filter-rating> 3 stars</label>
+        <label><input type="checkbox" value="2" data-filter-rating> 2 stars</label>
+        <label><input type="checkbox" value="1" data-filter-rating> 1 star</label>
+        <p class="w-rfilter__title">Media</p>
+        <label><input type="checkbox" data-filter-photos> With photos only</label>
+        <button type="button" class="w-facet__reset" data-filter-reset>Clear filters</button>
+      </div>
+    </details>
+    <div class="w-rtool w-rtool--select">
+      <select data-review-sort aria-label="Sort reviews">
+        <option value="recent">Most Recent</option>
+        <option value="high">Highest Rating</option>
+        <option value="low">Lowest Rating</option>
+        <option value="photos">Only Pictures first</option>
+      </select>
+      {{> w-caret}}
+    </div>
+  </div>
+
+  <div class="w-reviews__grid" data-reviews-list>
+    {{#each (limit product.reviews.items 6)}}
+    <article class="w-review">
+      <span class="w-stars w-stars--outline" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>
+      <p class="w-review__who">{{name}}{{#if verified}} <span class="w-pill-verified">Verified</span>{{/if}}</p>
+      {{#if title}}<p class="w-review__title">{{title}}</p>{{/if}}
+      <p class="w-review__text" data-clamp>{{content}}</p>
+      {{#if image}}<img class="w-review__thumb" src="{{image}}" alt="Photo from {{name}}" loading="lazy">{{/if}}
+    </article>
+    {{/each}}
+  </div>
+  <p class="w-muted w-center" data-reviews-empty hidden>No reviews match these filters.</p>
+  <div class="w-center"><button type="button" class="w-link-btn" data-reviews-more hidden>Show more ⌄</button></div>
+  <p class="w-reviews__bottom"><span class="w-stars w-stars--outline" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> {{product.reviews.summary.total_count}} reviews</p>
+
+  {{!-- Photo lightbox --}}
+  <div class="w-lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Review photo">
+    <div class="w-lightbox__overlay" data-lightbox-close></div>
+    <div class="w-lightbox__panel">
+      <button type="button" class="w-icon-btn w-lightbox__close" data-lightbox-close aria-label="Close">✕</button>
+      <button type="button" class="w-round-btn w-lightbox__nav w-lightbox__nav--prev" data-lightbox-step="-1" aria-label="Previous photo">‹</button>
+      <img class="w-lightbox__img" data-lightbox-img alt="">
+      <button type="button" class="w-round-btn w-lightbox__nav w-lightbox__nav--next" data-lightbox-step="1" aria-label="Next photo">›</button>
+      <div class="w-lightbox__info" data-lightbox-info></div>
+    </div>
+  </div>
+</div>
+{{/if}}

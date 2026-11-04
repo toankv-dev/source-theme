@@ -1,0 +1,42 @@
+{{!-- Filled by theme.js from localStorage "sf-cart:<domain>". The platform /checkout reads the same key. --}}
+<div class="w-drawer" id="CartDrawer" data-cart-drawer hidden>
+  <div class="w-drawer__overlay" data-cart-close></div>
+  <aside class="w-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawer-Title">
+    <div class="w-drawer__head">
+      {{!-- The store logo, centred; "Your cart" stays as the dialog's screen-reader name. --}}
+      <p class="w-sr" id="CartDrawer-Title">Your cart</p>
+      <span class="w-drawer__logo">{{#if brand.logo}}<img src="{{brand.logo}}" alt="{{brand.name}}" width="110" height="39">{{else}}{{brand.name}}{{/if}}</span>
+      <button type="button" class="w-icon-btn" data-cart-close><span aria-hidden="true">✕</span><span class="w-sr">Close cart</span></button>
+    </div>
+    <div class="w-drawer__body" data-cart-lines></div>
+    <p class="w-drawer__empty" data-cart-empty>{{#if settings.empty_cart_text}}{{settings.empty_cart_text}}{{else}}Your cart is empty.{{/if}}</p>
+    <div class="w-drawer__foot" data-cart-foot hidden>
+      {{!-- Prices and the discount come from the server's own cart quote (/api/storefront/cart/price),
+            the same numbers the checkout charges; shipping is added at checkout. --}}
+      {{!-- Shipping protection (settings.cart_upsells = this store's picked products, resolved by the server).
+            theme.js adds it to the cart as a real line, switched ON; the buyer can switch it off. --}}
+      {{#if settings.cart_upsells.length}}
+      <div class="w-ups" data-w-ups data-as-line="{{#if settings.cart_upsell_as_line}}1{{/if}}" style="--w-up-bg:{{#if settings.cart_upsell_bg}}{{settings.cart_upsell_bg}}{{else}}#f4f5f7{{/if}};--w-up-color:{{#if settings.cart_upsell_color}}{{settings.cart_upsell_color}}{{else}}var(--c-text){{/if}};--w-up-accent:{{#if settings.cart_upsell_accent}}{{settings.cart_upsell_accent}}{{else}}var(--c-ink){{/if}}" hidden>
+        {{#if settings.cart_upsell_heading}}<p class="w-ups__h">{{settings.cart_upsell_heading}}</p>{{/if}}
+        {{#each settings.cart_upsells}}
+        <div class="w-up" data-w-up data-pid="{{productId}}" data-handle="{{handle}}" data-title="{{title}}" data-image="{{image}}">
+          <span class="w-up__img">{{#if image}}<img src="{{image}}" alt="" loading="lazy" data-w-up-img>{{/if}}</span>
+          <span class="w-up__txt"><strong>{{title}}</strong>{{#if description}}<small class="w-up__desc">{{description}}</small>{{/if}}
+            {{#if (gt variants.length 1)}}<select class="w-up__var" data-w-up-var aria-label="{{title}} option">{{#each variants}}<option value="{{id}}" data-price="{{price}}" data-compare="{{compareAtPrice}}" data-image="{{image}}" data-title="{{title}}">{{title}}</option>{{/each}}</select>{{else}}{{#each variants}}<input type="hidden" data-w-up-var value="{{id}}" data-price="{{price}}" data-compare="{{compareAtPrice}}" data-image="{{image}}" data-title="{{title}}">{{/each}}{{/if}}
+          </span>
+          <span class="w-up__price"><b data-w-up-amt></b><s data-w-up-was hidden></s></span>
+          <button type="button" class="w-up__sw" role="switch" aria-checked="true" aria-label="Add {{title}}" data-w-up-sw><i></i></button>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      <div class="w-drawer__row w-drawer__row--discount" data-cart-discount-row hidden>
+        <span data-cart-discount-title>Discount</span><span data-cart-discount></span>
+      </div>
+      <div class="w-drawer__row"><span>Subtotal</span><strong><s class="w-drawer__was" data-cart-subtotal-was hidden></s> <span data-cart-subtotal></span></strong></div>
+      <p class="w-drawer__note">Shipping is calculated at checkout.</p>
+      <button type="button" class="w-btn w-btn--block w-btn--lg" id="CartDrawer-Checkout" data-cart-checkout>Checkout</button>
+      {{> w-pay}}
+    </div>
+  </aside>
+</div>

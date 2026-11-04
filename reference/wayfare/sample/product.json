@@ -1,0 +1,34 @@
+{
+  "title": "Travel Compression Kit",
+  "price": "$57.95",
+  "compare_at_price": "$115.95",
+  "off_pct": 50,
+  "meta_description": "Cordless pump and reusable compression bags for carry-on travel.",
+  "description_html": "<p>A small cordless pump and a set of reusable bags that press clothes flat, so a week of outfits fits in a carry-on.</p>",
+  "variants": [
+    {
+      "name": "Pack",
+      "displayType": "pills",
+      "metadata": {},
+      "options": [
+        { "label": "6 Pack", "active": false, "color": "" },
+        { "label": "9 Pack", "active": true, "color": "" },
+        { "label": "12 Pack", "active": false, "color": "" },
+        { "label": "15 Pack", "active": false, "color": "" }
+      ]
+    }
+  ],
+  "variants_list": [
+    { "id": "v6", "title": "6 Pack", "option_values": ["6 Pack"], "price": "$57.95", "compare_at_price": "$115.95" },
+    { "id": "v9", "title": "9 Pack", "option_values": ["9 Pack"], "price": "$69.95", "compare_at_price": "$139.95" },
+    { "id": "v12", "title": "12 Pack", "option_values": ["12 Pack"], "price": "$79.95", "compare_at_price": "$159.95" },
+    { "id": "v15", "title": "15 Pack", "option_values": ["15 Pack"], "price": "$85.95", "compare_at_price": "$171.95" }
+  ],
+  "reviews": {
+    "summary": { "average_rating": 4.6, "total_count": 128 },
+    "items": [
+      { "name": "Sample reviewer", "rating": 5, "title": "Sample review", "content": "Preview text — the live store shows the product's real reviews here.", "verified": true },
+      { "name": "Sample reviewer 2", "rating": 4, "title": "Another sample", "content": "Preview text only.", "verified": true }
+    ]
+  }
+}

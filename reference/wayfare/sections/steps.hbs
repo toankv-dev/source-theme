@@ -1,0 +1,16 @@
+{{!-- How-it-works: a navy panel 90% of the screen wide; its content (lead line, heading, image cards
+      captioned at the bottom) stays inside the normal page width in the middle of the panel. --}}
+<div class="w-steps">
+  <div class="w-steps__inner">
+    {{#if section.settings.lead}}<p class="w-steps__lead">{{section.settings.lead}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="w-steps__title" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    <div class="w-steps__grid">
+      {{#each section.blocks}}
+      <figure class="w-step" {{{this.attributes}}}>
+        {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" loading="lazy">{{else}}<div class="w-step__ph" aria-hidden="true"></div>{{/if}}
+        <figcaption>{{this.settings.caption}}</figcaption>
+      </figure>
+      {{/each}}
+    </div>
+  </div>
+</div>

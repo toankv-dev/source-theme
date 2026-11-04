@@ -1,0 +1,12 @@
+{
+  "name": "Customer reviews",
+  "tag": "section",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Customer Reviews" },
+    { "type": "range", "id": "page_size", "label": "Reviews per page", "default": 9, "min": 3, "max": 30, "step": 3 },
+    { "type": "paragraph", "content": "Reviews are written by you in the admin: open the product → Reviews → Add review (name, rating, text, photos). Shoppers cannot post reviews from the store. Hidden while the product has no published reviews." }
+  ],
+  "presets": [{ "name": "Customer reviews", "category": "Trust", "description": "Rating summary, photo grid, filters and a masonry review list." }],
+  "enabled_on": { "templates": ["product"] }
+}

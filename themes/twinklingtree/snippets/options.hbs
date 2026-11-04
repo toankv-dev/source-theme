@@ -1,0 +1,27 @@
+{{!-- TwinklingTree option pickers. Same data-* hooks as the base (ui.js maps the chosen labels to a variant):
+      a small uppercase label, swatches as pills with a round image + name (check mark when chosen), other
+      options as equal-width pills; an option's badge_text (e.g. POPULAR) sits on its top edge. --}}
+{{#if @root.product.variants.length}}
+<div class="b-options tt-options" data-options>
+  {{#each @root.product.variants}}
+  <fieldset class="b-opt tt-opt tt-opt--{{displayType}}" data-opt="{{@index}}">
+    <legend class="tt-opt__legend">{{name}}<span class="b-sr">: <span data-opt-current>{{#each options}}{{#if active}}{{label}}{{/if}}{{/each}}</span></span></legend>
+    {{#if (eq displayType "dropdown")}}
+    <select class="b-select tt-select" data-opt-select aria-label="{{name}}">
+      {{#each options}}<option value="{{label}}"{{#if active}} selected{{/if}}>{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</option>{{/each}}
+    </select>
+    {{else}}
+    <div class="tt-opt__values">
+      {{#each options}}
+      <button type="button" class="tt-pill{{#if active}} is-active{{/if}}" data-opt-value="{{label}}" aria-pressed="{{#if active}}true{{else}}false{{/if}}">
+        {{#if badge_text}}<span class="tt-pill__badge">{{badge_text}}</span>{{/if}}
+        {{#if (eq ../displayType "swatches")}}<span class="tt-pill__swatch" aria-hidden="true" style="{{#if image}}background-image:url('{{image}}'){{else}}{{#if color}}background:{{color}}{{else}}{{swatchStyle label}}{{/if}}{{/if}}"></span>{{/if}}
+        <span class="tt-pill__label">{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</span>
+      </button>
+      {{/each}}
+    </div>
+    {{/if}}
+  </fieldset>
+  {{/each}}
+</div>
+{{/if}}

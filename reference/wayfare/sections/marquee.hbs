@@ -1,0 +1,7 @@
+{{!-- Scrolling strip of short promises. The list is printed twice so the CSS loop is seamless. --}}
+<div class="w-marquee" aria-label="Store promises">
+  <div class="w-marquee__track">
+    {{#each section.blocks}}<span class="w-marquee__item" {{{this.attributes}}}><span class="w-check" aria-hidden="true">✓</span>{{this.settings.text}}</span>{{/each}}
+    {{#each section.blocks}}<span class="w-marquee__item" aria-hidden="true"><span class="w-check">✓</span>{{this.settings.text}}</span>{{/each}}
+  </div>
+</div>

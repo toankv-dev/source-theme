@@ -1,0 +1,116 @@
+{{!-- TwinklingTree home: hero collage, "Shop by category" tiles, one product grid per collection (6 cards +
+      VIEW ALL), customer reviews carousel. Hero / banner images default to the theme's own files and can be
+      replaced in Theme settings → TwinklingTree. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="b-body b-body--home tt-body">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#unless (eq settings.home_hero_show false)}}
+  <section class="tt-hero">
+    <picture class="tt-hero__bg">
+      <source media="(max-width: 649px)" srcset="{{#if settings.tt_hero_bg_mobile}}{{settings.tt_hero_bg_mobile}}{{else}}{{assets_url}}/images/tt/mobile-homepage-bg-9BZf6j0x0bitz03sgC6hAGI0Y5ytAC.png{{/if}}">
+      <img src="{{#if settings.home_hero_image}}{{settings.home_hero_image}}{{else}}{{assets_url}}/images/tt/home-page-designs-desktop-1-4-b18HYOKcLIS6GWIDLIvCOpILVP0aun.png{{/if}}" alt="{{brand.name}}" width="1440" height="600" fetchpriority="high">
+    </picture>
+    <div class="tt-hero__collage" aria-hidden="true">
+      <div class="tt-hero__col tt-hero__col--1">
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><img src="{{assets_url}}/images/tt/pic-xmas-2-1-800.webp" alt="" draggable="false"></a>
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><img src="{{assets_url}}/images/tt/pic-xmas-1-2-800.webp" alt="" draggable="false"></a>
+      </div>
+      <div class="tt-hero__col tt-hero__col--2">
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><img src="{{assets_url}}/images/tt/pic-xmas-2-1-800-v2.1.webp" alt="" draggable="false"></a>
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><img src="{{assets_url}}/images/tt/pic-xmas-2-2-800.webp" alt="" draggable="false"></a>
+      </div>
+      <div class="tt-hero__col tt-hero__col--3">
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><picture><source media="(max-width: 649px)" srcset="{{assets_url}}/images/tt/pic-xmas-mobile-3-1-800.webp"><img src="{{assets_url}}/images/tt/pic-xmas-3-1-800.webp" alt="" draggable="false"></picture></a>
+        <a href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" tabindex="-1"><img src="{{assets_url}}/images/tt/pic-xmas-3-2-800-v2.webp" alt="" draggable="false"></a>
+      </div>
+    </div>
+    <div class="tt-hero__content">
+      <picture class="tt-hero__text">
+        <source media="(max-width: 649px)" srcset="{{assets_url}}/images/tt/autumn-home-text-i51YY2TfpgzgZPneNiH8Fyzwq0AoiK.png">
+        <img src="{{#if settings.tt_hero_text_image}}{{settings.tt_hero_text_image}}{{else}}{{assets_url}}/images/tt/home-page-designs-desktop-4-1-QN1aLaPeNewvxZGJi8ergQp8FMI2vf.png{{/if}}" alt="{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}Autumn Sale – up to 50% off{{/if}}" width="1626" height="1533">
+      </picture>
+      <a class="tt-hero__btn" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}/collections/best-sellers{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop Now{{/if}} <img src="{{assets_url}}/images/tt/arrow-icon.png" alt="" width="15" height="19"></a>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#if collections.length}}{{#unless (eq settings.tt_categories_show false)}}
+  <section class="tt-cats">
+    <div class="tt-cats__inner">
+      <div class="tt-cats__head">
+        <div class="tt-cats__heading">
+          <p class="tt-cats__eyebrow">{{#if settings.tt_categories_eyebrow}}{{settings.tt_categories_eyebrow}}{{else}}Shop by Category{{/if}}</p>
+          <h2 class="tt-cats__title">{{#if settings.tt_categories_title}}{{settings.tt_categories_title}}{{else}}Find Your Perfect Glow{{/if}}</h2>
+          {{#if settings.tt_categories_lede}}<p class="tt-cats__lede">{{settings.tt_categories_lede}}</p>{{/if}}
+        </div>
+        <a class="tt-cats__all" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{#if settings.tt_categories_all}}{{settings.tt_categories_all}}{{else}}View All Collections{{/if}} <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="tt-cats__row">
+        {{#each collections}}
+        <li>
+          <a class="tt-cats__tile" href="/collections/{{handle}}" data-local-domain>
+            {{#with (lookup products 0)}}<img class="tt-cats__img" src="{{imageUrl}}" alt="" loading="lazy" draggable="false">{{/with}}
+            <span class="tt-cats__body">
+              <span class="tt-cats__kicker"><img src="{{@root.assets_url}}/images/tt/indoor.webp" alt="" width="20" height="20"> {{products.length}} Products</span>
+              <span class="tt-cats__label">{{title}}</span>
+              <span class="tt-cats__blurb">{{#if description}}{{description}}{{else}}Discover the {{title}} collection.{{/if}}</span>
+              <span class="tt-cats__cta">Shop {{title}} ›</span>
+            </span>
+            <span class="tt-cats__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+  {{/unless}}{{/if}}
+
+  {{#unless (eq settings.home_products_show false)}}
+  {{#each collections}}{{#if products.length}}
+  <section class="tt-grid-sec">
+    <h2 class="tt-grid-sec__title">{{title}}</h2>
+    <div class="b-grid tt-grid">{{#if @root.settings.home_products_limit}}{{#each (limit products @root.settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 6)}}{{> card-product}}{{/each}}{{/if}}</div>
+    <a class="tt-btn tt-grid-sec__more" href="/collections/{{handle}}" data-local-domain>View all</a>
+  </section>
+  {{/if}}{{else}}
+  {{#if products.length}}
+  <section class="tt-grid-sec">
+    <h2 class="tt-grid-sec__title">{{#if settings.home_products_heading}}{{settings.home_products_heading}}{{else}}Best Sellers{{/if}}</h2>
+    <div class="b-grid tt-grid">{{#each (limit products 6)}}{{> card-product}}{{/each}}</div>
+    <a class="tt-btn tt-grid-sec__more" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>View all</a>
+  </section>
+  {{/if}}
+  {{/each}}
+  {{/unless}}
+
+  {{#unless (eq settings.home_reviews_show false)}}
+  {{!-- Real reviews of the store's products (base carousel: ui.js fills data-carousel-track). --}}
+  <section class="b-home-reviews tt-hrevs" data-home-reviews hidden>
+    <div class="tt-hrevs__head">
+      <img class="tt-hrevs__sprig tt-hrevs__sprig--l" src="{{assets_url}}/images/tt/sprig-left.webp" alt="" aria-hidden="true">
+      <div>
+        <p class="tt-hrevs__eyebrow">{{#if settings.tt_reviews_eyebrow}}{{settings.tt_reviews_eyebrow}}{{else}}Real Homes · Real Stories{{/if}}</p>
+        <h2 class="tt-hrevs__title">{{#if settings.home_reviews_heading}}{{settings.home_reviews_heading}}{{else}}What Our Customers Have to Say{{/if}}</h2>
+        <p class="tt-hrevs__sub">{{#if settings.home_reviews_sub}}{{settings.home_reviews_sub}}{{else}}From cozy evenings to special moments, {{brand.name}} brings a little more magic into homes around the world. Here's what our customers are sharing.{{/if}}</p>
+      </div>
+      <img class="tt-hrevs__sprig tt-hrevs__sprig--r" src="{{assets_url}}/images/tt/sprig-right.webp" alt="" aria-hidden="true">
+    </div>
+    <div class="b-carousel tt-hrevs__carousel" data-carousel>
+      <div class="b-carousel__track" data-carousel-track></div>
+    </div>
+    <div class="b-carousel__dots" data-carousel-dots role="tablist" aria-label="Choose reviews"></div>
+    <script type="application/json" data-home-product-ids>[{{#each (limit products 60)}}{{#unless @first}},{{/unless}}"{{id}}"{{/each}}]</script>
+  </section>
+  {{/unless}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

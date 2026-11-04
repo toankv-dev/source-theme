@@ -1,0 +1,5 @@
+<div class="b-wrap b-guarantee">
+  {{#if section.settings.eyebrow}}<p class="b-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+</div>

@@ -1,0 +1,9 @@
+# Original source zips: their content lives unzipped in reference/
+/*.zip
+
+# Generated
+dist/
+themes/*/_work/
+reference/*/_inspect.json
+reference/*/_base-update.md
+tools/node_modules/

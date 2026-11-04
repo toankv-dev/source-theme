@@ -1,0 +1,6 @@
+{{!-- TwinklingTree price: struck compare price first, then the price with the currency code. ui.js rewrites
+      [data-price] / [data-compare] when the variant changes. --}}
+<div class="b-price tt-price" data-price-block>
+  {{#if @root.product.compare_at_price}}<s class="tt-price__was" data-compare>{{@root.product.compare_at_price}}</s>{{/if}}
+  <span class="tt-price__now"><span data-price>{{@root.product.price}}</span> {{#if @root.config.currency}}{{@root.config.currency}}{{else}}USD{{/if}}</span>
+</div>

@@ -1,0 +1,3009 @@
+<!DOCTYPE html>
+<html class="js" lang="en" data-tt-banners="edge">
+<head>
+{{> tt-head}}
+<title>{{brand.name}}</title>
+<meta name="description" content="{{metaDesc}}">
+<link rel="canonical" href="{{canonical}}">
+<script type="application/json" id="sf-config">{{{configJson}}}</script>
+{{{trackingHead}}}
+</head>
+<body>
+{{{trackingBody}}}
+<div class="page-load-overlay" id="page-load-overlay" aria-hidden="true"><div class="page-load-overlay__spinner"></div></div>
+<noscript><style>#page-load-overlay{display:none !important;}</style></noscript>
+{{> header}}
+<main class="body" id="main-content" role="main" data-currency-code="USD" data-template="pages-home">
+<div class="main full" id="home-page">
+{{#unless (eq settings.show_home_hero false)}}<div data-tt-banner-slot="home" class="tt-banner tt-banner--home" data-tt-banner="ban_da2c41660b90"><style>@font-face {font-family:'Crimson Pro';font-style:italic;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-italic-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Pro';font-style:italic;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-italic-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url("{{assets_url}}/fonts/crimson-text-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url("{{assets_url}}/fonts/crimson-text-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .icon {
+  height:.94118rem;
+  width:.94118rem;
+  display:inline-block;
+  vertical-align:middle;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .btn {
+  background-color:#111;
+  color:#fff;
+  padding:11px 20px;
+  font-size:16px;
+  letter-spacing:.3rem;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .icon {
+  -webkit-transition:all .15s ease;
+  transition:all .15s ease;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+  position:relative;
+  overflow:hidden;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:307px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:356px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:429px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:632px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:579px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:632px;
+  }
+}
+@media (min-width:1880px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container {
+    height:742px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container picture {
+  width:100%;
+  height:100%;
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:center;
+  object-position:center;
+  display:block;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container picture img {
+  width:100%;
+  height:100%;
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:center;
+  object-position:center;
+  display:block;
+  min-height:650px;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container picture img {
+    min-height:none;
+    -o-object-position:right;
+    object-position:right;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+  position:absolute;
+  top:226px;
+  padding:0 13px;
+  width:100%;
+  height:calc(100% - 309px);
+  z-index:10;
+  margin:0 auto;
+  left:0;
+  right:0;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:246px;
+    height:calc(100% - 354px);
+  }
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:247px;
+    height:calc(100% - 357px);
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:250px;
+    height:calc(100% - 363px);
+  }
+}
+@media (min-width:462px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:252px;
+    height:calc(100% - 360px);
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    height:calc(100% - 390px);
+  }
+}
+@media (min-width:546px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:249px;
+    height:calc(100% - 388px);
+  }
+}
+@media (min-width:570px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:267px;
+    height:calc(100% - 408px);
+  }
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    top:309px;
+    height:calc(100% - 443px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    height:auto;
+    padding:0;
+    right:11px;
+    top:-24px;
+    width:318px;
+    max-width:none;
+    left:auto;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:356px;
+  }
+}
+@media (min-width:865px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:437px;
+    top:-5px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:460px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:580px;
+  }
+}
+@media (min-width:1340px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:656px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    right:11px;
+    top:-62px;
+    width:764px;
+  }
+}
+@media (min-width:2200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images {
+    width:900px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  position:relative;
+  height:100%;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col {
+  position:relative;
+  margin:0 7px 0 0;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col {
+    margin:0 5px 0 0;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col {
+    margin:0 7px 0 0;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col:last-child {
+  margin:0;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col .image-wrapper {
+  overflow:hidden;
+  border-radius:11px;
+  margin:0 0 8px;
+  display:none;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col .image-wrapper {
+    margin:0 0 6px;
+    display:block;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col .image-wrapper {
+    margin:0 0 9px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col .image-wrapper img {
+  width:100%;
+  height:100%;
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:center;
+  object-position:center;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+  display:none;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:124px;
+    display:block;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:120px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:188px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:240px;
+  }
+}
+@media (min-width:1880px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:313px;
+  }
+}
+@media (min-width:2200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col1 {
+    top:240px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 {
+  width:50%;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 {
+    top:68px;
+    width:auto;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 {
+    top:60px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 {
+    top:99px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:first-of-type {
+  height:calc(55.2% - 8px);
+  display:block;
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:first-of-type {
+    height:calc(52.9% - 8px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:first-of-type {
+    height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:nth-of-type(2) {
+  height:calc(44.8% - 8px);
+  display:block;
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:nth-of-type(2) {
+    height:calc(47.1% - 8px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col2 .image-wrapper:nth-of-type(2) {
+    height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 {
+  width:50%;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 {
+    top:0;
+    width:auto;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 {
+    top:-29px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:first-of-type {
+  height:calc(43.3% - 8px);
+  display:block;
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:first-of-type {
+    height:calc(40.8% - 8px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:first-of-type {
+    height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:nth-of-type(2) {
+  height:calc(56.7% - 8px);
+  display:block;
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:nth-of-type(2) {
+    height:calc(59.2% - 8px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .product-images .inner-wrapper .col.col3 .image-wrapper:nth-of-type(2) {
+    height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  text-align:center;
+  padding:11px 10px;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+    text-align:left;
+    padding:11px 30px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+    padding:20px 35px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+    padding:36px 35px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+    padding:54px 47px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content {
+    padding:67px 53px 60px;
+    max-width:1560px;
+    left:0;
+    right:0;
+    margin:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text {
+  margin:0 auto 10px;
+  color:#787878;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text {
+    margin:0 auto 12px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text {
+    margin:0 auto;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text {
+    margin:0 0 10px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .stars img {
+  width:66px;
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .stars img {
+    width:77px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .desc {
+  font-size:16px;
+  font-weight:700;
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .desc {
+    font-size:17px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .desc {
+    font-size:13px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .desc {
+    font-size:16px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .reviews-text .desc {
+    font-size:17px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+  font-family:'Crimson Pro','Crimson Text',serif;
+  font-size:32px;
+  font-weight:700;
+  margin:0 auto 20px;
+  line-height:.9;
+  letter-spacing:0;
+}
+@media (min-width:362px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 auto 24px;
+  }
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    font-size:36px;
+    line-height:.9;
+    margin:0 auto 27px;
+    max-width:376px;
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    font-size:40px;
+    line-height:.9;
+    margin:0 auto 16px;
+  }
+}
+@media (min-width:546px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 auto 16px;
+  }
+}
+@media (min-width:570px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    font-size:43px;
+    line-height:.9;
+    max-width:480px;
+  }
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 auto 40px;
+  }
+}
+@media (min-width:607px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    font-size:52px;
+    line-height:.9;
+    max-width:600px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 0 9px;
+    font-size:31px;
+    line-height:.9;
+    max-width:358px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    font-size:40px;
+    line-height:.9;
+    max-width:453px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 0 14px;
+    font-size:46px;
+    line-height:.9;
+    max-width:600px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 0 38px;
+    font-size:61px;
+    line-height:.9;
+    max-width:694px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 0 17px;
+    max-width:700px;
+    font-size:71px;
+    line-height:.9;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-title {
+    margin:0 0 28px;
+    font-size:76px;
+    line-height:.9;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+  display:none;
+  font-size:14px;
+  line-height:16px;
+  max-width:276px;
+  letter-spacing:.54px;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    display:block;
+    margin:0;
+  }
+}
+@media (min-width:730px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:314px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    font-size:16px;
+    line-height:16px;
+    margin:0 0 4px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:376px;
+    font-size:17px;
+    line-height:19px;
+    margin:0 0 25px;
+  }
+}
+@media (min-width:979px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:412px;
+  }
+}
+@media (min-width:1198px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:456px;
+    font-size:19px;
+    line-height:25px;
+    margin:0 0 42px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:484px;
+    margin:0 0 24px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .banner-desc {
+    max-width:454px;
+    font-size:20px;
+    line-height:26px;
+    letter-spacing:.1px;
+    margin:0 0 25px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off {
+  margin:0 0 23px;
+  height:94px;
+}
+@media (min-width:546px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off {
+    height:64px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off {
+    margin:0 0 7px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off {
+    margin:0 0 11px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off {
+    height:135px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  max-width:230px;
+  position:relative;
+  top:8px;
+}
+@media (min-width:393px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    width:100%;
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:230px;
+    top:0;
+  }
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:306px;
+    top:-12px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:123px;
+    margin:0 auto 16px;
+    top:10px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:156px;
+    margin:0 auto 18px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:190px;
+    margin:0 auto 20px;
+    top:-10px;
+  }
+}
+@media (min-width:1198px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:345px;
+    margin:0 auto 20px;
+    top:0;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:345px;
+    margin:0 auto 35px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .up-to-50-off img {
+    max-width:345px;
+    margin:0 auto 40px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+  position:absolute;
+  bottom:17px;
+  left:0;
+  right:0;
+  margin:auto;
+  width:91%;
+  max-width:303px;
+  height:55px;
+  font-size:22px!important;
+  font-weight:700;
+  font-family:'Crimson Pro','Crimson Text',serif;
+  line-height:31px;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  -webkit-box-pack:center;
+  -ms-flex-pack:center;
+  justify-content:center;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    width:93%;
+    bottom:29px;
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    bottom:45px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    position:relative;
+    margin:0;
+    bottom:auto;
+    left:auto;
+    right:auto;
+    max-width:192px;
+    height:38px;
+    font-size:16px!important;
+    line-height:18px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    height:44px;
+  }
+}
+@media (min-width:800px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    height:48px;
+    font-size:18px!important;
+    line-height:20px;
+    max-width:222px;
+  }
+}
+@media (min-width:1198px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    height:60px;
+    font-size:30px!important;
+    line-height:25px;
+    max-width:294px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    height:60px;
+    font-size:26px!important;
+    line-height:28px;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn {
+    height:60px;
+    max-width:294px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn .icon {
+  width:14px;
+  height:19px;
+  margin-left:11px;
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn .icon {
+    width:12px;
+    height:17px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn .icon {
+    width:14px;
+    height:19px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn .icon {
+    width:15px;
+    height:20px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero .hero-banner-container .hero-content .btn .icon img {
+  width:100%;
+  display:block;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+  font-size:38px;
+  line-height:.9;
+  letter-spacing:0;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:43px;
+    line-height:.9;
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:50px;
+    line-height:.9;
+  }
+}
+@media (min-width:570px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:54px;
+    line-height:.9;
+  }
+}
+@media (min-width:607px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:64px;
+    line-height:.9;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:39px;
+    line-height:.9;
+    max-width:270px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:52px;
+    line-height:.9;
+    max-width:354px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:60px;
+    line-height:.9;
+    max-width:400px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:72px;
+    line-height:.9;
+    max-width:494px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    max-width:536px;
+    font-size:74px;
+    line-height:.9;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:80px;
+    line-height:.9;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container {
+    height:494px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container {
+    height:517px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container {
+    height:632px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container>picture img {
+  min-height:650px;
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container>picture img {
+    min-height:700px;
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container>picture img {
+    min-height:826px;
+  }
+}
+@media (min-width:600px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container>picture img {
+    min-height:992px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-banner-container>picture img {
+    min-height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .mobile-only {
+  display:inline-block;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .mobile-only {
+    display:none;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .desktop-only {
+  display:none;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .desktop-only {
+    display:inline-block;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:11px 30px;
+  }
+}
+@media (min-width:710px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:11px 30px;
+  }
+}
+@media (min-width:865px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:11px 30px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:54px 30px;
+  }
+}
+@media (min-width:1100px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:54px 30px;
+  }
+}
+@media (min-width:1278px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:54px 30px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content {
+    padding:54px 53px 60px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+  color:#000;
+  font-size:43px;
+  line-height:.9;
+  margin:0 auto 26px;
+}
+@media (min-width:362px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 auto 26px;
+    font-size:48px;
+    line-height:.9;
+  }
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:48px;
+    line-height:.9;
+    margin:0 auto 26px;
+    max-width:376px;
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:47px;
+    line-height:.9;
+    margin:0 auto 26px;
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:52px;
+  }
+}
+@media (min-width:546px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 auto 16px;
+  }
+}
+@media (min-width:570px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:55px;
+    line-height:.9;
+    max-width:380px;
+  }
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 auto 40px;
+  }
+}
+@media (min-width:607px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:52px;
+    line-height:.9;
+    max-width:600px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    text-shadow:none;
+    margin:0 0 18px;
+    font-size:31px;
+    line-height:.9;
+    max-width:358px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    font-size:37px;
+    line-height:.9;
+    max-width:453px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 0 14px;
+    font-size:46px;
+    line-height:.9;
+    max-width:600px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 0 22px;
+    font-size:49px;
+    line-height:.9;
+    max-width:694px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 0 17px;
+    max-width:700px;
+    font-size:58px;
+    line-height:.9;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-title {
+    margin:0 0 17px;
+    font-size:62px;
+    line-height:.9;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text {
+  color:#b6e2a9;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text {
+    color:#20ffc5;
+    margin:0 auto 6px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text .stars img {
+  width:78px;
+  position:relative;
+  top:-1px;
+  left:1px;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text .desc {
+  color:#747171;
+  font-size:17px;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text .desc {
+    font-size:18px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .reviews-text .desc {
+    text-shadow:none;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off {
+  margin:0 0 23px;
+  height:77px;
+}
+@media (min-width:546px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off {
+    height:64px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off {
+    margin:0 0 7px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off {
+    margin:0 0 11px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off {
+    height:107px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off img {
+  max-width:242px;
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off img {
+    max-width:260px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off img {
+    max-width:123px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off img {
+    max-width:184px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .up-to-50-off img {
+    max-width:260px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn {
+  background:#90100A!important;
+  bottom:15px;
+  font-size:21px!important;
+  letter-spacing:1.8px!important;
+  padding:11px 20px 13px;
+  max-width:192px;
+  height:auto;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn {
+    bottom:30px;
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn {
+    bottom:23px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn {
+    bottom:auto;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn {
+    font-size:30px!important;
+    line-height:25px;
+    max-width:266px;
+    padding:13px 20px 15px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-desc {
+  color:#000;
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-desc {
+    margin:0 0 40px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container {
+  position:absolute;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  width:100%;
+  -webkit-box-pack:justify;
+  -ms-flex-pack:justify;
+  justify-content:space-between;
+  bottom:-23px;
+  padding:0 8px;
+  left:0;
+  right:0;
+  display:none;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container {
+    display:none;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img {
+  display:inline-block;
+  position:relative;
+  -webkit-transform:scale(.8);
+  transform:scale(.8);
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img {
+    -webkit-transform:scale(1);
+    transform:scale(1);
+  }
+}
+@media (min-width:540px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img {
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img.gifts-1 {
+  left:-4px;
+}
+@media (min-width:540px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img.gifts-1 {
+    left:-1px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img.gifts-2 {
+  right:-2px;
+  top:-4px;
+}
+@media (min-width:540px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .gifts-container img.gifts-2 {
+    right:-1px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+  top:284px;
+  height:calc(100% - 362px);
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    height:calc(100% - 383px);
+  }
+}
+@media (min-width:500px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    height:calc(100% - 376px);
+  }
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    top:309px;
+    height:calc(100% - 404px);
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    top:-31px;
+    height:auto;
+  }
+}
+@media (min-width:1024px) and (max-width:1199px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    top:-56px;
+    width:491px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images {
+    top:-65px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .inner-wrapper {
+    padding-left:26px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .inner-wrapper {
+    padding-left:13px;
+  }
+}
+@media (min-width:865px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .inner-wrapper {
+    padding-left:29px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .inner-wrapper {
+    padding-left:53px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:128px;
+    width:96px;
+  }
+}
+@media (min-width:710px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:144px;
+    width:109px;
+  }
+}
+@media (min-width:770px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:147px;
+    width:114px;
+  }
+}
+@media (min-width:865px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:173px;
+    width:135px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:223px;
+    width:163px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:245px;
+    width:193px;
+  }
+}
+@media (min-width:1340px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:251px;
+    width:207px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col .image-wrapper {
+    height:279px;
+    width:233px;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col1 {
+    top:84px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col1 {
+    top:100px;
+  }
+}
+@media (min-width:870px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col1 {
+    top:74px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col1 {
+    top:126px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col1 {
+    top:161px;
+  }
+}
+@media (min-width:708px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2 {
+    top:48px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2 {
+    top:61px;
+  }
+}
+@media (min-width:870px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2 {
+    top:48px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2 {
+    top:90px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2 {
+    top:95px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col2>a:first-of-type img {
+  left:-1px;
+  top:-1px;
+  position:relative;
+  -webkit-transform:scale(1.05);
+  transform:scale(1.05);
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col3 {
+    top:16px;
+  }
+}
+@media (min-width:870px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col3 {
+    top:11px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col3 {
+    top:20px;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images .col3>a:last-of-type img {
+  position:relative;
+  top:1px;
+  -webkit-transform:scale(1.01);
+  transform:scale(1.01);
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .product-images picture img {
+  min-height:auto;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+  font-size:38px;
+  line-height:.9;
+  letter-spacing:0;
+  text-wrap-mode:nowrap;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:43px;
+    line-height:.9;
+  }
+}
+@media (min-width:425px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:48px;
+    line-height:.9;
+  }
+}
+@media (min-width:570px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:54px;
+    line-height:.9;
+  }
+}
+@media (min-width:607px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:64px;
+    line-height:.9;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:39px;
+    line-height:.9;
+    max-width:270px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:52px;
+    line-height:.9;
+    max-width:354px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:60px;
+    line-height:.9;
+    max-width:400px;
+  }
+}
+@media (min-width:1198px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:72px;
+    line-height:.9;
+    max-width:494px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    max-width:536px;
+    font-size:74px;
+    line-height:.9;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026.short-title .hero-banner-container .hero-content .banner-title {
+    font-size:80px;
+    line-height:.9;
+  }
+}
+@media (min-width:770px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .mobile-only {
+    display:none;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .desktop-only {
+  display:none;
+}
+@media (min-width:770px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .desktop-only {
+    display:block;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button {
+  text-align:center;
+  display:block;
+  background-color:#000;
+  border-radius:0;
+  text-transform:uppercase;
+  letter-spacing:.3rem;
+  width:100%;
+  font-size:16px;
+  color:#fff;
+  padding:13px 20px;
+  font-weight:700;
+  -webkit-transition:background .2s ease 0s;
+  transition:background .2s ease 0s;
+  position:relative;
+  overflow:hidden;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  pointer-events:none;
+  background:0 0;
+  background-image:-webkit-gradient(linear,left top,right top,from(transparent),color-stop(rgba(255,255,255,.25)),to(transparent));
+  background-image:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  height:100%;
+  left:150%;
+  position:absolute;
+  top:0;
+  -webkit-transform:skew(-20deg);
+  transform:skew(-20deg);
+  width:200%;
+  opacity:1;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button:hover {
+  background-color:#2b2b2b!important;
+  -webkit-transition:background .2s ease 0s;
+  transition:background .2s ease 0s;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button:hover::before {
+  -webkit-transform:skew(-20deg);
+  transform:skew(-20deg);
+  opacity:1;
+  -webkit-animation:shine .75s cubic-bezier(.01,.56,1,1);
+  animation:shine .75s cubic-bezier(.01,.56,1,1);
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button {
+  background:#90100A!important;
+  border-radius:8px!important;
+  color:#fff!important;
+  font-weight:700!important;
+  font-size:17px!important;
+  letter-spacing:3.8px!important;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .black-button:hover {
+  background:#700c08!important;
+  -webkit-transition-delay:0s;
+  transition-delay:0s;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .fade-in-enabled {
+  opacity:0;
+  -webkit-transition:opacity 1s ease-out;
+  transition:opacity 1s ease-out;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .fade-in-enabled.animated {
+  opacity:1;
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-banner-container>picture img {
+    min-height:0!important;
+    height:100%!important;
+    -o-object-position:center bottom!important;
+    object-position:center bottom!important;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+  max-width:250px;
+  margin:0 auto;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image img {
+  display:block;
+  width:100%;
+  height:auto;
+}
+@media (min-width:590px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:280px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:215px;
+    margin:0 0 10px;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:255px;
+    margin:0 0 12px;
+  }
+}
+@media (min-width:915px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:320px;
+    margin:0 0 14px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:295px;
+    margin:0 0 16px;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:315px;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-text-image {
+    max-width:415px;
+    margin:0 0 20px;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content {
+    text-align:left!important;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-content-group {
+    margin-left:15px!important;
+  }
+}
+@media (min-width:768px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-content-group {
+    margin-left:30px!important;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-content-group {
+    margin-left:60px!important;
+  }
+}
+@media (min-width:1200px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-content-group {
+    margin-left:200px!important;
+  }
+}
+@media (min-width:1440px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content {
+    max-width:none!important;
+    left:0!important;
+    right:0!important;
+    margin:0!important;
+    padding-left:53px!important;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-content-group {
+    margin-left:max(177px, calc(61vw - 763px))!important;
+  }
+}
+@media (min-width:650px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .banner-content-group {
+    display:-webkit-inline-box;
+    display:-ms-inline-flexbox;
+    display:inline-flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -ms-flex-direction:column;
+    flex-direction:column;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-banner-container .hero-content a.btn.hero-button.black-button {
+  background:#90100A!important;
+  background-color:#90100A!important;
+  color:#fff!important;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-banner-container .hero-content a.btn.hero-button.black-button:hover, .tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-banner-container .hero-content a.btn.hero-button.black-button:focus {
+  background:#700c08!important;
+  background-color:#700c08!important;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image picture {
+  display:block;
+  width:100%!important;
+  height:auto!important;
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image img {
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  -o-object-fit:contain!important;
+  object-fit:contain!important;
+}
+@media (max-width:649px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image {
+    max-width:280px!important;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image picture {
+    display:block;
+  }
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image img {
+    width:100%!important;
+    max-width:100%!important;
+    height:auto!important;
+    aspect-ratio:648/602;
+    -o-object-fit:cover!important;
+    object-fit:cover!important;
+    -o-object-position:top;
+    object-position:top;
+    margin:0 auto;
+  }
+}
+@media (min-width:590px) and (max-width:649px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-content .banner-text-image {
+    max-width:307px!important;
+  }
+}
+@media (max-width:374px) {
+.tt-banner[data-tt-banner="ban_da2c41660b90"] #banner-2026#banner-2026 .hero-banner-container>picture img {
+    -o-object-fit:fill!important;
+    object-fit:fill!important;
+  }
+}
+.tt-banner[data-tt-banner="ban_da2c41660b90"] .hero#banner-2026 .hero-content .btn.black-button .icon img {
+  -webkit-filter:brightness(0) invert(1);
+  filter:brightness(0) invert(1);
+}
+@-webkit-keyframes shine {100%{left:-200%}}
+@keyframes shine {100%{left:-200%}}
+</style><div class="hero fade-in-enabled animated short-title" id="banner-2026">
+            <div class="hero-banner-container">
+                
+                <picture>
+                    <source media="(max-width:649px)" srcset="{{assets_url}}/images/mobile-homepage-bg-9BZf6j0x0bitz03sgC6hAGI0Y5ytAC.png">
+                    <img src="{{assets_url}}/images/home-page-designs-desktop-1-4-b18HYOKcLIS6GWIDLIvCOpILVP0aun.png" alt="{{@root.brand.name}}" width="1440" height="600" fetchpriority="high" decoding="async">
+                </picture>
+
+
+
+                <div class="product-images">
+                    <div class="inner-wrapper">
+                        <div class="col col1">
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper">
+                                <img src="{{assets_url}}/images/pic-xmas-2-1-800.webp" draggable="false">
+                            </a>
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper"><img src="{{assets_url}}/images/pic-xmas-1-2-800.webp" draggable="false"></a>
+                        </div>
+                        <div class="col col2">
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper">
+                                <picture>
+                                    <source media="(max-width: 649px)" srcset="{{assets_url}}/images/pic-xmas-2-1-800-v2.1.webp">
+                                    <img src="{{assets_url}}/images/pic-xmas-2-1-800-v2.1.webp" draggable="false">
+                                </picture>
+                            </a>
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper">
+                                <picture>
+                                    <source media="(max-width: 649px)" srcset="{{assets_url}}/images/pic-xmas-2-2-800.webp">
+                                    <img src="{{assets_url}}/images/pic-xmas-2-2-800.webp" draggable="false">
+                                </picture>
+                            </a>
+                        </div>
+                        <div class="col col3">
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper">
+                                <picture>
+                                    <source media="(max-width: 649px)" srcset="{{assets_url}}/images/pic-xmas-mobile-3-1-800.webp">
+                                    <img src="{{assets_url}}/images/pic-xmas-3-1-800.webp" draggable="false">
+                                </picture>
+                            </a>
+                            <a href="{{@root.config.homeUrl}}#collection/best-sellers" class="image-wrapper">
+                                <picture>
+                                    <source media="(max-width: 649px)" srcset="{{assets_url}}/images/pic-xmas-3-2-800-v2.webp">
+                                    <img src="{{assets_url}}/images/pic-xmas-3-2-800-v2.webp" draggable="false">
+                                </picture>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="gifts-container">
+                        <img class="gifts-1" src="{{assets_url}}/images/gifts1.webp" alt="gifts" width="92">
+                        <img class="gifts-2" src="{{assets_url}}/images/gifts2.webp" alt="gifts" width="88">
+                    </div>
+                </div>
+                
+                    <div id="85075593"><div class="hero-content">
+
+<div class="banner-content-group">
+<div class="banner-text-image"><picture><source media="(max-width:649px)" srcset="{{assets_url}}/images/autumn-home-text-i51YY2TfpgzgZPneNiH8Fyzwq0AoiK.png" width="648" height="602"><img src="{{assets_url}}/images/home-page-designs-desktop-4-1-QN1aLaPeNewvxZGJi8ergQp8FMI2vf.png" alt="Autumn Sale – Cozy spaces, brighter days. Bring warmth &amp; light to every season. Up to 50% off" width="1626" height="1533"></picture></div>
+<a class="btn hero-button black-button" href="{{@root.config.homeUrl}}#collection/autumn-sale" style="background:#90100A !important;background-color:#90100A !important;color:#fff !important;"><span class="btn-text">Shop Now</span> <span class="icon"> <img src="{{assets_url}}/images/arrow-icon.png" alt="&gt;" width="15px" height="19px"> </span> </a>
+</div></div></div>
+            </div>
+
+        </div></div>{{/unless}}
+{{#if collections.length}}{{#unless (eq settings.show_home_categories false)}}<section class="tt-collections fade-in-enabled animated" aria-labelledby="tt-collections-title">
+    <div class="tt-collections__inner">
+        <div class="tt-collections__head">
+            <div class="tt-collections__heading">
+                <p class="tt-collections__eyebrow">Shop by Category</p>
+                <h2 class="tt-collections__title" id="tt-collections-title">Find Your Perfect Glow</h2>
+                <p class="tt-collections__lede">Brighter spaces. Warmer moments. <span class="tt-collections__lede-tail">A more magical season at home.</span></p>
+            </div>
+            <a class="tt-collections__all" href="{{@root.config.homeUrl}}#collection/best-sellers">View All Collections<svg class="tt-collections__all-chevron" viewBox="0 0 16 21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.4 3.6 12 10.5l-7.6 6.9"></path></svg><span class="tt-collections__all-arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <ul class="tt-collections__row" data-tt-icons="{{assets_url}}/images/best-sellers.webp|{{assets_url}}/images/indoor.webp|{{assets_url}}/images/outdoor.webp|{{assets_url}}/images/holiday.webp|{{assets_url}}/images/decorative.webp">{{#each collections}}<li class="tt-collections__item">
+    <a class="tt-collections__tile" href="{{@root.config.homeUrl}}#collection/{{handle}}">
+        <picture><img class="tt-collections__img" src="{{#with (lookup products 0)}}{{imageUrl}}{{/with}}" alt="{{title}}" width="1120" height="630" loading="lazy" decoding="async" draggable="false"></picture>
+
+        <span class="tt-collections__body">
+            <span class="tt-collections__kicker">
+                <img class="tt-collections__icon" src="{{assets_url}}/images/indoor.webp" alt="" aria-hidden="true" width="80" height="80" loading="lazy" decoding="async" draggable="false"> {{products.length}} Products
+            </span>
+            <span class="tt-collections__label">{{title}}</span>
+            <span class="tt-collections__blurb">{{#if description}}{{description}}{{else}}Discover the {{title}} collection.{{/if}}</span>
+            <span class="tt-collections__cta">Shop {{title}}
+                <svg viewBox="0 0 16 21" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.4 3.6 12 10.5l-7.6 6.9"></path></svg>
+            </span>
+        </span>
+
+        <span class="tt-collections__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </span>
+    </a>
+</li>{{/each}}</ul>
+    </div>
+</section>{{/unless}}{{/if}}
+{{#each collections}}<div data-collection="{{handle}}" class="product-grid-section fade-in-enabled animated"><h2 class="page-heading">{{title}}</h2><ul class="productGrid container">{{#each (limit products 6)}}{{> tt-card}}{{/each}}</ul><a class="btn view-all-btn black-button" href="{{@root.config.homeUrl}}#collection/{{handle}}"> VIEW ALL </a></div>{{else}}<div data-collection="all" class="product-grid-section fade-in-enabled animated"><h2 class="page-heading">Best Sellers</h2><ul class="productGrid container">{{#each (limit products 6)}}{{> tt-card}}{{/each}}</ul><a class="btn view-all-btn black-button" href="{{config.homeUrl}}#collection/all"> VIEW ALL </a></div>{{/each}}
+{{#unless (eq settings.show_home_reviews false)}}<section class="tt-reviews fade-in-enabled animated" aria-labelledby="tt-reviews-title">
+    <div class="tt-reviews__inner">
+        <div class="tt-reviews__head">
+            <img class="tt-reviews__sprig tt-reviews__sprig--left" src="{{assets_url}}/images/sprig-left.webp" alt="" aria-hidden="true" width="280" height="353" loading="lazy" decoding="async" draggable="false">
+            <p class="tt-reviews__eyebrow">Real Homes <span aria-hidden="true">·</span> Real Stories</p>
+            <h2 class="tt-reviews__title" id="tt-reviews-title">What Our Customers Have to Say</h2>
+            <p class="tt-reviews__lede">From cozy evenings to special moments, {{@root.brand.name}} brings a little more magic into homes around the world. Here’s what our customers are sharing.</p>
+            <img class="tt-reviews__sprig tt-reviews__sprig--right" src="{{assets_url}}/images/sprig-right.webp" alt="" aria-hidden="true" width="280" height="353" loading="lazy" decoding="async" draggable="false">
+        </div>
+
+        <div class="tt-reviews__deck">
+            <button type="button" class="tt-reviews__arrow tt-reviews__arrow--prev slick-arrow" aria-label="Previous reviews" style="">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"></path></svg>
+            </button>
+
+            <div class="tt-reviews__track slick-initialized slick-slider slick-dotted">
+
+
+                
+
+                
+
+
+                
+
+                
+
+                
+
+                
+
+                
+            <div class="slick-list draggable" style="padding: 0px;"><div class="slick-track" style="opacity: 1; width: 7542px; transform: translate3d(-2514px, 0px, 0px); transition: transform 450ms ease-out;"><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="-4" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-autumn-jar-800.webp" srcset="{{assets_url}}/images/review-autumn-jar-400.webp 400w, {{assets_url}}/images/review-autumn-jar-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A glowing jar of fairy-light blooms on a bedside table beside a bed with a knit throw" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Absolutely OBSESSED with creating physical warmth in my bedroom, and this glowing jar was the missing piece.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-autumn.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Autumn F.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Asheville, NC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-stella-vine-800.webp" srcset="{{assets_url}}/images/review-stella-vine-400.webp 400w, {{assets_url}}/images/review-stella-vine-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit vine light trailing across the wall behind a hanging macramé chair" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Bought this for me... but the kids hijacked it 😂 Thought I was creating a quiet, aesthetic corner for myself to read on. Instead, my kids have completely taken over, claiming the warm glowing vine makes it their personal 'fairy ship.' Highly recommend for gorgeous cozy vibes, but prepare to share your seat!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-stella.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Stella B.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Minneapolis, MN
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="-2" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-5.webp" alt="Blue fairy-light hydrangea blooms glowing in a garden bed at night" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I can't get enough of the Fairy Hydrangea Light! It makes my backyard look so magical at night. Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-5.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Sophia O.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Charleston, SC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="-1" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-julia-birch-800.webp" srcset="{{assets_url}}/images/review-julia-birch-400.webp 400w, {{assets_url}}/images/review-julia-birch-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit white birch-branch tree beside small evergreen trees and a gold reindeer on a mantel" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I absolutely love this Birch Tree light! The warm glow is perfect for evenings, and it looks stunning even when it's not lit. 🎄✨ Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-6-2.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Julia D.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Denver, CO
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide" style="width: 419px;" data-slick-index="0" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-candice-lunar-800.webp" srcset="{{assets_url}}/images/review-candice-lunar-400.webp 400w, {{assets_url}}/images/review-candice-lunar-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A crescent-moon lamp holding a glowing glass globe on a balcony table among succulents at night" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+            <span class="tt-review__badge">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.9 4.5 6.6 4.1c2-.2 3.9.8 5.4 2.6 1.5-1.8 3.4-2.8 5.4-2.6 3.7.4 5.7 4.1 4.2 7.6C19.5 16.4 12 21 12 21z"></path></svg>
+                Most Loved
+            </span>
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__title">Magical Evenings!!!!</p>
+            <p class="tt-review__quote">“Wasn't sure how this would look outdoors, but it's the centerpiece of my balcony now! Set against the city lights and my succulent collection, it looks like a piece of the night sky sitting right on my table.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-3.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Candice M.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Seattle, WA
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide" style="width: 419px;" data-slick-index="1" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide01" aria-describedby="slick-slide-control01">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-2.webp" srcset="{{assets_url}}/images/reviews-2-5-mobile.webp 400w, {{assets_url}}/images/review-2.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A smiling customer holding a glowing fairy-light tree lamp in her lap" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“{{@root.brand.name}} has to be my favorite online store: their range of lamps is so beautiful and unique!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-2.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Joanne T.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Portland, OR
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-active" style="width: 419px;" data-slick-index="2" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide02" aria-describedby="slick-slide-control02">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-kendra-boxes-800.webp" srcset="{{assets_url}}/images/review-kendra-boxes-400.webp 400w, {{assets_url}}/images/review-kendra-boxes-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="Three glowing gift-box lights stacked on a glass coffee table in front of a Christmas tree" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Came back for another one after seeing how neatly the silver ribbon is finished around each glowing box. The gold mesh looks warm on the coffee table, and that clean detail gives me confidence in the quality.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-kendra.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Kendra W.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Nashville, TN
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-current slick-active slick-center" style="width: 419px;" data-slick-index="3" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide03" aria-describedby="slick-slide-control03">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-autumn-jar-800.webp" srcset="{{assets_url}}/images/review-autumn-jar-400.webp 400w, {{assets_url}}/images/review-autumn-jar-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A glowing jar of fairy-light blooms on a bedside table beside a bed with a knit throw" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Absolutely OBSESSED with creating physical warmth in my bedroom, and this glowing jar was the missing piece.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-autumn.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Autumn F.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Asheville, NC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-active" style="width: 419px;" data-slick-index="4" aria-hidden="false" tabindex="0" role="tabpanel" id="slick-slide04" aria-describedby="slick-slide-control04">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-stella-vine-800.webp" srcset="{{assets_url}}/images/review-stella-vine-400.webp 400w, {{assets_url}}/images/review-stella-vine-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit vine light trailing across the wall behind a hanging macramé chair" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Bought this for me... but the kids hijacked it 😂 Thought I was creating a quiet, aesthetic corner for myself to read on. Instead, my kids have completely taken over, claiming the warm glowing vine makes it their personal 'fairy ship.' Highly recommend for gorgeous cozy vibes, but prepare to share your seat!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-stella.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Stella B.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Minneapolis, MN
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide" style="width: 419px;" data-slick-index="5" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide05" aria-describedby="slick-slide-control05">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-5.webp" alt="Blue fairy-light hydrangea blooms glowing in a garden bed at night" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I can't get enough of the Fairy Hydrangea Light! It makes my backyard look so magical at night. Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-5.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Sophia O.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Charleston, SC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide" style="width: 419px;" data-slick-index="6" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide06" aria-describedby="slick-slide-control06">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-julia-birch-800.webp" srcset="{{assets_url}}/images/review-julia-birch-400.webp 400w, {{assets_url}}/images/review-julia-birch-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit white birch-branch tree beside small evergreen trees and a gold reindeer on a mantel" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I absolutely love this Birch Tree light! The warm glow is perfect for evenings, and it looks stunning even when it's not lit. 🎄✨ Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-6-2.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Julia D.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Denver, CO
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="7" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-candice-lunar-800.webp" srcset="{{assets_url}}/images/review-candice-lunar-400.webp 400w, {{assets_url}}/images/review-candice-lunar-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A crescent-moon lamp holding a glowing glass globe on a balcony table among succulents at night" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+            <span class="tt-review__badge">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.9 4.5 6.6 4.1c2-.2 3.9.8 5.4 2.6 1.5-1.8 3.4-2.8 5.4-2.6 3.7.4 5.7 4.1 4.2 7.6C19.5 16.4 12 21 12 21z"></path></svg>
+                Most Loved
+            </span>
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__title">Magical Evenings!!!!</p>
+            <p class="tt-review__quote">“Wasn't sure how this would look outdoors, but it's the centerpiece of my balcony now! Set against the city lights and my succulent collection, it looks like a piece of the night sky sitting right on my table.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-3.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Candice M.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Seattle, WA
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="8" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-2.webp" srcset="{{assets_url}}/images/reviews-2-5-mobile.webp 400w, {{assets_url}}/images/review-2.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A smiling customer holding a glowing fairy-light tree lamp in her lap" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“{{@root.brand.name}} has to be my favorite online store: their range of lamps is so beautiful and unique!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-2.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Joanne T.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Portland, OR
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="9" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-kendra-boxes-800.webp" srcset="{{assets_url}}/images/review-kendra-boxes-400.webp 400w, {{assets_url}}/images/review-kendra-boxes-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="Three glowing gift-box lights stacked on a glass coffee table in front of a Christmas tree" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Came back for another one after seeing how neatly the silver ribbon is finished around each glowing box. The gold mesh looks warm on the coffee table, and that clean detail gives me confidence in the quality.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-kendra.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Kendra W.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Nashville, TN
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="10" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-autumn-jar-800.webp" srcset="{{assets_url}}/images/review-autumn-jar-400.webp 400w, {{assets_url}}/images/review-autumn-jar-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A glowing jar of fairy-light blooms on a bedside table beside a bed with a knit throw" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Absolutely OBSESSED with creating physical warmth in my bedroom, and this glowing jar was the missing piece.”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-autumn.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Autumn F.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Asheville, NC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="11" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-stella-vine-800.webp" srcset="{{assets_url}}/images/review-stella-vine-400.webp 400w, {{assets_url}}/images/review-stella-vine-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit vine light trailing across the wall behind a hanging macramé chair" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“Bought this for me... but the kids hijacked it 😂 Thought I was creating a quiet, aesthetic corner for myself to read on. Instead, my kids have completely taken over, claiming the warm glowing vine makes it their personal 'fairy ship.' Highly recommend for gorgeous cozy vibes, but prepare to share your seat!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-stella.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Stella B.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Minneapolis, MN
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="12" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-5.webp" alt="Blue fairy-light hydrangea blooms glowing in a garden bed at night" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I can't get enough of the Fairy Hydrangea Light! It makes my backyard look so magical at night. Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-5.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Sophia O.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Charleston, SC
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article><article class="tt-review slick-slide slick-cloned" style="width: 419px;" data-slick-index="13" id="" aria-hidden="true" tabindex="-1">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="{{assets_url}}/images/review-julia-birch-800.webp" srcset="{{assets_url}}/images/review-julia-birch-400.webp 400w, {{assets_url}}/images/review-julia-birch-800.webp 800w" sizes="(min-width: 1024px) 30vw, (min-width: 800px) 45vw, 92vw" alt="A lit white birch-branch tree beside small evergreen trees and a gold reindeer on a mantel" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__quote">“I absolutely love this Birch Tree light! The warm glow is perfect for evenings, and it looks stunning even when it's not lit. 🎄✨ Highly recommend!”</p>
+            <footer class="tt-review__meta">
+                <img class="tt-review__avatar" src="{{assets_url}}/images/profile-6-2.webp" alt="" width="96" height="96" loading="lazy" decoding="async" draggable="false">
+                <span class="tt-review__who">
+                    <span class="tt-review__name">Julia D.</span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg>
+                        Denver, CO
+                    </span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article></div></div></div>
+
+            <button type="button" class="tt-reviews__arrow tt-reviews__arrow--next slick-arrow" aria-label="Next reviews" style="">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </div>
+
+        <div class="tt-reviews__dots"><ul class="slick-dots" style="" role="tablist"><li class="" role="presentation"><button type="button" role="tab" id="slick-slide-control00" aria-controls="slick-slide00" aria-label="1 of 3" tabindex="-1">1</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control01" aria-controls="slick-slide01" aria-label="2 of 3" tabindex="-1">2</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control02" aria-controls="slick-slide02" aria-label="3 of 3" tabindex="0" aria-selected="true">3</button></li><li role="presentation" class="slick-active"><button type="button" role="tab" id="slick-slide-control03" aria-controls="slick-slide03" aria-label="4 of 3" tabindex="-1">4</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control04" aria-controls="slick-slide04" aria-label="5 of 3" tabindex="-1">5</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control05" aria-controls="slick-slide05" aria-label="6 of 3" tabindex="-1">6</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control06" aria-controls="slick-slide06" aria-label="7 of 3" tabindex="-1">7</button></li></ul></div>
+    </div>
+</section>{{/unless}}
+</div>
+<section id="category-page" hidden>
+
+    <div id="plp-banner">
+        
+        
+        
+        
+
+            <div data-tt-banner-slot="category" class="tt-banner tt-banner--category" data-tt-banner="ban_03aa6837893b"><style>@font-face {font-family:'Crimson Pro';font-style:italic;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-italic-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Pro';font-style:italic;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-italic-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url("{{assets_url}}/fonts/crimson-pro-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url("{{assets_url}}/fonts/crimson-text-latin-ext.woff2") format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url("{{assets_url}}/fonts/crimson-text-latin.woff2") format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container {
+  position:relative;
+  overflow:hidden;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container picture img {
+  width:100%;
+  height:100%;
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:center;
+  object-position:center;
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container picture img {
+    min-height:283px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container {
+    height:266px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container {
+    height:auto;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content {
+  position:absolute;
+  z-index:1;
+  left:0;
+  width:100%;
+  height:auto;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  -webkit-box-pack:center;
+  -ms-flex-pack:center;
+  justify-content:center;
+  top:50%;
+  -webkit-transform:translateY(-50%);
+  transform:translateY(-50%);
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .inner-wrapper {
+  height:100%;
+  width:100%;
+  max-width:1060px;
+  padding:10px 15px;
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .inner-wrapper {
+    font-size:50px;
+    line-height:60px;
+    padding:0 32px 10px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  font-size:11px;
+  letter-spacing:.9px;
+  line-height:26px;
+  margin:4px 0 0;
+}
+@media (min-width:350px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content {
+    font-size:13px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content {
+    font-size:18px;
+    margin:4px 0 10px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content img {
+  width:43px;
+  margin:0 8px 0 0;
+  position:relative;
+  top:-2px;
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content img {
+    width:49px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .stars-content img {
+    width:90px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+  font-family:'Crimson Pro','Crimson Text',serif;
+  font-size:19px;
+  line-height:18px;
+  font-weight:700;
+  margin:0 0 16px;
+}
+@media (min-width:320px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:19px;
+    line-height:18px;
+    max-width:169px;
+  }
+}
+@media (min-width:375px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    max-width:390px;
+  }
+}
+@media (min-width:440px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:24px;
+    line-height:23px;
+  }
+}
+@media (min-width:550px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:30px;
+    line-height:29px;
+    max-width:350px;
+  }
+}
+@media (min-width:571px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:31px;
+    line-height:30px;
+    max-width:400px;
+  }
+}
+@media (min-width:620px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    max-width:500px;
+  }
+}
+@media (min-width:677px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:37px;
+    line-height:35px;
+  }
+}
+@media (min-width:730px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:40px;
+    line-height:38px;
+    max-width:500px;
+  }
+}
+@media (min-width:890px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    max-width:650px;
+  }
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content h2 {
+    font-size:57px;
+    line-height:47px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content hr {
+  border:1px solid #000;
+  width:100%;
+  margin:0;
+  max-width:150px;
+}
+@media (min-width:360px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content hr {
+    margin:0 0 4px;
+  }
+}
+@media (min-width:600px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content hr {
+    max-width:280px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content hr {
+    margin:0 0 20px;
+    max-width:383px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  font-weight:700;
+  font-size:16px;
+  height:46px;
+}
+@media (min-width:360px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text {
+    font-size:18px;
+  }
+}
+@media (min-width:600px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text {
+    font-size:23px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text {
+    font-size:23px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text .percentage {
+  font-size:32px;
+  margin:0 7px;
+}
+@media (min-width:360px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text .percentage {
+    font-size:38px;
+  }
+}
+@media (min-width:600px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text .percentage {
+    font-size:41px;
+  }
+}
+@media (min-width:834px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container .banner-content .sale-text .percentage {
+    font-size:80px;
+    margin:0 14px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale .stars-content {
+  margin:0 0 6px;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale .stars-content span {
+  font-family:"Crimson Pro",serif;
+  letter-spacing:0;
+  line-height:normal;
+}
+@media (min-width:1024px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale .stars-content span {
+    font-weight:700;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale .stars-content img {
+  margin:0 4px 0 0;
+  top:0;
+}
+@media (max-width:374px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale h2 {
+    font-size:15px;
+    line-height:17px;
+    margin:0 0 7px;
+  }
+}
+@media (max-width:1023px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale h2 {
+    font-family:"Crimson Text",serif;
+  }
+}
+@media (max-width:439px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale hr {
+    margin:0 0 2px;
+  }
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.christmas-sale picture img {
+  -o-object-position:right;
+  object-position:right;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner {
+  
+  --h:max(160px, 19.94vw);
+  height:var(--h)!important;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner picture, .tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner picture img {
+  display:block;
+  width:100%;
+  height:100%!important;
+  min-height:0!important;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner picture img {
+  -o-object-fit:cover;
+  object-fit:cover;
+  -o-object-position:left center!important;
+  object-position:left center!important;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-content {
+  top:0!important;
+  bottom:0;
+  height:100%!important;
+  -webkit-transform:none!important;
+  transform:none!important;
+  left:calc(var(--h) * .3)!important;
+  width:min(100% - var(--h) * .3, var(--h) * 2.1)!important;
+  padding:0 12px;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-text-image {
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-align:center;
+  -ms-flex-align:center;
+  align-items:center;
+  -webkit-box-pack:center;
+  -ms-flex-pack:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+}
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-text-image img {
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:calc(var(--h) * .72);
+}
+@media (max-width:767px) {
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner {
+    --h:39.97vw;
+  }
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-content {
+    left:5%!important;
+    width:48%!important;
+    padding:0 4px;
+  }
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-text-image {
+    -webkit-box-align:start;
+    -ms-flex-align:start;
+    align-items:flex-start;
+    padding-top:calc(var(--h) * .17);
+  }
+.tt-banner[data-tt-banner="ban_03aa6837893b"] .banner-container.fall-cat-banner .banner-text-image img {
+    max-height:calc(var(--h) * .6);
+  }
+}
+</style><div class="banner-container christmas-sale fall-cat-banner">
+                
+                <picture>
+                    <source media="(max-width:767px)" srcset="{{assets_url}}/images/catalog-bg-mobile-ShG6cSOWcy6D5KAs1JHL6UV6UDPZ39.png">
+                    <img src="{{assets_url}}/images/autumnfall-cat-bg-EGZIj9VDd1RLO7dJU4oGfHFKKRLQIG.png" alt="{{@root.brand.name}}" width="4744" height="946" fetchpriority="high" decoding="async">
+                </picture>
+                <div class="banner-content">
+                    
+                    <div class="banner-text-image"><img src="{{assets_url}}/images/autumnsale-category-E7e3Vmcs797aj1FRPN9FpRbbRSftxD.png" alt="Autumn Sale Ending Soon – Up to 50% off" width="1716" height="754"></div>
+                </div>
+            </div></div>
+            <div class="logos-container">
+                <picture>
+                    <source media="(max-width:320px)" srcset="{{assets_url}}/images/catalog-logos.png">
+                    <source media="(max-width:375px)" srcset="{{assets_url}}/images/catalog-logos.png">
+                    <source media="(max-width:425px)" srcset="{{assets_url}}/images/catalog-logos.png">
+                    <source media="(max-width:638px)" srcset="{{assets_url}}/images/catalog-logos.png">
+                    <source media="(max-width:1023px)" srcset="{{assets_url}}/images/catalog-logos-tablet.png">
+                    <source media="(min-width:1024px)" srcset="{{assets_url}}/images/catalog-logos-tablet-2.png">
+                    <source media="(min-width:1440px)" srcset="{{assets_url}}/images/catalog-logos-tablet-2.png">
+                    <img src="{{assets_url}}/images/catalog-logos.png" alt="BuzzFeed, Forbes, Vogue, Business Insider" width="600" height="50" loading="lazy" decoding="async">
+                </picture>
+            </div>       
+    
+    </div>
+
+                <h1 class="page-heading" data-tt-cat-title>Shop All</h1>
+        <div data-content-region="category_below_header"></div>
+
+    <div class="tt-plp-layout is-active">
+        <aside class="page-sidebar tt-plp-rail" id="tt-plp-sidebar"><div id="tt-plp-filter" class="facetedSearch sidebarBlock tt-plp" aria-busy="false"><div class="tt-plp-header">
+            <h2 class="tt-plp-title">Filter &amp; Sort</h2>
+            <span class="tt-plp-results" role="status" aria-live="polite"></span>
+        </div>
+        <div class="tt-plp-bar">
+            <span class="tt-plp-bar-count" role="status" aria-live="polite"></span>
+            <button type="button" class="tt-plp-trigger" data-tt-plp-open="1" aria-haspopup="dialog" aria-expanded="false" aria-controls="tt-plp-sheet">
+                <svg class="icon" aria-hidden="true"><use href="#icon-tune"></use></svg>
+                <span>Filter &amp; Sort <span class="tt-plp-trigger-count"></span></span>
+            </button>
+        </div>
+        <div class="tt-plp-page-chips" data-tt-plp-chips=""></div>
+        <dialog id="tt-plp-sheet" class="tt-plp-sheet" aria-labelledby="tt-plp-sheet-title">
+            <div class="tt-plp-sheet-head">
+                <h2 class="tt-plp-sheet-title" id="tt-plp-sheet-title">Filter &amp; Sort</h2>
+                <button type="button" class="tt-plp-sheet-close" data-tt-plp-close="1" aria-label="Close Filter and Sort">
+                    <svg class="icon" aria-hidden="true"><use href="#icon-close"></use></svg>
+                </button>
+            </div>
+            <div class="tt-plp-sheet-scroll" id="tt-plp-navList">
+                <span class="tt-plp-sheet-status" role="status" aria-live="polite" data-tt-plp-sheet-status=""></span>
+                <div class="tt-plp-sheet-chips" data-tt-plp-chips=""></div>
+                <div class="accordion accordion--navList" data-tt-plp-facets=""><div class="accordion-block">
+        <div class="accordion-nav-clear-holder">
+            <button type="button" class="accordion-navigation toggleLink is-open" data-collapsible="#tt-plp-content--__sort" data-tt-plp-section="__sort" aria-label="Sort By" aria-controls="tt-plp-content--__sort" aria-expanded="true">
+                <span class="accordion-title">Sort By</span>
+                <span><svg class="icon accordion-indicator toggleLink-text toggleLink-text--off" aria-hidden="true"><use href="#icon-add"></use></svg><svg class="icon accordion-indicator toggleLink-text toggleLink-text--on" aria-hidden="true"><use href="#icon-remove"></use></svg></span>
+            </button>
+        </div>
+        <div id="tt-plp-content--__sort" class="accordion-content is-open" aria-hidden="false"><ul class="navList tt-plp-values tt-plp-values--radio" role="radiogroup" aria-label="Sort By"><li class="navList-item">
+            <a href="{{@root.config.homeUrl}}" class="navList-action navList-action--radio" role="radio" aria-checked="false" rel="nofollow" data-tt-plp-sort="newest">
+                <span class="tt-plp-label">Newest</span>
+            </a>
+        </li><li class="navList-item">
+            <a href="{{@root.config.homeUrl}}" class="navList-action navList-action--radio" role="radio" aria-checked="false" rel="nofollow" data-tt-plp-sort="alphaasc">
+                <span class="tt-plp-label">Name: A – Z</span>
+            </a>
+        </li><li class="navList-item">
+            <a href="{{@root.config.homeUrl}}" class="navList-action navList-action--radio" role="radio" aria-checked="false" rel="nofollow" data-tt-plp-sort="alphadesc">
+                <span class="tt-plp-label">Name: Z – A</span>
+            </a>
+        </li><li class="navList-item">
+            <a href="{{@root.config.homeUrl}}" class="navList-action navList-action--radio" role="radio" aria-checked="false" rel="nofollow" data-tt-plp-sort="priceasc">
+                <span class="tt-plp-label">Price: Low to High</span>
+            </a>
+        </li><li class="navList-item">
+            <a href="{{@root.config.homeUrl}}" class="navList-action navList-action--radio" role="radio" aria-checked="false" rel="nofollow" data-tt-plp-sort="pricedesc">
+                <span class="tt-plp-label">Price: High to Low</span>
+            </a>
+        </li></ul></div>
+    </div>{{#if collections.length}}<div class="accordion-block">
+        <div class="accordion-nav-clear-holder">
+            <button type="button" class="accordion-navigation toggleLink" data-collapsible="#tt-plp-content--category" data-tt-plp-section="category" aria-label="Category" aria-controls="tt-plp-content--category" aria-expanded="false">
+                <span class="accordion-title">Category</span>
+                <span><svg class="icon accordion-indicator toggleLink-text toggleLink-text--off" aria-hidden="true"><use href="#icon-add"></use></svg><svg class="icon accordion-indicator toggleLink-text toggleLink-text--on" aria-hidden="true"><use href="#icon-remove"></use></svg></span>
+            </button>
+        </div>
+        <div id="tt-plp-content--category" class="accordion-content" aria-hidden="true"><ul id="tt-plp-navList--category" class="navList tt-plp-values tt-plp-values--checkbox" data-facet="category">{{#each collections}}<li class="navList-item"><a href="{{@root.config.homeUrl}}#collection/{{handle}}" class="navList-action navList-action--checkbox" role="checkbox" aria-checked="false" rel="nofollow" data-tt-plp-axis="category" data-tt-plp-value="{{handle}}"><span class="tt-plp-label">{{title}}</span><span class="tt-plp-count">({{products.length}})</span></a></li>{{/each}}</ul></div>
+    </div>{{/if}}</div>
+            </div>
+            <div class="tt-plp-sheet-foot">
+                <button type="button" class="tt-plp-reset" data-tt-plp-reset="1">Clear All</button>
+                <button type="button" class="tt-plp-apply" data-tt-plp-apply="1">
+                    <span>Apply</span>
+                    <span class="tt-plp-apply-count"></span>
+                </button>
+            </div>
+        </dialog></div></aside>
+        <div class="tt-plp-main">
+            
+    <div id="product-listing" data-tt-await-filters="" class="">
+        
+        <div class="container">
+            <div>
+                        <ul class="productGrid">
+    
+        
+                
+                                
+
+        </ul>
+<button class="btn black-button load-next-page">Show More</button>
+            </div>
+        </div>
+    </div>
+    <span class="loader" aria-hidden="true"></span>
+    
+
+
+
+
+<style>
+  /* A part-filled last row leaves empty cells beside "Show More", which reads as a broken grid
+     rather than the end of a list. The trailing cards are marked by trimPartialRow() in
+     _customisations/pages/category.js and come back as soon as the next page makes up a full row.
+     Never set on the last page — a short final row is honest there. */
+  #product-listing .productGrid > li.product[data-tt-row-trim] {
+    display: none;
+  }
+
+  /*.pagination-list {*/
+  /*  display: none !important;*/
+  /*}*/
+
+  .loader {
+    display: none;
+    width: 48px;
+    height: 48px;
+    /* Match the full-page (search) loader: brand gold arc on a faint gold track. */
+    border: 4px solid rgba(240, 179, 35, 0.25);
+    border-top-color: #f0b323;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    margin: 20px auto;
+  }
+
+  .loader.is-active {
+    display: block;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+        </div>
+    </div>
+    <div data-content-region="category_below_content"></div>
+</section>
+</main>
+<template id="tt-review-tpl"><article class="tt-review slick-slide">
+    <div class="tt-review__card">
+        <div class="tt-review__media">
+            <img class="tt-review__photo" src="" alt="" width="800" height="600" loading="lazy" decoding="async" draggable="false">
+            <span class="tt-review__badge">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 2.9 4.5 6.6 4.1c2-.2 3.9.8 5.4 2.6 1.5-1.8 3.4-2.8 5.4-2.6 3.7.4 5.7 4.1 4.2 7.6C19.5 16.4 12 21 12 21z"></path></svg>
+                Most Loved
+            </span>
+        </div>
+        <div class="tt-review__body">
+            <div class="tt-review__stars" role="img" aria-label="Rated 5 out of 5 stars">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2.5l2.95 6.3 6.85.85-5.05 4.7 1.35 6.8L12 17.7l-6.1 3.45 1.35-6.8L2.2 9.65l6.85-.85z"></path></svg>
+            </div>
+            <p class="tt-review__title"></p>
+            <p class="tt-review__quote"></p>
+            <footer class="tt-review__meta">
+                <span class="tt-review__avatar tt-review__avatar--letter" aria-hidden="true"></span>
+                <span class="tt-review__who">
+                    <span class="tt-review__name"></span>
+                    <span class="tt-review__place">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"></path></svg><span class="tt-place-text"></span></span>
+                </span>
+                <span class="tt-review__verified">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M7.8 12.4l2.7 2.6 5.7-5.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified Buyer
+                </span>
+            </footer>
+        </div>
+    </div>
+</article></template>
+<script type="application/json" id="tt-collections">{{{json collections}}}</script>
+<script type="application/json" id="tt-products">{{{json products}}}</script>
+{{> footer}}
+{{> cart-drawer}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

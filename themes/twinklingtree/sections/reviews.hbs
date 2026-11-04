@@ -1,0 +1,55 @@
+{{!-- TwinklingTree reviews: eyebrow + large title, a summary box (score | star bars), black "Write a review",
+      a 4-column masonry of review cards (photo on top). Same data-* hooks as the base section, so ui.js loads,
+      filters, paginates and posts reviews unchanged. --}}
+{{#if product.reviews.summary.total_count}}
+<div class="b-reviews tt-revs" id="reviews" data-reviews data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}12{{/if}}">
+  <p class="tt-revs__eyebrow">{{#if section.settings.eyebrow}}{{section.settings.eyebrow}}{{else}}Customer Reviews{{/if}}</p>
+  <h2 class="tt-revs__title">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}See what everyone is glowing about.{{/if}}</h2>
+  <div class="tt-revs__summary">
+    <div class="tt-revs__score">
+      <strong>{{product.reviews.summary.average_rating}}</strong>
+      <span><span class="b-stars" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span><small>Based on {{product.reviews.summary.total_count}} reviews</small></span>
+    </div>
+    <ul class="b-reviews__dist tt-revs__dist" data-reviews-dist aria-label="Rating distribution"></ul>
+  </div>
+  <div class="tt-revs__tools">
+    <select data-review-sort aria-label="Sort reviews" hidden><option value="recent">Most Recent</option></select>
+    {{#unless (eq section.settings.show_form false)}}<button type="button" class="tt-revs__write" data-review-write>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</button>{{/unless}}
+  </div>
+  <div class="b-reviews__photos" data-reviews-photos hidden></div>
+  <div class="b-reviews__grid tt-revs__grid" data-reviews-list>
+    {{#each (limit product.reviews.items 8)}}
+    <article class="b-review">
+      <span class="b-stars b-stars--outline" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>
+      <p class="b-review__who">{{name}}{{#if verified}} <span class="b-pill-verified">Verified</span>{{/if}}</p>
+      {{#if title}}<p class="b-review__title">{{title}}</p>{{/if}}
+      <p class="b-review__text" data-clamp>{{content}}</p>
+      {{#if image}}<img class="b-review__thumb" src="{{image}}" alt="Photo from {{name}}" loading="lazy">{{/if}}
+    </article>
+    {{/each}}
+  </div>
+  <p class="b-muted b-center" data-reviews-empty hidden>No reviews yet.</p>
+  <div class="b-center"><button type="button" class="tt-revs__more" data-reviews-more hidden>Load more reviews</button></div>
+
+  <div class="b-lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="Review photo">
+    <div class="b-lightbox__overlay" data-lightbox-close></div>
+    <div class="b-lightbox__panel">
+      <button type="button" class="b-icon-btn b-lightbox__close" data-lightbox-close aria-label="Close">✕</button>
+      <button type="button" class="b-round-btn b-lightbox__nav b-lightbox__nav--prev" data-lightbox-step="-1" aria-label="Previous photo">‹</button>
+      <img class="b-lightbox__img" data-lightbox-img alt="">
+      <button type="button" class="b-round-btn b-lightbox__nav b-lightbox__nav--next" data-lightbox-step="1" aria-label="Next photo">›</button>
+      <div class="b-lightbox__info" data-lightbox-info></div>
+    </div>
+  </div>
+  {{#unless (eq section.settings.show_form false)}}{{> review-form}}{{/unless}}
+</div>
+{{else}}
+{{#unless (eq section.settings.show_form false)}}
+<div class="b-reviews tt-revs b-reviews--empty" id="reviews">
+  <p class="tt-revs__eyebrow">Customer Reviews</p>
+  <h2 class="tt-revs__title">Be the first to review.</h2>
+  <button type="button" class="tt-revs__write" data-review-write>Write a review</button>
+  {{> review-form}}
+</div>
+{{/unless}}
+{{/if}}

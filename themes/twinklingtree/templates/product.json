@@ -1,0 +1,153 @@
+{
+  "name": "Default",
+  "description": "TwinklingTree product page: gallery, rating, viewers, price, stock, style swatches, pack pills, add to cart, notes, description, FAQ and reviews.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": true,
+        "sticky_atc": true,
+        "sale_badge_style": "off"
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "label": "reviews"
+          }
+        },
+        "viewers": {
+          "type": "urgency",
+          "settings": {
+            "text": "👀 {n} people viewing this product",
+            "min": 150,
+            "max": 260
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "stock": {
+          "type": "urgency",
+          "settings": {
+            "text": "Only {n} left in stock",
+            "min": 12,
+            "max": 24
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Add to cart",
+            "mode": "cart",
+            "show_qty": true,
+            "show_payments": false,
+            "show_options": true
+          }
+        },
+        "notes": {
+          "type": "text",
+          "settings": {
+            "body": "<p><strong>Planting A Tree for Every Order 🌲</strong></p><p><strong>Fast Shipping, United States🇺🇸</strong></p>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "faq_title": {
+          "type": "text",
+          "settings": {
+            "body": "<h3>Frequently Asked Questions</h3>"
+          }
+        },
+        "faq_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How long does shipping take?",
+            "source": "custom",
+            "body": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>",
+            "open": false
+          }
+        },
+        "faq_2": {
+          "type": "accordion",
+          "settings": {
+            "title": "How can I track my order?",
+            "source": "custom",
+            "body": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>",
+            "open": false
+          }
+        },
+        "faq_3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Can I change or cancel my order?",
+            "source": "custom",
+            "body": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>",
+            "open": false
+          }
+        },
+        "faq_4": {
+          "type": "accordion",
+          "settings": {
+            "title": "What is your return and refund policy?",
+            "source": "custom",
+            "body": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>",
+            "open": false
+          }
+        },
+        "faq_5": {
+          "type": "accordion",
+          "settings": {
+            "title": "My item arrived damaged or isn't what I ordered. What now?",
+            "source": "custom",
+            "body": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>",
+            "open": false
+          }
+        },
+        "faq_6": {
+          "type": "accordion",
+          "settings": {
+            "title": "How can I reach customer support?",
+            "source": "custom",
+            "body": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>",
+            "open": false
+          }
+        }
+      },
+      "blockOrder": [
+        "title",
+        "rating",
+        "viewers",
+        "price",
+        "stock",
+        "buy",
+        "notes",
+        "description",
+        "faq_title",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "reviews"
+  ]
+}

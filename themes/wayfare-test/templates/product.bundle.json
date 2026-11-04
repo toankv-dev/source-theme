@@ -1,0 +1,199 @@
+{
+  "name": "Bundle packs",
+  "description": "Like Default with quantity pack cards (1 / 2 / 3 / 4 units) priced with the live automatic discounts.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {},
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Key benefit number one"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Key benefit number two"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Key benefit number three"
+          }
+        },
+        "offer": {
+          "type": "offer_heading",
+          "settings": {
+            "text": "Buy more, save more"
+          }
+        },
+        "cards": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity"
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "trust": {
+          "type": "trust_icons",
+          "settings": {}
+        },
+        "acc_desc": {
+          "type": "accordion",
+          "settings": {
+            "title": "Description",
+            "source": "description",
+            "open": true
+          }
+        },
+        "acc_ship": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & delivery"
+          }
+        },
+        "acc_ret": {
+          "type": "accordion",
+          "settings": {
+            "title": "Returns & refunds",
+            "body": "<p>30 days to return it. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "price",
+        "b1",
+        "b2",
+        "b3",
+        "offer",
+        "cards",
+        "buy",
+        "trust",
+        "acc_desc",
+        "acc_ship",
+        "acc_ret"
+      ]
+    },
+    "promises": {
+      "type": "marquee",
+      "settings": {},
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "30-day returns"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "24/7 support"
+          }
+        }
+      },
+      "blockOrder": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "story": {
+      "type": "image-with-text",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "icon-columns",
+      "settings": {},
+      "blocks": {
+        "column_1": {
+          "type": "column",
+          "settings": {
+            "emoji": "🚚",
+            "title": "Free shipping",
+            "text": "<p>On every order.</p>"
+          }
+        },
+        "column_2": {
+          "type": "column",
+          "settings": {
+            "emoji": "↩️",
+            "title": "30-day returns",
+            "text": "<p>No questions asked.</p>"
+          }
+        },
+        "column_3": {
+          "type": "column",
+          "settings": {
+            "emoji": "🔒",
+            "title": "Secure checkout",
+            "text": "<p>Encrypted payments.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "column_1",
+        "column_2",
+        "column_3"
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "related": {
+      "type": "related",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "promises",
+    "story",
+    "benefits",
+    "testimonials",
+    "faq",
+    "reviews",
+    "related"
+  ]
+}

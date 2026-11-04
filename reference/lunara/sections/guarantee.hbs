@@ -1,0 +1,20 @@
+{{!-- Guarantee — schema v2 section (sections/guarantee.schema.json). Heading from
+      the section settings, lines from "item" blocks; with no blocks the legacy
+      page.guarantees list prints. Styles are self-contained: the shared css
+      bundle has no .guarantee rules. --}}
+<style>
+  .gt-wrap{padding:24px 16px;font-family:var(--font,inherit)}
+  .guarantee{max-width:720px;margin:0 auto;padding:24px;border:1px solid #e5e5e5;border-radius:12px;box-sizing:border-box;background:#fff}
+  .guarantee h3{text-align:center;font-weight:700;font-size:20px;margin:0 0 16px;color:var(--ink,#1b1b1b)}
+  .guarantee ul{list-style:none;margin:0;padding:0}
+  .guarantee li{position:relative;padding:6px 0 6px 28px;font-size:16px;line-height:1.5;color:#444}
+  .guarantee li::before{content:"✔";position:absolute;left:0;top:6px;font-weight:700;color:var(--ok,#1f9d55)}
+</style>
+<div class="gt-wrap">
+<div class="guarantee">
+  <h3 {{{editable "heading"}}}>{{#if section.settings.heading}}{{section.settings.heading}}{{else}}⭐ OUR GUARANTEE ⭐{{/if}}</h3>
+  <ul>
+    {{#if section.blocks.length}}{{#each section.blocks}}<li {{{this.attributes}}} {{{editable "text"}}}>{{this.settings.text}}</li>{{/each}}{{else}}{{#each page.guarantees}}<li>{{this}}</li>{{/each}}{{/if}}
+  </ul>
+</div>
+</div>

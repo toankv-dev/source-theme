@@ -1,0 +1,21 @@
+{{!-- Intro text on the left; on the right a navy card with a product image and spec tiles. --}}
+<div class="w-wrap w-spec">
+  <div class="w-spec__text">
+    {{#if section.settings.eyebrow}}<p class="w-spec__eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+    <h2 class="w-spec__title">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}{{@root.product.title}}{{/if}}</h2>
+    {{#if section.settings.body}}<div class="w-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+  </div>
+  <div class="w-spec__card">
+    <div class="w-spec__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="" loading="lazy">{{else}}{{#if @root.product.media.main_image}}<img src="{{@root.product.media.main_image}}" alt="" loading="lazy">{{/if}}{{/if}}</div>
+    <ul class="w-spec__tiles">
+      {{#each section.blocks}}
+      <li class="w-spec__tile" {{{this.attributes}}}>
+        {{#if this.settings.icon}}<img src="{{this.settings.icon}}" alt="" loading="lazy">{{/if}}
+        <strong>{{this.settings.title}}</strong>
+        <span>{{this.settings.text}}</span>
+      </li>
+      {{/each}}
+    </ul>
+    {{#if section.settings.footer}}<p class="w-spec__foot"><span>{{@root.brand.name}}</span><em>{{section.settings.footer}}</em></p>{{/if}}
+  </div>
+</div>

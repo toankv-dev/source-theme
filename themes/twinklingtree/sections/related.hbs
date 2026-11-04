@@ -1,0 +1,13 @@
+{{!-- Other products of the store (relatedProducts from the platform, else the home product list). Without a
+      template document (legacy entry) `section` is undefined, so 4 products are shown. --}}
+{{#if relatedProducts.length}}
+<div class="b-wrap b-related">
+  <h2 class="b-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}You may also like{{/if}}</h2>
+  <div class="b-grid b-grid--related">{{#if section.settings.limit}}{{#each (limit relatedProducts section.settings.limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit relatedProducts 4)}}{{> card-product}}{{/each}}{{/if}}</div>
+</div>
+{{else}}{{#if products.length}}
+<div class="b-wrap b-related">
+  <h2 class="b-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}You may also like{{/if}}</h2>
+  <div class="b-grid b-grid--related">{{#if section.settings.limit}}{{#each (limit products section.settings.limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 4)}}{{> card-product}}{{/each}}{{/if}}</div>
+</div>
+{{/if}}{{/if}}

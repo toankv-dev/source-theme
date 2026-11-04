@@ -1,0 +1,28 @@
+{
+  "current": {
+    "primary": "#14203b",
+    "primary_text": "#ffffff",
+    "font": "Manrope",
+    "show_topbar": true,
+    "topbar_text": "Holiday sale | Up to 50% off + free shipping||30-day risk-free trial",
+    "atc_label": "Add to cart",
+    "open_cart_on_add": true,
+    "theme_image_url": "/uploads/templates/3fba7385-4235-41a2-8bc4-16e7368beeeb/assets/theme-preview.jpg",
+    "cart_upsells": {
+      "2b18b6e6-7920-4dbc-924d-e3544516103c": [
+        {
+          "title": "Shipping Protected",
+          "imageUrl": "/uploads/media/719ea446-f511-4ea6-8b66-422c50a743fe/6243de1a-e562-46e7-8dd9-a1ddd7325d46/04d7b2c37c1277e8.webp",
+          "productId": "a8ecff84-21eb-40a9-8643-41d4bdfee96e"
+        }
+      ],
+      "a2c21f14-f314-4b09-b92c-936f5bd14874": [
+        {
+          "title": "Shipping Protected",
+          "imageUrl": "/uploads/media/719ea446-f511-4ea6-8b66-422c50a743fe/6243de1a-e562-46e7-8dd9-a1ddd7325d46/ac9d544dbe74073e.webp",
+          "productId": "a8ecff84-21eb-40a9-8643-41d4bdfee96e"
+        }
+      ]
+    }
+  }
+}

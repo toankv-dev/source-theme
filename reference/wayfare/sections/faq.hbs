@@ -1,0 +1,21 @@
+<div class="w-faq-wrap">
+  <div class="w-wrap w-faq">
+    <h2 class="w-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Frequently asked questions{{/if}}</h2>
+    {{#if section.settings.intro}}<p class="w-faq__intro">{{section.settings.intro}}</p>{{/if}}
+    {{#if section.blocks.length}}
+    {{#each section.blocks}}
+    <details class="w-faq__item" {{{this.attributes}}}{{#if @first}} open{{/if}}>
+      <summary><span class="w-faq__icon" aria-hidden="true">?</span><span>{{this.settings.q}}</span></summary>
+      <div class="w-rte">{{{applyTokens this.settings.a}}}</div>
+    </details>
+    {{/each}}
+    {{else}}
+    {{#each page.faq}}
+    <details class="w-faq__item"{{#if @first}} open{{/if}}>
+      <summary><span class="w-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+      <div class="w-rte">{{{a}}}</div>
+    </details>
+    {{/each}}
+    {{/if}}
+  </div>
+</div>

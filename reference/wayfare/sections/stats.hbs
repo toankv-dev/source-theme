@@ -1,0 +1,15 @@
+<div class="w-stats">
+  <div class="w-wrap">
+    {{#if section.settings.eyebrow}}<p class="w-eyebrow w-eyebrow--light">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="w-stats__heading" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    <div class="w-stats__grid">
+      {{#each section.blocks}}
+      <div class="w-stat" {{{this.attributes}}}>
+        <p class="w-stat__value">{{this.settings.value}}</p>
+        <p class="w-stat__label">{{this.settings.label}}</p>
+      </div>
+      {{/each}}
+    </div>
+    {{#if section.settings.note}}<p class="w-stats__note">{{section.settings.note}}</p>{{/if}}
+  </div>
+</div>

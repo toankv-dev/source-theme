@@ -1,0 +1,21 @@
+{
+  "name": "Base",
+  "version": "2026.11.04.2",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/js/core.js",
+    "assets/js/ui.js"
+  ],
+  "description": "Base storefront theme every new theme is built from: sale bar (rotating or countdown), header with menu drawer and search, cart drawer with live discounts and shipping protection, product page built from blocks (gallery, rating, price, swatch / pill / dropdown pickers, pack cards, buy buttons, trust icons, accordions, custom HTML), reviews with a write-a-review form, FAQ and content sections; home, collection, search, policy / contact / order-tracking pages and checkout.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

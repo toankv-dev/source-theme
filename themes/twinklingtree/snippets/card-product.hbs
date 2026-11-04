@@ -1,0 +1,14 @@
+{{!-- TwinklingTree product card: square photo, "Sale" flag top-right, centred title, struck compare price
+      (bold) + price with the currency code, gold stars + review count. Same data-* as the base card (sorting). --}}
+<a class="b-pcard tt-card" href="{{url}}" data-card-price-num="{{sellingPrice}}" data-card-title="{{title}}" data-card-rating="{{rating}}">
+  <span class="b-pcard__media tt-card__media">
+    {{#if imageUrl}}<img src="{{#if imageThumbUrl}}{{imageThumbUrl}}{{else}}{{imageUrl}}{{/if}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}{{#if imagePosterUrl}} poster="{{imagePosterUrl}}"{{/if}}>{{/if}}
+    {{#if (gt compareAtPrice sellingPrice)}}<span class="tt-card__flag">{{#if @root.settings.card_badge_label}}{{@root.settings.card_badge_label}}{{else}}Sale{{/if}}</span>{{/if}}
+  </span>
+  <span class="tt-card__title">{{title}}</span>
+  <span class="tt-card__prices">
+    {{#if (gt compareAtPrice sellingPrice)}}<s class="tt-card__was">{{money compareAtPrice}}</s>{{/if}}
+    <span class="tt-card__price">{{money sellingPrice}} {{#if @root.config.currency}}{{@root.config.currency}}{{else}}USD{{/if}}</span>
+  </span>
+  {{#if reviewCount}}{{#unless (eq @root.settings.card_show_rating false)}}<span class="tt-card__rating"><span class="b-stars tt-card__stars" style="--r:{{rating}}" aria-hidden="true"></span><span class="tt-card__count">({{reviewCount}})</span></span>{{/unless}}{{/if}}
+</a>

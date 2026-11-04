@@ -1,0 +1,22 @@
+{{!-- Press / partner logos as an endless strip: uploaded images only. The logos are printed in two identical
+      groups that slide left together, so the strip loops without a seam (CSS only). Blocks without an image
+      are skipped on the store; the editor shows an empty slot to upload into. --}}
+<div class="w-press" style="--press-speed:{{#if section.settings.speed}}{{section.settings.speed}}{{else}}30{{/if}}s;--press-h:{{#if section.settings.logo_height}}{{section.settings.logo_height}}{{else}}24{{/if}}px">
+  {{#if section.settings.heading}}<p class="w-press__heading" {{{editable "heading"}}}>{{section.settings.heading}}</p>{{/if}}
+  <div class="w-press__viewport">
+    <ul class="w-press__group">
+      {{#each section.blocks}}
+      {{#if this.settings.image}}
+      <li class="w-press__item" {{{this.attributes}}}><img src="{{this.settings.image}}" alt="{{this.settings.name}}" loading="lazy"></li>
+      {{else if @root.__designMode}}
+      <li class="w-press__item w-press__item--empty" {{{this.attributes}}}><span>Upload a logo</span></li>
+      {{/if}}
+      {{/each}}
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="w-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+    </ul>
+    <ul class="w-press__group" aria-hidden="true">
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="w-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="w-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+    </ul>
+  </div>
+</div>

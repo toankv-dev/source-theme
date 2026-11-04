@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="js" lang="en" data-tt-banners="edge">
+<head>
+{{> tt-head}}
+<title>{{brand.name}} - {{product.title}}</title>
+<meta name="description" content="{{metaDesc}}">
+<link rel="canonical" href="{{canonical}}">
+<script type="application/json" id="sf-config">{{{configJson}}}</script>
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="{{brand.name}}">
+<meta property="og:title" content="{{product.title}}">
+<meta property="og:description" content="{{metaDesc}}">
+<meta property="og:url" content="{{canonical}}">
+{{#if product.media.main_image}}<meta property="og:image" content="{{product.media.main_image}}">{{/if}}
+<meta name="twitter:card" content="summary_large_image">
+{{{productJsonLd}}}
+<style>.stamped-product-reviews-badge{display:none!important}[data-twinkling-rating-badge]{align-items:center;background:transparent;border:0;color:#2b261f;display:flex;font:inherit;gap:10.4px;margin:-5px 0 0;min-height:44px;padding:0}[data-twinkling-rating-badge]:focus-visible{outline:3px solid #2e6b53;outline-offset:3px}.ttTitleStars{color:#ffb800;display:flex;gap:3px}.ttTitleStars svg{fill:currentColor;height:20.8px;width:20.8px}.ttTitleRating{font-size:18.2px;font-weight:700}.ttTitleCount{color:#686158;font-size:18.2px}.ttTitleLoading{animation:ttRatingPulse 1.1s ease-in-out infinite;background:#e5e0d6;border-radius:99px;display:block;height:14px;width:94px}@keyframes ttRatingPulse{50%{opacity:.48}}@media(prefers-reduced-motion:reduce){.ttTitleLoading{animation:none}}@media(max-width:700px){[data-twinkling-rating-badge]{justify-content:center;margin:-5px auto 0;text-align:center;width:100%}}</style>
+{{{trackingHead}}}
+</head>
+<body>
+{{{trackingBody}}}
+<div class="page-load-overlay" id="page-load-overlay" aria-hidden="true"><div class="page-load-overlay__spinner"></div></div>
+<noscript><style>#page-load-overlay{display:none !important;}</style></noscript>
+{{> header}}
+{{> product}}
+{{> footer}}
+{{> cart-drawer}}
+{{> product-scripts}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

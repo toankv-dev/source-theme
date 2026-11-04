@@ -1,0 +1,261 @@
+{{!-- PDP TwinklingTree nguyen ban (BigCommerce productView). Dong: gallery, ten, sao, gia, bien the, Add to cart, mo ta, FAQ, review. --}}
+<main class="body" id="main-content" role="main" data-currency-code="USD" data-template="pages-product">
+<div id="product-page" class="tt-pdp-scope">
+<div class="productView-image-container mobile-only"><section class="productCarousel mobile-only flickity-enabled is-draggable" data-tt-carousel="mobile"><div class="flickity-viewport" style="touch-action: pan-y;"><div class="flickity-slider" style="left: 0px;">{{#each product.media.gallery}}<div class="productView-img-container{{#if @first}} is-selected{{/if}}" data-index="{{@index}}" style="position: absolute; left: 0px;"><img alt="{{#if alt}}{{alt}}{{else}}{{@root.product.title}}{{/if}}" width="700" height="700" class="productView-image{{#if @first}} productView-image--default{{/if}}" src="{{url}}" decoding="async"{{#if @first}} fetchpriority="high"{{else}} loading="lazy"{{/if}} data-main-image=""></div>{{/each}}</div></div><button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button><ol class="flickity-page-dots">{{#each product.media.gallery}}<li class="dot{{#if @first}} is-selected{{/if}}" aria-label="Page dot {{@index}}"></li>{{/each}}</ol></section><section class="productView-thumbnails">{{#each product.media.gallery}}<a href="{{url}}" class="thumbnail-link{{#if @first}} is-active{{/if}}" draggable="false" data-index="{{@index}}"><img class="lazyloaded" src="{{url}}" draggable="false" loading="lazy" alt="{{#if alt}}{{alt}}{{else}}{{@root.product.title}}{{/if}}" height="80" width="80"></a>{{/each}}</section>{{#if product.off_pct}}<div class="discount-tag" data-tt-discount-tag>{{product.off_pct}}% OFF</div>{{/if}}</div>
+<div class="container"><div class="productView"><section class="productView-images" data-image-gallery=""><div class="productView-image-container desktop-only"><section class="productCarousel desktop-only flickity-enabled is-draggable" data-tt-carousel="desktop"><div class="flickity-viewport" style="touch-action: pan-y;"><div class="flickity-slider" style="left: 0px;">{{#each product.media.gallery}}<div class="productView-img-container{{#if @first}} is-selected{{/if}}" data-index="{{@index}}" style="position: absolute; left: 0px;"><img alt="{{#if alt}}{{alt}}{{else}}{{@root.product.title}}{{/if}}" width="700" height="700" class="productView-image{{#if @first}} productView-image--default{{/if}}" src="{{url}}" decoding="async"{{#if @first}} fetchpriority="high"{{else}} loading="lazy"{{/if}} data-main-image=""></div>{{/each}}</div></div><button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button></section><section class="productView-thumbnails">{{#each product.media.gallery}}<a href="{{url}}" class="thumbnail-link{{#if @first}} is-active{{/if}}" draggable="false" data-index="{{@index}}"><img class="lazyloaded" src="{{url}}" draggable="false" loading="lazy" alt="{{#if alt}}{{alt}}{{else}}{{@root.product.title}}{{/if}}" height="80" width="80"></a>{{/each}}</section>{{#if product.off_pct}}<div class="discount-tag" data-tt-discount-tag>{{product.off_pct}}% OFF</div>{{/if}}</div></section>
+<section class="productView-details product-data"><div class="productView-product"><h2 class="productView-title">{{product.title}}</h2>{{#if product.reviews.summary.total_count}}<button type="button" data-twinkling-rating-badge="1" data-scroll-to="#tt-reviews" aria-label="{{product.reviews.summary.average_rating}} out of 5. Jump to customer reviews."><span class="ttTitleStars"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9z"></path></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9z"></path></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9z"></path></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9z"></path></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9z"></path></svg></span><strong class="ttTitleRating">{{product.reviews.summary.average_rating}}</strong><span class="ttTitleCount">{{product.reviews.summary.total_count}} reviews</span></button>{{/if}}{{#unless (eq settings.show_viewing false)}}<div class="productView-viewing" data-min="{{#if settings.viewing_min}}{{settings.viewing_min}}{{else}}180{{/if}}" data-max="{{#if settings.viewing_max}}{{settings.viewing_max}}{{else}}230{{/if}}"><img src="{{assets_url}}/images/tt-eye-icon.png" alt="Customers viewing product" width="20" height="10"><span id="productView-viewing"></span> people viewing this product </div>{{/unless}}<div class="productView-price"><div class="price--original"{{#unless product.compare_at_price}} style="display: none;"{{/unless}}><s class="productView--base-price">{{product.compare_at_price}}</s> <span class="currency-text">USD</span></div><div class="price--discounted"><span class="productView--sale-price">{{product.price}}</span> <span class="currency-text">USD</span></div></div>{{#unless (eq settings.show_stock false)}}<div class="productView-stock" data-min="{{#if settings.stock_min}}{{settings.stock_min}}{{else}}17{{/if}}" data-max="{{#if settings.stock_max}}{{settings.stock_max}}{{else}}24{{/if}}" style="margin-bottom: 20px;"> Only <span id="productView-stock" style="font-weight: 600;"></span> left in stock </div>{{/unless}}<div class="productView-options"><form method="post" action="#" data-cart-item-add="" class="tt-pdp-form">{{#each product.variants}}{{#if (eq displayType "dropdown")}}<div class="product-variant-label" data-label="{{name}}">{{name}}</div><div class="productView-variant productView-variant--select tt-variant-group" data-option-name="{{name}}"><select class="form-select" data-option-name="{{name}}" aria-label="{{name}}">{{#each options}}<option value="{{label}}"{{#if active}} selected{{/if}}>{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</option>{{/each}}</select></div>{{else if (eq displayType "swatches")}}<div class="product-variant-label" data-label="{{name}}">{{name}}</div><div class="productView-variant productView-variant--radio"><div class="productView-variant--radio-group tt-variant-group" data-option-name="{{name}}">{{#each options}}<div class="productView-variant--radio-input productView-variant--radio-input--custom{{#if active}} active{{/if}}" data-option-name="{{../name}}" data-variant-label="{{label}}"><input type="radio" name="tt-opt-{{@../index}}" value="{{label}}" id="tt-opt-{{@../index}}-{{@index}}"{{#if active}} checked=""{{/if}} aria-label="{{label}}">{{#if badge_text}}<span class="customSwatch-popular">{{badge_text}}</span>{{/if}}<label class="form-variant-label" for="tt-opt-{{@../index}}-{{@index}}"><span class="customSwatch-image" aria-hidden="true" data-tt-swatch="{{label}}" style="{{#if image}}background-image: url('{{image}}');{{else}}{{#if color}}background: {{color}};{{else}}{{swatchStyle label}}{{/if}}{{/if}}"></span><span class="customSwatch-label">{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</span></label></div>{{/each}}</div></div>{{else if (isColorGroup name)}}<div class="product-variant-label" data-label="{{name}}">{{name}}&nbsp; — <span class="productView-variants--value" data-tt-variant-value>{{#each options}}{{#if active}}{{label}}{{/if}}{{/each}}</span></div><div class="productView-variant productView-variant--radio"><div class="productView-variant--radio-group tt-variant-group tt-color-group" data-option-name="color" data-tt-name="{{name}}">{{#each options}}<div class="productView-variant--radio-input{{#if active}} active{{/if}}" style="--i: {{#if color}}{{color}}{{else}}{{label}}{{/if}}" data-option-name="color" data-variant-label="{{label}}" title="{{label}}"{{#if image}} data-tt-img="{{image}}"{{/if}}><input type="radio" name="tt-opt-{{@../index}}" value="{{label}}" id="tt-opt-{{@../index}}-{{@index}}"{{#if active}} checked=""{{/if}} aria-label="{{label}}"><label class="form-variant-label" for="tt-opt-{{@../index}}-{{@index}}"></label></div>{{/each}}</div></div>{{else}}<div class="product-variant-label" data-label="{{name}}">{{name}}</div><div class="productView-variant productView-variant--radio"><div class="productView-variant--radio-group tt-variant-group" data-option-name="{{name}}">{{#each options}}<div class="productView-variant--radio-input{{#if active}} active{{/if}}" data-option-name="{{../name}}" data-variant-label="{{label}}"><input type="radio" name="tt-opt-{{@../index}}" value="{{label}}" id="tt-opt-{{@../index}}-{{@index}}"{{#if active}} checked=""{{/if}} aria-label="{{label}}">{{#if badge_text}}<span class="customSwatch-popular">{{badge_text}}</span>{{/if}}<label class="form-variant-label" for="tt-opt-{{@../index}}-{{@index}}">{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</label></div>{{/each}}</div></div>{{/if}}{{/each}}<div id="add-to-cart-wrapper" class="add-to-cart-wrapper"><div class="alertBox productAttributes-message" style="display:none"><p class="alertBox-column alertBox-message"></p></div><div class="quantity-container"><div class="form-field form-field--increments"><label class="form-label form-label--alternate" for="qty[]">QUANTITY</label><div class="form-increment" data-quantity-change=""><button type="button" data-action="dec"><img src="{{assets_url}}/images/minus.svg" alt="minus"></button><input class="form-input--incrementTotal" id="qty[]" name="qty[]" type="tel" readonly="" tabindex="-1" inputmode="none" maxlength="3" value="1" min="1" pattern="[0-9]*" aria-live="polite" aria-label="Quantity"><button type="button" data-action="inc"><img src="{{assets_url}}/images/plus.svg" alt="add"></button></div></div><button id="addToCart" data-testid="add-to-cart" class="black-button add-to-cart-button" type="submit">{{#if settings.atc_label}}{{settings.atc_label}}{{else}}ADD TO CART{{/if}}</button></div></div>{{#unless (eq settings.show_pdp_notes false)}}<div class="add-to-cart--note">{{#if settings.pdp_note_1}}{{settings.pdp_note_1}}{{else}}Planting A Tree for Every Order 🌲{{/if}}</div><div class="add-to-cart--note">Fast Shipping, <span id="displayCountryName">United States</span><span id="displayCountryFlag">🇺🇸</span></div>{{/unless}}</form></div></div><hr class="hr"><article class="productView-description"><div class="productView-description"><div class="elementor-widget-container tt-description">{{{product.description_html}}}</div>{{#unless (eq settings.show_faq false)}}<div class="tt-pdp-faq"><h3 style="font-family: inherit; text-align: center; font-size: 22px; font-weight: bold;">Frequently Asked Questions</h3><ul class="accordion">{{#if page.faqFromListing}}{{#each page.faq}}<li><i class="toggle-icon fa-solid fa-plus"></i><span>{{this.q}}</span><br><ul><li>{{{applyTokens this.a}}}</li></ul></li>{{/each}}{{else}}{{#each (faqItems settings)}}<li><i class="toggle-icon fa-solid fa-plus"></i><span>{{this.q}}</span><br><ul><li>{{{applyTokens this.a}}}</li></ul></li>{{/each}}{{/if}}</ul></div>{{/unless}}</div></article></section></div>
+{{#unless (eq settings.show_reviews false)}}<div id="tt-reviews"><twinkling-reviews data-total="{{product.reviews.summary.total_count}}"><template shadowrootmode="open"><style>
+          @font-face{font-family:'TT Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url('{{assets_url}}/fonts/crimson-text-latin-ext.woff2') format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+2C60-2C7F,U+A720-A7FF}
+          @font-face{font-family:'TT Crimson Text';font-style:normal;font-weight:400;font-display:swap;src:url('{{assets_url}}/fonts/crimson-text-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122}
+          @font-face{font-family:'TT Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url('{{assets_url}}/fonts/crimson-pro-latin-ext.woff2') format('woff2');unicode-range:U+0100-024F,U+1E00-1EFF,U+20A0-20AB,U+2C60-2C7F,U+A720-A7FF}
+          @font-face{font-family:'TT Crimson Pro';font-style:normal;font-weight:200 900;font-display:swap;src:url('{{assets_url}}/fonts/crimson-pro-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122}
+          :host{--cream:#fbfaf6;--ink:#29241c;--muted:#6f685c;--line:#ded9ce;--gold:#ffbc00;display:block;contain:content;color:var(--ink);font-family:'TT Crimson Text','Crimson Text',serif;font-size:16px}
+          *{box-sizing:border-box}
+          button,select,a,input{font:inherit}
+          button,a,select{cursor:pointer}
+          button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #2e6b53;outline-offset:3px}
+          .wrap{background:var(--cream);margin:0 auto;max-width:1440px;padding:56px 30px}
+          .eyebrow{color:#74550d;font-size:11px;font-weight:800;letter-spacing:.18em;margin:0 0 12px;text-transform:uppercase}
+          h2,h3{color:var(--ink)}
+          h2{font-family:'TT Crimson Pro','Crimson Pro','TT Crimson Text','Crimson Text',serif;font-size:clamp(36px,4.4vw,64px);font-weight:600;letter-spacing:-.035em;line-height:1.02;margin:0;max-width:980px}
+          .summary{border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:34% 66%;margin-top:26px;min-height:132px;overflow:hidden}
+          .score{align-items:center;border-right:1px solid var(--line);display:flex;justify-content:center;min-width:0;padding:20px}
+          .score>strong{font-family:'TT Crimson Pro','Crimson Pro','TT Crimson Text','Crimson Text',serif;font-size:48px;font-weight:600;letter-spacing:-.04em;line-height:1}
+          .scoreDetail{margin-left:14px}.stars{color:var(--gold);font-size:16px;letter-spacing:2px;white-space:nowrap}.scoreDetail small{color:var(--muted);display:block;font-size:11px;margin-top:5px}
+          .bars{align-content:center;display:grid;gap:6px;padding:18px 26px}.bar{align-items:center;color:#625c51;display:grid;font-size:10px;gap:8px;grid-template-columns:12px 12px 1fr 30px}.bar>i{color:var(--gold);font-style:normal}.track{background:#e5e2db;border-radius:99px;height:6px;overflow:hidden}.track>i{background:var(--gold);border-radius:inherit;display:block;height:100%;min-width:0}.bar>em{font-style:normal;text-align:right}
+          .tools{align-items:center;display:flex;gap:16px;justify-content:flex-end;margin:18px 0 14px}.write,.more{align-items:center;border-radius:9px;display:inline-flex;font-size:13px;font-weight:700;justify-content:center;min-height:44px;padding:0 20px}.write{background:#050505;border:1px solid #050505;color:#fff;min-width:154px}
+          .reviews{align-items:start;display:grid;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr))}.reviewColumn{display:flex;flex-direction:column;min-width:0}.review{background:var(--cream);border:1px solid var(--line);border-radius:13px;cursor:pointer;display:block;margin:0 0 14px;overflow:hidden;transition:box-shadow .18s ease,transform .18s ease;width:100%}.review:hover{box-shadow:0 11px 28px rgb(46 36 16/.1);transform:translateY(-2px)}.review:focus-visible{outline:3px solid #2e6b53;outline-offset:3px}.media{background:#eee9de;border:0;display:block;overflow:hidden;padding:0;position:relative;width:100%}.mediaOpenIcon{background:rgb(20 20 18/.72);border:1px solid rgb(255 255 255/.72);border-radius:99px;bottom:10px;box-sizing:border-box;fill:none;height:34px;padding:8px;pointer-events:none;position:absolute;right:10px;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2;width:34px}.media img,.media video{aspect-ratio:1/.9;display:block;height:auto;object-fit:cover;width:100%}.media video{min-height:200px}.content{padding:15px}.reviewTop{align-items:center;display:flex;gap:10px;justify-content:space-between}.reviewTop .stars{font-size:14px}.reviewTop time{color:#777066;font-size:10px}.review h3{font-size:19px;font-weight:700;line-height:1.05;margin:11px 0 7px}.review p{color:#625b50;font-size:16px;line-height:1.48;margin:0}.review footer{align-items:center;display:flex;gap:8px;justify-content:space-between;margin-top:14px}.review footer strong{font-size:11px}.verified{color:#267156;font-size:10px;font-weight:700}.reply{border-left:2px solid #d5c798;color:#5f584c;font-size:13px;margin-top:14px;padding:2px 0 2px 12px}.reply strong{display:block;font-size:10px;margin-bottom:4px}.moreRow{display:flex;justify-content:center;margin-top:24px}.more{background:transparent;border:1px solid var(--ink);color:var(--ink);min-width:210px}.more[disabled]{cursor:wait;opacity:.58}.skeleton{animation:pulse 1.4s ease-in-out infinite;background:#e8e4dc;border-radius:8px}.sk-title{height:52px;max-width:760px}.sk-panel{height:132px;margin-top:26px;width:100%}.sk-grid{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);margin-top:22px}.sk-card{height:300px}.error{background:#f8f1de;border:1px solid #e2d1a5;border-radius:10px;color:#665d4c;padding:20px}
+          dialog{border:0;margin:auto;padding:0}.reviewDialog{background:transparent;max-width:none;overflow:visible;width:min(94vw,1000px)}.reviewDialog::backdrop,.composerDialog::backdrop{background:rgb(14 16 14/.78);backdrop-filter:blur(7px)}.viewerShell{background:var(--cream);border-radius:16px;box-shadow:0 30px 90px rgb(0 0 0/.38);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);max-height:calc(100vh - 48px);overflow:hidden;position:relative;touch-action:pan-y}.viewerShell.noMedia{grid-template-columns:minmax(0,620px);margin:auto;max-width:620px}.viewerMedia{background:#1e1a14;min-height:min(72vh,650px)}.viewerMedia img,.viewerMedia video{display:block;height:100%;max-height:calc(100vh - 48px);object-fit:cover;width:100%}.viewerCopy{align-self:center;max-height:calc(100vh - 48px);overflow-y:auto;padding:64px 38px 32px}.viewerTop{align-items:center;display:flex;gap:12px;justify-content:space-between;padding-right:52px}.viewerTop .stars{font-size:15px}.viewerCount,.viewerDesktopHint,.viewerMobileHint{color:var(--muted);font-size:10px}.viewerMobileHint{display:none}.viewerCopy h3{font-family:'TT Crimson Pro','Crimson Pro','TT Crimson Text','Crimson Text',serif;font-size:30px;line-height:1.08;margin:18px 0 14px}.viewerBody{color:#625b50;font-size:17px;line-height:1.55;margin:0}.viewerAuthor{align-items:flex-start;display:flex;flex-direction:column;gap:5px;margin-top:22px}.viewerAuthor strong{font-size:12px}.viewerAuthor time{color:var(--muted);font-size:10px}.viewerNav{align-items:center;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;margin-top:28px;padding-top:18px}.viewerNav button{align-items:center;background:transparent;border:0;color:var(--ink);display:flex;font-size:11px;font-weight:700;gap:6px;min-height:44px;padding:0}.viewerNav button:last-child{justify-self:end}.viewerNav button:disabled{cursor:default;opacity:.35}.viewerClose{align-items:center;background:#fff;border:1px solid var(--line);border-radius:99px;color:#111;display:flex;font-size:24px;height:44px;justify-content:center;position:absolute;right:13px;top:13px;width:44px;z-index:2}.dialogClose{align-items:center;background:#fff;border:0;border-radius:99px;color:#111;display:flex;font-size:22px;height:44px;justify-content:center;width:44px}.composerDialog{background:#fff;border-radius:16px;box-shadow:0 24px 80px rgb(0 0 0/.4);height:min(90dvh,850px);max-width:760px;overflow:hidden;width:min(94vw,760px)}.composerDialog[open]{display:grid;grid-template-rows:56px minmax(0,1fr)}.composerDialog>.dialogClose{align-self:center;grid-row:1;justify-self:end;margin-right:8px;position:static}.composerDialog iframe{background:#fff;border:0;display:block;grid-row:2;height:100%;min-height:0;pointer-events:auto;position:relative;touch-action:pan-y;width:100%;z-index:1}
+          .reviewDialog{width:min(94vw,760px)}.viewerShell{display:block;margin:auto;max-width:760px;overflow-y:auto}.viewerShell.noMedia{max-width:620px}.viewerMedia{aspect-ratio:16/10;min-height:0}.viewerMedia img,.viewerMedia video{height:100%;max-height:none}.viewerCopy{max-height:none;overflow:visible;padding:64px 36px 26px}
+          [data-image-ratio="actual"] .media img,[data-image-ratio="actual"] .media video{aspect-ratio:auto;height:auto;object-fit:cover}[data-image-ratio="actual"] .viewerMedia{aspect-ratio:auto}[data-image-ratio="actual"] .viewerMedia img,[data-image-ratio="actual"] .viewerMedia video{height:auto;max-height:80vh;object-fit:contain;width:100%}
+          [data-show-date="false"] time{display:none}
+          @keyframes pulse{50%{opacity:.52}}
+          @media(max-width:900px){.reviews{gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}.sk-grid{grid-template-columns:repeat(3,1fr)}}
+          @media(max-width:700px){.wrap{padding:38px 0}h2{font-size:38px}.summary{border-radius:11px;margin-top:22px}.score{align-items:flex-start;flex-direction:column;gap:5px;justify-content:center;padding:14px 12px}.score>strong{font-size:42px}.scoreDetail{margin-left:0}.scoreDetail .stars{font-size:13px;letter-spacing:1px}.scoreDetail small{font-size:9px;margin-top:3px}.bars{gap:4px;padding:13px 11px}.bar{font-size:9px;gap:5px;grid-template-columns:10px 11px minmax(60px,1fr) 22px}.track{height:5px}.tools{margin:14px 2px 11px}.write{min-height:44px;min-width:142px;padding:0 14px}.reviews{gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.review{border-radius:9px;margin-bottom:8px}.review:hover{box-shadow:none;transform:none}.content{padding:12px}.reviewTop{align-items:flex-start;gap:5px;flex-direction:column}.review h3{font-size:17px}.review p{font-size:15px;line-height:1.46}.review footer{align-items:flex-start;flex-direction:column;margin-top:12px}.sk-grid{gap:8px;grid-template-columns:repeat(2,1fr)}.sk-card{height:240px}.eyebrow{font-size:10px}.reviewDialog{width:calc(100vw - 16px)}.viewerShell{display:block;max-height:calc(100vh - 16px);overflow-y:auto}.viewerMedia{aspect-ratio:1/.88;min-height:0}.viewerMedia img,.viewerMedia video{height:100%;max-height:none}.viewerCopy{max-height:none;overflow:visible;padding:64px 20px 20px}.viewerTop{padding-right:48px}.viewerCopy h3{font-size:26px}.viewerBody{font-size:16px}.viewerClose{right:9px;top:9px}.viewerDesktopHint{display:none}.viewerMobileHint{display:inline}.composerDialog{border-radius:12px;height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);width:calc(100vw - 16px)}}
+          @media(max-width:700px){.wrap{padding-left:10px;padding-right:10px}}
+          @media(max-width:349px){.composerDialog{height:calc(100dvh - 8px);max-width:calc(100vw - 8px);width:calc(100vw - 8px)}.composerDialog[open]{inset-block:0;inset-inline:auto;left:calc(50% + (100vw - 100%)/2);margin:auto 0;transform:translateX(-50%)}}
+          @media(prefers-reduced-motion:reduce){.skeleton{animation:none}}
+        
+:where(.composerPage, .composerPage *){box-sizing:border-box}:where(.composerPage) :where(button, input, textarea){font:inherit;color:inherit;letter-spacing:normal}:where(.composerPage button){cursor:pointer}:where(.composerPage) :where(h1, p){margin:0}.composerPage{letter-spacing:normal;text-transform:none}.composerDialog .composerPage.composerEmbedded{grid-row:2;min-height:0;height:100%}.composerPage [hidden]{display:none!important}.dialogClose:focus:not(:focus-visible),.composerPage:focus{outline:none}
+.storefrontPage, .composerPage{ --font-sans: "TT Crimson Text", "Crimson Text", serif; --font-serif: "TT Crimson Text", "Crimson Text", serif; --font-storefront-display: "TT Crimson Pro", "Crimson Pro", "TT Crimson Text", "Crimson Text", serif; --store-ink: #2d2c29; --store-muted: #79756e; --store-line: #e8e2d8; --store-cream: #faf7f1; --store-gold: #c99d40; color: var(--store-ink); font-family: var(--font-sans); background: rgb(255, 255, 255); min-height: 100vh; }
+.storefrontPage :is(h1, h2), .composerPage h1{ font-family: var(--font-storefront-display); }
+.storefrontHeader, .composerHeader{ border-bottom: 1px solid var(--store-line); background: rgb(255, 255, 255); grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 72px; padding: 0px 4.5vw; display: grid; }
+.storefrontEyebrow{ color: rgb(163, 123, 45); letter-spacing: 0.2em; text-transform: uppercase; margin: 0px 0px 12px; font-size: 9px; font-weight: 800; }
+.storefrontIntro h1, .composerCard h1{ color: rgb(45, 43, 40); font-family: var(--font-serif); letter-spacing: -0.035em; margin: 0px; font-size: clamp(35px, 4.2vw, 53px); font-weight: 400; line-height: 1.05; }
+.composerPage{ background: radial-gradient(circle at 12% 15%, #e7d8b047, transparent 27%), radial-gradient(circle at 88% 84%, #c6dbcd52, transparent 25%), var(--store-cream); font-size: 16px; }
+.composerPage.composerEmbedded{ overscroll-behavior: contain; touch-action: pan-y; background: rgb(255, 255, 255); height: 100dvh; min-height: 0px; overflow: hidden auto; }
+.composerEmbedded .composerMain{ min-height: 100%; padding: 24px 20px 34px; }
+.composerEmbedded .composerCard{ box-shadow: none; border: 0px; padding-top: 28px; }
+.composerHeader{ background: rgba(255, 255, 255, 0.75); grid-template-columns: 1fr auto; min-height: 66px; }
+.composerHeader .storefrontLogo{ font-size: 18px; }
+.composerClose{ border: 1px solid var(--store-line); border-radius: 50%; justify-content: center; justify-self: end; align-items: center; width: 44px; height: 44px; display: flex; }
+.composerMain{ max-width: 720px; min-height: calc(-116px + 100vh); margin: 0px auto; padding: 34px 20px 68px; }
+.composerProduct{ justify-content: center; align-items: center; gap: 11px; margin-bottom: 20px; display: flex; }
+.composerProductImage{ color: rgb(164, 124, 45); background: rgb(231, 225, 212); border: 2px solid rgb(255, 255, 255); border-radius: 9px; justify-content: center; align-items: center; width: 44px; height: 44px; display: flex; }
+.composerProductImage img{ object-fit: cover; border-radius: 7px; width: 100%; height: 100%; }
+.composerProduct span, .composerProduct strong{ display: block; }
+.composerProduct > div:last-child > span{ color: rgb(143, 136, 125); margin-bottom: 3px; font-size: 12px; }
+.composerProduct strong{ font-family: var(--font-serif); font-size: 15px; font-weight: 600; }
+.composerProgress{ grid-template-columns: 1fr 1fr; gap: 5px; max-width: 110px; margin: 0px auto 15px; display: grid; }
+.composerProgress > span{ background: rgb(222, 216, 204); border-radius: 99px; height: 3px; }
+.composerProgress > .composerStepActive{ background: var(--store-gold); }
+.composerProgress > small{ color: rgb(146, 139, 128); text-align: center; grid-column: 1 / -1; font-size: 11px; }
+.composerCard{ border: 1px solid var(--store-line); text-align: center; background: rgb(255, 255, 255); padding: 36px 48px 42px; position: relative; box-shadow: rgba(75, 66, 49, 0.1) 0px 24px 70px; }
+.composerCard h1{ max-width: 520px; margin: 0px auto; font-size: clamp(32px, 6vw, 44px); }
+.composerCard .storefrontEyebrow{ font-size: 12px; }
+.composerLead{ color: var(--store-muted); font-family: var(--font-serif); max-width: 410px; margin: 12px auto 0px; font-size: 16px; line-height: 1.55; }
+.composerStars{ justify-content: center; gap: 6px; margin-top: 27px; display: flex; }
+.composerStars button{ color: var(--store-gold); background: 0px 0px; border: 0px; padding: 3px; }
+.ratingLabel{ color: rgb(133, 126, 116); font-family: var(--font-serif); min-height: 18px; margin-top: 6px; font-size: 15px; font-style: italic; display: block; }
+.ratingLabelError{ color: rgb(164, 63, 63); font-style: normal; font-weight: 700; }
+.composerFields{ text-align: left; gap: 17px; margin-top: 28px; display: grid; }
+.composerFields label, .identityFields label{ display: block; position: relative; }
+.composerFields label > span, .identityFields label > span{ color: rgb(73, 70, 65); margin-bottom: 7px; font-size: 14px; font-weight: 700; display: block; }
+.composerFields input, .composerFields textarea, .identityFields input{ border: 1px solid var(--store-line); font-family: var(--font-serif); background: rgb(252, 251, 248); border-radius: 3px; outline: 0px; width: 100%; padding: 12px 13px; font-size: 16px; }
+.composerFields input:focus, .composerFields textarea:focus, .identityFields input:focus{ border-color: var(--store-gold); box-shadow: rgba(201, 157, 64, 0.1) 0px 0px 0px 3px; }
+.composerFields textarea{ resize: vertical; min-height: 118px; line-height: 1.55; }
+.composerFieldMeta{ color: rgb(138, 132, 122); justify-content: space-between; margin: 6px 1px 0px !important; font-size: 12px !important; font-weight: 400 !important; display: flex !important; }
+.composerFieldMeta small{ font-size: inherit; }
+.composerFieldError{ line-height: 1.35; display: block; color: rgb(164, 63, 63) !important; margin: 6px 1px 0px !important; font-size: 13px !important; font-weight: 700 !important; }
+.composerIdentityHint{ color: rgb(138, 132, 122); margin: 6px 1px 0px; font-size: 12px; line-height: 1.35; display: block; }
+.composerFields input[aria-invalid="true"], .composerFields textarea[aria-invalid="true"], .identityFields input[aria-invalid="true"]{ background: snow; border-color: rgb(185, 79, 79); }
+.composerFields input[aria-invalid="true"]:focus, .composerFields textarea[aria-invalid="true"]:focus, .identityFields input[aria-invalid="true"]:focus{ border-color: rgb(164, 63, 63); box-shadow: rgba(164, 63, 63, 0.11) 0px 0px 0px 3px; }
+.recommendRow{ border-bottom: 1px solid var(--store-line); border-top: 1px solid var(--store-line); justify-content: space-between; align-items: center; min-height: 62px; margin-top: 20px; display: flex; }
+.recommendRow > span{ color: rgb(94, 90, 84); font-size: 14px; font-weight: 700; }
+.recommendRow > div{ gap: 6px; display: flex; }
+.recommendRow button{ border: 1px solid var(--store-line); color: rgb(114, 109, 101); background: rgb(255, 255, 255); border-radius: 99px; min-height: 44px; padding: 0px 17px; font-size: 14px; }
+.recommendRow .choiceActive{ color: rgb(255, 255, 255); background: rgb(45, 55, 47); border-color: rgb(45, 55, 47); }
+.composerNext{ color: rgb(255, 255, 255); background: rgb(41, 52, 44); border: 0px; border-radius: 3px; justify-content: center; align-items: center; gap: 8px; width: 100%; min-height: 50px; margin-top: 24px; padding: 0px 22px; font-size: 16px; font-weight: 700; text-decoration: none; display: flex; }
+.composerNext:disabled{ background: rgb(169, 174, 169); }
+.composerBack{ color: rgb(126, 120, 111); background: 0px 0px; border: 0px; align-items: center; gap: 4px; min-height: 44px; font-size: 13px; display: inline-flex; position: absolute; top: 15px; left: 18px; }
+.composerBack svg{ transform: rotate(180deg); }
+.uploadZone{ color: rgb(89, 85, 78); background: rgb(252, 251, 247); border: 1px dashed rgb(203, 194, 178); border-radius: 4px; flex-direction: column; align-items: center; width: 100%; min-height: 154px; margin-top: 28px; padding: 22px; display: flex; }
+.uploadZone:hover{ border-color: var(--store-gold); background: rgb(250, 246, 236); }
+.uploadZoneIcon{ color: rgb(154, 117, 43); background: rgb(241, 234, 219); border-radius: 50%; justify-content: center; align-items: center; width: 38px; height: 38px; margin-bottom: 10px; display: flex; }
+.uploadZone strong{ font-family: var(--font-serif); font-size: 16px; }
+.uploadZone small{ color: rgb(151, 144, 134); margin-top: 6px; font-size: 12px; line-height: 1.45; }
+.composerUploads{ grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; display: grid; }
+.composerUpload{ aspect-ratio: 1 / 1; background: rgb(238, 234, 226); border-radius: 5px; position: relative; overflow: hidden; }
+.composerUpload img, .composerUpload video{ object-fit: cover; width: 100%; height: 100%; }
+.composerUpload > button{ color: rgb(255, 255, 255); background: rgba(33, 36, 33, 0.82); border: 0px; border-radius: 50%; justify-content: center; align-items: center; width: 23px; height: 23px; display: flex; position: absolute; top: 5px; right: 5px; }
+.identityFields{ text-align: left; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 24px; display: grid; }
+.composerPrivacy{ color: rgb(138, 132, 122); text-align: left; align-items: center; gap: 5px; margin: 11px 0px 0px; font-size: 12px; line-height: 1.45; display: flex; }
+.composerPrivacy svg{ color: rgb(40, 124, 96); background: rgb(226, 240, 233); border-radius: 50%; padding: 2px; }
+.composerError{ color: rgb(158, 70, 70); text-align: left; background: rgb(250, 233, 231); border: 1px solid rgb(239, 207, 203); border-radius: 4px; margin-top: 14px; padding: 10px; font-size: 13px; }
+.composerSuccess{ padding-bottom: 52px; }
+.composerSuccess > p:not(.storefrontEyebrow){ color: var(--store-muted); font-family: var(--font-serif); max-width: 450px; margin: 14px auto 0px; font-size: 16px; line-height: 1.6; }
+.composerFooter{ color: rgb(147, 140, 129); justify-content: center; align-items: center; gap: 18px; min-height: 50px; font-size: 12px; display: flex; }
+.composerFooter a{ text-decoration: underline; }
+@media (max-width: 640px){.composerHeader{ padding: 0px 17px; }.composerMain{ padding: 20px 12px 36px; }.composerCard{ padding: 32px 18px 28px; }.composerCard h1{ font-size: 32px; }.composerStars{ gap: 1px; }.composerStars svg{ width: 38px; height: 38px; }.composerFields, .uploadZone{ margin-top: 22px; }.composerFields input, .composerFields textarea, .identityFields input{ min-height: 48px; }.identityFields{ grid-template-columns: 1fr; }.composerUploads{ grid-template-columns: repeat(3, 1fr); }}</style><section class="wrap" data-concept="mosaic" data-image-ratio="actual" data-show-date="true"><p class="eyebrow">Customer reviews</p><h2>See what everyone is glowing about.</h2>{{#unless (eq settings.show_review_summary false)}}<div class="summary"><div class="score"><strong data-tt-avg>{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}}</strong><div class="scoreDetail"><span class="stars" aria-label="{{product.reviews.summary.average_rating}} out of 5 stars">★★★★★</span><small data-tt-based>Based on {{#if product.reviews.summary.total_count}}{{product.reviews.summary.total_count}}{{else}}0{{/if}} reviews</small></div></div><div class="bars"><div class="bar"><b>5</b><i aria-hidden="true">★</i><span class="track"><i style="width:0%" data-tt-bar="5"></i></span><em data-tt-bar-count="5">0</em></div><div class="bar"><b>4</b><i aria-hidden="true">★</i><span class="track"><i style="width:0%" data-tt-bar="4"></i></span><em data-tt-bar-count="4">0</em></div><div class="bar"><b>3</b><i aria-hidden="true">★</i><span class="track"><i style="width:0%" data-tt-bar="3"></i></span><em data-tt-bar-count="3">0</em></div><div class="bar"><b>2</b><i aria-hidden="true">★</i><span class="track"><i style="width:0%" data-tt-bar="2"></i></span><em data-tt-bar-count="2">0</em></div><div class="bar"><b>1</b><i aria-hidden="true">★</i><span class="track"><i style="width:0%" data-tt-bar="1"></i></span><em data-tt-bar-count="1">0</em></div></div></div>{{/unless}}<div class="tools"><button class="write" type="button">Write a review</button></div><div class="reviews" data-tt-review-list><div class="reviewColumn">{{#each (limit product.reviews.items 12)}}<article class="review" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open full review from {{name}}">{{#if image}}<div class="media"><img loading="lazy" src="{{image}}" alt="Review photo"><svg class="mediaOpenIcon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"></path></svg></div>{{/if}}<div class="content"><div class="reviewTop"><span class="stars" aria-label="{{rating}} out of 5 stars">{{#each (stars5 rating)}}{{#if (eq this "empty")}}☆{{else}}★{{/if}}{{/each}}</span><time>{{date}}</time></div>{{#if title}}<h3>{{title}}</h3>{{/if}}<p>{{content}}</p><footer><strong>{{name}}</strong></footer></div></article>{{/each}}</div></div><div class="moreRow"><button class="more" hidden>Load 12 more reviews</button></div><dialog class="reviewDialog" aria-label="Expanded customer review"><div class="viewerContent"></div></dialog><dialog class="composerDialog" aria-label="Write a customer review"><button class="dialogClose" type="button" aria-label="Close review form">×</button><div class="composerPage composerEmbedded"><main class="composerMain"><div class="composerProduct"><div class="composerProductImage"><img alt="{{product.title}}" height="72" src="{{product.media.main_image}}" width="72"></div><div><span>You’re reviewing</span><strong>{{product.title}}</strong></div></div><div class="composerProgress" aria-label="Step 1 of 2"><span class="composerStepActive"></span><span class="" data-tt-step2-bar></span><small data-tt-step-label>Step 1 of 2</small></div><section class="composerCard" data-tt-step="1"><p class="storefrontEyebrow">YOUR EXPERIENCE</p><h1>How did it make you feel?</h1><p class="composerLead">Your honest thoughts help another home find its perfect glow.</p><div class="composerStars" role="radiogroup"><button aria-label="1 star" aria-checked="false" aria-describedby="composer-rating-feedback" role="radio" type="button"><svg aria-hidden="true" fill="none" height="38" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="38"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"></path></svg></button><button aria-label="2 stars" aria-checked="false" aria-describedby="composer-rating-feedback" role="radio" type="button"><svg aria-hidden="true" fill="none" height="38" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="38"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"></path></svg></button><button aria-label="3 stars" aria-checked="false" aria-describedby="composer-rating-feedback" role="radio" type="button"><svg aria-hidden="true" fill="none" height="38" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="38"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"></path></svg></button><button aria-label="4 stars" aria-checked="false" aria-describedby="composer-rating-feedback" role="radio" type="button"><svg aria-hidden="true" fill="none" height="38" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="38"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"></path></svg></button><button aria-label="5 stars" aria-checked="false" aria-describedby="composer-rating-feedback" role="radio" type="button"><svg aria-hidden="true" fill="none" height="38" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="38"><path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z"></path></svg></button></div><span class="ratingLabel " id="composer-rating-feedback">Choose a rating</span><div class="composerFields"><label><span>Give your review a title</span><input aria-describedby="composer-title-help composer-title-error" maxlength="80" placeholder="What would you tell a friend?" value=""><span class="composerFieldMeta" id="composer-title-help"><small>Minimum 3 characters</small><small>0/80</small></span></label><label><span>Tell us a little more</span><textarea aria-describedby="composer-body-help composer-body-error" maxlength="1200" placeholder="What did you love? Where did you place it? How does it look at night?"></textarea><span class="composerFieldMeta" id="composer-body-help"><small>Minimum 20 characters</small><small>0/1200</small></span></label></div><div class="recommendRow"><span>Would you recommend it?</span><div><button class="" type="button">Yes</button><button class="" type="button">Not yet</button></div></div><button class="composerNext" type="button">Continue <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="17"><path d="m9 18 6-6-6-6"></path></svg></button></section><section class="composerCard" data-tt-step="2" hidden><button class="composerBack" type="button"><svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="14"><path d="m9 18 6-6-6-6"></path></svg> Back</button><p class="storefrontEyebrow">MAKE IT YOURS</p><h1>Add a glimpse of your glow</h1><p class="composerLead">A photo is optional, but it makes your review wonderfully useful.</p><input accept="image/jpeg,image/png,image/webp,image/heic,image/heif,image/gif,image/avif" hidden="" type="file"><button class="uploadZone" type="button"><span class="uploadZoneIcon"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="18"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg></span><strong>Drop a photo here, or choose a file</strong><small>One photo · JPG, PNG, WebP or HEIC · up to 5 MB</small></button><div class="identityFields"><label><span>Your first name</span><input aria-describedby="composer-name-error" autocomplete="given-name" placeholder="e.g. Margaret" value=""></label><label><span>Email address</span><input aria-describedby="composer-email-help composer-email-error" autocomplete="email" inputmode="email" placeholder="you@example.com" type="email" value=""><small class="composerIdentityHint" id="composer-email-help">Use the email address you check regularly.</small></label></div><p class="composerPrivacy"><svg aria-hidden="true" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="12"><path d="m5 12 4 4L19 6"></path></svg>Your email is only used to verify this review. It is never shown publicly.</p><button class="composerNext" type="button">Submit review<svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="17"><path d="m9 18 6-6-6-6"></path></svg></button></section><section class="composerCard composerSuccess" data-tt-step="3" hidden><p class="storefrontEyebrow">THANK YOU</p><h1>Your review is on its way</h1><p>Thank you for sharing your glow. Your review will appear once it has been checked.</p></section><p class="composerError" data-tt-composer-error hidden></p></main></div></dialog></section></template></twinkling-reviews></div>{{/unless}}
+</div>
+{{#unless (eq settings.show_sticky_atc false)}}<div class="tk-001-floating-atb">
+<div class="form-increment form-field--success" data-quantity-change="">
+	<button type="button" data-action="dec">
+		<img src="{{assets_url}}/images/minus.svg" alt="minus">
+	</button>
+	<input class="form-input--incrementTotal" name="tt-sticky-qty" type="tel" readonly="" tabindex="-1" inputmode="none" value="1" maxlength="3" data-quantity-min="0" data-quantity-max="0" min="1" pattern="[0-9]*" aria-live="polite" aria-label="Quantity">
+	<button type="button" data-action="inc">
+		<img src="{{assets_url}}/images/plus.svg" alt="add">
+	</button>
+    <span style="display: none;" class="nod-success-message"></span><span style="display: none;"></span></div>
+    <button id="tt-sticky-atc" data-testid="sticky-add-to-cart" data-wait-message="Adding to cart…" class="black-button add-to-cart-button sticky-atc-btn" type="submit"><span>{{#if settings.atc_label}}{{settings.atc_label}}{{else}}ADD TO CART{{/if}}</span></button>
+</div><style>
+      div.tk-001-floating-atb{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100vw;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-pack:justify;
+    -ms-flex-pack:justify;
+    justify-content:space-between;
+    -webkit-box-align:stretch;
+    -ms-flex-align:stretch;
+    align-items:stretch;
+    z-index:999;
+    -webkit-transform:translateY(100%);
+    -ms-transform:translateY(100%);
+    transform:translateY(100%);
+    -webkit-transition:-webkit-transform .5s ease;
+    -o-transition:transform .5s ease;
+    transition:transform .5s ease;
+    transition:transform .5s ease,-webkit-transform .5s ease;
+    border-radius:8px 8px 0 0;
+    background:#FBF9F4;
+    -webkit-box-shadow:0 0 15px rgba(0,0,0,.4);
+    box-shadow:0 0 15px rgba(0,0,0,.4);
+    padding:15px
+}
+div.tk-001-floating-atb.tk-001-reveal{
+    -webkit-transform:translateY(0);
+    -ms-transform:translateY(0);
+    transform:translateY(0)
+}
+div.tk-001-floating-atb button#tt-sticky-atc{
+    border-radius:8px;
+    background:#efb141!important;
+    opacity:1!important;
+    color:#000;
+    text-align:center;
+    /* font style + size copied from the main PDP add-to-cart (.black-button):
+       17px, uppercase, 3.8px tracking, 700 weight */
+    font-size:17px;
+    font-style:normal;
+    font-weight:700;
+    line-height:normal;
+    width:100%;
+    padding:5.5px 0;
+    text-transform:uppercase;
+    letter-spacing:3.8px
+}
+@media screen and (min-width:768px){
+    div.tk-001-floating-atb{
+        display:none !important;
+    }
+}
+div.tk-001-floating-atb button#tt-sticky-atc:before,div.tk-001-floating-atb button#tt-sticky-atc[disabled] span{
+    display:none
+}
+div.tk-001-floating-atb button#tt-sticky-atc i{
+    font-size: 15px;
+}
+div.tk-001-floating-atb button#tt-sticky-atc i:before{
+    width:20px;
+    height:20px;
+    margin:0;
+    display:block;
+    line-height:.96;
+    font-size:20px;
+}
+div.tk-001-floating-atb div.form-increment{
+    position:relative;
+    overflow:visible;
+    margin:0;
+    max-height: 42.5px;
+}
+div.tk-001-floating-atb div.form-increment button{
+    position:absolute;
+    padding:0 9px;
+    height:100%;
+    -webkit-transition:background-color .1s ease-out;
+    -o-transition:background-color .1s ease-out;
+    transition:background-color .1s ease-out;
+    z-index:999
+}
+div.tk-001-floating-atb div.form-increment button:hover{
+    background-color:#f7eee0;
+}
+div.tk-001-floating-atb div.form-increment button[data-action=dec]{
+    left:1px;
+    top:1px;
+    height:calc(100% - 2px);
+    border-top-left-radius:7px;
+    border-bottom-left-radius:7px;
+}
+div.tk-001-floating-atb div.form-increment button[data-action=inc]{
+    top:1px;
+    right:1px;
+    height:calc(100% - 2px);
+    border-top-right-radius:7px;
+    border-bottom-right-radius:7px;
+}
+div.tk-001-floating-atb div.form-increment button img{
+    height:13px; /* match main PDP stepper +/- icon size (was 19px) */
+    width:13px
+}
+div.tk-001-floating-atb div.form-increment input.form-input--incrementTotal{
+    width:92px;
+    text-align:center;
+    padding:6px 16px;
+    margin:0;
+    display:block;
+    background-color:transparent;
+    outline:0;
+    border-radius:8px;
+    border:1px solid #969696; /* match main PDP qty field outline colour */
+    height:42.5px;
+    font-size:26px
+}
+div.tk-001-floating-atb div.form-increment.form-field--error .form-field-error,div.tk-001-floating-atb div.form-increment.form-field--error .form-inlineMessage{
+    position:absolute;
+    top:calc(100% - 5px);
+    left:0;
+    width:100vw;
+    margin:0;
+    font-size:10px
+}
+div.tk-001-floating-atb button#tt-sticky-atc{
+    width:calc(100% - 15px - 92px)
+}
+html[lang="de"] div.tk-001-floating-atb button#tt-sticky-atc {
+    max-height: 42.5px;
+    font-size: 15px !important;
+    letter-spacing: 2px !important;
+    line-height: 1.1;
+}
+
+</style>{{/unless}}
+</div>
+</main>

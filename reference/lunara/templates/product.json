@@ -1,0 +1,28 @@
+{
+  "name": "Default",
+  "description": "Variant pickers and one Add to cart. Pick the Bundle (Kaching) template for packs.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "related": {
+      "type": "related",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq",
+    "related"
+  ]
+}

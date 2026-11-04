@@ -1,0 +1,62 @@
+{
+  "name": "Reviews",
+  "tag": "section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text above",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "See what everyone is glowing about."
+    },
+    {
+      "type": "range",
+      "id": "page_size",
+      "label": "Reviews per page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom",
+      "label": "Show the rating summary under the list",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_form",
+      "label": "Show the Write a review form",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "write_label",
+      "label": "Write button label",
+      "default": "Write a review"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shows the product's real reviews (added in the admin or written by shoppers and approved)."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "category": "Trust",
+      "description": "Average rating, distribution, photo grid, filters, review list and a write-a-review form."
+    }
+  ]
+}

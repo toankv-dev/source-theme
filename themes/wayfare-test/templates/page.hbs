@@ -1,0 +1,59 @@
+{{!-- Policy / About pages (page.title + page.bodyHtml), the order-tracking form and the contact page.
+      Tracking submits to the platform's /pages/tracking/result (templates/tracking-result.hbs). --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="b-body b-body--page">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#if (eq page.title "Order Tracking")}}
+  <article class="b-wrap b-page b-page--narrow">
+    <h1 class="b-page__title">{{#if settings.track_heading}}{{settings.track_heading}}{{else}}Track your order{{/if}}</h1>
+    <div class="b-track" data-track>
+      <div class="b-track__tabs" role="tablist">
+        <button type="button" class="b-track__tab is-active" role="tab" aria-selected="true" data-track-tab="order">Order number</button>
+        <button type="button" class="b-track__tab" role="tab" aria-selected="false" data-track-tab="tracking">Tracking number</button>
+      </div>
+      <form class="b-track__form" data-track-form="order" novalidate>
+        <label>Order number<input type="text" name="order" required placeholder="#1001"></label>
+        <label>Email<input type="email" name="email" required autocomplete="email"></label>
+        <p class="b-form-msg" data-track-msg role="status"></p>
+        <button type="submit" class="b-btn b-btn--block">Track order</button>
+      </form>
+      <form class="b-track__form" data-track-form="tracking" hidden novalidate>
+        <label>Tracking number<input type="text" name="trackingNumber" required></label>
+        <p class="b-form-msg" data-track-msg role="status"></p>
+        <button type="submit" class="b-btn b-btn--block">Track order</button>
+      </form>
+    </div>
+    {{#if page.bodyHtml}}<div class="b-rte b-page__body">{{{page.bodyHtml}}}</div>{{/if}}
+  </article>
+  {{else}}{{#if (eq page.title "Contact Us")}}
+  <article class="b-page">
+    <div class="b-wrap b-page--narrow">
+      <h1 class="b-page__title">{{page.title}}</h1>
+      {{#if page.bodyHtml}}<div class="b-rte b-page__body">{{{page.bodyHtml}}}</div>{{/if}}
+      <ul class="b-contact__info">
+        {{#if brand.email}}<li><strong>Email:</strong> <a href="mailto:{{brand.email}}">{{brand.email}}</a></li>{{/if}}
+        {{#if brand.phone}}<li><strong>Phone:</strong> {{brand.phone}}</li>{{/if}}
+        {{#if settings.support_hours}}<li><strong>Hours:</strong> {{settings.support_hours}}</li>{{/if}}
+        {{#if brand.address}}<li><strong>Address:</strong> {{brand.address}}</li>{{/if}}
+      </ul>
+    </div>
+    {{> contact-form-body heading=settings.contact_form_heading}}
+  </article>
+  {{else}}
+  <article class="b-wrap b-page b-page--narrow">
+    <h1 class="b-page__title">{{page.title}}</h1>
+    <div class="b-rte b-page__body">{{{page.bodyHtml}}}</div>
+  </article>
+  {{/if}}{{/if}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

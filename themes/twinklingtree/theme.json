@@ -1,0 +1,22 @@
+{
+  "name": "TwinklingTree",
+  "version": "2026.11.04.1",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/js/core.js",
+    "assets/js/ui.js",
+    "assets/js/tt.js"
+  ],
+  "description": "Home decor lighting storefront (TwinklingTree design): hero, category tiles and collection grids on home, Best Sellers collection, product page with pack options, gallery, reviews and FAQ; built on the Base theme.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

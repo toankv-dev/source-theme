@@ -1,0 +1,147 @@
+{{!-- Main product section. Gallery on one side; every element of the info column is a block rendered in the
+      merchant's order. From the legacy entry (templates/product.hbs) `section` is undefined, so the {{else}}
+      branch renders title, price, options and the buy button — the page still sells without a template
+      document. Pickers / buy row are wired by ui.js through data-* attributes only. --}}
+<div class="b-wrap b-pdp b-pdp--gallery-{{#if section.settings.gallery_side}}{{section.settings.gallery_side}}{{else}}left{{/if}}" data-pdp>
+  <div class="b-gallery b-gallery--{{#if section.settings.gallery_layout}}{{section.settings.gallery_layout}}{{else}}thumbs{{/if}}" data-gallery>
+    <div class="b-gallery__main">
+      {{#if product.media.main_image}}
+      <img data-gallery-main src="{{product.media.main_image}}" alt="{{product.title}}" fetchpriority="high">
+      {{/if}}
+      {{#if product.off_pct}}{{#unless (eq section.settings.show_sale_badge false)}}<span class="b-badge b-gallery__badge" data-off-badge>{{#if (eq section.settings.sale_badge_style "off")}}{{product.off_pct}}% OFF{{else}}-{{product.off_pct}}%{{/if}}</span>{{/unless}}{{/if}}
+    </div>
+    {{#if product.media.gallery.length}}
+    <div class="b-gallery__strip">
+      <button type="button" class="b-round-btn" data-gallery-step="-1" aria-label="Previous image">‹</button>
+      <div class="b-gallery__thumbs" data-gallery-thumbs>
+        {{#each product.media.gallery}}
+        <button type="button" class="b-thumb{{#if @first}} is-active{{/if}}" data-gallery-thumb="{{url}}" aria-label="Show image {{@index}}">
+          {{!-- A video's thumbnail is its poster (else the platform turns the <img> into a playing video). --}}
+          <img src="{{#if thumb_url}}{{thumb_url}}{{else}}{{#if is_video}}{{#if poster_url}}{{poster_url}}{{else}}{{url}}{{/if}}{{else}}{{url}}{{/if}}{{/if}}" alt="{{alt}}" loading="lazy">
+        </button>
+        {{/each}}
+      </div>
+      <button type="button" class="b-round-btn" data-gallery-step="1" aria-label="Next image">›</button>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="b-info">
+    {{#if section.blocks.length}}
+    {{#each section.blocks}}
+      {{#if (eq this.type "award")}}
+      <p class="b-award" {{{this.attributes}}}>{{#if this.settings.icon}}{{this.settings.icon}} {{/if}}{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "rating")}}
+      {{#if @root.product.reviews.summary.total_count}}
+      <a class="b-rating" href="#reviews" {{{this.attributes}}}>
+        <span class="b-stars" style="--r:{{@root.product.reviews.summary.average_rating}}" aria-hidden="true"></span>
+        <strong>{{@root.product.reviews.summary.average_rating}}</strong>
+        <span class="b-rating__sep">|</span>
+        <span>{{@root.product.reviews.summary.total_count}} {{#if this.settings.label}}{{this.settings.label}}{{else}}reviews{{/if}}</span>
+      </a>
+      {{/if}}
+      {{/if}}
+      {{#if (eq this.type "title")}}
+      <h1 class="b-info__title" {{{this.attributes}}}>{{@root.product.title}}</h1>
+      {{/if}}
+      {{#if (eq this.type "subtitle")}}
+      <p class="b-subtitle" {{{this.attributes}}}>{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "benefit")}}
+      <p class="b-benefit" {{{this.attributes}}}><span class="b-check" aria-hidden="true">✓</span>{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "stock")}}
+      <p class="b-stock" {{{this.attributes}}}><span class="b-stock__dot" aria-hidden="true"></span>{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "urgency")}}
+      {{!-- "{n}" in the text becomes a number between min and max that drifts a little (people viewing now). --}}
+      <p class="b-urgency" {{{this.attributes}}} data-urgency data-min="{{this.settings.min}}" data-max="{{this.settings.max}}" data-text="{{this.settings.text}}">{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "offer_heading")}}
+      <p class="b-offer" {{{this.attributes}}}><span>{{this.settings.text}}</span></p>
+      {{/if}}
+      {{#if (eq this.type "price")}}
+      <div {{{this.attributes}}}>{{> price}}</div>
+      {{/if}}
+      {{#if (eq this.type "variant_picker")}}
+      <div class="b-picker" {{{this.attributes}}}>{{> options}}</div>
+      {{/if}}
+      {{#if (eq this.type "variant_cards")}}
+      {{> pack-cards this}}
+      {{/if}}
+      {{#if (eq this.type "buy_buttons")}}
+      <div class="b-buy" {{{this.attributes}}}>
+        {{#unless (eq this.settings.show_options false)}}{{> options}}{{/unless}}
+        {{> buy-row label=this.settings.label mode=this.settings.mode show_qty=this.settings.show_qty}}
+        {{#if this.settings.note}}<p class="b-buy__note">{{this.settings.note}}</p>{{/if}}
+        {{#unless (eq this.settings.show_payments false)}}{{> pay-icons}}{{/unless}}
+      </div>
+      {{/if}}
+      {{#if (eq this.type "trust_icons")}}
+      <ul class="b-trust" {{{this.attributes}}}>
+        <li><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg><span>{{this.settings.label_1}}</span></li>
+        <li><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 3 8.3 7 9.5 4-1.2 7-5.1 7-9.5V6l-7-3Z" stroke="currentColor" stroke-width="1.6" fill="none"/><rect x="9" y="10.5" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M10.2 10.5V9.3a1.8 1.8 0 0 1 3.6 0v1.2" stroke="currentColor" stroke-width="1.4" fill="none"/></svg><span>{{this.settings.label_2}}</span></li>
+        <li><svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="7" cy="17.5" r="1.7" stroke="currentColor" stroke-width="1.5" fill="#fff"/><circle cx="17" cy="17.5" r="1.7" stroke="currentColor" stroke-width="1.5" fill="#fff"/></svg><span>{{this.settings.label_3}}</span></li>
+      </ul>
+      {{/if}}
+      {{#if (eq this.type "review")}}
+      {{#each (limit @root.product.reviews.items 1)}}
+      <figure class="b-quote" {{{../attributes}}}>
+        {{#if image}}<img class="b-quote__img" src="{{image}}" alt="" loading="lazy">{{/if}}
+        <figcaption>
+          <span class="b-stars b-stars--sm" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>
+          <p class="b-quote__text">{{content}}</p>
+          <p class="b-quote__who"><strong>{{name}}</strong>{{#if verified}} · <span class="b-verified">Verified buyer</span>{{/if}}</p>
+        </figcaption>
+      </figure>
+      {{/each}}
+      {{/if}}
+      {{#if (eq this.type "accordion")}}
+      <details class="b-acc" {{{this.attributes}}}{{#if this.settings.open}} open{{/if}}>
+        <summary>{{this.settings.title}}</summary>
+        <div class="b-acc__body b-rte">
+          {{#if (eq this.settings.source "description")}}{{{@root.product.description_html}}}{{/if}}
+          {{#if (eq this.settings.source "custom")}}{{{applyTokens this.settings.body}}}{{/if}}
+        </div>
+      </details>
+      {{/if}}
+      {{#if (eq this.type "description")}}
+      <div class="b-rte b-block-text b-description" {{{this.attributes}}}>{{{@root.product.description_html}}}</div>
+      {{/if}}
+      {{#if (eq this.type "text")}}
+      <div class="b-rte b-block-text" {{{this.attributes}}}>{{{applyTokens this.settings.body}}}</div>
+      {{/if}}
+      {{#if (eq this.type "image")}}
+      {{#if this.settings.image}}<img class="b-block-image" {{{this.attributes}}} src="{{this.settings.image}}" alt="{{this.settings.alt}}" loading="lazy">{{/if}}
+      {{/if}}
+      {{#if (eq this.type "divider")}}
+      <hr class="b-divider" {{{this.attributes}}}>
+      {{/if}}
+      {{#if (eq this.type "custom_html")}}
+      <div class="b-custom-html" {{{this.attributes}}}>{{{this.settings.html}}}</div>
+      {{/if}}
+    {{/each}}
+    {{else}}
+    <h1 class="b-info__title">{{product.title}}</h1>
+    {{> price}}
+    <div class="b-buy">
+      {{> options}}
+      {{> buy-row}}
+    </div>
+    {{#if product.description_html}}<div class="b-rte b-block-text">{{{product.description_html}}}</div>{{/if}}
+    {{/if}}
+  </div>
+</div>
+
+{{!-- Sticky buy bar (mobile). ui.js shows it once the main button scrolls out of view. --}}
+{{#unless (eq section.settings.sticky_atc false)}}
+<div class="b-sticky" data-sticky hidden>
+  {{#if product.media.main_image}}<img class="b-sticky__img" src="{{product.media.main_image}}" alt="" loading="lazy">{{/if}}
+  <div class="b-sticky__info">
+    <p class="b-sticky__title">{{product.title}}</p>
+    <p class="b-sticky__price" data-sticky-price>{{product.price}}</p>
+  </div>
+  <button type="button" class="b-btn" data-testid="sticky-add-to-cart" data-add-to-cart data-sticky-btn>{{#if settings.atc_label}}{{settings.atc_label}}{{else}}Add to cart{{/if}}</button>
+</div>
+{{/unless}}

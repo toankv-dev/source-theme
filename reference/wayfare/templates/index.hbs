@@ -1,0 +1,173 @@
+{{!-- Home page (settings-driven; the sections editor covers product pages only). Lists stored in textareas
+      (comparison rows, why-us items) are split into markup by theme.js, since Handlebars cannot split text. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="w-body w-body--home">
+{{{trackingBody}}}
+<a class="w-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="w-main">
+  {{!-- Hero: full-bleed background image, copy laid directly over its left side. --}}
+  <section class="w-hero"{{#if settings.home_hero_image}} style="background-image:url('{{settings.home_hero_image}}')"{{/if}}>
+    <div class="w-hero__inner">
+      <div class="w-hero__copy">
+        <h1 class="w-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
+        {{#if settings.home_hero_text}}<p class="w-hero__text">{{settings.home_hero_text}}</p>{{/if}}
+        {{#each (limit products 1)}}
+        <a class="w-btn w-btn--hero" href="{{url}}">{{#if @root.settings.home_hero_button}}{{@root.settings.home_hero_button}}{{else}}Shop now{{/if}} {{> w-arrow}}</a>
+        {{else}}
+        <a class="w-btn w-btn--hero" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}} {{> w-arrow}}</a>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  {{!-- Our product: the first product. theme.js loads its real gallery + variants from its own product page
+        (#sf-config / #sf-variants-data), so Quantity + Add to cart work right here. --}}
+  {{#each (limit products 1)}}
+  <section class="w-wrap w-featured" data-featured="{{url}}" data-featured-handle="{{handle}}">
+    <h2 class="w-h2">{{#if @root.settings.home_featured_heading}}{{@root.settings.home_featured_heading}}{{else}}Our product{{/if}}</h2>
+    <div class="w-featured__grid">
+      <div class="w-featured__gallery">
+        <div class="w-featured__media">
+          {{#if imageUrl}}<img data-featured-main src="{{imageUrl}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}
+        </div>
+        <div class="w-featured__strip" data-featured-strip hidden>
+          <button type="button" class="w-round-btn w-round-btn--dark" data-featured-step="-1" aria-label="Previous image">‹</button>
+          <div class="w-featured__thumbs" data-featured-thumbs></div>
+          <button type="button" class="w-round-btn w-round-btn--dark" data-featured-step="1" aria-label="Next image">›</button>
+        </div>
+      </div>
+      <div class="w-featured__info">
+        <h3 class="w-featured__title">{{title}}</h3>
+        <p class="w-featured__price"><span data-featured-price>{{money sellingPrice}}</span>{{#if (gt compareAtPrice sellingPrice)}}<s data-featured-compare>{{money compareAtPrice}}</s>{{/if}}</p>
+        <div class="w-featured__variant" data-featured-variant hidden>
+          <label>Option<select class="w-select" data-featured-select></select></label>
+        </div>
+        <p class="w-featured__qty-label">Quantity</p>
+        <div class="w-qty w-qty--square" data-featured-qty>
+          <button type="button" data-featured-qty-step="-1" aria-label="Decrease quantity">−</button>
+          <input type="number" min="1" max="999" value="1" data-featured-qty-input aria-label="Quantity">
+          <button type="button" data-featured-qty-step="1" aria-label="Increase quantity">+</button>
+        </div>
+        <button type="button" class="w-btn w-btn--block w-btn--outline-light" data-testid="add-to-cart" data-featured-atc disabled>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 4h2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.3" fill="currentColor"/><circle cx="17" cy="19.5" r="1.3" fill="currentColor"/></svg>
+          Add to cart
+        </button>
+        <a class="w-btn w-btn--block w-btn--outline-light" href="{{url}}">More info</a>
+        <p class="w-form-msg" data-featured-msg role="status"></p>
+      </div>
+    </div>
+  </section>
+  {{/each}}
+
+  {{#unless (eq settings.home_compare_show false)}}
+  {{!-- Us vs. them: two product columns around a dark middle column. The rows live in a textarea
+        (Feature|yes|no), which Handlebars cannot split, so the small script right below builds them. --}}
+  <section class="w-vs">
+    <h2 class="w-vs__title">{{#if settings.home_compare_heading}}{{settings.home_compare_heading}}{{else}}How we compare{{/if}}{{#if settings.home_compare_heading_2}}<br>{{settings.home_compare_heading_2}}{{/if}}</h2>
+    <div class="w-vs__frame">
+    <div class="w-vs__table" role="table" aria-label="{{#if settings.home_compare_heading}}{{settings.home_compare_heading}}{{else}}How we compare{{/if}}">
+      <div class="w-vs__row w-vs__row--head" role="row">
+        <div class="w-vs__side" role="columnheader">
+          <span class="w-vs__img">{{#if settings.home_compare_ours_image}}<img src="{{settings.home_compare_ours_image}}" alt="" loading="lazy">{{/if}}</span>
+          <span class="w-vs__name">{{#if settings.home_compare_ours}}{{settings.home_compare_ours}}{{else}}{{brand.name}}{{/if}}</span>
+        </div>
+        <div class="w-vs__mid" role="columnheader"><span>{{settings.home_compare_mid}}</span></div>
+        <div class="w-vs__side" role="columnheader">
+          <span class="w-vs__img">{{#if settings.home_compare_theirs_image}}<img src="{{settings.home_compare_theirs_image}}" alt="" loading="lazy">{{/if}}</span>
+          <span class="w-vs__name">{{settings.home_compare_theirs}}</span>
+        </div>
+      </div>
+      <div data-vs-rows data-rows="{{settings.home_compare_rows}}"></div>
+    </div>
+    </div>
+    <script>
+    (function () {
+      var host = document.querySelector('[data-vs-rows]');
+      if (!host) return;
+      var yes = '<span class="w-vs__ic w-vs__ic--yes" role="img" aria-label="Yes"><svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+      var no = '<span class="w-vs__ic w-vs__ic--no" role="img" aria-label="No"><svg viewBox="0 0 20 20" width="10" height="10" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>';
+      var esc = function (s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+      var on = function (v) { return /^\s*(yes|y|true|1)\s*$/i.test(v || ''); };
+      var html = '';
+      (host.getAttribute('data-rows') || '').split(/\r?\n/).forEach(function (line) {
+        var p = line.split('|'), label = (p[0] || '').trim();
+        if (!label) return;
+        html += '<div class="w-vs__row" role="row"><div class="w-vs__side" role="cell">' + (on(p[1]) ? yes : no) +
+          '</div><div class="w-vs__mid" role="cell"><span>' + esc(label) + '</span></div><div class="w-vs__side" role="cell">' + (on(p[2]) ? yes : no) + '</div></div>';
+      });
+      host.outerHTML = html;
+    })();
+    </script>
+    <div class="w-center w-vs__cta"><a class="w-btn" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{#if settings.home_compare_button}}{{settings.home_compare_button}}{{else}}Get now{{/if}} →</a></div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.home_why_show false)}}
+  <section class="w-why-band">
+    <div class="w-why" data-home-why="{{settings.home_why_items}}">
+      <div class="w-why__head">
+        <h2 class="w-why__title">{{#if settings.home_why_heading}}{{settings.home_why_heading}}{{else}}Why choose us?{{/if}}</h2>
+        {{#each (limit products 1)}}<a class="w-btn w-btn--why" href="{{url}}#adlux-section-faq">{{#if @root.settings.home_why_button}}{{@root.settings.home_why_button}}{{else}}FAQs{{/if}} →</a>{{/each}}
+      </div>
+      <div class="w-why__list" data-why-list></div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.home_banner_show false)}}
+  <section class="w-banner-wrap">
+    <div class="w-banner">
+      <div class="w-banner__media">{{#if settings.home_banner_image}}<img src="{{settings.home_banner_image}}" alt="" loading="lazy">{{/if}}</div>
+      <div class="w-banner__text">
+        <h2>{{#if settings.home_banner_title}}{{settings.home_banner_title}}{{else}}Our most popular pack{{/if}}{{#if settings.home_banner_highlight}} <span class="w-banner__hl">{{settings.home_banner_highlight}}</span>{{/if}}{{#if settings.home_banner_suffix}} {{settings.home_banner_suffix}}{{/if}}</h2>
+        <div class="w-center">
+          {{#each (limit products 1)}}
+          <a class="w-btn w-btn--banner" href="{{url}}">{{#if @root.settings.home_banner_button}}{{@root.settings.home_banner_button}}{{else}}Pack more. Pay less.{{/if}}</a>
+          {{else}}
+          <a class="w-btn w-btn--banner" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{#if settings.home_banner_button}}{{settings.home_banner_button}}{{else}}Pack more. Pay less.{{/if}}</a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.home_reviews_show false)}}
+  <section class="w-home-reviews" data-home-reviews hidden>
+    <div class="w-wrap">
+      <h2 class="w-h2 w-h2--tight">{{#if settings.home_reviews_heading}}{{settings.home_reviews_heading}}{{else}}What our customers are saying{{/if}}</h2>
+      {{#if settings.home_reviews_sub}}<p class="w-home-reviews__sub">{{settings.home_reviews_sub}}</p>{{/if}}
+      <div class="w-carousel" data-carousel>
+        <div class="w-carousel__track" data-carousel-track></div>
+      </div>
+      <div class="w-carousel__dots" data-carousel-dots role="tablist" aria-label="Choose reviews"></div>
+    </div>
+    <script type="application/json" data-home-product-ids>[{{#each (limit products 60)}}{{#unless @first}},{{/unless}}"{{id}}"{{/each}}]</script>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.home_contact_show false)}}
+  <section class="w-wrap w-contact">
+    <h2 class="w-h2 w-h2--serif">{{#if settings.home_contact_heading}}{{settings.home_contact_heading}}{{else}}Contact form{{/if}}</h2>
+    <form class="w-contact__form" data-contact-form novalidate>
+      <div class="w-contact__row">
+        <input type="text" name="name" placeholder="Name" maxlength="120" autocomplete="name" aria-label="Name">
+        <input type="email" name="email" placeholder="Email" required autocomplete="email" aria-label="Email">
+      </div>
+      <input type="tel" name="phone" placeholder="Phone" maxlength="40" autocomplete="tel" aria-label="Phone">
+      <textarea name="message" rows="6" placeholder="Comment" required maxlength="4900" aria-label="Comment"></textarea>
+      <p class="w-form-msg" data-contact-msg role="status"></p>
+      <button type="submit" class="w-btn w-btn--block">Send</button>
+    </form>
+  </section>
+  {{/unless}}
+</main>
+{{> footer}}
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

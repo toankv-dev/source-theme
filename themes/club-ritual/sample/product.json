@@ -1,0 +1,618 @@
+{
+  "title": "RITUAL 2 in 1 RUNNING SHORTS",
+  "price": "$24.00",
+  "compare_at_price": "$36.00",
+  "off_pct": 33,
+  "meta_description": "Lightweight 2-in-1 running shorts with a phone pocket and anti-chafe liner.",
+  "description_html": "<p>Lightweight 2-in-1 running shorts with an anti-chafe liner and a phone pocket that keeps everything still.</p>",
+  "media": {
+    "main_image": "/assets/sample/club-ritual/g01.webp",
+    "gallery": [
+      {
+        "url": "/assets/sample/club-ritual/g01.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g02.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g03.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g04.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g05.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g06.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g07.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g08.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g09.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g10.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g11.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g12.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g13.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g18.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g19.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g24.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g25.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/club-ritual/g30.webp",
+        "alt": ""
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "Color",
+      "displayType": "swatches",
+      "options": [
+        {
+          "label": "Black",
+          "active": true,
+          "image": "/assets/sample/club-ritual/g06.webp"
+        },
+        {
+          "label": "White",
+          "active": false,
+          "image": "/assets/sample/club-ritual/g12.webp"
+        },
+        {
+          "label": "Gray",
+          "active": false,
+          "image": "/assets/sample/club-ritual/g18.webp"
+        },
+        {
+          "label": "Black & White",
+          "active": false,
+          "image": "/assets/sample/club-ritual/g30.webp"
+        },
+        {
+          "label": "Green",
+          "active": false,
+          "image": "/assets/sample/club-ritual/g24.webp"
+        }
+      ]
+    },
+    {
+      "name": "Size",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "S",
+          "active": true
+        },
+        {
+          "label": "M",
+          "active": false
+        },
+        {
+          "label": "L",
+          "active": false
+        },
+        {
+          "label": "XL",
+          "active": false
+        },
+        {
+          "label": "XXL",
+          "active": false
+        }
+      ]
+    }
+  ],
+  "variants_list": [
+    {
+      "id": "v-black-s",
+      "title": "Black / S",
+      "option_values": [
+        "Black",
+        "S"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-m",
+      "title": "Black / M",
+      "option_values": [
+        "Black",
+        "M"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-l",
+      "title": "Black / L",
+      "option_values": [
+        "Black",
+        "L"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-xl",
+      "title": "Black / XL",
+      "option_values": [
+        "Black",
+        "XL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-xxl",
+      "title": "Black / XXL",
+      "option_values": [
+        "Black",
+        "XXL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-white-s",
+      "title": "White / S",
+      "option_values": [
+        "White",
+        "S"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g12.webp",
+      "available": true
+    },
+    {
+      "id": "v-white-m",
+      "title": "White / M",
+      "option_values": [
+        "White",
+        "M"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g12.webp",
+      "available": true
+    },
+    {
+      "id": "v-white-l",
+      "title": "White / L",
+      "option_values": [
+        "White",
+        "L"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g12.webp",
+      "available": true
+    },
+    {
+      "id": "v-white-xl",
+      "title": "White / XL",
+      "option_values": [
+        "White",
+        "XL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g12.webp",
+      "available": true
+    },
+    {
+      "id": "v-white-xxl",
+      "title": "White / XXL",
+      "option_values": [
+        "White",
+        "XXL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g12.webp",
+      "available": true
+    },
+    {
+      "id": "v-gray-s",
+      "title": "Gray / S",
+      "option_values": [
+        "Gray",
+        "S"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g18.webp",
+      "available": true
+    },
+    {
+      "id": "v-gray-m",
+      "title": "Gray / M",
+      "option_values": [
+        "Gray",
+        "M"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g18.webp",
+      "available": true
+    },
+    {
+      "id": "v-gray-l",
+      "title": "Gray / L",
+      "option_values": [
+        "Gray",
+        "L"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g18.webp",
+      "available": true
+    },
+    {
+      "id": "v-gray-xl",
+      "title": "Gray / XL",
+      "option_values": [
+        "Gray",
+        "XL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g18.webp",
+      "available": true
+    },
+    {
+      "id": "v-gray-xxl",
+      "title": "Gray / XXL",
+      "option_values": [
+        "Gray",
+        "XXL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g18.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-white-s",
+      "title": "Black & White / S",
+      "option_values": [
+        "Black & White",
+        "S"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g30.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-white-m",
+      "title": "Black & White / M",
+      "option_values": [
+        "Black & White",
+        "M"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g30.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-white-l",
+      "title": "Black & White / L",
+      "option_values": [
+        "Black & White",
+        "L"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g30.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-white-xl",
+      "title": "Black & White / XL",
+      "option_values": [
+        "Black & White",
+        "XL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g30.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-white-xxl",
+      "title": "Black & White / XXL",
+      "option_values": [
+        "Black & White",
+        "XXL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g30.webp",
+      "available": true
+    },
+    {
+      "id": "v-green-s",
+      "title": "Green / S",
+      "option_values": [
+        "Green",
+        "S"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g24.webp",
+      "available": true
+    },
+    {
+      "id": "v-green-m",
+      "title": "Green / M",
+      "option_values": [
+        "Green",
+        "M"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g24.webp",
+      "available": true
+    },
+    {
+      "id": "v-green-l",
+      "title": "Green / L",
+      "option_values": [
+        "Green",
+        "L"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g24.webp",
+      "available": true
+    },
+    {
+      "id": "v-green-xl",
+      "title": "Green / XL",
+      "option_values": [
+        "Green",
+        "XL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g24.webp",
+      "available": true
+    },
+    {
+      "id": "v-green-xxl",
+      "title": "Green / XXL",
+      "option_values": [
+        "Green",
+        "XXL"
+      ],
+      "price": "$24.00",
+      "compare_at_price": "$36.00",
+      "featured_image": "/assets/sample/club-ritual/g24.webp",
+      "available": true
+    }
+  ],
+  "reviews": {
+    "summary": {
+      "average_rating": 4.9,
+      "total_count": 1938
+    },
+    "items": [
+      {
+        "name": "Janet Mercer",
+        "rating": 5,
+        "title": "I used to stand at my dresser every morn",
+        "content": "I used to stand at my dresser every morning trying to figure out which bra worked with what I was wearing. The padded one, the wireless one, the one that does not show under white. Now I grab a tank and I am dressed. That is the whole decision. I have not opened my bra drawer in months and I do not miss it for a second.",
+        "date": "Oct 3, 2026",
+        "verified": true
+      },
+      {
+        "name": "Sarah Hartley",
+        "rating": 5,
+        "title": "For my whole adult life the first thing ",
+        "content": "For my whole adult life the first thing I did walking in the door was reach back and unhook my bra. Every single day. I have been wearing this tank for two months and the other night I realized I get into bed and there is nothing to take off. I am already comfortable. I never thought I would say that about anything I wear all day.",
+        "date": "Oct 4, 2026",
+        "image": "/assets/sample/grey_tank.jpg",
+        "verified": true
+      },
+      {
+        "name": "Linda White",
+        "rating": 5,
+        "title": "I genuinely live in this thing now. I pu",
+        "content": "I genuinely live in this thing now. I put one on first thing in the morning and I have it on all day around the house, cooking, cleaning, out to the mailbox, on the couch at night. It used to be that the minute I got home I would change into something soft. Now there is nothing to change into and nothing to take off. I wear it from the time I get up until I go to sleep. I bought one in every color so I always have a clean one in the drawer.",
+        "date": "Oct 5, 2026",
+        "verified": true
+      },
+      {
+        "name": "Stephanie Foren",
+        "rating": 5,
+        "title": "I've hated bras my entire life. Underwir",
+        "content": "I've hated bras my entire life. Underwire, tight bands, bra lines — I've dealt with it all for decades. A friend recommended this tank and honestly I was skeptical. But I ordered three  since it has fit guarantee. Best thing I've bought in years.",
+        "date": "Oct 6, 2026",
+        "verified": true
+      },
+      {
+        "name": "Erin Elwell",
+        "rating": 5,
+        "title": "Best day ever with my grandkids 💕 So com",
+        "content": "Best day ever with my grandkids 💕 So comfortable I can play on the floor all day without my bra killing me. These tanks are a GAME CHANGER! 78 and finally found something that actually supports me!",
+        "date": "Oct 7, 2026",
+        "image": "/assets/sample/rose_tank.jpg",
+        "verified": true
+      }
+    ]
+  },
+  "home_products": [
+    {
+      "id": "p1",
+      "handle": "product-1",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c1.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "Ritual 2-in-1 Aero Shorts",
+      "sellingPrice": 26,
+      "compareAtPrice": 48,
+      "offPct": 46,
+      "rating": 4.9,
+      "reviewCount": 120,
+      "description": ""
+    },
+    {
+      "id": "p2",
+      "handle": "product-2",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c2.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL 2 in 1 RUNNING SHORTS",
+      "sellingPrice": 24,
+      "compareAtPrice": 36,
+      "offPct": 33,
+      "rating": 4.9,
+      "reviewCount": 121,
+      "description": ""
+    },
+    {
+      "id": "p3",
+      "handle": "product-3",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c3.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL v2 Compression Top",
+      "sellingPrice": 27,
+      "compareAtPrice": 36,
+      "offPct": 25,
+      "rating": 4.9,
+      "reviewCount": 122,
+      "description": ""
+    },
+    {
+      "id": "p4",
+      "handle": "product-4",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c4.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL AirSwift Performance Tank",
+      "sellingPrice": 30,
+      "compareAtPrice": 40,
+      "offPct": 25,
+      "rating": 4.9,
+      "reviewCount": 123,
+      "description": ""
+    },
+    {
+      "id": "p5",
+      "handle": "product-5",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c5.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL Sleeveless Shirt",
+      "sellingPrice": 25,
+      "compareAtPrice": 50,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 124,
+      "description": ""
+    },
+    {
+      "id": "p6",
+      "handle": "product-6",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c6.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL 5” Shorts",
+      "sellingPrice": 26,
+      "compareAtPrice": 52,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 125,
+      "description": ""
+    },
+    {
+      "id": "p7",
+      "handle": "product-7",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c7.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL Short Tights - Built-In Pocket",
+      "sellingPrice": 30,
+      "compareAtPrice": 40,
+      "offPct": 25,
+      "rating": 4.9,
+      "reviewCount": 126,
+      "description": ""
+    },
+    {
+      "id": "p8",
+      "handle": "product-8",
+      "url": "/product",
+      "imageUrl": "/assets/sample/club-ritual/c8.webp",
+      "imageWidth": 360,
+      "imageHeight": 450,
+      "title": "RITUAL Marathon Shorts - Built-In Belt",
+      "sellingPrice": 45,
+      "compareAtPrice": 60,
+      "offPct": 25,
+      "rating": 4.9,
+      "reviewCount": 127,
+      "description": ""
+    }
+  ]
+}

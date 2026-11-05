@@ -76,6 +76,11 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
   }));
   check('InitiateCheckout fired with value', init && init.value > 0 && init.num_items > 0, JSON.stringify(init));
 
+  // The Checkout click above starts a navigation to /checkout: let it land before navigating again
+  // (otherwise goto can fail with ERR_ABORTED depending on timing).
+  await page.waitForURL(/\/checkout/, { timeout: 5000 }).catch(() => {});
+  await page.waitForLoadState('load').catch(() => {});
+
   // ---- Quantity packs --------------------------------------------------------------------------
   await page.goto(BASE + '/product?template=bundle', { waitUntil: 'load' });
   await page.evaluate(() => { localStorage.removeItem('sf-cart:localhost'); localStorage.removeItem('sf-cart'); });
@@ -114,6 +119,47 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
       const c4 = await cart(page);
       check('gift line removed below the tier', c4 && !c4.items.some((l) => l.gift), JSON.stringify(c4 && c4.items));
     }
+
+    // ---- Volume bundle: one Color / Size row per unit (Pack cards setting unit_pickers) ----
+    await page.goto(BASE + '/product?template=bundle', { waitUntil: 'load' });
+    await page.evaluate(() => { localStorage.removeItem('sf-cart:localhost'); localStorage.removeItem('sf-cart'); });
+    await page.reload({ waitUntil: 'load' });
+    await page.waitForTimeout(400);
+    await page.click('[data-qcard][data-qty="2"]');
+    const rows = await page.$$('[data-qcard].is-selected [data-unit-rows] .b-unit, [data-qcard].is-selected [data-unit-rows] > div');
+    if (!rows.length) console.log('SKIP per-unit rows (unit_pickers off in this theme)');
+    else {
+      check('2-pack shows 2 unit rows', rows.length === 2, rows.length + ' rows');
+      const sel = await rows[1].$('select');
+      const other = await sel.evaluate((s) => { const o = [...s.options].find((x) => x.value !== s.value); return o && o.value; });
+      if (other) await sel.selectOption(other);
+      await page.click('#addToCart');
+      await page.waitForTimeout(400);
+      const c5 = await cart(page);
+      const lines = c5 ? c5.items.filter((l) => !l.gift) : [];
+      check('mixed 2-pack adds one line per variant', lines.length === 2 && lines[0].variantId !== lines[1].variantId && lines.every((l) => l.qty === 1), JSON.stringify(lines));
+      const discountMixed = await page.$eval('[data-cart-discount-row]', (r) => !r.hidden);
+      check('mixed pack keeps the tier discount', discountMixed);
+    }
+  }
+
+  // ---- Related rows on a live-like page (no relatedProducts): topped up from the all-products page ----
+  if (await page.$('[data-related]')) {
+    const rp = await browser.newPage();
+    await rp.route((u) => new URL(u).pathname === '/product', async (r) => {
+      const res = await r.fetch();
+      const h = (await res.text()).replace(/(<div class="b-grid b-grid--related" data-related-grid>)[\s\S]*?(<\/div>\s*<\/div>)/g, '$1$2');
+      await r.fulfill({ response: res, body: h, headers: Object.assign({}, res.headers(), { 'content-type': 'text/html' }) });
+    });
+    await rp.goto(BASE + '/product', { waitUntil: 'load' });
+    await rp.evaluate(() => sessionStorage.clear());
+    await rp.reload({ waitUntil: 'load' });
+    await rp.waitForTimeout(1200);
+    const rel = await rp.evaluate(() => [...document.querySelectorAll('[data-related]')].map((r) => [...r.querySelectorAll('.b-pcard')].map((c) => c.getAttribute('href') + '|' + c.getAttribute('data-card-title'))));
+    const all = rel.flat();
+    check('related rows filled without relatedProducts', rel.length && rel.every((x) => x.length > 0), JSON.stringify(rel));
+    check('related rows never repeat a product', new Set(all).size === all.length, JSON.stringify(rel));
+    await rp.close();
   }
 
   // ---- Review form -----------------------------------------------------------------------------

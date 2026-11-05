@@ -1,0 +1,22 @@
+{
+  "name": "Club Ritual",
+  "version": "2026.11.05.1",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/js/core.js",
+    "assets/js/ui.js",
+    "assets/js/cr.js"
+  ],
+  "description": "Club Ritual storefront theme (clubritual.com look: Archivo, black / dark-green packs, picture banners), built on the Base theme 2026.11.05.2.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

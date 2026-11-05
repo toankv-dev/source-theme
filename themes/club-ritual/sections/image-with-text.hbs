@@ -1,0 +1,11 @@
+{{!-- Club Ritual: "Theme picture" (file in assets/) while no image is picked; with no heading / text / button the
+      picture stands alone (cr-iwt--solo). --}}
+<div class="b-wrap b-iwt b-iwt--image-{{#if section.settings.image_side}}{{section.settings.image_side}}{{else}}left{{/if}}{{#unless section.settings.heading}}{{#unless section.settings.body}} cr-iwt--solo{{/unless}}{{/unless}}">
+  <div class="b-iwt__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="{{section.settings.heading}}" loading="lazy">{{else}}{{#if section.settings.theme_image}}<img src="{{@root.assets_url}}/{{section.settings.theme_image}}" alt="{{section.settings.heading}}" loading="lazy">{{else}}{{#if @root.product.media.main_image}}<img src="{{@root.product.media.main_image}}" alt="" loading="lazy">{{else}}<div class="b-ph" aria-hidden="true"></div>{{/if}}{{/if}}{{/if}}</div>
+  <div class="b-iwt__text">
+    {{#if section.settings.eyebrow}}<p class="b-eyebrow b-eyebrow--left">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="b-h2 b-h2--left" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+    {{#if section.settings.button_label}}<a class="b-btn" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a>{{/if}}
+  </div>
+</div>

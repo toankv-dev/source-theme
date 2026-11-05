@@ -1,0 +1,172 @@
+{
+  "name": "Complete the look",
+  "description": "Club Ritual (tops): gallery + quantity packs, details accordion, \"Complete the look\" and \"You may also like\" product rows.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "full"
+      },
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "label": "Verified Reviews"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size": {
+          "type": "size_chart",
+          "settings": {
+            "label": "Size Chart",
+            "title": "Size chart",
+            "theme_image": "images/cr/size-chart.webp",
+            "option_name": "Size"
+          }
+        },
+        "offer": {
+          "type": "offer_heading",
+          "settings": {
+            "text": "Get more, save more"
+          }
+        },
+        "cards": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "layout": "cards",
+            "selected": "2",
+            "currency_code": false,
+            "unit_label": "",
+            "card_1_qty": 1,
+            "card_1_title": "Get 1",
+            "card_1_sub": "",
+            "card_1_badge": "",
+            "card_1_includes": "",
+            "card_2_qty": 2,
+            "card_2_title": "Get 2",
+            "card_2_sub": "50% OFF",
+            "card_2_badge": "MOST POPULAR",
+            "card_2_includes": "",
+            "card_3_qty": 3,
+            "card_3_title": "Get 3",
+            "card_3_sub": "55% OFF",
+            "card_3_badge": "BEST VALUE",
+            "card_3_includes": "",
+            "card_4_qty": 0,
+            "card_4_title": "",
+            "card_5_qty": 0,
+            "card_6_qty": 0,
+            "unit_pickers": true,
+            "pack_color": "#121010"
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "ADD TO CART",
+            "mode": "cart",
+            "show_options": false,
+            "show_qty": false,
+            "show_payments": false,
+            "note": ""
+          }
+        },
+        "trust": {
+          "type": "image",
+          "settings": {
+            "theme_image": "images/cr/trust-strip.png",
+            "alt": "Free shipping · 30-day guarantee, performance promise · Easy returns"
+          }
+        },
+        "pay": {
+          "type": "payment_icons",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "price",
+        "picker",
+        "size",
+        "offer",
+        "cards",
+        "buy",
+        "trust",
+        "pay"
+      ]
+    },
+    "details": {
+      "type": "faq",
+      "settings": {
+        "heading": "",
+        "intro": "",
+        "open_first": false
+      },
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "SIZE CHART",
+            "a": "<table><thead><tr><th>Size</th><th>UK/US</th><th>EU</th><th>Waist</th></tr></thead><tbody><tr><td>XS</td><td>36-37</td><td>46-47</td><td>28</td></tr><tr><td>S</td><td>38-39</td><td>48-49</td><td>30</td></tr><tr><td>M</td><td>40-41</td><td>50-51</td><td>32</td></tr><tr><td>L</td><td>42-43</td><td>52-53</td><td>34</td></tr><tr><td>XL</td><td>44-45</td><td>54-55</td><td>36</td></tr><tr><td>2XL</td><td>46-47</td><td>56-57</td><td>38</td></tr></tbody></table><p>Sizing chart in inches. If you are in-between sizes we recommend sizing down.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "MATERIALS & WARRANTY",
+            "a": "<p>MATERIAL: 100% Recycled Polyester</p><ul><li>Elasticated Waistband</li><li>Internal Drawcord</li><li>Phone Pocket</li><li>Anti-chafing materials</li><li>No roll ups</li></ul>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "SHIPPING DETAILS",
+            "a": "<p>Order processing takes 3-6 business days before shipment. Once your item/s is dispatched, the estimated delivery time is:</p><p>- UK: 5-10 business days<br>- USA: 7-12 business days<br>- Australia: 7-12 business days<br>- Canada: 7-12 business days<br>- Europe: 7-12 business days<br>- Rest of world: 14-20 business days</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "q1",
+        "q2",
+        "q3"
+      ]
+    },
+    "look": {
+      "type": "related",
+      "settings": {
+        "heading": "COMPLETE THE LOOK",
+        "limit": 3
+      }
+    },
+    "also": {
+      "type": "related",
+      "settings": {
+        "heading": "YOU MAY ALSO LIKE",
+        "limit": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "details",
+    "look",
+    "also"
+  ]
+}

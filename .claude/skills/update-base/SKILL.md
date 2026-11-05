@@ -29,6 +29,33 @@ CHANGELOG entry, README catalog), `dist/base-<version>.zip`, all checks green, a
 - Global settings are generated: edit `tools/scripts/build-base-settings.js`, then run it.
 - Ask the user only when it is genuinely unclear whether a feature is generic or one store's custom.
 
+## Speed — every run faster than the last
+
+Output as fast as possible without dropping a check. Before step 1, read `RUNLOG.md` (next to this file):
+apply its **Shortcuts** and watch the step that was slowest last time. Then work the fast way:
+
+- **Parallel by default**: send independent tool calls in one message (several source files read at once; unzip +
+  inspect in one command; start the preview server in the background right after unpacking, it watches files
+  and never needs a restart unless it serves stale output).
+- **Read by need**: the inspect report first, then only the files of real candidates. Grep minified JS for
+  endpoints / events / fields (`fetch(`, `track(`, `/api/`, `dispatchEvent`) instead of formatting it all;
+  prettier only the part you must understand.
+- **Reuse, don't redo**: `CHANGELOG.md` and other `reference/*/_base-update.md` already hold evidence and
+  decisions — a candidate decided before needs only a one-line row ("as in <slug>").
+- **Skip what does not apply**: no core change → skip step 7 and the smoke extension; no new section/block →
+  no test template; screenshots only of new/changed parts.
+- **Batch the checks**: one temporary test template with every new section; one `mobile-audit.js` run over all
+  pages; one `shot.js` command per width. While iterating, validate with `pack.js base-theme --no-zip` and
+  re-run only the check that failed; the full set runs once at the end. Bump the version before the final pack
+  so the zip is built once.
+- **Short writing**: `_base-update.md` is a table, the report is a few bullets.
+
+At the end (after the report), update `RUNLOG.md`: add one line to **Runs** (date · zip · rough minutes per
+step · slowest step) and turn what slowed you into a concrete **Shortcut**. If the same step is slowest in two
+runs, fix it with tooling (a flag or script in `tools/`, e.g. a one-shot verify command) instead of another
+note. Keep the file under ~50 lines: merge similar shortcuts, delete ones that no longer hold.
+Take timings cheaply (`date +%T` at each step start in a command you run anyway).
+
 ## Steps
 
 1. **Unpack**: `mkdir reference/<slug>` and unzip into it (e.g. `unzip -q -o <file>.zip -d reference/<slug>`).
@@ -60,9 +87,10 @@ CHANGELOG entry, README catalog), `dist/base-<version>.zip`, all checks green, a
      images not lazy, LCP / CLS budget). Look at 360 px screens of each new part, not only the full page.
    - `node tools/smoke.js http://localhost:8090` must pass; extend `tools/smoke.js` when you added platform
      behaviour (a new event, endpoint or cart field must get a check).
-   - `node tools/pack.js base-theme` → 0 errors.
+   - `node tools/pack.js base-theme --no-zip` → 0 errors.
 6. **Version + log**: bump `base-theme/theme.json` version (`YYYY.MM.DD.N`, N+1 on the same day) and add a
-   CHANGELOG entry (`base-theme/CHANGELOG.md`: Added / Changed / Fixed, with the source theme). Repack.
+   CHANGELOG entry (`base-theme/CHANGELOG.md`: Added / Changed / Fixed, with the source theme). Then pack once:
+   `node tools/pack.js base-theme`.
 7. **Propagate core** (only if core files changed): `node tools/sync-core.js --dry`, then without `--dry`;
    for "MERGE BY HAND" files merge the shared part and keep each theme's skin block; re-run the smoke test
    and pack for each touched theme. New sections are NOT pushed into existing themes (they opt in later).

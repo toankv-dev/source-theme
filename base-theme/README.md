@@ -51,11 +51,11 @@ byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCa
 
 | Section | What | Blocks |
 | --- | --- | --- |
-| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos), faq, size_chart (link + popup) |
+| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs; `card_style` classic / radio "volume bundle", `pack_color`, `unit_label` per-unit price pill, `unit_pickers` = one Color / Size row per unit so a pack can mix variants, `includes_all`), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos), faq, size_chart (link + popup) |
 | `reviews` | Average, distribution, photos, filters, list, lightbox, write-a-review form | — |
 | `faq` | Accordion; blocks → `page.faq` → Theme settings FAQ | qa |
 | `testimonials` | Photo reviews from the product's real reviews | — |
-| `related` | Other products | — |
+| `related` | Other products (relatedProducts, topped up from the all-products page on live pages; several rows never repeat) | — |
 | `marquee` | Scrolling promises strip | item |
 | `logo-bar` | Press / partner logos loop | logo |
 | `image-banner` | Full-width image with text | — |
@@ -69,6 +69,8 @@ byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCa
 | `guarantee` / `rich-text` | Heading + rich text (+ button) | — |
 | `image-row` | Portrait video row (reels) | video |
 | `newsletter`, `contact-form`, `custom-html` | Forms, free HTML / CSS | — |
+
+Product section: `sticky_style` compact / full (full-width bar with variant select).
 
 Chrome (rendered by the layout, settings-driven): `header` (top bar rotating or countdown, nav, menu drawer,
 search), `cart-drawer` (lines, shipping protection / add-ons, discount, trust lines), `footer` (contact, links,

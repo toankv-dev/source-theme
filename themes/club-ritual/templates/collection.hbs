@@ -1,0 +1,107 @@
+{{!-- All products / a collection (/collections/<handle>). Same data as the home page; `collection` is set
+      for a specific collection. Filtering and sorting run client-side over the cards on the page, using only
+      data the platform really sends (price, title, the merchant's order). The store has no stock tracking:
+      every product listed here is for sale, so Availability shows them all as in stock. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+<body class="b-body b-body--collection">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#unless (eq settings.cr_collection_banner_show false)}}
+  {{!-- Club Ritual: sale banner picture above every collection (its text is part of the artwork). --}}
+  <div class="cr-cbanner"><img src="{{#if settings.cr_collection_banner}}{{settings.cr_collection_banner}}{{else}}{{assets_url}}/images/cr/collection-banner.webp{{/if}}" alt="" width="1500" height="750" fetchpriority="high"></div>
+  {{/unless}}
+  <section class="b-wrap b-collection" data-collection>
+    <h1 class="b-collection__title{{#unless (eq settings.cr_collection_banner_show false)}} b-sr{{/unless}}">{{#if collection.title}}{{collection.title}}{{else}}Our Products{{/if}}</h1>
+    {{#if collection.description}}<p class="b-muted b-collection__desc">{{collection.description}}</p>{{/if}}
+
+    {{!-- Phones: one "Filter and sort" button opening the same controls in a drawer. --}}
+    <div class="b-facets-bar">
+      <button type="button" class="b-facets-bar__open" data-facets-open aria-haspopup="dialog" aria-expanded="false" aria-controls="b-facets-drawer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="7" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="8" cy="17" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        Filter and sort
+      </button>
+      <span class="b-facets__count" data-count></span>
+    </div>
+
+    <div class="b-facets-drawer" id="b-facets-drawer" data-facets-drawer aria-label="Filter and sort">
+      <div class="b-facets-drawer__overlay" data-facets-close></div>
+      <div class="b-facets-drawer__panel">
+        <div class="b-facets-drawer__head">
+          <div><p class="b-facets-drawer__title">Filter and sort</p><p class="b-facets-drawer__count" data-count></p></div>
+          <button type="button" class="b-icon-btn" data-facets-close aria-label="Close">
+            <svg viewBox="0 0 18 17" width="16" height="16" aria-hidden="true"><path d="m1 1 16 15M17 1 1 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+    <div class="b-facets">
+      <div class="b-facets__filters">
+        <span class="b-facets__label">Filter:</span>
+        <details class="b-facet" data-facet>
+          <summary class="b-facet__summary">Availability {{> icon-caret}}</summary>
+          <div class="b-facet__panel">
+            <div class="b-facet__head">
+              <span data-avail-selected>0 selected</span>
+              <button type="button" class="b-facet__reset" data-avail-reset>Reset</button>
+            </div>
+            <div class="b-facet__body">
+              <label class="b-check-row"><input type="checkbox" data-avail-in> <span>In stock (<span data-avail-count></span>)</span></label>
+              <label class="b-check-row is-disabled"><input type="checkbox" disabled> <span>Out of stock (0)</span></label>
+            </div>
+          </div>
+        </details>
+        <details class="b-facet" data-facet>
+          <summary class="b-facet__summary">Price {{> icon-caret}}</summary>
+          <div class="b-facet__panel">
+            <div class="b-facet__head">
+              <span>The highest price is <span data-price-max></span></span>
+              <button type="button" class="b-facet__reset" data-price-reset>Reset</button>
+            </div>
+            <div class="b-facet__body b-facet__range">
+              <label class="b-range-field"><span>$</span><input type="number" min="0" step="0.01" inputmode="decimal" placeholder="From" data-price-from aria-label="Price from"></label>
+              <label class="b-range-field"><span>$</span><input type="number" min="0" step="0.01" inputmode="decimal" placeholder="To" data-price-to aria-label="Price to"></label>
+            </div>
+          </div>
+        </details>
+      </div>
+      <div class="b-facets__sort">
+        <label for="b-sort-by">Sort by:</label>
+        <div class="b-sort-select">
+          <select id="b-sort-by" data-sort>
+            <option value="">Featured</option>
+            <option value="title-asc">Alphabetically, A-Z</option>
+            <option value="title-desc">Alphabetically, Z-A</option>
+            <option value="price-asc">Price, low to high</option>
+            <option value="price-desc">Price, high to low</option>
+          </select>
+          {{> icon-caret}}
+        </div>
+        <span class="b-facets__count" data-count></span>
+      </div>
+    </div>
+        <div class="b-facets-drawer__foot">
+          <button type="button" class="b-btn b-btn--ghost" data-clear-all-drawer>Remove all</button>
+          <button type="button" class="b-btn" data-facets-close>Apply</button>
+        </div>
+      </div>
+    </div>
+
+    {{#if collection.products.length}}
+    <div class="b-grid b-grid--collection" data-grid>{{#each collection.products}}{{> card-product above_fold=true}}{{/each}}</div>
+    {{else}}
+    <div class="b-grid b-grid--collection" data-grid>{{#each products}}{{> card-product above_fold=true}}{{/each}}</div>
+    {{/if}}
+    <div class="b-collection__empty" data-empty hidden>
+      <p>No products found.</p>
+      <button type="button" class="b-btn b-btn--ghost" data-clear-all>Remove all filters</button>
+    </div>
+  </section>
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

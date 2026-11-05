@@ -65,8 +65,24 @@
     {
       "type": "checkbox",
       "id": "sticky_atc",
-      "label": "Sticky Add to cart bar on phones",
+      "label": "Sticky Add to cart bar",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "sticky_style",
+      "label": "Sticky bar style",
+      "default": "compact",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact (small card, bottom right on desktop)"
+        },
+        {
+          "value": "full",
+          "label": "Full width (price, SAVE badge, variant select, button)"
+        }
+      ]
     },
     {
       "type": "paragraph",
@@ -298,6 +314,47 @@
           "id": "currency_code",
           "label": "Show the currency code after prices (e.g. $57.95 AUD)",
           "default": true
+        },
+        {
+          "type": "select",
+          "id": "card_style",
+          "label": "Card style",
+          "default": "classic",
+          "options": [
+            {
+              "value": "classic",
+              "label": "Classic (picture, boxed chosen card)"
+            },
+            {
+              "value": "radio",
+              "label": "Volume bundle (radio dot, no picture)"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "pack_color",
+          "label": "Chosen card, radio and badge colour (empty = button colour)",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "unit_pickers",
+          "label": "Quantity packs: one Color / Size row per unit in the chosen pack",
+          "default": false,
+          "info": "Shoppers can mix variants inside a pack (e.g. 2 × Black M + 1 × Green L); each variant becomes its own cart line."
+        },
+        {
+          "type": "text",
+          "id": "unit_label",
+          "label": "Per-unit price name (e.g. Pair, Item). Empty = hidden",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "includes_all",
+          "label": "Show every pack's \"What's included\" list (not only the chosen one)",
+          "default": false
         },
         {
           "type": "header",

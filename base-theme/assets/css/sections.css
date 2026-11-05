@@ -3341,6 +3341,257 @@ video.b-mslider__media {
   color: var(--c-check);
 }
 
+/* ---------------------------------------------------------------------------------------------
+   Pack cards — volume-bundle style (card_style "radio"), per-unit price pill, per-unit rows.
+   --b-pack = block setting pack_color (chosen card border, radio, badges); falls back to the button colour.
+   --------------------------------------------------------------------------------------------- */
+.b-card__radio,
+.b-card__unit[hidden] {
+  display: none;
+}
+.b-card__line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.b-card__unit {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--c-soft, #eeeeee);
+  color: var(--c-muted, #555555);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.b-cards-block--radio .b-card {
+  padding: 16px 18px;
+  border: 1px solid #c9c9c9;
+  border-radius: var(--btn-radius);
+  background: #fff;
+}
+.b-cards-block--radio .b-card.is-selected {
+  padding: 15px 17px;
+  border: 2px solid var(--b-pack, var(--c-ink));
+  background: #fff;
+}
+.b-cards-block--radio .b-card.is-selected .b-card__row {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.b-cards-block--radio .b-card__row {
+  align-items: center;
+  gap: 16px;
+}
+.b-cards-block--radio .b-card__img {
+  display: none;
+}
+.b-cards-block--radio .b-card__radio {
+  display: block;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border: 1.5px solid #9a9a9a;
+  border-radius: 50%;
+  background: #fff;
+}
+.b-cards-block--radio .b-card.is-selected .b-card__radio {
+  border: 2px solid var(--b-pack, var(--c-ink));
+  box-shadow: inset 0 0 0 4px #fff;
+  background: var(--b-pack, var(--c-ink));
+}
+.b-cards-block--radio .b-card__title {
+  font-size: 17px;
+  font-weight: 700;
+}
+.b-cards-block--radio .b-card__sub {
+  color: var(--c-muted, #555555);
+  font-size: 14px;
+}
+.b-cards-block--radio .b-card__sub:empty {
+  display: none;
+}
+.b-cards-block--radio .b-card__prices strong {
+  font-size: 17px;
+  font-weight: 700;
+}
+.b-cards-block--radio .b-card__prices s {
+  font-size: 13px;
+}
+.b-cards-block--radio .b-card__badge {
+  top: -12px;
+  right: 14px;
+  padding: 3px 9px;
+  border-radius: 4px 4px 0 0;
+  background: var(--b-pack, var(--c-ink));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  clip-path: none;
+}
+.b-cards-block--radio .b-card__includes {
+  margin: 12px 0 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+/* Per-unit rows inside the chosen quantity pack (ui.js renderUnits) */
+.b-units {
+  margin: 12px 0 0;
+}
+.b-units__label {
+  margin: 0 0 4px;
+  color: var(--c-muted, #555555);
+  font-size: 12px;
+}
+.b-unit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.b-unit__img {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 38px;
+  border-radius: 3px;
+  background: var(--c-soft, #f2f2f2);
+  object-fit: cover;
+}
+.b-unit__sel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.b-unit__sel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  border: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  border-bottom: 0;
+  pointer-events: none;
+}
+.b-unit__dot {
+  position: absolute;
+  left: 8px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.b-unit__select {
+  min-height: 36px;
+  padding: 0 26px 0 8px;
+  border: 1px solid var(--c-text);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--c-text);
+  font: inherit;
+  font-size: 14px;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+.b-unit__sel.has-dot .b-unit__select {
+  padding-left: 30px;
+}
+.b-unit.is-unavailable .b-unit__select {
+  border-color: var(--c-alert);
+}
+@media (max-width: 749px) {
+  .b-unit__select {
+    min-height: 44px;
+    font-size: 16px;
+  }
+  .b-unit__img {
+    width: 36px;
+    height: 44px;
+  }
+}
+
+/* Sticky buy bar — "full" style (section setting sticky_style): full-width bar, content on the page width */
+.b-sticky--full {
+  gap: 14px;
+  padding-left: max(16px, calc((100vw - var(--wrap)) / 2 + 16px));
+  padding-right: max(16px, calc((100vw - var(--wrap)) / 2 + 16px));
+}
+.b-sticky--full .b-sticky__img {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 50px;
+  border-radius: 0;
+}
+.b-sticky--full .b-sticky__title {
+  font-size: 18px;
+  font-weight: 500;
+}
+.b-sticky--full .b-sticky__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  color: var(--c-text);
+  font-size: 18px;
+  font-weight: 600;
+}
+.b-sticky__was {
+  color: var(--c-muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+.b-sticky__off {
+  font-size: 12px;
+}
+.b-sticky__variant {
+  flex: 0 1 200px;
+  min-width: 0;
+}
+.b-sticky__variant .b-select {
+  width: 100%;
+  min-height: 44px;
+  font-size: 16px;
+}
+.b-sticky--full .b-btn {
+  flex: 0 0 auto;
+  min-height: 52px;
+  padding: 0 28px;
+  font-size: 19px;
+  text-transform: none;
+}
+@media (min-width: 900px) {
+  .b-sticky.b-sticky--full {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    border-radius: 0;
+  }
+}
+@media (max-width: 749px) {
+  .b-sticky--full .b-sticky__title,
+  .b-sticky--full .b-sticky__price {
+    font-size: 14px;
+  }
+  .b-sticky--full .b-sticky__was {
+    font-size: 12px;
+  }
+  .b-sticky__variant {
+    display: none;
+  }
+  .b-sticky--full .b-btn {
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 15px;
+  }
+}
+
 /* =============================================================================================
    Phone pass (≤ 749px): every control ≥ 44 px to tap (dots ≥ 24 × 44, WCAG 2.5.8), text ≥ 12 px,
    form fields 16 px so iOS does not zoom on focus, popovers kept inside the screen.

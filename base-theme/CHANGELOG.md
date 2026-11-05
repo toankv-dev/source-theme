@@ -2,6 +2,37 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## 2026.11.05.5 — full-width sticky buy bar (from Club Ritual)
+### Added
+- Product section setting `sticky_style`: `compact` (default, unchanged small card) or `full` — a full-width bar
+  on the page width with picture, title, price + was price + SAVE badge, a variant select (`[data-sticky-variant]`,
+  drives the pickers / option pack cards above and the URL) and the Add to cart button. Phones: the select hides,
+  the bar stays one row. Hooks `[data-sticky-compare]`, `[data-sticky-off]` follow the live price.
+
+## 2026.11.05.4 — related products on live pages (from Club Ritual)
+### Fixed
+- `related` showed nothing on a live product page: the platform sends `relatedProducts` (same collection only)
+  and no `products` there, so the section rendered empty. The grid is now always printed and ui.js
+  (`initRelatedFill`, hook `[data-related]` / `[data-related-grid]`) tops it up to the section's limit with cards
+  from the store's all-products page (the theme's own card markup, cached per tab), skipping the product on
+  screen and cards another related row already shows.
+- `related` schema `limit` 1 → 3, so a page can carry "Complete the look" + "You may also like".
+### Added
+- `tools/smoke.js`: related rows filled without `relatedProducts`, no product repeated across rows.
+
+## 2026.11.05.3 — volume discount bundle (from Club Ritual)
+### Added
+- Pack cards (`variant_cards`) "volume bundle" style: `card_style` = `radio` (radio dot, no picture; chosen card,
+  radio and badges in `pack_color`), `unit_label` ("$18.00 / Pair" pill = pack total ÷ units), `includes_all`
+  (every pack's "What's included" list stays visible). `product.bundle.json` uses it.
+- `unit_pickers`: the chosen quantity pack shows one row per unit (picture + a select per option, colour dot), so
+  shoppers can mix variants in one pack; Add to cart sends one line per distinct variant and core.js keeps the
+  tier discount on the product's total quantity. Hooks `[data-unit-rows]`, `[data-card-unit]`. (Club Ritual —
+  the Kaching-style bundle the stores use most.)
+- `tools/smoke.js`: mixed 2-pack → 2 unit rows, one cart line per variant, tier discount kept.
+### Changed
+- ui.js `addSelection` builds its lines through `cartLine(v, qty)` (same line fields as before).
+
 ## 2026.11.05.2 — mobile pass
 ### Added
 - `tools/mobile-audit.js`: phone audit at 360 / 390 px (sideways overflow incl. opened popovers and drawers,

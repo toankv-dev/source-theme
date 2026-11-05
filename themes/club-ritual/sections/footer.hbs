@@ -1,0 +1,65 @@
+{{!-- Footer (Club Ritual): brand · Customer Care links · Our commitment ticks, then the "Sign up and save"
+      newsletter, then © + policy links. Rendered on the platform's own pages too, so read only brand / config /
+      policyLinks / settings / collections. --}}
+<footer class="b-footer cr-footer">
+  <div class="b-wrap b-footer__grid cr-footer__grid">
+    <div class="b-footer__brand">
+      {{#if brand.logo}}<img class="b-footer__logo" src="{{brand.logo}}" alt="{{brand.name}}" loading="lazy">{{else}}<p class="b-footer__name">{{brand.name}}</p>{{/if}}
+      {{#if settings.footer_about}}<p class="b-footer__about">{{settings.footer_about}}</p>{{/if}}
+    </div>
+    <div>
+      <p class="b-footer__title">{{#if settings.footer_links_title}}{{settings.footer_links_title}}{{else}}Customer Care{{/if}}</p>
+      <ul class="cr-footer__links">
+        {{> policy-link key="shipping" label="Shipping Policy"}}
+        {{> policy-link key="refund" label="Refund Policy"}}
+        {{> policy-link key="privacy" label="Privacy Policy"}}
+        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact Us</a></li>{{/if}}
+        {{> policy-link key="terms" label="Terms & Conditions"}}
+        <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track Your Order</a></li>
+        {{> policy-link key="about" label="About Page"}}
+      </ul>
+    </div>
+    {{#if settings.cr_commitment_title}}
+    <div>
+      <p class="b-footer__title">{{settings.cr_commitment_title}}</p>
+      <ul class="cr-footer__ticks">
+        {{#if settings.cr_commitment_1}}<li>✓&nbsp;{{settings.cr_commitment_1}}</li>{{/if}}
+        {{#if settings.cr_commitment_2}}<li>✓&nbsp;{{settings.cr_commitment_2}}</li>{{/if}}
+        {{#if settings.cr_commitment_3}}<li>✓&nbsp;{{settings.cr_commitment_3}}</li>{{/if}}
+        {{#if settings.cr_commitment_4}}<li>✓&nbsp;{{settings.cr_commitment_4}}</li>{{/if}}
+      </ul>
+    </div>
+    {{/if}}
+    {{#if settings.footer_collections}}{{#if collections.length}}
+    <div>
+      <p class="b-footer__title">Shop</p>
+      <ul>
+        {{#each (limit collections 6)}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/each}}
+      </ul>
+    </div>
+    {{/if}}{{/if}}
+  </div>
+  {{#unless (eq settings.footer_newsletter false)}}
+  <div class="b-wrap cr-footer__news">
+    <div class="b-footer__news">
+      <p class="b-footer__title">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Sign up and save{{/if}}</p>
+      {{#if settings.newsletter_text}}<p class="b-footer__about">{{settings.newsletter_text}}</p>{{/if}}
+      {{> newsletter-form}}
+      {{#if settings.social_facebook}}{{> social-links}}{{else}}{{#if settings.social_instagram}}{{> social-links}}{{else}}{{#if settings.social_tiktok}}{{> social-links}}{{/if}}{{/if}}{{/if}}
+    </div>
+  </div>
+  {{/unless}}
+  <div class="b-wrap b-footer__bottom">
+    {{#unless (eq settings.footer_payment false)}}{{> pay-icons}}{{/unless}}
+    <p class="b-footer__copy">
+      <small>© <span data-year></span>, <a href="{{#if config.homeUrl}}{{config.homeUrl}}{{else}}{{#if policyLinks.home}}{{policyLinks.home}}{{else}}/{{/if}}{{/if}}">{{brand.name}}</a></small>
+    </p>
+    <ul class="cr-footer__policies">
+      {{> policy-link key="refund" label="Refund policy"}}
+      {{> policy-link key="terms" label="Terms of service"}}
+      {{> policy-link key="privacy" label="Privacy policy"}}
+      {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact information</a></li>{{/if}}
+      {{> policy-link key="shipping" label="Shipping policy"}}
+    </ul>
+  </div>
+</footer>

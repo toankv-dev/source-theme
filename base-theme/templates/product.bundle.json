@@ -45,7 +45,11 @@
         "cards": {
           "type": "variant_cards",
           "settings": {
-            "source": "quantity"
+            "source": "quantity",
+            "card_style": "radio",
+            "unit_pickers": true,
+            "unit_label": "Item",
+            "includes_all": true
           }
         },
         "buy": {

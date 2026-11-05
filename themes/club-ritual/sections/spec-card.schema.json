@@ -1,0 +1,35 @@
+{
+  "name": "Intro + spec card",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Perfect for travel" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "", "info": "Empty = product title." },
+    { "type": "richtext", "id": "body", "label": "Text", "default": "<p>Say in two or three sentences what the product does and who it is for.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Card image", "info": "Empty = the product's main image." },
+    { "type": "text", "id": "footer", "label": "Card footer tagline", "default": "Pack smarter. Travel lighter." }
+  ],
+  "blocks": [
+    {
+      "type": "tile", "name": "Spec tile", "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "100% cordless" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Works in any hotel room" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Intro + spec card", "category": "Product", "description": "Intro copy beside a navy card of spec tiles.",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile", "settings": { "title": "Fast", "text": "About 10 seconds per bag" } },
+        { "type": "tile", "settings": { "title": "Long battery", "text": "Many bags per charge" } },
+        { "type": "tile", "settings": { "title": "Stays sealed", "text": "For days" } },
+        { "type": "tile", "settings": { "title": "3 sizes", "text": "S, M and L" } },
+        { "type": "tile", "settings": { "title": "No outlet needed", "text": "Anywhere in the world" } }
+      ]
+    }
+  ]
+}

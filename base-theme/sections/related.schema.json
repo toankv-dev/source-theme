@@ -1,7 +1,7 @@
 {
   "name": "Related products",
   "tag": "section",
-  "limit": 1,
+  "limit": 3,
   "settings": [
     {
       "type": "text",
@@ -23,7 +23,7 @@
     {
       "name": "Related products",
       "category": "Products",
-      "description": "Other products of the store."
+      "description": "Other products of the store (same collection first, then the rest of the store)."
     }
   ]
 }

@@ -1,0 +1,31 @@
+{{!-- Image + text rows that alternate sides, optionally numbered 01, 02…
+      With no rows of its own it shows the listing's features (page.features [{ title, body, image }]), and an
+      empty heading / intro falls back to the listing's page.heroTitle / page.intro. --}}
+<div class="b-wrap b-features">
+  {{#if section.settings.eyebrow}}<p class="b-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{else}}{{#if page.heroTitle}}<h2 class="b-h2">{{page.heroTitle}}</h2>{{/if}}{{/if}}
+  {{#if section.settings.intro}}<p class="b-features__intro">{{section.settings.intro}}</p>{{else}}{{#if page.intro}}<p class="b-features__intro">{{page.intro}}</p>{{/if}}{{/if}}
+  {{#if section.blocks.length}}
+  {{#each section.blocks}}
+  <div class="b-feature" {{{this.attributes}}}>
+    <div class="b-feature__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.heading}}" loading="lazy">{{else}}<div class="b-feature__ph" aria-hidden="true"></div>{{/if}}</div>
+    <div class="b-feature__text">
+      {{#unless (eq ../section.settings.numbered false)}}<p class="b-feature__num" data-feature-num></p>{{/unless}}
+      <h3 class="b-feature__title">{{this.settings.heading}}</h3>
+      <div class="b-rte">{{{applyTokens this.settings.body}}}</div>
+    </div>
+  </div>
+  {{/each}}
+  {{else}}
+  {{#each page.features}}
+  <div class="b-feature{{#unless image}} b-feature--text{{/unless}}">
+    {{#if image}}<div class="b-feature__media"><img src="{{image}}" alt="{{title}}" loading="lazy"></div>{{/if}}
+    <div class="b-feature__text">
+      {{#unless (eq @root.section.settings.numbered false)}}<p class="b-feature__num" data-feature-num></p>{{/unless}}
+      <h3 class="b-feature__title">{{title}}</h3>
+      <p>{{body}}</p>
+    </div>
+  </div>
+  {{/each}}
+  {{/if}}
+</div>

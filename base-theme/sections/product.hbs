@@ -195,14 +195,27 @@
   </div>
 </div>
 
-{{!-- Sticky buy bar (mobile). ui.js shows it once the main button scrolls out of view. --}}
+{{!-- Sticky buy bar. ui.js shows it once the main button scrolls out of view. sticky_style "compact" = small card
+      (bottom right on desktop); "full" = full-width bar with the was price, the SAVE badge and a variant select that
+      drives the pickers above (ui.js initSticky). --}}
 {{#unless (eq section.settings.sticky_atc false)}}
-<div class="b-sticky" data-sticky hidden>
+<div class="b-sticky{{#if (eq section.settings.sticky_style "full")}} b-sticky--full{{/if}}" data-sticky hidden>
   {{#if product.media.main_image}}<img class="b-sticky__img" src="{{product.media.main_image}}" alt="" loading="lazy">{{/if}}
   <div class="b-sticky__info">
     <p class="b-sticky__title">{{product.title}}</p>
+    {{#if (eq section.settings.sticky_style "full")}}
+    <p class="b-sticky__price"><span data-sticky-price>{{product.price}}</span>{{#if product.compare_at_price}} <s class="b-sticky__was" data-sticky-compare>{{product.compare_at_price}}</s>{{/if}}{{#if product.off_pct}} <span class="b-badge b-sticky__off" data-sticky-off>Save {{product.off_pct}}%</span>{{/if}}</p>
+    {{else}}
     <p class="b-sticky__price" data-sticky-price>{{product.price}}</p>
+    {{/if}}
   </div>
+  {{#if (eq section.settings.sticky_style "full")}}{{#if product.variants.length}}
+  <label class="b-sticky__variant"><span class="b-sr">Choose an option</span>
+    <select class="b-select" data-sticky-variant>
+      {{#each product.variants_list}}<option value="{{id}}">{{title}}</option>{{/each}}
+    </select>
+  </label>
+  {{/if}}{{/if}}
   <button type="button" class="b-btn" data-testid="sticky-add-to-cart" data-add-to-cart data-sticky-btn>{{#if settings.atc_label}}{{settings.atc_label}}{{else}}Add to cart{{/if}}</button>
 </div>
 {{/unless}}

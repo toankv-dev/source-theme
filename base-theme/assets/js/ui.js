@@ -294,6 +294,13 @@
         if (compareEl) compareEl.textContent = v && compare > total ? fmt(compare) : '';
         var img = $('[data-qcard-img]', card), qtyMark = $('.b-card__qty', card), src = (v && v.image) || cfg.image || '';
         if (img && src) { img.src = src; img.hidden = false; if (qtyMark) qtyMark.hidden = false; }
+        // "$18.00 / Pair": the pack total per unit (block setting unit_label; empty = hidden, 1-packs hidden).
+        var unitEl = $('[data-card-unit]', card);
+        if (unitEl) {
+          var unitText = v && s.unit_label && qty > 1 && total > 0 ? money(Base.round2(total / qty)) + ' / ' + s.unit_label : '';
+          unitEl.textContent = unitText;
+          unitEl.hidden = !unitText;
+        }
       } else {
         pos = Number(card.getAttribute('data-card-pos')) + 1;
         var vals = values.slice();
@@ -317,9 +324,125 @@
       if (inc) {
         var html = s['card_' + pos + '_includes'] || '';
         inc.innerHTML = html;
-        inc.hidden = !html || !card.classList.contains('is-selected');
+        inc.hidden = !html || (!s.includes_all && !card.classList.contains('is-selected'));
       }
     });
+  }
+
+  // ---------------------------------------------------------------------------------------------
+  // Volume bundle: the chosen quantity pack opens one row per unit (picture + one select per option),
+  // so a 2-pack can be Black / M + Green / L. Rows start from the main pickers and reset when those
+  // change. Add to cart then sends one line per distinct variant; core.js prices the tiers on the
+  // product's total quantity, so mixing keeps the pack discount. Pack cards setting unit_pickers.
+  // ---------------------------------------------------------------------------------------------
+  var unitVals = [], unitKey = null;
+
+  function unitRowsOn() {
+    return !!(packs && packs.kind === 'qty' && (packs.settings || {}).unit_pickers && $$('[data-opt]').length);
+  }
+
+  function optionNames() {
+    return $$('[data-opt]').map(function (g) {
+      var l = $('legend', g);
+      return l && l.firstChild ? l.firstChild.textContent.replace(/:\s*$/, '').trim() : '';
+    });
+  }
+
+  function optionChoices(i) {
+    var g = $('[data-opt="' + i + '"]');
+    if (!g) return [];
+    var sel = $('[data-opt-select]', g);
+    if (sel) return [].map.call(sel.options, function (o) { return { value: o.value, label: o.text }; });
+    return $$('[data-opt-value]', g).map(function (b) {
+      return { value: b.getAttribute('data-opt-value'), label: b.getAttribute('data-opt-display') || b.getAttribute('data-opt-value'), btn: b };
+    });
+  }
+
+  /** Dot colour of a colour value: the swatch's own colour, else its first word when CSS knows it. */
+  function dotColor(choice) {
+    if (!choice) return '';
+    var bg = choice.btn && choice.btn.style.backgroundColor;
+    if (bg) return bg;
+    var word = String(choice.value || '').trim().split(/[\s&\/-]+/)[0].toLowerCase();
+    return word && window.CSS && CSS.supports && CSS.supports('color', word) ? word : '';
+  }
+
+  function renderUnits() {
+    if (!packs || packs.kind !== 'qty') return;
+    var on = unitRowsOn(), base = selectedValues(), key = base.join('|');
+    if (key !== unitKey) { unitKey = key; unitVals = []; }
+    var names = on ? optionNames() : [], choices = names.map(function (n, i) { return optionChoices(i); });
+    $$('[data-qcard]', packs.el).forEach(function (card) {
+      var box = $('[data-unit-rows]', card);
+      if (!box) return;
+      var show = on && card.classList.contains('is-selected');
+      box.innerHTML = '';
+      box.hidden = !show;
+      if (!show) return;
+      var qty = Math.min(12, Number(card.getAttribute('data-qty')) || 1);
+      box.appendChild(el('p', 'b-units__label', names.join(', ')));
+      for (var k = 0; k < qty; k++) box.appendChild(unitRow(k, base, names, choices));
+    });
+  }
+
+  function unitRow(k, base, names, choices) {
+    var vals = unitVals[k] = unitVals[k] || base.slice();
+    var row = el('div', 'b-unit');
+    // Picking inside a row must not re-select (and re-render) the card.
+    ['click', 'keydown'].forEach(function (t) { row.addEventListener(t, function (e) { e.stopPropagation(); }); });
+    var img = el('img', 'b-unit__img');
+    img.alt = '';
+    img.width = 36;
+    img.height = 44;
+    row.appendChild(img);
+    var dots = [];
+    var paint = function () {
+      var v = Base.variants.find(vals);
+      var src = (v && v.image) || cfg.image || '';
+      if (src && img.getAttribute('src') !== src) img.src = src;
+      row.classList.toggle('is-unavailable', !v);
+      dots.forEach(function (d) {
+        var c = dotColor(choices[d.i].filter(function (x) { return x.value === vals[d.i]; })[0]);
+        d.el.style.background = c;
+        d.el.hidden = !c;
+      });
+    };
+    names.forEach(function (name, i) {
+      var wrap = el('span', 'b-unit__sel');
+      if (/colou?r/i.test(name)) {
+        var dot = el('span', 'b-unit__dot');
+        dot.setAttribute('aria-hidden', 'true');
+        wrap.appendChild(dot);
+        wrap.classList.add('has-dot');
+        dots.push({ i: i, el: dot });
+      }
+      var s = el('select', 'b-unit__select');
+      s.setAttribute('aria-label', name + ' ' + (k + 1));
+      s.setAttribute('data-unit-select', String(i));
+      choices[i].forEach(function (c) {
+        var o = el('option', null, c.label);
+        o.value = c.value;
+        s.appendChild(o);
+      });
+      s.value = vals[i];
+      s.addEventListener('change', function () { vals[i] = s.value; paint(); });
+      wrap.appendChild(s);
+      row.appendChild(wrap);
+    });
+    paint();
+    return row;
+  }
+
+  /** Cart lines for the chosen pack's unit rows (one line per distinct variant), or null. */
+  function unitLines(fallback) {
+    if (!unitRowsOn() || !unitVals.length) return null;
+    var qty = chosenQty(), groups = {}, order = [];
+    for (var k = 0; k < qty; k++) {
+      var v = (unitVals[k] && Base.variants.find(unitVals[k])) || fallback;
+      if (!groups[v.id]) { groups[v.id] = { v: v, q: 0 }; order.push(v.id); }
+      groups[v.id].q++;
+    }
+    return order.map(function (id) { return cartLine(groups[id].v, groups[id].q); });
   }
 
   function refreshProduct() {
@@ -333,6 +456,7 @@
         (act && act.getAttribute('data-opt-display')) || values[Number(g.getAttribute('data-opt'))] || '';
     });
     updatePackCards();
+    renderUnits();
     $$('[data-add-to-cart]').forEach(function (b) { b.disabled = !v && Base.variants.list().length > 0; });
     if (!v) return;
     var p = selectionPrice(v);
@@ -346,6 +470,14 @@
       if (pct) offEl.textContent = offEl.textContent.replace(/\d+%/, pct + '%');
     }
     if (sticky) sticky.textContent = money(p.total);
+    var sCompare = $('[data-sticky-compare]'), sOff = $('[data-sticky-off]'), sSel = $('[data-sticky-variant]');
+    if (sCompare) { sCompare.textContent = p.compare > p.total ? money(p.compare) : ''; sCompare.hidden = !(p.compare > p.total); }
+    if (sOff) {
+      var sPct = p.compare > p.total ? Math.round((1 - p.total / p.compare) * 100) : 0;
+      sOff.hidden = !sPct;
+      if (sPct) sOff.textContent = sOff.textContent.replace(/\d+%/, sPct + '%');
+    }
+    if (sSel && sSel.value !== String(v.id)) sSel.value = String(v.id);
     if (v.image && $('[data-gallery-main]')) {
       swapMedia($('[data-gallery-main]'), v.image, 'data-gallery-main');
       markThumb($('[data-gallery-thumbs]'), v.image);
@@ -459,17 +591,14 @@
     if ($('[data-pdp]')) refreshProduct();
   }
 
-  function addSelection(mode) {
-    var v = currentVariant();
-    if (!v) return;
-    var qty = chosenQty();
-    var p = selectionPrice(v);
-    var optionName = function (i) {
-      var cards = $('[data-cards="' + i + '"]'), legend = $('[data-opt="' + i + '"] legend');
-      if (cards) return cards.getAttribute('data-cards-name');
-      return legend && legend.firstChild ? legend.firstChild.textContent.replace(/:\s*$/, '').trim() : 'Option ' + (i + 1);
-    };
-    Base.cart.add({
+  function optionName(i) {
+    var cards = $('[data-cards="' + i + '"]'), legend = $('[data-opt="' + i + '"] legend');
+    if (cards) return cards.getAttribute('data-cards-name');
+    return legend && legend.firstChild ? legend.firstChild.textContent.replace(/:\s*$/, '').trim() : 'Option ' + (i + 1);
+  }
+
+  function cartLine(v, qty) {
+    return {
       variantId: v.id,
       variant: v.options.join(' / '),
       opts: v.options.map(function (value, i) { return { name: optionName(i), value: value }; }),
@@ -477,10 +606,50 @@
       price: v.price,
       comparePrice: v.compare || undefined,
       image: v.image || cfg.image || ''
-    }, { mode: mode, value: p.total });
+    };
+  }
+
+  function addSelection(mode) {
+    var v = currentVariant();
+    if (!v) return;
+    var p = selectionPrice(v);
+    Base.cart.add(unitLines(v) || cartLine(v, chosenQty()), { mode: mode, value: p.total });
+  }
+
+  /** Sets the option pickers (or the option pack card that replaces one) to a variant's values. */
+  function applyVariantValues(values) {
+    values.forEach(function (value, i) {
+      if (packs && packs.kind === 'option' && packs.index === i) {
+        var card = $$('[data-card]', packs.el).filter(function (c) { return c.getAttribute('data-card') === value; })[0];
+        if (card) {
+          $$('[data-card]', packs.el).forEach(function (c) {
+            c.classList.toggle('is-selected', c === card);
+            c.setAttribute('aria-checked', c === card ? 'true' : 'false');
+          });
+        }
+        return;
+      }
+      var g = $('[data-opt="' + i + '"]');
+      if (!g) return;
+      var sel = $('[data-opt-select]', g);
+      if (sel) { sel.value = value; return; }
+      $$('[data-opt-value]', g).forEach(function (b) {
+        var on = b.getAttribute('data-opt-value') === value;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    });
+    refreshProduct();
   }
 
   function initSticky() {
+    var stickySel = $('[data-sticky-variant]');
+    if (stickySel) {
+      stickySel.addEventListener('change', function () {
+        var v = Base.variants.byId(stickySel.value);
+        if (v) applyVariantValues(v.options);
+      });
+    }
     var bar = $('[data-sticky]'), main = $('[data-main-atc]');
     if (!bar || !main || !('IntersectionObserver' in window)) return;
     new IntersectionObserver(function (entries) {
@@ -1526,10 +1695,70 @@
     $$('[data-feature-num]').forEach(function (n, i) { n.textContent = (i < 9 ? '0' : '') + (i + 1); });
   }
 
+  // ---------------------------------------------------------------------------------------------
+  // Related rows ([data-related]): top each grid up to data-limit with cards from the store's all-products
+  // page (config.allProductsUrl, the theme's own .b-pcard markup), cached per tab. Skips the product on screen
+  // and cards already on the page, so two rows ("Complete the look", "You may also like") never repeat.
+  // ---------------------------------------------------------------------------------------------
+  var STORE_CARDS_KEY = 'b-store-cards:' + (cfg.domain || location.host);
+
+  function storeCards() {
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(STORE_CARDS_KEY) || 'null');
+      if (cached && cached.length) return Promise.resolve(cached);
+    } catch (e) { /* storage off */ }
+    var url = cfg.allProductsUrl || '/collections/all';
+    if (!window.fetch || !window.DOMParser) return Promise.resolve([]);
+    return fetch(url, { credentials: 'same-origin', headers: { Accept: 'text/html' } })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html || '', 'text/html');
+        var list = [].map.call(doc.querySelectorAll('.b-pcard'), function (c) { return c.outerHTML; });
+        try { sessionStorage.setItem(STORE_CARDS_KEY, JSON.stringify(list)); } catch (e) { /* full */ }
+        return list;
+      })
+      .catch(function () { return []; });
+  }
+
+  function cardKey(a) {
+    var href = a.getAttribute('href') || '';
+    try { href = new URL(href, location.href).pathname; } catch (e) { /* keep raw */ }
+    return href.replace(/\/+$/, '') + '|' + (a.getAttribute('data-card-title') || '').trim().toLowerCase();
+  }
+
+  function initRelatedFill() {
+    var rows = $$('[data-related]');
+    if (!rows.length) return;
+    var need = rows.some(function (r) { return $$('.b-pcard', r).length < (Number(r.getAttribute('data-limit')) || 4); });
+    if (!need) return;
+    storeCards().then(function (list) {
+      var holder = document.createElement('div');
+      var here = location.pathname.replace(/\/+$/, ''), title = String(cfg.title || '').trim().toLowerCase();
+      var seen = {};
+      $$('.b-pcard').forEach(function (c) { seen[cardKey(c)] = true; });
+      rows.forEach(function (row) {
+        var grid = $('[data-related-grid]', row), max = Number(row.getAttribute('data-limit')) || 4;
+        if (!grid) return;
+        for (var i = 0; i < list.length && $$('.b-pcard', grid).length < max; i++) {
+          holder.innerHTML = list[i];
+          var card = holder.firstElementChild;
+          if (!card) continue;
+          var key = cardKey(card), path = key.split('|')[0];
+          var t = (card.getAttribute('data-card-title') || '').trim().toLowerCase();
+          if (seen[key] || (path && path === here && (!t || !title || t === title)) || (title && t === title)) continue;
+          seen[key] = true;
+          $$('img', card).forEach(function (im) { im.setAttribute('loading', 'lazy'); im.removeAttribute('fetchpriority'); });
+          grid.appendChild(card);
+        }
+        row.hidden = !$$('.b-pcard', grid).length;
+      });
+    });
+  }
+
   function start() {
     [initTopbar, initHeader, initGallery, initProductForm, initSticky, initUrgency, initCart, initReviews, initReviewForm,
       initTestimonials, initHomeReviews, initDragScroll, initForms, initCollection, initSearchPage, initFeatured, initHomeCompare,
-      initMarquee, initAccordions, initReels, initSizeChart, initModals, initCardEntrance, initFeatureNumbers].forEach(function (fn) {
+      initMarquee, initAccordions, initReels, initSizeChart, initModals, initCardEntrance, initFeatureNumbers, initRelatedFill].forEach(function (fn) {
       try { fn(); } catch (e) { if (window.console) console.error(e); }
     });
   }

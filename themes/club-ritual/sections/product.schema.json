@@ -1,0 +1,1072 @@
+{
+  "name": "Product",
+  "tag": "section",
+  "limit": 1,
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "select",
+      "id": "gallery_side",
+      "label": "Gallery side (desktop)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "label": "Gallery layout",
+      "default": "thumbs",
+      "options": [
+        {
+          "value": "thumbs",
+          "label": "Main image + thumbnails below"
+        },
+        {
+          "value": "thumbs-left",
+          "label": "Main image + thumbnails on the left"
+        },
+        {
+          "value": "stack",
+          "label": "All images stacked (desktop)"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show % off badge on the image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "sale_badge_style",
+      "label": "Badge text",
+      "default": "minus",
+      "options": [
+        {
+          "value": "minus",
+          "label": "-50%"
+        },
+        {
+          "value": "off",
+          "label": "50% OFF"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_atc",
+      "label": "Sticky Add to cart bar",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "sticky_style",
+      "label": "Sticky bar style",
+      "default": "compact",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact (small card, bottom right on desktop)"
+        },
+        {
+          "value": "full",
+          "label": "Full width (price, SAVE badge, variant select, button)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "Everything in the info column is a block — reorder, hide or add them."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "award",
+      "name": "Award badge",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "🏆"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Voted product of the year"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Star rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label after the count",
+          "default": "reviews",
+          "info": "Real reviews only; hidden while the product has none."
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Short line under the title"
+        }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit (check line)",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Key benefit of the product"
+        }
+      ]
+    },
+    {
+      "type": "stock",
+      "name": "Stock note",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "In stock – ships within 24 hours",
+          "info": "Keep it truthful: the theme does not read live stock."
+        }
+      ]
+    },
+    {
+      "type": "urgency",
+      "name": "Urgency line",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text ({n} = live number)",
+          "default": "🔥 {n} people are viewing this right now"
+        },
+        {
+          "type": "number",
+          "id": "min",
+          "label": "Lowest number",
+          "default": 18
+        },
+        {
+          "type": "number",
+          "id": "max",
+          "label": "Highest number",
+          "default": 46
+        }
+      ]
+    },
+    {
+      "type": "offer_heading",
+      "name": "Offer heading",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Limited time offer"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Option pickers on their own (pills / swatches / dropdown come from each option's display type). Turn off \"Show the option pickers\" in Buy buttons when you use this."
+        }
+      ]
+    },
+    {
+      "type": "variant_cards",
+      "name": "Pack cards",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Cards show",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Auto: the product's variants (a Pack / Bundle / Set option if there is one, else the option below)"
+            },
+            {
+              "value": "option",
+              "label": "The option below"
+            },
+            {
+              "value": "quantity",
+              "label": "Quantity packs of the chosen variant (1 Pack, 2 Pack…)"
+            }
+          ],
+          "info": "Variant cards show each option value as a card with that variant's real price. Quantity packs are priced with your live automatic discounts."
+        },
+        {
+          "type": "number",
+          "id": "option_index",
+          "label": "Option shown as cards",
+          "default": 0,
+          "info": "0 = the product's first option (e.g. Color), 1 = the second… Used by Auto when the product has no Pack/Bundle option."
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Card style",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Auto: big cards for packs, compact tiles (price above) for other options"
+            },
+            {
+              "value": "cards",
+              "label": "Big cards with the price inside"
+            },
+            {
+              "value": "tiles",
+              "label": "Compact tiles, price shown above"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "selected",
+          "label": "Quantity pack selected by default",
+          "default": "2",
+          "options": [
+            {
+              "value": "1",
+              "label": "Card 1"
+            },
+            {
+              "value": "2",
+              "label": "Card 2"
+            },
+            {
+              "value": "3",
+              "label": "Card 3"
+            },
+            {
+              "value": "4",
+              "label": "Card 4"
+            },
+            {
+              "value": "5",
+              "label": "Card 5"
+            },
+            {
+              "value": "6",
+              "label": "Card 6"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "currency_code",
+          "label": "Show the currency code after prices (e.g. $57.95 AUD)",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "unit_label",
+          "label": "Unit name for the per-unit price (e.g. Pair). Empty = hidden.",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "unit_pickers",
+          "label": "Quantity packs: one Color / Size row per unit in the chosen pack",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "pack_color",
+          "label": "Chosen pack border, radio and badges",
+          "default": "#215401"
+        },
+        {
+          "type": "header",
+          "content": "Card 1"
+        },
+        {
+          "type": "number",
+          "id": "card_1_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "card_1_title",
+          "label": "Title (quantity packs)",
+          "default": "1 Pack"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_1_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_1_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_1_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_1_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Card 2"
+        },
+        {
+          "type": "number",
+          "id": "card_2_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "card_2_title",
+          "label": "Title (quantity packs)",
+          "default": "2 Pack"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_2_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_2_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_2_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_2_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Card 3"
+        },
+        {
+          "type": "number",
+          "id": "card_3_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "card_3_title",
+          "label": "Title (quantity packs)",
+          "default": "3 Pack"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_3_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_3_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_3_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_3_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Card 4"
+        },
+        {
+          "type": "number",
+          "id": "card_4_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "card_4_title",
+          "label": "Title (quantity packs)",
+          "default": "4 Pack"
+        },
+        {
+          "type": "image_picker",
+          "id": "card_4_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_4_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_4_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_4_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Card 5"
+        },
+        {
+          "type": "number",
+          "id": "card_5_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "card_5_title",
+          "label": "Title (quantity packs)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "card_5_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_5_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_5_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_5_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Card 6"
+        },
+        {
+          "type": "number",
+          "id": "card_6_qty",
+          "label": "Quantity (quantity packs; 0 hides the card)",
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "card_6_title",
+          "label": "Title (quantity packs)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "card_6_image",
+          "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "card_6_sub",
+          "label": "Subtitle",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "card_6_badge",
+          "label": "Badge",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "card_6_includes",
+          "label": "What's included (shown when selected)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Add to cart"
+        },
+        {
+          "type": "select",
+          "id": "mode",
+          "label": "After adding",
+          "default": "cart",
+          "options": [
+            {
+              "value": "cart",
+              "label": "Open the cart"
+            },
+            {
+              "value": "checkout",
+              "label": "Go straight to checkout"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_options",
+          "label": "Show the option pickers above the button",
+          "default": true,
+          "info": "Turn off when a separate Variant picker block is used."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_qty",
+          "label": "Show quantity selector",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payments",
+          "label": "Show accepted payments",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note under the button",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "trust_icons",
+      "name": "Trust icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "Heart icon",
+          "default": "30-day risk-free trial"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Shield icon",
+          "default": "Secure checkout"
+        },
+        {
+          "type": "text",
+          "id": "label_3",
+          "label": "Truck icon",
+          "default": "Fast & free shipping"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Featured review",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows the product's top real review."
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shipping & delivery"
+        },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Content",
+          "default": "custom",
+          "options": [
+            {
+              "value": "custom",
+              "label": "Text below"
+            },
+            {
+              "value": "description",
+              "label": "Product description"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text",
+          "default": "<p>Orders ship within 1–3 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Product description",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text",
+          "default": "<p>Add a short note.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "theme_image",
+          "label": "Theme picture (file in assets/, used while no image is picked)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "payment_icons",
+      "name": "Payment icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The payment marks switched on in Theme settings → Payment icons."
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "limit": 6,
+      "settings": []
+    },
+    {
+      "type": "custom_html",
+      "name": "Custom HTML",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML",
+          "default": "<p>Custom content</p>"
+        }
+      ]
+    },
+    {
+      "type": "media_slider",
+      "name": "Image / video slider",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "per_view",
+          "label": "Slides per row (desktop)",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 3,
+          "info": "More slides than this = a sideways slider with arrows."
+        },
+        {
+          "type": "select",
+          "id": "per_view_mobile",
+          "label": "Slides per row (phones)",
+          "default": "1.5",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "1.2",
+              "label": "1.2 (peek at the next)"
+            },
+            {
+              "value": "1.5",
+              "label": "1.5 (peek at the next)"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "2.5",
+              "label": "2.5"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Shape",
+          "default": "9/16",
+          "options": [
+            {
+              "value": "9/16",
+              "label": "Portrait 9:16"
+            },
+            {
+              "value": "3/4",
+              "label": "Portrait 3:4"
+            },
+            {
+              "value": "1/1",
+              "label": "Square"
+            },
+            {
+              "value": "4/3",
+              "label": "Landscape 4:3"
+            },
+            {
+              "value": "16/9",
+              "label": "Landscape 16:9"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "label": "Gap",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrows",
+          "label": "Show arrows when the slides do not fit",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Pick an image or a video (MP4 / WebM) in each slot. Videos play muted and looped while on screen; a tap pauses or resumes. Empty slots are skipped."
+        },
+        {
+          "type": "image_picker",
+          "id": "media_1",
+          "label": "Image or video 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_2",
+          "label": "Image or video 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_3",
+          "label": "Image or video 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_4",
+          "label": "Image or video 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_5",
+          "label": "Image or video 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_6",
+          "label": "Image or video 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_7",
+          "label": "Image or video 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_8",
+          "label": "Image or video 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_9",
+          "label": "Image or video 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_10",
+          "label": "Image or video 10"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Frequently asked questions"
+        },
+        {
+          "type": "paragraph",
+          "content": "Leave question 1 empty to show the product's own FAQ, else the FAQ in Theme settings."
+        },
+        {
+          "type": "text",
+          "id": "q_1",
+          "label": "Question 1",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_1",
+          "label": "Answer 1",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_2",
+          "label": "Question 2",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_2",
+          "label": "Answer 2",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_3",
+          "label": "Question 3",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_3",
+          "label": "Answer 3",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_4",
+          "label": "Question 4",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_4",
+          "label": "Answer 4",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_5",
+          "label": "Question 5",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_5",
+          "label": "Answer 5",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_6",
+          "label": "Question 6",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_6",
+          "label": "Answer 6",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "size_chart",
+      "name": "Size chart",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link text",
+          "default": "Size guide"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Popup title",
+          "default": "Size chart"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Size chart image"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text (below the image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "Show only for products with this option",
+          "default": "",
+          "info": "e.g. Size. Empty = every product."
+        },
+        {
+          "type": "text",
+          "id": "theme_image",
+          "label": "Theme picture (file in assets/, used while no image is picked)",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

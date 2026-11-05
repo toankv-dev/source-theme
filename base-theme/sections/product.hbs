@@ -121,6 +121,67 @@
       {{#if (eq this.type "custom_html")}}
       <div class="b-custom-html" {{{this.attributes}}}>{{{this.settings.html}}}</div>
       {{/if}}
+      {{#if (eq this.type "media_slider")}}
+      {{!-- Up to 10 images / videos side by side (data-reels in ui.js). A video file picked in an image slot
+            is turned into a muted looping <video> (by the server, else by ui.js). --}}
+      <div class="b-mslider" {{{this.attributes}}} data-reels style="--pv:{{#if this.settings.per_view}}{{this.settings.per_view}}{{else}}3{{/if}};--pvm:{{#if this.settings.per_view_mobile}}{{this.settings.per_view_mobile}}{{else}}1.5{{/if}};--gap:{{#if this.settings.gap}}{{this.settings.gap}}{{else}}0{{/if}}px;--r:{{#if this.settings.radius}}{{this.settings.radius}}{{else}}0{{/if}}px;--ar:{{#if this.settings.ratio}}{{this.settings.ratio}}{{else}}9/16{{/if}}">
+        {{#if this.settings.heading}}<h3 class="b-mslider__h">{{this.settings.heading}}</h3>{{/if}}
+        <div class="b-mslider__vp">
+          <div class="b-mslider__track" data-reels-track>
+            {{#if this.settings.media_1}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_1}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_2}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_2}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_3}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_3}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_4}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_4}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_5}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_5}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_6}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_6}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_7}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_7}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_8}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_8}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_9}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_9}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_10}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_10}}" alt="" loading="lazy"></figure>{{/if}}
+          </div>
+          {{#unless (eq this.settings.show_arrows false)}}
+          <div class="b-mslider__nav" data-reels-nav hidden>
+            <button type="button" class="b-round-btn" data-reels-step="-1" aria-label="Previous">‹</button>
+            <button type="button" class="b-round-btn" data-reels-step="1" aria-label="Next">›</button>
+          </div>
+          {{/unless}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if (eq this.type "faq")}}
+      {{!-- Own questions when question 1 is filled, else the store's FAQ (snippets/faq-list.hbs). --}}
+      <div class="b-pfaq" {{{this.attributes}}}>
+        {{#if this.settings.heading}}<h3 class="b-pfaq__h">{{this.settings.heading}}</h3>{{/if}}
+        {{#if this.settings.q_1}}
+        {{> faq-qa q=this.settings.q_1 a=this.settings.a_1}}
+        {{> faq-qa q=this.settings.q_2 a=this.settings.a_2}}
+        {{> faq-qa q=this.settings.q_3 a=this.settings.a_3}}
+        {{> faq-qa q=this.settings.q_4 a=this.settings.a_4}}
+        {{> faq-qa q=this.settings.q_5 a=this.settings.a_5}}
+        {{> faq-qa q=this.settings.q_6 a=this.settings.a_6}}
+        {{else}}
+        {{> faq-list}}
+        {{/if}}
+      </div>
+      {{/if}}
+      {{#if (eq this.type "size_chart")}}
+      {{!-- "Size guide" link + popup. With an option name set, it shows only on products that have that option. --}}
+      <div class="b-sizechart" {{{this.attributes}}} data-size-chart data-option="{{this.settings.option_name}}" data-options="{{#each @root.product.variants}}{{name}}|{{/each}}">
+        <button type="button" class="b-sizechart__link" data-modal-open>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2.5 8.5h19v7h-19z M6 8.5v3 M9.5 8.5v2 M13 8.5v3 M16.5 8.5v2 M20 8.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <span>{{#if this.settings.label}}{{this.settings.label}}{{else}}Size guide{{/if}}</span>
+        </button>
+        <div class="b-modal" data-modal hidden role="dialog" aria-modal="true" aria-label="{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}">
+          <div class="b-modal__overlay" data-modal-close></div>
+          <div class="b-modal__panel b-sizechart__panel">
+            <button type="button" class="b-icon-btn b-modal__close" data-modal-close aria-label="Close">✕</button>
+            <p class="b-sizechart__title">{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}</p>
+            {{#if this.settings.image}}<img class="b-sizechart__img" src="{{this.settings.image}}" alt="{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}" loading="lazy">{{/if}}
+            {{#if this.settings.body}}<div class="b-rte">{{{applyTokens this.settings.body}}}</div>{{/if}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
     {{/each}}
     {{else}}
     <h1 class="b-info__title">{{product.title}}</h1>

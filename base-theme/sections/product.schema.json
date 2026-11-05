@@ -721,6 +721,295 @@
           "default": "<p>Custom content</p>"
         }
       ]
+    },
+    {
+      "type": "media_slider",
+      "name": "Image / video slider",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "per_view",
+          "label": "Slides per row (desktop)",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 3,
+          "info": "More slides than this = a sideways slider with arrows."
+        },
+        {
+          "type": "select",
+          "id": "per_view_mobile",
+          "label": "Slides per row (phones)",
+          "default": "1.5",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "1.2",
+              "label": "1.2 (peek at the next)"
+            },
+            {
+              "value": "1.5",
+              "label": "1.5 (peek at the next)"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "2.5",
+              "label": "2.5"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Shape",
+          "default": "9/16",
+          "options": [
+            {
+              "value": "9/16",
+              "label": "Portrait 9:16"
+            },
+            {
+              "value": "3/4",
+              "label": "Portrait 3:4"
+            },
+            {
+              "value": "1/1",
+              "label": "Square"
+            },
+            {
+              "value": "4/3",
+              "label": "Landscape 4:3"
+            },
+            {
+              "value": "16/9",
+              "label": "Landscape 16:9"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "label": "Gap",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius",
+          "min": 0,
+          "max": 24,
+          "step": 2,
+          "unit": "px",
+          "default": 8
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrows",
+          "label": "Show arrows when the slides do not fit",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Pick an image or a video (MP4 / WebM) in each slot. Videos play muted and looped while on screen; a tap pauses or resumes. Empty slots are skipped."
+        },
+        {
+          "type": "image_picker",
+          "id": "media_1",
+          "label": "Image or video 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_2",
+          "label": "Image or video 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_3",
+          "label": "Image or video 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_4",
+          "label": "Image or video 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_5",
+          "label": "Image or video 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_6",
+          "label": "Image or video 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_7",
+          "label": "Image or video 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_8",
+          "label": "Image or video 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_9",
+          "label": "Image or video 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "media_10",
+          "label": "Image or video 10"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Frequently asked questions"
+        },
+        {
+          "type": "paragraph",
+          "content": "Leave question 1 empty to show the product's own FAQ, else the FAQ in Theme settings."
+        },
+        {
+          "type": "text",
+          "id": "q_1",
+          "label": "Question 1",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_1",
+          "label": "Answer 1",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_2",
+          "label": "Question 2",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_2",
+          "label": "Answer 2",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_3",
+          "label": "Question 3",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_3",
+          "label": "Answer 3",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_4",
+          "label": "Question 4",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_4",
+          "label": "Answer 4",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_5",
+          "label": "Question 5",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_5",
+          "label": "Answer 5",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "q_6",
+          "label": "Question 6",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_6",
+          "label": "Answer 6",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "size_chart",
+      "name": "Size chart",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link text",
+          "default": "Size guide"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Popup title",
+          "default": "Size chart"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Size chart image"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text (below the image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "Show only for products with this option",
+          "default": "",
+          "info": "e.g. Size. Empty = every product."
+        }
+      ]
     }
   ]
 }

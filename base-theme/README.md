@@ -28,6 +28,11 @@ what the original page has on top.
 - Cart in `localStorage["sf-cart:<domain>"]` (+ `sf-cart` mirror), lines with at least
   `title, variant, price, qty, image, variantId, comparePrice` — written only through `Base.cart`.
 - Events through `window.__adluxTrack`: ViewContent, AddToCart, InitiateCheckout, Lead, Search (core.js).
+- Free gifts: `product.gift_offers` → `#sf-gifts-data` (pack cards name the gift a pack unlocks);
+  `config.cartGiftsUrl` → the cart's gift lines (`gift: true`, price 0), synced by core.js on every cart change.
+- Listing data: option values show `custom_name` (value stays `label`); FAQ order follows `page.faqFromListing`
+  (`snippets/faq-list.hbs`); footer policy links follow `policies.<key>` (`snippets/policy-link.hbs`);
+  `feature-rows` / `guarantee` fall back to `page.heroTitle / intro / features / guarantees`.
 - Discounts: never set a price in the theme. `#b-offers` (nextItemTiers / bxgyOffers / amountOffOffers) +
   the checkout's own formula, corrected by `POST /api/storefront/cart/price`.
 - Only the engine's helpers: `if unless each with lookup eq gt limit json money applyTokens faqItems stars5
@@ -38,15 +43,15 @@ what the original page has on top.
 
 `Base.cfg`, `Base.money(n)`, `Base.num(str)`, `Base.track(event, payload)`, `Base.cart.{get, save, add(lines,
 {mode}), setQty, remove, totals, quote, checkout}`, `Base.discount.{best, pack}`, `Base.variants.{list, find(values),
-byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.contact(fields)`, `Base.lead`, `Base.search`,
-`Base.trackingResultUrl`. Events on `document`: `b:cart-change`, `b:cart-added`. `window.BaseUI` (ui.js):
+byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCart(qty, amount), sync}`, `Base.contact(fields)`, `Base.lead`, `Base.search`,
+`Base.trackingResultUrl`. Events on `document`: `b:cart-change`, `b:cart-added`, `b:gifts-change`. `window.BaseUI` (ui.js):
 `openCart, closeCart, refreshProduct, renderCart`.
 
 ## Section catalog (product templates)
 
 | Section | What | Blocks |
 | --- | --- | --- |
-| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html |
+| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos), faq, size_chart (link + popup) |
 | `reviews` | Average, distribution, photos, filters, list, lightbox, write-a-review form | — |
 | `faq` | Accordion; blocks → `page.faq` → Theme settings FAQ | qa |
 | `testimonials` | Photo reviews from the product's real reviews | — |
@@ -76,12 +81,22 @@ comparison, reviews carousel, FAQ, newsletter, contact) · `collection.hbs` (pri
 `search.hbs` · `page.hbs` (policies; "Order Tracking" form with order / tracking-number tabs; "Contact Us" with
 form) · `tracking-result.hbs` · `checkout.hbs` (platform checkout, skin follows Theme settings).
 
+## Mobile first
+
+Most shoppers arrive on a phone, so the base is built and checked at 360 / 390 px first:
+every control ≥ 44 × 44 px (carousel dots 24 × 44), text ≥ 12 px, form fields 16 px (no iOS zoom), no
+sideways scroll (popovers stay on screen), the first-screen images load eagerly (`card-product above_fold=true`
+on collection / search; gallery main image `fetchpriority="high"`), everything else lazy, LCP ≤ 2.5 s,
+CLS ≤ 0.1, JS ≤ 150 KB. Phone rules live in the "Phone pass" block at the end of `sections.css`.
+`node tools/mobile-audit.js` checks all of it; a child theme keeps it at 0 errors.
+
 ## Work on it
 
 ```
 cd tools && npm install          # once
 node tools/preview-server.js base-theme      # http://localhost:8090  (/product?template=bundle, ?legacy=1)
 node tools/smoke.js                          # end-to-end checks (cart, pixels, forms) against the preview
+node tools/mobile-audit.js                   # phones 360 / 390: overflow, tap size, text, fields, LCP / CLS
 node tools/pack.js base-theme                # validate + zip → dist/
 ```
 

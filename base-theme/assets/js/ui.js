@@ -256,6 +256,19 @@
     return { total: p.total, compare: Base.round2(Math.max(v.compare, v.price) * qty), qty: qty };
   }
 
+  /** "+ FREE Travel pouch $19.99" lines for the gifts a pack unlocks (product.gift_offers). */
+  function paintGifts(box, gifts) {
+    box.innerHTML = '';
+    gifts.forEach(function (g) {
+      var row = el('span', 'b-gift');
+      if (g.imageUrl) { var im = el('img', 'b-gift__img'); im.src = g.imageUrl; im.alt = ''; im.loading = 'lazy'; row.appendChild(im); }
+      row.appendChild(el('span', 'b-gift__text', '+ FREE ' + ((g.qty || 1) > 1 ? g.qty + ' × ' : '') + (g.title || 'gift')));
+      if (num(g.compareAtPrice) > 0) row.appendChild(el('s', 'b-gift__was', money(num(g.compareAtPrice) * (g.qty || 1))));
+      box.appendChild(row);
+    });
+    box.hidden = !gifts.length;
+  }
+
   function updatePackCards() {
     if (!packs) return;
     var values = selectedValues(), s = packs.settings || {};
@@ -292,6 +305,12 @@
         if (cimg && v && v.image) { cimg.src = v.image; cimg.hidden = false; }
       }
       card.classList.toggle('is-unavailable', !v);
+      var giftEl = $('[data-card-gift]', card);
+      if (giftEl) {
+        var units = packs.kind === 'qty' ? Number(card.getAttribute('data-qty')) || 1 : chosenQty();
+        var worth = v ? (packs.kind === 'qty' ? total : v.price * units) : 0;
+        paintGifts(giftEl, v && Base.gifts ? Base.gifts.forCart(units, worth) : []);
+      }
       var sub = $('[data-card-sub]', card), badge = $('[data-card-badge]', card), inc = $('[data-card-includes]', card);
       if (sub) sub.textContent = s['card_' + pos + '_sub'] || '';
       if (badge) { badge.textContent = s['card_' + pos + '_badge'] || ''; badge.hidden = !badge.textContent; }
@@ -307,7 +326,11 @@
     var values = selectedValues(), v = Base.variants.find(values);
     $$('[data-opt]').forEach(function (g) {
       var cur = $('[data-opt-current]', g);
-      if (cur) cur.textContent = values[Number(g.getAttribute('data-opt'))] || '';
+      if (!cur) return;
+      // Shown name (custom_name) of the chosen value, else the value itself.
+      var sel = $('[data-opt-select]', g), act = sel ? null : $('[data-opt-value].is-active', g);
+      cur.textContent = (sel && sel.selectedIndex > -1 ? sel.options[sel.selectedIndex].text : '') ||
+        (act && act.getAttribute('data-opt-display')) || values[Number(g.getAttribute('data-opt'))] || '';
     });
     updatePackCards();
     $$('[data-add-to-cart]').forEach(function (b) { b.disabled = !v && Base.variants.list().length > 0; });
@@ -1389,13 +1412,24 @@
     });
   }
 
+  // Video row section and Image / video slider block: muted videos play while on screen, a tap pauses /
+  // resumes, arrows step one slide. An <img> whose file is a video (not yet swapped by the server) becomes one.
   function initReels() {
     $$('[data-reels]').forEach(function (root) {
-      var track = $('[data-reels-track]', root), nav = $('[data-reels-nav]', root), videos = $$('[data-reel-video]', root);
-      videos.forEach(function (v) {
-        var fig = v.closest('.b-reel');
+      var track = $('[data-reels-track]', root), nav = $('[data-reels-nav]', root);
+      $$('img[data-reel-video]', root).forEach(function (img) {
+        if (isVideo(img.getAttribute('src'))) swapMedia(img, img.getAttribute('src'), 'data-reel-video');
+      });
+      var media = $$('[data-reel-video]', root);
+      media.forEach(function (v) {
+        var fig = v.closest('[data-reel], .b-reel');
         v.addEventListener('error', function () { if (fig) fig.hidden = true; });
+      });
+      var videos = media.filter(function (v) { return v.tagName === 'VIDEO'; });
+      videos.forEach(function (v) {
+        var fig = v.closest('[data-reel], .b-reel');
         v.addEventListener('click', function () {
+          if (!fig) return;
           if (v.paused) { v.play().catch(function () {}); fig.classList.remove('is-paused'); v.__userPaused = false; }
           else { v.pause(); fig.classList.add('is-paused'); v.__userPaused = true; }
         });
@@ -1416,11 +1450,40 @@
         window.addEventListener('resize', fit);
         $$('[data-reels-step]', nav).forEach(function (b) {
           b.addEventListener('click', function () {
-            var r = $('.b-reel', track), w = r ? r.getBoundingClientRect().width + 16 : track.clientWidth;
+            var r = track.firstElementChild, gap = parseFloat(getComputedStyle(track).columnGap) || 16;
+            var w = r ? r.getBoundingClientRect().width + gap : track.clientWidth;
             track.scrollBy({ left: w * Number(b.getAttribute('data-reels-step')), behavior: 'smooth' });
           });
         });
       }
+    });
+  }
+
+  // Popups: a [data-modal-open] button opens the [data-modal] next to it (same parent); [data-modal-close], Esc
+  // or the overlay closes it. The popup moves under <body> so a sticky / transformed column cannot clip it.
+  function initModals() {
+    $$('[data-modal-open]').forEach(function (btn) {
+      var modal = $('[data-modal]', btn.parentElement);
+      if (!modal) return;
+      document.body.appendChild(modal);
+      var setOpen = function (on) {
+        modal.hidden = !on;
+        lockScroll(on);
+        if (on) { var c = $('[data-modal-close].b-modal__close', modal) || $('[data-modal-close]', modal); if (c) c.focus(); } else btn.focus();
+      };
+      btn.addEventListener('click', function () { setOpen(true); });
+      $$('[data-modal-close]', modal).forEach(function (c) { c.addEventListener('click', function () { setOpen(false); }); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) setOpen(false); });
+    });
+  }
+
+  // Size chart block: with an option name set, only products that have that option keep it.
+  function initSizeChart() {
+    $$('[data-size-chart]').forEach(function (box) {
+      var want = String(box.getAttribute('data-option') || '').trim().toLowerCase();
+      if (!want) return;
+      var names = String(box.getAttribute('data-options') || '').toLowerCase().split('|').map(function (n) { return n.trim(); });
+      box.hidden = names.indexOf(want) === -1;
     });
   }
 
@@ -1466,7 +1529,7 @@
   function start() {
     [initTopbar, initHeader, initGallery, initProductForm, initSticky, initUrgency, initCart, initReviews, initReviewForm,
       initTestimonials, initHomeReviews, initDragScroll, initForms, initCollection, initSearchPage, initFeatured, initHomeCompare,
-      initMarquee, initAccordions, initReels, initCardEntrance, initFeatureNumbers].forEach(function (fn) {
+      initMarquee, initAccordions, initReels, initSizeChart, initModals, initCardEntrance, initFeatureNumbers].forEach(function (fn) {
       try { fn(); } catch (e) { if (window.console) console.error(e); }
     });
   }

@@ -53,6 +53,11 @@ CHANGELOG entry, README catalog), `dist/base-<version>.zip`, all checks green, a
      `/product?template=bundle`, `/product?legacy=1`, `/collections/all`, `/search?q=a`,
      `/pages/track-your-order`, `/pages/contact-us`, `/checkout` — no template errors.
    - Screenshot new sections desktop + phone (`node tools/shot.js … --full`, `--width 390`) and look at them.
+   - **Mobile is the first-class target** (most shoppers are on phones). Put every new section / block on a
+     temporary `templates/product.<test>.json` (delete it after) and run
+     `node tools/mobile-audit.js http://localhost:8090 --pages "/,/product,/product?template=<test>,…"`:
+     0 errors and 0 warnings (no sideways overflow, taps ≥ 44 px, text ≥ 12 px, fields 16 px, first-screen
+     images not lazy, LCP / CLS budget). Look at 360 px screens of each new part, not only the full page.
    - `node tools/smoke.js http://localhost:8090` must pass; extend `tools/smoke.js` when you added platform
      behaviour (a new event, endpoint or cart field must get a check).
    - `node tools/pack.js base-theme` → 0 errors.

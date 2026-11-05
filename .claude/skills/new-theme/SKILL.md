@@ -58,6 +58,9 @@ Talk to the user in Vietnamese.
 6. **Verify behaviour**: `node tools/smoke.js http://localhost:8091` must pass (cart, pixels, checkout,
    packs, reviews, contact, tracking, search). Also open `/checkout`, `/pages/track-your-order`,
    `/collections/all`, `/search?q=` and `?legacy=1` once.
+   **Mobile first**: `node tools/mobile-audit.js http://localhost:8091` must report 0 errors (sideways
+   overflow, fields < 16 px, LCP / CLS over budget); fix every warning the skin introduced (taps < 44 px, text
+   < 12 px, lazy first-screen image) unless the original page has it on purpose — say which remain.
 7. **Pack**: `node tools/pack.js themes/<slug>` → `dist/<slug>-<version>.zip` (0 errors required).
 8. **Report** (Vietnamese): the zip path, what matches, remaining differences with their cause, sections added
    beyond the base, and that the zip must be uploaded in the Adlux admin (Themes → upload) to check live.

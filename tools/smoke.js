@@ -6,7 +6,7 @@
  *   node tools/smoke.js [http://localhost:8090]
  *
  * Checks: pixel hooks, ViewContent / AddToCart / InitiateCheckout / Lead / Search events, ?variant= sync,
- * the sf-cart:<domain> line shape, drawer, checkout reading the cart, quantity packs, review form,
+ * the sf-cart:<domain> line shape, drawer, checkout reading the cart, quantity packs, free gifts, review form,
  * contact form, newsletter, order tracking.
  */
 'use strict';
@@ -93,6 +93,27 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
     check('3-pack adds qty 3', c2 && c2.items[0] && c2.items[0].qty === 3, JSON.stringify(c2 && c2.items));
     const discountShown = await page.$eval('[data-cart-discount-row]', (r) => !r.hidden);
     check('tier discount shown in drawer', discountShown);
+
+    // ---- Free gifts (product.gift_offers + config.cartGiftsUrl; the preview unlocks one at 3 units) ----
+    const giftCfg = await page.evaluate(() => ({ data: !!document.getElementById('sf-gifts-data'), url: !!(window.Base && Base.cfg.cartGiftsUrl) }));
+    if (!giftCfg.data) console.log('SKIP gift card text (no #sf-gifts-data)');
+    else if (!(await page.$('[data-qcard] [data-card-gift]'))) console.log('SKIP gift card text (pack cards without [data-card-gift] in this theme)');
+    else {
+      const giftText = await page.$eval('[data-qcard][data-qty="3"] [data-card-gift]', (n) => (n.hidden ? '' : n.textContent)).catch(() => '');
+      check('3-pack card names its free gift', /FREE/.test(giftText), giftText || 'no [data-card-gift]');
+    }
+    if (!giftCfg.url) console.log('SKIP cart gifts (no config.cartGiftsUrl)');
+    else {
+      await page.waitForTimeout(900);
+      const c3 = await cart(page);
+      const gift = c3 && c3.items.find((l) => l.gift);
+      check('cart gets the gift line', gift && gift.price === 0 && gift.variantId, JSON.stringify(c3 && c3.items));
+      check('drawer shows the gift as free', /free/i.test(await page.textContent('[data-cart-lines]')));
+      await page.evaluate(() => Base.cart.setQty(0, 1));
+      await page.waitForTimeout(900);
+      const c4 = await cart(page);
+      check('gift line removed below the tier', c4 && !c4.items.some((l) => l.gift), JSON.stringify(c4 && c4.items));
+    }
   }
 
   // ---- Review form -----------------------------------------------------------------------------

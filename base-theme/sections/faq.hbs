@@ -1,5 +1,5 @@
 {{!-- FAQ accordion. Questions come from the section's blocks, else the listing's own FAQ (page.faq), else the
-      default questions in Theme settings → FAQ (faqItems). --}}
+      default questions in Theme settings → FAQ (faqItems) — order in snippets/faq-list.hbs. --}}
 <div class="b-faq-wrap">
   <div class="b-wrap b-faq">
     <h2 class="b-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Frequently asked questions{{/if}}</h2>
@@ -11,20 +11,8 @@
       <div class="b-rte">{{{applyTokens this.settings.a}}}</div>
     </details>
     {{/each}}
-    {{else}}{{#if page.faq.length}}
-    {{#each page.faq}}
-    <details class="b-faq__item"{{#if @first}} open{{/if}}>
-      <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
-      <div class="b-rte">{{{a}}}</div>
-    </details>
-    {{/each}}
     {{else}}
-    {{#each (faqItems settings)}}
-    <details class="b-faq__item"{{#if @first}} open{{/if}}>
-      <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
-      <div class="b-rte">{{{applyTokens a}}}</div>
-    </details>
-    {{/each}}
-    {{/if}}{{/if}}
+    {{> faq-list open_first=true}}
+    {{/if}}
   </div>
 </div>

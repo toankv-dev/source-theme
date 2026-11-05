@@ -18,7 +18,7 @@
       <button type="submit" class="b-btn">Search</button>
     </form>
     <p class="b-muted" data-count></p>
-    <div class="b-grid" data-grid>{{#each products}}<div class="b-search-hit" data-search-text="{{title}} {{description}}">{{> card-product}}</div>{{/each}}</div>
+    <div class="b-grid" data-grid>{{#each products}}<div class="b-search-hit" data-search-text="{{title}} {{description}}">{{> card-product above_fold=true}}</div>{{/each}}</div>
     <p class="b-muted" data-search-empty hidden>No products match your search.</p>
   </section>
 </main>

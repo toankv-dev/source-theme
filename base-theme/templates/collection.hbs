@@ -87,9 +87,9 @@
     </div>
 
     {{#if collection.products.length}}
-    <div class="b-grid b-grid--collection" data-grid>{{#each collection.products}}{{> card-product}}{{/each}}</div>
+    <div class="b-grid b-grid--collection" data-grid>{{#each collection.products}}{{> card-product above_fold=true}}{{/each}}</div>
     {{else}}
-    <div class="b-grid b-grid--collection" data-grid>{{#each products}}{{> card-product}}{{/each}}</div>
+    <div class="b-grid b-grid--collection" data-grid>{{#each products}}{{> card-product above_fold=true}}{{/each}}</div>
     {{/if}}
     <div class="b-collection__empty" data-empty hidden>
       <p>No products found.</p>

@@ -7,7 +7,7 @@
  * Mimics what the platform engine gives a theme: the same helpers, the same root context
  * (brand, product, products, collections, config/configJson, settings, policyLinks, …), and for
  * schema v2 it renders templates/product*.json section by section into content_for_layout.
- * Mock storefront APIs (reviews, cart price, cart totals, contact, order lookup) answer locally.
+ * Mock storefront APIs (reviews, cart price, cart gifts, cart totals, contact, order lookup) answer locally.
  * Sample images live in tools/fixtures/sample and are served under /assets/sample/.
  *
  * Routes: /  /product[?template=bundle]  /collections/<handle>  /search?q=  /pages/<slug>
@@ -123,8 +123,12 @@ function loadProduct() {
   if (!p.media || !p.media.main_image) p.media = fix.media;
   if (!Array.isArray(p.home_products) || !p.home_products.length) p.home_products = fix.home_products;
   if (!p.reviews || !p.reviews.items) p.reviews = fix.reviews;
+  // Free-gift tiers (product.gift_offers) like the platform sends: 3+ units unlock a gift.
+  if (!p.gift_offers) p.gift_offers = { condition: 'quantity', tiers: [{ minQty: 3, gifts: [MOCK_GIFT] }] };
   return p;
 }
+
+const MOCK_GIFT = { productId: 'gift-product', variantId: 'gift-variant', title: 'Travel pouch', imageUrl: '', compareAtPrice: 19.99, qty: 1 };
 
 const num = (v) => { const n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.]/g, '')); return isNaN(n) ? 0 : n; };
 
@@ -157,6 +161,7 @@ function buildContext(req, extra) {
     checkoutPageUrl: '/checkout',
     validateUrl: '#',
     reviewsUrl: '/api/storefront/reviews',
+    cartGiftsUrl: '/api/storefront/cart/gifts',
     reviewsPageSize: 6,
     placeUrl: '/cart/place',
     thankYouUrl: '/thank-you',
@@ -176,7 +181,7 @@ function buildContext(req, extra) {
     collections,
     relatedProducts: products.slice(1, 5),
     settings,
-    page: { title: '', bodyHtml: '', faq: [
+    page: { title: '', bodyHtml: '', faqFromListing: true, faq: [
       { q: 'How long does shipping take?', a: '<p>Orders ship within 1–3 business days.</p>' },
       { q: 'Can I return it?', a: '<p>Yes, within 30 days of delivery.</p>' },
     ] },
@@ -433,6 +438,12 @@ const server = http.createServer(async (req, res) => {
     if (p === '/api/storefront/cart/price' && req.method === 'POST') {
       const body = JSON.parse((await readBody(req)).toString('utf8') || '{}');
       return jsonRes(res, 200, { success: true, data: cartQuote(body.items || []) });
+    }
+    if (p === '/api/storefront/cart/gifts' && req.method === 'POST') {
+      // Gifts the cart earns: 3+ units in the cart unlock MOCK_GIFT (mirrors the sample gift_offers tier).
+      const body = JSON.parse((await readBody(req)).toString('utf8') || '{}');
+      const units = (body.items || []).reduce((n, it) => n + (parseInt(it.qty, 10) || 0), 0);
+      return jsonRes(res, 200, { success: true, data: { gifts: units >= 3 ? [MOCK_GIFT] : [] } });
     }
     if (p === '/api/storefront/cart-totals' && req.method === 'POST') return cartTotals(req, res, false);
     if ((p === '/api/storefront/checkout' || p === '/checkout') && req.method === 'POST') return cartTotals(req, res, true);

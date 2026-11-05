@@ -16,13 +16,13 @@
     <div>
       <p class="b-footer__title">{{#if settings.footer_links_title}}{{settings.footer_links_title}}{{else}}Customer care{{/if}}</p>
       <ul>
-        {{#if policyLinks.about}}<li><a href="{{policyLinks.about}}">About us</a></li>{{/if}}
+        {{> policy-link key="about" label="About us"}}
         {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact us</a></li>{{/if}}
         <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track your order</a></li>
-        {{#if policyLinks.shipping}}<li><a href="{{policyLinks.shipping}}">Shipping policy</a></li>{{/if}}
-        {{#if policyLinks.refund}}<li><a href="{{policyLinks.refund}}">Return &amp; refund policy</a></li>{{/if}}
-        {{#if policyLinks.privacy}}<li><a href="{{policyLinks.privacy}}">Privacy policy</a></li>{{/if}}
-        {{#if policyLinks.terms}}<li><a href="{{policyLinks.terms}}">Terms of service</a></li>{{/if}}
+        {{> policy-link key="shipping" label="Shipping policy"}}
+        {{> policy-link key="refund" label="Return & refund policy"}}
+        {{> policy-link key="privacy" label="Privacy policy"}}
+        {{> policy-link key="terms" label="Terms of service"}}
       </ul>
     </div>
     {{#if settings.footer_collections}}{{#if collections.length}}

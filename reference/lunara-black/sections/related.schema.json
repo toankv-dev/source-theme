@@ -1,0 +1,36 @@
+{
+  "name": "You may also like",
+  "tag": "div",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products shown",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 8,
+      "info": "Products from the same collection as the product viewed, then other products of the store."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show Add to cart / Choose options button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "You may also like",
+      "category": "Products",
+      "description": "Products from the same collection as the one viewed, with the Products grid card."
+    }
+  ]
+}

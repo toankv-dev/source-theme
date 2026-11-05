@@ -1,0 +1,22 @@
+{{!-- Image banner — schema v2 section (sections/image-banner.schema.json). A 16:7
+      (4:3 on mobile) banner with the image as background, a dark overlay whose
+      opacity is a setting, and centered heading / text / button. Without an image
+      the strip is plain var(--ink). Self-contained styles. --}}
+<style>
+  .ib{position:relative;width:100%;aspect-ratio:16 / 7;min-height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--ink,#000000) center / cover no-repeat;font-family:var(--font,inherit)}
+  @media (max-width:767px){.ib{aspect-ratio:4 / 3}}
+  .ib-overlay{position:absolute;inset:0;background:#000;pointer-events:none}
+  .ib-content{position:relative;z-index:1;max-width:760px;padding:24px 16px;text-align:center}
+  .ib-heading{margin:0 0 12px;font-size:clamp(25.6px,4vw,41.6px);font-weight:700;line-height:1.15}
+  .ib-text{margin:0 0 20px;font-size:17px;line-height:1.5}
+  .ib-btn{display:inline-block;background:var(--ink,#000000);color:#fff;padding:14px 28px;border-radius:4px;font-weight:700;text-decoration:none;line-height:1.2}
+  .ib-btn:hover{opacity:.9}
+</style>
+<div class="ib" {{#if section.settings.image}}style="background-image:url('{{section.settings.image}}')"{{/if}}>
+  <div class="ib-overlay" style="opacity:{{section.settings.overlay}}%"></div>
+  <div class="ib-content" style="color:{{section.settings.text_color}}">
+    {{#if section.settings.heading}}<h2 class="ib-heading" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.text}}<p class="ib-text" {{{editable "text"}}}>{{section.settings.text}}</p>{{/if}}
+    {{#if section.settings.button_label}}<a class="ib-btn" href="{{section.settings.button_url}}" {{{editable "button_label"}}}>{{section.settings.button_label}}</a>{{/if}}
+  </div>
+</div>

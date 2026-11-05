@@ -1,21 +1,22 @@
 {{!-- Option pickers, one fieldset per option group (product.variants). theme.js maps the chosen labels to
-      a variant through config.variants, and hides the group a Pack cards block already controls. --}}
+      a variant through config.variants, and hides the group a Pack cards block already controls.
+      `custom_name` (set per value in the listing) is only the text shown; the value stays `label`. --}}
 {{#if @root.product.variants.length}}
 <div class="b-options" data-options>
   {{#each @root.product.variants}}
   <fieldset class="b-opt" data-opt="{{@index}}">
-    <legend class="b-opt__legend">{{name}}: <span data-opt-current>{{#each options}}{{#if active}}{{label}}{{/if}}{{/each}}</span></legend>
+    <legend class="b-opt__legend">{{name}}: <span data-opt-current>{{#each options}}{{#if active}}{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}{{/if}}{{/each}}</span></legend>
     {{#if (eq displayType "dropdown")}}
     <select class="b-select" data-opt-select aria-label="{{name}}">
-      {{#each options}}<option value="{{label}}"{{#if active}} selected{{/if}}>{{label}}</option>{{/each}}
+      {{#each options}}<option value="{{label}}"{{#if active}} selected{{/if}}>{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</option>{{/each}}
     </select>
     {{else}}
     <div class="b-opt__values">
       {{#each options}}
       {{#if (eq ../displayType "swatches")}}
-      <button type="button" class="b-swatch{{#if active}} is-active{{/if}}" data-opt-value="{{label}}" title="{{label}}" aria-label="{{label}}" aria-pressed="{{#if active}}true{{else}}false{{/if}}" style="{{#if image}}background-image:url('{{image}}'){{else}}{{#if color}}background:{{color}}{{/if}}{{/if}}"></button>
+      <button type="button" class="b-swatch{{#if active}} is-active{{/if}}" data-opt-value="{{label}}" data-opt-display="{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}" title="{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}" aria-label="{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}" aria-pressed="{{#if active}}true{{else}}false{{/if}}" style="{{#if image}}background-image:url('{{image}}'){{else}}{{#if color}}background:{{color}}{{/if}}{{/if}}"></button>
       {{else}}
-      <button type="button" class="b-pill{{#if active}} is-active{{/if}}" data-opt-value="{{label}}" aria-pressed="{{#if active}}true{{else}}false{{/if}}">{{label}}</button>
+      <button type="button" class="b-pill{{#if active}} is-active{{/if}}" data-opt-value="{{label}}" data-opt-display="{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}" aria-pressed="{{#if active}}true{{else}}false{{/if}}">{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</button>
       {{/if}}
       {{/each}}
     </div>

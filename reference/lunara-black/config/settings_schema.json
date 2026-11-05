@@ -1,0 +1,684 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary colour (buttons, menu, footer, top bar, badges, checkout button)",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "primary_text",
+        "label": "Text on primary colour",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer background",
+        "default": "",
+        "info": "Empty = primary colour."
+      },
+      {
+        "type": "color",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "",
+        "info": "Empty = text on primary colour."
+      },
+      {
+        "type": "color",
+        "id": "sale",
+        "label": "Checkout: sale / error colour",
+        "default": "#c0392b"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Checkout: success colour",
+        "default": "#1f9d55"
+      },
+      {
+        "type": "color",
+        "id": "page_bg",
+        "label": "Checkout: page background",
+        "default": "#f7f7f7"
+      },
+      {
+        "type": "checkbox",
+        "id": "black_finish",
+        "label": "Premium black finish (deep footer)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_footer_wave",
+        "label": "Animated wave above the footer (footer colour)",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font",
+        "label": "Checkout font (Google Fonts name)",
+        "default": "Poppins"
+      }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_topbar",
+        "label": "Show announcement bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Messages",
+        "default": "🍁 FALL SALE - Up To 70% Off|Free Shipping On All Orders",
+        "info": "Separate messages with | to rotate them."
+      },
+      {
+        "type": "color",
+        "id": "topbar_bg",
+        "label": "Background",
+        "default": "",
+        "info": "Empty = primary colour."
+      },
+      {
+        "type": "color",
+        "id": "topbar_color",
+        "label": "Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "select",
+        "id": "topbar_style",
+        "label": "Style",
+        "default": "rotate",
+        "options": [
+          {
+            "value": "rotate",
+            "label": "Rotating messages"
+          },
+          {
+            "value": "countdown",
+            "label": "Countdown timer"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Countdown timer"
+      },
+      {
+        "type": "text",
+        "id": "countdown_title",
+        "label": "Title",
+        "default": "🍁 FALL SALE"
+      },
+      {
+        "type": "text",
+        "id": "countdown_subtitle",
+        "label": "Subtitle",
+        "default": "Shop Now and Get Up To 70% Off"
+      },
+      {
+        "type": "number",
+        "id": "countdown_hours",
+        "label": "Timer length (hours)",
+        "min": 1,
+        "max": 72,
+        "default": 2,
+        "info": "Restarts for each visitor when it reaches zero."
+      }
+    ]
+  },
+  {
+    "name": "Home page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_home_banner",
+        "label": "Show banner",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "home_banner_image",
+        "label": "Banner image",
+        "info": "Empty = the theme sample image."
+      },
+      {
+        "type": "text",
+        "id": "home_banner_heading",
+        "label": "Heading",
+        "default": "Fall Sale  Ends Tonight - Up To 70% Off"
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Button label (empty = no button)",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "home_banner_link",
+        "label": "Button link",
+        "info": "Empty = the first product."
+      },
+      {
+        "type": "header",
+        "content": "Product list"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_home_products",
+        "label": "Show product list",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_products_heading",
+        "label": "Heading",
+        "default": "Products"
+      },
+      {
+        "type": "number",
+        "id": "home_products_limit",
+        "label": "Products shown",
+        "min": 1,
+        "max": 48,
+        "default": 8
+      },
+      {
+        "type": "header",
+        "content": "Reviews"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_home_reviews",
+        "label": "Show real reviews of random products",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_heading",
+        "label": "Heading",
+        "default": "What Our Customers Actually Say"
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_subheading",
+        "label": "Subheading",
+        "default": "Real reviews from real customers."
+      },
+      {
+        "type": "number",
+        "id": "home_reviews_limit",
+        "label": "Reviews shown",
+        "min": 3,
+        "max": 12,
+        "default": 6
+      }
+    ]
+  },
+  {
+    "name": "Cart & checkout",
+    "settings": [
+      {
+        "type": "text",
+        "id": "atc_label",
+        "label": "Add-to-cart label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "open_cart_on_add",
+        "label": "Open cart drawer after adding",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Discounts",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Automatic discounts from Adlux (Discounts → Automatic) apply to this theme ONLY when switched on here. Off = no automatic discount on the product page, cart or checkout. Discount codes always work."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_amount_off_discount",
+        "label": "Allow Amount off products discount",
+        "default": true,
+        "info": "Uses the live automatic AMOUNT_OFF_PRODUCTS discounts (e.g. 5% off from 2 items, 10% off from 3)."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_tiered_discount",
+        "label": "Allow tiered discount (Next item progressive)",
+        "default": false,
+        "info": "Uses the live automatic TIERED_NEXT_ITEM discount, e.g. #2 −10%, #3 −15%."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_bxgy_discount",
+        "label": "Allow Buy X Get Y discount",
+        "default": false,
+        "info": "Uses the live automatic BUY_X_GET_Y discounts (e.g. Buy 3 / Get 1 FREE)."
+      }
+    ]
+  },
+  {
+    "name": "Cart drawer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Title",
+        "default": "Your cart"
+      },
+      {
+        "type": "color",
+        "id": "cart_header_bg",
+        "label": "Header background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "cart_header_color",
+        "label": "Title colour",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "cart_notice",
+        "label": "Notice bar under the title (empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_notice_bg",
+        "label": "Notice bar background",
+        "default": "#f3f3f3"
+      },
+      {
+        "type": "color",
+        "id": "cart_notice_color",
+        "label": "Notice bar text",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "color",
+        "id": "cart_body_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "cart_empty_text",
+        "label": "Empty cart text",
+        "default": "Your cart is empty"
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_button_label",
+        "label": "Empty cart button label",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "cart_footer_bg",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "cart_savings_label",
+        "label": "Savings label",
+        "default": "Savings"
+      },
+      {
+        "type": "text",
+        "id": "cart_subtotal_label",
+        "label": "Subtotal label",
+        "default": "Subtotal"
+      },
+      {
+        "type": "header",
+        "content": "Shipping protection (cart footer)"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_upsells",
+        "label": "Protection product",
+        "info": "Pick per store domain the product you sell as protection (e.g. 'Shipping Protected'). It shows above the subtotal with its description, switched ON: added to the cart as a real item. The buyer can switch it off."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_as_line",
+        "label": "Also list it with the cart items",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Heading (empty = none)",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_bg",
+        "label": "Background",
+        "default": "#F4F4F4"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_color",
+        "label": "Text",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_accent",
+        "label": "Switch colour",
+        "default": "",
+        "info": "Empty = the theme primary colour."
+      },
+      {
+        "type": "header",
+        "content": "Upsell products (cart body)"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_body_upsells",
+        "label": "Upsell products",
+        "info": "Pick products per store domain. They show under the cart items as cards with a button; the buyer adds them as real items."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_body_upsell_move",
+        "label": "Move an added product up into the cart items",
+        "default": true,
+        "info": "Off = the card stays and its button shows the 'added' text. Removing the item brings the card back."
+      },
+      {
+        "type": "select",
+        "id": "cart_body_upsell_control",
+        "label": "Add control",
+        "default": "button",
+        "options": [
+          {
+            "value": "button",
+            "label": "Button (text below)"
+          },
+          {
+            "value": "switch",
+            "label": "Switch (on / off)"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "cart_body_upsell_delay",
+        "label": "Add delay (spinner)",
+        "min": 0,
+        "max": 3,
+        "step": 0.5,
+        "unit": "s",
+        "default": 1,
+        "info": "0 = add at once."
+      },
+      {
+        "type": "text",
+        "id": "cart_body_upsell_heading",
+        "label": "Heading",
+        "default": "Customers also add ..."
+      },
+      {
+        "type": "text",
+        "id": "cart_body_upsell_badge",
+        "label": "Badge (empty = none)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "cart_body_upsell_btn",
+        "label": "Button text",
+        "default": "Add +"
+      },
+      {
+        "type": "text",
+        "id": "cart_body_upsell_added",
+        "label": "Button text when added",
+        "default": "Added ✓"
+      },
+      {
+        "type": "range",
+        "id": "cart_body_upsell_title_size",
+        "label": "Product title size",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "color",
+        "id": "cart_body_upsell_btn_bg",
+        "label": "Button colour",
+        "default": "",
+        "info": "Empty = the theme primary colour."
+      },
+      {
+        "type": "color",
+        "id": "cart_body_upsell_btn_color",
+        "label": "Button text colour",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "cart_body_upsell_badge_color",
+        "label": "Badge colour",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "cart_body_upsell_card_bg",
+        "label": "Card background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "cart_checkout_label",
+        "label": "Checkout button label",
+        "default": "Check out"
+      },
+      {
+        "type": "color",
+        "id": "cart_checkout_bg",
+        "label": "Checkout button colour",
+        "default": "",
+        "info": "Empty = the theme primary colour."
+      },
+      {
+        "type": "color",
+        "id": "cart_checkout_color",
+        "label": "Checkout button text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "text",
+        "id": "cart_footer_note",
+        "label": "Note under the button (empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_trust",
+        "label": "Show trust line under the button",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_1",
+        "label": "Trust text 1",
+        "default": "60 Day Fit Guarantee"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_2",
+        "label": "Trust text 2",
+        "default": "Easy Returns & Exchanges"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_3",
+        "label": "Trust text 3 (optional, empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment",
+        "label": "Show payment icons",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Brand contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_email",
+        "label": "Support email",
+        "info": "Printed in the footer, on the contact page and as {{CompanyEmail}} in policy bodies, for every store on this theme. Blank → support@shopcare.net.",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "brand_phone",
+        "label": "Business phone",
+        "info": "Printed in the footer and as {{CompanyPhone}} in policy bodies, for every store on this theme. Blank → the footer omits the line.",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "brand_address",
+        "label": "Business address",
+        "info": "Printed in the footer and as {{CompanyAddress}} in policy bodies, for every store on this theme. Blank → the footer omits the line.",
+        "default": "412 N Main St, Suite 100, Buffalo, Wyoming 82834, United States"
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Footer: support hours",
+        "default": "Monday - Friday / 9 AM to 4 PM (UTC)"
+      }
+    ]
+  },
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "type": "text",
+        "id": "faq_1_q",
+        "label": "Question 1",
+        "default": "How long does shipping take?",
+        "info": "Six question/answer pairs shown on every product page (Sections → Show FAQ). Clear a question or its answer to hide that pair. Answers may link to the store's own pages with {{ShippingLink}}, {{RefundLink}}, {{ContactLink}}, {{TrackOrderLink}}, {{PrivacyLink}}, {{TermsLink}} and print the support email with {{CompanyEmail}} — each is filled in per store."
+      },
+      {
+        "type": "richtext",
+        "id": "faq_1_a",
+        "label": "Answer 1",
+        "default": "<p>Orders are processed within 1–3 business days. Delivery usually takes 7–15 business days depending on your location, and every order is tracked. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_2_q",
+        "label": "Question 2",
+        "default": "How can I track my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_2_a",
+        "label": "Answer 2",
+        "default": "<p>As soon as your package ships we email you the tracking number. You can also check the status any time on our <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_3_q",
+        "label": "Question 3",
+        "default": "Can I change or cancel my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_3_a",
+        "label": "Answer 3",
+        "default": "<p>Yes, within 12 hours of purchase. Email us at <a href=\"mailto:{{CompanyEmailPlain}}\">{{CompanyEmail}}</a> with your order number and we'll update or cancel it before it ships. After that the order is already on its way, but you can still return it under our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_4_q",
+        "label": "Question 4",
+        "default": "What is your return and refund policy?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_4_a",
+        "label": "Answer 4",
+        "default": "<p>You have 45 days from delivery to return or exchange, even if you simply changed your mind. Full details are in our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_5_q",
+        "label": "Question 5",
+        "default": "My item arrived damaged or isn't what I ordered. What now?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_5_a",
+        "label": "Answer 5",
+        "default": "<p>We're sorry! <a href=\"{{ContactLink}}\">Contact us</a> within 45 days with your order number and a photo, and we'll send a replacement or refund you in full.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_6_q",
+        "label": "Question 6",
+        "default": "How can I reach customer support?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_6_a",
+        "label": "Answer 6",
+        "default": "<p>Email <a href=\"mailto:{{CompanyEmailPlain}}\">{{CompanyEmail}}</a> or use our <a href=\"{{ContactLink}}\">Contact page</a>. We reply within 24 hours on business days.</p>"
+      }
+    ]
+  }
+]

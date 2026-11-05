@@ -1,0 +1,54 @@
+{
+  "name": "Reviews",
+  "tag": "div",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small title",
+      "default": "Customer reviews",
+      "info": "Home page only."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What our customers say",
+      "info": "Home page only."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show average rating",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star & badge colour",
+      "default": "#03AA6D",
+      "info": "Stars and the Verified purchase tick."
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button colour",
+      "default": "",
+      "info": "Empty = the theme primary colour."
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button text colour",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "category": "Trust",
+      "description": "Star rating summary, real reviews and a Write a review form."
+    }
+  ]
+}

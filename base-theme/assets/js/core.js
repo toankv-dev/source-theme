@@ -7,6 +7,7 @@
  *     the server quote POST /api/storefront/cart/price;
  *   - pixel events through window.__adluxTrack (ViewContent, AddToCart, InitiateCheckout, Lead, Search);
  *   - variant matching on #sf-variants-data and the ?variant= URL sync;
+ *   - free gifts: product.gift_offers (#sf-gifts-data) and the cart's gift lines from config.cartGiftsUrl;
  *   - storefront APIs: reviews (GET/POST), contact, order tracking links.
  * A child theme never edits this file; its interface code lives in ui.js and talks to window.Base.
  */
@@ -364,6 +365,89 @@
     setTimeout(function () { location.href = checkoutUrl(); }, 120);
   }
 
+  // ---------------------------------------------------------------------------------------------
+  // Free gifts.
+  //   - product.gift_offers (#sf-gifts-data, else config.giftOffers):
+  //     { condition: 'quantity' | 'amount', tiers: [{ minQty | minAmount, gifts: [{ productId, variantId, title,
+  //       imageUrl, compareAtPrice, qty }] }] } — what a selection unlocks, for the product page (pack cards).
+  //   - config.cartGiftsUrl: POST { domain, handle, items } → { data: { gifts: [...] } } — the gifts the order
+  //     gets. They become cart lines { gift: true, price: 0 }: never priced, discounted, merged or counted.
+  // ---------------------------------------------------------------------------------------------
+  var giftOffers = readJson($('#sf-gifts-data'), null) || cfg.giftOffers || null;
+
+  /** Gifts a selection of `qty` units worth `amount` unlocks (every reached tier, same variant merged). */
+  function giftsFor(qty, amount, offers) {
+    var o = offers || giftOffers;
+    if (!o || !Array.isArray(o.tiers)) return [];
+    var byAmount = o.condition === 'amount', out = [];
+    o.tiers.filter(function (t) {
+      return byAmount ? num(amount) >= num(t.minAmount) : t.minQty != null && Number(qty) >= Number(t.minQty);
+    }).sort(function (a, b) {
+      return byAmount ? num(a.minAmount) - num(b.minAmount) : Number(a.minQty) - Number(b.minQty);
+    }).forEach(function (t) {
+      (t.gifts || []).forEach(function (g) {
+        var same = out.filter(function (x) { return x.variantId && x.variantId === g.variantId; })[0];
+        if (same) same.qty = Math.max(same.qty || 1, g.qty || 1);
+        else out.push(Object.assign({}, g, { qty: g.qty || 1 }));
+      });
+    });
+    return out;
+  }
+
+  function giftLine(g) {
+    return {
+      title: g.title || 'Free gift', variant: g.variantTitle || '', variantId: g.variantId || '', productId: g.productId || '',
+      price: 0, comparePrice: num(g.compareAtPrice), qty: Math.max(1, parseInt(g.qty, 10) || 1),
+      image: g.imageUrl || g.image || '', gift: true
+    };
+  }
+
+  var giftSeq = 0, giftTimer = null, giftKey = null;
+  /** Asks the server which gifts the cart earns and replaces the cart's gift lines with them. */
+  function syncGifts() {
+    var url = https(cfg.cartGiftsUrl);
+    if (!url || typeof fetch !== 'function') return;
+    var cart = getCart();
+    var paid = cart.items.filter(function (l) { return !l.gift; });
+    var key = JSON.stringify(paid.map(function (l) { return [l.variantId || l.title, l.variant || '', l.qty]; }));
+    if (key === giftKey) return;
+    giftKey = key;
+    clearTimeout(giftTimer);
+    giftTimer = setTimeout(function () {
+      var seq = ++giftSeq;
+      if (!paid.length) { setGiftLines([]); return; }
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          domain: cfg.domain || domain,
+          handle: cart.handle || cfg.handle || '',
+          items: paid.map(function (l) {
+            return l.variantId ? { variantId: l.variantId, qty: l.qty } : { variant: l.variant || '', title: l.title, qty: l.qty };
+          })
+        })
+      }).then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (seq === giftSeq && d && d.data && Array.isArray(d.data.gifts)) setGiftLines(d.data.gifts); })
+        .catch(function () { /* keep the current gift lines */ });
+    }, 300);
+  }
+
+  function setGiftLines(gifts) {
+    var cart = getCart();
+    var want = gifts.map(giftLine);
+    var sig = function (lines) { return JSON.stringify(lines.map(function (l) { return [l.variantId || l.title, l.qty]; })); };
+    if (sig(cart.items.filter(function (l) { return l.gift; })) === sig(want)) return;
+    cart.items = cart.items.filter(function (l) { return !l.gift; }).concat(want);
+    saveCart(cart);
+    emit('b:gifts-change', { gifts: want });
+  }
+
+  if (cfg.cartGiftsUrl) {
+    document.addEventListener('b:cart-change', syncGifts);
+    syncGifts();
+  }
+
   // Cart changed in another tab.
   window.addEventListener('storage', function (e) {
     if (e.key === CART_KEY) emit('b:cart-change', getCart());
@@ -535,6 +619,7 @@
       setUrl: setVariantInUrl
     },
     reviews: { list: fetchReviews, post: postReview },
+    gifts: { offers: function () { return giftOffers; }, forCart: giftsFor, sync: syncGifts },
     contact: sendContact,
     trackingResultUrl: trackingResultUrl
   };

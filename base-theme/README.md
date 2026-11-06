@@ -37,6 +37,8 @@ what the original page has on top.
   the checkout's own formula, corrected by `POST /api/storefront/cart/price`.
 - Only the engine's helpers: `if unless each with lookup eq gt limit json money applyTokens faqItems stars5
   swatchStyle contains editable editableSetting`. Checkboxes default ON: test them with `(eq settings.x false)`.
+- FAQ / accordions always animate (ui.js): `.b-faq__item`, `.b-acc` and any theme markup `<details data-accordion>`
+  (icon: `[data-accordion-icon]`); the header menu drawer slides in (`[data-menu-drawer]` + `.is-open`).
 - `templates/product.hbs` (schema v1 entry) must render on its own: sections fall back when `section` is undefined.
 
 ## JavaScript API (`window.Base`, core.js)
@@ -51,7 +53,7 @@ byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCa
 
 | Section | What | Blocks |
 | --- | --- | --- |
-| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs; `card_style` classic / radio "volume bundle", `pack_color`, `unit_label` per-unit price pill, `unit_pickers` = one Color / Size row per unit so a pack can mix variants, `includes_all`), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos), faq, size_chart (link + popup) |
+| `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs; `card_style` classic / radio "volume bundle", `pack_color`, `unit_label` per-unit price pill, `unit_pickers` = one Color / Size row per unit so a pack can mix variants, `includes_all`), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos; `slots` = frames kept while empty), faq, size_chart (link + popup) |
 | `reviews` | Average, distribution, photos, filters, list, lightbox, write-a-review form | — |
 | `faq` | Accordion; blocks → `page.faq` → Theme settings FAQ | qa |
 | `testimonials` | Photo reviews from the product's real reviews | — |
@@ -72,7 +74,12 @@ byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCa
 
 Product section: `sticky_style` compact / full (full-width bar with variant select).
 
-Chrome (rendered by the layout, settings-driven): `header` (top bar rotating or countdown, nav, menu drawer,
+Media slots: the main product's gallery comes from the product data; every other image / video on the product
+page (image block, media slider, image-with-text, spec-card, steps, feature rows, banner, video row) is a slot
+the merchant fills in the theme editor. An empty slot keeps its frame (`.b-ph`, `.b-mslider__ph`,
+`.b-reel__ph`, …) with an "Upload …" hint in design mode only — it never collapses or borrows the product photo.
+
+Chrome (rendered by the layout, settings-driven): `header` (top bar rotating or countdown, nav, animated menu drawer,
 search), `cart-drawer` (lines, shipping protection / add-ons, discount, trust lines), `footer` (contact, links,
 collections, newsletter, social, payment icons).
 

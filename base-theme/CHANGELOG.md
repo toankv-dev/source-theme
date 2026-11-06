@@ -2,6 +2,33 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## 2026.11.06.2 — FAQ and header menu always animate (requested)
+### Added
+- Header menu drawer animation: the overlay fades, the panel slides in from the left and the links rise one after
+  another (ui.js adds `.is-open` after showing `[data-menu-drawer]`, removes it and hides the drawer 320 ms later;
+  focus moves to the close button and back to the burger). Off under prefers-reduced-motion.
+- Accordion hook `<details data-accordion>`: a theme's own FAQ / accordion markup gets the same open / close
+  animation as `.b-faq__item` / `.b-acc`; an element marked `[data-accordion-icon]` turns while open.
+- `tools/smoke.js`: menu drawer slides in / out, a FAQ opens with an animation (phone width).
+### Fixed
+- Closing a FAQ / accordion turned its icon back only after the close animation: ui.js now sets `.is-closing`
+  while it closes (the CSS for it already existed).
+
+## 2026.11.06.1 — empty media slots keep their frame
+### Changed
+- Content images / videos on the product page are slots the merchant fills in the theme editor, so an empty
+  slot keeps its frame (`.b-ph` / `.b-mslider__ph`, "Upload …" hint in design mode only) instead of
+  disappearing or borrowing the product photo:
+  - product `media_slider`: new `slots` setting (1–10, default 3) — slots 1..N without a file show an empty
+    frame in the chosen shape; empty slots past N are skipped;
+  - product `image` block: empty → 4:3 frame (was nothing);
+  - `image-with-text`: empty → square frame (was the product's main image);
+  - `spec-card`: empty → frame on the card (was the product's main image);
+  - `comparison`: column images stay optional; the editor marks the empty spot.
+- `.b-ph` centres its hint text; modifiers `--iwt`, `--block`, `--spec`, `--compare`.
+- `new-theme` skill: product-page content images / videos are left empty (never copied from the original);
+  the main product stays on platform data.
+
 ## 2026.11.05.5 — full-width sticky buy bar (from Club Ritual)
 ### Added
 - Product section setting `sticky_style`: `compact` (default, unchanged small card) or `full` — a full-width bar

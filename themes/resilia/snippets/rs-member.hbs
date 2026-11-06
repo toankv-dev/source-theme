@@ -1,0 +1,135 @@
+{{!-- Member page (page titled "Subscription Management"): login hero (email → the platform order list) ·
+      consistency chart + two phase cards · the store's first 3 products as formula cards · promise cards ·
+      community quotes · routine block (proverb, habits, Q&A card) · "a real person" help band.
+      Texts: Theme settings → Resilia – Member page. Pictures fall back to assets/images/rs. --}}
+{{#with settings}}
+<div class="rs-member">
+  <section class="rs-m-hero">
+    <picture class="rs-m-hero__media">
+      <source media="(max-width: 749px)" srcset="{{#if rs_member_image}}{{rs_member_image}}{{else}}{{@root.assets_url}}/images/rs/sub-hero-m.webp{{/if}}" width="700" height="949">
+      <img src="{{#if rs_member_image}}{{rs_member_image}}{{else}}{{@root.assets_url}}/images/rs/sub-hero.webp{{/if}}" alt="" width="1600" height="994" fetchpriority="high">
+    </picture>
+    <div class="b-wrap rs-m-hero__inner">
+      {{#if rs_member_eyebrow}}<p class="rs-m__eyebrow">{{rs_member_eyebrow}}</p>{{/if}}
+      <h1 class="rs-m__h1">{{#if rs_member_title}}{{rs_member_title}}{{else}}{{@root.page.title}}{{/if}}</h1>
+      {{#if rs_member_text}}<p class="rs-m__lede">{{rs_member_text}}</p>{{/if}}
+      <ul class="rs-m-hero__badges">
+        {{#if rs_member_badge_1}}<li><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M12 3.5c-4.7 0-8.5 3.4-8.5 7.6 0 2 .9 3.9 2.4 5.3l-.9 3.6 3.9-1.8c.9.3 2 .5 3.1.5 4.7 0 8.5-3.4 8.5-7.6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="m18 2.5.8 1.7 1.8.3-1.3 1.2.3 1.8-1.6-.9-1.6.9.3-1.8-1.3-1.2 1.8-.3Z" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/></svg>{{rs_member_badge_1}}</li>{{/if}}
+        {{#if rs_member_badge_2}}<li><svg viewBox="0 0 20 20" width="30" height="30" aria-hidden="true"><path d="M10 1.6l2 1.5 2.5-.2.8 2.4 2.1 1.4-.8 2.4.8 2.4-2.1 1.4-.8 2.4-2.5-.2-2 1.5-2-1.5-2.5.2-.8-2.4-2.1-1.4.8-2.4-.8-2.4 2.1-1.4.8-2.4 2.5.2z" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><path d="m6.8 10.2 2.2 2.2 4.2-4.3" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_badge_2}}</li>{{/if}}
+        {{#if rs_member_badge_3}}<li><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M8 16c0-5 3-8 8-8 0 5-3 8-8 8Zm0 0 4-4" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_badge_3}}</li>{{/if}}
+      </ul>
+      <form class="rs-m-login" action="/pages/order-list" method="get" data-local-domain>
+        <label class="rs-m-login__label" for="rs-m-email">{{#if rs_member_email_label}}{{rs_member_email_label}}{{else}}Email{{/if}}</label>
+        <div class="rs-m-login__row">
+          <input id="rs-m-email" type="email" name="email" placeholder="you@email.com" autocomplete="email">
+          <button type="submit" class="rs-m-login__btn">{{#if rs_member_button}}{{rs_member_button}}{{else}}Log in{{/if}}</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="rs-m-consist" style="--rs-sketch:url('{{@root.assets_url}}/images/rs/sketch-light.webp')">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_c_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_c_eyebrow}}</p>{{/if}}
+      {{#if rs_member_c_title}}<h2 class="rs-m__h2 rs-m__center">{{rs_member_c_title}}</h2>{{/if}}
+      {{#if rs_member_c_text}}<p class="rs-m__p rs-m__center">{{rs_member_c_text}}</p>{{/if}}
+      <picture class="rs-m-consist__chart">
+        <source media="(max-width: 749px)" srcset="{{@root.assets_url}}/images/rs/sub-chart-m.webp" width="1000" height="741">
+        <img src="{{@root.assets_url}}/images/rs/sub-chart.webp" alt="" width="1140" height="346" loading="lazy">
+      </picture>
+      <div class="rs-m-consist__cards">
+        <div class="rs-m-phase">
+          <p class="rs-m-phase__icons" aria-hidden="true">{{> rs-icon-cal}}{{> rs-icon-cal}}{{> rs-icon-cal}}</p>
+          <p class="rs-m-phase__t">{{rs_member_c1_title}}<br>{{rs_member_c1_sub}}</p>
+          <p class="rs-m-phase__p">{{rs_member_c1_text}}</p>
+        </div>
+        <div class="rs-m-phase">
+          <p class="rs-m-phase__icons" aria-hidden="true">{{> rs-icon-cal}}{{> rs-icon-cal}}{{> rs-icon-cal}}{{> rs-icon-cal plus=true}}</p>
+          <p class="rs-m-phase__t">{{rs_member_c2_title}}<br>{{rs_member_c2_sub}}</p>
+          <p class="rs-m-phase__p">{{rs_member_c2_text}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{#if @root.products.length}}
+  <section class="rs-m-formulas" style="--rs-leaf:url('{{@root.assets_url}}/images/rs/sub-leaf-bg.webp')">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_f_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_f_eyebrow}}</p>{{/if}}
+      {{#if rs_member_f_title}}<h2 class="rs-m__h2 rs-m__center">{{rs_member_f_title}}</h2>{{/if}}
+      {{#if rs_member_f_text}}<p class="rs-m__p rs-m__center">{{rs_member_f_text}}</p>{{/if}}
+      <div class="rs-m-formulas__grid">
+        {{#each (limit @root.products 3)}}
+        <article class="rs-m-formula">
+          <h3 class="rs-m-formula__t">{{title}}</h3>
+          {{#if imageUrl}}<img class="rs-m-formula__img" src="{{imageUrl}}" alt="" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}
+          <p class="rs-m-formula__tag">• {{#if (eq @index 0)}}{{../rs_member_f1_tag}}{{/if}}{{#if (eq @index 1)}}{{../rs_member_f2_tag}}{{/if}}{{#if (eq @index 2)}}{{../rs_member_f3_tag}}{{/if}}</p>
+          <p class="rs-m-formula__p">{{#if (eq @index 0)}}{{../rs_member_f1_text}}{{/if}}{{#if (eq @index 1)}}{{../rs_member_f2_text}}{{/if}}{{#if (eq @index 2)}}{{../rs_member_f3_text}}{{/if}}</p>
+          <a class="rs-m-formula__btn" href="{{url}}">{{#if (eq @index 0)}}{{../rs_member_f1_button}}{{/if}}{{#if (eq @index 1)}}{{../rs_member_f2_button}}{{/if}}{{#if (eq @index 2)}}{{../rs_member_f3_button}}{{/if}}</a>
+        </article>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+  {{/if}}
+
+  <section class="rs-m-promise">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_p_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_p_eyebrow}}</p>{{/if}}
+      {{#if rs_member_p_title}}<h2 class="rs-m__h2 rs-m__center">{{rs_member_p_title}}</h2>{{/if}}
+      <div class="rs-m-cards">
+        {{> rs-member-card n="1" title=rs_member_p1_title text=rs_member_p1_text image=rs_member_p1_image timg="trust-1"}}
+        {{> rs-member-card n="2" title=rs_member_p2_title text=rs_member_p2_text image=rs_member_p2_image timg="trust-2"}}
+        {{> rs-member-card n="3" title=rs_member_p3_title text=rs_member_p3_text image=rs_member_p3_image timg="trust-3"}}
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-m-community">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_r_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_r_eyebrow}}</p>{{/if}}
+      {{#if rs_member_r_title}}<h2 class="rs-m__h2 rs-m__center">{{rs_member_r_title}}</h2>{{/if}}
+      <div class="rs-m-cards">
+        {{> rs-member-quote n="1" text=rs_member_r1_text image=rs_member_r1_image badge=rs_member_r_badge}}
+        {{> rs-member-quote n="2" text=rs_member_r2_text image=rs_member_r2_image badge=rs_member_r_badge}}
+        {{> rs-member-quote n="3" text=rs_member_r3_text image=rs_member_r3_image badge=rs_member_r_badge}}
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-m-routine" style="--rs-sketch:url('{{@root.assets_url}}/images/rs/sketch-dark.webp')">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_l_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_l_eyebrow}}</p>{{/if}}
+      {{#if rs_member_l_title}}<h2 class="rs-m__h2 rs-m__center rs-m__italic">{{rs_member_l_title}}</h2>{{/if}}
+      {{#if rs_member_l_by}}<p class="rs-m__eyebrow rs-m__center rs-m-routine__by">{{rs_member_l_by}}</p>{{/if}}
+      {{#if rs_member_l_text}}<p class="rs-m__p rs-m__center">{{rs_member_l_text}}</p>{{/if}}
+      <ul class="rs-m-habits">
+        {{#if rs_member_l_habit_1}}<li><svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M17 5a11 11 0 1 0 10 15A9 9 0 0 1 17 5Z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linejoin="round"/><path d="M21 6h4l-4 4h4M14 13h3l-3 3h3" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_l_habit_1}}</li>{{/if}}
+        {{#if rs_member_l_habit_2}}<li><svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><circle cx="17" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="m11 15 4-5 4 3 3 3M15 10l-1 8 4 4 1 7M14 18l-4 11" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_l_habit_2}}</li>{{/if}}
+        {{#if rs_member_l_habit_3}}<li><svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M6 9c4 0 7 4 8 13M14 22c1-8 5-14 13-14-1 8-6 13-13 14Z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_l_habit_3}}</li>{{/if}}
+        {{#if rs_member_l_habit_4}}<li><svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M16 27V15M16 15c0-5-3-8-9-9 0 6 3 9 9 9Zm0 0c0-5 3-8 9-9 0 6-3 9-9 9Z" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{rs_member_l_habit_4}}</li>{{/if}}
+      </ul>
+      {{#if rs_member_l_note}}<p class="rs-m-routine__note">{{rs_member_l_note}}</p>{{/if}}
+      <div class="rs-m-qa">
+        <img class="rs-m-qa__img" src="{{@root.assets_url}}/images/rs/sub-proverb.webp" alt="" width="720" height="382" loading="lazy">
+        <div class="rs-m-qa__body">
+          <svg viewBox="0 0 24 24" width="38" height="38" aria-hidden="true"><path d="M20.5 12A8.5 8.5 0 1 1 18 6M20.5 3.5V7H17" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+          <div>
+            {{#if rs_member_l_q}}<p class="rs-m-qa__q">{{rs_member_l_q}}</p>{{/if}}
+            {{#if rs_member_l_a}}<p class="rs-m-qa__a">{{rs_member_l_a}}</p>{{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-m-help">
+    <div class="b-wrap rs-m__narrow">
+      {{#if rs_member_h_eyebrow}}<p class="rs-m__eyebrow rs-m__center">{{rs_member_h_eyebrow}}</p>{{/if}}
+      {{#if rs_member_h_title}}<h2 class="rs-m__h2 rs-m__center">{{rs_member_h_title}}</h2>{{/if}}
+      {{#if rs_member_h_text}}<p class="rs-m__p rs-m__center rs-m-help__p">{{rs_member_h_text}}</p>{{/if}}
+      {{#if rs_member_h_button}}<p class="rs-m__center"><a class="rs-m-help__btn" href="{{#if @root.policyLinks.contact}}{{@root.policyLinks.contact}}{{else}}/pages/contact-us{{/if}}">{{rs_member_h_button}}</a></p>{{/if}}
+    </div>
+  </section>
+</div>
+{{/with}}

@@ -1,0 +1,27 @@
+{
+  "name": "Resilia",
+  "version": "2026.11.06.2",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/css/rs-product.css",
+    "assets/css/rs-home.css",
+    "assets/css/rs-pages.css",
+    "assets/css/rs-help.css",
+    "assets/css/rs-member.css",
+    "assets/js/core.js",
+    "assets/js/ui.js",
+    "assets/js/rs.js"
+  ],
+  "description": "Resilia storefront theme (resilia.shop look: Satoshi / Clash Grotesk / Sentient, green store chrome, per-product page colour, gifts-unlocked pack cards, help-centre contact page, subscription member page), built on the Base theme 2026.11.06.1.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

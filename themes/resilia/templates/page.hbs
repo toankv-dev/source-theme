@@ -1,0 +1,57 @@
+{{!-- Policy / About pages (page.title + page.bodyHtml), the order-tracking form, the help page ("Contact Us") and
+      the member page ("Subscription Management"). Tracking submits to the platform's /pages/tracking/result
+      (templates/tracking-result.hbs). Help / member texts: Theme settings → Resilia – Help page / Member page.
+      The countdown bar hides here unless Theme settings → Resilia – Top bar says otherwise. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="stylesheet" href="{{assets_url}}/css/rs-pages.css">
+{{#if (eq page.title "Contact Us")}}<link rel="stylesheet" href="{{assets_url}}/css/rs-help.css">{{/if}}
+{{#if (eq page.title "Subscription Management")}}<link rel="stylesheet" href="{{assets_url}}/css/rs-member.css">{{/if}}
+</head>
+<body class="b-body b-body--page{{#if (eq page.title "Subscription Management")}}{{#if (eq settings.rs_topbar_member false)}} rs-no-topbar{{/if}} rs-page-member{{else}}{{#unless settings.rs_topbar_pages}} rs-no-topbar{{/unless}}{{/if}}{{#if (eq page.title "Contact Us")}} rs-page-help{{/if}}">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#if (eq page.title "Order Tracking")}}
+  <article class="b-wrap b-page rs-track-page">
+    <h1 class="b-page__title">{{#if settings.track_heading}}{{settings.track_heading}}{{else}}Track your order{{/if}}</h1>
+    <div class="b-track rs-track" data-track>
+      <div class="b-track__tabs" role="tablist">
+        <button type="button" class="b-track__tab is-active" role="tab" aria-selected="true" data-track-tab="order">Order Number</button>
+        <button type="button" class="b-track__tab" role="tab" aria-selected="false" data-track-tab="tracking">Tracking Number</button>
+      </div>
+      <div class="rs-track__forms">
+        <form class="b-track__form" data-track-form="order" novalidate>
+          <label>Order Number<input type="text" name="order" required></label>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <p class="b-form-msg" data-track-msg role="status"></p>
+          <button type="submit" class="b-btn">Track <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="rs-track__or" aria-hidden="true"><span>Or</span></p>
+        <form class="b-track__form" data-track-form="tracking" hidden novalidate>
+          <label>Tracking Number<input type="text" name="trackingNumber" required></label>
+          <p class="b-form-msg" data-track-msg role="status"></p>
+          <button type="submit" class="b-btn">Track <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </div>
+    {{#if page.bodyHtml}}<div class="b-rte b-page__body">{{{page.bodyHtml}}}</div>{{/if}}
+  </article>
+  {{else}}{{#if (eq page.title "Contact Us")}}
+  {{> rs-help}}
+  {{else}}{{#if (eq page.title "Subscription Management")}}
+  {{> rs-member}}
+  {{else}}
+  <article class="b-wrap b-page b-page--narrow">
+    <h1 class="b-page__title">{{page.title}}</h1>
+    <div class="b-rte b-page__body">{{{page.bodyHtml}}}</div>
+  </article>
+  {{/if}}{{/if}}{{/if}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

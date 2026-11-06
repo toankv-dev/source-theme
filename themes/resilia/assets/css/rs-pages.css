@@ -1,0 +1,37 @@
+/* Resilia — pages (templates/page.hbs links it after skin.css): order tracking + help colours. Help: rs-help.css, member: rs-member.css. */
+/* =====================================================================================================
+   PAGES (templates/page.hbs): top bar per page, order tracking, help page, member page
+   ===================================================================================================== */
+.b-page__title { font-family: var(--font-heading); font-weight: 500; }
+/* ---------- Order tracking: order number + email | Or | tracking number (phones: tabs) ---------- */
+.rs-track-page { padding-top: 30px; padding-bottom: 24px; }
+.rs-track-page .b-page__title { margin: 0 0 6px; font-size: 48px; line-height: 1.1; color: #191712; text-align: left; }
+.rs-track { max-width: none; padding: 50px 20px; border: 1px solid #e6e6e6; border-radius: 6px; background: #fff; box-shadow: none; }
+.rs-track .b-track__form label { display: grid; gap: 2px; margin: 0 0 24px; font-size: 17px; color: #191712; margin-bottom: 20px; }
+.rs-track .b-track__form input { height: 44px; padding: 0 12px; border-radius: 0; font-size: 16px; border: 1px solid #191712; box-shadow: none; background: #fff; }
+.rs-track .b-track__form .b-btn { min-height: 59px; padding: 0 50px; border-radius: 4px; background: var(--c-ink); font-family: var(--font-heading); font-size: 19px; font-weight: 600; width: auto; min-width: 167px; }
+.rs-track__or { display: none; }
+@media (min-width: 750px) {
+  .rs-track-page { max-width: 1240px; }
+  .rs-track .b-track__tabs { display: none; }
+  .rs-track__forms { display: grid; grid-template-columns: minmax(0, 264px) 1fr minmax(0, 264px); justify-content: center; gap: 0 120px; max-width: 864px; margin: 0 auto; }
+  .rs-track .b-track__form[hidden] { display: block; }
+  .rs-track__or { display: flex; align-items: center; justify-content: center; position: relative; margin: 0; font-size: 17px; color: #191712; }
+  .rs-track__or:before { content: ""; position: absolute; top: 0; bottom: 60px; left: 50%; border-left: 1px dashed #bbb; }
+  .rs-track__or span { position: relative; padding: 6px 0; background: #fff; margin-bottom: 60px; }
+}
+@media (max-width: 749px) {
+  .rs-track-page .b-page__title { font-size: 32px; }
+  .rs-track { padding: 24px 16px; }
+  .rs-track .b-track__form .b-btn { width: 100%; }
+}
+/* ---------- Help page ("Contact Us") ---------- */
+:root { --rs-deep: #003d30; --rs-deep-ink: #023a2d; --rs-lime: #d2fa99; --rs-lime-pale: #efffd8; --rs-cardbg: #f6f7ec; --rs-mint: #009370; }
+/* Order tracking: fixes after the side-by-side */
+@media (min-width: 750px) {
+  .rs-track-page { max-width: 1300px; }
+  .rs-track .b-track__form[hidden] { display: block !important; }
+}
+@media (max-width: 749px) {
+  .rs-track .b-track__form .b-btn { width: 100%; }
+}

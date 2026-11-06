@@ -82,10 +82,29 @@
   function initHeader() {
     var openBtn = $('[data-menu-open]'), drawer = $('[data-menu-drawer]');
     if (openBtn && drawer) {
+      // Animated like the cart drawer: shown, then .is-open on the next frames (overlay fades, panel slides in,
+      // links rise one after another); closing removes .is-open and hides once the transition is over.
+      var menuTimer = null, menuFocus = null;
       var setMenu = function (on) {
-        drawer.hidden = !on;
+        if (on === !drawer.hidden && on === drawer.classList.contains('is-open')) return;
+        clearTimeout(menuTimer);
         openBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
         lockScroll(on);
+        if (on) {
+          menuFocus = document.activeElement;
+          drawer.hidden = false;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              drawer.classList.add('is-open');
+              var c = $('[data-menu-close]:not(.b-menu-drawer__overlay)', drawer);
+              if (c) c.focus({ preventScroll: true });
+            });
+          });
+        } else {
+          drawer.classList.remove('is-open');
+          menuTimer = setTimeout(function () { if (!drawer.classList.contains('is-open')) drawer.hidden = true; }, reduceMotion ? 0 : 320);
+          if (menuFocus && menuFocus.focus) menuFocus.focus({ preventScroll: true });
+        }
       };
       openBtn.addEventListener('click', function () { setMenu(true); });
       $$('[data-menu-close]', drawer).forEach(function (b) { b.addEventListener('click', function () { setMenu(false); }); });
@@ -1554,7 +1573,9 @@
   }
 
   function initAccordions() {
-    var SEL = 'details.b-faq__item, details.b-acc';
+    // Every FAQ / accordion opens and closes with a height + fade animation: the base items, and any theme's own
+    // <details data-accordion> (its [data-accordion-icon] turns while open). .is-closing turns the icon back at once.
+    var SEL = 'details.b-faq__item, details.b-acc, details[data-accordion]';
     var body = function (d) { return d.querySelector(':scope > :not(summary)'); };
     var open = function (b) { var s = getComputedStyle(b); return { height: b.offsetHeight + 'px', paddingTop: s.paddingTop, paddingBottom: s.paddingBottom, opacity: 1 }; };
     var shut = { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 };
@@ -1573,7 +1594,8 @@
       var b = body(d);
       if (d.open) {
         if (reduceMotion || !b || !b.animate) { d.open = false; return; }
-        animate(d, b, open(b), shut, 240, function () { d.open = false; });
+        d.classList.add('is-closing');
+        animate(d, b, open(b), shut, 240, function () { d.open = false; d.classList.remove('is-closing'); });
       } else {
         d.open = true;
         if (!reduceMotion && b && b.animate) animate(d, b, shut, open(b), 300, function () {});

@@ -1,0 +1,2386 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary (buttons, accents)",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "primary_text",
+        "label": "Text on primary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Accent",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Body text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "page_bg",
+        "label": "Page background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "check",
+        "label": "Check marks / success",
+        "default": "#1fa463"
+      },
+      {
+        "type": "color",
+        "id": "badge",
+        "label": "Badges",
+        "default": "#3b9dea"
+      },
+      {
+        "type": "color",
+        "id": "sale",
+        "label": "Sale price / discount",
+        "default": "#e0392b"
+      },
+      {
+        "type": "color",
+        "id": "alert",
+        "label": "Alerts",
+        "default": "#e0392b"
+      },
+      {
+        "type": "color",
+        "id": "star",
+        "label": "Stars",
+        "default": "#17b26a"
+      },
+      {
+        "type": "header",
+        "content": "Header & footer"
+      },
+      {
+        "type": "color",
+        "id": "header_bg",
+        "label": "Header background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_text",
+        "label": "Header text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer background",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Checkout"
+      },
+      {
+        "type": "color",
+        "id": "checkout_bg",
+        "label": "Checkout background",
+        "default": "#f7f7f7"
+      }
+    ]
+  },
+  {
+    "name": "Typography & shape",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font",
+        "label": "Body font (Google Fonts name)",
+        "default": "Manrope",
+        "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
+      },
+      {
+        "type": "text",
+        "id": "font_heading",
+        "label": "Heading font (optional)",
+        "default": "",
+        "info": "Empty = same as the body font."
+      },
+      {
+        "type": "text",
+        "id": "font_weights",
+        "label": "Google Fonts weights",
+        "default": "400;500;600;700;800",
+        "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
+      },
+      {
+        "type": "checkbox",
+        "id": "load_google_fonts",
+        "label": "Load the fonts from Google Fonts",
+        "default": true,
+        "info": "Off when the theme ships its own font files (@font-face in skin.css)."
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Corner radius (cards, images)",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "btn_radius",
+        "label": "Button corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "default": 8,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "btn_case",
+        "label": "Button text",
+        "default": "uppercase",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "UPPERCASE"
+          },
+          {
+            "value": "none",
+            "label": "As typed"
+          },
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 960,
+        "max": 1600,
+        "step": 20,
+        "default": 1200,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_topbar",
+        "label": "Show the top bar",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "topbar_style",
+        "label": "Style",
+        "default": "rotate",
+        "options": [
+          {
+            "value": "rotate",
+            "label": "Rotating messages"
+          },
+          {
+            "value": "countdown",
+            "label": "Sale countdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Messages (separate with ||)",
+        "default": "Free shipping on every order || 30-day money-back guarantee"
+      },
+      {
+        "type": "checkbox",
+        "id": "topbar_autoplay",
+        "label": "Rotate automatically",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "topbar_bg",
+        "label": "Background",
+        "default": "#14203b"
+      },
+      {
+        "type": "color",
+        "id": "topbar_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Countdown"
+      },
+      {
+        "type": "text",
+        "id": "countdown_title",
+        "label": "Title",
+        "default": "FLASH SALE"
+      },
+      {
+        "type": "text",
+        "id": "countdown_subtitle",
+        "label": "Subtitle",
+        "default": "Up to 50% off – today only"
+      },
+      {
+        "type": "number",
+        "id": "countdown_hours",
+        "label": "Restart every (hours)",
+        "default": 2,
+        "info": "The timer counts down and restarts for each visitor."
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Sticky header",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "logo_position",
+        "label": "Logo position (desktop)",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo height",
+        "min": 20,
+        "max": 90,
+        "step": 2,
+        "default": 40,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_account",
+        "label": "Show orders link",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_track_link",
+        "label": "Show Track order in the menu",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_collections",
+        "label": "Show collections in the menu",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_show_shop",
+        "label": "Show the Shop link in the menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "nav_home_label",
+        "label": "Menu: Home label",
+        "default": "Home"
+      },
+      {
+        "type": "text",
+        "id": "nav_shop_label",
+        "label": "Menu: Shop label",
+        "default": "Shop"
+      },
+      {
+        "type": "text",
+        "id": "nav_contact_label",
+        "label": "Menu: Contact label",
+        "default": "Contact"
+      },
+      {
+        "type": "text",
+        "id": "nav_track_label",
+        "label": "Menu: Track label",
+        "default": "Track order"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "footer_about",
+        "label": "About text",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "footer_links_title",
+        "label": "Links column title",
+        "default": "Customer care"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_collections",
+        "label": "Show a collections column",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Support hours",
+        "default": "Monday – Friday, 9 AM – 5 PM"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter",
+        "label": "Show newsletter in the footer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_heading",
+        "label": "Heading",
+        "default": "Join our newsletter"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Text",
+        "default": "Offers, new arrivals and tips. No spam."
+      },
+      {
+        "type": "text",
+        "id": "newsletter_placeholder",
+        "label": "Placeholder",
+        "default": "Your email"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_button",
+        "label": "Button",
+        "default": "Subscribe"
+      },
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      }
+    ]
+  },
+  {
+    "name": "Payment icons",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Methods the platform checkout processes; switch off the ones you do not offer."
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_visa",
+        "label": "Visa",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_mastercard",
+        "label": "Mastercard",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_amex",
+        "label": "American Express",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_discover",
+        "label": "Discover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_applepay",
+        "label": "Apple Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_googlepay",
+        "label": "Google Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_paypal",
+        "label": "PayPal",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product & cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "atc_label",
+        "label": "Add to cart label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "text",
+        "id": "card_badge_label",
+        "label": "Card badge text before %",
+        "default": "Save"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "Show stars on product cards",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "open_cart_on_add",
+        "label": "Open the cart after Add to cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Title",
+        "default": "Your cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_logo",
+        "label": "Show the logo instead of the title",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_notice",
+        "label": "Notice strip (empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_text",
+        "label": "Empty cart text",
+        "default": "Your cart is empty."
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_button",
+        "label": "Empty cart button",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "text",
+        "id": "cart_subtotal_label",
+        "label": "Subtotal label",
+        "default": "Subtotal"
+      },
+      {
+        "type": "text",
+        "id": "cart_footer_note",
+        "label": "Note under the subtotal",
+        "default": "Shipping is calculated at checkout."
+      },
+      {
+        "type": "text",
+        "id": "cart_checkout_label",
+        "label": "Checkout button",
+        "default": "Checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_1",
+        "label": "Trust line 1",
+        "default": "30-day money-back guarantee"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_2",
+        "label": "Trust line 2",
+        "default": "Secure, encrypted checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_3",
+        "label": "Trust line 3",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping protection / add-ons"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_upsells",
+        "label": "Products offered in the cart",
+        "info": "Added to the cart switched on; the buyer can switch them off."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_as_line",
+        "label": "Also list them as cart lines",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Heading",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_bg",
+        "label": "Background",
+        "default": "#f4f5f7"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_color",
+        "label": "Text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_accent",
+        "label": "Switch colour",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Discounts",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Pack cards and the cart are priced with the store's live automatic discounts, using the checkout's formula. Switch off a kind the checkout does not apply to this store."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_tiered_discount",
+        "label": "Tiered (buy more, save more)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_bxgy_discount",
+        "label": "Buy X get Y",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_amount_off_discount",
+        "label": "Amount off products",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Pages",
+    "settings": [
+      {
+        "type": "text",
+        "id": "track_heading",
+        "label": "Order tracking heading",
+        "default": "Track your order"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_heading",
+        "label": "Contact form heading",
+        "default": "Send us a message"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Search heading",
+        "default": "Search results"
+      }
+    ]
+  },
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Default questions shown by every FAQ that has no questions of its own."
+      },
+      {
+        "type": "text",
+        "id": "faq_1_q",
+        "label": "Question 1",
+        "default": "How long does shipping take?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_1_a",
+        "label": "Answer 1",
+        "default": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_2_q",
+        "label": "Question 2",
+        "default": "How can I track my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_2_a",
+        "label": "Answer 2",
+        "default": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_3_q",
+        "label": "Question 3",
+        "default": "Can I change or cancel my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_3_a",
+        "label": "Answer 3",
+        "default": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_4_q",
+        "label": "Question 4",
+        "default": "What is your return and refund policy?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_4_a",
+        "label": "Answer 4",
+        "default": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_5_q",
+        "label": "Question 5",
+        "default": "My item arrived damaged or isn't what I ordered"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_5_a",
+        "label": "Answer 5",
+        "default": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_6_q",
+        "label": "Question 6",
+        "default": "How can I reach customer support?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_6_a",
+        "label": "Answer 6",
+        "default": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>"
+      }
+    ]
+  },
+  {
+    "name": "Home – hero",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_hero_show",
+        "label": "Show the hero",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_mobile_image",
+        "label": "Phone image (optional)"
+      },
+      {
+        "type": "text",
+        "id": "home_hero_eyebrow",
+        "label": "Small text above",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_hero_title",
+        "label": "Heading",
+        "default": "Everyday essentials, made better"
+      },
+      {
+        "type": "textarea",
+        "id": "home_hero_text",
+        "label": "Text",
+        "default": "Free shipping and 30-day returns on every order."
+      },
+      {
+        "type": "text",
+        "id": "home_hero_button",
+        "label": "Button",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "home_hero_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "home_hero_align",
+        "label": "Text position",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "home_hero_overlay",
+        "label": "Dark overlay",
+        "min": 0,
+        "max": 0.8,
+        "step": 0.1,
+        "default": 0.2
+      },
+      {
+        "type": "textarea",
+        "id": "home_promises",
+        "label": "Promises strip (separate with ||, empty = hidden)",
+        "default": "Free shipping || 30-day returns || Secure checkout || 24/7 support"
+      }
+    ]
+  },
+  {
+    "name": "Home – products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_featured_show",
+        "label": "Show the featured product (first product)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_featured_heading",
+        "label": "Featured heading",
+        "default": "Our product"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_products_show",
+        "label": "Show the product grid",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "home_products_source",
+        "label": "Grid shows",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All products"
+          },
+          {
+            "value": "collections",
+            "label": "One grid per collection"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_products_heading",
+        "label": "Grid heading",
+        "default": "Best sellers"
+      },
+      {
+        "type": "number",
+        "id": "home_products_limit",
+        "label": "Products per grid",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Home – banner & comparison",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_banner_show",
+        "label": "Show the image banner",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "home_banner_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "home_banner_side",
+        "label": "Image side",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_banner_title",
+        "label": "Heading",
+        "default": "Our most popular pack"
+      },
+      {
+        "type": "textarea",
+        "id": "home_banner_text",
+        "label": "Text",
+        "default": "Save more when you buy more."
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Button",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "home_banner_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Comparison"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_compare_show",
+        "label": "Show the comparison table",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_compare_heading",
+        "label": "Heading",
+        "default": "How we compare"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_ours",
+        "label": "Our column (empty = store name)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_compare_theirs",
+        "label": "Other column",
+        "default": "Others"
+      },
+      {
+        "type": "textarea",
+        "id": "home_compare_rows",
+        "label": "Rows (one per line: Feature|yes|no)",
+        "default": "Free shipping|yes|no\nMoney-back guarantee|yes|no\nPremium materials|yes|no"
+      }
+    ]
+  },
+  {
+    "name": "Home – reviews, FAQ, newsletter, contact",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_reviews_show",
+        "label": "Show customer reviews",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_heading",
+        "label": "Reviews heading",
+        "default": "What our customers are saying"
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_sub",
+        "label": "Reviews subheading",
+        "default": "Real reviews from verified buyers."
+      },
+      {
+        "type": "checkbox",
+        "id": "home_faq_show",
+        "label": "Show the FAQ (Theme settings → FAQ)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_newsletter_show",
+        "label": "Show the newsletter band",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_contact_show",
+        "label": "Show the contact form",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_contact_heading",
+        "label": "Contact heading",
+        "default": "Contact us"
+      }
+    ]
+  },
+  {
+    "name": "Resilia – Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "rs_footer_logo",
+        "label": "Footer logo (empty = the RESILIA wordmark)"
+      },
+      {
+        "type": "text",
+        "id": "rs_footer_faq_label",
+        "label": "First link (to the help page FAQ)",
+        "default": "FAQs"
+      },
+      {
+        "type": "text",
+        "id": "rs_footer_extra_label",
+        "label": "Extra link label",
+        "default": ""
+      },
+      {
+        "type": "url",
+        "id": "rs_footer_extra_url",
+        "label": "Extra link",
+        "default": ""
+      },
+      {
+        "type": "richtext",
+        "id": "rs_footer_legal",
+        "label": "Disclaimers",
+        "default": "<p>* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p><p>† Individual results may vary. Testimonials and reviews reflect individual experiences and are not guaranteed outcomes.</p><p>‡ Consult your healthcare provider before starting any supplement regimen, especially if you are pregnant, nursing, taking medication, or have a medical condition.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_copyright_suffix",
+        "label": "After \"© year Store name |\"",
+        "default": "All Rights Reserved"
+      }
+    ]
+  },
+  {
+    "name": "Resilia – Home",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Hero texts, button and pictures: Theme settings → Home – hero. Empty pictures = the theme pictures."
+      },
+      {
+        "type": "text",
+        "id": "rs_hero_tick_1",
+        "label": "Hero tick 1",
+        "default": "30-Day Risk-Free Trial"
+      },
+      {
+        "type": "text",
+        "id": "rs_hero_tick_2",
+        "label": "Hero tick 2",
+        "default": "Third-Party Tested"
+      },
+      {
+        "type": "header",
+        "content": "Picture tiles (swipe row on phones)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_tiles_show",
+        "label": "Show the picture tiles",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_tile_1_label",
+        "label": "Tile 1 label",
+        "default": "Resilia® Oil Of Oregano Softgels"
+      },
+      {
+        "type": "url",
+        "id": "rs_tile_1_link",
+        "label": "Tile 1 link (empty = all products)",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_tile_1_image",
+        "label": "Tile 1 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_tile_2_label",
+        "label": "Tile 2 label",
+        "default": "Resilia® On-the-Go Softgel Case"
+      },
+      {
+        "type": "url",
+        "id": "rs_tile_2_link",
+        "label": "Tile 2 link (empty = all products)",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_tile_2_image",
+        "label": "Tile 2 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_tile_3_label",
+        "label": "Tile 3 label",
+        "default": "Resilia® Aged Odorless Garlic"
+      },
+      {
+        "type": "url",
+        "id": "rs_tile_3_link",
+        "label": "Tile 3 link (empty = all products)",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_tile_3_image",
+        "label": "Tile 3 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_tile_4_label",
+        "label": "Tile 4 label",
+        "default": "Resilia® Ceylon Cinnamon"
+      },
+      {
+        "type": "url",
+        "id": "rs_tile_4_link",
+        "label": "Tile 4 link (empty = all products)",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_tile_4_image",
+        "label": "Tile 4 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_tile_5_label",
+        "label": "Tile 5 label",
+        "default": "Resilia® Bamboo Lid Jar"
+      },
+      {
+        "type": "url",
+        "id": "rs_tile_5_link",
+        "label": "Tile 5 link (empty = all products)",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_tile_5_image",
+        "label": "Tile 5 picture"
+      },
+      {
+        "type": "header",
+        "content": "Product lineup (the first 3 products of the store, dark cards)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_lineup_show",
+        "label": "Show the lineup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_from",
+        "label": "Price prefix",
+        "default": "Starting from"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_suffix",
+        "label": "Price suffix",
+        "default": "/mo"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_off",
+        "label": "Discount label (after the %)",
+        "default": "Off"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_1_text",
+        "label": "Product 1 line",
+        "default": "For daily immune and gut support.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_1_button",
+        "label": "Product 1 button",
+        "default": "Explore Oregano"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_lineup_1_ticks",
+        "label": "Product 1 ticks",
+        "default": "<ul><li>Natural Antioxidant†</li><li>Immune System Support†</li><li>Used For 2000+ Years</li></ul>"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_2_text",
+        "label": "Product 2 line",
+        "default": "For heart and circulation.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_2_button",
+        "label": "Product 2 button",
+        "default": "Explore Garlic"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_lineup_2_ticks",
+        "label": "Product 2 ticks",
+        "default": "<ul><li>Heart &amp; Blood Circulation†</li><li>Cardiovascular Support†</li><li>Aged 20 Months - Completely Odorless</li></ul>"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_3_text",
+        "label": "Product 3 line",
+        "default": "For healthy blood sugar and metabolic balance.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_lineup_3_button",
+        "label": "Product 3 button",
+        "default": "Explore Ceylon Cinnamon"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_lineup_3_ticks",
+        "label": "Product 3 ticks",
+        "default": "<ul><li>Healthy Blood Sugar†</li><li>Metabolic Balance†</li><li>Cardio Wellness and Vitality †</li></ul>"
+      },
+      {
+        "type": "header",
+        "content": "Quote"
+      },
+      {
+        "type": "text",
+        "id": "rs_quote",
+        "label": "Quote (empty = hidden)",
+        "default": "“Oregano is the joy of the mountain.”"
+      },
+      {
+        "type": "text",
+        "id": "rs_quote_by",
+        "label": "Quote author",
+        "default": "— attributed to Hippocrates, c. 400 BCE"
+      },
+      {
+        "type": "header",
+        "content": "Story block (picture + green panel)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_story_show",
+        "label": "Show the story block",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_story_image",
+        "label": "Picture (empty = theme picture)"
+      },
+      {
+        "type": "text",
+        "id": "rs_story_heading",
+        "label": "Heading",
+        "default": "The supplement aisle has forgotten something."
+      },
+      {
+        "type": "richtext",
+        "id": "rs_story_text",
+        "label": "Text",
+        "default": "<p>Walk into any health store. You'll find walls of synthetic isolates, lab-engineered compounds, and \"proprietary blends\" with names that read like chemistry homework. Most of it didn't exist a generation ago.</p><p>What we lost wasn’t a product...it was a daily connection to the plants that kept us well.</p><p>Resilia® brings it back.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_story_button",
+        "label": "Button",
+        "default": "READ THE LINEAGE"
+      },
+      {
+        "type": "url",
+        "id": "rs_story_link",
+        "label": "Button link",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Proof block (dark green, customer quotes)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_proof_show",
+        "label": "Show the proof block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_proof_heading",
+        "label": "Heading",
+        "default": "Traditional Herbs. Modern Research. Real Results.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_proof_text",
+        "label": "Text",
+        "default": "When time-tested botanicals meet modern clinical research, the results speak for themselves."
+      },
+      {
+        "type": "richtext",
+        "id": "rs_proof_quotes",
+        "label": "Quotes (one paragraph each: bold title, quote, italic name)",
+        "default": "<p><strong>“Noticeable difference in my midsection.”</strong> \"I don't have that bloated feeling as before. I can actually suck in my abdomen again. That feeling is priceless.\"* <em>— Evelyn N. (Verified Customer)</em></p><p><strong>“Worked wonders on my gut health.”</strong> \"This product has worked wonders on my gut health. My constant burping is so much better. I finished my first bag and have ordered a second.\"* <em>— Julie L. (Verified Customer)</em></p><p><strong>“Finally, something I actually feel.”</strong> \"I've tried every supplement under the sun and most ended up in the back of a cabinet. This one I actually feel. My gut isn't bloated, my energy doesn't crash, and I just feel steadier. It's part of my morning now.\"* <em>— Hailey A. (Verified Customer)</em></p><p><strong>“Excellent health benefits.”</strong> \"Oil of oregano really helps support the immune system, gut health, and more. It's rich in antioxidants. Very easy to swallow, and the health benefits far outweigh the cost. Part of my daily regimen.\"* <em>— Cari T. (Verified Customer)</em></p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_proof_button",
+        "label": "Button",
+        "default": "Explore the Lineup"
+      },
+      {
+        "type": "text",
+        "id": "rs_proof_note",
+        "label": "Note under the button",
+        "default": "30-day money back guarantee"
+      },
+      {
+        "type": "header",
+        "content": "Not sure where to start? (4 cards)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_start_show",
+        "label": "Show the cards",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_start_heading",
+        "label": "Heading",
+        "default": "Not sure where to start?"
+      },
+      {
+        "type": "text",
+        "id": "rs_start_1_title",
+        "label": "Card 1 title",
+        "default": "Your gut feels off"
+      },
+      {
+        "type": "text",
+        "id": "rs_start_1_text",
+        "label": "Card 1 text",
+        "default": "Bloating, irregularity, post-meal discomfort that lingers → Try Oil of Oregano"
+      },
+      {
+        "type": "url",
+        "id": "rs_start_1_link",
+        "label": "Card 1 link",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "rs_start_2_title",
+        "label": "Card 2 title",
+        "default": "Your energy or circulation feels low"
+      },
+      {
+        "type": "text",
+        "id": "rs_start_2_text",
+        "label": "Card 2 text",
+        "default": "Cold hands and feet, sluggish mornings, tired afternoons → Try Aged Garlic"
+      },
+      {
+        "type": "url",
+        "id": "rs_start_2_link",
+        "label": "Card 2 link",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "rs_start_3_title",
+        "label": "Card 3 title",
+        "default": "You're focused on digestion and inflammation"
+      },
+      {
+        "type": "text",
+        "id": "rs_start_3_text",
+        "label": "Card 3 text",
+        "default": "Post-meal discomfort, healthy inflammatory response → Try Black Seed Oil"
+      },
+      {
+        "type": "url",
+        "id": "rs_start_3_link",
+        "label": "Card 3 link",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "rs_start_4_title",
+        "label": "Card 4 title",
+        "default": "You want the full lineup"
+      },
+      {
+        "type": "text",
+        "id": "rs_start_4_text",
+        "label": "Card 4 text",
+        "default": "Daily support across your whole body → See All 3"
+      },
+      {
+        "type": "url",
+        "id": "rs_start_4_link",
+        "label": "Card 4 link",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Testimonials slider"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_testi_show",
+        "label": "Show the testimonials",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_heading",
+        "label": "Heading",
+        "default": "Thousands of 5-Star Reviews · Rated 4.9 ★"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_sub",
+        "label": "Text",
+        "default": "See what our customers are saying about Resilia"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_badge",
+        "label": "Verified label",
+        "default": "VERIFIED CUSTOMER"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_1_title",
+        "label": "Review 1 title",
+        "default": "\"You can feel it working.\""
+      },
+      {
+        "type": "textarea",
+        "id": "rs_testi_1_text",
+        "label": "Review 1 text",
+        "default": "Awesome product. In two days you can feel the product working. Helps my overall health, and it's part of my routine now.*"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_1_name",
+        "label": "Review 1 name",
+        "default": "Michael H."
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_1_tag_1",
+        "label": "Review 1 tag 1",
+        "default": "Immunity Boost"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_1_tag_2",
+        "label": "Review 1 tag 2",
+        "default": "Prevention"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_testi_1_photo",
+        "label": "Review 1 photo (empty = theme picture)"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_2_title",
+        "label": "Review 2 title",
+        "default": "\"More energy after just 3 days.\""
+      },
+      {
+        "type": "textarea",
+        "id": "rs_testi_2_text",
+        "label": "Review 2 text",
+        "default": "I ordered a pack of Resilia soft gels 2 days ago, 3rd day feeling better with more energy. Loving the progress so far.*"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_2_name",
+        "label": "Review 2 name",
+        "default": "Frances"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_2_tag_1",
+        "label": "Review 2 tag 1",
+        "default": "Gut Support"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_2_tag_2",
+        "label": "Review 2 tag 2",
+        "default": "Bloat Relief"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_testi_2_photo",
+        "label": "Review 2 photo (empty = theme picture)"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_3_title",
+        "label": "Review 3 title",
+        "default": "\"Calmed my symptoms after the first dose\""
+      },
+      {
+        "type": "textarea",
+        "id": "rs_testi_3_text",
+        "label": "Review 3 text",
+        "default": "These have calmed my digestive symptoms after the first dose. Easy to swallow. No negative side effects.*"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_3_name",
+        "label": "Review 3 name",
+        "default": "Catherine M."
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_3_tag_1",
+        "label": "Review 3 tag 1",
+        "default": "Cold Prevention"
+      },
+      {
+        "type": "text",
+        "id": "rs_testi_3_tag_2",
+        "label": "Review 3 tag 2",
+        "default": "Daily Defense"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_testi_3_photo",
+        "label": "Review 3 photo (empty = theme picture)"
+      },
+      {
+        "type": "header",
+        "content": "FAQ (questions: Theme settings → FAQ)"
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_faq_show",
+        "label": "Show the FAQ",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "rs_faq_heading",
+        "label": "Heading",
+        "default": "Frequently Asked Questions"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_faq_image",
+        "label": "Picture under / beside the FAQ (empty = theme picture)"
+      }
+    ]
+  },
+  {
+    "name": "Resilia – Top bar",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The countdown bar always shows on product pages. The store shows it on the member page, not on the home or help pages."
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_topbar_home",
+        "label": "Show the top bar on the home page",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_topbar_pages",
+        "label": "Show the top bar on other pages (help, tracking, policies)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "rs_topbar_member",
+        "label": "Show the top bar on the member page",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Resilia – Help page (page titled \"Contact Us\")",
+    "settings": [
+      {
+        "type": "text",
+        "id": "rs_help_title",
+        "label": "Heading",
+        "default": "How can we help you?"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_text",
+        "label": "Text",
+        "default": "Get answers to common questions, track your order, or reach our team directly — we're here for you."
+      },
+      {
+        "type": "text",
+        "id": "rs_help_email_btn",
+        "label": "Email button (to the store email)",
+        "default": "Email Us →"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_btn",
+        "label": "FAQ button",
+        "default": "Browse FAQs →"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_chip_track",
+        "label": "Shortcut: tracking",
+        "default": "Track Order"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_chip_contact",
+        "label": "Shortcut: contact",
+        "default": "Contact Us"
+      },
+      {
+        "type": "header",
+        "content": "Track your order"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_eyebrow",
+        "label": "Eyebrow",
+        "default": "Track Your Order"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_title",
+        "label": "Heading",
+        "default": "Waiting On Your Resilia® Order?"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_text",
+        "label": "Text",
+        "default": "Enter your order number or tracking code to see your delivery status. You'll find these in your order confirmation email."
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_card",
+        "label": "Card title",
+        "default": "Track Your Order"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_placeholder",
+        "label": "Field placeholder",
+        "default": "Tracking number"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_button",
+        "label": "Button",
+        "default": "Track →"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_track_link",
+        "label": "Link to the full tracking page",
+        "default": "Track by order number + email →"
+      },
+      {
+        "type": "header",
+        "content": "Reach our team"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_team_eyebrow",
+        "label": "Eyebrow",
+        "default": "Support 24/7"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_team_title",
+        "label": "Heading",
+        "default": "Reach Out Team"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_team_text",
+        "label": "Text",
+        "default": "Have a question that isn't answered below?"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_form_title",
+        "label": "Message card title",
+        "default": "Send Us a Message"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_form_text",
+        "label": "Message card text",
+        "default": "We'll get back to you via email, usually within 24 hours."
+      },
+      {
+        "type": "text",
+        "id": "rs_help_form_button",
+        "label": "Message card button",
+        "default": "Send Message →"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_chat_title",
+        "label": "Chat card title (empty = hidden)",
+        "default": "Live Chat"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_chat_text",
+        "label": "Chat card text",
+        "default": "Chat with our support assistant for instant answers. Available 24/7 for common questions, and our human team is always a click away."
+      },
+      {
+        "type": "text",
+        "id": "rs_help_chat_button",
+        "label": "Chat card button",
+        "default": "Start Live Chat →"
+      },
+      {
+        "type": "url",
+        "id": "rs_help_chat_link",
+        "label": "Chat card link (empty = the store email)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "rs_help_call_title",
+        "label": "Call card title (empty = hidden)",
+        "default": "Give us a call"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_help_call_text",
+        "label": "Call card text",
+        "default": "We're here 7 days a week\nAnytime between 8 AM–9 PM"
+      },
+      {
+        "type": "header",
+        "content": "Text-message consent"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_sms_eyebrow",
+        "label": "Eyebrow",
+        "default": "Support 24/7"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_sms_title",
+        "label": "Heading (empty = hidden)",
+        "default": "Contact Customer Support"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_sms_text",
+        "label": "Text",
+        "default": "<p>You can reach our Customer Support team by text message.<br>By texting our Customer Support, or by providing your phone number to our Customer Support team during a support interaction, you consent to receive text messages from us related to your inquiry, account, orders, or subscription.</p><ul><li>Messages are for customer care and transactional purposes only (support replies, order and shipping updates, billing and subscription assistance, account confirmations).</li><li>Message frequency varies depending on your inquiry.</li><li>Message and data rates may apply.</li><li>Reply STOP at any time to opt out. Reply HELP for help.</li><li>Your phone number and consent will never be shared with third parties for marketing purposes.</li><li>See our <a href=\"/policies/privacy-policy\"><strong>Privacy Policy</strong></a> and <a href=\"/policies/terms-of-service\"><strong>Terms of Service</strong></a> for more information.</li></ul>"
+      },
+      {
+        "type": "header",
+        "content": "FAQ groups (each question is a Heading 4; add \"[new]\" after a question for the NEW label)"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_1_title",
+        "label": "Group 1 title (empty = hidden)",
+        "default": "Subscription & Account"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_help_faq_1_image",
+        "label": "Group 1 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_1_theme_image",
+        "label": "Group 1 theme picture (file in assets/)",
+        "default": "images/rs/help-1.webp"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_faq_1_items",
+        "label": "Group 1 questions",
+        "default": "<h4>How do I cancel my subscription?</h4><p>We make it easy! You can cancel anytime through <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>, or just drop us a line at <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> and we’ll take care of it for you.</p><p>Please include your order number or the email address used at checkout so we can locate your account quickly.</p><h4>Why am I receiving orders I didn't authorize?</h4><p>This can happen if an active subscription or saved payment method is still on file. No worries, you can manage or cancel through the <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>, or reach out to <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> and we’ll sort it out right away.</p><h4>The website says I don't have a subscription, but I'm still being charged?</h4><p>It may be linked to a different email or payment method. Try logging into <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>with the email you used at checkout.</p><p>If it’s still not showing up, just reach out to <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a>and we’ll find it for you.</p><h4>How do I update my subscription (frequency, products, or address)? [new]</h4><p>You can update your frequency, products, or shipping address anytime at <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>. Or if you prefer, just email <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> and we’ll happily make the changes for you.</p><h4>How do I skip my next shipment? [new]</h4><p>Still working through your current supply? No problem! Skip your next shipment at <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>, or let us know at <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> and we’ll push your renewal date.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_2_title",
+        "label": "Group 2 title (empty = hidden)",
+        "default": "Order & Shipping"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_help_faq_2_image",
+        "label": "Group 2 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_2_theme_image",
+        "label": "Group 2 theme picture (file in assets/)",
+        "default": "images/rs/help-2.webp"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_faq_2_items",
+        "label": "Group 2 questions",
+        "default": "<h4>When will my order be shipped?</h4><p>Orders are typically processed within 1–3 business days after payment confirmation.</p><h4>How long does shipping take?</h4><p>Shipping times depend on the method selected at checkout:</p><ul><li>Free Shipping: 2–4 business days</li><li>Standard Shipping: 2–3 business days</li><li>Expedited Shipping: 1–2 business days</li></ul><h4>How can I track my order?</h4><p>Once your order has been shipped, you’ll receive a confirmation email with your tracking number and a tracking link. You can also use the order tracker on our help page.</p><h4>Can I cancel or change my order after placing it?</h4><p>Once your order has shipped, it can no longer be canceled or modified. If your order hasn’t shipped yet, contact us as soon as possible at <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> and we’ll do our best to help.</p><h4>Do you ship internationally?</h4><p>Yes, we offer international shipping. Please note that for orders outside the US, shipments are fulfilled through our logistics partner, which may result in shipments originating from a different location. Delivery times for international orders may vary.</p><h4>Where is my order being shipped from?</h4><p>All US orders ship from the US, and our products are manufactured here. International orders may ship through an international logistics partner for faster delivery. If you’re a US customer seeing unexpected shipping info, contact <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a>.</p><h4>How do I update my shipping address? [new]</h4><p>If your order hasn’t shipped yet, email <a href=\"mailto:support@resilia.shop\"><strong>support@resilia.shop</strong></a> with your updated address and we’ll fix it.</p><p>For subscriptions, you can update at <a href=\"/pages/subscription-management\"><strong>Resilia® Portal</strong></a>, or just let us know. Happy to help either way.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_3_title",
+        "label": "Group 3 title (empty = hidden)",
+        "default": "Product & Safety"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_help_faq_3_image",
+        "label": "Group 3 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_3_theme_image",
+        "label": "Group 3 theme picture (file in assets/)",
+        "default": ""
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_faq_3_items",
+        "label": "Group 3 questions",
+        "default": "<h4>When is the best time to take Resilia?</h4><p>Take 2 softgels in the morning and 2 in the evening, preferably with meals. Taking them with food supports better absorption and reduces stomach discomfort. If you can only take one dose per day, go with 2 in the morning.</p><h4>Who should avoid taking this product?</h4><p>Those who are pregnant, nursing, under 18, or have existing medical conditions should consult a healthcare professional before use.</p><h4>What is the recommended dosage? [new]</h4><p>Take 2 softgels in the morning, preferably with a meal. Each bag contains 60 softgels, a 30-day supply.</p><h4>Can I take it on an empty stomach? [new]</h4><p>We recommend taking them with food for optimal absorption, especially if you have a sensitive stomach.</p><h4>Is it safe to take with my medication?</h4><p>We recommend consulting your doctor before using Resilia alongside any prescription medication.</p><h4>How should I store the product? [new]</h4><p>Cool, dry place away from direct sunlight. No refrigeration needed. Keep the bag sealed when not in use.</p><h4>Is this safe for children?</h4><p>Resilia is formulated for adults. Consult a pediatrician before giving any supplement to a child under 18.</p><h4>How long until I notice results? [new]</h4><p>Most customers notice improvements within 30–60 days. For best results, use consistently for at least 90 days to see impactful results.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_4_title",
+        "label": "Group 4 title (empty = hidden)",
+        "default": "Quality & Ingredients"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_help_faq_4_image",
+        "label": "Group 4 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_4_theme_image",
+        "label": "Group 4 theme picture (file in assets/)",
+        "default": "images/rs/help-4.webp"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_faq_4_items",
+        "label": "Group 4 questions",
+        "default": "<h4>What ingredients are in Resilia? [new]</h4><p>Oil of Oregano (Origanum minutiflorum) — 300 mg standardized to 165 mg carvacrol. Black Seed Oil (Nigella sativa) — 200 mg, containing naturally-occurring thymoquinone (TQ). Softgel shell: gelatin, glycerin, purified water. No fillers, binders, or artificial additives.</p><h4>Is Resilia gluten-free? Allergen-free? [new]</h4><p>Yes, free from gluten, dairy, sugar, and artificial additives.</p><h4>Where does this product come from?</h4><p>Resilia Oil of Oregano uses plant extracts from Origanum vulgare, manufactured in the USA with globally sourced ingredients under strict quality standards.</p><h4>Are your products made in the USA?</h4><p>Yes. Manufactured in the USA with globally sourced ingredients. Each batch undergoes quality control checks for purity and consistency.</p><h4>Are your products FDA approved?</h4><p>Dietary supplements are not required to be FDA approved. Our products are produced in GMP-certified facilities following strict manufacturing standards. These statements have not been evaluated by the FDA.</p><h4>Is the product third-party tested for quality &amp; safety?</h4><p>Each batch undergoes quality control checks for purity and consistency. For specific concerns, reach out to support@resilia.shop.</p>"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_5_title",
+        "label": "Group 5 title (empty = hidden)",
+        "default": "Returns & Pricing"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_help_faq_5_image",
+        "label": "Group 5 picture"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_faq_5_theme_image",
+        "label": "Group 5 theme picture (file in assets/)",
+        "default": "images/rs/help-5.webp"
+      },
+      {
+        "type": "richtext",
+        "id": "rs_help_faq_5_items",
+        "label": "Group 5 questions",
+        "default": "<h4>What is your return policy?</h4><p>30-Day Money-Back Guarantee. Contact support@resilia.shop within 30 days of purchase for a full refund, no questions asked. Refunds are processed within 5–10 business days.</p><h4>How do I request a refund? [new]</h4><p>Email support@resilia.shop with your order number. Most refund requests are resolved within 24 hours, and appear on your statement within 5–10 business days.</p><h4>Why does the website price differ from what I saw on social media?</h4><p>Social media ads may show promotional pricing that has since expired. The pricing on resilia.shop is always the most current. If you saw a specific offer, reach out and we’ll help.</p><h4>What payment methods do you accept? [new]</h4><p>Visa, Mastercard, Amex, Discover, and PayPal. All transactions are secure and encrypted.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter band"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_news_title",
+        "label": "Heading (empty = hidden)",
+        "default": "Stay in the Loop"
+      },
+      {
+        "type": "text",
+        "id": "rs_help_news_text",
+        "label": "Text",
+        "default": "Wellness tips, exclusive offers, and product updates — straight to your inbox."
+      },
+      {
+        "type": "text",
+        "id": "rs_help_news_button",
+        "label": "Button",
+        "default": "Sign up →"
+      }
+    ]
+  },
+  {
+    "name": "Resilia – Member page (page titled \"Subscription Management\")",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The email form opens the platform order list (Your orders)."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_eyebrow",
+        "label": "Eyebrow",
+        "default": "Member Login"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_title",
+        "label": "Heading",
+        "default": "Welcome back to Resilia®"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_text",
+        "label": "Text",
+        "default": "You're taking care of yourself, one day at a time, and we're right here with you."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_badge_1",
+        "label": "Badge 1",
+        "default": "4.8/5 from 120,000+ reviews"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_badge_2",
+        "label": "Badge 2",
+        "default": "Trusted by 100,000+ people"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_badge_3",
+        "label": "Badge 3",
+        "default": "Clean, natural ingredients"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_email_label",
+        "label": "Email label",
+        "default": "Email"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_button",
+        "label": "Button",
+        "default": "Log In To My Account"
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_image",
+        "label": "Hero picture (empty = theme picture)"
+      },
+      {
+        "type": "header",
+        "content": "Consistency"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c_eyebrow",
+        "label": "Eyebrow",
+        "default": "The one rule that never changes"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c_title",
+        "label": "Heading",
+        "default": "Great results take consistency"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_c_text",
+        "label": "Text",
+        "default": "Whatever your goal, one thing is always true: your body responds best to steady, daily support. The customers who feel the biggest difference are simply the ones who stay consistent, so keep going. You're doing something good for yourself every single day."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c1_title",
+        "label": "Card 1 title",
+        "default": "Months 1—3:"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c1_sub",
+        "label": "Card 1 subtitle",
+        "default": "The building phase"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c1_text",
+        "label": "Card 1 text",
+        "default": "Quiet groundwork, first signs, then the shift."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c2_title",
+        "label": "Card 2 title",
+        "default": "Every month after:"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c2_sub",
+        "label": "Card 2 subtitle",
+        "default": "Your new normal"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_c2_text",
+        "label": "Card 2 text",
+        "default": "The first months build it. Every month after keeps it. That's not the slow way, the way that lasts."
+      },
+      {
+        "type": "header",
+        "content": "Formulas (the store's first 3 products)"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f_eyebrow",
+        "label": "Eyebrow",
+        "default": "Grow your foundation"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f_title",
+        "label": "Heading",
+        "default": "Built to work side by side"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_f_text",
+        "label": "Text",
+        "default": "Each Resilia® formula tends a different system, and together, they cover more of you. Add one to a delivery, or swap for a month to try it: one tap, switch back anytime."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f1_tag",
+        "label": "Formula 1 italic line",
+        "default": "Supports what your body takes in"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_f1_text",
+        "label": "Formula 1 text",
+        "default": "Gut balance, immune support, and steady daily energy. 6,000mg of wild oregano with black seed oil.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f1_button",
+        "label": "Formula 1 button",
+        "default": "Explore Oil Of Oregano"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f2_tag",
+        "label": "Formula 2 italic line",
+        "default": "Carries the good stuff everywhere"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_f2_text",
+        "label": "Formula 2 text",
+        "default": "A stronger heart, healthy circulation, and steady CoQ10 energy. 100% odorless by design.†"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f2_button",
+        "label": "Formula 2 button",
+        "default": "Explore Aged Garlic"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f3_tag",
+        "label": "Formula 3 italic line",
+        "default": "Keeps you strong and resilient"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_f3_text",
+        "label": "Formula 3 text",
+        "default": "Supporting immune balance, digestive comfort, and a healthy inflammation response†"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_f3_button",
+        "label": "Formula 3 button",
+        "default": "Explore Black Seed Oil"
+      },
+      {
+        "type": "header",
+        "content": "Promises"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_p_eyebrow",
+        "label": "Eyebrow",
+        "default": "Our promises, kept daily"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_p_title",
+        "label": "Heading",
+        "default": "Why people trust Resilia®"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_p1_title",
+        "label": "Promise 1 title",
+        "default": "Clean, honest formulas:"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_p1_text",
+        "label": "Promise 1 text",
+        "default": "Fully disclosed doses. No proprietary blends, no synthetic fillers, nothing you can't pronounce."
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_p1_image",
+        "label": "Promise 1 picture (empty = theme picture)"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_p2_title",
+        "label": "Promise 2 title",
+        "default": "Backed by real science:"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_p2_text",
+        "label": "Promise 2 text",
+        "default": "With clinically studied ingredients, in the forms and doses that scientific research actually used."
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_p2_image",
+        "label": "Promise 2 picture (empty = theme picture)"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_p3_title",
+        "label": "Promise 3 title",
+        "default": "Risk-free, always:"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_p3_text",
+        "label": "Promise 3 text",
+        "default": "Not happy? Every order is covered, no questions, no hassle."
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_p3_image",
+        "label": "Promise 3 picture (empty = theme picture)"
+      },
+      {
+        "type": "header",
+        "content": "Community"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_r_eyebrow",
+        "label": "Eyebrow",
+        "default": "From the Resilia® community"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_r_title",
+        "label": "Heading",
+        "default": "People who stood where you're standing"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_r_badge",
+        "label": "Verified label",
+        "default": "Verified customer"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_r1_text",
+        "label": "Quote 1",
+        "default": "\"I feel better than I have in years, and I love that it's all natural.\""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_r1_image",
+        "label": "Quote 1 picture (empty = theme picture)"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_r2_text",
+        "label": "Quote 2",
+        "default": "\"Clean ingredients, real results, and a team that actually cares.\""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_r2_image",
+        "label": "Quote 2 picture (empty = theme picture)"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_r3_text",
+        "label": "Quote 3",
+        "default": "\"Three months in and I'm not stopping. This is part of my life now.\""
+      },
+      {
+        "type": "image_picker",
+        "id": "rs_member_r3_image",
+        "label": "Quote 3 picture (empty = theme picture)"
+      },
+      {
+        "type": "header",
+        "content": "Routine"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_eyebrow",
+        "label": "Eyebrow",
+        "default": "Your routine, for life"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_title",
+        "label": "Heading",
+        "default": "\"Little by little, a little becomes a lot.\""
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_by",
+        "label": "Attribution",
+        "default": "— African proverb"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_l_text",
+        "label": "Text",
+        "default": "Resilia® isn't a program you finish, it's a foundation you keep. Like sleep, like walking, like eating well: the benefit isn't in having done it, it's in still doing it. We built the subscription so the doing part takes care of itself, and so the way you feel in your best months becomes, simply, the way you feel."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_habit_1",
+        "label": "Habit 1",
+        "default": "Sleep"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_habit_2",
+        "label": "Habit 2",
+        "default": "Walking"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_habit_3",
+        "label": "Habit 3",
+        "default": "Eating well"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_habit_4",
+        "label": "Habit 4",
+        "default": "Resilia®"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_note",
+        "label": "Line under the habits",
+        "default": "You never \"finish\" these. That's the point. The quiet habits that keep you, kept."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_l_q",
+        "label": "Card question",
+        "default": "\"How long should I stay on it?\""
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_l_a",
+        "label": "Card answer",
+        "default": "Our honest answer: as long as you want to keep feeling the difference. That's not a sales line, it's just how foundations work."
+      },
+      {
+        "type": "header",
+        "content": "Help"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_h_eyebrow",
+        "label": "Eyebrow",
+        "default": "We're always here if you need us"
+      },
+      {
+        "type": "text",
+        "id": "rs_member_h_title",
+        "label": "Heading",
+        "default": "A real person, one tap away"
+      },
+      {
+        "type": "textarea",
+        "id": "rs_member_h_text",
+        "label": "Text",
+        "default": "Questions about your routine, your order, or a \"is this normal?\" Moment, a real person is happy to help. No hold music, no runaround."
+      },
+      {
+        "type": "text",
+        "id": "rs_member_h_button",
+        "label": "Button (to the contact page)",
+        "default": "Get in touch"
+      }
+    ]
+  }
+]

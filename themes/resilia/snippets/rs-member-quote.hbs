@@ -1,0 +1,11 @@
+{{!-- Member page community quote (n = 1–3): picture, five stars, quote, verified label. --}}
+{{#if text}}
+<figure class="rs-m-card rs-m-quote">
+  <img class="rs-m-card__img" src="{{#if image}}{{image}}{{else}}{{@root.assets_url}}/images/rs/comm-{{n}}.webp{{/if}}" alt="" width="720" height="504" loading="lazy">
+  <div class="rs-m-card__body rs-m-quote__body">
+    <p class="rs-m-quote__stars" aria-label="5 out of 5">★★★★★</p>
+    <blockquote class="rs-m-card__p">{{text}}</blockquote>
+    {{#if badge}}<figcaption class="rs-m-quote__badge"><svg viewBox="0 0 20 20" width="26" height="26" aria-hidden="true"><path d="M10 1.6l2 1.5 2.5-.2.8 2.4 2.1 1.4-.8 2.4.8 2.4-2.1 1.4-.8 2.4-2.5-.2-2 1.5-2-1.5-2.5.2-.8-2.4-2.1-1.4.8-2.4-.8-2.4 2.1-1.4.8-2.4 2.5.2z" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><path d="m6.8 10.2 2.2 2.2 4.2-4.3" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{badge}}</figcaption>{{/if}}
+  </div>
+</figure>
+{{/if}}

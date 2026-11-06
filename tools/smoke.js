@@ -132,14 +132,17 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
       check('2-pack shows 2 unit rows', rows.length === 2, rows.length + ' rows');
       const sel = await rows[1].$('select');
       const other = await sel.evaluate((s) => { const o = [...s.options].find((x) => x.value !== s.value); return o && o.value; });
-      if (other) await sel.selectOption(other);
-      await page.click('#addToCart');
-      await page.waitForTimeout(400);
-      const c5 = await cart(page);
-      const lines = c5 ? c5.items.filter((l) => !l.gift) : [];
-      check('mixed 2-pack adds one line per variant', lines.length === 2 && lines[0].variantId !== lines[1].variantId && lines.every((l) => l.qty === 1), JSON.stringify(lines));
-      const discountMixed = await page.$eval('[data-cart-discount-row]', (r) => !r.hidden);
-      check('mixed pack keeps the tier discount', discountMixed);
+      if (!other) console.log('SKIP mixed 2-pack (the sample product has a single variant)');
+      else {
+        await sel.selectOption(other);
+        await page.click('#addToCart');
+        await page.waitForTimeout(400);
+        const c5 = await cart(page);
+        const lines = c5 ? c5.items.filter((l) => !l.gift) : [];
+        check('mixed 2-pack adds one line per variant', lines.length === 2 && lines[0].variantId !== lines[1].variantId && lines.every((l) => l.qty === 1), JSON.stringify(lines));
+        const discountMixed = await page.$eval('[data-cart-discount-row]', (r) => !r.hidden);
+        check('mixed pack keeps the tier discount', discountMixed);
+      }
     }
   }
 
@@ -151,7 +154,7 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
       const h = (await res.text()).replace(/(<div class="b-grid b-grid--related" data-related-grid>)[\s\S]*?(<\/div>\s*<\/div>)/g, '$1$2');
       await r.fulfill({ response: res, body: h, headers: Object.assign({}, res.headers(), { 'content-type': 'text/html' }) });
     });
-    await rp.goto(BASE + '/product', { waitUntil: 'load' });
+    await rp.goto(page.url(), { waitUntil: 'load' }); // same template as the page that has the related rows
     await rp.evaluate(() => sessionStorage.clear());
     await rp.reload({ waitUntil: 'load' });
     await rp.waitForTimeout(1200);
@@ -210,7 +213,30 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
   // ---- Home ------------------------------------------------------------------------------------
   await page.goto(BASE + '/', { waitUntil: 'load' });
   await page.waitForTimeout(1200);
-  check('home renders product cards', (await page.$$('.b-pcard')).length > 0);
+  check('home renders product cards', (await page.$$('.b-pcard, [data-product-card]')).length > 0); // [data-product-card]: a theme's own home product card
+
+  // ---- Header menu + FAQ always animate (phone width) -----------------------------------------
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(BASE + '/product', { waitUntil: 'load' });
+  await page.waitForTimeout(300);
+  await page.click('[data-menu-open]');
+  await page.waitForTimeout(60);
+  const menuMid = await page.$eval('[data-menu-drawer] .b-menu-drawer__panel', (p) => getComputedStyle(p).transform);
+  await page.waitForTimeout(500);
+  check('menu drawer opens with a slide', !(await page.$eval('[data-menu-drawer]', (d) => d.hidden)) && /matrix/.test(menuMid), menuMid);
+  await page.click('[data-menu-drawer] .b-menu-drawer__close');
+  await page.waitForTimeout(80);
+  const menuClosing = await page.$eval('[data-menu-drawer]', (d) => !d.hidden && !d.classList.contains('is-open'));
+  await page.waitForTimeout(450);
+  check('menu drawer closes with a slide', menuClosing && (await page.$eval('[data-menu-drawer]', (d) => d.hidden)));
+  const faqSel = 'details.b-faq__item:not([open]), details.b-acc:not([open]), details[data-accordion]:not([open])';
+  if (await page.$(faqSel)) {
+    await page.$eval(faqSel, (d) => d.scrollIntoView());
+    await page.click(faqSel + ' > summary');
+    await page.waitForTimeout(60);
+    check('FAQ opens with an animation', await page.$eval('details.is-animating', (d) => d.open).catch(() => false));
+  } else console.log('SKIP FAQ animation (no closed FAQ on the product page)');
+  await page.setViewportSize({ width: 1280, height: 900 });
 
   check('no page errors', errors.length === 0, errors.join(' | '));
   await browser.close();

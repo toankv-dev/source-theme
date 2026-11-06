@@ -1,0 +1,31 @@
+{{!-- Resilia footer: wordmark · "Stay In The Know" newsletter · links column, then the supplement disclaimers and
+      the copyright. Rendered on the platform's own pages too, so read only brand / config / policyLinks / settings. --}}
+<footer class="b-footer rs-footer">
+  <div class="b-wrap rs-footer__grid">
+    <div class="rs-footer__brand">
+      <a href="{{#if config.homeUrl}}{{config.homeUrl}}{{else}}{{#if policyLinks.home}}{{policyLinks.home}}{{else}}/{{/if}}{{/if}}" aria-label="{{brand.name}}">{{#if settings.rs_footer_logo}}<img src="{{settings.rs_footer_logo}}" alt="{{brand.name}}" loading="lazy">{{else}}<span class="rs-wordmark" aria-hidden="true"></span>{{/if}}</a>
+    </div>
+    {{#unless (eq settings.footer_newsletter false)}}
+    <div class="rs-footer__news">
+      <p class="rs-footer__title">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Stay In The Know{{/if}}</p>
+      {{#if settings.newsletter_text}}<p class="rs-footer__text">{{settings.newsletter_text}}</p>{{/if}}
+      {{> newsletter-form}}
+    </div>
+    {{else}}<div></div>{{/unless}}
+    <ul class="rs-footer__links">
+      {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}#faq">{{#if settings.rs_footer_faq_label}}{{settings.rs_footer_faq_label}}{{else}}FAQs{{/if}}</a></li>{{/if}}
+      {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact us</a></li>{{/if}}
+      <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track your order</a></li>
+      {{> policy-link key="shipping" label="Shipping & delivery"}}
+      {{> policy-link key="refund" label="Returns policy"}}
+      {{> policy-link key="privacy" label="Privacy policy"}}
+      {{> policy-link key="terms" label="Terms of service"}}
+      {{#if settings.rs_footer_extra_label}}<li><a href="{{settings.rs_footer_extra_url}}">{{settings.rs_footer_extra_label}}</a></li>{{/if}}
+    </ul>
+  </div>
+  <div class="b-wrap">
+    {{#if settings.rs_footer_legal}}<div class="rs-footer__legal">{{{settings.rs_footer_legal}}}</div>{{/if}}
+    {{#unless (eq settings.footer_payment false)}}{{> pay-icons}}{{/unless}}
+    <p class="rs-footer__copy">© <span data-year></span> {{brand.name}}{{#if settings.rs_copyright_suffix}} | {{settings.rs_copyright_suffix}}{{/if}}</p>
+  </div>
+</footer>

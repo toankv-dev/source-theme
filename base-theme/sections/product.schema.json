@@ -750,7 +750,8 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image"
+          "label": "Image",
+          "info": "Until an image is picked, an empty frame shows here."
         },
         {
           "type": "text",
@@ -888,7 +889,17 @@
         },
         {
           "type": "paragraph",
-          "content": "Pick an image or a video (MP4 / WebM) in each slot. Videos play muted and looped while on screen; a tap pauses or resumes. Empty slots are skipped."
+          "content": "Pick an image or a video (MP4 / WebM) in each slot. Videos play muted and looped while on screen; a tap pauses or resumes."
+        },
+        {
+          "type": "range",
+          "id": "slots",
+          "label": "Number of slots",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3,
+          "info": "Slots without a file show an empty frame in the chosen shape until you upload one."
         },
         {
           "type": "image_picker",

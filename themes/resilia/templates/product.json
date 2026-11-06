@@ -1,0 +1,449 @@
+{
+  "name": "Default",
+  "description": "Resilia product page (Ceylon Cinnamon look): rating pill, intro, benefits, pack cards with gifts unlocked and delivery date, three story rows, promise icons, comparison, special offer and FAQ.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "page_color": "#9b470d",
+        "page_tint": "#f6ede7",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "compact"
+      },
+      "blocks": {
+        "rating": {
+          "type": "rs_rating",
+          "settings": {
+            "label": "Rated",
+            "fallback": "4.9",
+            "theme_avatars": "images/rs/avatars.webp"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "intro": {
+          "type": "text",
+          "settings": {
+            "body": "<p><strong>Resilia Ceylon Cinnamon</strong> combines true Ceylon cinnamon and berberine, ingredients studied for healthy glucose metabolism.*</p><p><em>Just two daily capsules with a meal.</em></p>"
+          }
+        },
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Ceylon cinnamon extract, studied for blood sugar after meals*"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "True Ceylon - not common cassia"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Ingredients studied for healthy glucose metabolism*"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "text": "1,000 mg Ceylon cinnamon + 500 mg berberine HCl"
+          }
+        },
+        "d1": {
+          "type": "divider",
+          "settings": {}
+        },
+        "price": {
+          "type": "rs_price",
+          "settings": {
+            "label": "Subscribe & Save",
+            "badge_prefix": "FALL SALE - Save"
+          }
+        },
+        "d2": {
+          "type": "divider",
+          "settings": {}
+        },
+        "packs": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "selected": "2",
+            "currency_code": false,
+            "card_style": "classic",
+            "includes_all": false,
+            "save_label": "You save",
+            "card_1_qty": 1,
+            "card_1_title": "Buy One",
+            "card_1_theme_image": "images/rs/pack-1.webp",
+            "card_1_sub": "",
+            "card_1_badge": "",
+            "card_1_includes": "",
+            "card_2_qty": 2,
+            "card_2_title": "Buy 2 Get 1 Free Gift",
+            "card_2_theme_image": "images/rs/pack-2.webp",
+            "card_2_sub": "",
+            "card_2_badge": "Most Popular",
+            "card_2_includes": "<ul><li><span><strong>FREE Bamboo Lid Glass Jar ($24.99 Value)</strong><small>Premium Capsule Storage</small></span></li></ul>",
+            "card_3_qty": 3,
+            "card_3_title": "Buy 3 Get 2 Free Gifts",
+            "card_3_theme_image": "images/rs/pack-3.webp",
+            "card_3_sub": "",
+            "card_3_badge": "Free Shipping",
+            "card_3_includes": "<ul><li><span><strong>FREE Bamboo Lid Glass Jar ($24.99 Value)</strong><small>Premium Capsule Storage</small></span></li><li><span><strong>FREE On-the-Go Softgel Case ($14.99 Value)</strong><small>Travel-Ready Storage</small></span></li></ul>",
+            "card_4_qty": 0,
+            "card_5_qty": 0,
+            "card_6_qty": 0
+          }
+        },
+        "gifts": {
+          "type": "rs_gifts",
+          "settings": {
+            "title": "Gifts unlocked",
+            "locked_label": "Locked",
+            "ship_label": "FREE Shipping",
+            "ship_was": "$4.95",
+            "ship_min": 1,
+            "ship_theme_image": "images/rs/gift-shipping.webp"
+          }
+        },
+        "delivery": {
+          "type": "rs_delivery",
+          "settings": {
+            "label": "Order now for delivery by:",
+            "days": 3
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Add To Cart",
+            "show_options": true,
+            "show_qty": false,
+            "show_payments": false
+          }
+        },
+        "note": {
+          "type": "rs_note",
+          "settings": {
+            "text_1": "Refills Ship Every 30 Days",
+            "text_2": "Stop or Cancel Anytime"
+          }
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "intro",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "d1",
+        "price",
+        "d2",
+        "packs",
+        "gifts",
+        "delivery",
+        "buy",
+        "note"
+      ]
+    },
+    "story_1": {
+      "type": "image-with-text",
+      "settings": {
+        "theme_image": "images/rs/story-1.webp",
+        "image_side": "right",
+        "heading": "What's Really Happening Inside Your Cells After 40",
+        "body": "<p>Supporting healthy blood sugar is one of the most important things you can do after 40.</p><p>A spice jar isn't a standardized dose.</p><p>Berberine has been studied in multiple human clinical trials for glucose metabolism. Ceylon cinnamon extract has been studied for its effect on blood sugar after meals.*</p>",
+        "style": "story"
+      }
+    },
+    "story_2": {
+      "type": "image-with-text",
+      "settings": {
+        "theme_image": "images/rs/story-2.webp",
+        "image_side": "left",
+        "heading": "The Ancient Bark Backed By Thousands Of Years Of Use",
+        "body": "<p>Ceylon cinnamon has been prized for over 4,000 years — carried out of Sri Lanka by traders who hid where it grew.</p><p>Standardized to cinnamaldehyde and polyphenols.</p><p>With Resilia Ceylon Cinnamon + Berberine, you're getting true <em>Cinnamomum verum</em>, not common cassia — standardized to its active compounds and paired with berberine HCl.</p>",
+        "style": "story"
+      }
+    },
+    "story_3": {
+      "type": "image-with-text",
+      "settings": {
+        "theme_image": "images/rs/story-3.webp",
+        "image_side": "right",
+        "heading": "Two Ingredients. Fully Disclosed Doses.",
+        "body": "<p>What's in every serving:</p><p><strong>Key Compounds:</strong></p><ul><li><strong>Cinnamaldehyde &amp; polyphenols</strong> — the standardized compounds in true Ceylon bark</li><li><strong>Berberine HCl (500 mg)</strong> — studied in human clinical trials for glucose metabolism*</li></ul><p><strong>Natural Benefits:</strong></p><ul><li>Made with ingredients studied for healthy glucose metabolism*</li></ul><p>With Resilia Ceylon Cinnamon + Berberine, you're giving your body targeted, plant-powered support from two of the world's oldest herbal traditions — formulated for the way modern adults actually eat.</p>",
+        "style": "story"
+      }
+    },
+    "promise": {
+      "type": "icon-columns",
+      "settings": {
+        "heading": "Resilia Promise",
+        "columns": 5
+      },
+      "blocks": {
+        "p1": {
+          "type": "column",
+          "settings": {
+            "title": "Clean and Traceable",
+            "text": "",
+            "emoji": "",
+            "theme_image": "images/rs/promise-1.webp"
+          }
+        },
+        "p2": {
+          "type": "column",
+          "settings": {
+            "title": "Freshly Harvested",
+            "text": "",
+            "emoji": "",
+            "theme_image": "images/rs/promise-2.webp"
+          }
+        },
+        "p3": {
+          "type": "column",
+          "settings": {
+            "title": "No Artificial Additives",
+            "text": "",
+            "emoji": "",
+            "theme_image": "images/rs/promise-3.webp"
+          }
+        },
+        "p4": {
+          "type": "column",
+          "settings": {
+            "title": "Gluten Free",
+            "text": "",
+            "emoji": "",
+            "theme_image": "images/rs/promise-4.webp"
+          }
+        },
+        "p5": {
+          "type": "column",
+          "settings": {
+            "title": "Non-GMO",
+            "text": "",
+            "emoji": "",
+            "theme_image": "images/rs/promise-5.webp"
+          }
+        }
+      },
+      "blockOrder": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ]
+    },
+    "compare": {
+      "type": "comparison",
+      "settings": {
+        "heading": "How Resilia Compares",
+        "ours_label": "Resilia",
+        "ours_theme_image": "images/rs/compare-us.webp",
+        "theirs_label": "Typical Blood Sugar Supplements",
+        "theirs_theme_image": "images/rs/compare-them.webp",
+        "vs_label": "VS",
+        "button_label": "BUY NOW & SAVE",
+        "button_url": ""
+      },
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "No Artificial Additives",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "1,000mg True Ceylon Extract",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "500mg Berberine HCl",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Standardized Extract, Not Powder",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "True Ceylon: only trace coumarin",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "Artificial Ingredients & Fillers",
+            "ours": false,
+            "theirs": true
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "label": "Cassia (higher coumarin)",
+            "ours": false,
+            "theirs": true
+          }
+        },
+        "r8": {
+          "type": "row",
+          "settings": {
+            "label": "Proprietary Blends That Hide Dosages",
+            "ours": false,
+            "theirs": true
+          }
+        }
+      },
+      "blockOrder": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8"
+      ]
+    },
+    "offer": {
+      "type": "image-with-text",
+      "settings": {
+        "theme_image": "images/rs/offer.webp",
+        "image_side": "left",
+        "style": "offer",
+        "heading": "Special Offer On Now!",
+        "body": "<p class=\"rs-lede\">Try Resilia True Ceylon Cinnamon Now with our First Time Buyer's Offer!</p><p><strong>Act Now and You'll Get:</strong></p><ul><li><strong>Buy 2 Get 1 Free Gift</strong> — Resilia Ceylon Cinnamon + Berberine Capsules, plus Bamboo Glass Jar free with your order</li><li>True Ceylon Cinnamon + Berberine HCl formula</li><li>FREE Shipping</li></ul><p><strong>Limited-Time Offer: Up to 70% Off</strong></p><h3>Limited-Time Offer: Up to 70% Off</h3>",
+        "button_label": "BUY NOW & SAVE",
+        "button_url": "",
+        "show_payments": true,
+        "note": "All transactions are secure and encrypted"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "intro": "",
+        "open_first": false,
+        "button_label": "BUY NOW & SAVE",
+        "button_url": ""
+      },
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I buy Resilia True Ceylon Cinnamon in stores?",
+            "a": "<p>Resilia isn't sold in stores. Ordering here gets you our bundle pricing and 30-day guarantee.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "What ingredients are in Resilia True Ceylon Cinnamon?",
+            "a": "<p>Two actives: 1,000mg true Ceylon cinnamon bark extract, standardized to cinnamaldehyde and polyphenols, and 500mg berberine HCl. Other ingredients: the vegetable capsule. Nothing else.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "Is Resilia True Ceylon Cinnamon safe to take with my current medications?",
+            "a": "<p>Berberine can interact with some prescription medications, including those for blood sugar. Please talk to your doctor before starting if you take any prescription medication, are pregnant, or are nursing.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "How should I store Resilia True Ceylon Cinnamon?",
+            "a": "<p>Keep the pouch sealed in a cool, dry place away from direct sunlight. No refrigeration needed. The resealable pouch is designed to protect the extract between doses.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "Will Resilia help with my blood sugar?",
+            "a": "<p>Resilia Ceylon Cinnamon combines true Ceylon cinnamon and berberine, ingredients studied for healthy glucose metabolism.* Berberine has been studied in multiple human clinical trials for glucose metabolism. Ceylon cinnamon extract has been studied for its effect on blood sugar after meals.*</p>"
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "q": "How often should I take the supplement?",
+            "a": "<p>Two capsules once daily, with food. Taking them with a meal is how the actives are meant to work — and it ties the habit to something you already do.</p>"
+          }
+        },
+        "q7": {
+          "type": "qa",
+          "settings": {
+            "q": "How many servings are in each bag?",
+            "a": "<p>Each pouch has 60 vegetable capsules — 30 servings, a full month at two capsules daily.</p>"
+          }
+        },
+        "q8": {
+          "type": "qa",
+          "settings": {
+            "q": "What is Resilia®?",
+            "a": "<p>Resilia is a supplement company built on one idea: single-purpose formulas with standardized actives, no proprietary blends, and nothing on the label that isn't doing a job.</p>"
+          }
+        },
+        "q9": {
+          "type": "qa",
+          "settings": {
+            "q": "Are there any age or health restrictions?",
+            "a": "<p>Resilia is intended for adults 18 and over. It's not for anyone pregnant or nursing. If you have a medical condition or take prescription medication, speak with your doctor first.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "story_1",
+    "story_2",
+    "story_3",
+    "promise",
+    "compare",
+    "offer",
+    "faq"
+  ]
+}

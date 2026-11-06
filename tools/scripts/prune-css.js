@@ -32,6 +32,10 @@ for (const f of walk(theme, ['.hbs', '.js', '.json'], [])) {
   for (const m of fs.readFileSync(f, 'utf8').match(tokenRe) || []) used.add(m);
 }
 
+// A token ending in '-' is the fixed part of a class built from a setting (class="b-iwt--image-{{…}}"):
+// every class starting with it counts as used.
+const dynamic = [...used].filter((t) => t.endsWith('-'));
+
 /** Splits CSS into top-level nodes: { type: 'rule'|'at'|'comment', prelude, body, raw }. */
 function parse(css) {
   const nodes = [];
@@ -90,7 +94,7 @@ function splitSelectors(s) {
 let removed = 0;
 function keepSelector(sel) {
   const classes = sel.match(new RegExp('\\.' + esc + '[a-zA-Z0-9_-]+', 'g')) || [];
-  return classes.every((c) => used.has(c.slice(1)));
+  return classes.every((c) => used.has(c.slice(1)) || dynamic.some((p) => c.slice(1).startsWith(p)));
 }
 
 function prune(css, indent) {

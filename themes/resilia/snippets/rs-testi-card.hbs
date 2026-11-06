@@ -1,0 +1,13 @@
+{{!-- Home testimonial card (n = 1–3). Merchant-written quotes (Theme settings → Resilia – Home). --}}
+{{#if text}}
+<figure class="rs-testi__card" data-rs-slide>
+  <p class="rs-testi__cstars" aria-label="5 out of 5">★★★★★</p>
+  {{#if title}}<p class="rs-testi__ctitle">{{title}}</p>{{/if}}
+  <blockquote class="rs-testi__text">{{text}}</blockquote>
+  <figcaption class="rs-testi__who">
+    <span class="rs-testi__name"><img src="{{#if photo}}{{photo}}{{else}}{{@root.assets_url}}/images/rs/av-{{n}}.webp{{/if}}" alt="" width="20" height="20" loading="lazy">{{name}}</span>
+    {{#if @root.settings.rs_testi_badge}}<span class="rs-testi__badge"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 1.6l2 1.5 2.5-.2.8 2.4 2.1 1.4-.8 2.4.8 2.4-2.1 1.4-.8 2.4-2.5-.2-2 1.5-2-1.5-2.5.2-.8-2.4-2.1-1.4.8-2.4-.8-2.4 2.1-1.4.8-2.4 2.5.2z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round"/><path d="m6.8 10.2 2.2 2.2 4.2-4.3" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{@root.settings.rs_testi_badge}}</span>{{/if}}
+  </figcaption>
+  {{#if tag1}}<p class="rs-testi__tags"><span>{{tag1}}</span>{{#if tag2}}<span>{{tag2}}</span>{{/if}}</p>{{/if}}
+</figure>
+{{/if}}

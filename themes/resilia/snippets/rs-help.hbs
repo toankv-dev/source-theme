@@ -1,0 +1,120 @@
+{{!-- Help page (page titled "Contact Us"): hero · shortcut chips · tracking box · message form + chat + call
+      cards · text-message consent · FAQ groups (richtext, h4 = question → accordions in rs.js) · newsletter band.
+      Texts: Theme settings → Resilia – Help page. The message form posts through Base.contact (data-contact-form). --}}
+{{#with settings}}
+<div class="rs-help">
+  <section class="rs-help__hero">
+    <div class="b-wrap">
+      <h1 class="rs-help__h1">{{#if rs_help_title}}{{rs_help_title}}{{else}}{{@root.page.title}}{{/if}}</h1>
+      {{#if rs_help_text}}<p class="rs-help__lede">{{rs_help_text}}</p>{{/if}}
+      <div class="rs-help__actions">
+        {{#if @root.brand.email}}{{#if rs_help_email_btn}}<a class="rs-help__btn rs-help__btn--light" href="mailto:{{@root.brand.email}}">{{rs_help_email_btn}}</a>{{/if}}{{/if}}
+        {{#if rs_help_faq_btn}}<a class="rs-help__btn rs-help__btn--line" href="#faq">{{rs_help_faq_btn}}</a>{{/if}}
+      </div>
+    </div>
+  </section>
+
+  <nav class="rs-help__chips" aria-label="Help topics">
+    <div class="b-wrap">
+      {{#if rs_help_chip_track}}<a class="rs-chip" href="#track">{{rs_help_chip_track}}</a>{{/if}}
+      {{#if rs_help_chip_contact}}<a class="rs-chip" href="#contact">{{rs_help_chip_contact}}</a>{{/if}}
+      {{#if rs_help_faq_1_title}}<a class="rs-chip" href="#faq">{{rs_help_faq_1_title}}</a>{{/if}}
+      {{#if rs_help_faq_2_title}}<a class="rs-chip" href="#faq-2">{{rs_help_faq_2_title}}</a>{{/if}}
+      {{#if rs_help_faq_3_title}}<a class="rs-chip" href="#faq-3">{{rs_help_faq_3_title}}</a>{{/if}}
+      {{#if rs_help_faq_4_title}}<a class="rs-chip" href="#faq-4">{{rs_help_faq_4_title}}</a>{{/if}}
+      {{#if rs_help_faq_5_title}}<a class="rs-chip" href="#faq-5">{{rs_help_faq_5_title}}</a>{{/if}}
+    </div>
+  </nav>
+
+  <section class="rs-help__track" id="track">
+    <div class="b-wrap rs-help__narrow">
+      {{#if rs_help_track_eyebrow}}<p class="rs-help__eyebrow">{{rs_help_track_eyebrow}}</p>{{/if}}
+      {{#if rs_help_track_title}}<h2 class="rs-help__h2">{{rs_help_track_title}}</h2>{{/if}}
+      {{#if rs_help_track_text}}<p class="rs-help__p">{{rs_help_track_text}}</p>{{/if}}
+      <div class="rs-help__card rs-help__card--track" data-track>
+        {{#if rs_help_track_card}}<h3 class="rs-help__h3">{{rs_help_track_card}}</h3>{{/if}}
+        <form class="rs-help__trackform" data-track-form="tracking" novalidate>
+          <label class="b-sr" for="rs-help-track">{{#if rs_help_track_placeholder}}{{rs_help_track_placeholder}}{{else}}Tracking number{{/if}}</label>
+          <input id="rs-help-track" type="text" name="trackingNumber" required placeholder="{{#if rs_help_track_placeholder}}{{rs_help_track_placeholder}}{{else}}Tracking number{{/if}}">
+          <p class="b-form-msg" data-track-msg role="status"></p>
+          <button type="submit" class="rs-help__dark">{{#if rs_help_track_button}}{{rs_help_track_button}}{{else}}Track →{{/if}}</button>
+        </form>
+        {{#if rs_help_track_link}}<a class="rs-help__more" href="{{#if @root.config.trackUrl}}{{@root.config.trackUrl}}{{else}}{{#if @root.policyLinks.track}}{{@root.policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>{{rs_help_track_link}}</a>{{/if}}
+      </div>
+    </div>
+  </section>
+
+  <section class="rs-help__team" id="contact">
+    <div class="b-wrap">
+      {{#if rs_help_team_eyebrow}}<p class="rs-help__eyebrow rs-help__eyebrow--left">{{rs_help_team_eyebrow}}</p>{{/if}}
+      {{#if rs_help_team_title}}<h2 class="rs-help__h2 rs-help__h2--left">{{rs_help_team_title}}</h2>{{/if}}
+      {{#if rs_help_team_text}}<p class="rs-help__p rs-help__p--left">{{rs_help_team_text}}</p>{{/if}}
+      <div class="rs-help__cards">
+        <div class="rs-help__card rs-help__card--form">
+          <h3 class="rs-help__h3">{{> rs-icon-chat}}{{#if rs_help_form_title}}{{rs_help_form_title}}{{else}}Send us a message{{/if}}</h3>
+          {{#if rs_help_form_text}}<p class="rs-help__small">{{rs_help_form_text}}</p>{{/if}}
+          <form class="rs-help__form" data-contact-form novalidate>
+            <input type="text" name="name" placeholder="Your Name" maxlength="120" autocomplete="name" aria-label="Your name">
+            <input type="email" name="email" placeholder="Email Address" required autocomplete="email" aria-label="Email address">
+            <input type="text" name="orderNumber" placeholder="Order Number (optional)" maxlength="40" aria-label="Order number">
+            <input type="tel" name="phone" placeholder="Phone (optional)" maxlength="40" autocomplete="tel" aria-label="Phone">
+            <textarea name="message" rows="5" placeholder="Tell us what's going on, the more detail the better." required maxlength="4900" aria-label="Message"></textarea>
+            <p class="b-form-msg" data-contact-msg role="status"></p>
+            <button type="submit" class="rs-help__dark">{{#if rs_help_form_button}}{{rs_help_form_button}}{{else}}Send{{/if}}</button>
+          </form>
+        </div>
+        <div class="rs-help__side">
+          {{#if rs_help_chat_title}}
+          <div class="rs-help__card">
+            <h3 class="rs-help__h3">{{> rs-icon-chat}}{{rs_help_chat_title}}</h3>
+            {{#if rs_help_chat_text}}<p class="rs-help__small">{{rs_help_chat_text}}</p>{{/if}}
+            {{#if rs_help_chat_button}}<a class="rs-help__dark" href="{{#if rs_help_chat_link}}{{rs_help_chat_link}}{{else}}mailto:{{@root.brand.email}}{{/if}}">{{rs_help_chat_button}}</a>{{/if}}
+          </div>
+          {{/if}}
+          {{#if rs_help_call_title}}
+          <div class="rs-help__card">
+            <h3 class="rs-help__h3">{{> rs-icon-chat}}{{rs_help_call_title}}</h3>
+            {{#if rs_help_call_text}}<p class="rs-help__small rs-help__pre">{{rs_help_call_text}}</p>{{/if}}
+            {{#if @root.brand.phone}}<a class="rs-help__dark" href="tel:{{@root.brand.phone}}">{{@root.brand.phone}}</a>{{/if}}
+            {{#if @root.brand.email}}<a class="rs-help__mail" href="mailto:{{@root.brand.email}}">{{@root.brand.email}}</a>{{/if}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{#if rs_help_sms_title}}
+  <section class="rs-help__sms">
+    <div class="b-wrap rs-help__narrow">
+      {{#if rs_help_sms_eyebrow}}<p class="rs-help__eyebrow rs-help__eyebrow--left">{{rs_help_sms_eyebrow}}</p>{{/if}}
+      <h2 class="rs-help__h2 rs-help__h2--left">{{rs_help_sms_title}}</h2>
+      {{#if rs_help_sms_text}}<div class="b-rte rs-help__rte">{{{rs_help_sms_text}}}</div>{{/if}}
+    </div>
+  </section>
+  {{/if}}
+
+  <div id="faq">
+    {{> rs-help-faq n="1" title=rs_help_faq_1_title image=rs_help_faq_1_image timage=rs_help_faq_1_theme_image items=rs_help_faq_1_items}}
+    {{> rs-help-faq n="2" title=rs_help_faq_2_title image=rs_help_faq_2_image timage=rs_help_faq_2_theme_image items=rs_help_faq_2_items}}
+    {{> rs-help-faq n="3" title=rs_help_faq_3_title image=rs_help_faq_3_image timage=rs_help_faq_3_theme_image items=rs_help_faq_3_items}}
+    {{> rs-help-faq n="4" title=rs_help_faq_4_title image=rs_help_faq_4_image timage=rs_help_faq_4_theme_image items=rs_help_faq_4_items}}
+    {{> rs-help-faq n="5" title=rs_help_faq_5_title image=rs_help_faq_5_image timage=rs_help_faq_5_theme_image items=rs_help_faq_5_items}}
+  </div>
+
+  {{#if rs_help_news_title}}
+  <section class="rs-help__news">
+    <div class="b-wrap rs-help__narrow">
+      <h2 class="rs-help__h2 rs-help__h2--lime">{{rs_help_news_title}}</h2>
+      {{#if rs_help_news_text}}<p class="rs-help__p">{{rs_help_news_text}}</p>{{/if}}
+      <form class="b-news rs-help__newsform" data-newsletter novalidate>
+        <label class="b-sr" for="b-news-help">Email</label>
+        <input class="b-news__input" id="b-news-help" type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+        <button class="b-news__btn" type="submit">{{#if rs_help_news_button}}{{rs_help_news_button}}{{else}}Sign up{{/if}}</button>
+        <p class="b-form-msg" data-newsletter-msg role="status"></p>
+      </form>
+    </div>
+  </section>
+  {{/if}}
+</div>
+{{/with}}

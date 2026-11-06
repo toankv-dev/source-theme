@@ -5,7 +5,8 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Image",
+      "info": "Until an image is picked, an empty square frame shows here."
     },
     {
       "type": "select",

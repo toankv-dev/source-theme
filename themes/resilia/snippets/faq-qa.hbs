@@ -1,0 +1,5 @@
+{{!-- One FAQ question: {{> faq-qa q=… a=…}} (a = rich text). Nothing when q is empty. --}}
+{{#if q}}<details class="b-faq__item">
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{applyTokens a}}}</div>
+</details>{{/if}}

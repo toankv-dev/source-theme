@@ -1,0 +1,208 @@
+{
+  "title": "Resilia® Ceylon Cinnamon",
+  "price": "$29.99",
+  "compare_at_price": "$59.99",
+  "off_pct": 50,
+  "meta_description": "True Ceylon cinnamon + berberine HCl capsules, studied for healthy glucose metabolism.",
+  "description_html": "<p><strong>Resilia Ceylon Cinnamon</strong> combines true Ceylon cinnamon and berberine, ingredients studied for healthy glucose metabolism.*</p>",
+  "media": {
+    "main_image": "/assets/sample/resilia/g1.webp",
+    "gallery": [
+      {
+        "url": "/assets/sample/resilia/g1.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/resilia/g2.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/resilia/g3.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/resilia/g4.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/resilia/g5.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/resilia/g6.webp",
+        "alt": ""
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "Supply",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "60 Capsules",
+          "active": true
+        }
+      ]
+    }
+  ],
+  "variants_list": [
+    {
+      "id": "v-cinnamon-60",
+      "title": "60 Capsules",
+      "option_values": [
+        "60 Capsules"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$59.99",
+      "featured_image": "/assets/sample/resilia/g1.webp",
+      "available": true
+    }
+  ],
+  "gift_offers": {
+    "condition": "quantity",
+    "tiers": [
+      {
+        "minQty": 2,
+        "gifts": [
+          {
+            "productId": "gift-jar",
+            "variantId": "gift-jar-v",
+            "title": "Bamboo Glass Jar",
+            "imageUrl": "/assets/sample/resilia/gift-jar.webp",
+            "compareAtPrice": 24.99,
+            "qty": 1
+          }
+        ]
+      },
+      {
+        "minQty": 3,
+        "gifts": [
+          {
+            "productId": "gift-case",
+            "variantId": "gift-case-v",
+            "title": "On-the-Go Softgel Case",
+            "imageUrl": "/assets/sample/resilia/gift-case.webp",
+            "compareAtPrice": 14.99,
+            "qty": 1
+          }
+        ]
+      }
+    ]
+  },
+  "reviews": {
+    "summary": {
+      "average_rating": 4.9,
+      "total_count": 5
+    },
+    "items": [
+      {
+        "name": "Evelyn N.",
+        "rating": 5,
+        "title": "Noticeable difference in my midsection.",
+        "content": "I don't have that bloated feeling as before. I can actually suck in my abdomen again. That feeling is priceless.",
+        "verified": true,
+        "date": "2026-11-03",
+        "image": ""
+      },
+      {
+        "name": "Hailey A.",
+        "rating": 5,
+        "title": "Finally, something I actually feel.",
+        "content": "I've tried every supplement under the sun and most ended up in the back of a cabinet. This one I actually feel.",
+        "verified": true,
+        "date": "2026-10-29",
+        "image": ""
+      },
+      {
+        "name": "Julie L.",
+        "rating": 5,
+        "title": "Worked wonders on my gut health.",
+        "content": "I finished my first bag and have ordered a second.",
+        "verified": true,
+        "date": "2026-10-25",
+        "image": ""
+      },
+      {
+        "name": "Cari T.",
+        "rating": 5,
+        "title": "Excellent health benefits.",
+        "content": "Very easy to swallow, and the health benefits far outweigh the cost. Part of my daily regimen.",
+        "verified": true,
+        "date": "2026-10-17",
+        "image": ""
+      },
+      {
+        "name": "Michael H.",
+        "rating": 5,
+        "title": "You can feel it working.",
+        "content": "Awesome product. In two days you can feel the product working.",
+        "verified": true,
+        "date": "2026-10-11",
+        "image": ""
+      }
+    ]
+  },
+  "home_products": [
+    {
+      "id": "oregano-otp",
+      "handle": "oregano-otp",
+      "url": "/product",
+      "imageUrl": "/assets/sample/resilia/oregano.webp",
+      "imageWidth": 600,
+      "imageHeight": 600,
+      "title": "Resilia® Oil Of Oregano Softgels",
+      "sellingPrice": 34.99,
+      "compareAtPrice": 59.99,
+      "offPct": 42,
+      "rating": 4.9,
+      "reviewCount": 128,
+      "description": ""
+    },
+    {
+      "id": "garlic-otp",
+      "handle": "garlic-otp",
+      "url": "/product",
+      "imageUrl": "/assets/sample/resilia/garlic.webp",
+      "imageWidth": 600,
+      "imageHeight": 600,
+      "title": "Resilia® Aged Odorless Garlic",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 128,
+      "description": ""
+    },
+    {
+      "id": "cinnamon-otp",
+      "handle": "cinnamon-otp",
+      "url": "/product",
+      "imageUrl": "/assets/sample/resilia/cinnamon.webp",
+      "imageWidth": 600,
+      "imageHeight": 600,
+      "title": "Resilia® Ceylon Cinnamon",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 59.99,
+      "offPct": 50,
+      "rating": 4.9,
+      "reviewCount": 128,
+      "description": ""
+    },
+    {
+      "id": "black-seed-oil-otp",
+      "handle": "black-seed-oil-otp",
+      "url": "/product",
+      "imageUrl": "/assets/sample/resilia/blackseed.webp",
+      "imageWidth": 600,
+      "imageHeight": 600,
+      "title": "Resilia® Ethiopian Black Seed Oil",
+      "sellingPrice": 34.99,
+      "compareAtPrice": 59.99,
+      "offPct": 42,
+      "rating": 4.9,
+      "reviewCount": 128,
+      "description": ""
+    }
+  ]
+}

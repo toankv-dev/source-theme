@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="stylesheet" href="{{assets_url}}/css/rs-product.css">
+</head>
+<body class="b-body b-body--product">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+{{!-- Schema v2: the engine renders the sections of templates/product*.json in order and injects them here. --}}
+<main id="MainContent" class="b-main">{{{content_for_layout}}}</main>
+{{> footer}}
+{{> product-scripts}}
+{{> scripts}}
+</body>
+</html>

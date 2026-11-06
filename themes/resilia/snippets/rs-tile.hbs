@@ -1,0 +1,7 @@
+{{!-- Home picture tile (n = 1–5): picture with its label over a dark fade. Empty picture = theme picture. --}}
+{{#if label}}
+<a class="rs-tile" href="{{#if link}}{{link}}{{else}}{{#if @root.config.allProductsUrl}}{{@root.config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>
+  <img src="{{#if image}}{{image}}{{else}}{{@root.assets_url}}/images/rs/tile-{{n}}.webp{{/if}}" alt="" width="520" height="520" loading="lazy">
+  <span class="rs-tile__label">{{label}}</span>
+</a>
+{{/if}}

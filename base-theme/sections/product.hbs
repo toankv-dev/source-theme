@@ -113,7 +113,7 @@
       <div class="b-rte b-block-text" {{{this.attributes}}}>{{{applyTokens this.settings.body}}}</div>
       {{/if}}
       {{#if (eq this.type "image")}}
-      {{#if this.settings.image}}<img class="b-block-image" {{{this.attributes}}} src="{{this.settings.image}}" alt="{{this.settings.alt}}" loading="lazy">{{/if}}
+      {{#if this.settings.image}}<img class="b-block-image" {{{this.attributes}}} src="{{this.settings.image}}" alt="{{this.settings.alt}}" loading="lazy">{{else}}<div class="b-block-image b-ph b-ph--block" {{{this.attributes}}}>{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}
       {{/if}}
       {{#if (eq this.type "divider")}}
       <hr class="b-divider" {{{this.attributes}}}>
@@ -123,21 +123,22 @@
       {{/if}}
       {{#if (eq this.type "media_slider")}}
       {{!-- Up to 10 images / videos side by side (data-reels in ui.js). A video file picked in an image slot
-            is turned into a muted looping <video> (by the server, else by ui.js). --}}
+            is turned into a muted looping <video> (by the server, else by ui.js). Slots 1..`slots` with no file
+            keep an empty frame (upload hint in the editor); empty slots past `slots` are skipped. --}}
       <div class="b-mslider" {{{this.attributes}}} data-reels style="--pv:{{#if this.settings.per_view}}{{this.settings.per_view}}{{else}}3{{/if}};--pvm:{{#if this.settings.per_view_mobile}}{{this.settings.per_view_mobile}}{{else}}1.5{{/if}};--gap:{{#if this.settings.gap}}{{this.settings.gap}}{{else}}0{{/if}}px;--r:{{#if this.settings.radius}}{{this.settings.radius}}{{else}}0{{/if}}px;--ar:{{#if this.settings.ratio}}{{this.settings.ratio}}{{else}}9/16{{/if}}">
         {{#if this.settings.heading}}<h3 class="b-mslider__h">{{this.settings.heading}}</h3>{{/if}}
         <div class="b-mslider__vp">
           <div class="b-mslider__track" data-reels-track>
-            {{#if this.settings.media_1}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_1}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_2}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_2}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_3}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_3}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_4}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_4}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_5}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_5}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_6}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_6}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_7}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_7}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_8}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_8}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_9}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_9}}" alt="" loading="lazy"></figure>{{/if}}
-            {{#if this.settings.media_10}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_10}}" alt="" loading="lazy"></figure>{{/if}}
+            {{#if this.settings.media_1}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_1}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 0)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_2}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_2}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 1)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_3}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_3}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 2)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_4}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_4}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 3)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_5}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_5}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 4)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_6}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_6}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 5)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_7}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_7}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 6)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_8}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_8}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 7)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_9}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_9}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 8)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
+            {{#if this.settings.media_10}}<figure class="b-mslider__item" data-reel><img class="b-mslider__media" data-reel-video src="{{this.settings.media_10}}" alt="" loading="lazy"></figure>{{else if (gt this.settings.slots 9)}}<figure class="b-mslider__item" data-reel><div class="b-mslider__ph">{{#if @root.__designMode}}Upload an image or video{{/if}}</div></figure>{{/if}}
           </div>
           {{#unless (eq this.settings.show_arrows false)}}
           <div class="b-mslider__nav" data-reels-nav hidden>

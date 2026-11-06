@@ -1,0 +1,13 @@
+{{!-- Row of icon / image columns with a title and short text (benefits, trust badges, "why us"). --}}
+<div class="b-wrap b-icols" style="--icols:{{#if section.settings.columns}}{{section.settings.columns}}{{else}}3{{/if}}">
+  {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  <div class="b-icols__grid">
+    {{#each section.blocks}}
+    <div class="b-icol" {{{this.attributes}}}>
+      {{#if this.settings.image}}<img class="b-icol__img" src="{{this.settings.image}}" alt="" loading="lazy">{{else}}{{#if this.settings.theme_image}}<img class="b-icol__img" src="{{@root.assets_url}}/{{this.settings.theme_image}}" alt="" loading="lazy" width="90" height="90">{{else}}{{#if this.settings.emoji}}<span class="b-icol__emoji" aria-hidden="true">{{this.settings.emoji}}</span>{{/if}}{{/if}}{{/if}}
+      {{#if this.settings.title}}<h3 class="b-icol__title">{{this.settings.title}}</h3>{{/if}}
+      {{#if this.settings.text}}<div class="b-icol__text b-rte">{{{applyTokens this.settings.text}}}</div>{{/if}}
+    </div>
+    {{/each}}
+  </div>
+</div>

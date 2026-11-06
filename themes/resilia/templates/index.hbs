@@ -1,0 +1,162 @@
+{{!-- Resilia home (own copy). Settings-driven: Theme settings → Home – hero (texts, pictures) and Resilia – Home
+      (everything below the hero). Top to bottom: hero with ticks · picture tiles (swipe row on phones) · product
+      lineup (the store's first 3 products as dark cards: price + % off from the platform, lines / ticks from
+      settings) · quote · story block · proof block (customer quotes) · "Not sure where to start?" cards ·
+      testimonials slider · FAQ (Theme settings → FAQ) with a picture. Pictures fall back to assets/images/rs. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="stylesheet" href="{{assets_url}}/css/rs-home.css">
+</head>
+<body class="b-body b-body--home{{#unless settings.rs_topbar_home}} rs-no-topbar{{/unless}}">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  {{#unless (eq settings.home_hero_show false)}}
+  <section class="rs-hero">
+    <picture class="rs-hero__media">
+      <source media="(max-width: 749px)" srcset="{{#if settings.home_hero_mobile_image}}{{settings.home_hero_mobile_image}}{{else}}{{assets_url}}/images/rs/hero-mobile.webp{{/if}}" width="800" height="902">
+      <img src="{{#if settings.home_hero_image}}{{settings.home_hero_image}}{{else}}{{assets_url}}/images/rs/hero.webp{{/if}}" alt="" width="1600" height="893" fetchpriority="high">
+    </picture>
+    <div class="b-wrap rs-hero__inner">
+      <div class="rs-hero__copy">
+        {{#if settings.home_hero_eyebrow}}<p class="rs-hero__eyebrow">{{settings.home_hero_eyebrow}}</p>{{/if}}
+        <h1 class="rs-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
+        {{#if settings.home_hero_text}}<p class="rs-hero__text">{{settings.home_hero_text}}</p>{{/if}}
+        <a class="b-btn rs-hero__btn" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}} <span aria-hidden="true">→</span></a>
+        {{#if settings.rs_hero_tick_1}}
+        <ul class="rs-ticks">
+          <li>{{> rs-icon-check}}{{settings.rs_hero_tick_1}}</li>
+          {{#if settings.rs_hero_tick_2}}<li>{{> rs-icon-check}}{{settings.rs_hero_tick_2}}</li>{{/if}}
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_tiles_show false)}}
+  <section class="rs-tiles" aria-label="Our products">
+    <div class="b-wrap">
+      <div class="rs-tiles__row">
+        {{> rs-tile n="1" label=settings.rs_tile_1_label link=settings.rs_tile_1_link image=settings.rs_tile_1_image}}
+        {{> rs-tile n="2" label=settings.rs_tile_2_label link=settings.rs_tile_2_link image=settings.rs_tile_2_image}}
+        {{> rs-tile n="3" label=settings.rs_tile_3_label link=settings.rs_tile_3_link image=settings.rs_tile_3_image}}
+        {{> rs-tile n="4" label=settings.rs_tile_4_label link=settings.rs_tile_4_link image=settings.rs_tile_4_image}}
+        {{> rs-tile n="5" label=settings.rs_tile_5_label link=settings.rs_tile_5_link image=settings.rs_tile_5_image}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_lineup_show false)}}{{#if products.length}}
+  <section class="rs-lineup" style="--rs-lineup-bg:url('{{assets_url}}/images/rs/lineup-bg.webp')">
+    <div class="b-wrap rs-lineup__grid">
+      {{#each (limit products 3)}}
+      <article class="rs-lineup__card" data-product-card>
+        <h2 class="rs-lineup__title">{{title}}</h2>
+        <a class="rs-lineup__media" href="{{url}}" tabindex="-1" aria-hidden="true">{{#if imageUrl}}<img src="{{imageUrl}}" alt="" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}</a>
+        <p class="rs-lineup__line">{{#if (eq @index 0)}}{{@root.settings.rs_lineup_1_text}}{{/if}}{{#if (eq @index 1)}}{{@root.settings.rs_lineup_2_text}}{{/if}}{{#if (eq @index 2)}}{{@root.settings.rs_lineup_3_text}}{{/if}}</p>
+        <a class="b-btn rs-lineup__btn" href="{{url}}">{{#if (eq @index 0)}}{{#if @root.settings.rs_lineup_1_button}}{{@root.settings.rs_lineup_1_button}}{{else}}Explore{{/if}}{{/if}}{{#if (eq @index 1)}}{{#if @root.settings.rs_lineup_2_button}}{{@root.settings.rs_lineup_2_button}}{{else}}Explore{{/if}}{{/if}}{{#if (eq @index 2)}}{{#if @root.settings.rs_lineup_3_button}}{{@root.settings.rs_lineup_3_button}}{{else}}Explore{{/if}}{{/if}} <span aria-hidden="true">→</span></a>
+        <p class="rs-lineup__price"><span>{{@root.settings.rs_lineup_from}} {{money sellingPrice}} <small>{{@root.settings.rs_lineup_suffix}}</small></span>{{#if offPct}}<span class="rs-lineup__off">{{offPct}}% {{@root.settings.rs_lineup_off}}</span>{{/if}}</p>
+        <div class="rs-lineup__ticks">{{#if (eq @index 0)}}{{{@root.settings.rs_lineup_1_ticks}}}{{/if}}{{#if (eq @index 1)}}{{{@root.settings.rs_lineup_2_ticks}}}{{/if}}{{#if (eq @index 2)}}{{{@root.settings.rs_lineup_3_ticks}}}{{/if}}</div>
+      </article>
+      {{/each}}
+    </div>
+  </section>
+  {{/if}}{{/unless}}
+
+  {{#if settings.rs_quote}}
+  <section class="rs-quote">
+    <div class="b-wrap">
+      <h2 class="rs-quote__text">{{settings.rs_quote}}</h2>
+      {{#if settings.rs_quote_by}}<p class="rs-quote__by">{{settings.rs_quote_by}}</p>{{/if}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#unless (eq settings.rs_story_show false)}}
+  <section class="rs-story">
+    <div class="rs-story__media"><img src="{{#if settings.rs_story_image}}{{settings.rs_story_image}}{{else}}{{assets_url}}/images/rs/aisle.webp{{/if}}" alt="" width="1200" height="1064" loading="lazy"></div>
+    <div class="rs-story__panel">
+      <div class="rs-story__copy">
+        {{#if settings.rs_story_heading}}<h2 class="rs-story__title">{{settings.rs_story_heading}}</h2>{{/if}}
+        {{#if settings.rs_story_text}}<div class="b-rte rs-story__text">{{{settings.rs_story_text}}}</div>{{/if}}
+        {{#if settings.rs_story_button}}<a class="b-btn rs-story__btn" href="{{#if settings.rs_story_link}}{{settings.rs_story_link}}{{else}}{{#if policyLinks.about}}{{policyLinks.about}}{{else}}/pages/about-us{{/if}}{{/if}}">{{settings.rs_story_button}}</a>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_proof_show false)}}
+  <section class="rs-proof">
+    <div class="b-wrap rs-proof__inner">
+      <div class="rs-proof__head">
+        {{#if settings.rs_proof_heading}}<h2 class="rs-proof__title">{{settings.rs_proof_heading}}</h2>{{/if}}
+        {{#if settings.rs_proof_text}}<p class="rs-proof__text">{{settings.rs_proof_text}}</p>{{/if}}
+      </div>
+      {{#if settings.rs_proof_quotes}}<div class="rs-proof__quotes">{{{settings.rs_proof_quotes}}}</div>{{/if}}
+      <div class="rs-proof__foot">
+        {{#if settings.rs_proof_button}}<a class="b-btn rs-proof__btn" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{settings.rs_proof_button}}</a>{{/if}}
+        {{#if settings.rs_proof_note}}<p class="rs-proof__note"><svg viewBox="0 0 20 22" width="17" height="19" aria-hidden="true"><path d="M10 1.5 2.5 4.5v6c0 4.6 3.1 8.4 7.5 9.8 4.4-1.4 7.5-5.2 7.5-9.8v-6L10 1.5Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/><path d="m6.6 11 2.4 2.4 4.6-4.8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{settings.rs_proof_note}}</p>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_start_show false)}}
+  <section class="rs-start">
+    <div class="b-wrap">
+      {{#if settings.rs_start_heading}}<h2 class="rs-start__title">{{settings.rs_start_heading}}</h2>{{/if}}
+      <div class="rs-start__grid">
+        {{> rs-start-card title=settings.rs_start_1_title text=settings.rs_start_1_text link=settings.rs_start_1_link}}
+        {{> rs-start-card title=settings.rs_start_2_title text=settings.rs_start_2_text link=settings.rs_start_2_link}}
+        {{> rs-start-card title=settings.rs_start_3_title text=settings.rs_start_3_text link=settings.rs_start_3_link}}
+        {{> rs-start-card title=settings.rs_start_4_title text=settings.rs_start_4_text link=settings.rs_start_4_link}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_testi_show false)}}
+  <section class="rs-testi" data-rs-slider>
+    <div class="b-wrap">
+      <p class="rs-testi__stars" aria-hidden="true">★★★★★</p>
+      {{#if settings.rs_testi_heading}}<h2 class="rs-testi__title">{{settings.rs_testi_heading}}</h2>{{/if}}
+      {{#if settings.rs_testi_sub}}<p class="rs-testi__sub">{{settings.rs_testi_sub}}</p>{{/if}}
+      <div class="rs-testi__track" data-rs-track>
+        {{> rs-testi-card n="1" title=settings.rs_testi_1_title text=settings.rs_testi_1_text name=settings.rs_testi_1_name tag1=settings.rs_testi_1_tag_1 tag2=settings.rs_testi_1_tag_2 photo=settings.rs_testi_1_photo}}
+        {{> rs-testi-card n="2" title=settings.rs_testi_2_title text=settings.rs_testi_2_text name=settings.rs_testi_2_name tag1=settings.rs_testi_2_tag_1 tag2=settings.rs_testi_2_tag_2 photo=settings.rs_testi_2_photo}}
+        {{> rs-testi-card n="3" title=settings.rs_testi_3_title text=settings.rs_testi_3_text name=settings.rs_testi_3_name tag1=settings.rs_testi_3_tag_1 tag2=settings.rs_testi_3_tag_2 photo=settings.rs_testi_3_photo}}
+      </div>
+      <div class="rs-testi__nav">
+        <button type="button" class="rs-arrow" data-rs-step="-1" aria-label="Previous review"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="m13.5 8-4 4 4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="rs-arrow" data-rs-step="1" aria-label="Next review"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="m10.5 8 4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.rs_faq_show false)}}
+  <section class="rs-hfaq">
+    <div class="b-wrap rs-hfaq__grid">
+      <div class="rs-hfaq__list">
+        {{#if settings.rs_faq_heading}}<h2 class="rs-hfaq__title">{{settings.rs_faq_heading}}</h2>{{/if}}
+        {{#each (faqItems settings)}}
+        <details class="rs-hfaq__item" data-accordion>
+          <summary><span>{{q}}</span><svg data-accordion-icon viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="m4 7 6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="b-rte">{{{applyTokens a}}}</div>
+        </details>
+        {{/each}}
+      </div>
+      <div class="rs-hfaq__media"><img src="{{#if settings.rs_faq_image}}{{settings.rs_faq_image}}{{else}}{{assets_url}}/images/rs/faq-photo.webp{{/if}}" alt="" width="693" height="981" loading="lazy"></div>
+    </div>
+  </section>
+  {{/unless}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

@@ -1,0 +1,111 @@
+/* Resilia — member page ("Subscription Management"; templates/page.hbs links it). */
+.rs-member { --rs-sand: #f0ece5; --rs-sandline: #c4bfb9; color: var(--rs-forest); }
+.rs-m__narrow { max-width: 1240px; }
+.rs-m__center { text-align: center; }
+.rs-m__eyebrow { margin: 0 0 14px; font-size: 17px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rs-moss); }
+.rs-m__h1 { margin: 0 0 22px; font-family: var(--rs-serif); font-size: 62px; font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; color: var(--rs-forest); }
+.rs-m__lede { margin: 0; font-size: 19px; line-height: 1.45; color: var(--rs-moss); }
+.rs-m__h2 { margin: 0 0 24px; font-family: var(--rs-serif); font-size: 44px; font-weight: 500; line-height: 1.15; color: var(--rs-forest); }
+.rs-m__italic { font-style: italic; }
+.rs-m__p { max-width: 840px; margin: 0 auto 30px; font-size: 19px; line-height: 1.55; color: var(--rs-moss); }
+.rs-m-hero { position: relative; overflow: hidden; background: var(--rs-sand); }
+.rs-m-hero__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rs-m-hero__inner { position: relative; max-width: 1240px; padding-top: 100px; padding-bottom: 100px; }
+.rs-m-hero__badges { display: grid; gap: 34px; max-width: 360px; margin: 100px 0 100px; padding: 0; list-style: none; }
+.rs-m-hero__badges li { display: flex; align-items: center; gap: 14px; min-height: 66px; padding: 0 34px; border: 1px solid var(--rs-sandline); border-radius: 4px; font-size: 17px; color: var(--rs-moss); }
+.rs-m-login { display: grid; gap: 18px; max-width: 1140px; padding: 64px 64px; border-radius: 16px; background: var(--rs-forest); color: #fff; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12); }
+.rs-m-login__label { font-size: 19px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+.rs-m-login__row { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.rs-m-login input { height: 66px; padding: 0 22px; border: 1px solid #8ca189; border-radius: 4px; background: var(--rs-moss); color: #fff; font-family: var(--font); font-size: 17px; }
+.rs-m-login input::placeholder { color: rgba(255, 255, 255, 0.6); }
+.rs-m-login__btn { min-height: 62px; border: 0; border-radius: 6px; background: #fff; color: var(--rs-forest); font-family: var(--font); font-size: 22px; cursor: pointer; }
+@media (min-width: 750px) {
+  .rs-m-hero__media { position: absolute; top: 60px; right: 0; bottom: 0; width: 62%; }
+  .rs-m-hero__media img { object-position: left top; }
+}
+.rs-m-consist { padding: 100px 0 90px; background: #fff var(--rs-sketch) center / cover no-repeat; }
+.rs-m-consist__chart img { display: block; width: 100%; height: auto; border: 1px solid #dfdbd5; border-radius: 12px; background: #faf9f7; }
+.rs-m-consist__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 28px; }
+.rs-m-phase { padding: 40px 40px 46px; border: 1px solid var(--rs-sandline); border-radius: 16px; background: var(--rs-sand); }
+.rs-m-phase__icons { display: flex; gap: 18px; margin: 0 0 22px; color: var(--rs-moss); }
+.rs-m-phase__t { margin: 0 0 12px; font-size: 19px; line-height: 1.4; }
+.rs-m-phase__p { margin: 0; font-size: 16px; line-height: 1.45; color: var(--rs-moss); }
+.rs-m-formulas { padding: 100px 0; border-radius: 30px 30px 0 0; background: #2d4a24 var(--rs-leaf) center / cover no-repeat; color: #fff; }
+.rs-m-formulas .rs-m__eyebrow, .rs-m-formulas .rs-m__h2, .rs-m-formulas .rs-m__p { color: #fff; }
+.rs-m-formulas__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; }
+.rs-m-formula { display: flex; flex-direction: column; padding: 40px 60px 40px; border-radius: 16px; background: rgba(27, 53, 18, 0.85); }
+.rs-m-formula__t { margin: 0 0 40px; font-size: 24px; font-weight: 500; line-height: 1.3; text-align: center; }
+.rs-m-formula__img { display: block; width: 240px; max-width: 100%; height: 340px; margin: 0 auto 30px; object-fit: contain; }
+.rs-m-formula__tag { margin: 0 0 14px; font-size: 18px; font-style: italic; }
+.rs-m-formula__p { flex: 1; margin: 0 0 40px; font-size: 17px; line-height: 1.45; }
+.rs-m-formula__btn { display: flex; align-items: center; justify-content: center; min-height: 84px; padding: 8px 20px; border-radius: 4px; background: #fff; color: var(--rs-forest); font-size: 22px; line-height: 1.1; text-align: center; text-decoration: none; }
+.rs-m-promise { padding: 100px 0; }
+.rs-m-community { padding: 100px 0; background: var(--rs-sand); }
+.rs-m-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; margin-top: 30px; }
+.rs-m-card { margin: 0; overflow: hidden; border: 1px solid var(--rs-sandline); border-radius: 16px; background: #faf8f6; }
+.rs-m-card__img { display: block; width: 100%; height: 212px; object-fit: cover; }
+.rs-m-card__body { display: flex; gap: 26px; padding: 40px 40px 40px; }
+.rs-m-card__icon { flex: 0 0 48px; color: var(--rs-forest); }
+.rs-m-card__t { margin: 0 0 16px; font-size: 23px; font-weight: 400; line-height: 1.3; color: var(--rs-forest); }
+.rs-m-card__p { margin: 0; font-size: 17px; line-height: 1.45; color: var(--rs-moss); }
+.rs-m-quote .rs-m-card__img { height: 250px; }
+.rs-m-quote__body { flex-direction: column; gap: 22px; background: #f6f4f0; }
+.rs-m-quote__stars { margin: 0; font-size: 34px; letter-spacing: 12px; line-height: 1; color: var(--rs-moss); }
+.rs-m-quote__badge { display: flex; align-items: center; gap: 10px; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rs-moss); }
+.rs-m-routine { padding: 100px 0 90px; background: var(--rs-forest) var(--rs-sketch) center / cover no-repeat; color: #fff; }
+.rs-m-routine .rs-m__eyebrow, .rs-m-routine .rs-m__h2, .rs-m-routine .rs-m__p { color: #fff; }
+.rs-m-routine__by { margin-top: -6px; margin-bottom: 30px; }
+.rs-m-habits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; margin: 0; padding: 0; list-style: none; }
+.rs-m-habits li { display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 140px; border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 16px; font-size: 20px; }
+.rs-m-routine__note { margin: 34px 0 30px; font-size: 19px; font-style: italic; text-align: center; }
+.rs-m-qa { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 16px; background: var(--rs-sand); color: var(--rs-forest); }
+.rs-m-qa__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rs-m-qa__body { display: flex; gap: 26px; align-items: flex-start; padding: 80px 80px; }
+.rs-m-qa__body svg { flex: 0 0 38px; }
+.rs-m-qa__q { margin: 0 0 12px; font-size: 24px; }
+.rs-m-qa__a { margin: 0; font-size: 19px; line-height: 1.55; color: var(--rs-moss); }
+.rs-m-help { padding: 100px 0 100px; }
+.rs-m-help__p { max-width: 620px; }
+.rs-m-help__btn { display: inline-flex; align-items: center; justify-content: center; min-width: 500px; min-height: 62px; border-radius: 6px; background: var(--rs-forest); color: #fff; font-size: 21px; font-weight: 500; text-decoration: none; }
+@media (max-width: 989px) {
+  .rs-m-formulas__grid, .rs-m-cards { grid-template-columns: 1fr; gap: 24px; }
+  .rs-m-habits { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .rs-m-qa { grid-template-columns: 1fr; }
+}
+@media (max-width: 749px) {
+  .rs-member .b-wrap { padding: 0 20px; }
+  .rs-m__eyebrow { font-size: 13px; }
+  .rs-m__h1 { font-size: 36px; }
+  .rs-m__lede, .rs-m__p { font-size: 16px; }
+  .rs-m__h2 { font-size: 26px; }
+  .rs-m-hero__media { position: absolute; inset: auto 0 0 auto; width: 70%; height: 420px; opacity: 0.95; }
+  .rs-m-hero__media img { object-position: right bottom; }
+  .rs-m-hero__inner { padding-top: 40px; padding-bottom: 30px; }
+  .rs-m-hero__badges { gap: 14px; max-width: 230px; margin: 30px 0 40px; }
+  .rs-m-hero__badges li { min-height: 44px; padding: 0 12px; gap: 8px; background: rgba(240, 236, 229, 0.85); font-size: 13px; }
+  .rs-m-hero__badges svg { width: 22px; height: 22px; }
+  .rs-m-login { padding: 26px 20px; }
+  .rs-m-login__row { grid-template-columns: 1fr; gap: 14px; }
+  .rs-m-login input { height: 52px; font-size: 16px; }
+  .rs-m-login__btn { min-height: 52px; font-size: 17px; }
+  .rs-m-consist, .rs-m-formulas, .rs-m-promise, .rs-m-community, .rs-m-routine, .rs-m-help { padding: 56px 0; }
+  .rs-m-consist__cards { grid-template-columns: 1fr; gap: 16px; }
+  .rs-m-phase { padding: 24px; }
+  .rs-m-formula { padding: 30px 30px; }
+  .rs-m-formula__t { margin-bottom: 20px; }
+  .rs-m-formula__img { height: 260px; }
+  .rs-m-formula__btn { min-height: 56px; font-size: 18px; }
+  .rs-m-card__body { padding: 26px 24px; gap: 16px; }
+  .rs-m-card__t { font-size: 20px; }
+  .rs-m-card__p { font-size: 15px; }
+  .rs-m-habits li { min-height: 90px; font-size: 16px; }
+  .rs-m-routine__note { font-size: 16px; }
+  .rs-m-qa__body { padding: 30px 24px; }
+  .rs-m-qa__q { font-size: 20px; }
+  .rs-m-qa__a { font-size: 16px; }
+  .rs-m-help__btn { min-width: 0; width: 100%; font-size: 18px; }
+}
+@media (min-width: 750px) {
+  .rs-m-hero__media { top: 0; width: 100%; }
+  .rs-m-hero__media img { object-position: 75% 30%; }
+}

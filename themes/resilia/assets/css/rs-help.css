@@ -1,0 +1,73 @@
+/* Resilia — help page ("Contact Us"; templates/page.hbs links it). */
+.rs-help__narrow { max-width: 760px; }
+.rs-help__hero { padding: 40px 0 50px; background: var(--rs-deep); color: #fff; text-align: center; }
+.rs-help__h1 { max-width: 640px; margin: 0 auto 14px; font-family: var(--rs-serif); font-size: 44px; font-weight: 500; line-height: 1.15; color: var(--rs-lime); }
+.rs-help__lede { max-width: 560px; margin: 0 auto 30px; font-size: 16px; line-height: 1.5; }
+.rs-help__actions { display: flex; justify-content: center; gap: 16px; }
+.rs-help__btn { display: inline-flex; align-items: center; justify-content: center; min-width: 240px; min-height: 44px; padding: 0 24px; border: 1px solid #fff; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; }
+.rs-help__btn--light { background: #fff; color: #111; }
+.rs-help__btn--line { color: #fff; font-weight: 700; }
+.rs-help__chips { padding: 40px 0; background: var(--rs-lime-pale); }
+.rs-help__chips .b-wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; }
+.rs-chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid #c9c9c9; border-radius: 8px; background: #fff; color: #111; font-family: var(--font-heading); font-size: 15px; font-weight: 500; text-decoration: none; }
+.rs-chip:hover { border-color: var(--rs-deep); }
+.rs-help__eyebrow { margin: 0 0 6px; font-size: 17px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; color: var(--rs-mint); }
+.rs-help__h2 { margin: 0 0 14px; font-family: var(--rs-serif); font-size: 30px; font-weight: 500; line-height: 1.2; text-align: center; color: var(--rs-deep-ink); }
+.rs-help__p { margin: 0 0 30px; font-size: 15px; line-height: 1.5; text-align: center; color: #333; }
+.rs-help__eyebrow--left, .rs-help__h2--left, .rs-help__p--left { text-align: left; }
+.rs-help__h3 { display: flex; align-items: center; gap: 14px; margin: 0 0 18px; font-family: var(--rs-serif); font-size: 22px; font-weight: 500; color: var(--rs-deep-ink); }
+.rs-icon-chat { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 8px; background: var(--rs-deep); color: var(--rs-lime); }
+.rs-help__card { padding: 24px 20px; border-radius: 20px; background: var(--rs-cardbg); }
+.rs-help__small { margin: 0 0 18px; font-size: 15px; line-height: 1.4; color: #222; }
+.rs-help__pre { white-space: pre-line; }
+.rs-help__dark { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: var(--rs-deep); color: #fff; font-family: var(--font-heading); font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.rs-help__mail { display: inline-flex; align-items: center; min-height: 44px; color: var(--rs-mint); font-size: 15px; }
+.rs-help__more { display: inline-flex; align-items: center; min-height: 44px; margin-top: 6px; color: var(--rs-deep-ink); font-size: 14px; }
+.rs-help input, .rs-help textarea { width: 100%; min-height: 52px; padding: 12px 16px; border: 1px solid #d4d4d4; border-radius: 8px; background: #fff; font-family: var(--font); font-size: 16px; }
+.rs-help textarea { min-height: 108px; resize: vertical; }
+.rs-help__trackform, .rs-help__form { display: grid; gap: 12px; }
+.rs-help__trackform .b-form-msg, .rs-help__form .b-form-msg { min-height: 0; margin: 0; }
+.rs-help__track { padding: 50px 0 40px; }
+.rs-help__team { padding: 40px 0 50px; background: #f9faf6; }
+.rs-help__cards { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 30px; align-items: start; }
+.rs-help__side { display: grid; gap: 30px; }
+.rs-help__sms { padding: 50px 0; }
+.rs-help__rte { font-size: 15px; line-height: 1.45; color: #222; }
+.rs-help__rte a { color: inherit; }
+.rs-hgroup { padding: 50px 0; background: #f9faf6; }
+.rs-hgroup:nth-child(even) { background: #fff; }
+.rs-hgroup__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 50px; align-items: start; max-width: 1160px; }
+.rs-hgroup__head .rs-help__eyebrow, .rs-hgroup__head .rs-help__h2 { text-align: left; }
+.rs-hgroup__img { display: block; width: 100%; height: auto; margin-top: 20px; border-radius: 16px; }
+.rs-hgroup__list { display: grid; gap: 20px; }
+.rs-hgroup__list:not(.is-ready) h4 { margin: 0; font-size: 17px; }
+.rs-faq__item { border: 1px solid #b7b7b7; border-radius: 12px; background: #fff; }
+.rs-faq__item summary { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 10px 20px; font-size: 17px; line-height: 1.45; color: #111; list-style: none; cursor: pointer; }
+.rs-faq__item summary::-webkit-details-marker { display: none; }
+.rs-faq__q { flex: 1; }
+.rs-faq__new { padding: 2px 9px; border-radius: 999px; background: var(--rs-lime); color: #111; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; }
+.rs-faq__icon { flex: 0 0 22px; width: 22px; height: 12px; background: #999; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 12'%3E%3Cpath d='m1 1 10 10L21 1' stroke='%23000' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 12'%3E%3Cpath d='m1 1 10 10L21 1' stroke='%23000' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat; transition: transform 0.2s ease; }
+.rs-faq__a { padding: 0 20px 18px; font-size: 15px; line-height: 1.5; color: #333; }
+.rs-faq__a a { color: var(--rs-deep-ink); }
+.rs-help__news { padding: 40px 0 40px; background: var(--rs-deep); color: #fff; text-align: center; }
+.rs-help__h2--lime { color: var(--rs-lime); }
+.rs-help__news .rs-help__p { color: #fff; }
+.rs-help__newsform { display: grid; gap: 12px; max-width: 520px; margin: 0 auto; }
+.rs-help__newsform .b-news__input { height: 50px; border: 1px solid rgba(255, 255, 255, 0.5); background: rgba(255, 255, 255, 0.12); color: #fff; }
+.rs-help__newsform .b-news__input::placeholder { color: rgba(255, 255, 255, 0.75); }
+.rs-help__newsform .b-news__btn { min-height: 44px; border: 0; border-radius: 8px; background: #fff; color: #111; font-size: 15px; }
+.rs-help__newsform .b-form-msg { color: #fff; }
+@media (max-width: 989px) {
+  .rs-help__cards, .rs-hgroup__inner { grid-template-columns: 1fr; gap: 30px; }
+  .rs-hgroup__head .rs-help__eyebrow, .rs-hgroup__head .rs-help__h2 { text-align: center; }
+}
+@media (max-width: 749px) {
+  .rs-help .b-wrap { padding: 0 20px; }
+  .rs-help__h1 { font-size: 36px; }
+  .rs-help__actions { flex-direction: column; gap: 20px; }
+  .rs-help__btn { min-height: 44px; }
+  .rs-help__chips .b-wrap { gap: 20px; }
+  .rs-help__h2 { font-size: 28px; }
+  .rs-hgroup { padding: 40px 0; }
+  .rs-faq__item summary { padding: 10px 18px; }
+}

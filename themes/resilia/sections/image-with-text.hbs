@@ -1,0 +1,15 @@
+{{!-- Image beside heading / text / button. Resilia: "Theme picture" (file in assets/) while no image is picked;
+      style "offer" = centred heading + payment marks + secure note under the button (Special offer block). --}}
+<div class="rs-band rs-band--{{#if section.settings.style}}{{section.settings.style}}{{else}}story{{/if}}">
+<div class="b-wrap b-iwt b-iwt--image-{{#if section.settings.image_side}}{{section.settings.image_side}}{{else}}left{{/if}}">
+  <div class="b-iwt__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="{{section.settings.heading}}" loading="lazy" width="800" height="800">{{else}}{{#if section.settings.theme_image}}<img src="{{@root.assets_url}}/{{section.settings.theme_image}}" alt="{{section.settings.heading}}" loading="lazy" width="800" height="800">{{else}}{{#if @root.product.media.main_image}}<img src="{{@root.product.media.main_image}}" alt="" loading="lazy">{{else}}<div class="b-ph" aria-hidden="true"></div>{{/if}}{{/if}}{{/if}}</div>
+  <div class="b-iwt__text">
+    {{#if section.settings.eyebrow}}<p class="b-eyebrow b-eyebrow--left">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="b-h2 b-h2--left" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+    {{#if section.settings.button_label}}<a class="b-btn rs-pill" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a>{{/if}}
+    {{#if section.settings.show_payments}}{{> pay-icons}}{{/if}}
+    {{#if section.settings.note}}<p class="rs-secure"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="m4.6 8.2 2.2 2.2 4.6-4.6" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{section.settings.note}}</p>{{/if}}
+  </div>
+</div>
+</div>

@@ -1,0 +1,13 @@
+{{!-- Member page promise card (picture, icon, title, text). timg = theme picture name in assets/images/rs. --}}
+{{#if title}}
+<article class="rs-m-card">
+  <img class="rs-m-card__img" src="{{#if image}}{{image}}{{else}}{{@root.assets_url}}/images/rs/{{timg}}.webp{{/if}}" alt="" width="720" height="432" loading="lazy">
+  <div class="rs-m-card__body">
+    <span class="rs-m-card__icon" aria-hidden="true">{{#if (eq n "1")}}<svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M16 32c0-10 6-16 16-16 0 10-6 16-16 16Zm0 0 8-8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{/if}}{{#if (eq n "2")}}<svg viewBox="0 0 48 48" width="48" height="48"><path d="M20 6h6l-3 4zM21 10l-5 14 6 2 5-14M14 40h22M18 40v-4h14v4M30 28a8 8 0 0 0-6-10" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>{{/if}}{{#if (eq n "3")}}<svg viewBox="0 0 48 48" width="48" height="48"><path d="M40 24A16 16 0 1 1 30 9.2M30 4v6h-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="29.5" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="Satoshi, sans-serif">30</text></svg>{{/if}}</span>
+    <div>
+      <h3 class="rs-m-card__t">{{title}}</h3>
+      {{#if text}}<p class="rs-m-card__p">{{text}}</p>{{/if}}
+    </div>
+  </div>
+</article>
+{{/if}}

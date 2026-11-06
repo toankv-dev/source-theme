@@ -1,0 +1,8 @@
+{{!-- "Not sure where to start?" card: tick, title, text; the whole card links when a link is set. --}}
+{{#if title}}
+{{#if link}}<a class="rs-start__card" href="{{link}}">{{else}}<div class="rs-start__card">{{/if}}
+  {{> rs-icon-check}}
+  <h3 class="rs-start__h">{{title}}</h3>
+  {{#if text}}<p class="rs-start__p">{{text}}</p>{{/if}}
+{{#if link}}</a>{{else}}</div>{{/if}}
+{{/if}}

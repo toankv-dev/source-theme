@@ -14,8 +14,15 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
 - A feature first built in `themes/<slug>` (no zip): diff the theme's file against `base-theme/` and port the
   part in `b-` names; skip unzip/inspect.
 - Class names glued in Handlebars (`b-x--{{…}}`) look dead to `prune-css.js`: write the full class name.
-- Already absorbed: volume bundle (`card_style` radio, `unit_pickers`, `unit_label`, `pack_color`, `includes_all`).
+- Already absorbed: volume bundle (`card_style` radio, `unit_pickers`, `unit_label`, `pack_color`, `includes_all`),
+  animated menu drawer + `details[data-accordion]` FAQ hook (2026.11.06.2).
+- Interface changes (ui.js / sections.css) go to the base and to the theme built in the same session only — the
+  user does not want older themes touched unless asked. Check `git status` first: base may hold another
+  uncommitted bump today (take the next `.N`).
+- Preview servers just started make the first smoke run flaky (contact / AddToCart): re-run once before debugging.
+- Themes near the 120 KB CSS budget: strip comments from the theme's copy of sections.css (base keeps the docs).
 
 ## Runs
 <!-- date · zip · minutes per step (unpack/inspect/decide/implement/verify/version/sync/report) · slowest step -->
 - 2026-11-05 · themes/club-ritual (no zip) · 0/0/1/2/2/1/0/1 · implement (quoting errors in one-line node patches)
+- 2026-11-06 · request "FAQ + header menu always animate" (no zip) · 0/0/1/3/4/1/6/1 · propagation to old themes (reverted on request)

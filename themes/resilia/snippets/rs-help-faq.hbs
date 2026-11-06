@@ -1,0 +1,13 @@
+{{!-- Help page FAQ group (n = 1–5): eyebrow, title, optional picture, questions (richtext, h4 = question). --}}
+{{#if title}}
+<section class="rs-hgroup{{#if image}} has-image{{else}}{{#if timage}} has-image{{/if}}{{/if}}" id="faq-{{n}}">
+  <div class="b-wrap rs-hgroup__inner">
+    <div class="rs-hgroup__head">
+      <p class="rs-help__eyebrow">FAQs</p>
+      <h2 class="rs-help__h2">{{title}}</h2>
+      {{#if image}}<img class="rs-hgroup__img" src="{{image}}" alt="" width="720" height="537" loading="lazy">{{else}}{{#if timage}}<img class="rs-hgroup__img" src="{{@root.assets_url}}/{{timage}}" alt="" width="720" height="537" loading="lazy">{{/if}}{{/if}}
+    </div>
+    <div class="rs-hgroup__list b-rte" data-rs-faq>{{{items}}}</div>
+  </div>
+</section>
+{{/if}}

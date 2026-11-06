@@ -1,0 +1,75 @@
+{
+  "name": "Video row",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Portrait videos (390 × 580). On phones one video shows at a time — shoppers swipe for the next. Videos play muted and looped while on screen."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "video",
+          "label": "Video",
+          "info": "Upload an MP4 or WebM file in the media picker. Portrait 390 × 580 looks best. Images and YouTube/Vimeo links are not shown here."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster image (optional)",
+          "info": "Shown before the video starts."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Description (for screen readers)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image (older layout)",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image or video",
+          "info": "Kept so pages saved with the earlier image row still open and save. New slots: use Video."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video row",
+      "category": "Media",
+      "description": "Portrait videos in a row; swipe on phones.",
+      "blocks": [
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}

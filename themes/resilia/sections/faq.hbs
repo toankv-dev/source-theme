@@ -1,0 +1,20 @@
+{{!-- FAQ accordion. Questions come from the section's blocks, else the listing's own FAQ (page.faq), else the
+      default questions in Theme settings → FAQ (faqItems) — order in snippets/faq-list.hbs.
+      Resilia: white rows with a "+" on the right, all closed unless open_first, a button under the list. --}}
+<div class="b-faq-wrap">
+  <div class="b-wrap b-faq">
+    <h2 class="b-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Frequently asked questions{{/if}}</h2>
+    {{#if section.settings.intro}}<p class="b-faq__intro">{{section.settings.intro}}</p>{{/if}}
+    {{#if section.blocks.length}}
+    {{#each section.blocks}}
+    <details class="b-faq__item" {{{this.attributes}}}{{#if @first}}{{#if ../section.settings.open_first}} open{{/if}}{{/if}}>
+      <summary><span>{{this.settings.q}}</span></summary>
+      <div class="b-rte">{{{applyTokens this.settings.a}}}</div>
+    </details>
+    {{/each}}
+    {{else}}
+    {{> faq-list open_first=section.settings.open_first}}
+    {{/if}}
+    {{#if section.settings.button_label}}<p class="rs-cta"><a class="b-btn rs-pill" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a></p>{{/if}}
+  </div>
+</div>

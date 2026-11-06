@@ -12,6 +12,10 @@
  *   sections.json                the page cut into top-level sections (position, size, headings, text, images)
  *   sections/NN-desktop.png      one crop per section (and NN-mobile.png)
  *   images/                      the page's images (with images.json mapping original URL → file)
+ *   text.txt                     every text of the phone page per section, with structure (headings, list items,
+ *                                bold, links, hidden accordion / tab answers): copy the original's texts from here
+ *   fonts.json, fonts/           the self-hosted @font-face files the page really loads (family, weight, style, url)
+ *                                and the files themselves, ready to copy into assets/fonts/
  */
 'use strict';
 const fs = require('fs');
@@ -128,6 +132,59 @@ function measure() {
   };
 }
 
+/** Structured text of the page, per section (Shopify sections or the top-level blocks), hidden parts included. */
+function textOf() {
+  let secs = Array.from(document.querySelectorAll('.shopify-section'));
+  if (secs.length < 2) secs = Array.from((document.querySelector('main') || document.body).children);
+  const walk = (n) => {
+    let r = '';
+    n.childNodes.forEach((k) => {
+      if (k.nodeType === 3) { const t = k.textContent.replace(/\s+/g, ' '); if (t.trim()) r += t; return; }
+      if (k.nodeType !== 1) return;
+      const tag = k.tagName.toLowerCase();
+      const inner = walk(k);
+      if (!inner.trim() && tag !== 'br') return;
+      if (/^h[1-6]$/.test(tag)) r += '\n<' + tag + '>' + inner.trim() + '</' + tag + '>\n';
+      else if (tag === 'li') r += '\n- ' + inner.trim();
+      else if (/^(p|div|summary|details|section|article|header|footer|tr)$/.test(tag)) r += '\n' + inner.trim() + '\n';
+      else if (tag === 'strong' || tag === 'b') r += '**' + inner + '**';
+      else if (tag === 'em' || tag === 'i') r += '_' + inner + '_';
+      else if (tag === 'a') r += '[' + inner.trim() + '](' + (k.getAttribute('href') || '') + ')';
+      else if (tag === 'br') r += '\n';
+      else r += inner;
+    });
+    return r;
+  };
+  return secs.map((sec) => {
+    const c = sec.cloneNode(true);
+    c.querySelectorAll('script, style, svg, noscript, template, link, iframe').forEach((e) => e.remove());
+    return '######## ' + String(sec.id || sec.className || sec.tagName).slice(0, 80) + '\n' + walk(c).replace(/\n\s*\n+/g, '\n').trim();
+  }).join('\n\n') + '\n';
+}
+
+/** Self-hosted @font-face rules, marked used when the browser actually loaded that family / weight / style. */
+function fontsOf() {
+  const loaded = new Set(Array.from(document.fonts).filter((f) => f.status === 'loaded')
+    .map((f) => (f.family.replace(/["']/g, '') + '|' + f.weight + '|' + f.style).toLowerCase()));
+  const out = [];
+  for (const sheet of Array.from(document.styleSheets)) {
+    let rules;
+    try { rules = Array.from(sheet.cssRules); } catch (e) { continue; }
+    for (const r of rules) {
+      if (r.type !== 5) continue;
+      const family = r.style.getPropertyValue('font-family').replace(/["']/g, '').trim();
+      const weight = (r.style.getPropertyValue('font-weight') || '400').trim().replace('normal', '400').replace('bold', '700');
+      const style = (r.style.getPropertyValue('font-style') || 'normal').trim();
+      const urls = Array.from(r.style.getPropertyValue('src').matchAll(/url\(["']?([^"')]+)["']?\)/g)).map((m) => new URL(m[1], sheet.href || location.href).href);
+      const url = urls.find((u) => /\.woff2(\?|$)/.test(u)) || urls.find((u) => /\.woff(\?|$)/.test(u)) || urls[0];
+      if (!url || /fonts\.gstatic/.test(url)) continue;
+      out.push({ family, weight, style, url, used: weight.split(' ').some((w) => loaded.has((family + '|' + w + '|' + style).toLowerCase())) });
+    }
+  }
+  const seen = new Set();
+  return out.filter((f) => !seen.has(f.url) && seen.add(f.url));
+}
+
 function sectionsOf() {
   const vw = innerWidth;
   const visible = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.height > 40 && r.width > vw * 0.6 && s.display !== 'none' && s.visibility !== 'hidden'; };
@@ -193,8 +250,10 @@ async function shoot(browser, width, ua, label) {
     const file = path.join(OUT, 'sections', String(s.index).padStart(2, '0') + '-' + label + '.png');
     if (s.height > 0) await page.screenshot({ path: file, fullPage: true, clip: { x: 0, y: s.top, width, height: Math.min(s.height, 4000) } }).catch(() => {});
   }
-  const data = { tokens: await page.evaluate(measure), sections, images: label === 'desktop' ? await page.evaluate(imagesOf) : [] };
+  const data = { tokens: await page.evaluate(measure), sections, images: await page.evaluate(imagesOf) };
   if (label === 'desktop') fs.writeFileSync(path.join(OUT, 'page.html'), await page.content());
+  if (label === 'mobile') fs.writeFileSync(path.join(OUT, 'text.txt'), await page.evaluate(textOf));
+  data.fonts = await page.evaluate(fontsOf);
   await ctx.close();
   return data;
 }
@@ -211,7 +270,7 @@ async function shoot(browser, width, ua, label) {
     fs.mkdirSync(dir, { recursive: true });
     const map = {};
     let n = 0;
-    for (const src of desktop.images.slice(0, 120)) {
+    for (const src of Array.from(new Set(desktop.images.concat(mobile.images))).slice(0, 160)) { // phone-only banners too
       try {
         const res = await fetch(src, { headers: { 'User-Agent': UA } });
         if (!res.ok) continue;
@@ -225,6 +284,21 @@ async function shoot(browser, width, ua, label) {
     fs.writeFileSync(path.join(OUT, 'images.json'), JSON.stringify(map, null, 2));
     console.log('images: ' + Object.keys(map).length + ' downloaded');
   }
+  // Fonts: the self-hosted files the page really loaded (desktop or phone), saved under their original names.
+  const fonts = {};
+  desktop.fonts.concat(mobile.fonts).forEach((f) => { const o = fonts[f.url]; fonts[f.url] = Object.assign({}, f, { used: f.used || !!(o && o.used) }); });
+  const used = Object.values(fonts).filter((f) => f.used);
+  if (used.length) fs.mkdirSync(path.join(OUT, 'fonts'), { recursive: true });
+  for (const f of used) {
+    try {
+      const res = await fetch(f.url, { headers: { 'User-Agent': UA } });
+      if (!res.ok) continue;
+      f.file = path.basename(new URL(f.url).pathname).replace(/[^a-z0-9._-]+/gi, '-'); // the original name: two faces may share a weight
+      fs.writeFileSync(path.join(OUT, 'fonts', f.file), Buffer.from(await res.arrayBuffer()));
+    } catch (e) { /* skip */ }
+  }
+  fs.writeFileSync(path.join(OUT, 'fonts.json'), JSON.stringify(Object.values(fonts), null, 2));
+  console.log('self-hosted fonts used: ' + (used.map((f) => f.family + ' ' + f.weight + ' ' + (f.file || '(not saved)')).join(' · ') || 'none'));
   await browser.close();
   console.log('Captured ' + url + ' → ' + OUT);
   console.log('sections (desktop): ' + desktop.sections.length + ', mobile: ' + mobile.sections.length);

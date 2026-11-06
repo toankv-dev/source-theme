@@ -67,6 +67,30 @@ Talk to the user in Vietnamese.
 - Prefer one question to the user over a guess only when something cannot be read from the input
   (e.g. a screenshot shows no phone layout, or a font is unidentifiable).
 
+## Speed — every run faster than the last
+
+Deliver as fast as possible without dropping a check. Before step 1, read `RUNLOG.md` (next to this file):
+apply its **Shortcuts** and watch the step that was slowest last time.
+
+- **Parallel by default**: send independent calls in one message. Start the captures (one command, pages one
+  after another) in the background right after scaffolding, and read `base-theme/README.md` + the newest
+  `themes/*/_work/plan.md` while they run. Start the preview server once, in the background; it watches files.
+- **Use the tools, don't write throwaway scripts**: texts → `capture/<name>/text.txt`; self-hosted fonts →
+  `capture/<name>/fonts/` (only the faces the page loads, see `fonts.json`); a tall screenshot →
+  `tools/crop.js --slices`; pick images → `tools/contact-sheet.js`; one section / one measurement →
+  `tools/shot.js --selector` / `--eval`; compare → `tools/side-by-side.js`; images → `tools/scripts/to-webp.js`;
+  CSS over budget → `tools/scripts/css-compact.js`, `css-merge.js`, `css-split.js`.
+- **Read by need**: the README catalog and class names first; for the base markup of one part `grep` the class
+  in `sections.css` / the `.hbs` instead of reading whole files.
+- **Generate, don't hand-patch JSON**: `templates/product.json`, theme-only global settings and long texts
+  (FAQ) come from small `_work/build-*.js` scripts you edit and re-run (see `themes/resilia/_work/`).
+- **Batch the checks**: one `shot.js` call per page and width; while iterating re-run only what failed; smoke +
+  mobile-audit + pack once at the end.
+
+At the end (after the report), update `RUNLOG.md`: add one line to **Runs** (date · theme · rough minutes per
+step · slowest step) and turn what slowed you into a concrete **Shortcut**. If the same step is slowest in two
+runs, fix it with tooling (a flag or script in `tools/`) instead of another note. Keep the file under ~50 lines.
+
 ## Steps
 
 1. **Scaffold**: `node tools/new-theme.js "<Name>" --source "<url or image paths>"` → `themes/<slug>/`.
@@ -75,8 +99,9 @@ Talk to the user in Vietnamese.
      its images / videos), and `--name home` / other pages given without `--no-images`. If only a product page
      is given, the logo is the one file that may be saved by hand (its URL from `page.html`); nothing else. If a
      product capture already has an `images/` folder, delete it.
-     Read `tokens.json` (fonts, colours, button / header / topbar / footer styles), `sections.json`, and LOOK at
-     `desktop.png`, `mobile.png` and `sections/NN-*.png`. If a capture misses content (lazy / animated
+     Read `tokens.json` (fonts, colours, button / header / topbar / footer styles), `sections.json`,
+     `text.txt` (all texts incl. hidden FAQ answers), `fonts.json` (copy `fonts/*` into `assets/fonts/`), and
+     LOOK at `desktop.png`, `mobile.png` and `sections/NN-*.png`. If a capture misses content (lazy / animated
      blocks, pop-ups), take extra screenshots with `node tools/shot.js` or re-run with `--keep-popups`.
    - Images: read them with the Read tool; measure proportions; note fonts, colours (estimate hex), spacing,
      radius, shadows, icon style, every text. Ask for the phone view if only desktop is given.

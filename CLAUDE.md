@@ -11,11 +11,13 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 - `reference/{lunara,twinklingtree,wayfare}/` — the original source themes (unzipped from the `*.zip` files at the
   root). Read-only reference; never build from them.
 - `tools/` — `preview-server.js` (local engine, v1 + v2), `capture.js` (original page → screenshots, tokens,
-  sections, images), `visual-diff.js`, `shot.js`, `smoke.js` (end-to-end platform checks), `mobile-audit.js` (phone layout + speed
-  budget), `new-theme.js`,
-  `pack.js` (validate + zip to `dist/`), `side-by-side.js` (compare screenshot slices), `inspect-theme.js`
+  sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
+  probe), `smoke.js` (end-to-end platform checks), `mobile-audit.js` (phone layout + speed budget), `new-theme.js`,
+  `pack.js` (validate + zip to `dist/`), `side-by-side.js` (compare screenshot slices), `crop.js` (slice tall
+  screenshots), `contact-sheet.js` (all images of a folder in one picture), `inspect-theme.js`
   (inventory a theme vs the base), `sync-core.js` (push base core files into built themes), `scripts/prune-css.js`,
-  `scripts/build-base-settings.js`.
+  `scripts/build-base-settings.js`, `scripts/to-webp.js`, `scripts/css-compact.js` / `css-merge.js` /
+  `css-split.js` (shrink a CSS file under the budget).
   Install once: `cd tools && npm install && npx playwright install chromium`.
 - `dist/` — uploadable zips.
 

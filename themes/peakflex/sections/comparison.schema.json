@@ -1,0 +1,33 @@
+{
+  "name": "Comparison table",
+  "tag": "section",
+  "max_blocks": 14,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why it beats ordinary vacuum bags" },
+    { "type": "text", "id": "ours_label", "label": "Our column", "default": "", "info": "Empty = store name." },
+    { "type": "image_picker", "id": "ours_image", "label": "Our column image", "info": "Optional: the column shows no picture until one is picked (the editor marks the spot)." },
+    { "type": "text", "id": "theirs_label", "label": "Other column", "default": "Ordinary vacuum bags" },
+    { "type": "image_picker", "id": "theirs_image", "label": "Other column image", "info": "Optional: the column shows no picture until one is picked (the editor marks the spot)." }
+  ],
+  "blocks": [
+    {
+      "type": "row", "name": "Row", "limit": 14,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Feature", "default": "Works anywhere, no plug needed" },
+        { "type": "checkbox", "id": "ours", "label": "We have it", "default": true },
+        { "type": "checkbox", "id": "theirs", "label": "They have it", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table", "category": "Product", "description": "Feature-by-feature, us vs. the usual alternative.",
+      "blocks": [
+        { "type": "row" },
+        { "type": "row", "settings": { "label": "Cordless and rechargeable" } },
+        { "type": "row", "settings": { "label": "Bags stay sealed overnight" } },
+        { "type": "row", "settings": { "label": "Needs a wall outlet", "ours": false, "theirs": true } }
+      ]
+    }
+  ]
+}

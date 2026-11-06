@@ -1,0 +1,7 @@
+{{!-- One set of the home promise strip (index.hbs prints it twice for a seamless loop). --}}
+<ul class="pf-marquee__set"{{#if hidden}} aria-hidden="true"{{/if}}>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 3 8.3 7 9.5 4-1.2 7-5.1 7-9.5V6l-7-3Z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span><b>{{@root.settings.pf_marq_2_title}}</b><small>{{@root.settings.pf_marq_2_text}}</small></span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="1.6"/></svg><span><b>{{@root.settings.pf_marq_3_title}}</b><small>{{@root.settings.pf_marq_3_text}}</small></span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span><b>{{@root.settings.pf_marq_4_title}}</b><small>{{@root.settings.pf_marq_4_text}}</small></span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6" cy="17.5" r="1.8" fill="#fff" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17.5" r="1.8" fill="#fff" stroke="currentColor" stroke-width="1.6"/></svg><span><b>{{@root.settings.pf_marq_1_title}}</b><small>{{@root.settings.pf_marq_1_text}}</small></span></li>
+</ul>

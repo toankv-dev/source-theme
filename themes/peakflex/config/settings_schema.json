@@ -1,0 +1,2280 @@
+[
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary (buttons, accents)",
+        "default": "#cf5905"
+      },
+      {
+        "type": "color",
+        "id": "primary_text",
+        "label": "Text on primary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Accent",
+        "default": "#0b2e59"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Body text",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "id": "page_bg",
+        "label": "Page background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "check",
+        "label": "Check marks / success",
+        "default": "#1d4f91"
+      },
+      {
+        "type": "color",
+        "id": "badge",
+        "label": "Badges",
+        "default": "#0b2e59"
+      },
+      {
+        "type": "color",
+        "id": "sale",
+        "label": "Sale price / discount",
+        "default": "#009600"
+      },
+      {
+        "type": "color",
+        "id": "alert",
+        "label": "Alerts",
+        "default": "#cf5905"
+      },
+      {
+        "type": "color",
+        "id": "star",
+        "label": "Stars",
+        "default": "#ffbe59"
+      },
+      {
+        "type": "header",
+        "content": "Header & footer"
+      },
+      {
+        "type": "color",
+        "id": "header_bg",
+        "label": "Header background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "header_text",
+        "label": "Header text",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer background",
+        "default": "#0b2e59"
+      },
+      {
+        "type": "color",
+        "id": "footer_text",
+        "label": "Footer text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Checkout"
+      },
+      {
+        "type": "color",
+        "id": "checkout_bg",
+        "label": "Checkout background",
+        "default": "#f7f7f7"
+      }
+    ]
+  },
+  {
+    "name": "Typography & shape",
+    "settings": [
+      {
+        "type": "text",
+        "id": "font",
+        "label": "Body font (Google Fonts name)",
+        "default": "Poppins",
+        "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
+      },
+      {
+        "type": "text",
+        "id": "font_heading",
+        "label": "Heading font (optional)",
+        "default": "",
+        "info": "Empty = same as the body font."
+      },
+      {
+        "type": "text",
+        "id": "font_weights",
+        "label": "Google Fonts weights",
+        "default": "400;500;600;700",
+        "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
+      },
+      {
+        "type": "checkbox",
+        "id": "load_google_fonts",
+        "label": "Load the fonts from Google Fonts",
+        "default": false,
+        "info": "Off when the theme ships its own font files (@font-face in skin.css)."
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Corner radius (cards, images)",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "btn_radius",
+        "label": "Button corner radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "default": 8,
+        "unit": "px"
+      },
+      {
+        "type": "select",
+        "id": "btn_case",
+        "label": "Button text",
+        "default": "none",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "UPPERCASE"
+          },
+          {
+            "value": "none",
+            "label": "As typed"
+          },
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 960,
+        "max": 1600,
+        "step": 20,
+        "default": 1440,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_topbar",
+        "label": "Show the top bar",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "topbar_style",
+        "label": "Style",
+        "default": "countdown",
+        "options": [
+          {
+            "value": "rotate",
+            "label": "Rotating messages"
+          },
+          {
+            "value": "countdown",
+            "label": "Sale countdown"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Messages (separate with ||)",
+        "default": "Free shipping on every order || 30-day money-back guarantee"
+      },
+      {
+        "type": "checkbox",
+        "id": "topbar_autoplay",
+        "label": "Rotate automatically",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "topbar_bg",
+        "label": "Background",
+        "default": "#0b2e59"
+      },
+      {
+        "type": "color",
+        "id": "topbar_color",
+        "label": "Text",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Countdown"
+      },
+      {
+        "type": "text",
+        "id": "countdown_title",
+        "label": "Title",
+        "default": "FALL SALE"
+      },
+      {
+        "type": "text",
+        "id": "countdown_subtitle",
+        "label": "Subtitle",
+        "default": "Up to 70% off"
+      },
+      {
+        "type": "number",
+        "id": "countdown_hours",
+        "label": "Restart every (hours)",
+        "default": 2,
+        "info": "The timer counts down and restarts for each visitor."
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Sticky header",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "logo_position",
+        "label": "Logo position (desktop)",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo height",
+        "min": 20,
+        "max": 90,
+        "step": 2,
+        "default": 40,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_account",
+        "label": "Show orders link",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_track_link",
+        "label": "Show Track order in the menu",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_collections",
+        "label": "Show collections in the menu",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "nav_show_shop",
+        "label": "Show the Shop link in the menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "nav_home_label",
+        "label": "Menu: Home label",
+        "default": "Home"
+      },
+      {
+        "type": "text",
+        "id": "nav_shop_label",
+        "label": "Menu: Shop label",
+        "default": "All Products"
+      },
+      {
+        "type": "text",
+        "id": "nav_contact_label",
+        "label": "Menu: Contact label",
+        "default": "Contact"
+      },
+      {
+        "type": "text",
+        "id": "nav_track_label",
+        "label": "Menu: Track label",
+        "default": "Track Order"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "footer_about",
+        "label": "About text",
+        "default": "Our mission is to improve your well-being and relieve everyday aches and pains with our thoughtfully designed solutions."
+      },
+      {
+        "type": "text",
+        "id": "footer_links_title",
+        "label": "Links column title",
+        "default": "Customer Service"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_collections",
+        "label": "Show a collections column",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Support hours",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Newsletter"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_newsletter",
+        "label": "Show newsletter in the footer",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "newsletter_heading",
+        "label": "Heading",
+        "default": "Tips for happier knees"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_text",
+        "label": "Text",
+        "default": "Simple tips, honest advice and members-only deals, straight to your inbox."
+      },
+      {
+        "type": "text",
+        "id": "newsletter_placeholder",
+        "label": "Placeholder",
+        "default": "Enter your email"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_button",
+        "label": "Button",
+        "default": "Sign Up"
+      },
+      {
+        "type": "header",
+        "content": "Social links"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube"
+      }
+    ]
+  },
+  {
+    "name": "Payment icons",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Methods the platform checkout processes; switch off the ones you do not offer."
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_visa",
+        "label": "Visa",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_mastercard",
+        "label": "Mastercard",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_amex",
+        "label": "American Express",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_discover",
+        "label": "Discover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_applepay",
+        "label": "Apple Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_googlepay",
+        "label": "Google Pay",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "pay_paypal",
+        "label": "PayPal",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product & cards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "atc_label",
+        "label": "Add to cart label",
+        "default": "Add to cart"
+      },
+      {
+        "type": "text",
+        "id": "card_badge_label",
+        "label": "Card badge text before %",
+        "default": "SAVE"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_rating",
+        "label": "Show stars on product cards",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "open_cart_on_add",
+        "label": "Open the cart after Add to cart",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_title",
+        "label": "Title",
+        "default": "Your cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_logo",
+        "label": "Show the logo instead of the title",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_notice",
+        "label": "Notice strip (empty = hidden)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_text",
+        "label": "Empty cart text",
+        "default": "Your cart is empty."
+      },
+      {
+        "type": "text",
+        "id": "empty_cart_button",
+        "label": "Empty cart button",
+        "default": "Continue shopping"
+      },
+      {
+        "type": "text",
+        "id": "cart_subtotal_label",
+        "label": "Subtotal label",
+        "default": "Subtotal"
+      },
+      {
+        "type": "text",
+        "id": "cart_footer_note",
+        "label": "Note under the subtotal",
+        "default": "Shipping is calculated at checkout."
+      },
+      {
+        "type": "text",
+        "id": "cart_checkout_label",
+        "label": "Checkout button",
+        "default": "Checkout"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_1",
+        "label": "Trust line 1",
+        "default": "90-day money-back guarantee"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_2",
+        "label": "Trust line 2",
+        "default": "Free US shipping"
+      },
+      {
+        "type": "text",
+        "id": "cart_trust_3",
+        "label": "Trust line 3",
+        "default": "Secure, encrypted checkout"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment",
+        "label": "Show payment icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping protection / add-ons"
+      },
+      {
+        "type": "store_products",
+        "id": "cart_upsells",
+        "label": "Products offered in the cart",
+        "info": "Added to the cart switched on; the buyer can switch them off."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_as_line",
+        "label": "Also list them as cart lines",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "cart_upsell_heading",
+        "label": "Heading",
+        "default": ""
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_bg",
+        "label": "Background",
+        "default": "#f4f5f7"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_color",
+        "label": "Text",
+        "default": "#15171c"
+      },
+      {
+        "type": "color",
+        "id": "cart_upsell_accent",
+        "label": "Switch colour",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Discounts",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Pack cards and the cart are priced with the store's live automatic discounts, using the checkout's formula. Switch off a kind the checkout does not apply to this store."
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_tiered_discount",
+        "label": "Tiered (buy more, save more)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_bxgy_discount",
+        "label": "Buy X get Y",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "allow_amount_off_discount",
+        "label": "Amount off products",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Pages",
+    "settings": [
+      {
+        "type": "text",
+        "id": "track_heading",
+        "label": "Order tracking heading",
+        "default": "Track your order"
+      },
+      {
+        "type": "text",
+        "id": "contact_form_heading",
+        "label": "Contact form heading",
+        "default": "Send us a message"
+      },
+      {
+        "type": "text",
+        "id": "search_heading",
+        "label": "Search heading",
+        "default": "Search results"
+      }
+    ]
+  },
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Default questions shown by every FAQ that has no questions of its own."
+      },
+      {
+        "type": "text",
+        "id": "faq_1_q",
+        "label": "Question 1",
+        "default": "How long does shipping take?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_1_a",
+        "label": "Answer 1",
+        "default": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_2_q",
+        "label": "Question 2",
+        "default": "How can I track my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_2_a",
+        "label": "Answer 2",
+        "default": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_3_q",
+        "label": "Question 3",
+        "default": "Can I change or cancel my order?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_3_a",
+        "label": "Answer 3",
+        "default": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_4_q",
+        "label": "Question 4",
+        "default": "What is your return and refund policy?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_4_a",
+        "label": "Answer 4",
+        "default": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_5_q",
+        "label": "Question 5",
+        "default": "My item arrived damaged or isn't what I ordered"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_5_a",
+        "label": "Answer 5",
+        "default": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>"
+      },
+      {
+        "type": "text",
+        "id": "faq_6_q",
+        "label": "Question 6",
+        "default": "How can I reach customer support?"
+      },
+      {
+        "type": "richtext",
+        "id": "faq_6_a",
+        "label": "Answer 6",
+        "default": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>"
+      }
+    ]
+  },
+  {
+    "name": "Home – hero",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_hero_show",
+        "label": "Show the hero",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "home_hero_mobile_image",
+        "label": "Phone image (optional)"
+      },
+      {
+        "type": "text",
+        "id": "home_hero_eyebrow",
+        "label": "Small text above",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_hero_title",
+        "label": "Heading",
+        "default": "The adjustable knee sleeve that helps sore, arthritic knees feel steady on stairs."
+      },
+      {
+        "type": "textarea",
+        "id": "home_hero_text",
+        "label": "Text",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_hero_button",
+        "label": "Button",
+        "default": "Find Your Size →"
+      },
+      {
+        "type": "url",
+        "id": "home_hero_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "home_hero_align",
+        "label": "Text position",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "home_hero_overlay",
+        "label": "Dark overlay",
+        "min": 0,
+        "max": 0.8,
+        "step": 0.1,
+        "default": 0
+      },
+      {
+        "type": "textarea",
+        "id": "home_promises",
+        "label": "Promises strip (separate with ||, empty = hidden)",
+        "default": ""
+      }
+    ]
+  },
+  {
+    "name": "Home – products",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_featured_show",
+        "label": "Show the featured product (first product)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_featured_heading",
+        "label": "Featured heading",
+        "default": "Our product"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_products_show",
+        "label": "Show the product grid",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "home_products_source",
+        "label": "Grid shows",
+        "default": "all",
+        "options": [
+          {
+            "value": "all",
+            "label": "All products"
+          },
+          {
+            "value": "collections",
+            "label": "One grid per collection"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_products_heading",
+        "label": "Grid heading",
+        "default": "Best sellers"
+      },
+      {
+        "type": "number",
+        "id": "home_products_limit",
+        "label": "Products per grid",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Home – banner & comparison",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_banner_show",
+        "label": "Show the image banner",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "home_banner_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "home_banner_side",
+        "label": "Image side",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "home_banner_title",
+        "label": "Heading",
+        "default": "Our most popular pack"
+      },
+      {
+        "type": "textarea",
+        "id": "home_banner_text",
+        "label": "Text",
+        "default": "Save more when you buy more."
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Button",
+        "default": "Shop now"
+      },
+      {
+        "type": "url",
+        "id": "home_banner_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Comparison"
+      },
+      {
+        "type": "checkbox",
+        "id": "home_compare_show",
+        "label": "Show the comparison table",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_compare_heading",
+        "label": "Heading",
+        "default": "How we compare"
+      },
+      {
+        "type": "text",
+        "id": "home_compare_ours",
+        "label": "Our column (empty = store name)",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_compare_theirs",
+        "label": "Other column",
+        "default": "Others"
+      },
+      {
+        "type": "textarea",
+        "id": "home_compare_rows",
+        "label": "Rows (one per line: Feature|yes|no)",
+        "default": "Free shipping|yes|no\nMoney-back guarantee|yes|no\nPremium materials|yes|no"
+      }
+    ]
+  },
+  {
+    "name": "Home – reviews, FAQ, newsletter, contact",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "home_reviews_show",
+        "label": "Show customer reviews",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_heading",
+        "label": "Reviews heading",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "home_reviews_sub",
+        "label": "Reviews subheading",
+        "default": ""
+      },
+      {
+        "type": "checkbox",
+        "id": "home_faq_show",
+        "label": "Show the FAQ (Theme settings → FAQ)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_newsletter_show",
+        "label": "Show the newsletter band",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_contact_show",
+        "label": "Show the contact form",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "home_contact_heading",
+        "label": "Contact heading",
+        "default": "Contact us"
+      }
+    ]
+  },
+  {
+    "name": "PeakFlex – Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "pf_footer_about_title",
+        "label": "About column title",
+        "default": "Focus on Quality of Life"
+      },
+      {
+        "type": "text",
+        "id": "pf_footer_email_label",
+        "label": "Text before the email",
+        "default": "💌"
+      },
+      {
+        "type": "text",
+        "id": "pf_footer_links_title",
+        "label": "Links column title",
+        "default": "Customer Service"
+      },
+      {
+        "type": "textarea",
+        "id": "pf_footer_disclaimer",
+        "label": "Disclaimer (after the copyright)",
+        "default": "The statements on this website have not been evaluated by the Food and Drug Administration. Our services are not intended to diagnose, treat, cure, or prevent any disease or medical condition. The information and advice provided by Peakflex services are for informational purposes only and cannot replace the services of a doctor or healthcare professional. Always consult your doctor before making any changes. Peakflex is not responsible for any health issues arising from the information or instructions you have received through the Peakflex Services. If you make changes to your activities on the Peakflex Services, you agree that you do so at your own risk."
+      }
+    ]
+  },
+  {
+    "name": "PeakFlex – Home top",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Hero: title, button and pictures are in \"Home page → Hero\". Empty picture = theme picture."
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_rating_label",
+        "label": "Rating pill: word",
+        "default": "Excellent"
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_rating",
+        "label": "Rating pill: score",
+        "default": "4.8/5"
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_tick_1",
+        "label": "Tick 1 (HTML allowed)",
+        "default": "<strong>Tighten or loosen</strong> in seconds with one dial"
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_tick_2",
+        "label": "Tick 2 (HTML allowed)",
+        "default": "<strong>Stays put</strong> with a non-slip grip"
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_tick_3",
+        "label": "Tick 3 (HTML allowed)",
+        "default": "<strong>Slim enough</strong> to wear under pants"
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_btn2",
+        "label": "Second button",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "pf_hero_btn2_link",
+        "label": "Second button link",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "pf_hero_note",
+        "label": "Note pill",
+        "default": "Free US shipping · 90-day money-back guarantee"
+      },
+      {
+        "type": "header",
+        "content": "Promise strip"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_1_title",
+        "label": "Item 1 title",
+        "default": "Free US Shipping"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_1_text",
+        "label": "Item 1 text",
+        "default": "On every order"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_2_title",
+        "label": "Item 2 title",
+        "default": "90-Day Guarantee"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_2_text",
+        "label": "Item 2 text",
+        "default": "Not happy? Get your money back"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_3_title",
+        "label": "Item 3 title",
+        "default": "Orthopedic Design"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_3_text",
+        "label": "Item 3 text",
+        "default": "Developed to orthopedic principles"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_4_title",
+        "label": "Item 4 title",
+        "default": "Easy Returns"
+      },
+      {
+        "type": "text",
+        "id": "pf_marq_4_text",
+        "label": "Item 4 text",
+        "default": "If it isn't the right fit"
+      },
+      {
+        "type": "header",
+        "content": "Problems"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_prob_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_heading",
+        "label": "Heading",
+        "default": "Does this sound familiar?"
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_text",
+        "label": "Text",
+        "default": "Sore knees change through the day. Most sleeves don't."
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_1_title",
+        "label": "Card 1 title",
+        "default": "Stairs feel shaky"
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_1_text",
+        "label": "Card 1 text",
+        "default": "You hold the railing and take them one step at a time."
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_2_title",
+        "label": "Card 2 title",
+        "default": "Swollen mornings, fine by noon"
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_2_text",
+        "label": "Card 2 text",
+        "default": "One fixed sleeve is too tight early and too loose later."
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_3_title",
+        "label": "Card 3 title",
+        "default": "Sleeves that slide down"
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_3_text",
+        "label": "Card 3 text",
+        "default": "You spend the day pulling it back up."
+      },
+      {
+        "type": "text",
+        "id": "pf_prob_callout",
+        "label": "Callout (HTML allowed)",
+        "default": "<strong>PeakFlex was built for all three.</strong> A dial you can tighten or loosen in seconds, and a non-slip grip that stays put."
+      },
+      {
+        "type": "header",
+        "content": "Steps"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_steps_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_steps_heading",
+        "label": "Heading",
+        "default": "Get steadier knees in 3 simple steps"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_steps_image",
+        "label": "Picture (empty = theme picture, 4:3)"
+      },
+      {
+        "type": "text",
+        "id": "pf_step_1_title",
+        "label": "Step 1 title",
+        "default": "Find your size"
+      },
+      {
+        "type": "text",
+        "id": "pf_step_1_text",
+        "label": "Step 1 text",
+        "default": "Match your body weight to our size chart. It takes 30 seconds."
+      },
+      {
+        "type": "text",
+        "id": "pf_step_2_title",
+        "label": "Step 2 title",
+        "default": "Slip it on"
+      },
+      {
+        "type": "text",
+        "id": "pf_step_2_text",
+        "label": "Step 2 text",
+        "default": "Pull it over your knee and turn the dial until it feels right."
+      },
+      {
+        "type": "text",
+        "id": "pf_step_3_title",
+        "label": "Step 3 title",
+        "default": "Get back to your day"
+      },
+      {
+        "type": "text",
+        "id": "pf_step_3_text",
+        "label": "Step 3 text",
+        "default": "Stairs, walks and errands with a knee that feels steadier."
+      },
+      {
+        "type": "header",
+        "content": "Best sellers (the store's first 4 products)"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_best_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_best_eyebrow",
+        "label": "Eyebrow",
+        "default": "Best sellers"
+      },
+      {
+        "type": "text",
+        "id": "pf_best_heading",
+        "label": "Heading",
+        "default": "Start here."
+      },
+      {
+        "type": "text",
+        "id": "pf_best_text",
+        "label": "Text",
+        "default": "These are the ones people buy most."
+      },
+      {
+        "type": "text",
+        "id": "pf_best_from",
+        "label": "Price prefix",
+        "default": "From"
+      },
+      {
+        "type": "text",
+        "id": "pf_best_button",
+        "label": "Card button",
+        "default": "Choose Your Size →"
+      }
+    ]
+  },
+  {
+    "name": "PeakFlex – Home middle",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Specialist"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_expert_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_heading",
+        "label": "Heading (HTML allowed, <em> = italic)",
+        "default": "Designed with a <em>knee specialist</em>"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_text",
+        "label": "Text",
+        "default": "Made with joint specialists. Tested by people with real knee pain."
+      },
+      {
+        "type": "textarea",
+        "id": "pf_expert_quote",
+        "label": "Quote",
+        "default": "Most people with sore knees don't need a stiff brace. They need support that keeps them steady and is comfy enough to wear every day."
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_sign",
+        "label": "Signature",
+        "default": "Daniel M."
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_role",
+        "label": "Role",
+        "default": "Knee Support Specialist"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_org",
+        "label": "Organisation",
+        "default": "PeakFlex advisor"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_chip_1",
+        "label": "Chip 1",
+        "default": "Designed for sore knees"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_chip_2",
+        "label": "Chip 2",
+        "default": "Cushions the kneecap"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_chip_3",
+        "label": "Chip 3",
+        "default": "Support on both sides of the knee"
+      },
+      {
+        "type": "text",
+        "id": "pf_expert_chip_4",
+        "label": "Chip 4",
+        "default": "Won't slide down your leg"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_expert_image",
+        "label": "Picture (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "header",
+        "content": "Soft enough"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_soft_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_soft_heading",
+        "label": "Heading (HTML allowed)",
+        "default": "<em>Soft enough</em><br>to wear all day"
+      },
+      {
+        "type": "text",
+        "id": "pf_soft_text",
+        "label": "Text",
+        "default": "A support only helps if you wear it. Ours is flexible, light and slim enough to wear under most clothes."
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_soft_image",
+        "label": "Picture or MP4 / WebM video (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "text",
+        "id": "pf_soft_button",
+        "label": "Button",
+        "default": "Learn More"
+      },
+      {
+        "type": "url",
+        "id": "pf_soft_link",
+        "label": "Button link",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Real people"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_rev_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_heading",
+        "label": "Heading",
+        "default": "Real people, real knees"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_score",
+        "label": "Score",
+        "default": "4.8"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_score_label",
+        "label": "Score label",
+        "default": "Average rating"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_mention",
+        "label": "Chips title",
+        "default": "What customers mention most"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_chip_1",
+        "label": "Chip 1",
+        "default": "Holds the knee in place"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_chip_2",
+        "label": "Chip 2",
+        "default": "Better stability"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_chip_3",
+        "label": "Chip 3",
+        "default": "Fast, friendly support"
+      },
+      {
+        "type": "text",
+        "id": "pf_rev_use",
+        "label": "Photo row title",
+        "default": "PeakFlex in use"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_1",
+        "label": "Photo 1 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_2",
+        "label": "Photo 2 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_3",
+        "label": "Photo 3 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_4",
+        "label": "Photo 4 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_5",
+        "label": "Photo 5 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_6",
+        "label": "Photo 6 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_ugc_7",
+        "label": "Photo 7 (empty = theme picture, 1:1)"
+      },
+      {
+        "type": "paragraph",
+        "content": "The review cards come from the store's real reviews (Home page → Reviews carousel)."
+      },
+      {
+        "type": "header",
+        "content": "Why people choose"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_stats_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_heading",
+        "label": "Heading",
+        "default": "Why people choose PeakFlex."
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_text",
+        "label": "Text",
+        "default": "No miracle claims. Just honest support and a guarantee that has your back."
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_1_value",
+        "label": "Stat 1 value",
+        "default": "20k+"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_1_label",
+        "label": "Stat 1 label",
+        "default": "Happy customers"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_2_value",
+        "label": "Stat 2 value",
+        "default": "4.8/5"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_2_label",
+        "label": "Stat 2 label",
+        "default": "Average rating"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_3_value",
+        "label": "Stat 3 value",
+        "default": "90"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_3_label",
+        "label": "Stat 3 label",
+        "default": "Day money-back guarantee"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_4_value",
+        "label": "Stat 4 value",
+        "default": "$0"
+      },
+      {
+        "type": "text",
+        "id": "pf_stat_4_label",
+        "label": "Stat 4 label",
+        "default": "Shipping on every US order"
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_quote",
+        "label": "Quote",
+        "default": "They held my knees more secure and I had better stability."
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_quote_by",
+        "label": "Quote author",
+        "default": "Harry H. | PeakFlex customer"
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_chip_1",
+        "label": "Chip 1",
+        "default": "Steadier on stairs"
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_chip_2",
+        "label": "Chip 2",
+        "default": "Adjusts to swelling"
+      },
+      {
+        "type": "text",
+        "id": "pf_stats_chip_3",
+        "label": "Chip 3",
+        "default": "Won't slide down"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_stats_image",
+        "label": "Picture (empty = theme picture, transparent PNG / WebP)"
+      }
+    ]
+  },
+  {
+    "name": "PeakFlex – Home bottom",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Comparison"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_cmp_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_heading",
+        "label": "Heading",
+        "default": "PeakFlex vs. an ordinary knee sleeve"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_text",
+        "label": "Text",
+        "default": "Most knee sleeves give you one fit for the whole day. Here is what is different."
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_ours",
+        "label": "Our column title",
+        "default": "PeakFlex"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_ours_sub",
+        "label": "Our column subtitle",
+        "default": "Knee Sleeve"
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_cmp_ours_image",
+        "label": "Our column picture (small, 1:1)"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_theirs",
+        "label": "Their column title",
+        "default": "Ordinary"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_theirs_sub",
+        "label": "Their column subtitle",
+        "default": "knee sleeve"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_1_label",
+        "label": "Row 1 label",
+        "default": "Change the fit during the day"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_1_ours",
+        "label": "Row 1 ours",
+        "default": "One‑hand dial"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_1_theirs",
+        "label": "Row 1 theirs",
+        "default": "One fixed tightness"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_1_mark",
+        "label": "Row 1 their mark",
+        "default": "x",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_2_label",
+        "label": "Row 2 label",
+        "default": "Kneecap support"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_2_ours",
+        "label": "Row 2 ours",
+        "default": "Padded kneecap area"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_2_theirs",
+        "label": "Row 2 theirs",
+        "default": "Usually none"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_2_mark",
+        "label": "Row 2 their mark",
+        "default": "x",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_3_label",
+        "label": "Row 3 label",
+        "default": "Side support"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_3_ours",
+        "label": "Row 3 ours",
+        "default": "Built-in side stabilizers"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_3_theirs",
+        "label": "Row 3 theirs",
+        "default": "Usually none"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_3_mark",
+        "label": "Row 3 their mark",
+        "default": "x",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_4_label",
+        "label": "Row 4 label",
+        "default": "Stays in place"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_4_ours",
+        "label": "Row 4 ours",
+        "default": "Non-slip grip"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_4_theirs",
+        "label": "Row 4 theirs",
+        "default": "Often slides down"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_4_mark",
+        "label": "Row 4 their mark",
+        "default": "x",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_5_label",
+        "label": "Row 5 label",
+        "default": "Sizes"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_5_ours",
+        "label": "Row 5 ours",
+        "default": "7 sizes, S to 4XL"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_5_theirs",
+        "label": "Row 5 theirs",
+        "default": "Varies"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_5_mark",
+        "label": "Row 5 their mark",
+        "default": "-",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_6_label",
+        "label": "Row 6 label",
+        "default": "Try it risk-free"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_6_ours",
+        "label": "Row 6 ours",
+        "default": "90-day money-back guarantee"
+      },
+      {
+        "type": "text",
+        "id": "pf_cmp_6_theirs",
+        "label": "Row 6 theirs",
+        "default": "Varies"
+      },
+      {
+        "type": "select",
+        "id": "pf_cmp_6_mark",
+        "label": "Row 6 their mark",
+        "default": "-",
+        "options": [
+          {
+            "value": "x",
+            "label": "×"
+          },
+          {
+            "value": "-",
+            "label": "–"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Two promo cards"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_promo_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_1_title",
+        "label": "Card 1 title",
+        "default": "The both‑knees bundle"
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_1_text",
+        "label": "Card 1 text",
+        "default": "Two sore knees? Get one for each and pay less per sleeve."
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_1_button",
+        "label": "Card 1 button",
+        "default": "Shop the Bundle →"
+      },
+      {
+        "type": "url",
+        "id": "pf_promo_1_link",
+        "label": "Card 1 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_promo_1_image",
+        "label": "Card 1 picture (empty = theme picture, tall cut-out)"
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_2_eyebrow",
+        "label": "Card 2 eyebrow",
+        "default": "Size Guide"
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_2_title",
+        "label": "Card 2 title (HTML allowed)",
+        "default": "Find your size<br>in 30 seconds"
+      },
+      {
+        "type": "text",
+        "id": "pf_promo_2_button",
+        "label": "Card 2 button",
+        "default": "Find Your Size →"
+      },
+      {
+        "type": "url",
+        "id": "pf_promo_2_link",
+        "label": "Card 2 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_promo_2_image",
+        "label": "Card 2 picture (empty = theme picture, cut-out)"
+      },
+      {
+        "type": "header",
+        "content": "Categories"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_cat_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_cat_heading",
+        "label": "Heading (HTML allowed)",
+        "default": "Support for every <em>sore spot</em>"
+      },
+      {
+        "type": "text",
+        "id": "pf_cat_1_label",
+        "label": "Tile 1 label",
+        "default": "Knee"
+      },
+      {
+        "type": "url",
+        "id": "pf_cat_1_link",
+        "label": "Tile 1 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_cat_1_image",
+        "label": "Tile 1 picture (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "text",
+        "id": "pf_cat_2_label",
+        "label": "Tile 2 label",
+        "default": "Foot"
+      },
+      {
+        "type": "url",
+        "id": "pf_cat_2_link",
+        "label": "Tile 2 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_cat_2_image",
+        "label": "Tile 2 picture (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "text",
+        "id": "pf_cat_3_label",
+        "label": "Tile 3 label",
+        "default": "Lower Back"
+      },
+      {
+        "type": "url",
+        "id": "pf_cat_3_link",
+        "label": "Tile 3 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_cat_3_image",
+        "label": "Tile 3 picture (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "text",
+        "id": "pf_cat_4_label",
+        "label": "Tile 4 label",
+        "default": "Recovery"
+      },
+      {
+        "type": "url",
+        "id": "pf_cat_4_link",
+        "label": "Tile 4 link",
+        "default": ""
+      },
+      {
+        "type": "image_picker",
+        "id": "pf_cat_4_image",
+        "label": "Tile 4 picture (empty = theme picture, 5:4)"
+      },
+      {
+        "type": "header",
+        "content": "FAQ"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_faq_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_heading",
+        "label": "Heading (HTML allowed)",
+        "default": "Got <em>questions?</em>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_text",
+        "label": "Text (HTML allowed)",
+        "default": "Can't find your answer? <a href=\"/pages/contact\">Write us</a>."
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_1_q",
+        "label": "Question 1",
+        "default": "How do I pick my size?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_1_a",
+        "label": "Answer 1",
+        "default": "<p>For the Knee Sleeve, pick your size by body weight, from S (110 to 130 lbs) to 4XL (301+ lbs). Not sure? <a href=\"/pages/contact\">Write us</a> before you order.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_2_q",
+        "label": "Question 2",
+        "default": "Can I change how tight it feels?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_2_a",
+        "label": "Answer 2",
+        "default": "<p>Yes. Make it tighter for stairs and long walks, and looser when your knee feels swollen. It only takes a few seconds.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_3_q",
+        "label": "Question 3",
+        "default": "How long can I wear it?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_3_a",
+        "label": "Answer 3",
+        "default": "<p>All day. Take it off at night. If anything feels numb or tingly, loosen it a little.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_4_q",
+        "label": "Question 4",
+        "default": "Will it help if my knee is \"bone on bone\"?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_4_a",
+        "label": "Answer 4",
+        "default": "<p>Many people with bone-on-bone knees wear it for extra steadiness when they move. It won't repair cartilage, but support that keeps the knee steadier can make stairs and walks feel more comfortable. If you're unsure, ask your doctor.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_5_q",
+        "label": "Question 5",
+        "default": "When will I feel a difference?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_5_a",
+        "label": "Answer 5",
+        "default": "<p>Most people notice the extra support the first time they walk in it. Give it a few days of regular wear to find the fit that feels best for you.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_6_q",
+        "label": "Question 6",
+        "default": "What if it doesn't work for me?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_6_a",
+        "label": "Answer 6",
+        "default": "<p>You're covered by our 90-day money-back guarantee, starting the day your order arrives. Email us at info@trypeakflex.com and we'll walk you through it.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_7_q",
+        "label": "Question 7",
+        "default": "How long does shipping take?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_7_a",
+        "label": "Answer 7",
+        "default": "<p>Orders leave in 1 to 3 business days. US delivery usually takes 5 to 12 business days, and you get a tracking number by email.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_8_q",
+        "label": "Question 8",
+        "default": "Which product is right for me?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_8_a",
+        "label": "Answer 8",
+        "default": "<p>Start with where it hurts. For knees, most people pick the PeakFlex Knee Sleeve. For feet, the Footsleeve. For the lower back, the Orthobelt.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_faq_9_q",
+        "label": "Question 9",
+        "default": "How do I wash it?"
+      },
+      {
+        "type": "richtext",
+        "id": "pf_faq_9_a",
+        "label": "Answer 9",
+        "default": "<p>Hand wash in cold water and let it air dry. No dryer. Heat ruins the stretch.</p>"
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_heading",
+        "label": "Call to action heading",
+        "default": "Ready for steadier steps?"
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_text",
+        "label": "Call to action text",
+        "default": "Find your size in 30 seconds, then try it at home."
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_button",
+        "label": "Call to action button",
+        "default": "Find Your Size →"
+      },
+      {
+        "type": "url",
+        "id": "pf_cta_link",
+        "label": "Call to action link",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_tick_1",
+        "label": "Tick 1",
+        "default": "Free US shipping"
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_tick_2",
+        "label": "Tick 2",
+        "default": "Easy returns"
+      },
+      {
+        "type": "text",
+        "id": "pf_cta_tick_3",
+        "label": "Tick 3",
+        "default": "90-day money-back guarantee"
+      },
+      {
+        "type": "header",
+        "content": "Newsletter band"
+      },
+      {
+        "type": "checkbox",
+        "id": "pf_news_show",
+        "label": "Show",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "pf_news_eyebrow",
+        "label": "Eyebrow",
+        "default": "PeakFlex newsletter"
+      },
+      {
+        "type": "text",
+        "id": "pf_news_heading",
+        "label": "Heading",
+        "default": "Tips for happier knees"
+      },
+      {
+        "type": "text",
+        "id": "pf_news_text",
+        "label": "Text",
+        "default": "Simple tips, honest advice and members-only deals, straight to your inbox."
+      },
+      {
+        "type": "text",
+        "id": "pf_news_note",
+        "label": "Note under the form",
+        "default": "No spam. Just good stuff for your knees."
+      }
+    ]
+  }
+]

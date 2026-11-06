@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n7.56758dcf284489feb014a026f3727f2f20a54626.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/pf-product.css">
+</head>
+<body class="b-body b-body--product">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+{{!-- Schema v2: the engine renders the sections of templates/product*.json in order and injects them here. --}}
+<main id="MainContent" class="b-main">{{{content_for_layout}}}</main>
+{{> footer}}
+{{> product-scripts}}
+{{> scripts}}
+</body>
+</html>

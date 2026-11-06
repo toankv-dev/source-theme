@@ -1,0 +1,313 @@
+{{!-- PeakFlex home page. Settings-driven: Theme settings → "Home – hero" (title, button, pictures) and
+      "PeakFlex – Home top / middle / bottom" (every other block, each switchable). Empty pictures fall back to the
+      theme's pictures in assets/images/pf. Review cards come from the store's real reviews (data-home-reviews),
+      the newsletter posts through the platform (newsletter-form), the FAQ uses the animated accordion. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/pf-home.css">
+</head>
+<body class="b-body b-body--home">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main pf-home">
+  {{#unless (eq settings.home_hero_show false)}}
+  <section class="pf-hero">
+    <picture class="pf-hero__media">
+      <source media="(max-width: 749px)" srcset="{{#if settings.home_hero_mobile_image}}{{settings.home_hero_mobile_image}}{{else}}{{assets_url}}/images/pf/hero-mobile.webp{{/if}}" width="800" height="600">
+      <img src="{{#if settings.home_hero_image}}{{settings.home_hero_image}}{{else}}{{assets_url}}/images/pf/hero-desktop.webp{{/if}}" alt="" width="1920" height="1072" fetchpriority="high">
+    </picture>
+    <div class="b-wrap pf-hero__inner">
+      <div class="pf-hero__copy">
+        {{#if settings.pf_hero_rating}}<p class="pf-hero__rating"><span class="pf-tp-stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><strong>{{settings.pf_hero_rating_label}}</strong> {{settings.pf_hero_rating}} <span class="pf-tp-logo">★ Trustpilot</span></p>{{/if}}
+        <h1 class="pf-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
+        <ul class="pf-hero__ticks">
+          {{#if settings.pf_hero_tick_1}}<li>{{{settings.pf_hero_tick_1}}}</li>{{/if}}
+          {{#if settings.pf_hero_tick_2}}<li>{{{settings.pf_hero_tick_2}}}</li>{{/if}}
+          {{#if settings.pf_hero_tick_3}}<li>{{{settings.pf_hero_tick_3}}}</li>{{/if}}
+        </ul>
+        <div class="pf-hero__btns">
+          <a class="pf-btn" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}{{#each (limit products 1)}}{{url}}{{/each}}{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}}</a>
+          {{#if settings.pf_hero_btn2}}<a class="pf-btn pf-btn--ghost" href="{{#if settings.pf_hero_btn2_link}}{{settings.pf_hero_btn2_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{settings.pf_hero_btn2}}</a>{{/if}}
+        </div>
+        {{#if settings.pf_hero_note}}<p class="pf-hero__note"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 3 8.3 7 9.5 4-1.2 7-5.1 7-9.5V6l-7-3Z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>{{settings.pf_hero_note}}</p>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#if settings.pf_marq_1_title}}
+  <div class="pf-marquee" aria-label="Store promises">
+    <div class="pf-marquee__track">
+      {{> pf-marquee-set}}
+      {{> pf-marquee-set hidden=true}}
+    </div>
+  </div>
+  {{/if}}
+
+  {{#unless (eq settings.pf_prob_show false)}}
+  <section class="pf-sec pf-dots pf-prob">
+    <div class="b-wrap">
+      <h2 class="pf-h2">{{settings.pf_prob_heading}}</h2>
+      {{#if settings.pf_prob_text}}<p class="pf-sub">{{settings.pf_prob_text}}</p>{{/if}}
+      <ul class="pf-prob__cards">
+        <li><span class="pf-prob__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18h3v-3h3v-3h3V9h3V6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><b>{{settings.pf_prob_1_title}}</b><span>{{settings.pf_prob_1_text}}</span></li>
+        <li><span class="pf-prob__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l2.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><b>{{settings.pf_prob_2_title}}</b><span>{{settings.pf_prob_2_text}}</span></li>
+        <li><span class="pf-prob__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>{{settings.pf_prob_3_title}}</b><span>{{settings.pf_prob_3_text}}</span></li>
+      </ul>
+      {{#if settings.pf_prob_callout}}<p class="pf-prob__callout"><span class="pf-prob__tick" aria-hidden="true">✓</span><span>{{{settings.pf_prob_callout}}}</span></p>{{/if}}
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_steps_show false)}}
+  <section class="pf-sec pf-dots">
+    <div class="b-wrap pf-split pf-steps">
+      <div class="pf-split__media"><img src="{{#if settings.pf_steps_image}}{{settings.pf_steps_image}}{{else}}{{assets_url}}/images/pf/steps.webp{{/if}}" alt="" width="800" height="640" loading="lazy"></div>
+      <div class="pf-split__text">
+        <h2 class="pf-h2 pf-h2--left">{{settings.pf_steps_heading}}</h2>
+        <ol class="pf-steps__list">
+          <li><b>{{settings.pf_step_1_title}}</b><span>{{settings.pf_step_1_text}}</span></li>
+          <li><b>{{settings.pf_step_2_title}}</b><span>{{settings.pf_step_2_text}}</span></li>
+          <li><b>{{settings.pf_step_3_title}}</b><span>{{settings.pf_step_3_text}}</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_best_show false)}}{{#if products.length}}
+  <section class="pf-sec pf-best" id="products">
+    <div class="b-wrap">
+      {{#if settings.pf_best_eyebrow}}<p class="pf-eyebrow">{{settings.pf_best_eyebrow}}</p>{{/if}}
+      <h2 class="pf-h2">{{settings.pf_best_heading}}</h2>
+      {{#if settings.pf_best_text}}<p class="pf-sub">{{settings.pf_best_text}}</p>{{/if}}
+      <div class="pf-best__row">
+        {{#each (limit products 4)}}
+        <article class="pf-pcard" data-product-card>
+          <a class="pf-pcard__img" href="{{url}}" data-local-domain>{{#if imageUrl}}<img src="{{imageUrl}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}</a>
+          <h3 class="pf-pcard__title"><a href="{{url}}" data-local-domain>{{title}}</a></h3>
+          {{#if reviewCount}}<span class="b-stars pf-pcard__stars" style="--r:{{rating}}" aria-label="{{rating}} out of 5"></span>{{/if}}
+          {{#if description}}<div class="pf-pcard__text">{{{description}}}</div>{{/if}}
+          <p class="pf-pcard__price"><small>{{@root.settings.pf_best_from}}</small> <strong>{{money sellingPrice}}</strong>{{#if (gt compareAtPrice sellingPrice)}} <s>{{money compareAtPrice}}</s>{{/if}}</p>
+          <a class="pf-btn pf-btn--block" href="{{url}}" data-local-domain>{{#if @root.settings.pf_best_button}}{{@root.settings.pf_best_button}}{{else}}Shop now{{/if}}</a>
+        </article>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+  {{/if}}{{/unless}}
+
+  {{#unless (eq settings.pf_expert_show false)}}
+  <section class="pf-sec pf-dots">
+    <div class="b-wrap pf-split pf-split--rev pf-expert">
+      <div class="pf-split__media"><img src="{{#if settings.pf_expert_image}}{{settings.pf_expert_image}}{{else}}{{assets_url}}/images/pf/expert.webp{{/if}}" alt="" width="800" height="640" loading="lazy"></div>
+      <div class="pf-split__text">
+        <h2 class="pf-h2 pf-h2--left">{{{settings.pf_expert_heading}}}</h2>
+        {{#if settings.pf_expert_text}}<p class="pf-sub pf-sub--left">{{settings.pf_expert_text}}</p>{{/if}}
+        {{#if settings.pf_expert_quote}}<blockquote class="pf-expert__quote">“{{settings.pf_expert_quote}}”</blockquote>{{/if}}
+        {{#if settings.pf_expert_sign}}<p class="pf-expert__sign">{{settings.pf_expert_sign}}</p>{{/if}}
+        <p class="pf-expert__who"><b>{{settings.pf_expert_role}}</b><span>{{settings.pf_expert_org}}</span></p>
+        <ul class="pf-chips">
+          {{#if settings.pf_expert_chip_1}}<li>{{settings.pf_expert_chip_1}}</li>{{/if}}
+          {{#if settings.pf_expert_chip_2}}<li>{{settings.pf_expert_chip_2}}</li>{{/if}}
+          {{#if settings.pf_expert_chip_3}}<li>{{settings.pf_expert_chip_3}}</li>{{/if}}
+          {{#if settings.pf_expert_chip_4}}<li>{{settings.pf_expert_chip_4}}</li>{{/if}}
+        </ul>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_soft_show false)}}
+  <section class="pf-sec pf-dots pf-sec--tight">
+    <div class="b-wrap pf-split pf-soft">
+      <div class="pf-split__media"><img src="{{#if settings.pf_soft_image}}{{settings.pf_soft_image}}{{else}}{{assets_url}}/images/pf/soft.webp{{/if}}" alt="" width="800" height="640" loading="lazy" data-pf-media></div>
+      <div class="pf-split__text">
+        <h2 class="pf-h2 pf-h2--left">{{{settings.pf_soft_heading}}}</h2>
+        {{#if settings.pf_soft_text}}<p class="pf-sub pf-sub--left">{{settings.pf_soft_text}}</p>{{/if}}
+        <ul class="pf-badges" aria-label="Badges">
+          <li class="pf-badge pf-badge--ortho"><small>Developed to</small><b>Orthopedic</b><small>principles</small></li>
+          <li class="pf-badge pf-badge--days"><b>90</b><small>Days</small><em>Guarantee</em></li>
+          <li class="pf-badge"><b>All-day</b><small>comfort</small></li>
+        </ul>
+        {{#if settings.pf_soft_button}}<a class="pf-btn pf-btn--ghost" href="{{#if settings.pf_soft_link}}{{settings.pf_soft_link}}{{else}}{{#each (limit products 1)}}{{url}}{{/each}}{{/if}}" data-local-domain>{{settings.pf_soft_button}}</a>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_rev_show false)}}
+  <section class="pf-sec pf-dots pf-rev">
+    <div class="b-wrap">
+      <h2 class="pf-h2">{{settings.pf_rev_heading}}</h2>
+      <div class="pf-rev__summary">
+        <p class="pf-rev__score"><b>{{settings.pf_rev_score}}</b><span><span class="pf-tp-stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><small>{{settings.pf_rev_score_label}}</small></span></p>
+        <div class="pf-rev__mention">
+          <p class="pf-eyebrow pf-eyebrow--plain">{{settings.pf_rev_mention}}</p>
+          <ul class="pf-ticks-chips">
+            {{#if settings.pf_rev_chip_1}}<li>{{settings.pf_rev_chip_1}}</li>{{/if}}
+            {{#if settings.pf_rev_chip_2}}<li>{{settings.pf_rev_chip_2}}</li>{{/if}}
+            {{#if settings.pf_rev_chip_3}}<li>{{settings.pf_rev_chip_3}}</li>{{/if}}
+          </ul>
+        </div>
+      </div>
+      {{#if settings.pf_rev_use}}<p class="pf-eyebrow pf-eyebrow--plain">{{settings.pf_rev_use}}</p>{{/if}}
+      <ul class="pf-ugc">
+        <li><img src="{{#if settings.pf_ugc_1}}{{settings.pf_ugc_1}}{{else}}{{assets_url}}/images/pf/ugc-1.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_2}}{{settings.pf_ugc_2}}{{else}}{{assets_url}}/images/pf/ugc-2.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_3}}{{settings.pf_ugc_3}}{{else}}{{assets_url}}/images/pf/ugc-3.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_4}}{{settings.pf_ugc_4}}{{else}}{{assets_url}}/images/pf/ugc-4.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_5}}{{settings.pf_ugc_5}}{{else}}{{assets_url}}/images/pf/ugc-5.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_6}}{{settings.pf_ugc_6}}{{else}}{{assets_url}}/images/pf/ugc-6.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+        <li><img src="{{#if settings.pf_ugc_7}}{{settings.pf_ugc_7}}{{else}}{{assets_url}}/images/pf/ugc-7.webp{{/if}}" alt="" width="400" height="400" loading="lazy"></li>
+      </ul>
+    </div>
+    {{#unless (eq settings.home_reviews_show false)}}
+    <div class="b-home-reviews pf-rev__cards" data-home-reviews hidden>
+      <div class="b-wrap">
+        <div class="b-carousel" data-carousel>
+          <div class="b-carousel__track" data-carousel-track></div>
+        </div>
+        <div class="b-carousel__dots" data-carousel-dots role="tablist" aria-label="Choose reviews"></div>
+      </div>
+      <script type="application/json" data-home-product-ids>[{{#each (limit products 60)}}{{#unless @first}},{{/unless}}"{{id}}"{{/each}}]</script>
+    </div>
+    {{/unless}}
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_stats_show false)}}
+  <section class="pf-sec pf-sec--tight">
+    <div class="b-wrap">
+      <div class="pf-stats">
+        <div class="pf-stats__text">
+          <h2 class="pf-h2 pf-h2--left">{{settings.pf_stats_heading}}</h2>
+          {{#if settings.pf_stats_text}}<p class="pf-stats__sub">{{settings.pf_stats_text}}</p>{{/if}}
+          <ul class="pf-stats__grid">
+            <li><b>{{settings.pf_stat_1_value}}</b><span>{{settings.pf_stat_1_label}}</span></li>
+            <li><b>{{settings.pf_stat_2_value}}</b><span>{{settings.pf_stat_2_label}}</span></li>
+            <li><b>{{settings.pf_stat_3_value}}</b><span>{{settings.pf_stat_3_label}}</span></li>
+            <li><b>{{settings.pf_stat_4_value}}</b><span>{{settings.pf_stat_4_label}}</span></li>
+          </ul>
+        </div>
+        <div class="pf-stats__visual">
+          {{#if settings.pf_stats_quote}}<figure class="pf-stats__quote"><blockquote>“{{settings.pf_stats_quote}}”</blockquote><figcaption><span class="pf-tp-stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span> {{settings.pf_stats_quote_by}}</figcaption></figure>{{/if}}
+          <img class="pf-stats__img" src="{{#if settings.pf_stats_image}}{{settings.pf_stats_image}}{{else}}{{assets_url}}/images/pf/stats-person.webp{{/if}}" alt="" width="646" height="875" loading="lazy">
+          <ul class="pf-stats__chips">
+            {{#if settings.pf_stats_chip_1}}<li>{{settings.pf_stats_chip_1}}</li>{{/if}}
+            {{#if settings.pf_stats_chip_2}}<li>{{settings.pf_stats_chip_2}}</li>{{/if}}
+            {{#if settings.pf_stats_chip_3}}<li>{{settings.pf_stats_chip_3}}</li>{{/if}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_cmp_show false)}}
+  <section class="pf-sec pf-sec--tight">
+    <div class="b-wrap pf-cmp">
+      <h2 class="pf-h2">{{settings.pf_cmp_heading}}</h2>
+      {{#if settings.pf_cmp_text}}<p class="pf-sub">{{settings.pf_cmp_text}}</p>{{/if}}
+      <div class="pf-cmp__table" role="table">
+        <div class="pf-cmp__row pf-cmp__row--head" role="row">
+          <span role="columnheader"></span>
+          <span role="columnheader" class="pf-cmp__ours"><span class="pf-cmp__thumb">{{#if settings.pf_cmp_ours_image}}<img src="{{settings.pf_cmp_ours_image}}" alt="" width="44" height="44" loading="lazy">{{/if}}</span><span><b>{{settings.pf_cmp_ours}}</b><small>{{settings.pf_cmp_ours_sub}}</small></span></span>
+          <span role="columnheader" class="pf-cmp__theirs"><span class="pf-cmp__thumb"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 8h10M7 16h10" stroke="currentColor" stroke-width="1.6"/></svg></span><span><b>{{settings.pf_cmp_theirs}}</b><small>{{settings.pf_cmp_theirs_sub}}</small></span></span>
+        </div>
+        {{#if settings.pf_cmp_1_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_1_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_1_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_1_mark}}">{{settings.pf_cmp_1_theirs}}</span></div>{{/if}}
+        {{#if settings.pf_cmp_2_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_2_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_2_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_2_mark}}">{{settings.pf_cmp_2_theirs}}</span></div>{{/if}}
+        {{#if settings.pf_cmp_3_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_3_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_3_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_3_mark}}">{{settings.pf_cmp_3_theirs}}</span></div>{{/if}}
+        {{#if settings.pf_cmp_4_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_4_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_4_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_4_mark}}">{{settings.pf_cmp_4_theirs}}</span></div>{{/if}}
+        {{#if settings.pf_cmp_5_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_5_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_5_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_5_mark}}">{{settings.pf_cmp_5_theirs}}</span></div>{{/if}}
+        {{#if settings.pf_cmp_6_label}}<div class="pf-cmp__row" role="row"><span role="rowheader">{{settings.pf_cmp_6_label}}</span><span role="cell" class="pf-cmp__ours">{{settings.pf_cmp_6_ours}}</span><span role="cell" class="pf-cmp__theirs pf-cmp__mark--{{settings.pf_cmp_6_mark}}">{{settings.pf_cmp_6_theirs}}</span></div>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_promo_show false)}}
+  <section class="pf-sec pf-sec--tight">
+    <div class="b-wrap pf-promo">
+      <a class="pf-promo__card" href="{{#if settings.pf_promo_1_link}}{{settings.pf_promo_1_link}}{{else}}{{#each (limit products 1)}}{{url}}{{/each}}{{/if}}" data-local-domain>
+        <span class="pf-promo__text"><b class="pf-promo__title">{{settings.pf_promo_1_title}}</b><span>{{settings.pf_promo_1_text}}</span><span class="pf-btn pf-btn--ghost pf-btn--sm">{{settings.pf_promo_1_button}}</span></span>
+        <img class="pf-promo__img pf-promo__img--tall" src="{{#if settings.pf_promo_1_image}}{{settings.pf_promo_1_image}}{{else}}{{assets_url}}/images/pf/promo-bundle.webp{{/if}}" alt="" width="283" height="674" loading="lazy">
+      </a>
+      <a class="pf-promo__card" href="{{#if settings.pf_promo_2_link}}{{settings.pf_promo_2_link}}{{else}}{{#each (limit products 1)}}{{url}}{{/each}}{{/if}}" data-local-domain>
+        <span class="pf-promo__text">{{#if settings.pf_promo_2_eyebrow}}<span class="pf-promo__eyebrow"><i aria-hidden="true">✎</i>{{settings.pf_promo_2_eyebrow}}</span>{{/if}}<b class="pf-promo__title">{{{settings.pf_promo_2_title}}}</b><span class="pf-btn pf-btn--ghost pf-btn--sm">{{settings.pf_promo_2_button}}</span></span>
+        <img class="pf-promo__img" src="{{#if settings.pf_promo_2_image}}{{settings.pf_promo_2_image}}{{else}}{{assets_url}}/images/pf/promo-size.webp{{/if}}" alt="" width="760" height="561" loading="lazy">
+      </a>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_cat_show false)}}
+  <section class="pf-sec pf-sec--tight pf-cats">
+    <div class="b-wrap">
+      <h2 class="pf-h2">{{{settings.pf_cat_heading}}}</h2>
+      <div class="pf-cats__row">
+        <a class="pf-cat" href="{{#if settings.pf_cat_1_link}}{{settings.pf_cat_1_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain><img src="{{#if settings.pf_cat_1_image}}{{settings.pf_cat_1_image}}{{else}}{{assets_url}}/images/pf/cat-1.webp{{/if}}" alt="" width="800" height="640" loading="lazy"><span>{{settings.pf_cat_1_label}} →</span></a>
+        <a class="pf-cat" href="{{#if settings.pf_cat_2_link}}{{settings.pf_cat_2_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain><img src="{{#if settings.pf_cat_2_image}}{{settings.pf_cat_2_image}}{{else}}{{assets_url}}/images/pf/cat-2.webp{{/if}}" alt="" width="800" height="640" loading="lazy"><span>{{settings.pf_cat_2_label}} →</span></a>
+        <a class="pf-cat" href="{{#if settings.pf_cat_3_link}}{{settings.pf_cat_3_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain><img src="{{#if settings.pf_cat_3_image}}{{settings.pf_cat_3_image}}{{else}}{{assets_url}}/images/pf/cat-3.webp{{/if}}" alt="" width="800" height="640" loading="lazy"><span>{{settings.pf_cat_3_label}} →</span></a>
+        <a class="pf-cat" href="{{#if settings.pf_cat_4_link}}{{settings.pf_cat_4_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain><img src="{{#if settings.pf_cat_4_image}}{{settings.pf_cat_4_image}}{{else}}{{assets_url}}/images/pf/cat-4.webp{{/if}}" alt="" width="800" height="640" loading="lazy"><span>{{settings.pf_cat_4_label}} →</span></a>
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_faq_show false)}}
+  <section class="pf-sec pf-faq">
+    <div class="b-wrap">
+      <h2 class="pf-h2">{{{settings.pf_faq_heading}}}</h2>
+      {{#if settings.pf_faq_text}}<p class="pf-sub">{{{settings.pf_faq_text}}}</p>{{/if}}
+      <div class="pf-faq__list">
+        {{#if settings.pf_faq_1_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_1_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_1_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_2_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_2_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_2_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_3_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_3_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_3_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_4_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_4_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_4_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_5_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_5_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_5_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_6_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_6_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_6_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_7_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_7_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_7_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_8_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_8_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_8_a}}}</div></details>{{/if}}
+        {{#if settings.pf_faq_9_q}}<details class="b-faq__item"><summary><span>{{settings.pf_faq_9_q}}</span></summary><div class="b-rte">{{{applyTokens settings.pf_faq_9_a}}}</div></details>{{/if}}
+      </div>
+      {{#if settings.pf_cta_heading}}
+      <div class="pf-cta">
+        <h3 class="pf-cta__h">{{settings.pf_cta_heading}}</h3>
+        {{#if settings.pf_cta_text}}<p class="pf-sub">{{settings.pf_cta_text}}</p>{{/if}}
+        <a class="pf-btn" href="{{#if settings.pf_cta_link}}{{settings.pf_cta_link}}{{else}}{{#each (limit products 1)}}{{url}}{{/each}}{{/if}}" data-local-domain>{{settings.pf_cta_button}}</a>
+        <ul class="pf-cta__ticks">
+          {{#if settings.pf_cta_tick_1}}<li>{{settings.pf_cta_tick_1}}</li>{{/if}}
+          {{#if settings.pf_cta_tick_2}}<li>{{settings.pf_cta_tick_2}}</li>{{/if}}
+          {{#if settings.pf_cta_tick_3}}<li>{{settings.pf_cta_tick_3}}</li>{{/if}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.pf_news_show false)}}
+  <section class="pf-news">
+    <div class="b-wrap pf-news__inner">
+      <div>
+        {{#if settings.pf_news_eyebrow}}<p class="pf-news__eyebrow"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m3 7 9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>{{settings.pf_news_eyebrow}}</p>{{/if}}
+        <h2 class="pf-news__h">{{settings.pf_news_heading}}</h2>
+        {{#if settings.pf_news_text}}<p class="pf-news__text">{{settings.pf_news_text}}</p>{{/if}}
+      </div>
+      <div class="pf-news__form">
+        {{> newsletter-form id="home"}}
+        {{#if settings.pf_news_note}}<p class="pf-news__note">{{settings.pf_news_note}}</p>{{/if}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

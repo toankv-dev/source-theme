@@ -1,0 +1,40 @@
+{{!-- PeakFlex footer: logo · about (title, text, email) · customer service links; payment icons; copyright +
+      disclaimer + policy links. Rendered on the platform's own pages too, so read only brand / config /
+      policyLinks / settings. --}}
+<footer class="b-footer">
+  <div class="b-wrap pf-footer__grid">
+    <div class="pf-footer__brand">
+      {{#if brand.logo}}<img class="b-footer__logo" src="{{brand.logo}}" alt="{{brand.name}}" loading="lazy">{{else}}<p class="b-footer__name">{{brand.name}}</p>{{/if}}
+    </div>
+    <div class="pf-footer__about">
+      <p class="b-footer__title">{{#if settings.pf_footer_about_title}}{{settings.pf_footer_about_title}}{{else}}About us{{/if}}</p>
+      {{#if settings.footer_about}}<p>{{settings.footer_about}}</p>{{/if}}
+      {{#if brand.email}}<p>{{settings.pf_footer_email_label}}<a href="mailto:{{brand.email}}">{{brand.email}}</a></p>{{else}}{{#if brand.store_email}}<p>{{settings.pf_footer_email_label}}<a href="mailto:{{brand.store_email}}">{{brand.store_email}}</a></p>{{/if}}{{/if}}
+      {{#if brand.phone}}<p>{{brand.phone}}</p>{{/if}}
+      {{#if settings.support_hours}}<p>{{settings.support_hours}}</p>{{/if}}
+    </div>
+    <div class="pf-footer__links">
+      <p class="b-footer__title">{{#if settings.pf_footer_links_title}}{{settings.pf_footer_links_title}}{{else}}Customer Service{{/if}}</p>
+      <ul>
+        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact Us</a></li>{{/if}}
+        {{> policy-link key="shipping" label="Shipping Policy"}}
+        {{> policy-link key="refund" label="Returns and Refunds"}}
+        <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Tracking</a></li>
+        {{> policy-link key="privacy" label="Privacy Policy"}}
+        {{> policy-link key="terms" label="Terms of Service"}}
+        {{> policy-link key="about" label="About Us"}}
+      </ul>
+      {{#if settings.social_facebook}}{{> social-links}}{{else}}{{#if settings.social_instagram}}{{> social-links}}{{else}}{{#if settings.social_tiktok}}{{> social-links}}{{/if}}{{/if}}{{/if}}
+    </div>
+  </div>
+  {{#unless (eq settings.footer_newsletter false)}}
+  <div class="b-wrap b-footer__news">
+    <p class="b-footer__title">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Join our newsletter{{/if}}</p>
+    {{> newsletter-form}}
+  </div>
+  {{/unless}}
+  <div class="pf-footer__bottom">
+    <div class="b-wrap">{{#unless (eq settings.footer_payment false)}}{{> pay-icons}}{{/unless}}</div>
+    <p class="b-wrap pf-footer__copy">© <span data-year></span>, <a href="{{#if config.homeUrl}}{{config.homeUrl}}{{else}}{{#if policyLinks.home}}{{policyLinks.home}}{{else}}/{{/if}}{{/if}}">{{brand.name}}</a> {{settings.pf_footer_disclaimer}}<span class="pf-footer__policies">{{#if policyLinks.privacy}}<a href="{{policyLinks.privacy}}">Privacy policy</a>{{/if}}{{#if policyLinks.refund}}<a href="{{policyLinks.refund}}">Refund policy</a>{{/if}}{{#if policyLinks.terms}}<a href="{{policyLinks.terms}}">Terms of service</a>{{/if}}{{#if policyLinks.shipping}}<a href="{{policyLinks.shipping}}">Shipping policy</a>{{/if}}</span></p>
+  </div>
+</footer>

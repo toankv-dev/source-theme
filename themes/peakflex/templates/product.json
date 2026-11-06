@@ -1,0 +1,481 @@
+{
+  "name": "Default",
+  "description": "PeakFlex Knee Sleeve: gallery, rating, social proof, research, benefits, size / side pickers, packs, HSA box, comment, accordions; 5 story rows, comparison, quote cards, FAQ, promise, reviews.",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "compact"
+      },
+      "blocks": {
+        "rating": {
+          "type": "pf_rating",
+          "settings": {
+            "label": "Reviews"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "intro": {
+          "type": "text",
+          "settings": {
+            "body": "<p>Relieve <strong>knee pain</strong> and enjoy greater freedom, or get your money back.</p><p>More stability, more safety, and more confidence with every step.</p>"
+          }
+        },
+        "social": {
+          "type": "pf_social",
+          "settings": {
+            "image": "",
+            "title": "Over 20,000 happy knees",
+            "text": "More than 121,957 people trust Peakflex"
+          }
+        },
+        "research": {
+          "type": "accordion",
+          "settings": {
+            "icon": "research",
+            "title": "Based on clinical research",
+            "source": "custom",
+            "open": false,
+            "body": "<p>Compression, lateral stabilization, and patellar support are approaches that have been studied in clinical trials:</p><p><a href=\"https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0324864\" target=\"_blank\" rel=\"noopener\">PLOS One Netzwerk-Meta-Analyse (2025)</a> — Analysis of 139 randomized controlled trials. Knee braces were identified as the most effective type of intervention for reducing symptoms in knee osteoarthritis.</p><p><a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC12260456/\" target=\"_blank\" rel=\"noopener\">Ayık et al. (2025)</a> — A randomized study involving 60 patients. Knee braces with lateral stabilizers improved balance and reduced pain in patients with knee osteoarthritis immediately after application.</p><p><a href=\"https://pubmed.ncbi.nlm.nih.gov/24917049/\" target=\"_blank\" rel=\"noopener\">Patella Pro Studie, BMC (2014)</a> — A multicenter randomized trial involving 156 patients. Medial patellar stabilization as a clinically evaluated approach for anterior knee pain.</p><p><small>The studies refer to the method (compression, stabilization, and patellar support), not to this specific product.</small></p>"
+          }
+        },
+        "benefits_h": {
+          "type": "text",
+          "settings": {
+            "body": "<p><strong>Benefits:</strong></p>"
+          }
+        },
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Individually adjustable support, for optimal stability."
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Carefully developed according to orthopedic principles."
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Fast relief for a better quality of life in everyday situations."
+          }
+        },
+        "picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size": {
+          "type": "size_chart",
+          "settings": {
+            "label": "Sizing chart",
+            "title": "Find your size",
+            "image": "",
+            "option_name": "Size",
+            "body": "<p>Find your body weight in the chart. That's your size.</p><table><tr><th>Size</th><th>Body weight</th></tr><tr><td>S</td><td>110 to 130 lbs</td></tr><tr><td>M</td><td>131 to 165 lbs</td></tr><tr><td>L</td><td>166 to 200 lbs</td></tr><tr><td>XL</td><td>201 to 240 lbs</td></tr><tr><td>2XL</td><td>241 to 270 lbs</td></tr><tr><td>3XL</td><td>271 to 300 lbs</td></tr><tr><td>4XL</td><td>301+ lbs</td></tr></table><p>Between two sizes, or not sure? <a href=\"{{ContactLink}}\">Write us</a> before you order and we'll help you pick.</p>"
+          }
+        },
+        "offer": {
+          "type": "offer_heading",
+          "settings": {
+            "text": "Select a package"
+          }
+        },
+        "packs": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "selected": "2",
+            "currency_code": false,
+            "card_style": "classic",
+            "unit_pickers": true,
+            "unit_label": "",
+            "includes_all": false,
+            "card_1_qty": 1,
+            "card_1_title": "1 Piece",
+            "card_1_image": "",
+            "card_1_sub": "Free Shipping",
+            "card_1_badge": "",
+            "card_1_includes": "",
+            "card_2_qty": 2,
+            "card_2_title": "2 Pieces",
+            "card_2_image": "",
+            "card_2_sub": "Free Shipping",
+            "card_2_badge": "2-Pack Special",
+            "card_2_includes": "",
+            "card_3_qty": 4,
+            "card_3_title": "2 + 2 FREE",
+            "card_3_image": "",
+            "card_3_sub": "Free Shipping",
+            "card_3_badge": "Best Offer",
+            "card_3_includes": "",
+            "card_4_qty": 0,
+            "card_5_qty": 0,
+            "card_6_qty": 0
+          }
+        },
+        "stock": {
+          "type": "stock",
+          "settings": {
+            "text": "In stock - few items available"
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "ADD TO CART",
+            "show_options": false,
+            "show_qty": false,
+            "show_payments": true,
+            "note": ""
+          }
+        },
+        "hsa": {
+          "type": "pf_hsa",
+          "settings": {
+            "label": "HSA/FSA eligible",
+            "text": "Save an average of 30%",
+            "link_label": "Learn more",
+            "popup_title": "Pay with HSA/FSA and save",
+            "popup_body": "<p><strong>Save an average of 30%</strong> when you pay with pre-tax HSA/FSA funds. No added costs.</p><ol><li><strong>At checkout, select Truemed</strong><br>If you're logged into Shop Pay, select \"Pay another way\" or \"More payment options\" to find Truemed.</li><li><strong>Enter card info and pay</strong><br>Pay with your HSA/FSA card, or use a personal credit or debit card and get reimbursed afterward.</li></ol><p><small>Truemed is for qualified customers. HSA/FSA tax savings <a href=\"https://truemed.com/disclosures\" target=\"_blank\" rel=\"noopener\">vary</a>.</small></p>"
+          }
+        },
+        "comment": {
+          "type": "pf_comment",
+          "settings": {
+            "avatar": "",
+            "name": "Thomas K.",
+            "text": "I'd already tried four different knee braces, but none came close to this one. The dial is genius. It's super comfortable to wear and provides great support.",
+            "time": "2 wks",
+            "likes": "37"
+          }
+        },
+        "acc_g": {
+          "type": "accordion",
+          "settings": {
+            "icon": "return",
+            "title": "90-day money-back guarantee",
+            "source": "custom",
+            "open": false,
+            "body": "<p>At Peakflex, we’re confident that our products can help relieve your pain. That’s why we offer a risk-free 90-day money-back guarantee, which begins only after you receive the product. If, for any reason, you’re not satisfied, please contact us at {{CompanyEmail}} and we’ll be happy to assist you!</p>"
+          }
+        },
+        "acc_s": {
+          "type": "accordion",
+          "settings": {
+            "icon": "truck",
+            "title": "Shipping",
+            "source": "custom",
+            "open": false,
+            "body": "<p>The average delivery time is about 6–12 days. It takes us about 1–3 business days to process your order.</p><p>You will receive a tracking number as soon as we have shipped your order.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "intro",
+        "social",
+        "research",
+        "benefits_h",
+        "b1",
+        "b2",
+        "b3",
+        "picker",
+        "size",
+        "offer",
+        "packs",
+        "stock",
+        "buy",
+        "hsa",
+        "comment",
+        "acc_g",
+        "acc_s"
+      ]
+    },
+    "story_1": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "",
+        "image_side": "left",
+        "eyebrow": "",
+        "heading": "When every step becomes uncomfortable",
+        "body": "<p><strong>At first, it’s often just a slight tugging sensation.</strong></p><p>Then come the moments when you suddenly feel your knee more acutely:</p><ul><li>Standing up</li><li>On stairs</li><li>Sitting for a long time</li><li>Walking or standing for extended periods</li></ul><p>Many people automatically start to avoid certain movements. They walk more slowly, unconsciously take the weight off their knee, or feel unsteady during everyday movements.</p><p><strong>The problem is this: the more carefully you move, the more your knee becomes the focus of your daily life.</strong></p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "story_2": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "",
+        "image_side": "right",
+        "eyebrow": "",
+        "heading": "Maybe it's not just wear and tear",
+        "body": "<p>Many conventional explanations focus solely on “wear and tear.”</p><p>However, knee pain often feels more like pressure, irritation, or instability.</p><p><strong>One possible cause may be irritated synovial tissue</strong>—the sensitive lining of the knee joint. When this tissue becomes irritated, <strong>the knee may react more sensitively to stress.</strong></p><p>This can manifest as:</p><ul><li>A feeling of pressure around the kneecap</li><li>Stiffness after periods of rest</li><li>Uncertainty during movement</li><li>Sensitivity under stress</li></ul><p>Many conventional knee braces attempt to solve the problem with rigid stability. <strong>However, hard braces can be uncomfortable, slip out of place, or restrict natural movement.</strong></p><p>That is exactly why Peakflex was designed differently.</p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "story_3": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "",
+        "image_side": "left",
+        "eyebrow": "",
+        "heading": "Support for active knees",
+        "body": "<p>The PeakFlex knee sleeve combines multiple functions into a flexible support system for everyday use.</p><p>Instead of a heavy orthosis, you get:</p><ul><li>Customizable compression</li><li>Lateral stabilization</li><li>Patella gel pads for pressure relief</li><li>Non-slip grip during movement</li></ul><p>The goal is not to rigidly immobilize your knee.</p><p><strong>PeakFlex was designed to provide comfortable support for your knee during everyday activities—whether you’re walking, working, shopping, or on the go.</strong></p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "story_4": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "",
+        "image_side": "right",
+        "eyebrow": "",
+        "heading": "4 functions. A more stable feeling.",
+        "body": "<p>The PeakFlex knee brace is designed so that multiple support systems work together simultaneously:</p><p><strong>Precision compression wheel</strong><br>Enables customizable support.</p><p><strong>Patella gel pad</strong><br>Helps distribute pressure around the kneecap more comfortably.</p><p><strong>Dual side stabilizers</strong><br>Support the knee during everyday movements.</p><p><strong>Non-slip silicone grip</strong><br>Helps prevent slipping and rolling.</p><p>The result is a more stable and comfortable fit for everyday use.</p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "story_5": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "",
+        "image_side": "left",
+        "eyebrow": "",
+        "heading": "More convenience in everyday life",
+        "body": "<p>Many people don’t want a bulky sports brace.</p><p>They simply want to:</p><ul><li>walk more confidently</li><li>climb stairs more easily</li><li>stand for longer periods</li><li>move more freely.</li></ul><p><strong>The PeakFlex knee sleeve was designed to make everyday movements more comfortable</strong>—without unnecessary restrictions.</p><p><strong>The flexible material adapts better to your daily life</strong> and supports your knee exactly where you need it.</p>",
+        "button_label": "",
+        "button_url": ""
+      }
+    },
+    "compare": {
+      "type": "comparison",
+      "settings": {
+        "heading": "The difference is noticeable",
+        "ours_label": "PeakFlex",
+        "ours_image": "",
+        "theirs_label": "Traditional sleeves",
+        "theirs_image": ""
+      },
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Knee support",
+            "ours": true,
+            "theirs": true
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Adjustable compression",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Patella gel pads",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Side stabilizers",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Non-slip grip",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "A seat suitable for everyday use",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "label": "Often stiff and bulky",
+            "ours": false,
+            "theirs": true
+          }
+        }
+      },
+      "blockOrder": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7"
+      ]
+    },
+    "quotes": {
+      "type": "pf-quotes",
+      "settings": {
+        "heading": "WHAT OUR CUSTOMERS SAY",
+        "text": "Thousands of customers already use the PeakFlex Knee Sleeve every day because it is designed to provide targeted stabilization for the knee—rather than unnecessarily restricting movement or merely masking discomfort temporarily."
+      },
+      "blocks": {
+        "q1": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "title": "Finally walking more steadily",
+            "text": "I've tried several knee braces, but many were either too stiff or kept slipping out of place. The PeakFlex sleeve is much more comfortable to wear and finally gives my knee more stability when walking and climbing stairs.",
+            "name": "Caroline S."
+          }
+        },
+        "q2": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "title": "Better traction on stairs",
+            "text": "Stairs have always been uncomfortable for me because my knee often felt unstable. Since I started using the PeakFlex sleeve, my knee feels much more stable. It hardly slips at all and remains comfortable to wear even during longer walks.",
+            "name": "Sarah K."
+          }
+        },
+        "q3": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "title": "Comfortable for everyday use",
+            "text": "I wear the compression bandage often at work, and I never would have thought it would be this comfortable. The material feels flexible, and the compression is easy to adjust. I especially like that it’s barely noticeable under my clothes.",
+            "name": "David T."
+          }
+        }
+      },
+      "blockOrder": [
+        "q1",
+        "q2",
+        "q3"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "intro": "",
+        "open_first": false
+      },
+      "blocks": {
+        "qa1": {
+          "type": "qa",
+          "settings": {
+            "q": "Is the PeakFlex Knee Sleeve suitable for everyday use?",
+            "a": "<p>Yes. The PeakFlex Knee Sleeve was specifically designed for everyday activities such as walking, working, climbing stairs, or standing for long periods of time.</p>"
+          }
+        },
+        "qa2": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I adjust the compression myself?",
+            "a": "<p>Yes. With the built-in precision dial, you can adjust the compression to your liking—depending on how much support feels comfortable.</p>"
+          }
+        },
+        "qa3": {
+          "type": "qa",
+          "settings": {
+            "q": "Does the sleeve slip when you walk?",
+            "a": "<p>The PeakFlex Knee Sleeve features a non-slip silicone grip designed to help reduce slipping and rolling.</p>"
+          }
+        },
+        "qa4": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I wear the sleeve under my clothes?",
+            "a": "<p>Yes. Its flexible and compact design ensures that the bandage can be worn comfortably under most everyday clothing.</p>"
+          }
+        },
+        "qa5": {
+          "type": "qa",
+          "settings": {
+            "q": "Is the knee brace suitable for both knees?",
+            "a": "<p>Yes. The PeakFlex Knee Sleeve can be worn on either the left or right knee.</p>"
+          }
+        },
+        "qa6": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I wear the sleeve for longer?",
+            "a": "<p>The bandage was designed for everyday use. Many customers wear it while working, going for walks, or doing everyday activities.</p>"
+          }
+        },
+        "qa7": {
+          "type": "qa",
+          "settings": {
+            "q": "Is there a money-back guarantee if the PeakFlex Knee Sleeve doesn't work?",
+            "a": "<p>We offer a satisfaction guarantee! If you are not satisfied with the PeakFlex Knee Sleeve, please contact us at {{CompanyEmail}} for a return and refund within 90 days.</p><p>The period begins upon receipt of the product. It is important to us to support you as best as possible in your daily life. Therefore, we recommend wearing the PeakFlex Knee Sleeve daily for 2 weeks before making a final decision.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "qa1",
+        "qa2",
+        "qa3",
+        "qa4",
+        "qa5",
+        "qa6",
+        "qa7"
+      ]
+    },
+    "promise": {
+      "type": "pf-promise",
+      "settings": {
+        "heading": "Try the PeakFlex Knee Sleeve now for 90 days without any risk",
+        "image": "",
+        "subheading": "Our promise to you:",
+        "body": "<p>We believe in the effectiveness of our products and don't want you to spend a single cent before you know that the product is right for you. That's why every order comes with a risk-free 90-day money-back guarantee. If for any reason you don't achieve the desired results, you'll get your money back.</p><p><strong>In other words: You only pay once you are 100% satisfied with the product and are benefiting from it.</strong></p>"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "heading": "Customer reviews",
+        "write_label": "Write a Rating"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "story_1",
+    "story_2",
+    "story_3",
+    "story_4",
+    "story_5",
+    "compare",
+    "quotes",
+    "faq",
+    "promise",
+    "reviews"
+  ]
+}

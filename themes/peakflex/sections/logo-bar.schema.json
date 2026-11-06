@@ -1,0 +1,23 @@
+{
+  "name": "Logo bar",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "", "info": "Optional, e.g. As featured in." },
+    { "type": "range", "id": "speed", "label": "Seconds per loop", "min": 10, "max": 80, "step": 5, "default": 30, "info": "Lower is faster." },
+    { "type": "range", "id": "logo_height", "label": "Logo height (px)", "min": 16, "max": 80, "step": 2, "default": 24 },
+    { "type": "paragraph", "content": "Upload one logo per block. The strip scrolls endlessly; only show outlets that really featured your store." }
+  ],
+  "blocks": [
+    {
+      "type": "logo", "name": "Logo", "limit": 12,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo image", "info": "PNG or SVG on a transparent background works best." },
+        { "type": "text", "id": "name", "label": "Outlet name (for screen readers)", "default": "" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Logo bar", "category": "Trust", "description": "An endless strip of press or partner logos.", "blocks": [{ "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }] }
+  ]
+}

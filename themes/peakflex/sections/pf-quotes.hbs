@@ -1,0 +1,32 @@
+{{!-- PeakFlex: customer quote cards (photo, stars, title, text, name). Swipe row with arrows + counter on
+      phones (data-reels in ui.js), columns on desktop. Every photo is a slot the merchant uploads; an empty slot
+      keeps its square frame. Without `section` (legacy entry) it renders nothing. --}}
+{{#if section}}
+<section class="pf-quotes">
+  <div class="b-wrap">
+    {{#if section.settings.heading}}<h2 class="b-h2 pf-quotes__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.text}}<p class="pf-quotes__intro">{{section.settings.text}}</p>{{/if}}
+    <div class="pf-quotes__vp" data-reels>
+      <div class="pf-quotes__track" data-reels-track>
+        {{#each section.blocks}}
+        <figure class="pf-quote" data-reel {{{this.attributes}}}>
+          <div class="pf-quote__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" loading="lazy" width="800" height="800">{{else}}<div class="b-ph" aria-hidden="true">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
+          <figcaption class="pf-quote__body">
+            <p class="pf-quote__stars" aria-label="5 out of 5">★★★★★</p>
+            {{#if this.settings.title}}<p class="pf-quote__title">{{this.settings.title}}</p>{{/if}}
+            {{#if this.settings.text}}<p class="pf-quote__text">{{this.settings.text}}</p>{{/if}}
+            {{#if this.settings.name}}<p class="pf-quote__name">{{this.settings.name}}</p>{{/if}}
+          </figcaption>
+        </figure>
+        {{/each}}
+      </div>
+      <div class="pf-quotes__nav" data-reels-nav hidden>
+        <button type="button" class="pf-quotes__arrow" data-reels-step="-1" aria-label="Previous">‹</button>
+        <span class="pf-quotes__count">1/{{section.blocks.length}}</span>
+        <button type="button" class="pf-quotes__arrow" data-reels-step="1" aria-label="Next">›</button>
+      </div>
+    </div>
+  </div>
+  <script>(function(){var s=document.currentScript.parentNode,t=s.querySelector('[data-reels-track]'),c=s.querySelector('.pf-quotes__count');if(!t||!c)return;var n=t.children.length;t.addEventListener('scroll',function(){var w=t.firstElementChild?t.firstElementChild.getBoundingClientRect().width:1;c.textContent=Math.min(n,Math.round(t.scrollLeft/w)+1)+'/'+n},{passive:true})})();</script>
+</section>
+{{/if}}

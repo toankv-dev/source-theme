@@ -1,0 +1,9 @@
+{{!-- PeakFlex: guarantee promise — heading, round badge picture (slot), sub-heading, text. Centered. --}}
+{{#if section}}
+<section class="b-wrap pf-promise">
+  {{#if section.settings.heading}}<h2 class="pf-promise__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  <div class="pf-promise__badge">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="" width="400" height="400" loading="lazy">{{else}}<div class="b-ph" aria-hidden="true">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
+  {{#if section.settings.subheading}}<h3 class="pf-promise__sub">{{section.settings.subheading}}</h3>{{/if}}
+  {{#if section.settings.body}}<div class="b-rte pf-promise__body">{{{applyTokens section.settings.body}}}</div>{{/if}}
+</section>
+{{/if}}

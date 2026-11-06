@@ -1,0 +1,10 @@
+{
+  "name": "Promise badge (PeakFlex)",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try it now for 90 days without any risk" },
+    { "type": "image_picker", "id": "image", "label": "Badge", "info": "Image, round guarantee badge, 400 × 400 px (1:1)." },
+    { "type": "text", "id": "subheading", "label": "Sub-heading", "default": "Our promise to you:" },
+    { "type": "richtext", "id": "body", "label": "Text", "default": "" }
+  ]
+}

@@ -34,7 +34,7 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
   check('ViewContent fired', (await events(page)).includes('ViewContent'));
   // The option to change: a visible pill / swatch, else an option card (pack cards that ARE variants).
   const choices = (await page.$$('[data-opt-value]:visible')).concat(await page.$$('[data-card]:visible'));
-  const priceSel = ['[data-price-block] [data-price]', '[data-cards-price] [data-price]', '[data-card].is-selected [data-card-price]'];
+  const priceSel = ['[data-price-block] [data-price]', '[data-cards-price] [data-price]', '[data-card].is-selected [data-card-price]', '[data-qcard].is-selected [data-card-price]']; // last: quantity packs carry the price (no price block)
   let priceEl = null;
   for (const s of priceSel) if (!priceEl && (await page.$(s + ':visible'))) priceEl = s;
   if (choices.length > 1) {

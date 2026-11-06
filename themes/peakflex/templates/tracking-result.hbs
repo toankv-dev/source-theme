@@ -1,0 +1,74 @@
+{{!-- Order lookup result (/pages/tracking/result?order=&email= or ?trackingNumber=). The script is the shared
+      Adlux one: GET /api/storefront/order and print the order, its status steps, shipment events, products,
+      totals and customer details. Only the wrapper is theme-specific; keep #trk-root. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2">
+</head>
+<body class="b-body b-body--page">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  <article class="b-wrap b-page b-page--narrow b-track-result">
+    <h1 class="b-page__title">{{#if settings.track_heading}}{{settings.track_heading}}{{else}}Track your order{{/if}}</h1>
+    <div class="b-rte b-track-result__body" id="trk-root" aria-live="polite"><p>Looking up your order…</p></div>
+        <script>
+        (function () {
+          var root = document.getElementById('trk-root');
+          if (!root) return;
+          var q = new URLSearchParams(window.location.search);
+          var order = (q.get('order') || '').trim(), email = (q.get('email') || '').trim(), tn = (q.get('trackingNumber') || '').trim();
+          var domain = '';
+          try { domain = (JSON.parse(document.getElementById('sf-config').textContent || '{}') || {}).domain || ''; } catch (e) {}
+          function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+          function msg(t) { root.innerHTML = '<p>' + esc(t) + '</p>'; }
+          function render(d) {
+            var html = '<h2>Order ' + esc(d.orderNumber || '') + '</h2>';
+            html += '<p><strong>Status:</strong> ' + esc(d.status && d.status.label) + '</p>';
+            if (d.status && d.status.steps) {
+              html += '<ol>' + d.status.steps.map(function (s) {
+                var mark = s.state === 'done' ? ' ✓' : s.state === 'current' ? ' (current)' : '';
+                return '<li>' + (s.state === 'current' ? '<strong>' + esc(s.label) + '</strong>' : esc(s.label)) + mark + '</li>';
+              }).join('') + '</ol>';
+            }
+            var sh = d.shipment || {};
+            if (sh.trackingNumber) {
+              html += '<p><strong>Shipping:</strong> ' + (sh.carrier ? esc(sh.carrier) + ' · ' : '') +
+                (sh.trackUrl ? '<a href="' + esc(sh.trackUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(sh.trackingNumber) + '</a>' : esc(sh.trackingNumber)) + '</p>';
+            }
+            html += sh.events && sh.events.length
+              ? '<ul>' + sh.events.map(function (ev) { return '<li>' + esc(ev.time) + ' — ' + esc(ev.description) + '</li>'; }).join('') + '</ul>'
+              : '<p>No tracking events yet.</p>';
+            html += '<h2>Products</h2><ul>' + (d.products || []).map(function (p) {
+              return '<li>' + esc(p.name) + (p.variant ? ' (' + esc(p.variant) + ')' : '') + ' × ' + esc(p.qty) + ' — $' + esc(p.price) + '</li>';
+            }).join('') + '</ul>';
+            var t = d.totals || {};
+            html += '<p>Subtotal: $' + esc(t.subtotal) + '<br>Shipping: $' + esc(t.shipping) + '<br>Tax: $' + esc(t.tax) + '<br><strong>Total: $' + esc(t.total) + '</strong></p>';
+            var c = d.customer || {}, a = c.shippingAddress;
+            html += '<h2>Customer information</h2><p>' + esc(c.email) + (c.phone ? '<br>' + esc(c.phone) : '') + '</p>';
+            if (a) html += '<p>' + esc(a.name) + '<br>' + esc(a.line1) + '<br>' + esc(a.line2) + '<br>' + esc(a.country) + '</p>';
+            root.innerHTML = html;
+          }
+          if (!tn && (!order || !email)) { msg('Missing order number or email in the link.'); return; }
+          var qs = tn ? 'trackingNumber=' + encodeURIComponent(tn) : 'order=' + encodeURIComponent(order) + '&email=' + encodeURIComponent(email);
+          if (domain) qs += '&domain=' + encodeURIComponent(domain);
+          fetch('/api/storefront/order?' + qs, { headers: { Accept: 'application/json' } })
+            .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
+            .then(function (r) {
+              if (r.ok && r.body && r.body.success) { render(r.body.data); return; }
+              if (r.status === 404) { msg("We couldn't find an order with those details. Please check the link and try again."); return; }
+              msg((r.body && r.body.error && r.body.error.message) || 'Something went wrong. Please try again in a moment.');
+            })
+            .catch(function () { msg('Network error. Please check your connection and try again.'); });
+        })();
+        </script>
+    <p class="b-center"><a class="b-btn b-btn--ghost" href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}/pages/track-your-order{{/if}}" data-local-domain>Track another order</a></p>
+  </article>
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

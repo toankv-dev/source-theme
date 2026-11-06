@@ -1,0 +1,29 @@
+{{!-- /search?q=… — the platform passes every product (same data as the home page); theme.js filters the
+      cards by the query, so the result matches the title / description text the shopper typed. --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2">
+</head>
+<body class="b-body b-body--collection">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">
+  <section class="b-wrap b-collection" data-search-page>
+    <h1 class="b-page__title">{{#if settings.search_heading}}{{settings.search_heading}}{{else}}Search results{{/if}}</h1>
+    <form class="b-search-page__form" method="get" role="search">
+      {{#if config.domain}}<input type="hidden" name="domain" value="{{config.domain}}" data-local-only>{{/if}}
+      <input type="search" name="q" placeholder="Search" data-search-page-input>
+      <button type="submit" class="b-btn">Search</button>
+    </form>
+    <p class="b-muted" data-count></p>
+    <div class="b-grid" data-grid>{{#each products}}<div class="b-search-hit" data-search-text="{{title}} {{description}}">{{> card-product above_fold=true}}</div>{{/each}}</div>
+    <p class="b-muted" data-search-empty hidden>No products match your search.</p>
+  </section>
+</main>
+{{> footer}}
+{{> scripts}}
+</body>
+</html>

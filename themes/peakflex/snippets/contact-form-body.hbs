@@ -1,0 +1,18 @@
+{{!-- Contact form posting to /api/storefront/contact (Base.contact). Params: heading, text. --}}
+<div class="b-wrap b-contact">
+  <h2 class="b-h2">{{#if heading}}{{heading}}{{else}}Contact us{{/if}}</h2>
+  {{#if text}}<p class="b-contact__text">{{text}}</p>{{/if}}
+  <form class="b-contact__form" data-contact-form novalidate>
+    <div class="b-contact__row">
+      <input type="text" name="name" placeholder="Name" maxlength="120" autocomplete="name" aria-label="Name">
+      <input type="email" name="email" placeholder="Email *" required autocomplete="email" aria-label="Email">
+    </div>
+    <div class="b-contact__row">
+      <input type="tel" name="phone" placeholder="Phone" maxlength="40" autocomplete="tel" aria-label="Phone">
+      <input type="text" name="orderNumber" placeholder="Order number (optional)" maxlength="40" aria-label="Order number">
+    </div>
+    <textarea name="message" rows="6" placeholder="Message *" required maxlength="4900" aria-label="Message"></textarea>
+    <p class="b-form-msg" data-contact-msg role="status"></p>
+    <button type="submit" class="b-btn b-btn--block">Send</button>
+  </form>
+</div>

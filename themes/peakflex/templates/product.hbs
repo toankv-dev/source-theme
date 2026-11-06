@@ -1,0 +1,21 @@
+{{!-- Legacy (schema v1) entry: the upload validator renders this file, and a store without a template document
+      falls back to it. Same shell as layout/theme.hbs with the key sections inlined (`section` is undefined,
+      so each section renders its built-in defaults). --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n4.0ba78fa5af9b0e1a374041b3ceaadf0a43b41362.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_n7.56758dcf284489feb014a026f3727f2f20a54626.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/pf-product.css">
+</head>
+<body class="b-body b-body--product">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+<main id="MainContent" class="b-main">{{> product}}{{> reviews}}{{> faq}}{{> related}}</main>
+{{> footer}}
+{{> product-scripts}}
+{{> scripts}}
+</body>
+</html>

@@ -32,8 +32,8 @@ Talk to the user in Vietnamese.
   - **exception — full-width sections** (edge-to-edge banners, image / video rows, marquees, coloured bands,
     sliders that bleed to the screen edge, as on the original): no side padding, keep their full width and
     size. A full-width band whose *text* is boxed puts that text in `.b-wrap` so it lines up again.
-- Use the original's real texts and fonts (Google Fonts name in settings; self-hosted fonts → copy the woff2
-  into `assets/fonts/` and declare `@font-face` in skin.css). Theme-wide images (logo, icons, payment badges,
+- Use the original's real texts. **Fonts and colours must be the original's exact ones** — measured, never
+  guessed or "close enough" (see *Fonts and colours* below). Theme-wide images (logo, icons, payment badges,
   home page banners) may be copied from `_work/capture/home/images` into `assets/images/` as settings
   defaults. **The product page's images and videos are never downloaded from the source page** (capture it
   with `--no-images`): the main product's media comes from the product data and every other media slot is
@@ -66,6 +66,34 @@ Talk to the user in Vietnamese.
     for UI icons.
 - Prefer one question to the user over a guess only when something cannot be read from the input
   (e.g. a screenshot shows no phone layout, or a font is unidentifiable).
+
+## Fonts and colours (exact, and they must survive on the live store)
+
+- **Read, don't estimate.** Fonts: `tokens.json` (`body`, `h1`–`h3`, `price`, `buttons[]`: family, weight, size,
+  line height, letter spacing, case) + `fonts.json` (every face the page loads). Colours: `tokens.json` (`palette`,
+  each button's text / background / border, top bar, header, footer, price) and, for what tokens miss (stars,
+  badges, compare-at price, borders, section backgrounds), the exact pixel colour of the screenshot:
+  `node tools/pixel.js <capture>/mobile.png --top 8 --y <a-b>` (most used colours of a band), `… x,y` (one
+  point), `… --find "#hex"` (where a colour sits) — never a hex from memory or from a downscaled look. A desktop pass that hit a bot-check page has no tokens: take them from
+  the phone pass. Colours can differ per page (PeakFlex: orange `#c25204` on home, `#cf5905` on product; stars
+  `#f5a623` / `#ffbe59`) — take each from its own page and scope page-only ones to that page's CSS.
+- Write the measured table into `plan.md` (role → font / weight / size, role → hex, with the source of each).
+- **Fonts on the theme**: copy every face the original uses (all weights + italics from `fonts.json`) into
+  `assets/fonts/`. Declare `@font-face` in a header snippet (`snippets/<prefix>-fonts.hbs`, `{{> …}}` right after
+  `{{> vars}}` in `sections/header.hbs`) with `{{@root.assets_url}}/fonts/…` URLs — not `url("../fonts/…")` in
+  a CSS file. Set `font` / `font_heading` / `font_weights`, `load_google_fonts: false` (Google-hosted original →
+  keep `load_google_fonts` on with that exact family name instead). Pin it in skin.css so a store's stale saved
+  "font" setting cannot replace it: `:root { --font: "<Font>", system-ui, sans-serif !important; --font-heading:
+  … !important; }` plus `font-family: var(--font) !important` on body text elements (a separate heading / button
+  family gets its own variable). Preload the 400 + 700 woff2 after `{{> head}}` in `layout/theme.hbs` and the
+  templates. **Never touch the fonts of `templates/checkout.hbs`** (checkout / payment keep the platform's own).
+- **Colours on the theme**: every override goes through `_work/build-*-settings.js`, which writes it into
+  `settings_data.json` **and** as the default in `settings_schema.json` (a live store shows schema defaults when a
+  key is not saved). Hard-coded hex in skin.css only for what has no setting, with a comment naming its source.
+- **Check**: `node tools/style-audit.js http://localhost:8091 themes/<slug> [--allow "<intentional other font>"]`
+  — fails when any text element on any page is not in the original's font (also with a stale saved font
+  simulated) or a face fails to load; lists key element colours that are not in the original (tokens or
+  screenshot pixels). Fix every line it prints before packing.
 
 ## Speed — every run faster than the last
 
@@ -103,12 +131,14 @@ runs, fix it with tooling (a flag or script in `tools/`) instead of another note
      `text.txt` (all texts incl. hidden FAQ answers), `fonts.json` (copy `fonts/*` into `assets/fonts/`), and
      LOOK at `desktop.png`, `mobile.png` and `sections/NN-*.png`. If a capture misses content (lazy / animated
      blocks, pop-ups), take extra screenshots with `node tools/shot.js` or re-run with `--keep-popups`.
-   - Images: read them with the Read tool; measure proportions; note fonts, colours (estimate hex), spacing,
+   - Images: read them with the Read tool; measure proportions; note fonts, colours (exact hex with
+     `tools/pixel.js`), spacing,
      radius, shadows, icon style, every text. Ask for the phone view if only desktop is given.
 3. **Map sections**: write `themes/<slug>/_work/plan.md` — the original's sections top to bottom, each mapped
    to a base section / block (see the catalog in `base-theme/README.md`) or marked NEW, plus the design tokens.
 4. **Build**
-   - Tokens → `config/settings_data.json` (primary, primary_text, text_color, page_bg, header/topbar/footer
+   - Tokens (measured — see *Fonts and colours*) → `config/settings_data.json` + schema defaults via the
+     build-settings script (primary, primary_text, text_color, page_bg, header/topbar/footer
      colours, sale, star, check, badge, font, font_heading, radius, btn_radius, btn_case, page_width, top bar
      style + texts, menu labels, cart texts, home_* settings).
    - Product page → `templates/product.json` (section order, block order, block settings with the original's
@@ -129,6 +159,8 @@ runs, fix it with tooling (a flag or script in `tools/`) instead of another note
 6. **Verify behaviour**: `node tools/smoke.js http://localhost:8091` must pass (cart, pixels, checkout,
    packs, reviews, contact, tracking, search). Also open `/checkout`, `/pages/track-your-order`,
    `/collections/all`, `/search?q=` and `?legacy=1` once.
+   **Fonts and colours**: `node tools/style-audit.js http://localhost:8091 themes/<slug>` must print no FAIL and no
+   colour line.
    **Mobile first**: `node tools/mobile-audit.js http://localhost:8091` must report 0 errors (sideways
    overflow, fields < 16 px, LCP / CLS over budget); fix every warning the skin introduced (taps < 44 px, text
    < 12 px, lazy first-screen image) unless the original page has it on purpose — say which remain.

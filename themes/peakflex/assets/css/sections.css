@@ -418,23 +418,7 @@ body.b-body { background: var(--c-bg); color: var(--c-text); }
 .b-modal__overlay { position: absolute; inset: 0; background: rgba(15, 17, 22, 0.6); }
 .b-modal__panel { position: relative; width: min(560px, 100%); max-height: calc(100dvh - 32px); overflow: auto; padding: 32px 28px 28px; border-radius: var(--radius); background: #fff; color: #15171c; }
 .b-modal__close { position: absolute; top: 8px; right: 8px; }
-.b-rform { display: grid; gap: 6px; text-align: left; }
-.b-rform__eyebrow { margin: 0; font-size: 13px; color: var(--c-muted); }
-.b-rform__title { margin: 0 0 8px; font-size: 26px; }
-.b-rform label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; }
-.b-rform input[type="text"], .b-rform input[type="email"], .b-rform textarea { width: 100%; padding: 11px 12px; border: 1px solid var(--c-line); border-radius: 8px; font: inherit; font-weight: 400; }
-.b-rform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.b-rform__stars { display: flex; gap: 4px; border: 0; padding: 0; margin: 0; }
-.b-rform__stars legend { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-.b-rform__stars label { cursor: pointer; font-size: 32px; line-height: 1; color: #cfd3da; }
-.b-rform__stars label.is-on { color: var(--c-star); }
-.b-rform__check { display: flex !important; align-items: center; gap: 8px !important; font-weight: 500 !important; }
-.b-rform__file { font-weight: 500 !important; }
-.b-rform__err { margin: 0; font-size: 13px; color: var(--c-alert); }
-.b-rform__err:empty { display: none; }
-@media (max-width: 560px) {
-  .b-rform__row { grid-template-columns: 1fr; }
-}
+
 /* Image banner section */
 .b-banner-sec { position: relative; display: grid; overflow: hidden; color: var(--banner-text); }
 .b-banner-sec > * { grid-area: 1 / 1; }

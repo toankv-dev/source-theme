@@ -906,12 +906,21 @@
   // ---------------------------------------------------------------------------------------------
   // Reviews: list (filters, sort, show more), photo grid + lightbox, write-a-review form.
   // ---------------------------------------------------------------------------------------------
-  function reviewCard(r) {
+  // asList: layout "list" — initial avatar, name + Verified, date under the name.
+  function reviewCard(r, asList) {
     var a = el('article', 'b-review');
     a.appendChild(stars(r.rating, 'b-stars--outline'));
     var who = el('p', 'b-review__who', r.name || '');
     if (r.verified) { who.appendChild(document.createTextNode(' ')); who.appendChild(el('span', 'b-pill-verified', 'Verified')); }
-    a.appendChild(who);
+    if (asList) {
+      var by = el('div', 'b-review__by');
+      by.appendChild(el('span', 'b-review__avatar', String(r.name || '?').trim().charAt(0).toUpperCase() || '?'));
+      var col = el('div');
+      col.appendChild(who);
+      if (r.date) col.appendChild(el('p', 'b-review__date', r.date));
+      by.appendChild(col);
+      a.appendChild(by);
+    } else a.appendChild(who);
     if (r.title) a.appendChild(el('p', 'b-review__title', r.title));
     var t = el('p', 'b-review__text', r.content || '');
     t.setAttribute('data-clamp', '');
@@ -954,6 +963,9 @@
     clamp(root);
     var pageSize = Number(root.getAttribute('data-page-size')) || 9, BATCH = 50, CAP = 300;
     var all = [], hasMore = true, loading = null, shown = pageSize;
+    // layout "list": numbered pages instead of Show more.
+    var asList = root.getAttribute('data-layout') === 'list', pager = $('[data-reviews-pager]', root), page = 1;
+    var total = Number(root.getAttribute('data-total')) || 0;
 
     var load = function () {
       if (!hasMore) return Promise.resolve();
@@ -992,9 +1004,52 @@
       if (by === 'photos') out.sort(function (a, b) { return (b.image ? 1 : 0) - (a.image ? 1 : 0); });
       return out;
     };
+    var pageCount = function (v) {
+      var n = (filtering() || !hasMore) ? v.length : Math.max(v.length, Math.min(total, CAP));
+      return Math.max(1, Math.ceil(n / pageSize));
+    };
+    var goTo = function (p) {
+      var step = function () { if (visible().length < p * pageSize && hasMore) return load().then(step); page = p; paint(); root.scrollIntoView({ block: 'start', behavior: 'smooth' }); };
+      step();
+    };
+    var paintPager = function (v) {
+      if (!pager) return;
+      var last = pageCount(v), keep = {}, nums = [];
+      [1, last, page - 1, page, page + 1].forEach(function (n) { keep[n] = 1; });
+      if (page <= 3) [2, 3, 4].forEach(function (n) { keep[n] = 1; });
+      if (page >= last - 2) [last - 3, last - 2, last - 1].forEach(function (n) { keep[n] = 1; });
+      for (var n = 1; n <= last; n++) if (keep[n]) nums.push(n);
+      pager.innerHTML = '';
+      pager.hidden = last < 2;
+      var btn = function (label, p, cls, aria) {
+        var b = el('button', 'b-pager__btn' + (cls ? ' ' + cls : ''));
+        b.type = 'button';
+        b.appendChild(el('span', '', label));
+        if (aria) b.setAttribute('aria-label', aria);
+        if (p === page && !cls) { b.classList.add('is-current'); b.setAttribute('aria-current', 'page'); }
+        if (p < 1 || p > last) b.disabled = true;
+        else b.addEventListener('click', function () { if (p !== page) goTo(p); });
+        pager.appendChild(b);
+      };
+      btn('‹', page - 1, 'b-pager__step', 'Previous page');
+      nums.forEach(function (n, i) {
+        if (i && n - nums[i - 1] > 1) pager.appendChild(el('span', 'b-pager__gap', '…'));
+        btn(String(n), n, '', 'Page ' + n);
+      });
+      btn('›', page + 1, 'b-pager__step', 'Next page');
+    };
     var paint = function () {
       var v = visible();
       list.innerHTML = '';
+      if (asList) {
+        page = Math.min(page, pageCount(v));
+        v.slice((page - 1) * pageSize, page * pageSize).forEach(function (r) { list.appendChild(reviewCard(r, true)); });
+        clamp(list);
+        if (empty) empty.hidden = v.length > 0;
+        if (more) more.hidden = true;
+        paintPager(v);
+        return;
+      }
       v.slice(0, shown).forEach(function (r) { list.appendChild(reviewCard(r)); });
       clamp(list);
       if (empty) empty.hidden = v.length > 0;
@@ -1020,6 +1075,7 @@
     };
     var refilter = function () {
       shown = pageSize;
+      page = 1;
       var step = function () { if (filtering() && hasMore) return load().then(step); paint(); };
       step();
     };
@@ -1071,55 +1127,6 @@
       if (e.key === 'Escape') closeBox();
       if (e.key === 'ArrowRight') showPic(at + 1);
       if (e.key === 'ArrowLeft') showPic(at - 1);
-    });
-  }
-
-  function initReviewForm() {
-    var modal = $('[data-review-modal]'), form = $('[data-review-form]');
-    if (!modal || !form) return;
-    var msg = $('[data-review-msg]', form);
-    var setOpen = function (on) { modal.hidden = !on; lockScroll(on); if (on) { var f = form.querySelector('input[name="name"]'); if (f) f.focus(); } };
-    $$('[data-review-write]').forEach(function (b) { b.addEventListener('click', function () { setOpen(true); }); });
-    $$('[data-review-close]', modal).forEach(function (b) { b.addEventListener('click', function () { setOpen(false); }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) setOpen(false); });
-    var starsBox = $('[data-review-stars]', form);
-    if (starsBox) starsBox.addEventListener('change', function () {
-      var v = Number((form.querySelector('input[name="rating"]:checked') || {}).value) || 0;
-      $$('label', starsBox).forEach(function (l, i) { l.classList.toggle('is-on', i < v); });
-    });
-    var showErrors = function (errors) {
-      $$('[data-err]', form).forEach(function (p) { p.textContent = ''; });
-      Object.keys(errors || {}).forEach(function (k) {
-        var p = $('[data-err="' + k + '"]', form);
-        var text = [].concat(errors[k]).join(' ');
-        if (p) p.textContent = text; else if (msg) msg.textContent = text;
-      });
-    };
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var fd = new FormData(form), errors = {};
-      if (!fd.get('rating')) errors.rating = 'Please choose a rating.';
-      if (!String(fd.get('name') || '').trim()) errors.name = 'Please add your name.';
-      if (String(fd.get('body') || '').trim().length < 10) errors.body = 'Please write at least 10 characters.';
-      var photo = fd.get('photo');
-      if (photo && !photo.size) fd.delete('photo');
-      if (!fd.get('recommend')) fd.set('recommend', '0');
-      showErrors(errors);
-      if (Object.keys(errors).length) return;
-      var btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      if (msg) msg.textContent = 'Sending…';
-      Base.reviews.post(fd).then(function (r) {
-        btn.disabled = false;
-        if (r.ok) {
-          form.reset();
-          $$('label', starsBox).forEach(function (l) { l.classList.remove('is-on'); });
-          if (msg) msg.textContent = 'Thank you! Your review will appear once it is approved.';
-          return;
-        }
-        if (r.data && r.data.errors) showErrors(r.data.errors);
-        if (msg) msg.textContent = (r.data && r.data.error && (r.data.error.message || r.data.error)) || (r.data && r.data.message) || 'Please check the form and try again.';
-      }).catch(function () { btn.disabled = false; if (msg) msg.textContent = 'Network error. Please try again.'; });
     });
   }
 
@@ -1778,7 +1785,7 @@
   }
 
   function start() {
-    [initTopbar, initHeader, initGallery, initProductForm, initSticky, initUrgency, initCart, initReviews, initReviewForm,
+    [initTopbar, initHeader, initGallery, initProductForm, initSticky, initUrgency, initCart, initReviews,
       initTestimonials, initHomeReviews, initDragScroll, initForms, initCollection, initSearchPage, initFeatured, initHomeCompare,
       initMarquee, initAccordions, initReels, initSizeChart, initModals, initCardEntrance, initFeatureNumbers, initRelatedFill].forEach(function (fn) {
       try { fn(); } catch (e) { if (window.console) console.error(e); }

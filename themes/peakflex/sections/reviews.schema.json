@@ -15,12 +15,29 @@
       "default": "Customer Reviews"
     },
     {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Cards (masonry grid, Show more)"
+        },
+        {
+          "value": "list",
+          "label": "List (avatar + date, numbered pages)"
+        }
+      ],
+      "info": "List: one review per row with the initial, name, Verified and date; average + count beside icon-only Filter / Sort; photo strip; numbered pages (Reviews per page sets the page length)."
+    },
+    {
       "type": "range",
       "id": "page_size",
       "label": "Reviews per page",
       "min": 3,
       "max": 24,
-      "step": 3,
+      "step": 1,
       "default": 9
     },
     {
@@ -30,20 +47,8 @@
       "default": true
     },
     {
-      "type": "checkbox",
-      "id": "show_form",
-      "label": "Show the Write a review form",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "write_label",
-      "label": "Write button label",
-      "default": "Write a review"
-    },
-    {
       "type": "paragraph",
-      "content": "Shows the product's real reviews (added in the admin or written by shoppers and approved)."
+      "content": "Shows the product's real reviews, added in the admin. There is no review form on the storefront."
     }
   ],
   "presets": [

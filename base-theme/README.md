@@ -45,7 +45,7 @@ what the original page has on top.
 
 `Base.cfg`, `Base.money(n)`, `Base.num(str)`, `Base.track(event, payload)`, `Base.cart.{get, save, add(lines,
 {mode}), setQty, remove, totals, quote, checkout}`, `Base.discount.{best, pack}`, `Base.variants.{list, find(values),
-byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCart(qty, amount), sync}`, `Base.contact(fields)`, `Base.lead`, `Base.search`,
+byId, fromUrl, setUrl}`, `Base.reviews.{list, post}` (post is kept for the API contract only: no theme shows a review form), `Base.gifts.{offers, forCart(qty, amount), sync}`, `Base.contact(fields)`, `Base.lead`, `Base.search`,
 `Base.trackingResultUrl`. Events on `document`: `b:cart-change`, `b:cart-added`, `b:gifts-change`. `window.BaseUI` (ui.js):
 `openCart, closeCart, refreshProduct, renderCart`.
 
@@ -54,20 +54,20 @@ byId, fromUrl, setUrl}`, `Base.reviews.{list, post}`, `Base.gifts.{offers, forCa
 | Section | What | Blocks |
 | --- | --- | --- |
 | `product` | Gallery (thumbs below / left / stacked, side) + info column | award, rating, title, subtitle, benefit, stock, urgency, offer_heading, price, variant_picker, variant_cards (option or quantity packs; `card_style` classic / radio "volume bundle", `pack_color`, `unit_label` per-unit price pill, `unit_pickers` = one Color / Size row per unit so a pack can mix variants, `includes_all`), buy_buttons, trust_icons, review, accordion, description, text, image, divider, custom_html, media_slider (images / videos; `slots` = frames kept while empty), faq, size_chart (link + popup) |
-| `reviews` | Average, distribution, photos, filters, list, lightbox, write-a-review form | — |
+| `reviews` | Average, distribution, photos, filters, list, lightbox (no review form — never add one); `layout` grid (cards + Show more) or list (avatar + date rows, numbered pages `[data-reviews-pager]`) | — |
 | `faq` | Accordion; blocks → `page.faq` → Theme settings FAQ | qa |
 | `testimonials` | Photo reviews from the product's real reviews | — |
 | `related` | Other products (relatedProducts, topped up from the all-products page on live pages; several rows never repeat) | — |
 | `marquee` | Scrolling promises strip | item |
 | `logo-bar` | Press / partner logos loop | logo |
 | `image-banner` | Full-width image with text | — |
-| `image-with-text` | Image beside heading / text / button | — |
+| `image-with-text` | Image beside heading / text / button; text alignment (desktop / phone), vertical position, text width | — |
 | `icon-columns` | Benefits / trust badges in columns | column |
 | `feature-rows` | Alternating image + text rows, numbered | row |
 | `spec-card` | Intro text + spec tiles card | tile |
 | `steps` | How it works, image cards | step |
 | `stats` | Big numbers | stat |
-| `comparison` | Us vs others table | row |
+| `comparison` | Us vs others table; rows are blocks (≤ 20), each side ✓ / ✕ or a short text | row |
 | `guarantee` / `rich-text` | Heading + rich text (+ button) | — |
 | `image-row` | Portrait video row (reels) | video |
 | `newsletter`, `contact-form`, `custom-html` | Forms, free HTML / CSS | — |

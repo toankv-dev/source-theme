@@ -2,6 +2,37 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## 2026.11.06.6 — No customer review form (requested)
+### Removed
+- The write-a-review form: `snippets/review-form.hbs`, every "Write a review" button (`[data-review-write]`),
+  ui.js `initReviewForm`, the `reviews` settings `show_form` / `write_label` and the `.b-rform` CSS.
+  Shoppers never write reviews on the storefront; the store adds them in the admin. A product without reviews
+  renders no reviews section. `Base.reviews.post` stays in core.js (API contract) but nothing calls it.
+- `tools/smoke.js`: the review-form check now FAILS when a theme shows a review form or Write button.
+
+## 2026.11.06.5 — Reviews: list layout with numbered pages (requested, from the PeakFlex original)
+### Added
+- `reviews` → `layout` select: "grid" (default, unchanged) or "list": title + average + count on the left; Write,
+  Filter and Sort as 44 px icon buttons on the right (stacked under the title on phones); photo strip; one review
+  per row with an initial avatar, name, Verified pill, date and text; numbered pages (`<nav data-reviews-pager>`,
+  ui.js: ‹ 1 2 3 4 … N ›, loads more reviews from the API when a later page is opened).
+- Filter button text is wrapped in `.b-rtool__label` (visually hidden in the list layout).
+### Changed
+- `reviews` → "Reviews per page" moves in steps of 1 (was 3), e.g. 5 per page.
+
+## 2026.11.06.4 — Comparison rows: up to 20, text values (requested, from PeakFlex)
+### Added
+- `comparison` row blocks: `ours_text` / `theirs_text` show a short text (e.g. "8 hours") instead of ✓ / ✕.
+### Changed
+- `comparison`: up to 20 rows (was 14). Rows stay blocks — add, remove and reorder them in the editor.
+
+## 2026.11.06.3 — Image with text: text alignment (requested, from the PeakFlex story rows)
+### Added
+- `image-with-text` → "Text layout" settings: `text_align` (left / center / right), `text_align_mobile` (same /
+  left / center), `content_position` (top / middle / bottom next to the image, desktop) and `text_width` (full /
+  wide 600 px / narrow 460 px, centred in its column). Defaults keep the old look (left, middle, full); lists move
+  their bullets inside when the text is centred or right-aligned.
+
 ## 2026.11.06.2 — FAQ and header menu always animate (requested)
 ### Added
 - Header menu drawer animation: the overlay fades, the panel slides in from the left and the links rise one after

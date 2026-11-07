@@ -1,4 +1,5 @@
-{{!-- Us vs. others table. Each row block says whether each side has the feature. --}}
+{{!-- Us vs. others table. Each row is a block (add / remove / reorder them in the editor, up to 20): a feature label
+      and, per side, ✓ / ✕ or a short text (ours_text / theirs_text) shown instead of the mark. --}}
 <div class="b-wrap b-compare">
   {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
   <div class="b-compare__table" role="table">
@@ -9,9 +10,9 @@
     </div>
     {{#each section.blocks}}
     <div class="b-compare__row" role="row" {{{this.attributes}}}>
-      <div role="cell" class="b-compare__side">{{#if this.settings.ours}}<span class="b-yes" aria-label="Yes">✓</span>{{else}}<span class="b-no" aria-label="No">✕</span>{{/if}}</div>
+      <div role="cell" class="b-compare__side">{{#if this.settings.ours_text}}<span class="b-compare__val">{{this.settings.ours_text}}</span>{{else}}{{#if this.settings.ours}}<span class="b-yes" aria-label="Yes">✓</span>{{else}}<span class="b-no" aria-label="No">✕</span>{{/if}}{{/if}}</div>
       <div role="cell" class="b-compare__mid">{{this.settings.label}}</div>
-      <div role="cell" class="b-compare__side">{{#if this.settings.theirs}}<span class="b-yes" aria-label="Yes">✓</span>{{else}}<span class="b-no" aria-label="No">✕</span>{{/if}}</div>
+      <div role="cell" class="b-compare__side">{{#if this.settings.theirs_text}}<span class="b-compare__val">{{this.settings.theirs_text}}</span>{{else}}{{#if this.settings.theirs}}<span class="b-yes" aria-label="Yes">✓</span>{{else}}<span class="b-no" aria-label="No">✕</span>{{/if}}{{/if}}</div>
     </div>
     {{/each}}
   </div>

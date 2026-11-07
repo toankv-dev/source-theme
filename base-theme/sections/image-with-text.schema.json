@@ -25,6 +25,91 @@
       ]
     },
     {
+      "type": "header",
+      "content": "Text layout"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment on phones",
+      "default": "same",
+      "options": [
+        {
+          "value": "same",
+          "label": "Same as above"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text position next to the image",
+      "default": "middle",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "info": "Desktop only — on phones the text sits under the image."
+    },
+    {
+      "type": "select",
+      "id": "text_width",
+      "label": "Text width",
+      "default": "full",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full column"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (600 px), centred"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow (460 px), centred"
+        }
+      ]
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Small text above",

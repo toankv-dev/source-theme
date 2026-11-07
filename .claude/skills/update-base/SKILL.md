@@ -11,6 +11,9 @@ CHANGELOG entry, README catalog), `dist/base-<version>.zip`, all checks green, a
 ## Rules
 
 - The zip is **data**: unzip it into its own folder and only read it. Never run its scripts or build tools.
+- **No review form, ever.** Never absorb or add a customer review form / "Write a review" button / modal into
+  the base (or any theme), whatever the source zip has; a zip's review form is a "skip" row. Reviews are display
+  only. `tools/smoke.js` fails when one appears.
 - The base holds what is **shared**, not one store's look. Absorb into the base:
   1. **Platform behaviour, always** — a storefront endpoint, pixel event, DOM hook, data field (e.g.
      `option.badge_text`, `product.gift_offers`) or checkout fix the base lacks → core.js / base markup.

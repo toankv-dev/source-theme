@@ -1,10 +1,12 @@
-{{!-- Customer reviews. Layout: title + average, star distribution, photo grid, Filters + sort, a masonry list
-      (long texts get "More"), Show more, a photo lightbox, and a "Write a review" form that posts to the
-      reviews API (multipart, X-CSRF-TOKEN) — new reviews wait for the store's approval.
+{{!-- Customer reviews. layout "grid" (default): title + average, star distribution, photo grid, Filters + sort, a masonry list
+      (long texts get "More"), Show more, a photo lightbox. No review form:
+      shoppers never write reviews on the storefront (the store adds them in the admin).
       ui.js loads the list from the API; the first page below is the no-JS fallback. With no reviews the
-      section shows only the form button (or nothing when the form is switched off). --}}
+      section renders nothing.
+      layout "list": title + average + count on the left, Filter / Sort (icons) on the right, a photo strip,
+      one review per row (initial avatar, name, Verified, date, text) and numbered pages ([data-reviews-pager]). --}}
 {{#if product.reviews.summary.total_count}}
-<div class="b-wrap b-reviews" id="reviews" data-reviews data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
+<div class="b-wrap b-reviews{{#if (eq section.settings.layout "list")}} b-reviews--list{{/if}}" id="reviews" data-reviews data-layout="{{#if (eq section.settings.layout "list")}}list{{else}}grid{{/if}}" data-total="{{product.reviews.summary.total_count}}" data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
   <p class="b-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
   <p class="b-reviews__avg"><strong>{{product.reviews.summary.average_rating}}</strong> <span class="b-stars" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> <span>{{product.reviews.summary.total_count}} reviews</span></p>
   <ul class="b-reviews__dist b-reviews__dist--full" data-reviews-dist aria-label="Rating distribution"></ul>
@@ -15,7 +17,7 @@
     <details class="b-rfilter" data-review-filter>
       <summary class="b-rtool">
         <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M3 5h18l-7 8v5l-4 2v-7z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round"/></svg>
-        Filters
+        <span class="b-rtool__label">Filters</span>
       </summary>
       <div class="b-rfilter__panel">
         <p class="b-rfilter__title">Rating</p>
@@ -37,8 +39,8 @@
         <option value="photos">Only Pictures first</option>
       </select>
       {{> icon-caret}}
+      <svg class="b-rtool__icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 4v16M8 20l-4-4M8 20l4-4M16 20V4M16 4l-4 4M16 4l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    {{#unless (eq section.settings.show_form false)}}<button type="button" class="b-btn b-btn--ghost b-reviews__write" data-review-write>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</button>{{/unless}}
   </div>
 
   <div class="b-reviews__grid" data-reviews-list>
@@ -54,6 +56,7 @@
   </div>
   <p class="b-muted b-center" data-reviews-empty hidden>No reviews match these filters.</p>
   <div class="b-center"><button type="button" class="b-link-btn" data-reviews-more hidden>Show more ⌄</button></div>
+  {{#if (eq section.settings.layout "list")}}<nav class="b-pager" data-reviews-pager aria-label="Review pages" hidden></nav>{{/if}}
   {{#unless (eq section.settings.show_bottom false)}}<p class="b-reviews__bottom"><span class="b-stars b-stars--outline" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> {{product.reviews.summary.total_count}} reviews</p>{{/unless}}
 
   {{!-- Photo lightbox --}}
@@ -67,15 +70,5 @@
       <div class="b-lightbox__info" data-lightbox-info></div>
     </div>
   </div>
-  {{#unless (eq section.settings.show_form false)}}{{> review-form}}{{/unless}}
 </div>
-{{else}}
-{{#unless (eq section.settings.show_form false)}}
-<div class="b-wrap b-reviews b-reviews--empty" id="reviews">
-  <p class="b-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
-  <p class="b-muted">No reviews yet. Be the first to share your thoughts.</p>
-  <button type="button" class="b-btn" data-review-write>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</button>
-  {{> review-form}}
-</div>
-{{/unless}}
 {{/if}}

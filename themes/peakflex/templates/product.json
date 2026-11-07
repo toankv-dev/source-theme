@@ -461,7 +461,9 @@
       "type": "reviews",
       "settings": {
         "heading": "Customer reviews",
-        "write_label": "Write a Rating"
+        "layout": "list",
+        "page_size": 5,
+        "show_bottom": false
       }
     }
   },

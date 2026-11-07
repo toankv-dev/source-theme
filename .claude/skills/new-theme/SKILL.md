@@ -38,6 +38,10 @@ Talk to the user in Vietnamese.
   defaults. **The product page's images and videos are never downloaded from the source page** (capture it
   with `--no-images`): the main product's media comes from the product data and every other media slot is
   left empty for the merchant to upload (see below). The page's screenshots are the only visual reference.
+- **No review form, ever.** Shoppers never write reviews on the storefront: no "Write a review" / "Write a
+  Rating" button, modal or form, even when the original page has one (leave it out and say so in the report).
+  Reviews are shown only (the store adds them in the admin). `tools/smoke.js` fails on `[data-review-form]`,
+  `[data-review-write]`, `[data-review-modal]`.
 - **Main product** (the `product` section: gallery, title, price, variants, packs, buy box, reviews) comes
   from the platform product data — never hard-code it. Set the sample (`sample/product.json`) to resemble the
   original so the preview compares fairly.

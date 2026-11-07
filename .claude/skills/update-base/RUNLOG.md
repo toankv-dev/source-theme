@@ -26,3 +26,7 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
 <!-- date · zip · minutes per step (unpack/inspect/decide/implement/verify/version/sync/report) · slowest step -->
 - 2026-11-05 · themes/club-ritual (no zip) · 0/0/1/2/2/1/0/1 · implement (quoting errors in one-line node patches)
 - 2026-11-06 · request "FAQ + header menu always animate" (no zip) · 0/0/1/3/4/1/6/1 · propagation to old themes (reverted on request)
+- 2026-11-06 · request "image-with-text text alignment" (no zip) · 0/0/0/2/3/1/1/1 · verify (shot + audit + smoke); theme copy needs the theme's own breakpoint (PeakFlex 750, base 900)
+- 2026-11-06 · request "comparison rows add / remove" (no zip) · 0/0/1/1/2/1/1/1 · decide (rows were already blocks: check the schema before building)
+- 2026-11-06 · request "reviews list layout" (no zip) · 0/0/1/4/3/1/2/1 · implement (patch script; escaped \n in a Node fix broke it — write fixes with Edit). Product page CSS of a theme near budget: run css-compact.js after porting
+- 2026-11-06 · request "no review form, ever" (no zip) · 0/0/0/2/2/1/1/1 · implement (removal script: hbs, snippet, schema, ui.js, CSS)

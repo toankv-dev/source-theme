@@ -6,7 +6,7 @@
  *   node tools/smoke.js [http://localhost:8090]
  *
  * Checks: pixel hooks, ViewContent / AddToCart / InitiateCheckout / Lead / Search events, ?variant= sync,
- * the sf-cart:<domain> line shape, drawer, checkout reading the cart, quantity packs, free gifts, review form,
+ * the sf-cart:<domain> line shape, drawer, checkout reading the cart, quantity packs, free gifts, no review form,
  * contact form, newsletter, order tracking.
  */
 'use strict';
@@ -167,20 +167,8 @@ const cart = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('sf-c
 
   // ---- Review form -----------------------------------------------------------------------------
   await page.goto(BASE + '/product', { waitUntil: 'load' });
-  if (await page.$('[data-review-write]')) {
-    await page.click('[data-review-write]');
-    await page.check('[data-review-form] input[name="rating"][value="5"]', { force: true });
-    await page.fill('[data-review-form] input[name="name"]', 'Smoke Tester');
-    await page.fill('[data-review-form] input[name="email"]', 'smoke@example.com');
-    await page.fill('[data-review-form] input[name="title"]', 'Works');
-    await page.fill('[data-review-form] textarea[name="body"]', 'Automated review from the smoke test.');
-    const resp = page.waitForResponse((r) => r.url().includes('/reviews') && r.request().method() === 'POST');
-    await page.click('[data-review-form] button[type="submit"]');
-    const r = await resp.catch(() => null);
-    await page.waitForTimeout(300);
-    check('review POST accepted', r && r.status() === 200, r && r.status());
-    check('review thank-you shown', /Thank you/.test(await page.textContent('[data-review-msg]')));
-  } else console.log('SKIP review form (switched off in this theme)');
+  // Rule: shoppers never write reviews on the storefront — no review form, no Write button.
+  check('no review form on the product page', !(await page.$('[data-review-form], [data-review-write], [data-review-modal], form.b-rform')));
 
   // ---- Contact + newsletter --------------------------------------------------------------------
   await page.goto(BASE + '/pages/contact-us', { waitUntil: 'load' });

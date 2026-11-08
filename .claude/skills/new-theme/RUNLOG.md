@@ -3,6 +3,9 @@
 Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50 lines.
 
 ## Shortcuts
+- Link input (theme-from-link): `node tools/download-page.js <url> themes/<slug>` per link in the background replaces
+  the captures below; measure on `node tools/site-server.js themes/<slug> --port 8092`, not on the live store. Product
+  page ≈ 1–2 min / 75 MB. A desktop bot check often passes on the built-in retry; twice → the tool goes on with mobile.
 - Captures: `for p in "product|<url>" "home|<url>" …; do node tools/capture.js "${p#*|}" themes/<slug> --name "${p%%|*}" …; done`
   in the background (product with `--no-images`). Blocked sites (memory: capture-blocked-sites): one try, no loops.
   Never re-capture a page for its phone images, texts or fonts: capture now saves both passes' images,
@@ -34,8 +37,12 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
   `config/settings_schema.json`, writes defaults to `settings_data.json`) — copy it from `themes/resilia/_work/`.
 
 ## Runs
-<!-- date · theme · minutes per step (scaffold/capture/map/build product/build other pages/compare/verify/pack+report) · slowest step -->
+<!-- date · theme · minutes per step (scaffold/capture-or-download/map/build product/build other pages/compare/verify/pack+report) · slowest step -->
+<!-- theme-from-link runs: "capture" = download-page.js (download + offline check + capture on the copy) -->
+
 - 2026-11-06 · resilia (5 pages: home, product, tracking, contact, subscription) · 1/9/6/15/14/8/6/6 · build
   (throwaway scripts for texts / fonts / crops / probes, CSS budget hit at the end) → now tools
 - 2026-11-06 · peakflex (4 pages: product phone-only + home, collection, tracking) · 1/10/5/22/16/8/8/3 · build product
   (2nd run in a row with build slowest: CSS budget split was manual → tools/scripts/split-product-css.js)
+- 2026-11-08 · club-ritual-link (theme-from-link acceptance, 1 link: product, desktop bot-checked → phone only) ·
+  0.5/1.5/1/4/0/2/2/1 · build (offline copy made measuring fast: _work/probe.js = one role table original | theme)

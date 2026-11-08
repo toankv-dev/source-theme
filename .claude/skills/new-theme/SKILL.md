@@ -1,6 +1,6 @@
 ---
 name: new-theme
-description: Build a new Adlux storefront theme that looks exactly like a given original page (a URL or screenshots), starting from d:\source-theme\base-theme, and deliver it as an uploadable .zip. Use whenever the user asks to create / clone / build a theme ("tạo theme", "dựng theme mới", "làm giống trang này", a store link or screenshots of a store page).
+description: Build a new Adlux storefront theme that looks exactly like a given original page from screenshots, starting from d:\source-theme\base-theme, and deliver it as an uploadable .zip; also the build rules the theme-from-link skill follows. Use when the user asks to create / clone / build a theme from screenshots of a store page ("tạo theme từ ảnh", "dựng theme mới", "làm giống ảnh này"). A store link → use theme-from-link instead (it downloads the page, then follows these rules).
 ---
 
 # New theme from base-theme
@@ -35,9 +35,11 @@ Talk to the user in Vietnamese.
 - Use the original's real texts. **Fonts and colours must be the original's exact ones** — measured, never
   guessed or "close enough" (see *Fonts and colours* below). Theme-wide images (logo, icons, payment badges,
   home page banners) may be copied from `_work/capture/home/images` into `assets/images/` as settings
-  defaults. **The product page's images and videos are never downloaded from the source page** (capture it
-  with `--no-images`): the main product's media comes from the product data and every other media slot is
-  left empty for the merchant to upload (see below). The page's screenshots are the only visual reference.
+  defaults. **The product page's images and videos never go into the theme**: the main product's media comes
+  from the product data and every other media slot is left empty for the merchant to upload (see below). With
+  a link (theme-from-link) they are downloaded into `_work/site/` to look at and measure only — `pack.js` fails
+  on a copy; a direct `capture.js` of a product page uses `--no-images`. The page's screenshots are the only
+  visual reference.
 - **No review form, ever.** Shoppers never write reviews on the storefront: no "Write a review" / "Write a
   Rating" button, modal or form, even when the original page has one (leave it out and say so in the report).
   Reviews are shown only (the store adds them in the admin). `tools/smoke.js` fails on `[data-review-form]`,
@@ -127,6 +129,9 @@ runs, fix it with tooling (a flag or script in `tools/`) instead of another note
 
 1. **Scaffold**: `node tools/new-theme.js "<Name>" --source "<url or image paths>"` → `themes/<slug>/`.
 2. **Capture the input**
+   - Link: follow the `theme-from-link` skill (`.claude/skills/theme-from-link/SKILL.md`): `tools/download-page.js`
+     saves the page (only that page) offline and runs `capture.js` on the copy; its steps 1–3 replace this step.
+     Below, `capture.js` straight on a live URL is the fallback, e.g. for an extra screenshot.
    - URL: `node tools/capture.js <url> themes/<slug> --name product --no-images` (product page: never download
      its images / videos), and `--name home` / other pages given without `--no-images`. If only a product page
      is given, the logo is the one file that may be saved by hand (its URL from `page.html`); nothing else. If a

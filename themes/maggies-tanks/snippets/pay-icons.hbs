@@ -1,0 +1,13 @@
+{{!-- Accepted-payment marks — the same artwork the platform checkout uses (exported from
+      packages/shared-types checkout-card-brands / checkout-trust-badges). Only methods the platform
+      processes are offered; each can be switched off in Theme settings → Payment icons. Card marks are
+      38×24 icons; wallet marks sit in a white 38×24 box. --}}
+<ul class="b-pay" aria-label="Accepted payment methods">
+  {{#unless (eq @root.settings.pay_visa false)}}<li><img src="{{@root.assets_url}}/images/pay/visa.svg" alt="Visa" width="38" height="24" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_mastercard false)}}<li><img src="{{@root.assets_url}}/images/pay/mastercard.svg" alt="Mastercard" width="38" height="24" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_amex false)}}<li><img src="{{@root.assets_url}}/images/pay/amex.svg" alt="American Express" width="38" height="24" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_discover false)}}<li><img src="{{@root.assets_url}}/images/pay/discover.svg" alt="Discover" width="38" height="24" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_applepay false)}}<li class="b-pay__box"><img src="{{@root.assets_url}}/images/pay/applepay.svg" alt="Apple Pay" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_googlepay false)}}<li class="b-pay__box"><img src="{{@root.assets_url}}/images/pay/googlepay.svg" alt="Google Pay" loading="lazy"></li>{{/unless}}
+  {{#unless (eq @root.settings.pay_paypal false)}}<li class="b-pay__box"><img src="{{@root.assets_url}}/images/pay/paypal.svg" alt="PayPal" loading="lazy"></li>{{/unless}}
+</ul>

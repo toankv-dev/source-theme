@@ -1,0 +1,28 @@
+@import "extra.css";
+@font-face { font-family: "Fixture Sans"; src: url(../fonts/fixture.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: block; }
+@font-face { font-family: "Fixture Sans"; src: url(../fonts/fixture-bold.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: block; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Fixture Sans", sans-serif; color: #222; background: #fffaf3; }
+h1, h2, .btn { font-weight: 400; }
+.site-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: #1d3557; color: #fff; }
+.site-header a { color: #fff; }
+.logo img { display: block; object-fit: cover; }
+.product { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 24px; }
+.main-img { width: 100%; height: auto; display: block; }
+h1 { font-size: 40px; margin: 0 0 8px; }
+.price { font-size: 24px; color: #e63946; }
+.installments { margin-top: 6px; padding: 8px; font-size: 14px; color: #555; background: #f1ece4; }
+.btn { background: #e63946; color: #fff; border: 0; border-radius: 6px; padding: 14px 28px; font-size: 16px; }
+.hero { min-height: 300px; padding: 40px 24px; background: #1d3557 url(../img/EEOB_-_WP1__96291.jpg?hero=desktop) center/cover; color: #fff; }
+.inline-bg, .style-attr { min-height: 200px; padding: 40px 24px; color: #fff; background-size: cover; }
+.video { display: flex; gap: 16px; padding: 24px; flex-wrap: wrap; }
+video { background: #000; max-width: 100%; height: auto; }
+iframe { border: 0; background: #ddd; max-width: 100%; }
+.js-lazy { padding: 24px; }
+.site-footer { display: flex; gap: 12px; align-items: center; padding: 24px; background: #1d3557; color: #fff; }
+@media (max-width: 600px) {
+  .product { grid-template-columns: 1fr; }
+  .hero { background-image: url(../img/GGGC_-_WP1__70703.jpg?hero=mobile); }
+  h1 { font-size: 28px; }
+}
+@media (min-width: 2000px) { .hero { background-image: url(../img/Sparkling_Spooky_Ghost_-_WP1__16228.jpg?hero=xl); } }

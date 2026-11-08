@@ -10,6 +10,7 @@
  *   - templates/*.json: section types exist, block types are declared in the section schema
  *   - pixel / platform hooks: trackingHead, trackingBody, #sf-config, #sf-variants-data, #addToCart,
  *     data-testid="add-to-cart", #CartDrawer-Checkout, data-testid="checkout-button"
+ *   - no product-page image / video of an original downloaded into _work/site/ (tools/lib/media-guard.js)
  * Skipped from the zip: dotfiles, folders starting with "_" (e.g. _work), node_modules, *.zip.
  */
 'use strict';
@@ -120,6 +121,11 @@ for (const [file, src] of Object.entries(sources)) {
   const isPage = /^(templates\/.+|layout\/.+)\.hbs$/.test(file) && file !== 'templates/checkout.hbs' && /<body/i.test(src);
   if (isPage && !src.includes('{{{trackingBody}}}')) errors.push(file + ': page without {{{trackingBody}}} right after <body>');
 }
+
+// Product-page media of an original downloaded with tools/download-page.js never ships: those slots stay empty.
+const guard = require('./lib/media-guard').findOriginalMedia(dir);
+errors.push(...guard.errors);
+warnings.push(...guard.warnings);
 
 // Report
 warnings.forEach((w) => console.log('WARN  ' + w));

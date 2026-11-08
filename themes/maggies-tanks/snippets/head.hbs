@@ -1,0 +1,30 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{#if page_title}}{{page_title}} – {{else}}{{#if product.title}}{{product.title}} – {{/if}}{{/if}}{{brand.name}}</title>
+<meta name="description" content="{{metaDesc}}">
+<link rel="canonical" href="{{canonical}}">
+{{#if brand.favicon}}<link rel="icon" href="{{brand.favicon}}">{{/if}}
+<meta property="og:site_name" content="{{brand.name}}">
+<meta property="og:title" content="{{#if product.title}}{{product.title}}{{else}}{{brand.name}}{{/if}}">
+<meta property="og:description" content="{{metaDesc}}">
+<meta property="og:url" content="{{canonical}}">
+{{#if product.media.main_image}}<meta property="og:type" content="product"><meta property="og:image" content="{{product.media.main_image}}">{{/if}}
+<meta name="twitter:card" content="summary_large_image">
+{{{productJsonLd}}}
+<script type="application/json" id="sf-config">{{{configJson}}}</script>
+{{!-- Live automatic discounts (the same ones the checkout applies). core.js prices pack cards and the cart
+      with them using the checkout's own formula; the theme never sets a price of its own. Each kind can be
+      switched off in Theme settings → Discounts. Spaces before the outer braces matter: "{{{x}}}}" does not
+      parse in Handlebars. --}}
+<script type="application/json" id="b-offers">{ "tiers": {{#unless (eq settings.allow_tiered_discount false)}}{{{json nextItemTiers}}}{{else}}null{{/unless}}, "bxgy": {{#unless (eq settings.allow_bxgy_discount false)}}{{{json bxgyOffers}}}{{else}}null{{/unless}}, "amountOff": {{#unless (eq settings.allow_amount_off_discount false)}}{{{json amountOffOffers}}}{{else}}null{{/unless}} }</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{!-- Colours + fonts are printed by the header (snippets/vars.hbs) so the platform's own pages get them too.
+      Every file in assets/css is also linked on the platform's own pages, EXCEPT one named theme.css (the
+      engine treats that name as a legacy inline bundle) — never name a stylesheet theme.css. --}}
+<link rel="stylesheet" href="{{assets_url}}/css/base.css">
+<link rel="stylesheet" href="{{assets_url}}/css/sections.css">
+<link rel="stylesheet" href="{{assets_url}}/css/skin.css">
+<script>window.__bCart = { open: {{#if (eq settings.open_cart_on_add false)}}false{{else}}true{{/if}} };</script>
+{{{trackingHead}}}
+{{#if __designMode}}<style>html{scroll-behavior:auto!important}</style>{{/if}}

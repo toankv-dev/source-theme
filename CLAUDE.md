@@ -10,7 +10,9 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   never packed.
 - `reference/{lunara,twinklingtree,wayfare}/` — the original source themes (unzipped from the `*.zip` files at the
   root). Read-only reference; never build from them.
-- `tools/` — `preview-server.js` (local engine, v1 + v2), `capture.js` (original page → screenshots, tokens,
+- `tools/` — `preview-server.js` (local engine, v1 + v2), `download-page.js` (one store page → offline copy in
+  `_work/site/`: DOM, CSS, JS, fonts, every image / video, live screenshots, offline check, then capture.js on it),
+  `site-server.js` (serves that copy, no network), `capture.js` (original page → screenshots, tokens,
   sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
   probe), `smoke.js` (end-to-end platform checks), `mobile-audit.js` (phone layout + speed budget), `style-audit.js` (fonts + colours vs the original), `pixel.js` (exact
   colours from a screenshot), `new-theme.js`,
@@ -18,14 +20,16 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   screenshots), `contact-sheet.js` (all images of a folder in one picture), `inspect-theme.js`
   (inventory a theme vs the base), `sync-core.js` (push base core files into built themes), `scripts/prune-css.js`,
   `scripts/build-base-settings.js`, `scripts/to-webp.js`, `scripts/css-compact.js` / `css-merge.js` /
-  `css-split.js` (shrink a CSS file under the budget).
-  Install once: `cd tools && npm install && npx playwright install chromium`.
+  `css-split.js` (shrink a CSS file under the budget), `lib/` (shared helpers; `lib/media-guard.js` = pack.js check).
+  Install once: `cd tools && npm install && npx playwright install chromium`. Tests of the tools: `cd tools && npm test`.
 - `dist/` — uploadable zips.
 
 ## Rules
 
-- A new theme request (a store URL or screenshots) → follow the `new-theme` skill
-  (`.claude/skills/new-theme/SKILL.md`): start from `base-theme`, match the input exactly, deliver a zip.
+- A new theme from a store link → follow the `theme-from-link` skill (`.claude/skills/theme-from-link/SKILL.md`):
+  download only the page of each link (offline copy), then build it with the `new-theme` rules. From screenshots →
+  the `new-theme` skill (`.claude/skills/new-theme/SKILL.md`). Both: start from `base-theme`, match the input
+  exactly, deliver a zip.
 - A theme zip given to improve the base → follow the `update-base` skill (`.claude/skills/update-base/SKILL.md`):
   absorb platform behaviour always and recurring sections/settings, bump the version, log it in
   `base-theme/CHANGELOG.md`, sync core files into `themes/*`.

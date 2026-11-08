@@ -30,37 +30,9 @@ if (!url || !themeDir) { console.error('usage: node tools/capture.js <url> <them
 const OUT = path.resolve(themeDir, '_work', 'capture', opt('name', 'page'));
 fs.mkdirSync(path.join(OUT, 'sections'), { recursive: true });
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
-const UA_M = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
-
-async function settle(page) {
-  await page.waitForTimeout(1500);
-  await page.evaluate(async () => {
-    for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
-    window.scrollTo(0, 0);
-  });
-  await page.waitForTimeout(1200);
-}
-
-// Closes newsletter / cookie pop-ups: Escape, then hides fixed layers covering most of the screen.
-async function clearPopups(page) {
-  if (args.includes('--keep-popups')) return;
-  await page.keyboard.press('Escape').catch(() => {});
-  await page.evaluate(() => {
-    const vw = innerWidth, vh = innerHeight;
-    document.querySelectorAll('body *').forEach((el) => {
-      const s = getComputedStyle(el);
-      if (s.position !== 'fixed' && s.position !== 'sticky') return;
-      const r = el.getBoundingClientRect();
-      const big = r.width * r.height > vw * vh * 0.35;
-      const z = parseInt(s.zIndex, 10) || 0;
-      const isChrome = /header|announcement|topbar|nav/i.test(el.className + ' ' + el.id + ' ' + el.tagName);
-      if (big && z > 10 && !isChrome) el.style.setProperty('display', 'none', 'important');
-    });
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'auto';
-  });
-}
+const lib = require('./lib/page');
+const { UA, UA_M, settle } = lib;
+const clearPopups = (page) => lib.clearPopups(page, args.includes('--keep-popups'));
 
 function measure() {
   const rgbToHex = (c) => {

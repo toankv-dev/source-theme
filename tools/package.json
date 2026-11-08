@@ -4,7 +4,8 @@
   "description": "Preview, scaffold, capture, visual-diff and pack tools for Adlux Handlebars themes",
   "scripts": {
     "preview": "node preview-server.js ../base-theme",
-    "pack": "node pack.js ../base-theme"
+    "pack": "node pack.js ../base-theme",
+    "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {
     "archiver": "7.0.1",

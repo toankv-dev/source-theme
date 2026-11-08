@@ -1,0 +1,29 @@
+{{!-- Theme settings → CSS custom properties + the theme fonts. Printed by the HEADER (not <head>) because the
+      platform's own pages (contact, tracking result, order list…) render only the theme's header/footer and
+      its assets/css files ("theme chrome") — anything in <head> never reaches them. A child theme restyles
+      mostly by changing these defaults (config/settings_data.json) and assets/css/skin.css. --}}
+<style>:root{
+--c-ink:{{#if @root.settings.primary}}{{@root.settings.primary}}{{else}}#14203b{{/if}};
+--c-on-ink:{{#if @root.settings.primary_text}}{{@root.settings.primary_text}}{{else}}#ffffff{{/if}};
+--c-accent:{{#if @root.settings.accent}}{{@root.settings.accent}}{{else}}var(--c-ink){{/if}};
+--c-text:{{#if @root.settings.text_color}}{{@root.settings.text_color}}{{else}}#15171c{{/if}};
+--c-bg:{{#if @root.settings.page_bg}}{{@root.settings.page_bg}}{{else}}#ffffff{{/if}};
+--c-check:{{#if @root.settings.check}}{{@root.settings.check}}{{else}}#1fa463{{/if}};
+--c-badge:{{#if @root.settings.badge}}{{@root.settings.badge}}{{else}}#3b9dea{{/if}};
+--c-sale:{{#if @root.settings.sale}}{{@root.settings.sale}}{{else}}#e0392b{{/if}};
+--c-alert:{{#if @root.settings.alert}}{{@root.settings.alert}}{{else}}#e0392b{{/if}};
+--c-star:{{#if @root.settings.star}}{{@root.settings.star}}{{else}}#17b26a{{/if}};
+--c-topbar-bg:{{#if @root.settings.topbar_bg}}{{@root.settings.topbar_bg}}{{else}}var(--c-ink){{/if}};
+--c-topbar-text:{{#if @root.settings.topbar_color}}{{@root.settings.topbar_color}}{{else}}var(--c-on-ink){{/if}};
+--c-header-bg:{{#if @root.settings.header_bg}}{{@root.settings.header_bg}}{{else}}#ffffff{{/if}};
+--c-header-text:{{#if @root.settings.header_text}}{{@root.settings.header_text}}{{else}}var(--c-text){{/if}};
+--c-footer-bg:{{#if @root.settings.footer_bg}}{{@root.settings.footer_bg}}{{else}}var(--c-ink){{/if}};
+--c-footer-text:{{#if @root.settings.footer_text}}{{@root.settings.footer_text}}{{else}}var(--c-on-ink){{/if}};
+--font:'{{#if @root.settings.font}}{{@root.settings.font}}{{else}}Manrope{{/if}}',system-ui,-apple-system,'Segoe UI',sans-serif;
+--font-heading:{{#if @root.settings.font_heading}}'{{@root.settings.font_heading}}',{{/if}}var(--font);
+--radius:{{#if @root.settings.radius}}{{@root.settings.radius}}{{else}}12{{/if}}px;
+--btn-radius:{{#if @root.settings.btn_radius}}{{@root.settings.btn_radius}}{{else}}8{{/if}}px;
+--btn-case:{{#if @root.settings.btn_case}}{{@root.settings.btn_case}}{{else}}uppercase{{/if}};
+--wrap:{{#if @root.settings.page_width}}{{@root.settings.page_width}}{{else}}1200{{/if}}px;
+}</style>
+{{#unless (eq @root.settings.load_google_fonts false)}}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{#if @root.settings.font}}{{@root.settings.font}}{{else}}Manrope{{/if}}:wght@{{#if @root.settings.font_weights}}{{@root.settings.font_weights}}{{else}}400;500;600;700;800{{/if}}{{#if @root.settings.font_heading}}&family={{@root.settings.font_heading}}:wght@{{#if @root.settings.font_weights}}{{@root.settings.font_weights}}{{else}}400;500;600;700;800{{/if}}{{/if}}&display=swap">{{/unless}}

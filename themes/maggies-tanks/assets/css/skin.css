@@ -1,0 +1,2 @@
+/* Maggies Tanks — skin. Loaded after base.css and sections.css. Restyle here (with the colour / font settings in
+   config/settings_data.json); keep every data-* hook in the markup, since ui.js and core.js find elements through them. */

@@ -1,0 +1,2 @@
+.badge { display: inline-block; margin-top: 16px; padding: 4px 10px; background: #333 url(../img/wash-bag.jpg?badge=1) center/cover; color: #fff; }
+.ready .badge { outline: 2px solid #e63946; }

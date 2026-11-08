@@ -1,0 +1,565 @@
+{
+  "title": "Band-Free Bra Tank",
+  "price": "$29.99",
+  "compare_at_price": "$39.99",
+  "off_pct": 25,
+  "meta_description": "Built-in bra tank with front support, no band.",
+  "description_html": "<p>Our first tank top with real built-in bra support. No wires, no extra layers, no lines showing through your clothes. One piece that does it all. Features <strong>removable padding </strong>for customisable coverage and <strong>a smoothing sculpt fit </strong>that defines your shape without squeezing. Works for everything from <strong>lounging to errands to the office</strong>. Comfortable enough to forget you're wearing it.</p><p><strong>Simple Care for High Performance:</strong></p><ul><li>Machine wash cold on a gentle cycle.</li><li>Use a machine wash bag to protect the garment.</li><li>Line dry only.</li><li>Do not bleach, iron, or dry clean.</li></ul>",
+  "media": {
+    "main_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+    "gallery": [
+      {
+        "url": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/hf_20260908_175707_a2126785-e82f-43b7-8675-8bf6a646c8a3.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/hf_20260817_185927_a3dd08e3-b150-4a0b-9490-0b46dc222505.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/hf_20260930_172838_245405c4-c1df-4d21-80d0-7079fbad2117.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/white.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/grey_tank.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/rose_tank.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/Rosewood.jpg",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/Wine_Red.jpg",
+        "alt": ""
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "Color",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "White",
+          "active": true
+        },
+        {
+          "label": "Grey",
+          "active": false
+        },
+        {
+          "label": "Rose",
+          "active": false
+        },
+        {
+          "label": "Rosewood",
+          "active": false
+        },
+        {
+          "label": "Wine Red",
+          "active": false
+        }
+      ]
+    },
+    {
+      "name": "Size",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "S",
+          "active": true
+        },
+        {
+          "label": "M",
+          "active": false
+        },
+        {
+          "label": "L",
+          "active": false
+        },
+        {
+          "label": "XL",
+          "active": false
+        },
+        {
+          "label": "XXL",
+          "active": false
+        }
+      ]
+    }
+  ],
+  "variants_list": [
+    {
+      "id": "v-white-m",
+      "title": "White / M",
+      "option_values": [
+        "White",
+        "M"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/white.jpg",
+      "available": true
+    },
+    {
+      "id": "v-white-l",
+      "title": "White / L",
+      "option_values": [
+        "White",
+        "L"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/white.jpg",
+      "available": true
+    },
+    {
+      "id": "v-white-xl",
+      "title": "White / XL",
+      "option_values": [
+        "White",
+        "XL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/white.jpg",
+      "available": true
+    },
+    {
+      "id": "v-white-xxl",
+      "title": "White / XXL",
+      "option_values": [
+        "White",
+        "XXL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/white.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-s",
+      "title": "Grey / S",
+      "option_values": [
+        "Grey",
+        "S"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/grey_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-m",
+      "title": "Grey / M",
+      "option_values": [
+        "Grey",
+        "M"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/grey_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-l",
+      "title": "Grey / L",
+      "option_values": [
+        "Grey",
+        "L"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/grey_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-xl",
+      "title": "Grey / XL",
+      "option_values": [
+        "Grey",
+        "XL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/grey_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-xxl",
+      "title": "Grey / XXL",
+      "option_values": [
+        "Grey",
+        "XXL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/grey_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rose-s",
+      "title": "Rose / S",
+      "option_values": [
+        "Rose",
+        "S"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/rose_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rose-m",
+      "title": "Rose / M",
+      "option_values": [
+        "Rose",
+        "M"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/rose_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rose-l",
+      "title": "Rose / L",
+      "option_values": [
+        "Rose",
+        "L"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/rose_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rose-xl",
+      "title": "Rose / XL",
+      "option_values": [
+        "Rose",
+        "XL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/rose_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rose-xxl",
+      "title": "Rose / XXL",
+      "option_values": [
+        "Rose",
+        "XXL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/rose_tank.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rosewood-s",
+      "title": "Rosewood / S",
+      "option_values": [
+        "Rosewood",
+        "S"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Rosewood.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rosewood-m",
+      "title": "Rosewood / M",
+      "option_values": [
+        "Rosewood",
+        "M"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Rosewood.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rosewood-l",
+      "title": "Rosewood / L",
+      "option_values": [
+        "Rosewood",
+        "L"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Rosewood.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rosewood-xl",
+      "title": "Rosewood / XL",
+      "option_values": [
+        "Rosewood",
+        "XL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Rosewood.jpg",
+      "available": true
+    },
+    {
+      "id": "v-rosewood-xxl",
+      "title": "Rosewood / XXL",
+      "option_values": [
+        "Rosewood",
+        "XXL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Rosewood.jpg",
+      "available": true
+    },
+    {
+      "id": "v-wine-red-s",
+      "title": "Wine Red / S",
+      "option_values": [
+        "Wine Red",
+        "S"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "available": true
+    },
+    {
+      "id": "v-wine-red-m",
+      "title": "Wine Red / M",
+      "option_values": [
+        "Wine Red",
+        "M"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "available": true
+    },
+    {
+      "id": "v-wine-red-l",
+      "title": "Wine Red / L",
+      "option_values": [
+        "Wine Red",
+        "L"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "available": true
+    },
+    {
+      "id": "v-wine-red-xl",
+      "title": "Wine Red / XL",
+      "option_values": [
+        "Wine Red",
+        "XL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "available": true
+    },
+    {
+      "id": "v-wine-red-xxl",
+      "title": "Wine Red / XXL",
+      "option_values": [
+        "Wine Red",
+        "XXL"
+      ],
+      "price": "$29.99",
+      "compare_at_price": "$39.99",
+      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "available": true
+    }
+  ],
+  "reviews": {
+    "summary": {
+      "average_rating": 4.8,
+      "total_count": 6
+    },
+    "items": [
+      {
+        "name": "Janet Mercer",
+        "rating": 5,
+        "title": "I used to stand at my dresser every morn",
+        "content": "I used to stand at my dresser every morning trying to figure out which bra worked with what I was wearing. The padded one, the wireless one, the one that does not show under white. Now I grab a tank and I am dressed. That is the whole decision. I have not opened my bra drawer in months and I do not miss it for a second.",
+        "date": "Oct 3, 2026",
+        "verified": true
+      },
+      {
+        "name": "Sarah Hartley",
+        "rating": 5,
+        "title": "For my whole adult life the first thing ",
+        "content": "For my whole adult life the first thing I did walking in the door was reach back and unhook my bra. Every single day. I have been wearing this tank for two months and the other night I realized I get into bed and there is nothing to take off. I am already comfortable. I never thought I would say that about anything I wear all day.",
+        "date": "Oct 4, 2026",
+        "image": "/assets/sample/grey_tank.jpg",
+        "verified": true
+      },
+      {
+        "name": "Linda White",
+        "rating": 5,
+        "title": "I genuinely live in this thing now. I pu",
+        "content": "I genuinely live in this thing now. I put one on first thing in the morning and I have it on all day around the house, cooking, cleaning, out to the mailbox, on the couch at night. It used to be that the minute I got home I would change into something soft. Now there is nothing to change into and nothing to take off. I wear it from the time I get up until I go to sleep. I bought one in every color so I always have a clean one in the drawer.",
+        "date": "Oct 5, 2026",
+        "verified": true
+      },
+      {
+        "name": "Stephanie Foren",
+        "rating": 5,
+        "title": "I've hated bras my entire life. Underwir",
+        "content": "I've hated bras my entire life. Underwire, tight bands, bra lines — I've dealt with it all for decades. A friend recommended this tank and honestly I was skeptical. But I ordered three  since it has fit guarantee. Best thing I've bought in years.",
+        "date": "Oct 6, 2026",
+        "verified": true
+      },
+      {
+        "name": "Erin Elwell",
+        "rating": 5,
+        "title": "Best day ever with my grandkids 💕 So com",
+        "content": "Best day ever with my grandkids 💕 So comfortable I can play on the floor all day without my bra killing me. These tanks are a GAME CHANGER! 78 and finally found something that actually supports me!",
+        "date": "Oct 7, 2026",
+        "image": "/assets/sample/rose_tank.jpg",
+        "verified": true
+      }
+    ]
+  },
+  "home_products": [
+    {
+      "id": "p1",
+      "handle": "band-free-bra-tank",
+      "url": "/product",
+      "imageUrl": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Band-Free Bra Tank",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 39.99,
+      "offPct": 25,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p2",
+      "handle": "machine-wash-bag",
+      "url": "/product",
+      "imageUrl": "/assets/sample/wash-bag.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Machine Wash Bag",
+      "sellingPrice": 7.49,
+      "compareAtPrice": 14.98,
+      "offPct": 50,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p3",
+      "handle": "band-free-bra-tank",
+      "url": "/product",
+      "imageUrl": "/assets/sample/hf_20260817_185927_a3dd08e3-b150-4a0b-9490-0b46dc222505.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Band-Free Bra Tank",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 39.99,
+      "offPct": 25,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p4",
+      "handle": "machine-wash-bag",
+      "url": "/product",
+      "imageUrl": "/assets/sample/wash-bag.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Machine Wash Bag",
+      "sellingPrice": 7.49,
+      "compareAtPrice": 14.98,
+      "offPct": 50,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p5",
+      "handle": "band-free-bra-tank",
+      "url": "/product",
+      "imageUrl": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Band-Free Bra Tank",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 39.99,
+      "offPct": 25,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p6",
+      "handle": "machine-wash-bag",
+      "url": "/product",
+      "imageUrl": "/assets/sample/wash-bag.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Machine Wash Bag",
+      "sellingPrice": 7.49,
+      "compareAtPrice": 14.98,
+      "offPct": 50,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p7",
+      "handle": "band-free-bra-tank",
+      "url": "/product",
+      "imageUrl": "/assets/sample/hf_20260817_185927_a3dd08e3-b150-4a0b-9490-0b46dc222505.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Band-Free Bra Tank",
+      "sellingPrice": 29.99,
+      "compareAtPrice": 39.99,
+      "offPct": 25,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    },
+    {
+      "id": "p8",
+      "handle": "machine-wash-bag",
+      "url": "/product",
+      "imageUrl": "/assets/sample/wash-bag.jpg",
+      "imageWidth": 1000,
+      "imageHeight": 1000,
+      "title": "Machine Wash Bag",
+      "sellingPrice": 7.49,
+      "compareAtPrice": 14.98,
+      "offPct": 50,
+      "rating": 4.8,
+      "reviewCount": 6,
+      "description": ""
+    }
+  ]
+}

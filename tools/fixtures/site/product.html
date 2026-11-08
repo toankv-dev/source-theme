@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixture Tee – Fixture Store</title>
+<link rel="icon" href="/icons/pay.svg">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="preload" as="script" href="/js/app.js">
+<link rel="prefetch" href="/">
+<link rel="canonical" href="/products/fixture-tee">
+<style>.inline-bg{background:#457b9d url(/img/GGLL_-_WP1__34811.jpg) center/cover}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Fixture Tee"}</script>
+<script src="/js/app.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <a href="/" class="logo"><img src="/img/wash-bag.jpg" alt="Fixture Store" width="120" height="40"></a>
+  <nav><a href="/">Home</a> <a href="/collections/all">Shop</a></nav>
+</header>
+<main>
+  <section class="product">
+    <div class="gallery">
+      <img class="main-img" src="/img/EEOB_-_WP1__96291.jpg?width=400"
+        srcset="/img/EEOB_-_WP1__96291.jpg?width=400 400w, /img/EEOB_-_WP1__96291.jpg?width=800 800w, /img/EEOB_-_WP1__96291.jpg?width=1600 1600w"
+        sizes="(max-width: 600px) 100vw, 50vw" width="600" height="600" alt="Fixture Tee">
+      <div class="slide" hidden><img class="lazyload" data-src="/img/Sparkling_Spooky_Ghost_-_WP1__16228.jpg" alt=""></div>
+    </div>
+    <div class="info">
+      <h1>Fixture Tee</h1>
+      <p class="price">$29.00</p>
+      <button id="add" class="btn" onclick="this.textContent='Added'">Add to cart</button>
+      <div class="tabs">
+        <div class="tab-panel" style="display:none"><img loading="lazy" src="/img/GGGC_-_WP1__70703.jpg" alt=""></div>
+      </div>
+      <span class="badge">New</span>
+    </div>
+  </section>
+  <section class="hero"><h2>Made to last</h2></section>
+  <section class="inline-bg"><h2>Inline style background</h2></section>
+  <section class="style-attr" style="background-image:url('/img/RRTL_-_WP1__71153.jpg')"><h2>Style attribute</h2></section>
+  <section class="video">
+    <video muted playsinline poster="/img/RRTL_-_WP1__71153.jpg?poster=1" width="640" height="360">
+      <source src="/media/clip.webm" type="video/webm">
+      <source src="/media/clip.mp4" type="video/mp4">
+    </video>
+    <iframe src="http://localhost:1/embed/abc" width="560" height="315" title="Embedded video"></iframe>
+  </section>
+  <section class="js-lazy">
+    <img class="js-lazy-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="/img/GGLL_-_WP1__34811.jpg?lazy=1" width="300" height="300" alt="">
+  </section>
+</main>
+<footer class="site-footer"><img src="/icons/pay.svg" width="38" height="24" alt="Visa"> <span>© Fixture Store</span></footer>
+<script>
+  document.documentElement.classList.add('js');
+  // A tree the HTML parser cannot rebuild: a <div> inside a <p> (as payment widgets do).
+  var terms = document.createElement('div');
+  terms.className = 'installments';
+  terms.textContent = 'or 3 payments of $9.67';
+  document.querySelector('.price').appendChild(terms);
+  // A tiny lazy loader: swaps data-src on images near the viewport (not the ones in hidden slides).
+  addEventListener('scroll', function () {
+    document.querySelectorAll('img.js-lazy-img[data-src]').forEach(function (i) {
+      if (i.getBoundingClientRect().top < innerHeight * 2) { i.src = i.dataset.src; i.removeAttribute('data-src'); }
+    });
+  });
+</script>
+</body>
+</html>

@@ -56,4 +56,4 @@ fs.writeFileSync(path.join(dest, '_work', 'source.json'), JSON.stringify({
 }, null, 2) + '\n');
 
 console.log('Created ' + path.relative(ROOT, dest) + ' from base-theme ' + baseVersion);
-console.log('Next: node tools/capture.js <url> themes/' + slug + '   ·   node tools/preview-server.js themes/' + slug);
+console.log('Next: node tools/download-page.js <url> themes/' + slug + '   ·   node tools/preview-server.js themes/' + slug);

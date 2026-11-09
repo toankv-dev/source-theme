@@ -1,11 +1,12 @@
 {{!-- Maggie's: one video review card. video = uploaded MP4 (empty → the theme's video defvideo, the original's file
       in assets/videos/mt), poster (empty → theme picture def), title, name. mt-home.js plays the video on tap; it
-      loads nothing before (preload="none"). --}}
+      loads nothing before (preload="none"). slot = true (product page): only the merchant's poster / video — no poster →
+      an empty frame, no video → the play button is disabled; never the theme's sample picture or video. --}}
 {{#if title}}
 <li class="mt-vr__card" data-mt-video>
-  <img class="mt-vr__poster" src="{{#if poster}}{{poster}}{{else}}{{@root.assets_url}}/images/mt/{{def}}.webp{{/if}}" alt="" width="600" height="1000" loading="lazy">
-  {{#if video}}<video class="mt-vr__video" src="{{video}}" playsinline preload="none" hidden></video>{{else}}{{#if defvideo}}<video class="mt-vr__video" src="{{@root.assets_url}}/videos/mt/{{defvideo}}.mp4" playsinline preload="none" hidden></video>{{/if}}{{/if}}
-  <button type="button" class="mt-vr__play" aria-label="Play the video of {{name}}"{{#unless video}}{{#unless defvideo}} disabled{{/unless}}{{/unless}}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+  {{#if slot}}{{#if poster}}<img class="mt-vr__poster" src="{{poster}}" alt="" width="600" height="1000" loading="lazy">{{else}}<div class="b-ph mt-vr__poster{{#unless @root.__designMode}} is-live-empty{{/unless}}">{{#if @root.__designMode}}Upload a poster (600 × 1000) in Theme settings → Maggie's – Home middle{{/if}}</div>{{/if}}{{else}}<img class="mt-vr__poster" src="{{#if poster}}{{poster}}{{else}}{{@root.assets_url}}/images/mt/{{def}}.webp{{/if}}" alt="" width="600" height="1000" loading="lazy">{{/if}}
+  {{#if video}}<video class="mt-vr__video" src="{{video}}" playsinline preload="none" hidden></video>{{else}}{{#unless slot}}{{#if defvideo}}<video class="mt-vr__video" src="{{@root.assets_url}}/videos/mt/{{defvideo}}.mp4" playsinline preload="none" hidden></video>{{/if}}{{/unless}}{{/if}}
+  <button type="button" class="mt-vr__play" aria-label="Play the video of {{name}}"{{#unless video}}{{#if slot}} disabled{{else}}{{#unless defvideo}} disabled{{/unless}}{{/if}}{{/unless}}><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
   <div class="mt-vr__text"><p class="mt-vr__title">{{title}}</p><p class="mt-vr__name">{{name}}</p></div>
 </li>
 {{/if}}

@@ -6,7 +6,7 @@
       layout "list": title + average + count on the left, Filter / Sort (icons) on the right, a photo strip,
       one review per row (initial avatar, name, Verified, date, text) and numbered pages ([data-reviews-pager]). --}}
 {{#if product.reviews.summary.total_count}}
-<div class="b-wrap b-reviews{{#if (eq section.settings.layout "list")}} b-reviews--list{{/if}}" id="reviews" data-reviews data-layout="{{#if (eq section.settings.layout "list")}}list{{else}}grid{{/if}}" data-total="{{product.reviews.summary.total_count}}" data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
+<div class="b-wrap b-reviews{{#if (eq section.settings.layout "list")}} b-reviews--list{{/if}}" id="reviews" data-reviews data-layout="{{#if (eq section.settings.layout "list")}}list{{else}}grid{{/if}}"{{#if section.settings.show_more}} data-more="true"{{/if}} data-total="{{product.reviews.summary.total_count}}" data-page-size="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}9{{/if}}">
   <p class="b-reviews__label">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</p>
   <p class="b-reviews__avg"><strong>{{product.reviews.summary.average_rating}}</strong> <span class="b-stars" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> <span>{{product.reviews.summary.total_count}} reviews</span></p>
   <ul class="b-reviews__dist b-reviews__dist--full" data-reviews-dist aria-label="Rating distribution"></ul>
@@ -36,7 +36,7 @@
         <option value="recent">Most Recent</option>
         <option value="high">Highest Rating</option>
         <option value="low">Lowest Rating</option>
-        <option value="photos">Only Pictures first</option>
+        <option value="photos"{{#if section.settings.show_more}} selected{{/if}}>Pictures First</option>
       </select>
       {{> icon-caret}}
       <svg class="b-rtool__icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 4v16M8 20l-4-4M8 20l4-4M16 20V4M16 4l-4 4M16 4l4 4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -55,8 +55,8 @@
     {{/each}}
   </div>
   <p class="b-muted b-center" data-reviews-empty hidden>No reviews match these filters.</p>
-  <div class="b-center"><button type="button" class="b-link-btn" data-reviews-more hidden>Show more ⌄</button></div>
-  {{#if (eq section.settings.layout "list")}}<nav class="b-pager" data-reviews-pager aria-label="Review pages" hidden></nav>{{/if}}
+  <div class="b-center"><button type="button" class="b-link-btn" data-reviews-more hidden>Show more</button></div>
+  {{#if (eq section.settings.layout "list")}}{{#unless section.settings.show_more}}<nav class="b-pager" data-reviews-pager aria-label="Review pages" hidden></nav>{{/unless}}{{/if}}
   {{#unless (eq section.settings.show_bottom false)}}<p class="b-reviews__bottom"><span class="b-stars b-stars--outline" style="--r:{{product.reviews.summary.average_rating}}" aria-hidden="true"></span> {{product.reviews.summary.total_count}} reviews</p>{{/unless}}
 
   {{!-- Photo lightbox --}}

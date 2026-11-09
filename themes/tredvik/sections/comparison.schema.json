@@ -22,6 +22,7 @@
       "label": "Our column image",
       "info": "Optional: the column shows no picture until one is picked (the editor marks the spot)."
     },
+    { "type": "text", "id": "default_ours_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
     {
       "type": "text",
       "id": "theirs_label",
@@ -33,7 +34,8 @@
       "id": "theirs_image",
       "label": "Other column image",
       "info": "Optional: the column shows no picture until one is picked (the editor marks the spot)."
-    }
+    },
+    { "type": "text", "id": "default_theirs_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." }
   ],
   "blocks": [
     {

@@ -3,42 +3,36 @@
       "FAQ" (questions) and "Maggie's – Home top / middle / bottom" (every other block, each switchable).
       Empty pictures fall back to the theme's pictures in assets/images/mt; videos stay empty until uploaded.
       The product block is the store's first product (base featured product: gallery, options, quantity, add to
-      cart through ui.js); the comparison table and the video cards are run by assets/js/mt-home.js. --}}
+      cart through ui.js); the comparison table and the video cards are run by assets/js/mt-home.js.
+      Theme settings → Maggie's – Home layout → Home page = Simple product list: a plain catalogue instead
+      (snippets/mt-simple-home.hbs + mt-simple.css, no mt-home.css / mt-home.js). The landing's HTML is unchanged. --}}
 <!doctype html>
 <html lang="en">
 <head>
 {{> head}}
+{{#if (eq settings.mt_home_layout "simple")}}
+<link rel="stylesheet" href="{{assets_url}}/css/mt-simple.css">
+{{else}}
 <link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/inter-400.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-serif-display.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-sans.woff2">
 <link rel="stylesheet" href="{{assets_url}}/css/mt-home.css">
+{{/if}}
 </head>
 <body class="b-body b-body--home">
 {{{trackingBody}}}
 <a class="b-skip" href="#MainContent">Skip to content</a>
 {{> header}}
+{{#if (eq settings.mt_home_layout "simple")}}
+{{> mt-simple-home}}
+{{else}}
 <main id="MainContent" class="b-main mt-home">
   {{#unless (eq settings.home_hero_show false)}}
-  <section class="mt-hero">
-    <div class="b-wrap mt-hero__inner">
-      {{#if settings.mt_hero_rating}}<p class="mt-pill"><span class="mt-pill__stars" aria-hidden="true">★★★★★</span>{{settings.mt_hero_rating}}</p>{{/if}}
-      <h1 class="mt-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
-      {{#if settings.home_hero_text}}<p class="mt-hero__text">{{settings.home_hero_text}}</p>{{/if}}
-      <a class="mt-btn" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}#mt-product{{/if}}">{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}}</a>
-      {{> mt-ticks}}
-      <div class="mt-hero__media">
-        <img src="{{#if settings.home_hero_image}}{{settings.home_hero_image}}{{else}}{{assets_url}}/images/mt/hero.webp{{/if}}" alt="" width="720" height="720" fetchpriority="high">
-        {{!-- The poster picture stays the LCP; the video (uploaded, else the original's in assets/videos/mt) plays over it. --}}
-        <video class="mt-hero__video" src="{{#if settings.mt_hero_video}}{{settings.mt_hero_video}}{{else}}{{assets_url}}/videos/mt/hero.mp4{{/if}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
-      </div>
-    </div>
-  </section>
+  {{> mt-hero}}
   {{/unless}}
 
   {{#if settings.home_promises}}
-  <div class="b-marquee mt-ticker" aria-label="Store promises" data-split-marquee="{{settings.home_promises}}">
-    <div class="b-marquee__track"></div>
-  </div>
+  {{> mt-ticker}}
   {{/if}}
 
   {{#unless (eq settings.mt_ba_show false)}}
@@ -46,78 +40,15 @@
   {{/unless}}
 
   {{#unless (eq settings.mt_iwt_show false)}}
-  <section class="mt-sec mt-sec--warm mt-iwt">
-    <div class="b-wrap mt-iwt__grid">
-      <div class="mt-iwt__text mt-only-desktop">
-        <h2 class="mt-h2 mt-h2--left">{{settings.mt_iwt_heading}}</h2>
-        <p class="mt-iwt__lead">{{settings.mt_iwt_text}}</p>
-        <ul class="mt-iwt__list">
-          {{#if settings.mt_iwt_li_1}}<li>{{settings.mt_iwt_li_1}}</li>{{/if}}
-          {{#if settings.mt_iwt_li_2}}<li>{{settings.mt_iwt_li_2}}</li>{{/if}}
-          {{#if settings.mt_iwt_li_3}}<li>{{settings.mt_iwt_li_3}}</li>{{/if}}
-          {{#if settings.mt_iwt_li_4}}<li>{{settings.mt_iwt_li_4}}</li>{{/if}}
-        </ul>
-        {{#if settings.mt_iwt_note}}<p class="mt-iwt__note">{{settings.mt_iwt_note}}</p>{{/if}}
-      </div>
-      <div class="mt-iwt__text mt-only-phone">
-        <h2 class="mt-h2 mt-h2--left">{{settings.mt_iwt_m_heading}}</h2>
-        <p class="mt-iwt__sub">{{settings.mt_iwt_m_text}}</p>
-        <div class="mt-vs mt-vs--old">
-          <p class="mt-vs__title">{{settings.mt_iwt_m_old}}</p>
-          <ul>
-            {{#if settings.mt_iwt_m_old_1}}<li>{{settings.mt_iwt_m_old_1}}</li>{{/if}}
-            {{#if settings.mt_iwt_m_old_2}}<li>{{settings.mt_iwt_m_old_2}}</li>{{/if}}
-            {{#if settings.mt_iwt_m_old_3}}<li>{{settings.mt_iwt_m_old_3}}</li>{{/if}}
-          </ul>
-        </div>
-        <div class="mt-vs mt-vs--new">
-          <p class="mt-vs__title">{{settings.mt_iwt_m_new}}</p>
-          <ul>
-            {{#if settings.mt_iwt_m_new_1}}<li>{{settings.mt_iwt_m_new_1}}</li>{{/if}}
-            {{#if settings.mt_iwt_m_new_2}}<li>{{settings.mt_iwt_m_new_2}}</li>{{/if}}
-            {{#if settings.mt_iwt_m_new_3}}<li>{{settings.mt_iwt_m_new_3}}</li>{{/if}}
-          </ul>
-        </div>
-        {{#if settings.mt_iwt_m_note}}<p class="mt-iwt__mnote">{{settings.mt_iwt_m_note}}</p>{{/if}}
-      </div>
-      <div class="mt-iwt__media"><img src="{{#if settings.mt_iwt_image}}{{settings.mt_iwt_image}}{{else}}{{assets_url}}/images/mt/iwt.webp{{/if}}" alt="" width="800" height="800" loading="lazy"></div>
-    </div>
-  </section>
+  {{> mt-iwt}}
   {{/unless}}
 
   {{#unless (eq settings.mt_why_show false)}}
-  <section class="mt-sec mt-why">
-    <div class="b-wrap mt-narrow">
-      <h2 class="mt-h2">{{settings.mt_why_heading}}</h2>
-      {{#if settings.mt_why_lead}}<p class="mt-why__lead">{{settings.mt_why_lead}}</p>{{/if}}
-      {{#if settings.mt_why_text}}<p class="mt-why__text">{{settings.mt_why_text}}</p>{{/if}}
-      <ul class="mt-why__x">
-        {{#if settings.mt_why_x_1}}<li>{{settings.mt_why_x_1}}</li>{{/if}}
-        {{#if settings.mt_why_x_2}}<li>{{settings.mt_why_x_2}}</li>{{/if}}
-        {{#if settings.mt_why_x_3}}<li>{{settings.mt_why_x_3}}</li>{{/if}}
-      </ul>
-      {{#if settings.mt_why_close}}<p class="mt-why__close">{{settings.mt_why_close}}</p>{{/if}}
-      <div class="mt-cta-row mt-cta-row--tight">
-        <a class="mt-btn" href="#mt-product">{{settings.mt_why_button}}</a>
-        {{> mt-ticks}}
-      </div>
-    </div>
-  </section>
+  {{> mt-why}}
   {{/unless}}
 
   {{#unless (eq settings.mt_list_show false)}}
-  <section class="mt-sec mt-sec--warm mt-list">
-    <div class="b-wrap mt-narrow">
-      <h2 class="mt-h2">{{settings.mt_list_heading}}</h2>
-      <dl class="mt-list__items">
-        {{#if settings.mt_list_1_title}}<dt>{{settings.mt_list_1_title}}</dt><dd>{{settings.mt_list_1_text}}</dd>{{/if}}
-        {{#if settings.mt_list_2_title}}<dt>{{settings.mt_list_2_title}}</dt><dd>{{settings.mt_list_2_text}}</dd>{{/if}}
-        {{#if settings.mt_list_3_title}}<dt>{{settings.mt_list_3_title}}</dt><dd>{{settings.mt_list_3_text}}</dd>{{/if}}
-        {{#if settings.mt_list_4_title}}<dt>{{settings.mt_list_4_title}}</dt><dd>{{settings.mt_list_4_text}}</dd>{{/if}}
-      </dl>
-      {{#if settings.mt_list_quote}}<p class="mt-list__quote">{{settings.mt_list_quote}}</p>{{/if}}
-    </div>
-  </section>
+  {{> mt-list}}
   {{/unless}}
 
   {{#unless (eq settings.home_featured_show false)}}
@@ -186,24 +117,7 @@
   {{/unless}}
 
   {{#unless (eq settings.mt_vr_show false)}}
-  <section class="mt-sec mt-vr">
-    <div class="b-wrap">
-      {{#if settings.mt_vr_pill}}<p class="mt-vr__pill"><i aria-hidden="true"></i>{{settings.mt_vr_pill}}</p>{{/if}}
-      <h2 class="mt-vr__heading">{{{settings.mt_vr_heading}}}</h2>
-    </div>
-    <ul class="mt-vr__track" data-mt-track>
-      {{> mt-vr-card video=settings.mt_vr_1_video poster=settings.mt_vr_1_poster def="vr-1" defvideo="vr-1" title=settings.mt_vr_1_title name=settings.mt_vr_1_name}}
-      {{> mt-vr-card video=settings.mt_vr_2_video poster=settings.mt_vr_2_poster def="vr-2" defvideo="vr-2" title=settings.mt_vr_2_title name=settings.mt_vr_2_name}}
-      {{> mt-vr-card video=settings.mt_vr_3_video poster=settings.mt_vr_3_poster def="vr-3" defvideo="vr-3" title=settings.mt_vr_3_title name=settings.mt_vr_3_name}}
-      {{> mt-vr-card video=settings.mt_vr_4_video poster=settings.mt_vr_4_poster def="vr-4" defvideo="vr-4" title=settings.mt_vr_4_title name=settings.mt_vr_4_name}}
-      {{> mt-vr-card video=settings.mt_vr_5_video poster=settings.mt_vr_5_poster def="vr-5" defvideo="vr-5" title=settings.mt_vr_5_title name=settings.mt_vr_5_name}}
-      {{> mt-vr-card video=settings.mt_vr_6_video poster=settings.mt_vr_6_poster def="vr-6" defvideo="vr-6" title=settings.mt_vr_6_title name=settings.mt_vr_6_name}}
-    </ul>
-    <div class="mt-vr__arrows">
-      <button type="button" class="mt-arrow" data-mt-step="-1" aria-label="Previous videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      <button type="button" class="mt-arrow" data-mt-step="1" aria-label="Next videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </section>
+  {{> mt-vr}}
   {{/unless}}
 
   {{#unless (eq settings.mt_ch_show false)}}
@@ -230,8 +144,11 @@
   {{> mt-last}}
   {{/unless}}
 </main>
+{{/if}}
 {{> footer}}
 {{> scripts}}
+{{#unless (eq settings.mt_home_layout "simple")}}
 <script src="{{assets_url}}/js/mt-home.js" defer></script>
+{{/unless}}
 </body>
 </html>

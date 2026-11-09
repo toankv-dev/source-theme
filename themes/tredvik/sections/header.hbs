@@ -6,6 +6,7 @@
       Sale bar: topbar_style "rotate" cycles messages split on "||"; "countdown" shows a title, a subtitle and
       a timer that restarts every countdown_hours hours (per visitor). --}}
 {{> vars}}
+{{> tv-fonts}}
 {{#unless (eq settings.show_topbar false)}}
 <div class="b-topbar b-topbar--{{#if (eq settings.topbar_style "countdown")}}countdown{{else}}rotate{{/if}}" role="region" aria-label="Announcements" data-topbar="{{settings.topbar_text}}" data-autoplay="{{#if (eq settings.topbar_autoplay false)}}false{{else}}true{{/if}}">
   {{#if (eq settings.topbar_style "countdown")}}
@@ -33,7 +34,8 @@
       <svg viewBox="0 0 18 16" width="20" height="20" aria-hidden="true"><path d="M1 1h16M1 8h16M1 15h16" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
     </button>
     <a class="b-logo" href="{{#if config.homeUrl}}{{config.homeUrl}}{{else}}{{#if policyLinks.home}}{{policyLinks.home}}{{else}}/{{/if}}{{/if}}">
-      {{#if brand.logo}}<img src="{{brand.logo}}" alt="{{brand.name}}" width="140" height="40" style="max-height:{{#if settings.logo_height}}{{settings.logo_height}}{{else}}40{{/if}}px">{{else}}<span>{{brand.name}}</span>{{/if}}
+      {{!-- Tredvik: the store logo, else Theme settings → Tredvik → Logo, else the theme logo (assets/images/tv-brand/untitled_design_6.webp). --}}
+      <img src="{{#if brand.logo}}{{brand.logo}}{{else}}{{#if settings.tv_logo}}{{settings.tv_logo}}{{else}}{{assets_url}}/images/tv-brand/untitled_design_6.webp{{/if}}{{/if}}" alt="{{brand.name}}" width="150" height="84" style="max-height:{{#if settings.logo_height}}{{settings.logo_height}}{{else}}84{{/if}}px">
     </a>
     <nav class="b-nav" aria-label="Main">{{> nav-links}}</nav>
     <div class="b-header__actions">

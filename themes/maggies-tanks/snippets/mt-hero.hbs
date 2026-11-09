@@ -1,0 +1,16 @@
+{{!-- Maggie's: Hero (title, text, button: Theme settings → Home – hero; rating pill, ticks, video: Maggie's – Home top). Home (templates/index.hbs) + product page (sections/mt-story.hbs).
+      slot = true (product page): only the merchant's picture / video; none → an empty frame, never the theme's sample. --}}
+<section class="mt-hero">
+  <div class="b-wrap mt-hero__inner">
+    {{#if @root.settings.mt_hero_rating}}<p class="mt-pill"><span class="mt-pill__stars" aria-hidden="true">★★★★★</span>{{@root.settings.mt_hero_rating}}</p>{{/if}}
+    <h1 class="mt-hero__title">{{#if @root.settings.home_hero_title}}{{@root.settings.home_hero_title}}{{else}}{{@root.brand.name}}{{/if}}</h1>
+    {{#if @root.settings.home_hero_text}}<p class="mt-hero__text">{{@root.settings.home_hero_text}}</p>{{/if}}
+    <a class="mt-btn" href="{{#if @root.settings.home_hero_link}}{{@root.settings.home_hero_link}}{{else}}#mt-product{{/if}}">{{#if @root.settings.home_hero_button}}{{@root.settings.home_hero_button}}{{else}}Shop now{{/if}}</a>
+    {{> mt-ticks}}
+    <div class="mt-hero__media">
+      {{#if slot}}{{#if @root.settings.home_hero_image}}<img src="{{@root.settings.home_hero_image}}" alt="" width="720" height="720" fetchpriority="high">{{else}}{{#unless @root.settings.mt_hero_video}}<div class="b-ph b-ph--mt-hero{{#unless @root.__designMode}} is-live-empty{{/unless}}">{{#if @root.__designMode}}Upload a square picture (720 × 720) in Theme settings → Home – hero, or a video in Maggie's – Home top{{/if}}</div>{{/unless}}{{/if}}{{else}}<img src="{{#if @root.settings.home_hero_image}}{{@root.settings.home_hero_image}}{{else}}{{@root.assets_url}}/images/mt/hero.webp{{/if}}" alt="" width="720" height="720" fetchpriority="high">{{/if}}
+      {{!-- The poster picture stays the LCP; the video (uploaded, else the original's in assets/videos/mt) plays over it. --}}
+      {{#if slot}}{{#if @root.settings.mt_hero_video}}<video class="mt-hero__video" src="{{@root.settings.mt_hero_video}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>{{/if}}{{else}}<video class="mt-hero__video" src="{{#if @root.settings.mt_hero_video}}{{@root.settings.mt_hero_video}}{{else}}{{@root.assets_url}}/videos/mt/hero.mp4{{/if}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>{{/if}}
+    </div>
+  </div>
+</section>

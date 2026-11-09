@@ -120,6 +120,20 @@
           "label": "Label after the count",
           "default": "reviews",
           "info": "Real reviews only; hidden while the product has none."
+        },
+        {
+          "type": "text",
+          "id": "prefix",
+          "label": "Text before the count",
+          "default": "",
+          "info": "With a text after the count: \"Excellent 487+ reviews\" instead of \"4.8 | 487 reviews\"."
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Text after the count",
+          "default": "",
+          "info": "e.g. \"+ reviews\" (no space before +)."
         }
       ]
     },
@@ -152,6 +166,34 @@
           "id": "text",
           "label": "Text",
           "default": "Key benefit of the product"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "✓ (check)"
+            },
+            {
+              "value": "walk",
+              "label": "Walking person"
+            },
+            {
+              "value": "stairs",
+              "label": "Stairs"
+            },
+            {
+              "value": "move",
+              "label": "Move freely (arrows)"
+            },
+            {
+              "value": "feather",
+              "label": "Feather"
+            }
+          ]
         }
       ]
     },
@@ -379,6 +421,12 @@
         },
         {
           "type": "text",
+          "id": "default_card_1_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
           "id": "card_1_sub",
           "label": "Subtitle",
           "default": ""
@@ -415,6 +463,12 @@
           "type": "image_picker",
           "id": "card_2_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "default_card_2_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "text",
@@ -457,6 +511,12 @@
         },
         {
           "type": "text",
+          "id": "default_card_3_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
           "id": "card_3_sub",
           "label": "Subtitle",
           "default": ""
@@ -493,6 +553,12 @@
           "type": "image_picker",
           "id": "card_4_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "default_card_4_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "text",
@@ -535,6 +601,12 @@
         },
         {
           "type": "text",
+          "id": "default_card_5_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
           "id": "card_5_sub",
           "label": "Subtitle",
           "default": ""
@@ -571,6 +643,12 @@
           "type": "image_picker",
           "id": "card_6_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
+        },
+        {
+          "type": "text",
+          "id": "default_card_6_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "text",
@@ -625,6 +703,13 @@
           "label": "Show the option pickers above the button",
           "default": true,
           "info": "Turn off when a separate Variant picker block is used."
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_options",
+          "label": "Bundles only: hide the option pickers (shoppers pick Color / Size / Side in each pack's rows)",
+          "default": false,
+          "info": "For Pack cards with quantity packs and 'one row per unit' on. The pickers stay in the page (the pack rows read them) but are not shown; without pack rows they show again."
         },
         {
           "type": "checkbox",
@@ -720,6 +805,22 @@
           "id": "open",
           "label": "Open by default",
           "default": false
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "help",
+              "label": "Question mark"
+            }
+          ]
         }
       ]
     },
@@ -755,9 +856,22 @@
         },
         {
           "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
           "id": "alt",
           "label": "Alt text",
           "default": ""
+        },
+        {
+          "type": "text",
+          "id": "ratio",
+          "label": "Frame ratio (width / height)",
+          "default": "",
+          "info": "e.g. 535/299. Keeps the frame while the picture is empty."
         }
       ]
     },
@@ -907,9 +1021,21 @@
           "label": "Image or video 1"
         },
         {
+          "type": "text",
+          "id": "default_media_1",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
           "type": "image_picker",
           "id": "media_2",
           "label": "Image or video 2"
+        },
+        {
+          "type": "text",
+          "id": "default_media_2",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "image_picker",
@@ -917,9 +1043,21 @@
           "label": "Image or video 3"
         },
         {
+          "type": "text",
+          "id": "default_media_3",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
           "type": "image_picker",
           "id": "media_4",
           "label": "Image or video 4"
+        },
+        {
+          "type": "text",
+          "id": "default_media_4",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "image_picker",
@@ -927,9 +1065,21 @@
           "label": "Image or video 5"
         },
         {
+          "type": "text",
+          "id": "default_media_5",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
           "type": "image_picker",
           "id": "media_6",
           "label": "Image or video 6"
+        },
+        {
+          "type": "text",
+          "id": "default_media_6",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "image_picker",
@@ -937,9 +1087,21 @@
           "label": "Image or video 7"
         },
         {
+          "type": "text",
+          "id": "default_media_7",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
           "type": "image_picker",
           "id": "media_8",
           "label": "Image or video 8"
+        },
+        {
+          "type": "text",
+          "id": "default_media_8",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "image_picker",
@@ -947,9 +1109,21 @@
           "label": "Image or video 9"
         },
         {
+          "type": "text",
+          "id": "default_media_9",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
           "type": "image_picker",
           "id": "media_10",
           "label": "Image or video 10"
+        },
+        {
+          "type": "text",
+          "id": "default_media_10",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         }
       ]
     },
@@ -1063,6 +1237,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Size chart image"
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
         },
         {
           "type": "richtext",

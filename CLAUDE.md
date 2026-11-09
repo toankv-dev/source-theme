@@ -17,7 +17,7 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
   probe), `smoke.js` (end-to-end platform checks), `mobile-audit.js` (phone layout + speed budget), `style-audit.js` (fonts + colours vs the original), `pixel.js` (exact
   colours from a screenshot), `new-theme.js`,
-  `pack.js` (validate + zip to `dist/`), `side-by-side.js` (compare screenshot slices), `crop.js` (slice tall
+  `media-library.js` (a download → the theme's media: WebP in `assets/images/<prefix>-<group>/`, videos, originals in `_work/images/`, `_work/media-map.json`), `pack.js` (validate + zip to `dist/`), `side-by-side.js` (compare screenshot slices), `crop.js` (slice tall
   screenshots), `contact-sheet.js` (all images of a folder in one picture), `inspect-theme.js`
   (inventory a theme vs the base), `sync-core.js` (push base core files into built themes), `scripts/prune-css.js`,
   `scripts/build-base-settings.js`, `scripts/to-webp.js`, `scripts/css-compact.js` / `css-merge.js` /
@@ -30,7 +30,7 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 ## Rules
 
 - A new theme from a store link → follow the `theme-from-link` skill (`.claude/skills/theme-from-link/SKILL.md`):
-  download only the page of each link (offline copy), then build it with the `new-theme` rules. From screenshots →
+  download only the page of each link (offline copy), put all its pictures and videos into the theme as slot defaults (the user replaces them later), then build it with the `new-theme` rules. From screenshots →
   the `new-theme` skill (`.claude/skills/new-theme/SKILL.md`). Both: start from `base-theme`, match the input
   exactly, deliver a zip.
 - A theme zip given to improve the base → follow the `update-base` skill (`.claude/skills/update-base/SKILL.md`):

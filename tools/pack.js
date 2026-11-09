@@ -10,8 +10,8 @@
  *   - templates/*.json: section types exist, block types are declared in the section schema
  *   - pixel / platform hooks: trackingHead, trackingBody, #sf-config, #sf-variants-data, #addToCart,
  *     data-testid="add-to-cart", #CartDrawer-Checkout, data-testid="checkout-button"
- *   - no product-page image of an original downloaded into _work/site/ (tools/lib/media-guard.js); videos are
- *     allowed and their total is printed ("videos: N files, X MB")
+ * Prints, never blocks: "videos: N files, X MB" and, for a theme with a media library (tools/media-library.js), how much of the
+ * sample store's media it still ships ("originals: …"; the list goes to _work/media-to-replace.md, tools/lib/media-guard.js).
  * Skipped from the zip: dotfiles, folders starting with "_" (e.g. _work), node_modules, *.zip.
  */
 'use strict';
@@ -123,18 +123,18 @@ for (const [file, src] of Object.entries(sources)) {
   if (isPage && !src.includes('{{{trackingBody}}}')) errors.push(file + ': page without {{{trackingBody}}} right after <body>');
 }
 
-// Product-page images of an original downloaded with tools/download-page.js never ship: those slots stay empty.
-// (Videos may: the original's videos are the defaults of the theme's video slots.)
 const mediaGuard = require('./lib/media-guard');
-const guard = mediaGuard.findOriginalMedia(dir);
-errors.push(...guard.errors);
-warnings.push(...guard.warnings);
 
 // Report
 warnings.forEach((w) => console.log('WARN  ' + w));
 errors.forEach((e) => console.log('ERROR ' + e));
 const vids = mediaGuard.videoBytes(dir);
 if (vids.files) console.log('videos: ' + vids.files + ' file' + (vids.files > 1 ? 's' : '') + ', ' + (vids.bytes / 1048576).toFixed(1) + ' MB');
+const originals = mediaGuard.originalsStillShipped(dir);
+if (originals) {
+  const list = path.relative(dir, mediaGuard.writeReplaceList(dir, originals)).replace(/\\/g, '/');
+  console.log('originals: ' + originals.images + ' images, ' + originals.videos + ' videos from the sample store still in the theme, ' + (originals.bytes / 1048576).toFixed(1) + ' MB → ' + list);
+}
 console.log(hbsFiles.length + ' templates, ' + jsonFiles.length + ' JSON files checked: ' + errors.length + ' errors, ' + warnings.length + ' warnings');
 if (errors.length) process.exit(1);
 if (args.includes('--no-zip')) process.exit(0);

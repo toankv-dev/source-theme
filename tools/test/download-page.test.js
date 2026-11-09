@@ -56,6 +56,23 @@ describe('download-page.js on the fake store', LONG, () => {
     assert.ok(m.skipped.some((s) => s.url === 'http://localhost:1/embed/abc' && /embedded frame/.test(s.reason)));
   });
 
+  test('pass 2: each picture knows its section, whether that section shows, and the gallery', () => {
+    const a = assetsByPath();
+    const main = a['/img/EEOB_-_WP1__96291.jpg?width=1600'];
+    assert.equal(main.section, 'product');
+    assert.equal(main.gallery, true);
+    assert.equal(main.hidden, false);
+    const slide = a['/img/Sparkling_Spooky_Ghost_-_WP1__16228.jpg'];
+    assert.equal(slide.gallery, true, 'a hidden slide is still the gallery');
+    assert.equal(slide.hidden, false, 'a hidden slide is not a hidden section');
+    const secret = a['/img/wash-bag.jpg?hidden=1'];
+    assert.equal(secret.section, 'secret_ab12');
+    assert.equal(secret.hidden, true);
+    assert.ok(!secret.gallery);
+    assert.equal(a['/img/wash-bag.jpg'].hidden, false);
+    assert.ok(!a['/img/wash-bag.jpg'].gallery);
+  });
+
   test('pass 2: every image, video, stylesheet and font is in the copy', () => {
     const a = assetsByPath();
     const expected = [

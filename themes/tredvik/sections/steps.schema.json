@@ -11,6 +11,7 @@
       "type": "step", "name": "Step", "limit": 4,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (portrait)" },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         { "type": "text", "id": "caption", "label": "Caption", "default": "Fill the bag" }
       ]
     }

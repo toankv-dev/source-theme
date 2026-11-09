@@ -3,26 +3,26 @@
 <footer class="b-footer">
   <div class="b-wrap b-footer__grid">
     <div class="b-footer__brand">
-      {{#if brand.logo}}<img class="b-footer__logo" src="{{brand.logo}}" alt="{{brand.name}}" loading="lazy">{{else}}<p class="b-footer__name">{{brand.name}}</p>{{/if}}
+      <img class="b-footer__logo" src="{{#if brand.logo}}{{brand.logo}}{{else}}{{#if settings.tv_logo}}{{settings.tv_logo}}{{else}}{{assets_url}}/images/tv-brand/untitled_design_6.webp{{/if}}{{/if}}" alt="{{brand.name}}" width="220" height="123">
       {{#if settings.footer_about}}<p class="b-footer__about">{{settings.footer_about}}</p>{{/if}}
+    </div>
+    <div class="tv-footer__contact">
+      <p class="b-footer__title">{{#if settings.tv_footer_contact_title}}{{settings.tv_footer_contact_title}}{{else}}Contact{{/if}}</p>
       <ul class="b-footer__contact">
-        {{#if brand.email}}<li>Email: <a href="mailto:{{brand.email}}">{{brand.email}}</a></li>{{/if}}
-        {{#if brand.store_email}}<li>Email: <a href="mailto:{{brand.store_email}}">{{brand.store_email}}</a></li>{{/if}}
-        {{#if brand.phone}}<li>Phone: {{brand.phone}}</li>{{/if}}
-        {{#if brand.address}}<li>Address: {{brand.address}}</li>{{/if}}
-        {{#if settings.support_hours}}<li>{{settings.support_hours}}</li>{{/if}}
+        {{#if settings.support_hours}}<li><strong>{{settings.support_hours}}</strong></li>{{/if}}
+        {{#if brand.email}}<li><strong>{{#if settings.tv_footer_email_label}}{{settings.tv_footer_email_label}}{{else}}Email{{/if}}</strong> <a href="mailto:{{brand.email}}">{{brand.email}}</a></li>{{/if}}
+        {{#if brand.store_email}}<li><strong>{{#if settings.tv_footer_email_label}}{{settings.tv_footer_email_label}}{{else}}Email{{/if}}</strong> <a href="mailto:{{brand.store_email}}">{{brand.store_email}}</a></li>{{/if}}
+        {{#if settings.tv_footer_company}}<li>{{settings.tv_footer_company}}</li>{{/if}}
       </ul>
     </div>
     <div>
       <p class="b-footer__title">{{#if settings.footer_links_title}}{{settings.footer_links_title}}{{else}}Customer care{{/if}}</p>
       <ul>
-        {{> policy-link key="about" label="About us"}}
-        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact us</a></li>{{/if}}
-        <li><a href="{{#if config.trackUrl}}{{config.trackUrl}}{{else}}{{#if policyLinks.track}}{{policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-local-domain>Track your order</a></li>
-        {{> policy-link key="shipping" label="Shipping policy"}}
-        {{> policy-link key="refund" label="Return & refund policy"}}
-        {{> policy-link key="privacy" label="Privacy policy"}}
-        {{> policy-link key="terms" label="Terms of service"}}
+        {{> policy-link key="privacy" label="Privacy Policy"}}
+        {{> policy-link key="refund" label="Refund Policy"}}
+        {{#if policyLinks.contact}}<li><a href="{{policyLinks.contact}}">Contact Information</a></li>{{/if}}
+        {{> policy-link key="shipping" label="Shipping Policy"}}
+        {{> policy-link key="terms" label="Terms of Service"}}
       </ul>
     </div>
     {{#if settings.footer_collections}}{{#if collections.length}}

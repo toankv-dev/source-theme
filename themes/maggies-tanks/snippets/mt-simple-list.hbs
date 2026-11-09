@@ -1,0 +1,13 @@
+{{!-- Maggie's simple home: one product list. items = product cards (home `products` or a collection's `products`),
+      title / url = the collection's ("" = no heading: the "every product" list), max = Theme settings → Maggie's – Home
+      layout → Products per list (empty → 8; the engine's `limit` treats empty as 0), eager = the first list (its first
+      4 pictures load at once: the page's LCP). Cards: snippets/card-product.hbs,
+      the same as the collection page. --}}
+<section class="b-wrap mt-simple__list">
+  {{#if title}}<div class="mt-simple__head"><h2 class="mt-simple__h2">{{title}}</h2>{{#if url}}{{#if @root.settings.mt_simple_limit}}{{#if (gt items.length @root.settings.mt_simple_limit)}}<a class="mt-simple__all" href="{{url}}">{{#if @root.settings.mt_simple_all_label}}{{@root.settings.mt_simple_all_label}}{{else}}View all{{/if}} →</a>{{/if}}{{else}}{{#if (gt items.length 8)}}<a class="mt-simple__all" href="{{url}}">{{#if @root.settings.mt_simple_all_label}}{{@root.settings.mt_simple_all_label}}{{else}}View all{{/if}} →</a>{{/if}}{{/if}}{{/if}}</div>{{/if}}
+  {{#if items.length}}
+  <div class="b-grid mt-simple__grid" data-grid>{{#if @root.settings.mt_simple_limit}}{{#each (limit items @root.settings.mt_simple_limit)}}{{> card-product above_fold=../eager}}{{/each}}{{else}}{{#each (limit items 8)}}{{> card-product above_fold=../eager}}{{/each}}{{/if}}</div>
+  {{else}}
+  <p class="mt-simple__empty">No products yet.</p>
+  {{/if}}
+</section>

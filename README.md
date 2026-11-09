@@ -1,6 +1,6 @@
 # source-theme
 
-Repo này dựng theme cửa hàng cho Adlux. Mọi theme đều đi từ `base-theme/`, kết quả là một file `.zip` để upload lên
+Repo này dựng theme cửa hàng cho Shopdy. Mọi theme đều đi từ `base-theme/`, kết quả là một file `.zip` để upload lên
 admin.
 
 ## Cài đặt (một lần)
@@ -37,7 +37,7 @@ Gửi ảnh chụp nguyên trang, định dạng PNG, cả bản desktop và b�
 
 ## Kết quả
 
-- File zip trong `dist/`: upload ở admin Adlux (Themes → upload).
+- File zip trong `dist/`: upload ở admin Shopdy (Themes → upload).
 - Mã nguồn theme trong `themes/<tên>/`.
 - Báo cáo tiếng Việt: phần đã khớp, phần còn khác, và **các ô ảnh / video để trống mà chủ shop cần tự upload**.
 
@@ -65,6 +65,7 @@ có ảnh chụp để nhìn, còn `/theme-from-link` tải cả trang thật v�
 | Kích thước, khoảng cách | Ước lượng từ ảnh | Đo chính xác từng khối trên bản tải về |
 | Kiểm tra độ giống | Chụp theme rồi đặt cạnh ảnh gốc, so bằng mắt | Tool so từng điểm ảnh với ảnh chụp trang thật và chỉ ra chỗ lệch |
 | Khi site chặn bot | Không ảnh hưởng, vì không cần vào site | Không tải được thì Claude xin ảnh chụp và chuyển sang `/new-theme` |
+/theme-from-link: Thực hiện tải video, ảnh từ trang gốc.
 
 **Tóm lại:** có link thì dùng `/theme-from-link`, vì theme giống bản gốc hơn và bạn đỡ việc hơn. Chỉ dùng `/new-theme`
 khi không có link, hoặc link bị chặn không tải được.

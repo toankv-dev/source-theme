@@ -78,6 +78,9 @@ Media slots: the main product's gallery comes from the product data; every other
 page (image block, media slider, image-with-text, spec-card, steps, feature rows, banner, video row) is a slot
 the merchant fills in the theme editor. An empty slot keeps its frame (`.b-ph`, `.b-mslider__ph`,
 `.b-reel__ph`, …) with an "Upload …" hint in design mode only — it never collapses or borrows the product photo.
+Each slot also has a `default_<slot id>` text setting: a path inside `assets/` (`images/tv-sections/photo.webp`,
+`videos/tv-sections/clip.mp4`) shown while the slot is empty; a picked file wins. Themes built from a store link fill these
+with the sample store's media (`tools/media-library.js`); left empty, nothing changes.
 
 Chrome (rendered by the layout, settings-driven): `header` (top bar rotating or countdown, nav, animated menu drawer,
 search), `cart-drawer` (lines, shipping protection / add-ons, discount, trust lines), `footer` (contact, links,

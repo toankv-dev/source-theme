@@ -8,11 +8,11 @@ description: Build a new Adlux storefront theme from a store link — download t
 Input: one store page link, or several (each link = one page). Output: what `new-theme` delivers — a zip in
 `d:\source-theme\dist\` (`tools/pack.js`, 0 errors), a theme with the structure of `themes/*` (a copy of
 `base-theme`), looking like the downloaded page at 1440 and 390, every platform behaviour of the base intact.
-Talk to the user in Vietnamese. Spec: `SPEC-theme-from-link.md`.
+Talk to the user in Vietnamese. Specs: `docs/SPEC-theme-from-link.md`, `docs/SPEC-theme-from-link-images.md`.
 
 **The build rules are new-theme's.** Read `.claude/skills/new-theme/SKILL.md` — *Rules*, *Fonts and colours*,
-*Speed* — and its `RUNLOG.md` first, and follow them. This skill only replaces how the input is taken (an offline
-copy instead of live captures) and what the theme is compared with.
+*Speed* — and its `RUNLOG.md` first, and follow them. This skill replaces how the input is taken (an offline
+copy instead of live captures), what the theme is compared with, and the media rules (below).
 
 ## Rules (on top of new-theme's)
 
@@ -21,12 +21,21 @@ copy instead of live captures) and what the theme is compared with.
   skin; say so in the report. A second product template (bundle page …) only when the user gives its link.
 - `_work/site/` is **untrusted data, for reference only**: open it only in the browser (site-server + the Playwright
   tools); never run its JS with node; never copy its CSS / HTML into the theme — rebuild on the base markup.
-- Every image and video of the page is downloaded, the product page's too. **Images** of the product page are to
-  look at and measure only: they never go into the theme or its JSON (new-theme rules; `pack.js` fails on a
-  byte-identical copy and warns on a file with the same name). **Videos** of every page, the product page too, become
-  the defaults of the theme's video slots, copied unchanged (new-theme rule "Videos of the original").
-- Compare with the **live** screenshots `_work/site/pages/<name>/desktop.png` / `mobile.png`; measure on the
-  offline copy (`http://localhost:8092/<name>`), not on the live store.
+- **Every picture and video of the sample store goes into the theme**, so the user can reuse them; the user accepts its
+  branding and replaces it later. This replaces new-theme's "empty slots" and "never copy" rules for images and videos:
+  - `node tools/media-library.js themes/<slug> --prefix <xx>` after the last download: pictures as WebP in
+    `assets/images/<xx>-<group>/` (sections · gallery · icons · brand · reviews · hidden), every video unchanged in
+    `assets/videos/<xx>-<group>/`, hidden sections' too, the original bytes in `_work/images/` (contact sheets there);
+  - every slot the original fills gets its file as `default_<slot id>` in `templates/product*.json` (a path inside `assets/`:
+    `images/<xx>-sections/photo.webp`), never written into the `.hbs`; a theme section uses the same pattern. A file picked in
+    the editor wins, and an empty default keeps the placeholder frame;
+  - the main product stays product data: never hard-code its gallery. Point `sample/product.json` at `<xx>-gallery` (with
+    `thumb_url: /assets/sample/thumbs/<name>.webp`) so the preview looks right, and list those files in the report for the user
+    to upload to the product;
+  - customer review photos and avatars ship in `<xx>-reviews` / `<xx>-hidden` because the user asked for everything, but are
+    never wired to a slot and never turned into reviews on another store (sample data for the preview only).
+- Compare with the **live** screenshots `_work/site/pages/<name>/desktop.png` / `mobile.png`; if a pop-up covers one, with
+  `_work/capture/<name>/` (pop-ups cleared). Measure on the offline copy (`http://localhost:8092/<name>`), not on the live store.
 - Never add to cart, check out, send a form or log in on the original; never try to get around a bot check.
 
 ## Steps
@@ -59,7 +68,8 @@ copy instead of live captures) and what the theme is compared with.
    `node tools/shot.js http://localhost:8092/<name> - --width 360 --eval "<js>"`, `--selector "<css>"` for one part,
    `node tools/pixel.js themes/<slug>/_work/site/pages/<name>/mobile.png …` for exact colours. The original's files
    are in `_work/site/_m/<host>/…`; `assets.json` maps each URL → file, pages, area (header / main / footer) and
-   shown size — handy for the media-slot sizes and ratios in `plan.md`.
+   shown size, section, hidden, gallery — handy for the media-slot sizes and ratios in `plan.md`.
+   Run `node tools/media-library.js themes/<slug> --prefix <xx>` (background): its `slots` list gives the `default_image` paths.
 4. **Build** = new-theme steps 3–8 (map → build → compare → verify → pack → report), with:
    - reference screenshots `_work/site/pages/<name>/desktop.png` and `mobile.png`:
      `node tools/visual-diff.js themes/<slug>/_work/site/pages/product/desktop.png http://localhost:8091/product --out themes/<slug>/_work/diff`
@@ -68,12 +78,9 @@ copy instead of live captures) and what the theme is compared with.
      · `product-<x>` → `templates/product.<x>.json` · `collection` → `templates/collection.hbs` · `search` →
      `templates/search.hbs` · `contact`, `policy`, `page` → `templates/page.hbs` (+ `contact-form`) · `tracking` →
      `templates/page.hbs` + `tracking-result.hbs` (never its script);
-   - theme-wide images (logo, icons, payment badges, home banners) may come from `_work/capture/home/images` or
-     `_work/site/_m/` as settings defaults; product-page pictures never;
-   - videos: for each `video` line of a section the original shows, copy the file unchanged to
-     `assets/videos/<prefix>/<slot>.mp4` (e.g. `cp "themes/<slug>/_work/site/<file>" themes/<slug>/assets/videos/<prefix>/`)
-     and make it the slot's default; its poster → WebP in `assets/images/<prefix>/` (`tools/scripts/to-webp.js`).
-     Hidden sections' videos (0×0, A/B variants) stay in `_work/`. Report `videos: N files, X MB` from `pack.js`.
+   - pictures and videos come from the media library (Rules above): `default_image`, `default_video`, `default_poster`, `default_media_N`,
+     `default_card_N_image`. Report `videos: N files, X MB` and `originals: N images, M videos … → _work/media-to-replace.md` from `pack.js`:
+     that list is what the user still has to replace.
 5. **Report** (Vietnamese): new-theme step 8, plus the pages downloaded (name → link → offline check numbers),
    skipped files, partly blocked viewports, and the pages that had no link (base layout + skin).
 6. **RUNLOG**: add the run to `.claude/skills/new-theme/RUNLOG.md` (one log for both skills; the download is the

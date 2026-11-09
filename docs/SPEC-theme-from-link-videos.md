@@ -3,6 +3,8 @@
 Trạng thái: **bản nháp, chờ duyệt** · 2026-11-09 · Sửa đổi cho [SPEC-theme-from-link.md](../SPEC-theme-from-link.md)
 (mục "Tất cả ảnh và video" và quyết định số 3).
 
+**Một phần đã thay bởi [SPEC-theme-from-link-images.md](SPEC-theme-from-link-images.md) (2026-11-09):** ảnh trang sản phẩm nay vào theme; video của section ẩn cũng vào zip; `pack.js` không còn báo lỗi nào về ảnh trùng.
+
 ## Mục tiêu
 
 Hiện tại skill chỉ đưa **ảnh** của bản gốc vào theme. Video thì hoặc bị bỏ qua lúc tải (stream HLS, video giấu trong

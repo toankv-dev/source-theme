@@ -8,7 +8,7 @@
   {{#if section.blocks.length}}
   {{#each section.blocks}}
   <div class="b-feature" {{{this.attributes}}}>
-    <div class="b-feature__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.heading}}" loading="lazy">{{else}}<div class="b-feature__ph" aria-hidden="true"></div>{{/if}}</div>
+    <div class="b-feature__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.heading}}" loading="lazy">{{else if this.settings.default_image}}<img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="{{this.settings.heading}}" loading="lazy">{{else}}<div class="b-feature__ph" aria-hidden="true"></div>{{/if}}</div>
     <div class="b-feature__text">
       {{#unless (eq ../section.settings.numbered false)}}<p class="b-feature__num" data-feature-num></p>{{/unless}}
       <h3 class="b-feature__title">{{this.settings.heading}}</h3>

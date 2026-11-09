@@ -9,6 +9,30 @@
       "default": "before_after",
       "options": [
         {
+          "value": "hero",
+          "label": "Hero (top of the home page)"
+        },
+        {
+          "value": "ticker",
+          "label": "Promises ticker"
+        },
+        {
+          "value": "iwt",
+          "label": "Picture + text / old bra vs tank"
+        },
+        {
+          "value": "why",
+          "label": "Why bras stopped working"
+        },
+        {
+          "value": "list",
+          "label": "Nothing else has worked"
+        },
+        {
+          "value": "vr",
+          "label": "Video reviews"
+        },
+        {
           "value": "before_after",
           "label": "Real Women… (before & after cards)"
         },
@@ -37,14 +61,21 @@
           "label": "Last call"
         }
       ],
-      "info": "Texts and pictures: Theme settings → Maggie's – Home top / Home bottom and FAQ (shared with the home page). Before & after pictures left empty stay upload frames here (square, 800 × 800). Its look loads with the product section set to Look = Maggie's (template \"Maggie's product page\")."
+      "info": "Texts and pictures: Theme settings → Home – hero / promises, Maggie's – Home top / middle / bottom and FAQ (shared with the home page). Pictures and videos left empty stay upload frames on product pages. The look loads with the product section set to Look = Maggie's, and for hero, ticker, picture + text, why, list and video reviews also \"Has the landing blocks\" (template \"Maggie's landing\")."
+    },
+    {
+      "type": "checkbox",
+      "id": "cta",
+      "label": "Before & after: show the Buy now button",
+      "default": false,
+      "info": "Like the home page (template \"Maggie's landing\"). Button text: Theme settings → Maggie's – Home top."
     }
   ],
   "presets": [
     {
       "name": "Maggie's story block",
       "category": "Maggie's",
-      "description": "One of the home page's blocks (before & after, what we changed, routine, comparison, comfort, FAQ, last call)."
+      "description": "One of the home page's blocks (hero, ticker, picture + text, why, list, video reviews, before & after, what we changed, routine, comparison, comfort, FAQ, last call)."
     }
   ]
 }

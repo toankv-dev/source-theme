@@ -1,15 +1,23 @@
-{{!-- Maggie's: one of the home page's story blocks on a product page (template "Maggie's product page"). Texts and
-      pictures come from Theme settings → Maggie's – Home top / bottom and FAQ, the same as the home page, so they are
-      edited once. On the product page a before / after picture left empty stays an upload frame (never the theme's
-      sample picture). Look: assets/css/mt-story.css (generated from mt-home.css), linked ONCE by the product section
-      with Look = Maggie's (one link per story block would load and parse it 8 times). Without a part: before & after. --}}
+{{!-- Maggie's: one of the home page's blocks on a product page (templates "Maggie's product page" and "Maggie's
+      landing"). Texts and pictures come from Theme settings → Home – hero / promises, Maggie's – Home top / middle /
+      bottom and FAQ, the same as the home page, so they are edited once. On the product page a picture / video left
+      empty stays an upload frame (slot = true: never the theme's sample). Look: assets/css/mt-story.css (story blocks)
+      and assets/css/mt-landing.css (hero, ticker, picture + text, why, list, video reviews), linked ONCE by the product
+      section (Look = Maggie's; "Has the landing blocks"), never per block. mt-home.js runs the comparison table and the
+      video cards; it runs once however many blocks include it. Without a part: before & after. --}}
 <div class="mt-home mt-story">
+{{#if (eq section.settings.part "hero")}}{{> mt-hero slot=true}}{{/if}}
+{{#if (eq section.settings.part "ticker")}}{{#if @root.settings.home_promises}}{{> mt-ticker}}{{/if}}{{/if}}
+{{#if (eq section.settings.part "iwt")}}{{> mt-iwt slot=true}}{{/if}}
+{{#if (eq section.settings.part "why")}}{{> mt-why}}{{/if}}
+{{#if (eq section.settings.part "list")}}{{> mt-list}}{{/if}}
+{{#if (eq section.settings.part "vr")}}{{> mt-vr slot=true}}<script src="{{@root.assets_url}}/js/mt-home.js" defer></script>{{/if}}
 {{#if (eq section.settings.part "changed")}}{{> mt-changed}}{{/if}}
 {{#if (eq section.settings.part "routine")}}{{> mt-routine}}{{/if}}
 {{#if (eq section.settings.part "compare")}}{{> mt-compare}}<script src="{{@root.assets_url}}/js/mt-home.js" defer></script>{{/if}}
 {{#if (eq section.settings.part "comfort")}}{{> mt-comfort}}{{/if}}
 {{#if (eq section.settings.part "faq")}}{{> mt-faq}}{{/if}}
 {{#if (eq section.settings.part "last")}}{{> mt-last}}{{/if}}
-{{#if (eq section.settings.part "before_after")}}{{> mt-ba slot=true nocta=true}}{{/if}}
+{{#if (eq section.settings.part "before_after")}}{{#if section.settings.cta}}{{> mt-ba slot=true}}{{else}}{{> mt-ba slot=true nocta=true}}{{/if}}{{/if}}
 {{#unless section.settings.part}}{{> mt-ba slot=true nocta=true}}{{/unless}}
 </div>

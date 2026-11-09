@@ -1041,6 +1041,103 @@
     ]
   },
   {
+    "name": "Maggie's – Home layout",
+    "settings": [
+      {
+        "type": "select",
+        "id": "mt_home_layout",
+        "label": "Home page",
+        "default": "landing",
+        "options": [
+          {
+            "value": "landing",
+            "label": "Maggie's landing (hero, story blocks, product)"
+          },
+          {
+            "value": "simple",
+            "label": "Simple product list"
+          }
+        ],
+        "info": "Simple product list: a short intro and your products in lists, like a catalogue. The landing can live on a product's own link: product template \"Maggie's landing (ad page)\"."
+      },
+      {
+        "type": "header",
+        "content": "Simple product list"
+      },
+      {
+        "type": "text",
+        "id": "mt_simple_heading",
+        "label": "Heading",
+        "default": "Our Products"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_simple_text",
+        "label": "Intro",
+        "default": "A small range of products, each one chosen and tested with care. Pick one below to see the details."
+      },
+      {
+        "type": "select",
+        "id": "mt_simple_source",
+        "label": "Lists",
+        "default": "collections",
+        "options": [
+          {
+            "value": "collections",
+            "label": "One list per collection (its title + products)"
+          },
+          {
+            "value": "all",
+            "label": "One list with every product"
+          }
+        ],
+        "info": "No collection with products yet = one list with every product. Collection order: Products → Collections."
+      },
+      {
+        "type": "number",
+        "id": "mt_simple_limit",
+        "label": "Products per list",
+        "default": 8
+      },
+      {
+        "type": "text",
+        "id": "mt_simple_all_label",
+        "label": "\"View all\" link (when a collection has more)",
+        "default": "View all"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_simple_help_show",
+        "label": "Show the help block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_simple_help_heading",
+        "label": "Help heading",
+        "default": "How can we help you?"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_simple_help_text",
+        "label": "Help text",
+        "default": "A question about an order, a size or a return? Write to us and we will get back to you within one business day."
+      },
+      {
+        "type": "text",
+        "id": "mt_simple_help_button",
+        "label": "Help button",
+        "default": "Contact us"
+      },
+      {
+        "type": "text",
+        "id": "mt_simple_help_link",
+        "label": "Help button link",
+        "default": "/pages/contact-us"
+      }
+    ]
+  },
+  {
     "name": "Maggie's – Home top",
     "settings": [
       {

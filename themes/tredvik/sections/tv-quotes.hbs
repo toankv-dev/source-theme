@@ -1,0 +1,22 @@
+{{!-- Tredvik: "What Our Customers Say". A white band with cards written by the store (not the product's reviews): a square
+      picture slot (empty keeps its frame), stars, title, text, name. Three columns on desktop; on phones the row scrolls
+      sideways inside its own box and bleeds to the screen edge. --}}
+<div class="tv-quotes">
+  <div class="b-wrap">
+    {{#if section.settings.heading}}<h2 class="tv-quotes__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.text}}<p class="tv-quotes__sub">{{section.settings.text}}</p>{{/if}}
+    <div class="tv-quotes__grid">
+      {{#each section.blocks}}
+      <article class="tv-quotes__card" {{{this.attributes}}}>
+        <div class="tv-quotes__media">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" loading="lazy" width="830" height="830">{{else if this.settings.default_image}}<img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy" width="830" height="830">{{else}}<div class="b-ph tv-quotes__ph">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
+        <div class="tv-quotes__body">
+          <div class="tv-quotes__stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
+          <h3 class="tv-quotes__title">{{this.settings.title}}</h3>
+          <p class="tv-quotes__text">{{this.settings.text}}</p>
+          <p class="tv-quotes__who">{{this.settings.name}}</p>
+        </div>
+      </article>
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -2,6 +2,24 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## Tredvik 2026.11.09.2 — the sample store's media as slot defaults (docs/SPEC-theme-from-link-images.md)
+### Added
+- `assets/images/tv-{sections,gallery,icons,brand,reviews,hidden}/`: all 45 pictures of the downloaded page as WebP (2.3 MB); the originals are in `_work/images/`.
+- `default_*` settings from base 2026.11.09.1, also in `tv-steps` and `tv-quotes`. The nine picture slots of the product page show the sample store's file until one is picked.
+### Changed
+- Logo fallback: `images/tv-brand/untitled_design_6.webp`. Sample product: the store's gallery and review photos, for the preview only.
+- Measured against the pop-up free capture: desktop 1.8 %, phone 15.1 % (the 44 px selects shift the page down 30 px; aligned blocks differ 0.9–5.1 %).
+
+## Tredvik 2026.11.09.1 — built from the product page link (theme-from-link)
+### Added
+- `sections/tv-steps` (numbered square pictures) and `sections/tv-quotes` (store-written customer cards, a sideways row on phones).
+- `snippets/tv-fonts.hbs`: Montserrat 400 / 700 / 700 italic + DM Serif Display, self-hosted; Theme settings → Tredvik (logo, footer lines).
+- Product blocks: benefit `icon` (line icons), rating `prefix` / `suffix`, image `ratio`, accordion `icon`; buy buttons `hide_options` (bundles only, same as Maggie's Tanks).
+- Reviews `show_more`: the list layout with a Show more button and Pictures First as the default sort.
+### Changed
+- Theme copies: `faq` (checkbox icon, all closed), `footer` (logo · Contact · Legal), `pay-icons` (the original's order, sized wallet marks), `header` (fonts, logo fallback), home cards load the first row eagerly.
+- `base.css` / `sections.css` compacted and without comments to stay inside the 120 KB CSS budget.
+
 ## 2026.11.06.6 — No customer review form (requested)
 ### Removed
 - The write-a-review form: `snippets/review-form.hbs`, every "Write a review" button (`[data-review-write]`),

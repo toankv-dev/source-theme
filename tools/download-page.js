@@ -15,7 +15,8 @@
  *
  * Writes <theme-dir>/_work/site/ (never packed; untrusted data, only ever opened in the browser):
  *   manifest.json     pages (name, url, title, counts, blocked viewports, offline check) and skipped files
- *   assets.json       original URL → { file, contentType, bytes, pages, area: header|main|footer, rendered: { w, h } };
+ *   assets.json       original URL → { file, contentType, bytes, pages, area: header|main|footer, rendered: { w, h }, section,
+ *                     hidden (its section shows in no viewport), gallery (product gallery) };
  *                     videos also: via (page / template / json / script / link / stream), stream (its .m3u8), poster
  * Videos: every <video> / <source>, the ones inside <template> (deferred media), in JSON / inline scripts and behind
  * links; HLS streams (also those a script plays from a blob:) → Shopify's MP4 of the best rendition, else the master +
@@ -151,6 +152,10 @@ function collectRefs() {
   const up = (e) => { if (e.parentElement) return e.parentElement; const r = e.getRootNode && e.getRootNode(); return (r && (r.host || tplHost.get(r))) || null; };
   const closestDeep = (el, sel) => { for (let e = el; e; e = up(e)) if (e.matches && e.matches(sel)) return e; return null; };
   const areaOf = (el) => (closestDeep(el, headerSel) ? 'header' : closestDeep(el, footerSel) ? 'footer' : 'main');
+  const sectionSel = '.shopify-section, [id^="shopify-section-"]';
+  const gallerySel = 'media-gallery, .thumbnail-list, [class*="product__media"], [class*="product-media"], [class*="product-gallery"], [class*="product__gallery"], [class*="product-single__media"], [data-product-gallery], [data-media-gallery]';
+  // "shopify-section-template--1__image_with_text_xn" → "image_with_text_xn"; no id → its first class, else its tag.
+  const sectionName = (s) => (s.id ? s.id.replace(/^shopify-section-/, '').replace(/^.*__/, '') : (String(s.getAttribute('class') || '').trim().split(/\s+/)[0] || s.tagName.toLowerCase()));
   const inTemplate = (el) => { for (let e = el; e; e = up(e)) { const r = e.getRootNode && e.getRootNode(); if (r && tplHost.has(r)) return true; } return false; };
   const VIDEO = /\.(mp4|webm|mov|m4v|ogv)(\?|#|$)/i;
   const add = (u, el, via) => {
@@ -163,10 +168,16 @@ function collectRefs() {
     if (!el) return;
     const r = el.getBoundingClientRect();
     const area = areaOf(el);
-    const m = out.media[a] || (out.media[a] = { area, w: 0, h: 0 });
+    const m = out.media[a] || (out.media[a] = { area, w: 0, h: 0, hidden: true });
     if (area === 'main') m.area = 'main';
     m.w = Math.max(m.w, Math.round(r.width));
     m.h = Math.max(m.h, Math.round(r.height));
+    // Where it is (tools/media-library.js groups by this): its section, whether that section shows, the product gallery.
+    const sec = closestDeep(el, sectionSel) || closestDeep(el, 'main > *, body > *');
+    if (sec && !m.section) m.section = sectionName(sec);
+    const box = sec && sec.getBoundingClientRect();
+    if (!box || (box.width >= 1 && box.height >= 1)) m.hidden = false;
+    if (closestDeep(el, gallerySel)) m.gallery = true;
   };
   all('img, picture source, video source, audio source, video, input[type="image" i]').forEach((el) => {
     const host = el.tagName === 'SOURCE' ? (el.parentElement || el) : el;
@@ -642,6 +653,9 @@ function counts() {
         if (!a) continue;
         a.area = a.area === 'main' || m.area === 'main' ? 'main' : (a.area || m.area);
         a.rendered = { w: Math.max((a.rendered && a.rendered.w) || 0, m.w), h: Math.max((a.rendered && a.rendered.h) || 0, m.h) };
+        a.section = a.section || m.section;
+        if (m.gallery) a.gallery = true;
+        a.hidden = a.hidden === undefined ? m.hidden : !!(a.hidden && m.hidden); // shown in either viewport = shown
       }
     }
     // Videos: where each was found, its poster, and for a stream's MP4 the place / size the stream had on the page.
@@ -657,7 +671,7 @@ function counts() {
       const p = posterOf[u] || (a.stream && posterOf[a.stream]);
       if (p) a.poster = p;
       const s = a.stream && assets[a.stream];
-      if (s && !a.area && s.area) { a.area = s.area; a.rendered = s.rendered; }
+      if (s && !a.area && s.area) { a.area = s.area; a.rendered = s.rendered; a.section = s.section; a.hidden = s.hidden; if (s.gallery) a.gallery = true; }
     }
     // Stream sources in the copy point at what was saved: a Shopify stream's MP4, else the local playlist.
     const streamTo = new Map(streams.map((s) => [s.stream, s.mp4 ? { src: M.localUrl(s.mp4), type: 'video/mp4' } : { src: M.localUrl(s.stream), type: null }]));

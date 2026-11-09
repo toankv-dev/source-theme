@@ -555,6 +555,15 @@
       });
     }
 
+    // Buy buttons → hide_options ("bundles only"): the pickers stay in the page because the pack unit rows read
+    // their names / values. Without unit rows nothing else would pick the variant, so they show again; with them
+    // the sticky bar's variant select goes too (the rows pick every unit).
+    var hiddenPickers = $$('[data-options-hidden]');
+    if (hiddenPickers.length) {
+      if (!unitRowsOn()) hiddenPickers.forEach(function (o) { o.hidden = false; });
+      else $$('[data-sticky-variant]').forEach(function (s) { (s.closest('.b-sticky__variant') || s).hidden = true; });
+    }
+
     $$('[data-opt]').forEach(function (group) {
       $$('[data-opt-value]', group).forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -964,7 +973,7 @@
     var pageSize = Number(root.getAttribute('data-page-size')) || 9, BATCH = 50, CAP = 300;
     var all = [], hasMore = true, loading = null, shown = pageSize;
     // layout "list": numbered pages instead of Show more.
-    var asList = root.getAttribute('data-layout') === 'list', pager = $('[data-reviews-pager]', root), page = 1;
+    var asList = root.getAttribute('data-layout') === 'list', useMore = root.getAttribute('data-more') === 'true', pager = $('[data-reviews-pager]', root), page = 1;
     var total = Number(root.getAttribute('data-total')) || 0;
 
     var load = function () {
@@ -1041,7 +1050,7 @@
     var paint = function () {
       var v = visible();
       list.innerHTML = '';
-      if (asList) {
+      if (asList && !useMore) {
         page = Math.min(page, pageCount(v));
         v.slice((page - 1) * pageSize, page * pageSize).forEach(function (r) { list.appendChild(reviewCard(r, true)); });
         clamp(list);
@@ -1050,7 +1059,7 @@
         paintPager(v);
         return;
       }
-      v.slice(0, shown).forEach(function (r) { list.appendChild(reviewCard(r)); });
+      v.slice(0, shown).forEach(function (r) { list.appendChild(reviewCard(r, asList)); });
       clamp(list);
       if (empty) empty.hidden = v.length > 0;
       if (more) more.hidden = !(v.length > shown || (hasMore && !filtering()));

@@ -1,0 +1,86 @@
+{
+  "name": "Customer quotes",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Thousands of customers already use the Tredvik Knee Sleeve every day because it is designed to provide targeted stabilization for the knee—rather than unnecessarily restricting movement or merely masking discomfort temporarily."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture (square)",
+          "info": "Recommended 830 × 830."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Finally walking more steadily"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "I’ve tried several knee braces, but many were either too stiff or kept slipping out of place. The Tredvik sleeve is much more comfortable to wear and finally gives my knee more stability when walking and climbing stairs."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Caroline S."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer quotes",
+      "category": "Product",
+      "description": "Cards with a picture, stars, a quote and a name.",
+      "blocks": [
+        {
+          "type": "quote"
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "title": "Better traction on stairs",
+            "text": "Stairs have always been uncomfortable for me because my knee often felt unstable. Since I started using the Tredvik sleeve, my knee feels much more stable. It hardly slips at all and remains comfortable to wear even during longer walks.",
+            "name": "Sarah K."
+          }
+        },
+        {
+          "type": "quote",
+          "settings": {
+            "title": "Comfortable for everyday use",
+            "text": "I wear the compression bandage often at work, and I never would have thought it would be this comfortable. The material feels flexible, and the compression is easy to adjust. I especially like that it’s barely noticeable under my clothes.",
+            "name": "David T."
+          }
+        }
+      ]
+    }
+  ]
+}

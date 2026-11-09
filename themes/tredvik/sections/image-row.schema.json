@@ -20,12 +20,14 @@
           "label": "Video",
           "info": "Upload an MP4 or WebM file in the media picker. Portrait 390 × 580 looks best. Images and YouTube/Vimeo links are not shown here."
         },
+        { "type": "text", "id": "default_video", "label": "Theme file while empty", "info": "Path inside assets/, e.g. videos/xx-sections/clip.mp4. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "poster",
           "label": "Poster image (optional)",
           "info": "Shown before the video starts."
         },
+        { "type": "text", "id": "default_poster", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "alt",
@@ -45,6 +47,7 @@
           "label": "Image or video",
           "info": "Kept so pages saved with the earlier image row still open and save. New slots: use Video."
         },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "alt",

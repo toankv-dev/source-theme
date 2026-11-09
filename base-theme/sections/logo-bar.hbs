@@ -8,15 +8,17 @@
       {{#each section.blocks}}
       {{#if this.settings.image}}
       <li class="b-press__item" {{{this.attributes}}}><img src="{{this.settings.image}}" alt="{{this.settings.name}}" loading="lazy"></li>
+      {{else if this.settings.default_image}}
+      <li class="b-press__item" {{{this.attributes}}}><img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="{{this.settings.name}}" loading="lazy"></li>
       {{else if @root.__designMode}}
       <li class="b-press__item b-press__item--empty" {{{this.attributes}}}><span>Upload a logo</span></li>
       {{/if}}
       {{/each}}
-      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{else if this.settings.default_image}}<li class="b-press__item"><img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
     </ul>
     <ul class="b-press__group" aria-hidden="true">
-      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
-      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{else if this.settings.default_image}}<li class="b-press__item"><img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
+      {{#each section.blocks}}{{#if this.settings.image}}<li class="b-press__item"><img src="{{this.settings.image}}" alt="" loading="lazy"></li>{{else if this.settings.default_image}}<li class="b-press__item"><img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy"></li>{{/if}}{{/each}}
     </ul>
   </div>
 </div>

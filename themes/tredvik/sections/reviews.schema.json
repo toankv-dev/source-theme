@@ -49,6 +49,12 @@
     {
       "type": "paragraph",
       "content": "Shows the product's real reviews, added in the admin. There is no review form on the storefront."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more",
+      "label": "List layout: \"Show more\" button instead of page numbers",
+      "default": false
     }
   ],
   "presets": [

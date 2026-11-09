@@ -8,6 +8,7 @@
       "label": "Image",
       "info": "Until an image is picked, an empty square frame shows here."
     },
+    { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
     {
       "type": "select",
       "id": "image_side",

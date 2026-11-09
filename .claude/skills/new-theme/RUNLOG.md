@@ -8,9 +8,9 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
   min / 75 MB, long home ≈ 3 min / 190 MB. Desktop bot checks often pass on the built-in retry; twice → phone only.
 - Long pages: `node tools/probe-sections.js http://127.0.0.1:8092/<name> --width 1440` (and 390) = every block's fonts,
   sizes, colours, edges in one table (save as `_work/probe-*.txt`).
-- Videos (2026-11-09): the download summary lists every video (`video …` lines, streams already turned into MP4s);
-  copy the shown sections' files unchanged into `assets/videos/<prefix>/` as slot defaults + poster WebP; keep a
-  `--refresh` for a bot-checked desktop: it no longer wipes the old viewport.
+- Media (2026-11-09): `node tools/media-library.js themes/<slug> --prefix xx` after the download = every picture (WebP) and video
+  in the theme + a `slots` list of paths for `default_image` (`.b-iwt__media img` needs an aspect-ratio: CLS). `--refresh` keeps a
+  bot-checked viewport's files.
 - Captures without a link: `capture.js` per page in the background (product `--no-images`); blocked sites: one try.
 - Tall screenshots: `node tools/crop.js <png> <scratch>/m --slices 2000`; one part: `tools/shot.js <url> - --eval` /
   `--selector`; compare: `tools/side-by-side.js`.
@@ -30,6 +30,11 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
   lists are numbered settings (`many()`), tables from a textarea go through a small page script.
 - Sample product: copy `tools/fixtures/product.json`, change title, price, options, packs; keep variants available
   (smoke picks the 2nd option). Product page with packs needs the `variant_picker` block.
+- Packs with unit rows, no visible pickers: `show_options: false` = no variant (no price, ATC off) → `hide_options`
+  (maggies-tanks, tredvik `_work/patch-tv-options.js`; 2 themes, due for the base). Pop-up in the live desktop shot: diff
+  against `_work/capture/<name>/desktop.png`, close-ups with `crop.js --x --y --w --h`.
+- Compare with one `--eval` list of block tops per pass. Base traps: comparison lines (`.b-compare__table:after`, `__head:before`,
+  `__side` border), `[open]:not(.is-closing) summary:after`. CSS: compact sections + base and strip comments ≈ 9 KB.
 - First smoke run right after a server start can fail on contact / AddToCart: re-run once before debugging.
 - Home-heavy originals: own `templates/index.hbs` + `<prefix>-home.css` + `_work/build-<prefix>-settings.js` (theme
   groups replaced idempotently, defaults also in schema); theme product card gets `data-product-card` for smoke.js.
@@ -46,3 +51,5 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
 - 2026-11-08 · maggies-tanks (theme-from-link, 1 link: home, 14 blocks; product = base + offer) · 0.5/3/8/0/20/5/6/1 ·
   build home (phone overflow, serif pin, CSS budget) → tools/probe-sections.js
 - 2026-11-08 · maggies-tanks product page (theme-from-link, 2nd link on a built theme; reuse the home blocks) · 0/1.5/4/25/0/15/10/2 · build product (one source with home: snippets + generated mt-story.css; CSS budget)
+- 2026-11-09 · tredvik (theme-from-link, 1 link: product, desktop pop-up; 2 new sections) · 0.5/1.5/10/12/0/20/5/1 · compare (block positions measured by hand, base decorations found late)
+- 2026-11-09 · tredvik again with its media (the rule of docs/SPEC-theme-from-link-images.md; tools + base first) · 0/2/1/4/0/6/3/1 · compare (phone: a pop-up in the live shot, `.b-buy` is `!important` in the base)

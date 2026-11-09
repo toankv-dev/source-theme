@@ -2,7 +2,7 @@
       a variant through config.variants, and hides the group a Pack cards block already controls.
       `custom_name` (set per value in the listing) is only the text shown; the value stays `label`. --}}
 {{#if @root.product.variants.length}}
-<div class="b-options" data-options>
+<div class="b-options" data-options{{#if hide_pickers}} hidden data-options-hidden{{/if}}>
   {{#each @root.product.variants}}
   <fieldset class="b-opt" data-opt="{{@index}}">
     <legend class="b-opt__legend">{{name}}: <span data-opt-current>{{#each options}}{{#if active}}{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}{{/if}}{{/each}}</span></legend>

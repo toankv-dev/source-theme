@@ -5,6 +5,11 @@
     {{#if section.settings.mobile_image}}<source media="(max-width: 749px)" srcset="{{section.settings.mobile_image}}">{{/if}}
     <img src="{{section.settings.image}}" alt="" loading="lazy">
   </picture>
+  {{else if section.settings.default_image}}
+  <picture class="b-banner-sec__media">
+    {{#if section.settings.mobile_image}}<source media="(max-width: 749px)" srcset="{{section.settings.mobile_image}}">{{else if section.settings.default_mobile_image}}<source media="(max-width: 749px)" srcset="{{@root.assets_url}}/{{section.settings.default_mobile_image}}">{{/if}}
+    <img src="{{@root.assets_url}}/{{section.settings.default_image}}" alt="" loading="lazy">
+  </picture>
   {{else}}<div class="b-banner-sec__media b-ph" aria-hidden="true"></div>{{/if}}
   <div class="b-wrap b-banner-sec__copy">
     {{#if section.settings.eyebrow}}<p class="b-banner-sec__eyebrow">{{section.settings.eyebrow}}</p>{{/if}}

@@ -1,0 +1,30 @@
+{{!-- Maggie's simple home (Theme settings → Maggie's – Home layout → Home page = Simple product list), like a plain
+      catalogue: heading + intro, the products in lists (one per collection, or one with every product), a help block.
+      Look: assets/css/mt-simple.css (templates/index.hbs links it instead of mt-home.css). The Maggie's landing stays
+      available on a product's own link (product template "Maggie's landing (ad page)"). --}}
+<main id="MainContent" class="b-main mt-simple">
+  <section class="b-wrap mt-simple__intro">
+    <h1 class="mt-simple__title">{{#if @root.settings.mt_simple_heading}}{{@root.settings.mt_simple_heading}}{{else}}{{@root.brand.name}}{{/if}}</h1>
+    {{#if @root.settings.mt_simple_text}}<p class="mt-simple__text">{{@root.settings.mt_simple_text}}</p>{{/if}}
+  </section>
+  {{#if (eq @root.settings.mt_simple_source "all")}}
+  {{> mt-simple-list items=@root.products title="" url="" eager=true}}
+  {{else}}
+  {{#if @root.collections.length}}
+  {{#each @root.collections}}
+  {{> mt-simple-list items=products title=title url=url eager=@first}}
+  {{/each}}
+  {{else}}
+  {{> mt-simple-list items=@root.products title="" url="" eager=true}}
+  {{/if}}
+  {{/if}}
+  {{#unless (eq @root.settings.mt_simple_help_show false)}}
+  <section class="mt-simple__help">
+    <div class="b-wrap mt-simple__help-inner">
+      <h2 class="mt-simple__h2">{{#if @root.settings.mt_simple_help_heading}}{{@root.settings.mt_simple_help_heading}}{{else}}How can we help you?{{/if}}</h2>
+      {{#if @root.settings.mt_simple_help_text}}<p class="mt-simple__help-text">{{@root.settings.mt_simple_help_text}}</p>{{/if}}
+      {{#if @root.settings.mt_simple_help_button}}<a class="b-btn mt-simple__btn" href="{{#if @root.settings.mt_simple_help_link}}{{@root.settings.mt_simple_help_link}}{{else}}/pages/contact-us{{/if}}">{{@root.settings.mt_simple_help_button}}</a>{{/if}}
+    </div>
+  </section>
+  {{/unless}}
+</main>

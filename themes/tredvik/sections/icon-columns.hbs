@@ -4,7 +4,7 @@
   <div class="b-icols__grid">
     {{#each section.blocks}}
     <div class="b-icol" {{{this.attributes}}}>
-      {{#if this.settings.image}}<img class="b-icol__img" src="{{this.settings.image}}" alt="" loading="lazy">{{else}}{{#if this.settings.emoji}}<span class="b-icol__emoji" aria-hidden="true">{{this.settings.emoji}}</span>{{/if}}{{/if}}
+      {{#if this.settings.image}}<img class="b-icol__img" src="{{this.settings.image}}" alt="" loading="lazy">{{else if this.settings.default_image}}<img class="b-icol__img" src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy">{{else}}{{#if this.settings.emoji}}<span class="b-icol__emoji" aria-hidden="true">{{this.settings.emoji}}</span>{{/if}}{{/if}}
       {{#if this.settings.title}}<h3 class="b-icol__title">{{this.settings.title}}</h3>{{/if}}
       {{#if this.settings.text}}<div class="b-icol__text b-rte">{{{applyTokens this.settings.text}}}</div>{{/if}}
     </div>

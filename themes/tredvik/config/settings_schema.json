@@ -6,7 +6,7 @@
         "type": "color",
         "id": "primary",
         "label": "Primary (buttons, accents)",
-        "default": "#14203b"
+        "default": "#000000"
       },
       {
         "type": "color",
@@ -18,49 +18,49 @@
         "type": "color",
         "id": "accent",
         "label": "Accent",
-        "default": "#14203b"
+        "default": "#000000"
       },
       {
         "type": "color",
         "id": "text_color",
         "label": "Body text",
-        "default": "#15171c"
+        "default": "#121212"
       },
       {
         "type": "color",
         "id": "page_bg",
         "label": "Page background",
-        "default": "#ffffff"
+        "default": "#f7f7f7"
       },
       {
         "type": "color",
         "id": "check",
         "label": "Check marks / success",
-        "default": "#1fa463"
+        "default": "#53af01"
       },
       {
         "type": "color",
         "id": "badge",
         "label": "Badges",
-        "default": "#3b9dea"
+        "default": "#000000"
       },
       {
         "type": "color",
         "id": "sale",
         "label": "Sale price / discount",
-        "default": "#e0392b"
+        "default": "#921a19"
       },
       {
         "type": "color",
         "id": "alert",
         "label": "Alerts",
-        "default": "#e0392b"
+        "default": "#921a19"
       },
       {
         "type": "color",
         "id": "star",
         "label": "Stars",
-        "default": "#17b26a"
+        "default": "#f3cc4b"
       },
       {
         "type": "header",
@@ -70,25 +70,25 @@
         "type": "color",
         "id": "header_bg",
         "label": "Header background",
-        "default": "#ffffff"
+        "default": "#f7f7f7"
       },
       {
         "type": "color",
         "id": "header_text",
         "label": "Header text",
-        "default": "#15171c"
+        "default": "#121212"
       },
       {
         "type": "color",
         "id": "footer_bg",
         "label": "Footer background",
-        "default": "#14203b"
+        "default": "#f7f7f7"
       },
       {
         "type": "color",
         "id": "footer_text",
         "label": "Footer text",
-        "default": "#ffffff"
+        "default": "#121212"
       },
       {
         "type": "header",
@@ -109,28 +109,28 @@
         "type": "text",
         "id": "font",
         "label": "Body font (Google Fonts name)",
-        "default": "Manrope",
+        "default": "Montserrat",
         "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
       },
       {
         "type": "text",
         "id": "font_heading",
         "label": "Heading font (optional)",
-        "default": "",
+        "default": "DM Serif Display",
         "info": "Empty = same as the body font."
       },
       {
         "type": "text",
         "id": "font_weights",
         "label": "Google Fonts weights",
-        "default": "400;500;600;700;800",
+        "default": "400;700",
         "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
       },
       {
         "type": "checkbox",
         "id": "load_google_fonts",
         "label": "Load the fonts from Google Fonts",
-        "default": true,
+        "default": false,
         "info": "Off when the theme ships its own font files (@font-face in skin.css)."
       },
       {
@@ -180,7 +180,7 @@
         "min": 960,
         "max": 1600,
         "step": 20,
-        "default": 1200,
+        "default": 1400,
         "unit": "px"
       }
     ]
@@ -214,19 +214,19 @@
         "type": "text",
         "id": "topbar_text",
         "label": "Messages (separate with ||)",
-        "default": "Free shipping on every order || 30-day money-back guarantee"
+        "default": "99-Day Money-Back Guarantee"
       },
       {
         "type": "checkbox",
         "id": "topbar_autoplay",
         "label": "Rotate automatically",
-        "default": true
+        "default": false
       },
       {
         "type": "color",
         "id": "topbar_bg",
         "label": "Background",
-        "default": "#14203b"
+        "default": "#000000"
       },
       {
         "type": "color",
@@ -272,7 +272,7 @@
         "type": "select",
         "id": "logo_position",
         "label": "Logo position (desktop)",
-        "default": "left",
+        "default": "center",
         "options": [
           {
             "value": "left",
@@ -291,20 +291,20 @@
         "min": 20,
         "max": 90,
         "step": 2,
-        "default": 40,
+        "default": 84,
         "unit": "px"
       },
       {
         "type": "checkbox",
         "id": "show_search",
         "label": "Show search",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
         "id": "show_account",
         "label": "Show orders link",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -334,7 +334,7 @@
         "type": "text",
         "id": "nav_shop_label",
         "label": "Menu: Shop label",
-        "default": "Shop"
+        "default": "Catalog"
       },
       {
         "type": "text",
@@ -346,7 +346,7 @@
         "type": "text",
         "id": "nav_track_label",
         "label": "Menu: Track label",
-        "default": "Track order"
+        "default": "Track Your Order"
       }
     ]
   },
@@ -363,7 +363,7 @@
         "type": "text",
         "id": "footer_links_title",
         "label": "Links column title",
-        "default": "Customer care"
+        "default": "Legal"
       },
       {
         "type": "checkbox",
@@ -381,7 +381,7 @@
         "type": "text",
         "id": "support_hours",
         "label": "Support hours",
-        "default": "Monday – Friday, 9 AM – 5 PM"
+        "default": "Our team is available Mon-Fri 9:00am-6:00pm"
       },
       {
         "type": "header",
@@ -391,7 +391,7 @@
         "type": "checkbox",
         "id": "footer_newsletter",
         "label": "Show newsletter in the footer",
-        "default": true
+        "default": false
       },
       {
         "type": "text",
@@ -472,7 +472,7 @@
         "type": "checkbox",
         "id": "pay_discover",
         "label": "Discover",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -490,7 +490,7 @@
         "type": "checkbox",
         "id": "pay_paypal",
         "label": "PayPal",
-        "default": true
+        "default": false
       }
     ]
   },
@@ -578,13 +578,13 @@
         "type": "text",
         "id": "cart_trust_1",
         "label": "Trust line 1",
-        "default": "30-day money-back guarantee"
+        "default": "99-Day Money-Back Guarantee"
       },
       {
         "type": "text",
         "id": "cart_trust_2",
         "label": "Trust line 2",
-        "default": "Secure, encrypted checkout"
+        "default": "Free Returns & Exchanges"
       },
       {
         "type": "text",
@@ -674,13 +674,13 @@
         "type": "text",
         "id": "track_heading",
         "label": "Order tracking heading",
-        "default": "Track your order"
+        "default": "Track Your Order"
       },
       {
         "type": "text",
         "id": "contact_form_heading",
         "label": "Contact form heading",
-        "default": "Send us a message"
+        "default": "Contact"
       },
       {
         "type": "text",
@@ -701,73 +701,73 @@
         "type": "text",
         "id": "faq_1_q",
         "label": "Question 1",
-        "default": "How long does shipping take?"
+        "default": "Is the Tredvik Knee Sleeve suitable for everyday use?"
       },
       {
         "type": "richtext",
         "id": "faq_1_a",
         "label": "Answer 1",
-        "default": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+        "default": "<p>Yes. The Tredvik Knee Sleeve was specifically designed for everyday activities such as walking, working, climbing stairs, or standing for long periods of time.</p>"
       },
       {
         "type": "text",
         "id": "faq_2_q",
         "label": "Question 2",
-        "default": "How can I track my order?"
+        "default": "Can I adjust the compression myself?"
       },
       {
         "type": "richtext",
         "id": "faq_2_a",
         "label": "Answer 2",
-        "default": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+        "default": "<p>Yes. With the built-in precision dial, you can adjust the compression to your liking—depending on how much support feels comfortable.</p>"
       },
       {
         "type": "text",
         "id": "faq_3_q",
         "label": "Question 3",
-        "default": "Can I change or cancel my order?"
+        "default": "Does the sleeve slip when you walk?"
       },
       {
         "type": "richtext",
         "id": "faq_3_a",
         "label": "Answer 3",
-        "default": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>"
+        "default": "<p>The Tredvik Knee Sleeve features a non-slip silicone grip designed to help reduce slipping and rolling.</p>"
       },
       {
         "type": "text",
         "id": "faq_4_q",
         "label": "Question 4",
-        "default": "What is your return and refund policy?"
+        "default": "Can I wear the sleeve under my clothes?"
       },
       {
         "type": "richtext",
         "id": "faq_4_a",
         "label": "Answer 4",
-        "default": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+        "default": "<p>Yes. Its flexible and compact design ensures that the bandage can be worn comfortably under most everyday clothing.</p>"
       },
       {
         "type": "text",
         "id": "faq_5_q",
         "label": "Question 5",
-        "default": "My item arrived damaged or isn't what I ordered"
+        "default": "Is the knee brace suitable for both knees?"
       },
       {
         "type": "richtext",
         "id": "faq_5_a",
         "label": "Answer 5",
-        "default": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>"
+        "default": "<p>Yes. The Tredvik Knee Sleeve can be worn on either the left or right knee.</p>"
       },
       {
         "type": "text",
         "id": "faq_6_q",
         "label": "Question 6",
-        "default": "How can I reach customer support?"
+        "default": "Is there a money-back guarantee if the Tredvik Knee Sleeve doesn't work?"
       },
       {
         "type": "richtext",
         "id": "faq_6_a",
         "label": "Answer 6",
-        "default": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>"
+        "default": "<p>We offer a satisfaction guarantee! If you are not satisfied with the Tredvik Knee Seeve, please contact us at {{CompanyEmail}} for a return and refund within 99 days.</p><p>The period begins upon receipt of the product. It is important to us to support you as best as possible in your daily life. Therefore, we recommend wearing the Tredvik Knee Sleeve daily for 2 weeks before making a final decision.</p>"
       }
     ]
   },
@@ -800,13 +800,13 @@
         "type": "text",
         "id": "home_hero_title",
         "label": "Heading",
-        "default": "Everyday essentials, made better"
+        "default": "Tredvik Knee Sleeve"
       },
       {
         "type": "textarea",
         "id": "home_hero_text",
         "label": "Text",
-        "default": "Free shipping and 30-day returns on every order."
+        "default": "Instant relief, all-day stability & adjustable support."
       },
       {
         "type": "text",
@@ -848,7 +848,7 @@
         "type": "textarea",
         "id": "home_promises",
         "label": "Promises strip (separate with ||, empty = hidden)",
-        "default": "Free shipping || 30-day returns || Secure checkout || 24/7 support"
+        "default": "99-Day Money-Back Guarantee || Free Returns & Exchanges || Trusted by over 10,000 Happy Knees"
       }
     ]
   },
@@ -865,7 +865,7 @@
         "type": "text",
         "id": "home_featured_heading",
         "label": "Featured heading",
-        "default": "Our product"
+        "default": "Tredvik Knee Sleeve"
       },
       {
         "type": "checkbox",
@@ -893,7 +893,7 @@
         "type": "text",
         "id": "home_products_heading",
         "label": "Grid heading",
-        "default": "Best sellers"
+        "default": "Catalog"
       },
       {
         "type": "number",
@@ -1005,19 +1005,19 @@
         "type": "text",
         "id": "home_reviews_heading",
         "label": "Reviews heading",
-        "default": "What our customers are saying"
+        "default": "What Our Customers Say"
       },
       {
         "type": "text",
         "id": "home_reviews_sub",
         "label": "Reviews subheading",
-        "default": "Real reviews from verified buyers."
+        "default": "Thousands of customers already use the Tredvik Knee Sleeve every day."
       },
       {
         "type": "checkbox",
         "id": "home_faq_show",
         "label": "Show the FAQ (Theme settings → FAQ)",
-        "default": false
+        "default": true
       },
       {
         "type": "checkbox",
@@ -1036,6 +1036,43 @@
         "id": "home_contact_heading",
         "label": "Contact heading",
         "default": "Contact us"
+      }
+    ]
+  },
+  {
+    "name": "Tredvik",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "tv_logo",
+        "label": "Logo (used when the store has no logo)",
+        "info": "Leave empty to use the theme logo. Transparent PNG / WebP, about 500 × 280."
+      },
+      {
+        "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "text",
+        "id": "tv_footer_contact_title",
+        "label": "Contact column title",
+        "default": "Contact"
+      },
+      {
+        "type": "text",
+        "id": "tv_footer_email_label",
+        "label": "Email label",
+        "default": "Email"
+      },
+      {
+        "type": "text",
+        "id": "tv_footer_company",
+        "label": "Company line",
+        "default": "Tredvik LLC"
       }
     ]
   }

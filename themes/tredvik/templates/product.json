@@ -1,185 +1,397 @@
 {
-  "name": "Default",
-  "description": "Gallery, rating, price, benefits, option pickers, buy buttons, trust icons, accordions; promises strip, image with text, icon columns, testimonials, FAQ, reviews and related products.",
+  "name": "Product",
+  "description": "Tredvik product page: gallery + buy box (packs with per-unit pickers), two picture + text blocks, numbered steps, comparison, customer quotes, FAQ, reviews.",
   "sections": {
     "main": {
       "type": "product",
-      "settings": {},
+      "settings": {
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "compact"
+      },
       "blocks": {
-        "rating": {
+        "rating_1": {
           "type": "rating",
-          "settings": {}
+          "settings": {
+            "prefix": "Excellent",
+            "suffix": "+ reviews",
+            "label": "reviews"
+          }
         },
-        "title": {
+        "title_2": {
           "type": "title",
           "settings": {}
         },
-        "price": {
-          "type": "price",
+        "divider_3": {
+          "type": "divider",
           "settings": {}
         },
-        "b1": {
+        "benefit_4": {
           "type": "benefit",
           "settings": {
-            "text": "Key benefit number one"
+            "icon": "walk",
+            "text": "Less Pain With Every Step"
           }
         },
-        "b2": {
+        "benefit_5": {
           "type": "benefit",
           "settings": {
-            "text": "Key benefit number two"
+            "icon": "stairs",
+            "text": "Feel Steady On Stairs & Uneven Ground"
           }
         },
-        "b3": {
+        "benefit_6": {
           "type": "benefit",
           "settings": {
-            "text": "Key benefit number three"
+            "icon": "move",
+            "text": "Move Freely, All Day Long"
           }
         },
-        "buy": {
+        "benefit_7": {
+          "type": "benefit",
+          "settings": {
+            "icon": "feather",
+            "text": "So Comfortable You Forget It's On"
+          }
+        },
+        "divider_8": {
+          "type": "divider",
+          "settings": {}
+        },
+        "variant_cards_9": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "card_style": "radio",
+            "selected": "2",
+            "unit_pickers": true,
+            "currency_code": false,
+            "unit_label": "",
+            "pack_color": "#000000",
+            "card_1_qty": 1,
+            "card_1_title": "1 Piece",
+            "card_1_sub": "",
+            "card_1_badge": "",
+            "card_2_qty": 2,
+            "card_2_title": "Buy 1 Get 1 Free",
+            "card_2_sub": "",
+            "card_2_badge": "BEST SELLER",
+            "card_3_qty": 0,
+            "card_3_title": "",
+            "card_4_qty": 0,
+            "card_4_title": "",
+            "card_5_qty": 0,
+            "card_6_qty": 0
+          }
+        },
+        "stock_10": {
+          "type": "stock",
+          "settings": {
+            "text": "High demand, only a few left in stock!"
+          }
+        },
+        "buy_buttons_11": {
           "type": "buy_buttons",
-          "settings": {}
-        },
-        "trust": {
-          "type": "trust_icons",
-          "settings": {}
-        },
-        "acc_desc": {
-          "type": "accordion",
           "settings": {
-            "title": "Description",
-            "source": "description",
-            "open": true
+            "label": "Add to cart",
+            "show_options": true,
+            "hide_options": true,
+            "show_qty": false,
+            "show_payments": true
           }
         },
-        "acc_ship": {
-          "type": "accordion",
+        "image_12": {
+          "type": "image",
           "settings": {
-            "title": "Shipping & delivery"
+            "alt": "Based On Clinical Research",
+            "ratio": "535/299",
+            "default_image": "images/tv-sections/image-1790134111161.webp"
           }
         },
-        "acc_ret": {
+        "accordion_13": {
           "type": "accordion",
           "settings": {
-            "title": "Returns & refunds",
-            "body": "<p>30 days to return it. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+            "title": "Free Returns & Exchanges",
+            "icon": "help",
+            "source": "custom",
+            "body": "<p>We believe in hassle-free shopping. That’s why Tredvik products come with <strong>free returns and exchanges.</strong></p><p>If they don’t fit just right or you’re not completely satisfied, simply return or exchange them at no cost to you. Enjoy comfort without any risk.</p>",
+            "open": false
           }
         }
       },
       "blockOrder": [
-        "rating",
-        "title",
-        "price",
-        "b1",
-        "b2",
-        "b3",
-        "buy",
-        "trust",
-        "acc_desc",
-        "acc_ship",
-        "acc_ret"
+        "rating_1",
+        "title_2",
+        "divider_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6",
+        "benefit_7",
+        "divider_8",
+        "variant_cards_9",
+        "stock_10",
+        "buy_buttons_11",
+        "image_12",
+        "accordion_13"
       ]
     },
-    "promises": {
-      "type": "marquee",
-      "settings": {},
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "Free shipping"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "30-day returns"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "Secure checkout"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "text": "24/7 support"
-          }
-        }
-      },
-      "blockOrder": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ]
-    },
-    "story": {
+    "iwt_1": {
       "type": "image-with-text",
-      "settings": {}
+      "settings": {
+        "default_image": "images/tv-sections/knee-pain.webp",
+        "image_side": "left",
+        "heading": "When every step becomes uncomfortable",
+        "body": "<p><strong>At first, it’s often just a slight tugging sensation.</strong></p><p>Then come the moments when you suddenly feel your knee more acutely:</p><ul><li>Standing up</li><li>On stairs</li><li>Sitting for a long time</li><li>Walking or standing for extended periods</li></ul><p>Many people automatically start to avoid certain movements. They walk more slowly, unconsciously take the weight off their knee, or feel unsteady during everyday movements.</p><p><strong>The problem is this: the more carefully you move, the more your knee becomes the focus of your daily life.</strong></p>",
+        "text_align": "left",
+        "content_position": "middle"
+      }
     },
-    "benefits": {
-      "type": "icon-columns",
-      "settings": {},
+    "iwt_2": {
+      "type": "image-with-text",
+      "settings": {
+        "default_image": "images/tv-sections/synovial-irritation-graphic.webp",
+        "image_side": "right",
+        "heading": "Maybe it's not just wear and tear",
+        "body": "<p>Many conventional explanations focus solely on “wear and tear.”</p><p>However, knee pain often feels more like pressure, irritation, or instability.</p><p><strong>One possible cause may be irritated synovial tissue</strong>—the sensitive lining of the knee joint. When this tissue becomes irritated, <strong>the knee may react more sensitively to stress.</strong></p><p>This can manifest as:</p><ul><li>A feeling of pressure around the kneecap</li><li>Stiffness after periods of rest</li><li>Uncertainty during movement</li><li>Sensitivity under stress</li></ul><p>Many conventional knee braces attempt to solve the problem with rigid stability. <strong>However, hard braces can be uncomfortable, slip out of place, or restrict natural movement.</strong></p><p>That is exactly why Tredvik Knee Sleeve was designed differently.</p>",
+        "text_align": "left",
+        "content_position": "middle"
+      }
+    },
+    "steps": {
+      "type": "tv-steps",
+      "settings": {
+        "heading": "Comfortable Support in 3 Steps"
+      },
       "blocks": {
-        "column_1": {
-          "type": "column",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "emoji": "🚚",
-            "title": "Free shipping",
-            "text": "<p>On every order.</p>"
+            "number": "1",
+            "title": "Pull Bandage Over Knee",
+            "text": "Pull the brace upward for a secure and comfortable fit.",
+            "default_image": "images/tv-sections/tvk-3steps-1.webp"
           }
         },
-        "column_2": {
-          "type": "column",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "emoji": "↩️",
-            "title": "30-day returns",
-            "text": "<p>No questions asked.</p>"
+            "number": "2",
+            "title": "Align Patella Gel Pad",
+            "text": "Place the gel pad centrally around the kneecap.",
+            "default_image": "images/tv-sections/tvk-3steps-2.webp"
           }
         },
-        "column_3": {
-          "type": "column",
+        "step_3": {
+          "type": "step",
           "settings": {
-            "emoji": "🔒",
-            "title": "Secure checkout",
-            "text": "<p>Encrypted payments.</p>"
+            "number": "3",
+            "title": "Adjust Compression",
+            "text": "Turn the dial to individually adjust support and stability.",
+            "default_image": "images/tv-sections/tvk-3steps-3.webp"
           }
         }
       },
       "blockOrder": [
-        "column_1",
-        "column_2",
-        "column_3"
+        "step_1",
+        "step_2",
+        "step_3"
       ]
     },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {}
+    "compare": {
+      "type": "comparison",
+      "settings": {
+        "heading": "TREDVIK KNEE SLEEVE VS. OTHER KNEE SLEEVE",
+        "ours_label": "TREDVIK",
+        "theirs_label": "Others"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Knee support",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Adjustable compression",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Patella gel pads",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Side stabilizers",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Non-slip grip",
+            "ours": true,
+            "theirs": false
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "A seat suitable for everyday use",
+            "ours": true,
+            "theirs": false
+          }
+        }
+      },
+      "blockOrder": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "quotes": {
+      "type": "tv-quotes",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "text": "Thousands of customers already use the Tredvik Knee Sleeve every day because it is designed to provide targeted stabilization for the knee—rather than unnecessarily restricting movement or merely masking discomfort temporarily."
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "title": "Finally walking more steadily",
+            "text": "I’ve tried several knee braces, but many were either too stiff or kept slipping out of place. The Tredvik sleeve is much more comfortable to wear and finally gives my knee more stability when walking and climbing stairs.",
+            "name": "Caroline S.",
+            "default_image": "images/tv-sections/tvk-reviews-1.webp"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "title": "Better traction on stairs",
+            "text": "Stairs have always been uncomfortable for me because my knee often felt unstable. Since I started using the Tredvik sleeve, my knee feels much more stable. It hardly slips at all and remains comfortable to wear even during longer walks.",
+            "name": "Sarah K.",
+            "default_image": "images/tv-sections/tvk-reviews-2.webp"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "title": "Comfortable for everyday use",
+            "text": "I wear the compression bandage often at work, and I never would have thought it would be this comfortable. The material feels flexible, and the compression is easy to adjust. I especially like that it’s barely noticeable under my clothes.",
+            "name": "David T.",
+            "default_image": "images/tv-sections/tvk-reviews-3.webp"
+          }
+        }
+      },
+      "blockOrder": [
+        "quote_1",
+        "quote_2",
+        "quote_3"
+      ]
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "settings": {
+        "heading": "Didn't find your answer? We will be happy to help you here",
+        "intro": ""
+      },
+      "blocks": {
+        "qa_1": {
+          "type": "qa",
+          "settings": {
+            "q": "Is the Tredvik Knee Sleeve suitable for everyday use?",
+            "a": "<p>Yes. The Tredvik Knee Sleeve was specifically designed for everyday activities such as walking, working, climbing stairs, or standing for long periods of time.</p>"
+          }
+        },
+        "qa_2": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I adjust the compression myself?",
+            "a": "<p>Yes. With the built-in precision dial, you can adjust the compression to your liking—depending on how much support feels comfortable.</p>"
+          }
+        },
+        "qa_3": {
+          "type": "qa",
+          "settings": {
+            "q": "Does the sleeve slip when you walk?",
+            "a": "<p>The Tredvik Knee Sleeve features a non-slip silicone grip designed to help reduce slipping and rolling.</p>"
+          }
+        },
+        "qa_4": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I wear the sleeve under my clothes?",
+            "a": "<p>Yes. Its flexible and compact design ensures that the bandage can be worn comfortably under most everyday clothing.</p>"
+          }
+        },
+        "qa_5": {
+          "type": "qa",
+          "settings": {
+            "q": "Is the knee brace suitable for both knees?",
+            "a": "<p>Yes. The Tredvik Knee Sleeve can be worn on either the left or right knee.</p>"
+          }
+        },
+        "qa_6": {
+          "type": "qa",
+          "settings": {
+            "q": "Can I wear the sleeve for longer?",
+            "a": "<p>The bandage was designed for everyday use. Many customers wear it while working, going for walks, or doing everyday activities.</p>"
+          }
+        },
+        "qa_7": {
+          "type": "qa",
+          "settings": {
+            "q": "Is there a money-back guarantee if the Tredvik Knee Sleeve doesn't work?",
+            "a": "<p>We offer a satisfaction guarantee! If you are not satisfied with the Tredvik Knee Seeve, please contact us at {{CompanyEmail}} for a return and refund within 99 days.</p><p>The period begins upon receipt of the product. It is important to us to support you as best as possible in your daily life. Therefore, we recommend wearing the Tredvik Knee Sleeve daily for 2 weeks before making a final decision.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "qa_1",
+        "qa_2",
+        "qa_3",
+        "qa_4",
+        "qa_5",
+        "qa_6",
+        "qa_7"
+      ]
     },
     "reviews": {
       "type": "reviews",
-      "settings": {}
-    },
-    "related": {
-      "type": "related",
-      "settings": {}
+      "settings": {
+        "heading": "Customer Reviews",
+        "layout": "list",
+        "page_size": 4,
+        "show_more": true,
+        "show_bottom": false
+      }
     }
   },
   "order": [
     "main",
-    "promises",
-    "story",
-    "benefits",
-    "testimonials",
+    "iwt_1",
+    "iwt_2",
+    "steps",
+    "compare",
+    "quotes",
     "faq",
-    "reviews",
-    "related"
+    "reviews"
   ]
 }

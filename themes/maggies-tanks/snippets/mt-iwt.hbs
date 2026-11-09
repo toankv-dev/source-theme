@@ -1,0 +1,38 @@
+{{!-- Maggie's: Picture + text (desktop) / old bra vs tank (phone) (Theme settings → Maggie's – Home middle). Home (templates/index.hbs) + product page (sections/mt-story.hbs, slot = true: an empty frame instead of the sample picture). --}}
+<section class="mt-sec mt-sec--warm mt-iwt">
+  <div class="b-wrap mt-iwt__grid">
+    <div class="mt-iwt__text mt-only-desktop">
+      <h2 class="mt-h2 mt-h2--left">{{@root.settings.mt_iwt_heading}}</h2>
+      <p class="mt-iwt__lead">{{@root.settings.mt_iwt_text}}</p>
+      <ul class="mt-iwt__list">
+        {{#if @root.settings.mt_iwt_li_1}}<li>{{@root.settings.mt_iwt_li_1}}</li>{{/if}}
+        {{#if @root.settings.mt_iwt_li_2}}<li>{{@root.settings.mt_iwt_li_2}}</li>{{/if}}
+        {{#if @root.settings.mt_iwt_li_3}}<li>{{@root.settings.mt_iwt_li_3}}</li>{{/if}}
+        {{#if @root.settings.mt_iwt_li_4}}<li>{{@root.settings.mt_iwt_li_4}}</li>{{/if}}
+      </ul>
+      {{#if @root.settings.mt_iwt_note}}<p class="mt-iwt__note">{{@root.settings.mt_iwt_note}}</p>{{/if}}
+    </div>
+    <div class="mt-iwt__text mt-only-phone">
+      <h2 class="mt-h2 mt-h2--left">{{@root.settings.mt_iwt_m_heading}}</h2>
+      <p class="mt-iwt__sub">{{@root.settings.mt_iwt_m_text}}</p>
+      <div class="mt-vs mt-vs--old">
+        <p class="mt-vs__title">{{@root.settings.mt_iwt_m_old}}</p>
+        <ul>
+          {{#if @root.settings.mt_iwt_m_old_1}}<li>{{@root.settings.mt_iwt_m_old_1}}</li>{{/if}}
+          {{#if @root.settings.mt_iwt_m_old_2}}<li>{{@root.settings.mt_iwt_m_old_2}}</li>{{/if}}
+          {{#if @root.settings.mt_iwt_m_old_3}}<li>{{@root.settings.mt_iwt_m_old_3}}</li>{{/if}}
+        </ul>
+      </div>
+      <div class="mt-vs mt-vs--new">
+        <p class="mt-vs__title">{{@root.settings.mt_iwt_m_new}}</p>
+        <ul>
+          {{#if @root.settings.mt_iwt_m_new_1}}<li>{{@root.settings.mt_iwt_m_new_1}}</li>{{/if}}
+          {{#if @root.settings.mt_iwt_m_new_2}}<li>{{@root.settings.mt_iwt_m_new_2}}</li>{{/if}}
+          {{#if @root.settings.mt_iwt_m_new_3}}<li>{{@root.settings.mt_iwt_m_new_3}}</li>{{/if}}
+        </ul>
+      </div>
+      {{#if @root.settings.mt_iwt_m_note}}<p class="mt-iwt__mnote">{{@root.settings.mt_iwt_m_note}}</p>{{/if}}
+    </div>
+    <div class="mt-iwt__media">{{#if slot}}{{#if @root.settings.mt_iwt_image}}<img src="{{@root.settings.mt_iwt_image}}" alt="" width="800" height="800" loading="lazy">{{else}}<div class="b-ph b-ph--iwt{{#unless @root.__designMode}} is-live-empty{{/unless}}">{{#if @root.__designMode}}Upload a square picture (1200 × 1200) in Theme settings → Maggie's – Home middle{{/if}}</div>{{/if}}{{else}}<img src="{{#if @root.settings.mt_iwt_image}}{{@root.settings.mt_iwt_image}}{{else}}{{@root.assets_url}}/images/mt/iwt.webp{{/if}}" alt="" width="800" height="800" loading="lazy">{{/if}}</div>
+  </div>
+</section>

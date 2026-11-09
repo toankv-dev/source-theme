@@ -2,9 +2,13 @@
    - [data-mt-compare]: builds the comparison table from its rows ("Feature|1|0|…" per line, 1 = ✓) and columns
      (data-cols "A|B|…", the last one highlighted), plus a score row when data-score is set;
    - [data-mt-track] + [data-mt-step]: the video reviews slider arrows;
-   - [data-mt-video]: plays the uploaded video of a card on tap (cards without a video keep their poster). */
+   - [data-mt-video]: plays the uploaded video of a card on tap (cards without a video keep their poster).
+   Also on product pages (sections/mt-story.hbs: the comparison and the video reviews blocks each include this file),
+   so it runs once per page whatever the number of <script> tags. */
 (function () {
   'use strict';
+  if (window.__mtHomeRan) return;
+  window.__mtHomeRan = true;
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var yes = '<span class="mt-yes" aria-label="Yes">✓</span>';
@@ -58,5 +62,12 @@
       card.classList.add('is-playing');
       video.play();
     });
+  });
+
+  // Product page (sections/mt-story.hbs): on the live store a card with no poster and no video is hidden
+  // (mt-landing.css); when that leaves no card, the whole video reviews block goes rather than a lone heading.
+  $$('.mt-story .mt-vr').forEach(function (sec) {
+    var shown = $$('.mt-vr__card', sec).some(function (c) { return c.offsetParent !== null; });
+    if (!shown) sec.hidden = true;
   });
 })();

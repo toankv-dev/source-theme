@@ -1,0 +1,19 @@
+{{!-- Maggie's: Video reviews (Theme settings → Maggie's – Home middle); mt-home.js plays them and runs the arrows. Home (templates/index.hbs) + product page (sections/mt-story.hbs). slot = true (product page): the cards show only the merchant's posters / videos. --}}
+<section class="mt-sec mt-vr">
+  <div class="b-wrap">
+    {{#if @root.settings.mt_vr_pill}}<p class="mt-vr__pill"><i aria-hidden="true"></i>{{@root.settings.mt_vr_pill}}</p>{{/if}}
+    <h2 class="mt-vr__heading">{{{@root.settings.mt_vr_heading}}}</h2>
+  </div>
+  <ul class="mt-vr__track" data-mt-track>
+    {{> mt-vr-card video=@root.settings.mt_vr_1_video poster=@root.settings.mt_vr_1_poster def="vr-1" defvideo="vr-1" title=@root.settings.mt_vr_1_title name=@root.settings.mt_vr_1_name slot=slot}}
+    {{> mt-vr-card video=@root.settings.mt_vr_2_video poster=@root.settings.mt_vr_2_poster def="vr-2" defvideo="vr-2" title=@root.settings.mt_vr_2_title name=@root.settings.mt_vr_2_name slot=slot}}
+    {{> mt-vr-card video=@root.settings.mt_vr_3_video poster=@root.settings.mt_vr_3_poster def="vr-3" defvideo="vr-3" title=@root.settings.mt_vr_3_title name=@root.settings.mt_vr_3_name slot=slot}}
+    {{> mt-vr-card video=@root.settings.mt_vr_4_video poster=@root.settings.mt_vr_4_poster def="vr-4" defvideo="vr-4" title=@root.settings.mt_vr_4_title name=@root.settings.mt_vr_4_name slot=slot}}
+    {{> mt-vr-card video=@root.settings.mt_vr_5_video poster=@root.settings.mt_vr_5_poster def="vr-5" defvideo="vr-5" title=@root.settings.mt_vr_5_title name=@root.settings.mt_vr_5_name slot=slot}}
+    {{> mt-vr-card video=@root.settings.mt_vr_6_video poster=@root.settings.mt_vr_6_poster def="vr-6" defvideo="vr-6" title=@root.settings.mt_vr_6_title name=@root.settings.mt_vr_6_name slot=slot}}
+  </ul>
+  <div class="mt-vr__arrows">
+    <button type="button" class="mt-arrow" data-mt-step="-1" aria-label="Previous videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="mt-arrow" data-mt-step="1" aria-label="Next videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
+</section>

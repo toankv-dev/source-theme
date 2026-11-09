@@ -35,11 +35,10 @@ Talk to the user in Vietnamese.
 - Use the original's real texts. **Fonts and colours must be the original's exact ones** — measured, never
   guessed or "close enough" (see *Fonts and colours* below). Theme-wide images (logo, icons, payment badges,
   home page banners) may be copied from `_work/capture/home/images` into `assets/images/` as settings
-  defaults. **The product page's images never go into the theme**: the main product's media comes from the
-  product data and every other image slot is left empty for the merchant to upload (see below). With a link
-  (theme-from-link) they are downloaded into `_work/site/` to look at and measure only — `pack.js` fails on a
-  copy; a direct `capture.js` of a product page uses `--no-images`. The page's screenshots are the only visual
-  reference.
+  defaults. **From screenshots, the product page's images never go into the theme**: the main product's media comes from the
+  product data and every other image slot is left empty for the merchant to upload (see below); a direct `capture.js` of a
+  product page uses `--no-images`, and the page's screenshots are the only visual reference. **From a store link, the theme-from-link
+  skill replaces this rule**: every picture and video goes into the theme through `tools/media-library.js` (docs/SPEC-theme-from-link-images.md).
 - **Videos of the original are the defaults of the theme's video slots — on every page, the product page too**
   (docs/SPEC-theme-from-link-videos.md). Each video of a section the original SHOWS (not hidden A/B variants) is
   copied **unchanged** (no re-encoding) from `_work/site/_m/…` into `assets/videos/<prefix>/<slot>.mp4`; its
@@ -60,7 +59,7 @@ Talk to the user in Vietnamese.
 - **Main product** (the `product` section: gallery, title, price, variants, packs, buy box, reviews) comes
   from the platform product data — never hard-code it. Set the sample (`sample/product.json`) to resemble the
   original so the preview compares fairly.
-- **Every image on the product page that does not come from the product data is an empty, dynamic slot** the
+- **From screenshots: every image on the product page that does not come from the product data is an empty, dynamic slot** the
   merchant uploads in the theme editor (video slots: same slots, but with the original's video as default — see
   the rule above). That covers base sections (image with text, feature rows,
   banners, video row, image / video slider, comparison / steps / spec images) **and** everything the theme

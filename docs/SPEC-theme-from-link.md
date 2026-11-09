@@ -1,7 +1,7 @@
 # Spec: skill `theme-from-link` — tạo theme từ đường link
 
 Trạng thái: **đã duyệt ngày 2026-11-08**, kèm các chỉnh sửa trong phần *Quyết định đã chốt*.
-Kế hoạch: [tasks/plan.md](tasks/plan.md).
+Sửa đổi: [SPEC-theme-from-link-videos.md](SPEC-theme-from-link-videos.md), [SPEC-theme-from-link-images.md](SPEC-theme-from-link-images.md).
 
 ## Mục tiêu
 
@@ -20,7 +20,7 @@ So với skill `new-theme` hiện có:
 | --- | --- | --- |
 | Đầu vào | link của từng trang, hoặc ảnh chụp | link của từng trang (ảnh chụp vẫn dùng `new-theme`) |
 | Lưu lại | DOM đã render, ảnh chụp, tối đa 160 ảnh, font đang dùng | thêm **toàn bộ CSS / JS / font / ảnh / video**, xem lại offline |
-| Ảnh / video trang SP | không tải | tải **hết** vào `_work/`; ảnh chỉ để tham khảo, video thành mặc định của ô video (từ 2026-11-09) |
+| Ảnh / video trang SP | không tải | tải **hết**; từ 2026-11-09 ảnh (WebP) và video vào theme, làm mặc định của các ô |
 | Đo và so sánh | trên site thật (có thể bị chặn bot, có thể đổi giữa chừng) | trên bản offline, ổn định, chạy lại không cần mạng |
 
 ### Quyết định đã chốt (2026-11-08)
@@ -28,8 +28,8 @@ So với skill `new-theme` hiện có:
 1. Phạm vi: **một link = một trang**. Không tự tìm hay tải trang nào khác. Trang nào không có link thì theme dùng
    bố cục của base, phủ màu và font của theme.
 2. Tải **tất cả ảnh và video** của trang, **không giới hạn** số file hay dung lượng (tool in tổng dung lượng).
-3. Ảnh trang SP: chỉ để tham khảo trong `_work/`; trong theme, các ô ảnh vẫn để trống. **Sửa ngày 2026-11-09**
-   ([docs/SPEC-theme-from-link-videos.md](docs/SPEC-theme-from-link-videos.md)): video của bản gốc, ở mọi trang kể cả
+3. ~~Ảnh trang SP: chỉ để tham khảo trong `_work/`; trong theme, các ô ảnh vẫn để trống.~~ **Thay bởi [SPEC-theme-from-link-images.md](SPEC-theme-from-link-images.md) (2026-11-09): mọi ảnh và video vào theme làm mặc định.** **Sửa ngày 2026-11-09**
+   ([SPEC-theme-from-link-videos.md](SPEC-theme-from-link-videos.md)): video của bản gốc, ở mọi trang kể cả
    trang SP, được chép nguyên file vào theme làm mặc định của ô video.
 4. Cách dựng: **dựng lại trên markup của base**. Mọi quy tắc của `new-theme` giữ nguyên, không bê nguyên CSS/HTML gốc.
 5. Cấu trúc theme: **cấu trúc chung của `themes/*`** (bản sao `base-theme`, khởi tạo bằng `tools/new-theme.js`).
@@ -132,7 +132,7 @@ tools/lib/mirror.js                      hàm thuần, chạy được cả tron
 tools/lib/page.js                        tách từ capture.js: UA, settle, clearPopups; capture.js giữ nguyên hành vi
 tools/test/*.test.js                     test bằng node:test
 tools/fixtures/site/                     site giả: trang product (CSS @import, url(), font, srcset, ảnh lazy, tab ẩn, video, iframe), trang home, trang 403
-tools/pack.js                            thêm kiểm tra: ảnh / video trong assets/ trùng byte với ảnh nội dung của trang SP đã tải → ERROR
+tools/pack.js                            in số ảnh / video của store mẫu còn trong theme (không chặn, xem SPEC-theme-from-link-images.md)
 tools/package.json                       thêm script "test"
 .claude/skills/new-theme/SKILL.md        đầu vào là link → theme-from-link; nới quy tắc ảnh SP (được nằm trong _work/site/, vẫn cấm vào theme)
 .claude/skills/new-theme/RUNLOG.md       ghi cả các lượt chạy theme-from-link (thêm cột thời gian download)

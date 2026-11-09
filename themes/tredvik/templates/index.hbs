@@ -6,6 +6,8 @@
 <html lang="en">
 <head>
 {{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/montserrat-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/montserrat-700.woff2">
 </head>
 <body class="b-body b-body--home">
 {{{trackingBody}}}
@@ -84,14 +86,14 @@
       <h2 class="b-h2 b-h2--left">{{title}}</h2>
       <a class="b-link" href="/collections/{{handle}}" data-local-domain>View all {{> icon-arrow}}</a>
     </div>
-    <div class="b-grid">{{#if @root.settings.home_products_limit}}{{#each (limit products @root.settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
+    <div class="b-grid">{{#if @root.settings.home_products_limit}}{{#each (limit products @root.settings.home_products_limit)}}{{> card-product above_fold=true}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product above_fold=true}}{{/each}}{{/if}}</div>
   </section>
   {{/if}}{{/each}}
   {{else}}
   {{#if products.length}}
   <section class="b-wrap b-home-grid" id="products">
     <h2 class="b-h2">{{#if settings.home_products_heading}}{{settings.home_products_heading}}{{else}}Best sellers{{/if}}</h2>
-    <div class="b-grid">{{#if settings.home_products_limit}}{{#each (limit products settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
+    <div class="b-grid">{{#if settings.home_products_limit}}{{#each (limit products settings.home_products_limit)}}{{> card-product above_fold=true}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product above_fold=true}}{{/each}}{{/if}}</div>
     <div class="b-center b-home-grid__more"><a class="b-btn b-btn--ghost" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>View all</a></div>
   </section>
   {{/if}}

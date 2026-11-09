@@ -7,11 +7,13 @@
       "id": "image",
       "label": "Image"
     },
+    { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
     {
       "type": "image_picker",
       "id": "mobile_image",
       "label": "Phone image (optional)"
     },
+    { "type": "text", "id": "default_mobile_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
     {
       "type": "text",
       "id": "eyebrow",

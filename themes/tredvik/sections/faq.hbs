@@ -6,8 +6,8 @@
     {{#if section.settings.intro}}<p class="b-faq__intro">{{section.settings.intro}}</p>{{/if}}
     {{#if section.blocks.length}}
     {{#each section.blocks}}
-    <details class="b-faq__item" {{{this.attributes}}}{{#if @first}} open{{/if}}>
-      <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{this.settings.q}}</span></summary>
+    <details class="b-faq__item" {{{this.attributes}}}>
+      <summary><span class="b-faq__icon tv-faq__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="m7.5 12.2 3.1 3.1 5.9-6.2"/></svg></span><span>{{this.settings.q}}</span></summary>
       <div class="b-rte">{{{applyTokens this.settings.a}}}</div>
     </details>
     {{/each}}

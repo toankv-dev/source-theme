@@ -6,11 +6,11 @@
     {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
   </div>
   <div class="b-spec__card">
-    <div class="b-spec__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="" loading="lazy">{{else}}<div class="b-ph b-ph--spec">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
+    <div class="b-spec__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="" loading="lazy">{{else if section.settings.default_image}}<img src="{{@root.assets_url}}/{{section.settings.default_image}}" alt="" loading="lazy">{{else}}<div class="b-ph b-ph--spec">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
     <ul class="b-spec__tiles">
       {{#each section.blocks}}
       <li class="b-spec__tile" {{{this.attributes}}}>
-        {{#if this.settings.icon}}<img src="{{this.settings.icon}}" alt="" loading="lazy">{{/if}}
+        {{#if this.settings.icon}}<img src="{{this.settings.icon}}" alt="" loading="lazy">{{else if this.settings.default_icon}}<img src="{{@root.assets_url}}/{{this.settings.default_icon}}" alt="" loading="lazy">{{/if}}
         <strong>{{this.settings.title}}</strong>
         <span>{{this.settings.text}}</span>
       </li>

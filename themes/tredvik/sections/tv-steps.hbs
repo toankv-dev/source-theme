@@ -1,0 +1,19 @@
+{{!-- Tredvik: "Comfortable Support in 3 Steps". A full-width band; each step block = a square picture slot (empty keeps
+      its frame, upload hint in the editor only), a numbered badge, a title and a text. --}}
+<div class="tv-steps">
+  <div class="b-wrap">
+    {{#if section.settings.heading}}<h2 class="tv-steps__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    <div class="tv-steps__grid">
+      {{#each section.blocks}}
+      <div class="tv-steps__item" {{{this.attributes}}}>
+        <div class="tv-steps__media">
+          {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.title}}" loading="lazy" width="700" height="700">{{else if this.settings.default_image}}<img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="{{this.settings.title}}" loading="lazy" width="700" height="700">{{else}}<div class="b-ph tv-steps__ph">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}
+          {{#if this.settings.number}}<span class="tv-steps__num" aria-hidden="true">{{this.settings.number}}</span>{{/if}}
+        </div>
+        <h3 class="tv-steps__title">{{this.settings.title}}</h3>
+        <p class="tv-steps__text">{{this.settings.text}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

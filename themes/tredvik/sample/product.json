@@ -1,47 +1,45 @@
 {
-  "title": "Band-Free Bra Tank",
-  "price": "$29.99",
-  "compare_at_price": "$39.99",
-  "off_pct": 25,
-  "meta_description": "Built-in bra tank with front support, no band.",
-  "description_html": "<p>Our first tank top with real built-in bra support. No wires, no extra layers, no lines showing through your clothes. One piece that does it all. Features <strong>removable padding </strong>for customisable coverage and <strong>a smoothing sculpt fit </strong>that defines your shape without squeezing. Works for everything from <strong>lounging to errands to the office</strong>. Comfortable enough to forget you're wearing it.</p><p><strong>Simple Care for High Performance:</strong></p><ul><li>Machine wash cold on a gentle cycle.</li><li>Use a machine wash bag to protect the garment.</li><li>Line dry only.</li><li>Do not bleach, iron, or dry clean.</li></ul>",
+  "title": "Tredvik Knee Sleeve | Instant Relief, All-Day Stability & Adjustable Support",
+  "price": "$39.99",
+  "off_pct": 0,
+  "meta_description": "Instant relief, all-day stability and adjustable support for your knee.",
+  "description_html": "<p>Less pain with every step. Feel steady on stairs and uneven ground. Move freely, all day long.</p>",
   "media": {
-    "main_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+    "main_image": "/assets/images/tv-gallery/image-1789953943186.webp",
     "gallery": [
       {
-        "url": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+        "url": "/assets/images/tv-gallery/image-1789953943186.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789953943186.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/hf_20260908_175707_a2126785-e82f-43b7-8675-8bf6a646c8a3.jpg",
+        "url": "/assets/images/tv-gallery/image-1789953984330.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789953984330.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/hf_20260817_185927_a3dd08e3-b150-4a0b-9490-0b46dc222505.jpg",
+        "url": "/assets/images/tv-gallery/image-1789949740664.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789949740664.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/hf_20260930_172838_245405c4-c1df-4d21-80d0-7079fbad2117.jpg",
+        "url": "/assets/images/tv-gallery/image-1789949791741.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789949791741.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/white.jpg",
+        "url": "/assets/images/tv-gallery/image-1789953121776.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789953121776.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/grey_tank.jpg",
+        "url": "/assets/images/tv-gallery/image-1789953344764.webp",
+        "thumb_url": "/assets/sample/thumbs/image-1789953344764.webp",
         "alt": ""
       },
       {
-        "url": "/assets/sample/rose_tank.jpg",
-        "alt": ""
-      },
-      {
-        "url": "/assets/sample/Rosewood.jpg",
-        "alt": ""
-      },
-      {
-        "url": "/assets/sample/Wine_Red.jpg",
+        "url": "/assets/images/tv-gallery/hf_20260928_124308_3be270cb-f23c-4408-9ef3-4c55e5ffb2ff.webp",
+        "thumb_url": "/assets/sample/thumbs/hf_20260928_124308_3be270cb-f23c-4408-9ef3-4c55e5ffb2ff.webp",
         "alt": ""
       }
     ]
@@ -56,19 +54,7 @@
           "active": true
         },
         {
-          "label": "Grey",
-          "active": false
-        },
-        {
-          "label": "Rose",
-          "active": false
-        },
-        {
-          "label": "Rosewood",
-          "active": false
-        },
-        {
-          "label": "Wine Red",
+          "label": "Black",
           "active": false
         }
       ]
@@ -78,23 +64,45 @@
       "displayType": "pills",
       "options": [
         {
-          "label": "S",
+          "label": "S (110-130lbs)",
           "active": true
         },
         {
-          "label": "M",
+          "label": "M (131-165lbs)",
           "active": false
         },
         {
-          "label": "L",
+          "label": "L (166-215lbs)",
           "active": false
         },
         {
-          "label": "XL",
+          "label": "XL (216-285lbs)",
           "active": false
         },
         {
-          "label": "XXL",
+          "label": "2XL (286-330lbs)",
+          "active": false
+        },
+        {
+          "label": "3XL (331-370lbs)",
+          "active": false
+        },
+        {
+          "label": "4XL (371lbs+)",
+          "active": false
+        }
+      ]
+    },
+    {
+      "name": "Side",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "Left",
+          "active": true
+        },
+        {
+          "label": "Right",
           "active": false
         }
       ]
@@ -102,358 +110,464 @@
   ],
   "variants_list": [
     {
-      "id": "v-white-m",
-      "title": "White / M",
+      "id": "v-white-s-110-130lbs-left",
+      "title": "White / S (110-130lbs) / Left",
       "option_values": [
         "White",
-        "M"
+        "S (110-130lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-white-l",
-      "title": "White / L",
+      "id": "v-white-s-110-130lbs-right",
+      "title": "White / S (110-130lbs) / Right",
       "option_values": [
         "White",
-        "L"
+        "S (110-130lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-white-xl",
-      "title": "White / XL",
+      "id": "v-white-m-131-165lbs-left",
+      "title": "White / M (131-165lbs) / Left",
       "option_values": [
         "White",
-        "XL"
+        "M (131-165lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-white-xxl",
-      "title": "White / XXL",
+      "id": "v-white-m-131-165lbs-right",
+      "title": "White / M (131-165lbs) / Right",
       "option_values": [
         "White",
-        "XXL"
+        "M (131-165lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-grey-s",
-      "title": "Grey / S",
+      "id": "v-white-l-166-215lbs-left",
+      "title": "White / L (166-215lbs) / Left",
       "option_values": [
-        "Grey",
-        "S"
+        "White",
+        "L (166-215lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-grey-m",
-      "title": "Grey / M",
+      "id": "v-white-l-166-215lbs-right",
+      "title": "White / L (166-215lbs) / Right",
       "option_values": [
-        "Grey",
-        "M"
+        "White",
+        "L (166-215lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-grey-l",
-      "title": "Grey / L",
+      "id": "v-white-xl-216-285lbs-left",
+      "title": "White / XL (216-285lbs) / Left",
       "option_values": [
-        "Grey",
-        "L"
+        "White",
+        "XL (216-285lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-grey-xl",
-      "title": "Grey / XL",
+      "id": "v-white-xl-216-285lbs-right",
+      "title": "White / XL (216-285lbs) / Right",
       "option_values": [
-        "Grey",
-        "XL"
+        "White",
+        "XL (216-285lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-grey-xxl",
-      "title": "Grey / XXL",
+      "id": "v-white-2xl-286-330lbs-left",
+      "title": "White / 2XL (286-330lbs) / Left",
       "option_values": [
-        "Grey",
-        "XXL"
+        "White",
+        "2XL (286-330lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rose-s",
-      "title": "Rose / S",
+      "id": "v-white-2xl-286-330lbs-right",
+      "title": "White / 2XL (286-330lbs) / Right",
       "option_values": [
-        "Rose",
-        "S"
+        "White",
+        "2XL (286-330lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rose-m",
-      "title": "Rose / M",
+      "id": "v-white-3xl-331-370lbs-left",
+      "title": "White / 3XL (331-370lbs) / Left",
       "option_values": [
-        "Rose",
-        "M"
+        "White",
+        "3XL (331-370lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rose-l",
-      "title": "Rose / L",
+      "id": "v-white-3xl-331-370lbs-right",
+      "title": "White / 3XL (331-370lbs) / Right",
       "option_values": [
-        "Rose",
-        "L"
+        "White",
+        "3XL (331-370lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rose-xl",
-      "title": "Rose / XL",
+      "id": "v-white-4xl-371lbs-left",
+      "title": "White / 4XL (371lbs+) / Left",
       "option_values": [
-        "Rose",
-        "XL"
+        "White",
+        "4XL (371lbs+)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rose-xxl",
-      "title": "Rose / XXL",
+      "id": "v-white-4xl-371lbs-right",
+      "title": "White / 4XL (371lbs+) / Right",
       "option_values": [
-        "Rose",
-        "XXL"
+        "White",
+        "4XL (371lbs+)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rosewood-s",
-      "title": "Rosewood / S",
+      "id": "v-black-s-110-130lbs-left",
+      "title": "Black / S (110-130lbs) / Left",
       "option_values": [
-        "Rosewood",
-        "S"
+        "Black",
+        "S (110-130lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rosewood-m",
-      "title": "Rosewood / M",
+      "id": "v-black-s-110-130lbs-right",
+      "title": "Black / S (110-130lbs) / Right",
       "option_values": [
-        "Rosewood",
-        "M"
+        "Black",
+        "S (110-130lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rosewood-l",
-      "title": "Rosewood / L",
+      "id": "v-black-m-131-165lbs-left",
+      "title": "Black / M (131-165lbs) / Left",
       "option_values": [
-        "Rosewood",
-        "L"
+        "Black",
+        "M (131-165lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rosewood-xl",
-      "title": "Rosewood / XL",
+      "id": "v-black-m-131-165lbs-right",
+      "title": "Black / M (131-165lbs) / Right",
       "option_values": [
-        "Rosewood",
-        "XL"
+        "Black",
+        "M (131-165lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-rosewood-xxl",
-      "title": "Rosewood / XXL",
+      "id": "v-black-l-166-215lbs-left",
+      "title": "Black / L (166-215lbs) / Left",
       "option_values": [
-        "Rosewood",
-        "XXL"
+        "Black",
+        "L (166-215lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-wine-red-s",
-      "title": "Wine Red / S",
+      "id": "v-black-l-166-215lbs-right",
+      "title": "Black / L (166-215lbs) / Right",
       "option_values": [
-        "Wine Red",
-        "S"
+        "Black",
+        "L (166-215lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-wine-red-m",
-      "title": "Wine Red / M",
+      "id": "v-black-xl-216-285lbs-left",
+      "title": "Black / XL (216-285lbs) / Left",
       "option_values": [
-        "Wine Red",
-        "M"
+        "Black",
+        "XL (216-285lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-wine-red-l",
-      "title": "Wine Red / L",
+      "id": "v-black-xl-216-285lbs-right",
+      "title": "Black / XL (216-285lbs) / Right",
       "option_values": [
-        "Wine Red",
-        "L"
+        "Black",
+        "XL (216-285lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-wine-red-xl",
-      "title": "Wine Red / XL",
+      "id": "v-black-2xl-286-330lbs-left",
+      "title": "Black / 2XL (286-330lbs) / Left",
       "option_values": [
-        "Wine Red",
-        "XL"
+        "Black",
+        "2XL (286-330lbs)",
+        "Left"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     },
     {
-      "id": "v-wine-red-xxl",
-      "title": "Wine Red / XXL",
+      "id": "v-black-2xl-286-330lbs-right",
+      "title": "Black / 2XL (286-330lbs) / Right",
       "option_values": [
-        "Wine Red",
-        "XXL"
+        "Black",
+        "2XL (286-330lbs)",
+        "Right"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-3xl-331-370lbs-left",
+      "title": "Black / 3XL (331-370lbs) / Left",
+      "option_values": [
+        "Black",
+        "3XL (331-370lbs)",
+        "Left"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-3xl-331-370lbs-right",
+      "title": "Black / 3XL (331-370lbs) / Right",
+      "option_values": [
+        "Black",
+        "3XL (331-370lbs)",
+        "Right"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-4xl-371lbs-left",
+      "title": "Black / 4XL (371lbs+) / Left",
+      "option_values": [
+        "Black",
+        "4XL (371lbs+)",
+        "Left"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
+      "available": true
+    },
+    {
+      "id": "v-black-4xl-371lbs-right",
+      "title": "Black / 4XL (371lbs+) / Right",
+      "option_values": [
+        "Black",
+        "4XL (371lbs+)",
+        "Right"
+      ],
+      "price": "$39.99",
+      "compare_at_price": "",
+      "featured_image": "/assets/images/tv-gallery/image-1789953943186.webp",
       "available": true
     }
   ],
   "reviews": {
     "summary": {
       "average_rating": 4.8,
-      "total_count": 6
+      "total_count": 487
     },
     "items": [
       {
-        "name": "Janet Mercer",
+        "name": "Ryan Z.",
         "rating": 5,
-        "title": "I used to stand at my dresser every morn",
-        "content": "I used to stand at my dresser every morning trying to figure out which bra worked with what I was wearing. The padded one, the wireless one, the one that does not show under white. Now I grab a tank and I am dressed. That is the whole decision. I have not opened my bra drawer in months and I do not miss it for a second.",
-        "date": "Oct 3, 2026",
-        "verified": true
+        "title": "",
+        "content": "I use it when I know I will be on my feet all afternoon. The side stabilizers make it feel more substantial than the basic sleeves I have owned, but it does not feel like a rigid orthopedic brace. The sleeve feels supportive without being rigid.",
+        "date": "09/15/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153927__1790153924210-capturedecran2026-09-23a15__origin.webp"
       },
       {
-        "name": "Sarah Hartley",
+        "name": "Daniel V.",
         "rating": 5,
-        "title": "For my whole adult life the first thing ",
-        "content": "For my whole adult life the first thing I did walking in the door was reach back and unhook my bra. Every single day. I have been wearing this tank for two months and the other night I realized I get into bed and there is nothing to take off. I am already comfortable. I never thought I would say that about anything I wear all day.",
-        "date": "Oct 4, 2026",
-        "image": "/assets/sample/grey_tank.jpg",
-        "verified": true
+        "title": "",
+        "content": "I like that the design combines compression with side support instead of relying on a single elastic layer. I wear it around the house when my knee needs extra support.",
+        "date": "09/14/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153946__1790153942576-capturedecran2026-09-23a15__origin.webp"
       },
       {
-        "name": "Linda White",
+        "name": "Richard X.",
         "rating": 5,
-        "title": "I genuinely live in this thing now. I pu",
-        "content": "I genuinely live in this thing now. I put one on first thing in the morning and I have it on all day around the house, cooking, cleaning, out to the mailbox, on the couch at night. It used to be that the minute I got home I would change into something soft. Now there is nothing to change into and nothing to take off. I wear it from the time I get up until I go to sleep. I bought one in every color so I always have a clean one in the drawer.",
-        "date": "Oct 5, 2026",
-        "verified": true
+        "title": "",
+        "content": "The non-slip grip is a small detail that I appreciate because constantly repositioning a knee sleeve gets annoying. It is comfortable enough for several hours.",
+        "date": "09/13/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153958__1790153955231-capturedecran2026-09-23a15__origin.webp"
       },
       {
-        "name": "Stephanie Foren",
+        "name": "Joseph K.",
         "rating": 5,
-        "title": "I've hated bras my entire life. Underwir",
-        "content": "I've hated bras my entire life. Underwire, tight bands, bra lines — I've dealt with it all for decades. A friend recommended this tank and honestly I was skeptical. But I ordered three  since it has fit guarantee. Best thing I've bought in years.",
-        "date": "Oct 6, 2026",
-        "verified": true
+        "title": "",
+        "content": "I bought it for everyday errands rather than sports. I wanted support without feeling like my knee was locked in place. This still lets me move naturally while giving me a more secure feeling. It is less bulky than I expected.",
+        "date": "09/09/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153998__1790153995374-capturedecran2026-09-23a15__origin.webp"
       },
       {
-        "name": "Erin Elwell",
+        "name": "More Ryan Z.",
         "rating": 5,
-        "title": "Best day ever with my grandkids 💕 So com",
-        "content": "Best day ever with my grandkids 💕 So comfortable I can play on the floor all day without my bra killing me. These tanks are a GAME CHANGER! 78 and finally found something that actually supports me!",
-        "date": "Oct 7, 2026",
-        "image": "/assets/sample/rose_tank.jpg",
-        "verified": true
+        "title": "",
+        "content": "I use it when I know I will be on my feet all afternoon. The side stabilizers make it feel more substantial than the basic sleeves I have owned, but it does not feel like a rigid orthopedic brace. The sleeve feels supportive without being rigid.",
+        "date": "09/01/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153927__1790153924210-capturedecran2026-09-23a15__origin.webp"
+      },
+      {
+        "name": "More Daniel V.",
+        "rating": 5,
+        "title": "",
+        "content": "I like that the design combines compression with side support instead of relying on a single elastic layer. I wear it around the house when my knee needs extra support.",
+        "date": "09/01/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153946__1790153942576-capturedecran2026-09-23a15__origin.webp"
+      },
+      {
+        "name": "More Richard X.",
+        "rating": 5,
+        "title": "",
+        "content": "The non-slip grip is a small detail that I appreciate because constantly repositioning a knee sleeve gets annoying. It is comfortable enough for several hours.",
+        "date": "09/01/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153958__1790153955231-capturedecran2026-09-23a15__origin.webp"
+      },
+      {
+        "name": "More Joseph K.",
+        "rating": 5,
+        "title": "",
+        "content": "I bought it for everyday errands rather than sports. I wanted support without feeling like my knee was locked in place. This still lets me move naturally while giving me a more secure feeling. It is less bulky than I expected.",
+        "date": "09/01/2026",
+        "verified": false,
+        "image": "/assets/images/tv-reviews/1790153998__1790153995374-capturedecran2026-09-23a15__origin.webp"
       }
     ]
   },
   "home_products": [
     {
       "id": "p1",
-      "handle": "band-free-bra-tank",
+      "handle": "tredvik-knee-sleeve",
       "url": "/product",
       "imageUrl": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "imageWidth": 1000,
       "imageHeight": 1000,
-      "title": "Band-Free Bra Tank",
-      "sellingPrice": 29.99,
-      "compareAtPrice": 39.99,
-      "offPct": 25,
+      "title": "Tredvik Knee Sleeve | Instant Relief, All-Day Stability & Adjustable Support",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 0,
+      "offPct": 0,
       "rating": 4.8,
-      "reviewCount": 6,
+      "reviewCount": 487,
       "description": ""
     },
     {

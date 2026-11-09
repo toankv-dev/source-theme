@@ -4,7 +4,10 @@
       document. Pickers / buy row are wired by ui.js through data-* attributes only. --}}
 {{!-- style "maggies" (template "Maggie's product page"): the home product block's look — mt-story.css (generated from
       mt-home.css) + the .mt-home variables, #mt-product for the story blocks' "Buy now" links. --}}
-{{#if (eq section.settings.style "maggies")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/mt-story.css">{{/if}}
+{{!-- "Has the landing blocks" (template "Maggie's landing"): mt-landing.css = the look of the home's hero, ticker,
+      picture + text, why, list and video reviews blocks (sections/mt-story.hbs), linked once here — never by each block.
+      Same line as mt-story.css on purpose: no blank line in pages without it. --}}
+{{#if (eq section.settings.style "maggies")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/mt-story.css">{{/if}}{{#if section.settings.landing}}<link rel="stylesheet" href="{{@root.assets_url}}/css/mt-landing.css">{{/if}}
 <div class="b-wrap b-pdp b-pdp--gallery-{{#if section.settings.gallery_side}}{{section.settings.gallery_side}}{{else}}left{{/if}}{{#if (eq section.settings.style "maggies")}} b-pdp--mt mt-home{{/if}}" data-pdp>
   <div class="b-gallery b-gallery--{{#if section.settings.gallery_layout}}{{section.settings.gallery_layout}}{{else}}thumbs{{/if}}" data-gallery>
     <div class="b-gallery__main">

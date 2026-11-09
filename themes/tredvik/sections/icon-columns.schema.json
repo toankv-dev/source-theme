@@ -30,6 +30,7 @@
           "id": "image",
           "label": "Icon / image"
         },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "emoji",

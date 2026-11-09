@@ -287,6 +287,17 @@
     "mt_sf_note_bust": "Sized up for your {bust} bust, which needs more room than your height and weight alone suggest.",
     "mt_sf_pick": "Choose {size} below when you pick your colors.",
     "mt_sf_missing": "Choose your height and type your weight first.",
-    "mt_sf_between": "Between two sizes? <strong>Go one size up</strong> for a more comfortable fit."
+    "mt_sf_between": "Between two sizes? <strong>Go one size up</strong> for a more comfortable fit.",
+    "mt_home_layout": "landing",
+    "mt_simple_heading": "Our Products",
+    "mt_simple_text": "A small range of products, each one chosen and tested with care. Pick one below to see the details.",
+    "mt_simple_source": "collections",
+    "mt_simple_limit": 8,
+    "mt_simple_all_label": "View all",
+    "mt_simple_help_show": true,
+    "mt_simple_help_heading": "How can we help you?",
+    "mt_simple_help_text": "A question about an order, a size or a return? Write to us and we will get back to you within one business day.",
+    "mt_simple_help_button": "Contact us",
+    "mt_simple_help_link": "/pages/contact-us"
   }
 }

@@ -1,0 +1,177 @@
+{
+  "name": "Maggie's landing (ad page)",
+  "description": "The home page on the product's own link, for ads: hero, ticker, before & after, picture + text, why, list, the buy box, video reviews, what we changed, routine, comparison, comfort, FAQ, last call (texts and pictures: Theme settings, shared with the home page).",
+  "sections": {
+    "hero": {
+      "type": "mt-story",
+      "settings": {
+        "part": "hero"
+      }
+    },
+    "ticker": {
+      "type": "mt-story",
+      "settings": {
+        "part": "ticker"
+      }
+    },
+    "ba": {
+      "type": "mt-story",
+      "settings": {
+        "part": "before_after",
+        "cta": true
+      }
+    },
+    "iwt": {
+      "type": "mt-story",
+      "settings": {
+        "part": "iwt"
+      }
+    },
+    "why": {
+      "type": "mt-story",
+      "settings": {
+        "part": "why"
+      }
+    },
+    "list": {
+      "type": "mt-story",
+      "settings": {
+        "part": "list"
+      }
+    },
+    "main": {
+      "type": "product",
+      "settings": {
+        "style": "maggies",
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "compact",
+        "gallery_caption": "",
+        "landing": true
+      },
+      "blocks": {
+        "mt_intro_1": {
+          "type": "mt_intro",
+          "settings": {}
+        },
+        "size_chart_2": {
+          "type": "size_chart",
+          "settings": {
+            "mode": "finder",
+            "label": "",
+            "title": "Size Chart",
+            "option_name": ""
+          }
+        },
+        "variant_cards_3": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "card_style": "tiers",
+            "selected": "2",
+            "unit_pickers": true,
+            "currency_code": true,
+            "unit_label": "",
+            "pack_color": "",
+            "card_1_qty": 1,
+            "card_1_title": "Buy 1",
+            "card_1_sub": "Free Shipping",
+            "card_1_badge": "",
+            "card_2_qty": 3,
+            "card_2_title": "Buy 2 Get 1 Free",
+            "card_2_sub": "Includes 3 Tanks + Free Shipping",
+            "card_2_badge": "Most Popular",
+            "card_3_qty": 5,
+            "card_3_title": "Buy 3 Get 2 Free",
+            "card_3_sub": "Includes 5 Tanks + Free Shipping",
+            "card_3_badge": "",
+            "card_4_qty": 0,
+            "card_5_qty": 0,
+            "card_6_qty": 0
+          }
+        },
+        "buy_buttons_4": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Add to cart",
+            "show_options": true,
+            "hide_options": true,
+            "show_qty": false,
+            "show_payments": false
+          }
+        },
+        "mt_trust_5": {
+          "type": "mt_trust",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "mt_intro_1",
+        "size_chart_2",
+        "variant_cards_3",
+        "buy_buttons_4",
+        "mt_trust_5"
+      ]
+    },
+    "vr": {
+      "type": "mt-story",
+      "settings": {
+        "part": "vr"
+      }
+    },
+    "changed": {
+      "type": "mt-story",
+      "settings": {
+        "part": "changed"
+      }
+    },
+    "routine": {
+      "type": "mt-story",
+      "settings": {
+        "part": "routine"
+      }
+    },
+    "compare": {
+      "type": "mt-story",
+      "settings": {
+        "part": "compare"
+      }
+    },
+    "comfort": {
+      "type": "mt-story",
+      "settings": {
+        "part": "comfort"
+      }
+    },
+    "faq": {
+      "type": "mt-story",
+      "settings": {
+        "part": "faq"
+      }
+    },
+    "last": {
+      "type": "mt-story",
+      "settings": {
+        "part": "last"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "ba",
+    "iwt",
+    "why",
+    "list",
+    "main",
+    "vr",
+    "changed",
+    "routine",
+    "compare",
+    "comfort",
+    "faq",
+    "last"
+  ]
+}

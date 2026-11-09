@@ -2,6 +2,12 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## 2026.11.09.1 — Default files for media slots (requested, docs/SPEC-theme-from-link-images.md)
+### Added
+- `default_<slot id>` text setting next to all 32 image / video pickers (comparison, feature-rows, icon-columns, image-banner,
+  image-row, image-with-text, logo-bar, product, spec-card, steps): a path inside `assets/`, shown while the slot is empty. A
+  picked file wins. Empty = the same HTML as before (placeholder frames), so existing themes do not change.
+
 ## 2026.11.06.6 — No customer review form (requested)
 ### Removed
 - The write-a-review form: `snippets/review-form.hbs`, every "Write a review" button (`[data-review-write]`),

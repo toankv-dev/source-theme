@@ -1,0 +1,13 @@
+{{!-- Maggie's: "Nothing else has worked" (Theme settings → Maggie's – Home middle). Home (templates/index.hbs) + product page (sections/mt-story.hbs). --}}
+<section class="mt-sec mt-sec--warm mt-list">
+  <div class="b-wrap mt-narrow">
+    <h2 class="mt-h2">{{@root.settings.mt_list_heading}}</h2>
+    <dl class="mt-list__items">
+      {{#if @root.settings.mt_list_1_title}}<dt>{{@root.settings.mt_list_1_title}}</dt><dd>{{@root.settings.mt_list_1_text}}</dd>{{/if}}
+      {{#if @root.settings.mt_list_2_title}}<dt>{{@root.settings.mt_list_2_title}}</dt><dd>{{@root.settings.mt_list_2_text}}</dd>{{/if}}
+      {{#if @root.settings.mt_list_3_title}}<dt>{{@root.settings.mt_list_3_title}}</dt><dd>{{@root.settings.mt_list_3_text}}</dd>{{/if}}
+      {{#if @root.settings.mt_list_4_title}}<dt>{{@root.settings.mt_list_4_title}}</dt><dd>{{@root.settings.mt_list_4_text}}</dd>{{/if}}
+    </dl>
+    {{#if @root.settings.mt_list_quote}}<p class="mt-list__quote">{{@root.settings.mt_list_quote}}</p>{{/if}}
+  </div>
+</section>

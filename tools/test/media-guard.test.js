@@ -3,75 +3,72 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { tmpDir } = require('./helpers');
-const { findOriginalMedia, isContent, videoBytes } = require('../lib/media-guard');
+const { originalsStillShipped, writeReplaceList, videoBytes } = require('../lib/media-guard');
 
 const bytes = (seed, n) => Buffer.alloc(n || 8000, seed);
+const sha = (b) => crypto.createHash('sha1').update(b).digest('hex');
 
-function theme(withSite) {
+function theme(withMap) {
   const dir = tmpDir('media-guard-');
   const put = (rel, body) => { const f = path.join(dir, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, body); };
   put('theme.json', '{}');
-  if (withSite) {
-    put('_work/site/_m/cdn.x.com/shorts-1_800x.jpg', bytes(1));
-    put('_work/site/_m/cdn.x.com/logo.png', bytes(2));
-    put('_work/site/_m/cdn.x.com/badge.png', bytes(3));
-    put('_work/site/_m/cdn.x.com/clip.mp4', bytes(4, 20000));
-    put('_work/site/_m/cdn.x.com/banner.jpg', bytes(5));
-    put('_work/site/assets.json', JSON.stringify({
-      'https://cdn.x.com/shorts-1_800x.jpg?v=3': { file: '_m/cdn.x.com/shorts-1_800x.jpg', contentType: 'image/jpeg', bytes: 8000, pages: ['product'], area: 'main', rendered: { w: 600, h: 600 } },
-      'https://cdn.x.com/logo.png': { file: '_m/cdn.x.com/logo.png', contentType: 'image/png', bytes: 8000, pages: ['product'], area: 'header', rendered: { w: 160, h: 40 } },
-      'https://cdn.x.com/badge.png': { file: '_m/cdn.x.com/badge.png', contentType: 'image/png', bytes: 8000, pages: ['product'], area: 'main', rendered: { w: 32, h: 32 } },
-      'https://cdn.x.com/clip.mp4': { file: '_m/cdn.x.com/clip.mp4', contentType: 'video/mp4', bytes: 20000, pages: ['product-bundle'], area: 'main', rendered: { w: 0, h: 0 } },
-      'https://cdn.x.com/banner.jpg': { file: '_m/cdn.x.com/banner.jpg', contentType: 'image/jpeg', bytes: 8000, pages: ['home', 'product'], area: 'main', rendered: { w: 1440, h: 500 } },
-    }));
+  if (withMap) {
+    put('assets/images/tt-sections/knee.webp', bytes(1));
+    put('assets/images/tt-gallery/main.webp', bytes(2));
+    put('assets/videos/tt-hidden/clip.mp4', bytes(3, 20000));
+    put('templates/product.json', JSON.stringify({ sections: { a: { type: 'image-with-text', settings: { default_image: 'images/tt-sections/knee.webp' } } } }));
+    put('sample/product.json', JSON.stringify({ media: { main_image: '/assets/images/tt-gallery/main.webp' } }));
+    put('_work/media-map.json', JSON.stringify([
+      { url: 'https://x.com/knee.jpg', kind: 'image', group: 'sections', shipped: 'assets/images/tt-sections/knee.webp', sha1: sha(bytes(1)) },
+      { url: 'https://x.com/main.jpg', kind: 'image', group: 'gallery', shipped: 'assets/images/tt-gallery/main.webp', sha1: sha(bytes(2)) },
+      { url: 'https://x.com/clip.mp4', kind: 'video', group: 'hidden', shipped: 'assets/videos/tt-hidden/clip.mp4', sha1: sha(bytes(3, 20000)) },
+    ]));
   }
   return { dir, put };
 }
 
-test('isContent: product-only, main area, not an icon', () => {
-  assert.ok(isContent({ file: 'a', contentType: 'image/jpeg', bytes: 9000, pages: ['product'], area: 'main', rendered: { w: 600, h: 600 } }));
-  assert.ok(isContent({ file: 'a', contentType: 'image/jpeg', bytes: 9000, pages: ['product'], area: 'main', rendered: { w: 0, h: 0 } }), 'a hidden slide is content');
-  assert.ok(isContent({ file: 'a', contentType: 'image/webp', bytes: 9000, pages: ['product'] }), 'a CSS-only background is content');
-  assert.ok(!isContent({ file: 'a', contentType: 'image/svg+xml', bytes: 9000, pages: ['product'], area: 'main' }));
-  assert.ok(!isContent({ file: 'a', contentType: 'image/png', bytes: 1000, pages: ['product'], area: 'main', rendered: { w: 400, h: 400 } }), 'tiny file');
-  assert.ok(!isContent({ file: 'a', contentType: 'image/jpeg', bytes: 9000, pages: [], area: 'main' }));
-  assert.ok(!isContent({ file: 'a', contentType: 'video/mp4', bytes: 9e6, pages: ['product'], area: 'main', rendered: { w: 600, h: 600 } }), 'videos may ship');
+test('a theme without a media map is not reported', () => {
+  const t = theme(false);
+  t.put('assets/images/anything.jpg', bytes(1));
+  assert.equal(originalsStillShipped(t.dir), null);
 });
 
-test('a copied product-page image is an error; its video, logo, icon, shared banner are not', () => {
+test('counts what is still the sample store\'s and where it is used', () => {
+  const r = originalsStillShipped(theme(true).dir);
+  assert.equal(r.images, 2);
+  assert.equal(r.videos, 1);
+  assert.equal(r.bytes, 36000);
+  const knee = r.items.find((i) => i.shipped.endsWith('knee.webp'));
+  assert.deepEqual(knee.usedIn, ['templates/product.json']);
+  assert.deepEqual(r.items.find((i) => i.shipped.endsWith('main.webp')).usedIn, [], 'the sample product is not a use');
+});
+
+test('a replaced or removed file no longer counts', () => {
   const t = theme(true);
-  t.put('assets/images/hero.jpg', bytes(1)); // the product photo, renamed
-  t.put('assets/images/logo.png', bytes(2));
-  t.put('assets/images/badge.png', bytes(3));
-  t.put('assets/images/banner.jpg', bytes(5));
-  t.put('assets/videos/mt/clip.mp4', bytes(4, 20000)); // the original's video as a slot default: allowed
-  t.put('_work/notes/shorts-1.jpg', bytes(1)); // _work is never packed
-  const r = findOriginalMedia(t.dir);
-  assert.equal(r.errors.length, 1, r.errors.join('\n'));
-  assert.ok(r.errors[0].startsWith('assets/images/hero.jpg is a product-page image'));
-  assert.deepEqual(r.warnings, []);
+  t.put('assets/images/tt-sections/knee.webp', bytes(9));
+  fs.unlinkSync(path.join(t.dir, 'assets/videos/tt-hidden/clip.mp4'));
+  const r = originalsStillShipped(t.dir);
+  assert.equal(r.images, 1);
+  assert.equal(r.videos, 0);
+  assert.ok(r.items[0].shipped.endsWith('main.webp'));
+});
+
+test('writeReplaceList lists every file with its use and original', () => {
+  const t = theme(true);
+  const out = writeReplaceList(t.dir, originalsStillShipped(t.dir));
+  assert.equal(path.relative(t.dir, out).replace(/\\/g, '/'), '_work/media-to-replace.md');
+  const md = fs.readFileSync(out, 'utf8');
+  assert.match(md, /2 images, 1 videos/);
+  assert.match(md, /assets\/images\/tt-sections\/knee\.webp \| sections \| 8 KB \| templates\/product\.json \| https:\/\/x\.com\/knee\.jpg/);
+  assert.match(md, /main\.webp \| gallery \| 8 KB \| not in a slot/);
 });
 
 test('videoBytes: shipped videos only (not _work)', () => {
-  const t = theme(true);
+  const t = theme(false);
   t.put('assets/videos/mt/a.mp4', bytes(4, 20000));
   t.put('assets/videos/mt/b.webm', bytes(5, 10000));
   t.put('_work/site/_m/x/c.mp4', bytes(6, 50000));
   assert.deepEqual(videoBytes(t.dir), { files: 2, bytes: 30000 });
-});
-
-test('the same name under another format is a warning', () => {
-  const t = theme(true);
-  t.put('assets/images/shorts-1.webp', bytes(9));
-  const r = findOriginalMedia(t.dir);
-  assert.deepEqual(r.errors, []);
-  assert.equal(r.warnings.length, 1);
-  assert.match(r.warnings[0], /^assets\/images\/shorts-1\.webp has the name/);
-});
-
-test('a theme without a downloaded original is not checked', () => {
-  const t = theme(false);
-  t.put('assets/images/anything.jpg', bytes(1));
-  assert.deepEqual(findOriginalMedia(t.dir), { errors: [], warnings: [] });
 });

@@ -302,7 +302,7 @@ const MIME = { '.css': 'text/css', '.js': 'application/javascript', '.json': 'ap
 
 function serveAsset(res, rel) {
   const candidates = [path.join(THEME, 'assets', rel)];
-  if (rel.startsWith('sample/')) candidates.push(path.join(FIX, rel));
+  if (rel.startsWith('sample/')) candidates.push(path.join(THEME, '_work', rel), path.join(FIX, rel)); // a theme's own sample files, never packed
   for (const f of candidates) {
     if (f.startsWith(THEME) || f.startsWith(FIX)) {
       if (exists(f) && fs.statSync(f).isFile()) {

@@ -1,0 +1,18 @@
+{{!-- Maggie's: "Why bras stopped working" (Theme settings → Maggie's – Home middle). Home (templates/index.hbs) + product page (sections/mt-story.hbs). --}}
+<section class="mt-sec mt-why">
+  <div class="b-wrap mt-narrow">
+    <h2 class="mt-h2">{{@root.settings.mt_why_heading}}</h2>
+    {{#if @root.settings.mt_why_lead}}<p class="mt-why__lead">{{@root.settings.mt_why_lead}}</p>{{/if}}
+    {{#if @root.settings.mt_why_text}}<p class="mt-why__text">{{@root.settings.mt_why_text}}</p>{{/if}}
+    <ul class="mt-why__x">
+      {{#if @root.settings.mt_why_x_1}}<li>{{@root.settings.mt_why_x_1}}</li>{{/if}}
+      {{#if @root.settings.mt_why_x_2}}<li>{{@root.settings.mt_why_x_2}}</li>{{/if}}
+      {{#if @root.settings.mt_why_x_3}}<li>{{@root.settings.mt_why_x_3}}</li>{{/if}}
+    </ul>
+    {{#if @root.settings.mt_why_close}}<p class="mt-why__close">{{@root.settings.mt_why_close}}</p>{{/if}}
+    <div class="mt-cta-row mt-cta-row--tight">
+      <a class="mt-btn" href="#mt-product">{{@root.settings.mt_why_button}}</a>
+      {{> mt-ticks}}
+    </div>
+  </div>
+</section>

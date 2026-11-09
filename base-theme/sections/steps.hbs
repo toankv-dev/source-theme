@@ -7,7 +7,7 @@
     <div class="b-steps__grid">
       {{#each section.blocks}}
       <figure class="b-step" {{{this.attributes}}}>
-        {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" loading="lazy">{{else}}<div class="b-step__ph" aria-hidden="true"></div>{{/if}}
+        {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" loading="lazy">{{else if this.settings.default_image}}<img src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="" loading="lazy">{{else}}<div class="b-step__ph" aria-hidden="true"></div>{{/if}}
         <figcaption>{{this.settings.caption}}</figcaption>
       </figure>
       {{/each}}

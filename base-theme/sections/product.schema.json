@@ -377,6 +377,7 @@
           "id": "card_1_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_1_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_1_sub",
@@ -416,6 +417,7 @@
           "id": "card_2_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_2_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_2_sub",
@@ -455,6 +457,7 @@
           "id": "card_3_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_3_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_3_sub",
@@ -494,6 +497,7 @@
           "id": "card_4_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_4_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_4_sub",
@@ -533,6 +537,7 @@
           "id": "card_5_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_5_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_5_sub",
@@ -572,6 +577,7 @@
           "id": "card_6_image",
           "label": "Image (quantity packs; empty = the chosen variant's photo)"
         },
+        { "type": "text", "id": "default_card_6_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "card_6_sub",
@@ -753,6 +759,7 @@
           "label": "Image",
           "info": "Until an image is picked, an empty frame shows here."
         },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "text",
           "id": "alt",
@@ -906,51 +913,61 @@
           "id": "media_1",
           "label": "Image or video 1"
         },
+        { "type": "text", "id": "default_media_1", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_2",
           "label": "Image or video 2"
         },
+        { "type": "text", "id": "default_media_2", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_3",
           "label": "Image or video 3"
         },
+        { "type": "text", "id": "default_media_3", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_4",
           "label": "Image or video 4"
         },
+        { "type": "text", "id": "default_media_4", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_5",
           "label": "Image or video 5"
         },
+        { "type": "text", "id": "default_media_5", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_6",
           "label": "Image or video 6"
         },
+        { "type": "text", "id": "default_media_6", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_7",
           "label": "Image or video 7"
         },
+        { "type": "text", "id": "default_media_7", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_8",
           "label": "Image or video 8"
         },
+        { "type": "text", "id": "default_media_8", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_9",
           "label": "Image or video 9"
         },
+        { "type": "text", "id": "default_media_9", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "image_picker",
           "id": "media_10",
           "label": "Image or video 10"
-        }
+        },
+        { "type": "text", "id": "default_media_10", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." }
       ]
     },
     {
@@ -1064,6 +1081,7 @@
           "id": "image",
           "label": "Size chart image"
         },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         {
           "type": "richtext",
           "id": "body",

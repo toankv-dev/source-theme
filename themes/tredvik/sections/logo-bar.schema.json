@@ -13,6 +13,7 @@
       "type": "logo", "name": "Logo", "limit": 12,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Logo image", "info": "PNG or SVG on a transparent background works best." },
+        { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         { "type": "text", "id": "name", "label": "Outlet name (for screen readers)", "default": "" }
       ]
     }

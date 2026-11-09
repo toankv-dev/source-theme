@@ -109,6 +109,13 @@
       "info": "e.g. Model is 5'6\" and wears M. Empty = no caption."
     },
     {
+      "type": "checkbox",
+      "id": "landing",
+      "label": "Has the landing blocks",
+      "default": false,
+      "info": "Turn on when this template has Maggie's story blocks Hero, Ticker, Picture + text, Why, List or Video reviews (template \"Maggie's landing\"): loads their look once."
+    },
+    {
       "type": "paragraph",
       "content": "Everything in the info column is a block — reorder, hide or add them."
     }

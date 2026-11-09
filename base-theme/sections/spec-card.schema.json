@@ -7,6 +7,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "", "info": "Empty = product title." },
     { "type": "richtext", "id": "body", "label": "Text", "default": "<p>Say in two or three sentences what the product does and who it is for.</p>" },
     { "type": "image_picker", "id": "image", "label": "Card image", "info": "Product picture on the card (transparent PNG looks best). Until one is picked, an empty frame shows here." },
+    { "type": "text", "id": "default_image", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
     { "type": "text", "id": "footer", "label": "Card footer tagline", "default": "Pack smarter. Travel lighter." }
   ],
   "blocks": [
@@ -14,6 +15,7 @@
       "type": "tile", "name": "Spec tile", "limit": 6,
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "default_icon", "label": "Theme file while empty", "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above." },
         { "type": "text", "id": "title", "label": "Title", "default": "100% cordless" },
         { "type": "text", "id": "text", "label": "Text", "default": "Works in any hotel room" }
       ]

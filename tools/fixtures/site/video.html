@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Tee – Fixture Store</title>
+<link rel="stylesheet" href="/css/main.css">
+<script type="application/json" id="product-media">{"media":[{"media_type":"video","sources":[{"format":"mp4","url":"\/media\/json.mp4"}]}]}</script>
+</head>
+<body>
+<header class="site-header"><a href="/" class="logo"><img src="/img/wash-bag.jpg" alt="Fixture Store" width="120" height="40"></a></header>
+<main>
+  <section class="product">
+    <div class="gallery">
+      <img class="main-img" src="/img/EEOB_-_WP1__96291.jpg?width=400" width="600" height="600" alt="Video Tee">
+      <!-- Like Shopify's deferred media: the video only exists inside a <template> until someone presses play. -->
+      <deferred-media class="deferred">
+        <button type="button" class="btn">Play the video</button>
+        <template><video controls playsinline><source src="/media/tpl.mp4" type="video/mp4"></video></template>
+      </deferred-media>
+    </div>
+    <div class="info">
+      <h1>Video Tee</h1>
+      <p class="price">$29.00</p>
+      <button class="btn">Add to cart</button>
+      <p><a href="/media/link.mp4">Watch how it fits</a></p>
+    </div>
+  </section>
+  <!-- A Shopify HLS source (Chromium cannot play it, so only the DOM knows it). -->
+  <section class="video">
+    <video class="hls" muted playsinline poster="/img/RRTL_-_WP1__71153.jpg?poster=2" width="320" height="180">
+      <source src="/videos/c/vp/abc/abc.m3u8" type="application/x-mpegURL">
+    </video>
+  </section>
+  <!-- Like hls.js: the playlist is fetched by script and the video plays from a media-source blob. -->
+  <section class="video"><video class="mse" muted playsinline width="320" height="180"></video></section>
+</main>
+<footer class="site-footer"><span>© Fixture Store</span></footer>
+<script>
+  fetch('/media/plain/master.m3u8').then(function (r) { return r.text(); }).then(function () {
+    document.querySelector('video.mse').src = URL.createObjectURL(new Blob([new Uint8Array(16)], { type: 'video/mp4' }));
+  });
+</script>
+</body>
+</html>

@@ -6,8 +6,10 @@
       Per-card subtitle / badge / "what's included" come from the block settings (JSON below), because
       Handlebars cannot index card_1…card_6 by position. A card also names the free gifts it unlocks
       (product.gift_offers, Base.gifts.forCart).
-      card_style "radio" = volume-bundle look (radio dot, no picture, chosen card in pack_color). --}}
-<div class="b-cards-block{{#if (eq settings.card_style "radio")}} b-cards-block--radio{{/if}}" {{{attributes}}}{{#if settings.pack_color}} style="--b-pack:{{settings.pack_color}}"{{/if}} data-cards-block data-mode="{{#if settings.source}}{{settings.source}}{{else}}auto{{/if}}" data-option-index="{{settings.option_index}}" data-layout="{{#if settings.layout}}{{settings.layout}}{{else}}auto{{/if}}">
+      card_style "radio" = volume-bundle look (radio dot, no picture, chosen card in pack_color);
+      "tiers" = the Maggie's original look (picture, chosen card tinted in pack_color / the accent, black pill badge,
+      unit rows Color then Size on one line). --}}
+<div class="b-cards-block{{#if (eq settings.card_style "radio")}} b-cards-block--radio{{/if}}{{#if (eq settings.card_style "tiers")}} b-cards-block--tiers{{/if}}" {{{attributes}}}{{#if settings.pack_color}} style="--b-pack:{{settings.pack_color}}"{{/if}} data-cards-block data-mode="{{#if settings.source}}{{settings.source}}{{else}}auto{{/if}}" data-option-index="{{settings.option_index}}" data-layout="{{#if settings.layout}}{{settings.layout}}{{else}}auto{{/if}}">
   <script type="application/json" data-cards-settings>{{{json settings}}}</script>
   {{!-- Shared price shown above compact variant tiles (variant cards keep the price outside the tiles). --}}
   <p class="b-cards__price" data-cards-price hidden>

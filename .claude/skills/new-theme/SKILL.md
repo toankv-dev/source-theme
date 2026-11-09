@@ -35,11 +35,24 @@ Talk to the user in Vietnamese.
 - Use the original's real texts. **Fonts and colours must be the original's exact ones** — measured, never
   guessed or "close enough" (see *Fonts and colours* below). Theme-wide images (logo, icons, payment badges,
   home page banners) may be copied from `_work/capture/home/images` into `assets/images/` as settings
-  defaults. **The product page's images and videos never go into the theme**: the main product's media comes
-  from the product data and every other media slot is left empty for the merchant to upload (see below). With
-  a link (theme-from-link) they are downloaded into `_work/site/` to look at and measure only — `pack.js` fails
-  on a copy; a direct `capture.js` of a product page uses `--no-images`. The page's screenshots are the only
-  visual reference.
+  defaults. **The product page's images never go into the theme**: the main product's media comes from the
+  product data and every other image slot is left empty for the merchant to upload (see below). With a link
+  (theme-from-link) they are downloaded into `_work/site/` to look at and measure only — `pack.js` fails on a
+  copy; a direct `capture.js` of a product page uses `--no-images`. The page's screenshots are the only visual
+  reference.
+- **Videos of the original are the defaults of the theme's video slots — on every page, the product page too**
+  (docs/SPEC-theme-from-link-videos.md). Each video of a section the original SHOWS (not hidden A/B variants) is
+  copied **unchanged** (no re-encoding) from `_work/site/_m/…` into `assets/videos/<prefix>/<slot>.mp4`; its
+  poster goes to `assets/images/<prefix>/` as WebP. The slot stays an `image_picker` (MP4 / WebM): an uploaded
+  video replaces the default. Exceptions: videos of the main product's gallery come from the product data; YouTube /
+  Vimeo frames are not files (leave the slot empty). How:
+  - the theme's own sections / snippets: `{{#if setting}}{{setting}}{{else}}{{@root.assets_url}}/videos/<prefix>/<file>.mp4{{/if}}`;
+  - a base section used on the product page (video row, media slider…): its theme copy gets a `default_video` text
+    setting (a path inside `assets/videos/`) used only while the picker is empty — the one allowed "file path"
+    text setting, for videos only;
+  - videos that do not autoplay use `preload="none"` (they load on tap); an autoplay hero video uses
+    `preload="metadata"` over its poster, so the poster stays the LCP;
+  - `pack.js` prints `videos: N files, X MB`: say the zip size in the report (Adlux upload limit unknown).
 - **No review form, ever.** Shoppers never write reviews on the storefront: no "Write a review" / "Write a
   Rating" button, modal or form, even when the original page has one (leave it out and say so in the report).
   Reviews are shown only (the store adds them in the admin). `tools/smoke.js` fails on `[data-review-form]`,
@@ -47,8 +60,9 @@ Talk to the user in Vietnamese.
 - **Main product** (the `product` section: gallery, title, price, variants, packs, buy box, reviews) comes
   from the platform product data — never hard-code it. Set the sample (`sample/product.json`) to resemble the
   original so the preview compares fairly.
-- **Every image / video on the product page that does not come from the product data is an empty, dynamic
-  slot** the merchant uploads in the theme editor. That covers base sections (image with text, feature rows,
+- **Every image on the product page that does not come from the product data is an empty, dynamic slot** the
+  merchant uploads in the theme editor (video slots: same slots, but with the original's video as default — see
+  the rule above). That covers base sections (image with text, feature rows,
   banners, video row, image / video slider, comparison / steps / spec images) **and** everything the theme
   adds: its own sections and snippets, pack / bundle card pictures, gift tiles, story / promise / help tiles,
   avatars and testimonial photos, background pictures, before / after, charts drawn as images. Only UI icons
@@ -57,8 +71,8 @@ Talk to the user in Vietnamese.
     on the section or block — never a `text` setting holding a file name / path (`theme_image`,
     `card_1_theme_image`, …), never a picture written into the `.hbs`, never a `background-image: url(…)` of a
     picture in skin.css, never a fallback to a file in `assets/images/`;
-  - never copy those images / videos into `assets/images/` and never put them in `templates/product*.json`
-    or schema `default`s — leave every slot empty;
+  - never copy those images into `assets/images/` and never put them in `templates/product*.json` or schema
+    `default`s — leave every image slot empty (videos: `assets/videos/` + `default_video`, see above);
   - keep as many slots (blocks) as the original has, with its texts, so the layout and the slot count match;
   - an empty slot must still render its frame at the original's size and aspect ratio (placeholder `b-ph` /
     `b-reel__ph`, with an "Upload …" hint only in design mode) — never collapse, hide or skip it, and never fall
@@ -67,7 +81,7 @@ Talk to the user in Vietnamese.
   - each slot's schema label / `info` says what to upload (image or MP4 / WebM, recommended size / ratio).
   - In the visual diff these slots are expected to differ (placeholder vs the original's picture): compare
     their position, size and ratio, not their content.
-  - Before packing, check: `templates/product*.json` holds no image / video path, `assets/images/` holds no
+  - Before packing, check: `templates/product*.json` holds no image path (video paths only in `default_video`), `assets/images/` holds no
     product-page picture, and no section / snippet used on the product page points to `assets/images/` except
     for UI icons.
 - Prefer one question to the user over a guess only when something cannot be read from the input

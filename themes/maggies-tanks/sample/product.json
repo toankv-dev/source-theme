@@ -1,10 +1,10 @@
 {
-  "title": "Band-Free Bra Tank",
-  "price": "$29.99",
-  "compare_at_price": "$39.99",
-  "off_pct": 25,
-  "meta_description": "Built-in bra tank with front support, no band.",
-  "description_html": "<p>Our first tank top with real built-in bra support. No wires, no extra layers, no lines showing through your clothes. One piece that does it all. Features <strong>removable padding </strong>for customisable coverage and <strong>a smoothing sculpt fit </strong>that defines your shape without squeezing. Works for everything from <strong>lounging to errands to the office</strong>. Comfortable enough to forget you're wearing it.</p><p><strong>Simple Care for High Performance:</strong></p><ul><li>Machine wash cold on a gentle cycle.</li><li>Use a machine wash bag to protect the garment.</li><li>Line dry only.</li><li>Do not bleach, iron, or dry clean.</li></ul>",
+  "title": "Maggie's Tanks Built-In Bra Comfort Shaper Tank",
+  "price": "$36.95",
+  "compare_at_price": "$73.90",
+  "off_pct": 50,
+  "meta_description": "The built-in-bra tank that feels like nothing and looks smooth under everything.",
+  "description_html": "<p>Holds a full D+, no wire, no clasp, no band. Smooth back with no bulge, lines, or red marks. Double lined, so nothing shows through. Breathable fabric that stays cool, even in summer.</p>",
   "media": {
     "main_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
     "gallery": [
@@ -52,23 +52,35 @@
       "displayType": "pills",
       "options": [
         {
-          "label": "White",
+          "label": "Nude",
           "active": true
+        },
+        {
+          "label": "Coffee",
+          "active": false
+        },
+        {
+          "label": "Black",
+          "active": false
+        },
+        {
+          "label": "Khaki",
+          "active": false
+        },
+        {
+          "label": "Red Wine",
+          "active": false
+        },
+        {
+          "label": "Blush Pink",
+          "active": false
         },
         {
           "label": "Grey",
           "active": false
         },
         {
-          "label": "Rose",
-          "active": false
-        },
-        {
-          "label": "Rosewood",
-          "active": false
-        },
-        {
-          "label": "Wine Red",
+          "label": "White",
           "active": false
         }
       ]
@@ -79,11 +91,11 @@
       "options": [
         {
           "label": "S",
-          "active": true
+          "active": false
         },
         {
           "label": "M",
-          "active": false
+          "active": true
         },
         {
           "label": "L",
@@ -94,7 +106,15 @@
           "active": false
         },
         {
-          "label": "XXL",
+          "label": "2XL",
+          "active": false
+        },
+        {
+          "label": "3XL",
+          "active": false
+        },
+        {
+          "label": "4XL",
           "active": false
         }
       ]
@@ -102,51 +122,507 @@
   ],
   "variants_list": [
     {
-      "id": "v-white-m",
-      "title": "White / M",
+      "id": "v-nude-s",
+      "title": "Nude / S",
       "option_values": [
-        "White",
+        "Nude",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-nude-m",
+      "title": "Nude / M",
+      "option_values": [
+        "Nude",
         "M"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-white-l",
-      "title": "White / L",
+      "id": "v-nude-l",
+      "title": "Nude / L",
       "option_values": [
-        "White",
+        "Nude",
         "L"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-white-xl",
-      "title": "White / XL",
+      "id": "v-nude-xl",
+      "title": "Nude / XL",
       "option_values": [
-        "White",
+        "Nude",
         "XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-white-xxl",
-      "title": "White / XXL",
+      "id": "v-nude-2xl",
+      "title": "Nude / 2XL",
       "option_values": [
-        "White",
-        "XXL"
+        "Nude",
+        "2XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/white.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-nude-3xl",
+      "title": "Nude / 3XL",
+      "option_values": [
+        "Nude",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-nude-4xl",
+      "title": "Nude / 4XL",
+      "option_values": [
+        "Nude",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-s",
+      "title": "Coffee / S",
+      "option_values": [
+        "Coffee",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-m",
+      "title": "Coffee / M",
+      "option_values": [
+        "Coffee",
+        "M"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-l",
+      "title": "Coffee / L",
+      "option_values": [
+        "Coffee",
+        "L"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-xl",
+      "title": "Coffee / XL",
+      "option_values": [
+        "Coffee",
+        "XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-2xl",
+      "title": "Coffee / 2XL",
+      "option_values": [
+        "Coffee",
+        "2XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-3xl",
+      "title": "Coffee / 3XL",
+      "option_values": [
+        "Coffee",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-coffee-4xl",
+      "title": "Coffee / 4XL",
+      "option_values": [
+        "Coffee",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-s",
+      "title": "Black / S",
+      "option_values": [
+        "Black",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-m",
+      "title": "Black / M",
+      "option_values": [
+        "Black",
+        "M"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-l",
+      "title": "Black / L",
+      "option_values": [
+        "Black",
+        "L"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-xl",
+      "title": "Black / XL",
+      "option_values": [
+        "Black",
+        "XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-2xl",
+      "title": "Black / 2XL",
+      "option_values": [
+        "Black",
+        "2XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-3xl",
+      "title": "Black / 3XL",
+      "option_values": [
+        "Black",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-black-4xl",
+      "title": "Black / 4XL",
+      "option_values": [
+        "Black",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-s",
+      "title": "Khaki / S",
+      "option_values": [
+        "Khaki",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-m",
+      "title": "Khaki / M",
+      "option_values": [
+        "Khaki",
+        "M"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-l",
+      "title": "Khaki / L",
+      "option_values": [
+        "Khaki",
+        "L"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-xl",
+      "title": "Khaki / XL",
+      "option_values": [
+        "Khaki",
+        "XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-2xl",
+      "title": "Khaki / 2XL",
+      "option_values": [
+        "Khaki",
+        "2XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-3xl",
+      "title": "Khaki / 3XL",
+      "option_values": [
+        "Khaki",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-khaki-4xl",
+      "title": "Khaki / 4XL",
+      "option_values": [
+        "Khaki",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-s",
+      "title": "Red Wine / S",
+      "option_values": [
+        "Red Wine",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-m",
+      "title": "Red Wine / M",
+      "option_values": [
+        "Red Wine",
+        "M"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-l",
+      "title": "Red Wine / L",
+      "option_values": [
+        "Red Wine",
+        "L"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-xl",
+      "title": "Red Wine / XL",
+      "option_values": [
+        "Red Wine",
+        "XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-2xl",
+      "title": "Red Wine / 2XL",
+      "option_values": [
+        "Red Wine",
+        "2XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-3xl",
+      "title": "Red Wine / 3XL",
+      "option_values": [
+        "Red Wine",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-red-wine-4xl",
+      "title": "Red Wine / 4XL",
+      "option_values": [
+        "Red Wine",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-s",
+      "title": "Blush Pink / S",
+      "option_values": [
+        "Blush Pink",
+        "S"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-m",
+      "title": "Blush Pink / M",
+      "option_values": [
+        "Blush Pink",
+        "M"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-l",
+      "title": "Blush Pink / L",
+      "option_values": [
+        "Blush Pink",
+        "L"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-xl",
+      "title": "Blush Pink / XL",
+      "option_values": [
+        "Blush Pink",
+        "XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-2xl",
+      "title": "Blush Pink / 2XL",
+      "option_values": [
+        "Blush Pink",
+        "2XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-3xl",
+      "title": "Blush Pink / 3XL",
+      "option_values": [
+        "Blush Pink",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-blush-pink-4xl",
+      "title": "Blush Pink / 4XL",
+      "option_values": [
+        "Blush Pink",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
@@ -156,9 +632,9 @@
         "Grey",
         "S"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
@@ -168,9 +644,9 @@
         "Grey",
         "M"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
@@ -180,9 +656,9 @@
         "Grey",
         "L"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
@@ -192,201 +668,129 @@
         "Grey",
         "XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-grey-xxl",
-      "title": "Grey / XXL",
+      "id": "v-grey-2xl",
+      "title": "Grey / 2XL",
       "option_values": [
         "Grey",
-        "XXL"
+        "2XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/grey_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rose-s",
-      "title": "Rose / S",
+      "id": "v-grey-3xl",
+      "title": "Grey / 3XL",
       "option_values": [
-        "Rose",
+        "Grey",
+        "3XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-grey-4xl",
+      "title": "Grey / 4XL",
+      "option_values": [
+        "Grey",
+        "4XL"
+      ],
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
+      "available": true
+    },
+    {
+      "id": "v-white-s",
+      "title": "White / S",
+      "option_values": [
+        "White",
         "S"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rose-m",
-      "title": "Rose / M",
+      "id": "v-white-m",
+      "title": "White / M",
       "option_values": [
-        "Rose",
+        "White",
         "M"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rose-l",
-      "title": "Rose / L",
+      "id": "v-white-l",
+      "title": "White / L",
       "option_values": [
-        "Rose",
+        "White",
         "L"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rose-xl",
-      "title": "Rose / XL",
+      "id": "v-white-xl",
+      "title": "White / XL",
       "option_values": [
-        "Rose",
+        "White",
         "XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rose-xxl",
-      "title": "Rose / XXL",
+      "id": "v-white-2xl",
+      "title": "White / 2XL",
       "option_values": [
-        "Rose",
-        "XXL"
+        "White",
+        "2XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/rose_tank.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rosewood-s",
-      "title": "Rosewood / S",
+      "id": "v-white-3xl",
+      "title": "White / 3XL",
       "option_values": [
-        "Rosewood",
-        "S"
+        "White",
+        "3XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     },
     {
-      "id": "v-rosewood-m",
-      "title": "Rosewood / M",
+      "id": "v-white-4xl",
+      "title": "White / 4XL",
       "option_values": [
-        "Rosewood",
-        "M"
+        "White",
+        "4XL"
       ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
-      "available": true
-    },
-    {
-      "id": "v-rosewood-l",
-      "title": "Rosewood / L",
-      "option_values": [
-        "Rosewood",
-        "L"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
-      "available": true
-    },
-    {
-      "id": "v-rosewood-xl",
-      "title": "Rosewood / XL",
-      "option_values": [
-        "Rosewood",
-        "XL"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
-      "available": true
-    },
-    {
-      "id": "v-rosewood-xxl",
-      "title": "Rosewood / XXL",
-      "option_values": [
-        "Rosewood",
-        "XXL"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Rosewood.jpg",
-      "available": true
-    },
-    {
-      "id": "v-wine-red-s",
-      "title": "Wine Red / S",
-      "option_values": [
-        "Wine Red",
-        "S"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
-      "available": true
-    },
-    {
-      "id": "v-wine-red-m",
-      "title": "Wine Red / M",
-      "option_values": [
-        "Wine Red",
-        "M"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
-      "available": true
-    },
-    {
-      "id": "v-wine-red-l",
-      "title": "Wine Red / L",
-      "option_values": [
-        "Wine Red",
-        "L"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
-      "available": true
-    },
-    {
-      "id": "v-wine-red-xl",
-      "title": "Wine Red / XL",
-      "option_values": [
-        "Wine Red",
-        "XL"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
-      "available": true
-    },
-    {
-      "id": "v-wine-red-xxl",
-      "title": "Wine Red / XXL",
-      "option_values": [
-        "Wine Red",
-        "XXL"
-      ],
-      "price": "$29.99",
-      "compare_at_price": "$39.99",
-      "featured_image": "/assets/sample/Wine_Red.jpg",
+      "price": "$36.95",
+      "compare_at_price": "$73.90",
+      "featured_image": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "available": true
     }
   ],
@@ -443,15 +847,15 @@
   "home_products": [
     {
       "id": "p1",
-      "handle": "band-free-bra-tank",
+      "handle": "maggies-tanks-built-in-bra-comfort-shaper-tank",
       "url": "/product",
       "imageUrl": "/assets/sample/hf_20260908_175529_58559914-f4e9-49fc-8a41-3855f86a2908.jpg",
       "imageWidth": 1000,
       "imageHeight": 1000,
-      "title": "Band-Free Bra Tank",
-      "sellingPrice": 29.99,
-      "compareAtPrice": 39.99,
-      "offPct": 25,
+      "title": "Maggie's Tanks Built-In Bra Comfort Shaper Tank",
+      "sellingPrice": 36.95,
+      "compareAtPrice": 73.9,
+      "offPct": 50,
       "rating": 4.8,
       "reviewCount": 6,
       "description": ""

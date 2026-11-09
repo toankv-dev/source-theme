@@ -1,0 +1,13 @@
+{{!-- Maggie's: one before / after card. img = the setting (empty → theme picture def; slot = true on the product page:
+      empty → an empty upload frame, never the theme picture), quote = HTML, name. --}}
+<li class="mt-ba__card">
+  <div class="mt-ba__media">
+    {{#if img}}<img src="{{img}}" alt="Before and after: {{name}}" width="800" height="800" loading="lazy">{{else}}{{#if slot}}<div class="b-ph b-ph--mt-ba">{{#if @root.__designMode}}Upload a before | after picture (square, 800 × 800){{/if}}</div>{{else}}<img src="{{@root.assets_url}}/images/mt/{{def}}.webp" alt="Before and after: {{name}}" width="800" height="800" loading="lazy">{{/if}}{{/if}}
+    <span class="mt-ba__label">Before</span><span class="mt-ba__label mt-ba__label--after">After</span>
+  </div>
+  <div class="mt-ba__body">
+    <p class="mt-ba__stars" aria-label="5 out of 5 stars">★★★★★</p>
+    <p class="mt-ba__quote">{{{quote}}}</p>
+    <p class="mt-ba__who"><strong>{{name}}</strong><span class="mt-ba__verified"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="m3 8.5 3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{{@root.settings.mt_ba_verified}}</span></p>
+  </div>
+</li>

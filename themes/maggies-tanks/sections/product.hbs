@@ -2,12 +2,16 @@
       merchant's order. From the legacy entry (templates/product.hbs) `section` is undefined, so the {{else}}
       branch renders title, price, options and the buy button — the page still sells without a template
       document. Pickers / buy row are wired by ui.js through data-* attributes only. --}}
-<div class="b-wrap b-pdp b-pdp--gallery-{{#if section.settings.gallery_side}}{{section.settings.gallery_side}}{{else}}left{{/if}}" data-pdp>
+{{!-- style "maggies" (template "Maggie's product page"): the home product block's look — mt-story.css (generated from
+      mt-home.css) + the .mt-home variables, #mt-product for the story blocks' "Buy now" links. --}}
+{{#if (eq section.settings.style "maggies")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/mt-story.css">{{/if}}
+<div class="b-wrap b-pdp b-pdp--gallery-{{#if section.settings.gallery_side}}{{section.settings.gallery_side}}{{else}}left{{/if}}{{#if (eq section.settings.style "maggies")}} b-pdp--mt mt-home{{/if}}" data-pdp>
   <div class="b-gallery b-gallery--{{#if section.settings.gallery_layout}}{{section.settings.gallery_layout}}{{else}}thumbs{{/if}}" data-gallery>
     <div class="b-gallery__main">
       {{#if product.media.main_image}}
       <img data-gallery-main src="{{product.media.main_image}}" alt="{{product.title}}" fetchpriority="high">
       {{/if}}
+      {{#if section.settings.gallery_caption}}<span class="b-gallery__caption">{{section.settings.gallery_caption}}</span>{{/if}}
       {{#if product.off_pct}}{{#unless (eq section.settings.show_sale_badge false)}}<span class="b-badge b-gallery__badge" data-off-badge>{{#if (eq section.settings.sale_badge_style "off")}}{{product.off_pct}}% OFF{{else}}-{{product.off_pct}}%{{/if}}</span>{{/unless}}{{/if}}
     </div>
     {{#if product.media.gallery.length}}
@@ -26,11 +30,39 @@
     {{/if}}
   </div>
 
-  <div class="b-info">
+  <div class="b-info"{{#if (eq section.settings.style "maggies")}} id="mt-product"{{/if}}>
     {{#if section.blocks.length}}
     {{#each section.blocks}}
       {{#if (eq this.type "award")}}
       <p class="b-award" {{{this.attributes}}}>{{#if this.settings.icon}}{{this.settings.icon}} {{/if}}{{this.settings.text}}</p>
+      {{/if}}
+      {{#if (eq this.type "mt_intro")}}
+      {{!-- Maggie's intro: #1 badge, headline, product name, ✓ lines. Empty settings → the home product block's
+            (Theme settings → Maggie's – Home middle → Product). An empty badge is an upload frame, never a sample. --}}
+      <div class="mt-intro" {{{this.attributes}}}>
+        {{#if this.settings.badge}}<img class="mt-product__badge" src="{{this.settings.badge}}" alt="#1 Bestseller" width="320" height="65">{{else if @root.settings.mt_prod_badge}}<img class="mt-product__badge" src="{{@root.settings.mt_prod_badge}}" alt="#1 Bestseller" width="320" height="65">{{else}}<div class="mt-product__badge b-ph b-ph--mt-badge">{{#if @root.__designMode}}Upload the #1 badge picture (640 × 130){{/if}}</div>{{/if}}
+        <p class="mt-product__title">{{#if this.settings.heading}}{{this.settings.heading}}{{else}}{{@root.settings.mt_prod_title}}{{/if}}</p>
+        <h1 class="mt-product__name">{{@root.product.title}}</h1>
+        <ul class="mt-product__ticks">
+          {{#if this.settings.tick_1}}<li>{{{this.settings.tick_1}}}</li>{{else if @root.settings.mt_prod_tick_1}}<li>{{{@root.settings.mt_prod_tick_1}}}</li>{{/if}}
+          {{#if this.settings.tick_2}}<li>{{{this.settings.tick_2}}}</li>{{else if @root.settings.mt_prod_tick_2}}<li>{{{@root.settings.mt_prod_tick_2}}}</li>{{/if}}
+          {{#if this.settings.tick_3}}<li>{{{this.settings.tick_3}}}</li>{{else if @root.settings.mt_prod_tick_3}}<li>{{{@root.settings.mt_prod_tick_3}}}</li>{{/if}}
+          {{#if this.settings.tick_4}}<li>{{{this.settings.tick_4}}}</li>{{else if @root.settings.mt_prod_tick_4}}<li>{{{@root.settings.mt_prod_tick_4}}}</li>{{/if}}
+        </ul>
+      </div>
+      {{/if}}
+      {{#if (eq this.type "mt_trust")}}
+      {{!-- Maggie's trust lines under the button: ships row, 90-day guarantee (seal = trust icon), founder quote. Empty
+            settings → the home product block's (Theme settings → Maggie's – Home middle → Product). --}}
+      <div class="mt-trust" {{{this.attributes}}}>
+        <p class="mt-product__ships"><span><i class="mt-dot" aria-hidden="true"></i>{{#if this.settings.ships}}{{this.settings.ships}}{{else}}{{@root.settings.mt_prod_ships}}{{/if}}</span><span>{{#if this.settings.free}}{{{this.settings.free}}}{{else}}{{{@root.settings.mt_prod_free}}}{{/if}}</span></p>
+        <div class="mt-product__guarantee">
+          <img src="{{@root.assets_url}}/images/mt/seal-90.webp" alt="" width="52" height="52" loading="lazy">
+          <div><p class="mt-product__g-title">{{#if this.settings.g_title}}{{this.settings.g_title}}{{else}}{{@root.settings.mt_prod_g_title}}{{/if}}</p><p class="mt-product__g-text">{{#if this.settings.g_text}}{{{this.settings.g_text}}}{{else}}{{{@root.settings.mt_prod_g_text}}}{{/if}}</p></div>
+        </div>
+        {{!-- Each founder field falls back on its own (a name typed here shows even when the quote comes from Theme settings). --}}
+        {{#if this.settings.quote}}{{> mt-founder quote=this.settings.quote name=this.settings.founder name_def=@root.settings.mt_prod_founder role=this.settings.role role_def=@root.settings.mt_prod_role avatar=this.settings.avatar}}{{else if @root.settings.mt_prod_quote}}{{> mt-founder quote=@root.settings.mt_prod_quote name=this.settings.founder name_def=@root.settings.mt_prod_founder role=this.settings.role role_def=@root.settings.mt_prod_role avatar=this.settings.avatar}}{{/if}}
+      </div>
       {{/if}}
       {{#if (eq this.type "rating")}}
       {{#if @root.product.reviews.summary.total_count}}
@@ -72,7 +104,7 @@
       {{/if}}
       {{#if (eq this.type "buy_buttons")}}
       <div class="b-buy" {{{this.attributes}}}>
-        {{#unless (eq this.settings.show_options false)}}{{> options}}{{/unless}}
+        {{#unless (eq this.settings.show_options false)}}{{> options hide_pickers=this.settings.hide_options}}{{/unless}}
         {{> buy-row label=this.settings.label mode=this.settings.mode show_qty=this.settings.show_qty}}
         {{#if this.settings.note}}<p class="b-buy__note">{{this.settings.note}}</p>{{/if}}
         {{#unless (eq this.settings.show_payments false)}}{{> pay-icons}}{{/unless}}
@@ -166,22 +198,20 @@
       </div>
       {{/if}}
       {{#if (eq this.type "size_chart")}}
-      {{!-- "Size guide" link + popup. With an option name set, it shows only on products that have that option. --}}
-      <div class="b-sizechart" {{{this.attributes}}} data-size-chart data-option="{{this.settings.option_name}}" data-options="{{#each @root.product.variants}}{{name}}|{{/each}}">
-        <button type="button" class="b-sizechart__link" data-modal-open>
-          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2.5 8.5h19v7h-19z M6 8.5v3 M9.5 8.5v2 M13 8.5v3 M16.5 8.5v2 M20 8.5v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-          <span>{{#if this.settings.label}}{{this.settings.label}}{{else}}Size guide{{/if}}</span>
-        </button>
-        <div class="b-modal" data-modal hidden role="dialog" aria-modal="true" aria-label="{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}">
-          <div class="b-modal__overlay" data-modal-close></div>
-          <div class="b-modal__panel b-sizechart__panel">
-            <button type="button" class="b-icon-btn b-modal__close" data-modal-close aria-label="Close">✕</button>
-            <p class="b-sizechart__title">{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}</p>
-            {{#if this.settings.image}}<img class="b-sizechart__img" src="{{this.settings.image}}" alt="{{#if this.settings.title}}{{this.settings.title}}{{else}}Size chart{{/if}}" loading="lazy">{{/if}}
-            {{#if this.settings.body}}<div class="b-rte">{{{applyTokens this.settings.body}}}</div>{{/if}}
-          </div>
-        </div>
+      {{!-- Size chart. mode "finder" (default): the size finder that opens in place (snippets/mt-size-finder.hbs; size
+            table + texts: Theme settings → Maggie's – Home middle → Size chart & size finder, shared with the home page;
+            no table → hidden on the live store). mode "popup": "Size guide" link + popup (snippets/mt-size-chart.hbs;
+            picture / text left empty → the same Theme settings; nothing anywhere → hidden on the live store). Both:
+            with an option name set, only on products that have that option. Shown in the editor with a hint. --}}
+      {{#if (eq this.settings.mode "popup")}}
+      <div class="b-sizechart" {{{this.attributes}}} data-size-chart data-option="{{this.settings.option_name}}" data-options="{{#each @root.product.variants}}{{name}}|{{/each}}"{{#unless this.settings.image}}{{#unless this.settings.body}}{{#unless @root.settings.mt_size_image}}{{#unless @root.settings.mt_size_text}}{{#unless @root.__designMode}} hidden{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}>
+        {{> mt-size-chart label=this.settings.label title=this.settings.title image=this.settings.image text=this.settings.body}}
       </div>
+      {{else}}
+      <div class="b-sizechart b-sizechart--finder" {{{this.attributes}}} data-size-chart data-option="{{this.settings.option_name}}" data-options="{{#each @root.product.variants}}{{name}}|{{/each}}"{{#unless @root.settings.mt_sf_table}}{{#unless @root.__designMode}} hidden{{/unless}}{{/unless}}>
+        {{#if @root.settings.mt_sf_table}}{{> mt-size-finder label=this.settings.label}}{{else}}{{#if @root.__designMode}}<p class="b-sizechart__hint">Size finder: add your size table in Theme settings → Maggie's – Home middle → Size chart &amp; size finder. Hidden on the live store until then.</p>{{/if}}{{/if}}
+      </div>
+      {{/if}}
       {{/if}}
     {{/each}}
     {{else}}

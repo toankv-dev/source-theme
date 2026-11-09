@@ -1,0 +1,87 @@
+{
+  "name": "Icon columns",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why customers love us"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon / image"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji (when no image)",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Short explanation.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon columns",
+      "category": "Trust",
+      "description": "Benefits or trust badges in columns.",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "emoji": "🚚",
+            "title": "Free shipping",
+            "text": "<p>On every order.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "emoji": "↩️",
+            "title": "30-day returns",
+            "text": "<p>No questions asked.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "emoji": "🔒",
+            "title": "Secure checkout",
+            "text": "<p>Encrypted payments.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}

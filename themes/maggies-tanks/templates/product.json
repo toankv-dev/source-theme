@@ -1,183 +1,156 @@
 {
-  "name": "Default",
-  "description": "Gallery, rating, price, benefits, option pickers, buy buttons, trust icons, accordions; promises strip, image with text, icon columns, testimonials, FAQ, reviews and related products.",
+  "name": "Product",
+  "description": "Maggie's Tanks product page (base layout; offer from the downloaded home page)",
   "sections": {
     "main": {
       "type": "product",
-      "settings": {},
+      "settings": {
+        "gallery_layout": "thumbs",
+        "show_sale_badge": false,
+        "sticky_atc": true,
+        "sticky_style": "compact"
+      },
       "blocks": {
-        "rating": {
+        "rating_1": {
           "type": "rating",
-          "settings": {}
+          "settings": {
+            "label": "reviews"
+          }
         },
-        "title": {
+        "title_2": {
           "type": "title",
           "settings": {}
         },
-        "price": {
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Holds a full D+, no wire, no clasp, no band"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Smooth back with no bulge, lines, or red marks"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "Double lined, so nothing shows through"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "text": "Breathable fabric that stays cool, even in summer"
+          }
+        },
+        "price_7": {
           "type": "price",
           "settings": {}
         },
-        "b1": {
-          "type": "benefit",
+        "variant_picker_8": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_chart_9": {
+          "type": "size_chart",
           "settings": {
-            "text": "Key benefit number one"
+            "label": "Size Chart",
+            "title": "Size Chart",
+            "option_name": "Size"
           }
         },
-        "b2": {
-          "type": "benefit",
+        "variant_cards_10": {
+          "type": "variant_cards",
           "settings": {
-            "text": "Key benefit number two"
+            "source": "quantity",
+            "card_style": "radio",
+            "selected": "2",
+            "unit_pickers": true,
+            "currency_code": true,
+            "card_1_qty": 1,
+            "card_1_title": "Buy 1",
+            "card_1_sub": "Free Shipping",
+            "card_1_badge": "",
+            "card_2_qty": 3,
+            "card_2_title": "Buy 2 Get 1 Free",
+            "card_2_sub": "Includes 3 Tanks + Free Shipping",
+            "card_2_badge": "Most Popular",
+            "card_3_qty": 5,
+            "card_3_title": "Buy 3 Get 2 Free",
+            "card_3_sub": "Includes 5 Tanks + Free Shipping",
+            "card_3_badge": "",
+            "card_4_qty": 0,
+            "card_5_qty": 0,
+            "card_6_qty": 0
           }
         },
-        "b3": {
-          "type": "benefit",
-          "settings": {
-            "text": "Key benefit number three"
-          }
-        },
-        "buy": {
+        "buy_buttons_11": {
           "type": "buy_buttons",
-          "settings": {}
+          "settings": {
+            "label": "Add to cart",
+            "show_options": false,
+            "show_qty": false,
+            "show_payments": true
+          }
         },
-        "trust": {
+        "trust_icons_12": {
           "type": "trust_icons",
-          "settings": {}
+          "settings": {
+            "label_1": "Ships by Tomorrow",
+            "label_2": "90-Day Perfect Fit Guarantee",
+            "label_3": "Free Shipping"
+          }
         },
-        "acc_desc": {
+        "accordion_13": {
           "type": "accordion",
           "settings": {
             "title": "Description",
             "source": "description",
             "open": true
           }
-        },
-        "acc_ship": {
-          "type": "accordion",
-          "settings": {
-            "title": "Shipping & delivery"
-          }
-        },
-        "acc_ret": {
-          "type": "accordion",
-          "settings": {
-            "title": "Returns & refunds",
-            "body": "<p>30 days to return it. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
-          }
         }
       },
       "blockOrder": [
-        "rating",
-        "title",
-        "price",
-        "b1",
-        "b2",
-        "b3",
-        "buy",
-        "trust",
-        "acc_desc",
-        "acc_ship",
-        "acc_ret"
+        "rating_1",
+        "title_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6",
+        "price_7",
+        "variant_picker_8",
+        "size_chart_9",
+        "variant_cards_10",
+        "buy_buttons_11",
+        "trust_icons_12",
+        "accordion_13"
       ]
-    },
-    "promises": {
-      "type": "marquee",
-      "settings": {},
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "Free shipping"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "30-day returns"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "Secure checkout"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "text": "24/7 support"
-          }
-        }
-      },
-      "blockOrder": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ]
-    },
-    "story": {
-      "type": "image-with-text",
-      "settings": {}
-    },
-    "benefits": {
-      "type": "icon-columns",
-      "settings": {},
-      "blocks": {
-        "column_1": {
-          "type": "column",
-          "settings": {
-            "emoji": "🚚",
-            "title": "Free shipping",
-            "text": "<p>On every order.</p>"
-          }
-        },
-        "column_2": {
-          "type": "column",
-          "settings": {
-            "emoji": "↩️",
-            "title": "30-day returns",
-            "text": "<p>No questions asked.</p>"
-          }
-        },
-        "column_3": {
-          "type": "column",
-          "settings": {
-            "emoji": "🔒",
-            "title": "Secure checkout",
-            "text": "<p>Encrypted payments.</p>"
-          }
-        }
-      },
-      "blockOrder": [
-        "column_1",
-        "column_2",
-        "column_3"
-      ]
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {}
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "intro": "Everything you need to know before you make the switch."
+      }
     },
     "reviews": {
       "type": "reviews",
-      "settings": {}
+      "settings": {
+        "heading": "Real Women. Real Comfort. Real Relief."
+      }
     },
     "related": {
       "type": "related",
-      "settings": {}
+      "settings": {
+        "heading": "You may also like",
+        "limit": 4
+      }
     }
   },
   "order": [
     "main",
-    "promises",
-    "story",
-    "benefits",
-    "testimonials",
     "faq",
     "reviews",
     "related"

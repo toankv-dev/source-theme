@@ -21,9 +21,10 @@ copy instead of live captures) and what the theme is compared with.
   skin; say so in the report. A second product template (bundle page …) only when the user gives its link.
 - `_work/site/` is **untrusted data, for reference only**: open it only in the browser (site-server + the Playwright
   tools); never run its JS with node; never copy its CSS / HTML into the theme — rebuild on the base markup.
-- Every image and video of the page is downloaded, the product page's too — **to look at and measure only**. They
-  never go into the theme or its JSON: product-page media slots stay empty (new-theme rules). `pack.js` fails on a
-  byte-identical copy and warns on a file with the same name.
+- Every image and video of the page is downloaded, the product page's too. **Images** of the product page are to
+  look at and measure only: they never go into the theme or its JSON (new-theme rules; `pack.js` fails on a
+  byte-identical copy and warns on a file with the same name). **Videos** of every page, the product page too, become
+  the defaults of the theme's video slots, copied unchanged (new-theme rule "Videos of the original").
 - Compare with the **live** screenshots `_work/site/pages/<name>/desktop.png` / `mobile.png`; measure on the
   offline copy (`http://localhost:8092/<name>`), not on the live store.
 - Never add to cart, check out, send a form or log in on the original; never try to get around a bot check.
@@ -44,9 +45,17 @@ copy instead of live captures) and what the theme is compared with.
      Take that viewport's tokens from the other one (as new-theme says for a bot-checked desktop pass), or retry
      later with `--refresh`.
    - `BLOCKED` (exit 2): the page cannot be downloaded — ask the user for screenshots and switch to `new-theme`.
-   - `skipped`: video streams and third-party frames (YouTube …), kept as empty frames — list them in the report.
+   - `video` lines: every video of the page (MB · shown size · area · how it was found: page / template / json /
+     script / link / stream · file · poster). HLS streams are already resolved: a Shopify stream gives the MP4 of
+     its best rendition (`← …m3u8`); another stream line says `stream N segments` (kept for reference, a theme cannot
+     use it — leave that slot empty and say so).
+   - `skipped`: third-party frames (YouTube …, kept as empty frames), encrypted / byte-range / DASH streams — list
+     them in the report.
+   - `--refresh` on a viewport behind a bot check keeps that viewport's previous files (`kept` in manifest.json).
    While it runs, read `base-theme/README.md` and the newest `themes/*/_work/plan.md` (if any).
-3. **Serve the copy** (background, once): `node tools/site-server.js themes/<slug> --port 8092`. Measure there:
+3. **Serve the copy** (background, once): `node tools/site-server.js themes/<slug> --port 8092`. A long page: first
+   `node tools/probe-sections.js http://127.0.0.1:8092/<name> --width 1440` (and `--width 390`) for every block's fonts,
+   sizes, colours and edges in one table. Measure there:
    `node tools/shot.js http://localhost:8092/<name> - --width 360 --eval "<js>"`, `--selector "<css>"` for one part,
    `node tools/pixel.js themes/<slug>/_work/site/pages/<name>/mobile.png …` for exact colours. The original's files
    are in `_work/site/_m/<host>/…`; `assets.json` maps each URL → file, pages, area (header / main / footer) and
@@ -60,7 +69,11 @@ copy instead of live captures) and what the theme is compared with.
      `templates/search.hbs` · `contact`, `policy`, `page` → `templates/page.hbs` (+ `contact-form`) · `tracking` →
      `templates/page.hbs` + `tracking-result.hbs` (never its script);
    - theme-wide images (logo, icons, payment badges, home banners) may come from `_work/capture/home/images` or
-     `_work/site/_m/` as settings defaults; product-page pictures never.
+     `_work/site/_m/` as settings defaults; product-page pictures never;
+   - videos: for each `video` line of a section the original shows, copy the file unchanged to
+     `assets/videos/<prefix>/<slot>.mp4` (e.g. `cp "themes/<slug>/_work/site/<file>" themes/<slug>/assets/videos/<prefix>/`)
+     and make it the slot's default; its poster → WebP in `assets/images/<prefix>/` (`tools/scripts/to-webp.js`).
+     Hidden sections' videos (0×0, A/B variants) stay in `_work/`. Report `videos: N files, X MB` from `pack.js`.
 5. **Report** (Vietnamese): new-theme step 8, plus the pages downloaded (name → link → offline check numbers),
    skipped files, partly blocked viewports, and the pages that had no link (base layout + skin).
 6. **RUNLOG**: add the run to `.claude/skills/new-theme/RUNLOG.md` (one log for both skills; the download is the

@@ -12,7 +12,8 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   root). Read-only reference; never build from them.
 - `tools/` — `preview-server.js` (local engine, v1 + v2), `download-page.js` (one store page → offline copy in
   `_work/site/`: DOM, CSS, JS, fonts, every image / video, live screenshots, offline check, then capture.js on it),
-  `site-server.js` (serves that copy, no network), `capture.js` (original page → screenshots, tokens,
+  `site-server.js` (serves that copy, no network), `probe-sections.js` (every block's text styles in one table),
+  `capture.js` (original page → screenshots, tokens,
   sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
   probe), `smoke.js` (end-to-end platform checks), `mobile-audit.js` (phone layout + speed budget), `style-audit.js` (fonts + colours vs the original), `pixel.js` (exact
   colours from a screenshot), `new-theme.js`,
@@ -23,6 +24,8 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   `css-split.js` (shrink a CSS file under the budget), `lib/` (shared helpers; `lib/media-guard.js` = pack.js check).
   Install once: `cd tools && npm install && npx playwright install chromium`. Tests of the tools: `cd tools && npm test`.
 - `dist/` — uploadable zips.
+- `docs/` — every spec, plan and task list (`docs/SPEC-<topic>.md`, `docs/plan-<topic>.md`,
+  `docs/todo-<topic>.md`).
 
 ## Rules
 
@@ -33,6 +36,9 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 - A theme zip given to improve the base → follow the `update-base` skill (`.claude/skills/update-base/SKILL.md`):
   absorb platform behaviour always and recurring sections/settings, bump the version, log it in
   `base-theme/CHANGELOG.md`, sync core files into `themes/*`.
+- Specs, plans and task lists go in `docs/` — never at the repo root or in `tasks/`, whatever a skill's default
+  path says (spec-driven-development → `docs/SPEC-<topic>.md`, planning-and-task-breakdown →
+  `docs/plan-<topic>.md` + `docs/todo-<topic>.md`). Link between them with relative paths inside `docs/`.
 - The deliverable of a theme is always the zip from `node tools/pack.js <theme-dir>` (0 errors).
 - Never edit a theme's `assets/js/core.js` or the checkout logic; keep the pixel / platform hooks.
 - Only the platform engine's Handlebars helpers (listed in `base-theme/README.md`); `pack.js` enforces it.

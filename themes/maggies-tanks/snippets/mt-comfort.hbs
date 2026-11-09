@@ -1,0 +1,14 @@
+{{!-- Maggie's: "Your Comfort Comes First" (Theme settings → Maggie's – Home bottom). Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-comfort">
+    <div class="b-wrap mt-mid">
+      <svg class="mt-comfort__icon" viewBox="0 0 60 60" width="60" height="60" aria-hidden="true"><path d="M54 30a24 24 0 1 1-9.6-19.2" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="m19 28 10 10 24-24" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h2 class="mt-comfort__h2">{{@root.settings.mt_cf_heading}}</h2>
+      {{#if @root.settings.mt_cf_text}}<p class="mt-comfort__text">{{@root.settings.mt_cf_text}}</p>{{/if}}
+      {{#if @root.settings.mt_cf_bold}}<p class="mt-comfort__bold">{{@root.settings.mt_cf_bold}}</p>{{/if}}
+      <ul class="mt-comfort__ticks">
+        {{#if @root.settings.mt_cf_tick_1}}<li>{{@root.settings.mt_cf_tick_1}}</li>{{/if}}
+        {{#if @root.settings.mt_cf_tick_2}}<li>{{@root.settings.mt_cf_tick_2}}</li>{{/if}}
+        {{#if @root.settings.mt_cf_tick_3}}<li>{{@root.settings.mt_cf_tick_3}}</li>{{/if}}
+      </ul>
+    </div>
+  </section>

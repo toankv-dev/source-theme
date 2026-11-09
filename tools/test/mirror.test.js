@@ -102,6 +102,55 @@ test('looksLikeMedia / isStream', () => {
   assert.ok(!m.isStream('https://x.com/v/a.mp4'));
 });
 
+const SHOPIFY_MASTER = [
+  '#EXTM3U',
+  '#EXT-X-STREAM-INF:BANDWIDTH=2751476,AVERAGE-BANDWIDTH=2236791,RESOLUTION=404x720,CODECS="avc1.64001e,mp4a.40.2"',
+  'abc.HD-720p.1.6Mbps.hls.94731942_.m3u8',
+  '#EXT-X-STREAM-INF:BANDWIDTH=4438205,AVERAGE-BANDWIDTH=3536349,RESOLUTION=606x1080,CODECS="avc1.64001f,mp4a.40.2"',
+  'abc.HD-1080p.2.5Mbps.hls.94731942_.m3u8',
+  '#EXT-X-STREAM-INF:BANDWIDTH=1449532,AVERAGE-BANDWIDTH=1200904,RESOLUTION=270x480',
+  'abc.SD-480p.0.9Mbps.hls.94731942_.m3u8',
+].join('\n');
+
+test('hlsVariants: best variant first, relative URLs made absolute, AVERAGE-BANDWIDTH ignored', () => {
+  const v = m.hlsVariants(SHOPIFY_MASTER, 'https://cdn.shopify.com/videos/c/vp/abc/abc.m3u8');
+  assert.equal(v.length, 3);
+  assert.deepEqual(v.map((x) => x.bandwidth), [4438205, 2751476, 1449532]);
+  assert.equal(v[0].url, 'https://cdn.shopify.com/videos/c/vp/abc/abc.HD-1080p.2.5Mbps.hls.94731942_.m3u8');
+  assert.equal(v[0].resolution, '606x1080');
+  assert.deepEqual(m.hlsVariants('#EXTM3U\n#EXTINF:3,\na.ts', 'https://x.com/v/'), [], 'a media playlist has no variants');
+});
+
+test('hlsMedia: segments, init map, encryption and byte ranges', () => {
+  const plain = m.hlsMedia('#EXTM3U\n#EXT-X-TARGETDURATION:3\n#EXTINF:3.0,\nseg0.ts\n#EXTINF:3.0,\nhttps://cdn.x.com/seg1.ts\n#EXT-X-ENDLIST', 'https://x.com/v/media.m3u8');
+  assert.deepEqual(plain.segments, ['https://x.com/v/seg0.ts', 'https://cdn.x.com/seg1.ts']);
+  assert.equal(plain.encrypted, false);
+  const fmp4 = m.hlsMedia('#EXTM3U\n#EXT-X-MAP:URI="init.mp4"\n#EXTINF:4,\na.m4s', 'https://x.com/v/m.m3u8');
+  assert.equal(fmp4.map, 'https://x.com/v/init.mp4');
+  assert.ok(m.hlsMedia('#EXT-X-KEY:METHOD=AES-128,URI="k"\n#EXTINF:3,\na.ts', 'https://x.com/').encrypted);
+  assert.ok(!m.hlsMedia('#EXT-X-KEY:METHOD=NONE\n#EXTINF:3,\na.ts', 'https://x.com/').encrypted);
+  assert.ok(m.hlsMedia('#EXT-X-BYTERANGE:100@0\na.ts', 'https://x.com/').byteRange);
+});
+
+test('shopifyMp4: the progressive file of each Shopify rendition, null otherwise', () => {
+  const b = 'https://cdn.shopify.com/videos/c/vp/a60f/a60f';
+  assert.equal(m.shopifyMp4(b + '.HD-1080p.2.5Mbps.hls.94731942_.m3u8'), b + '.HD-1080p-2.5Mbps-94731942.mp4');
+  assert.equal(m.shopifyMp4(b + '.HD-720p.1.6Mbps.hls.94731942_.m3u8'), b + '.HD-720p-1.6Mbps-94731942.mp4');
+  assert.equal(m.shopifyMp4(b + '.SD-480p.0.9Mbps.hls.94731942_.m3u8?x=1'), b + '.SD-480p-0.9Mbps-94731942.mp4?x=1');
+  assert.equal(m.shopifyMp4('https://store.com/cdn/shop/videos/c/vp/q/q.HD-720p.1.6Mbps.hls.7_.m3u8'), 'https://store.com/cdn/shop/videos/c/vp/q/q.HD-720p-1.6Mbps-7.mp4');
+  assert.equal(m.shopifyMp4('https://x.com/v/master.m3u8'), null);
+  assert.equal(m.shopifyMp4('https://x.com/v/a.mp4'), null);
+});
+
+test('videoUrlsIn: JSON (escaped too), scripts, root-relative paths; no data: / blob: / bare names', () => {
+  const json = '{"sources":[{"url":"https:\\/\\/cdn.x.com\\/v\\/a.mp4?v=1"},{"url":"\\/media\\/json.mp4"}],"hls":"//cdn.x.com/v/s.m3u8"}';
+  assert.deepEqual(m.videoUrlsIn(json, 'https://shop.com/p'), ['https://cdn.x.com/v/a.mp4?v=1', 'https://shop.com/media/json.mp4', 'https://cdn.x.com/v/s.m3u8']);
+  const js = 'var v = "https://cdn.x.com/v/a.mp4?v=1"; load(\'/clips/b.webm\'); x = "c.mp4"; y = "blob:https://x/1"; z = "data:video/mp4;base64,AA";';
+  assert.deepEqual(m.videoUrlsIn(js, 'https://shop.com/'), ['https://cdn.x.com/v/a.mp4?v=1', 'https://shop.com/clips/b.webm']);
+  assert.deepEqual(m.videoUrlsIn('<img src="/a.jpg"> /path/to/movie.mov.txt', 'https://shop.com/'), []);
+  assert.deepEqual(m.videoUrlsIn('{"u":"https:\\u002F\\u002Fcdn.x.com\\u002Fv.mp4"}', 'https://s.com/'), ['https://cdn.x.com/v.mp4']);
+});
+
 test('the same helpers run in the page with the same results', async () => {
   const { chromium } = require('playwright');
   const src = fs.readFileSync(path.join(__dirname, '..', 'lib', 'mirror.js'), 'utf8');
@@ -112,5 +161,8 @@ test('the same helpers run in the page with the same results', async () => {
     const urls = ['https://fonts.gstatic.com/s/a.woff2', 'http://127.0.0.1:9/a/b?x=1', 'https://x.com/' + 'y/'.repeat(120) + 'z.png'];
     const inPage = await page.evaluate((list) => list.map((u) => window.__mirror.localPath(u)), urls);
     assert.deepEqual(inPage, urls.map(m.localPath));
+    const text = '{"u":"https:\\/\\/cdn.x.com\\/a.mp4","h":"/v/abc.HD-720p.1.6Mbps.hls.7_.m3u8"}';
+    const pageVideos = await page.evaluate((t) => window.__mirror.videoUrlsIn(t, 'https://s.com/').map((u) => window.__mirror.shopifyMp4(u) || u), text);
+    assert.deepEqual(pageVideos, m.videoUrlsIn(text, 'https://s.com/').map((u) => m.shopifyMp4(u) || u));
   } finally { await browser.close(); }
 });

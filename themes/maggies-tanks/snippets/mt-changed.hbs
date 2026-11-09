@@ -1,0 +1,18 @@
+{{!-- Maggie's: "What We Changed" (Theme settings → Maggie's – Home bottom). Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-sec--warm mt-changed">
+    <div class="b-wrap mt-mid">
+      <h2 class="mt-h2">{{@root.settings.mt_ch_heading}}</h2>
+      {{#if @root.settings.mt_ch_sub}}<p class="mt-sub">{{@root.settings.mt_ch_sub}}</p>{{/if}}
+      <div class="mt-changed__box">
+        {{#if @root.settings.mt_ch_text}}<p>{{@root.settings.mt_ch_text}}</p>{{/if}}
+        {{#if @root.settings.mt_ch_italic}}<p class="mt-changed__italic">{{@root.settings.mt_ch_italic}}</p>{{/if}}
+      </div>
+      {{#if @root.settings.mt_ch_layers}}<h3 class="mt-changed__h3">{{@root.settings.mt_ch_layers}}</h3>{{/if}}
+      <ol class="mt-changed__grid">
+        {{#if @root.settings.mt_ch_1_title}}<li><span class="mt-num">1</span><h4>{{@root.settings.mt_ch_1_title}}</h4><p>{{@root.settings.mt_ch_1_text}}</p></li>{{/if}}
+        {{#if @root.settings.mt_ch_2_title}}<li><span class="mt-num">2</span><h4>{{@root.settings.mt_ch_2_title}}</h4><p>{{@root.settings.mt_ch_2_text}}</p></li>{{/if}}
+        {{#if @root.settings.mt_ch_3_title}}<li><span class="mt-num">3</span><h4>{{@root.settings.mt_ch_3_title}}</h4><p>{{@root.settings.mt_ch_3_text}}</p></li>{{/if}}
+        {{#if @root.settings.mt_ch_4_title}}<li><span class="mt-num">4</span><h4>{{@root.settings.mt_ch_4_title}}</h4><p>{{@root.settings.mt_ch_4_text}}</p></li>{{/if}}
+      </ol>
+    </div>
+  </section>

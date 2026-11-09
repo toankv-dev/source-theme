@@ -1,0 +1,5 @@
+{{!-- Maggie's: the two guarantee ticks under every buy button (Theme settings → Maggie's – Home top). --}}
+<ul class="mt-ticks">
+  {{#if @root.settings.mt_tick_1}}<li><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="m4.6 8.2 2.2 2.2 4.6-4.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{@root.settings.mt_tick_1}}</li>{{/if}}
+  {{#if @root.settings.mt_tick_2}}<li><svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="m4.6 8.2 2.2 2.2 4.6-4.6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{@root.settings.mt_tick_2}}</li>{{/if}}
+</ul>

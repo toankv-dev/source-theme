@@ -85,6 +85,30 @@
       ]
     },
     {
+      "type": "select",
+      "id": "style",
+      "label": "Look",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Base"
+        },
+        {
+          "value": "maggies",
+          "label": "Maggie's (as the home product block)"
+        }
+      ],
+      "info": "Maggie's: the home product block's fonts and colours, a boxed Size chart row, the Maggie's intro / trust blocks."
+    },
+    {
+      "type": "text",
+      "id": "gallery_caption",
+      "label": "Caption on the main photo",
+      "default": "",
+      "info": "e.g. Model is 5'6\" and wears M. Empty = no caption."
+    },
+    {
       "type": "paragraph",
       "content": "Everything in the info column is a block — reorder, hide or add them."
     }
@@ -328,6 +352,10 @@
             {
               "value": "radio",
               "label": "Volume bundle (radio dot, no picture)"
+            },
+            {
+              "value": "tiers",
+              "label": "Maggie's tiers (picture, chosen card in the accent colour, black pill badge)"
             }
           ]
         },
@@ -625,6 +653,13 @@
           "label": "Show the option pickers above the button",
           "default": true,
           "info": "Turn off when a separate Variant picker block is used."
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_options",
+          "label": "Bundles only: hide the option pickers (shoppers pick Size / Color in each pack's rows)",
+          "default": false,
+          "info": "For Pack cards with quantity packs and 'one Color / Size row per unit' on. The pickers stay in the page (the pack rows read them) but are not shown; without pack rows they show again."
         },
         {
           "type": "checkbox",
@@ -1048,26 +1083,44 @@
       "limit": 1,
       "settings": [
         {
+          "type": "select",
+          "id": "mode",
+          "label": "Kind",
+          "default": "finder",
+          "options": [
+            {
+              "value": "finder",
+              "label": "Size finder (opens in place: height, weight, bust → size)"
+            },
+            {
+              "value": "popup",
+              "label": "Popup with a size chart picture"
+            }
+          ],
+          "info": "Size finder: the size table and every text are in Theme settings → Maggie's – Home middle → Size chart & size finder (shared with the home page)."
+        },
+        {
           "type": "text",
           "id": "label",
-          "label": "Link text",
-          "default": "Size guide"
+          "label": "Button text",
+          "default": "",
+          "info": "Empty = Theme settings (Size Chart)."
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Popup title",
+          "label": "Popup title (popup only)",
           "default": "Size chart"
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Size chart image"
+          "label": "Size chart image (popup only)"
         },
         {
           "type": "richtext",
           "id": "body",
-          "label": "Text (below the image)",
+          "label": "Text below the image (popup only)",
           "default": ""
         },
         {
@@ -1076,6 +1129,105 @@
           "label": "Show only for products with this option",
           "default": "",
           "info": "e.g. Size. Empty = every product."
+        }
+      ]
+    },
+    {
+      "type": "mt_intro",
+      "name": "Maggie's intro (badge, headline, ✓ lines)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "badge",
+          "label": "#1 badge picture",
+          "info": "Recommended 640 × 130. Empty = the home product block's (Theme settings → Maggie's – Home middle → Product); none there = an upload frame."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Headline",
+          "default": "",
+          "info": "Empty = the home product block's (Theme settings → Maggie's – Home middle → Product)."
+        },
+        {
+          "type": "text",
+          "id": "tick_1",
+          "label": "✓ 1 (HTML: <strong>)",
+          "default": "",
+          "info": "Empty = the home product block's (Theme settings → Maggie's – Home middle → Product)."
+        },
+        {
+          "type": "text",
+          "id": "tick_2",
+          "label": "✓ 2 (HTML: <strong>)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "tick_3",
+          "label": "✓ 3 (HTML: <strong>)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "tick_4",
+          "label": "✓ 4 (HTML: <strong>)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "mt_trust",
+      "name": "Maggie's trust lines (shipping, guarantee, founder)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "ships",
+          "label": "Shipping line",
+          "default": "",
+          "info": "Empty = the home product block's (Theme settings → Maggie's – Home middle → Product) — for every field of this block."
+        },
+        {
+          "type": "text",
+          "id": "free",
+          "label": "Free shipping line (HTML)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "g_title",
+          "label": "Guarantee title",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "g_text",
+          "label": "Guarantee text (HTML)",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Founder quote (HTML; empty here and in Theme settings = no quote)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "founder",
+          "label": "Founder name",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Founder role",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Founder picture",
+          "info": "Round, recommended 88 × 88. Empty = an upload frame."
         }
       ]
     }

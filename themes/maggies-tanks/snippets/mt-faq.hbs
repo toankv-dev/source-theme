@@ -1,0 +1,15 @@
+{{!-- Maggie's: FAQ (questions: Theme settings → FAQ; heading: Maggie's – Home bottom). Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-faq">
+    <div class="b-wrap mt-faq__inner">
+      <h2 class="mt-h2 mt-h2--sans">{{#if @root.settings.mt_faq_heading}}{{@root.settings.mt_faq_heading}}{{else}}Frequently asked questions{{/if}}</h2>
+      {{#if @root.settings.mt_faq_sub}}<p class="mt-sub">{{@root.settings.mt_faq_sub}}</p>{{/if}}
+      <div class="b-faq mt-faq__list">
+        {{#each (faqItems @root.settings)}}
+        <details class="b-faq__item">
+          <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+          <div class="b-rte">{{{applyTokens a}}}</div>
+        </details>
+        {{/each}}
+      </div>
+    </div>
+  </section>

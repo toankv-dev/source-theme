@@ -1,0 +1,50 @@
+{
+  "name": "Maggie's story block",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "part",
+      "label": "Block",
+      "default": "before_after",
+      "options": [
+        {
+          "value": "before_after",
+          "label": "Real Women… (before & after cards)"
+        },
+        {
+          "value": "changed",
+          "label": "What We Changed"
+        },
+        {
+          "value": "routine",
+          "label": "Your New Morning Routine"
+        },
+        {
+          "value": "compare",
+          "label": "How It Compares"
+        },
+        {
+          "value": "comfort",
+          "label": "Your Comfort Comes First"
+        },
+        {
+          "value": "faq",
+          "label": "Frequently Asked Questions"
+        },
+        {
+          "value": "last",
+          "label": "Last call"
+        }
+      ],
+      "info": "Texts and pictures: Theme settings → Maggie's – Home top / Home bottom and FAQ (shared with the home page). Before & after pictures left empty stay upload frames here (square, 800 × 800). Its look loads with the product section set to Look = Maggie's (template \"Maggie's product page\")."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maggie's story block",
+      "category": "Maggie's",
+      "description": "One of the home page's blocks (before & after, what we changed, routine, comparison, comfort, FAQ, last call)."
+    }
+  ]
+}

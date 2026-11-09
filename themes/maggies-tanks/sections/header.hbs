@@ -6,17 +6,22 @@
       Sale bar: topbar_style "rotate" cycles messages split on "||"; "countdown" shows a title, a subtitle and
       a timer that restarts every countdown_hours hours (per visitor). --}}
 {{> vars}}
+{{> mt-fonts}}
 {{#unless (eq settings.show_topbar false)}}
 <div class="b-topbar b-topbar--{{#if (eq settings.topbar_style "countdown")}}countdown{{else}}rotate{{/if}}" role="region" aria-label="Announcements" data-topbar="{{settings.topbar_text}}" data-autoplay="{{#if (eq settings.topbar_autoplay false)}}false{{else}}true{{/if}}">
   {{#if (eq settings.topbar_style "countdown")}}
   <div class="b-wrap b-topbar__inner b-topbar__inner--countdown">
+    <img class="mt-cd-flag" src="{{assets_url}}/images/mt/flag.webp" alt="" width="65" height="49">
+    <div class="mt-cd-copy">
     <p class="b-topbar__title">{{#if settings.countdown_title}}{{settings.countdown_title}}{{else}}Flash sale{{/if}}</p>
     {{#if settings.countdown_subtitle}}<p class="b-topbar__sub">{{settings.countdown_subtitle}}</p>{{/if}}
+    </div>
     <p class="b-countdown" data-countdown data-hours="{{#if settings.countdown_hours}}{{settings.countdown_hours}}{{else}}2{{/if}}" aria-label="Time left">
-      <span><b data-cd-h>00</b><small>Hours</small></span><i>:</i>
+      <span><b data-cd-h>00</b><small>Hrs</small></span><i>:</i>
       <span><b data-cd-m>00</b><small>Min</small></span><i>:</i>
       <span><b data-cd-s>00</b><small>Sec</small></span>
     </p>
+    <span class="mt-cd-stars" aria-hidden="true">★★★★★</span>
   </div>
   {{else}}
   <div class="b-wrap b-topbar__inner">

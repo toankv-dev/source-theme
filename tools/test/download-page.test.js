@@ -129,3 +129,107 @@ describe('download-page.js on the fake store', LONG, () => {
     assert.ok(!fs.existsSync(path.join(t2, '_work', 'site', 'pages', 'page')));
   });
 });
+
+describe('download-page.js: every video of a page', LONG, () => {
+  let fx;
+  let site;
+  let run;
+  const rel = (u) => u.replace(/^http:\/\/127\.0\.0\.1:\d+/, '');
+  let assets;
+
+  before(async () => {
+    fx = await startFixture();
+    const theme = tmpDir('download-video-');
+    site = path.join(theme, '_work', 'site');
+    run = await runNode([TOOL, fx.origin + '/products/video-tee', theme, '--no-capture']);
+    assets = Object.fromEntries(Object.entries(JSON.parse(fs.readFileSync(path.join(site, 'assets.json'), 'utf8'))).map(([u, r]) => [rel(u), r]));
+  });
+  after(() => fx.close());
+
+  test('videos in a <template>, in JSON and behind a link are downloaded, with where they came from', () => {
+    assert.equal(run.code, 0, run.stdout + run.stderr);
+    for (const [p, via] of [['/media/tpl.mp4', 'template'], ['/media/json.mp4', 'json'], ['/media/link.mp4', 'link']]) {
+      assert.ok(assets[p], 'missing ' + p);
+      assert.equal(assets[p].via, via, p);
+      assert.ok(fs.existsSync(path.join(site, assets[p].file)), 'file of ' + p);
+      assert.equal(assets[p].bytes, 64 * 1024);
+    }
+    const html = fs.readFileSync(path.join(site, 'pages', 'product', 'index.html'), 'utf8');
+    assert.match(html, /<template><video[^>]*><source src="\/_m\/127\.0\.0\.1_\d+\/media\/tpl\.mp4"/, 'links inside <template> point at /_m/');
+  });
+
+  test('a Shopify-named HLS stream becomes the MP4 of its best rendition, with its poster', () => {
+    const mp4 = assets['/videos/c/vp/abc/abc.HD-720p-1.6Mbps-123.mp4'];
+    assert.ok(mp4, 'the best rendition (720p, not 480p) as one MP4');
+    assert.equal(mp4.via, 'stream');
+    assert.match(mp4.stream, /\/videos\/c\/vp\/abc\/abc\.m3u8$/);
+    assert.match(mp4.poster, /RRTL_-_WP1__71153\.jpg\?poster=2$/);
+    assert.ok(!assets['/videos/c/vp/abc/abc.SD-480p-0.9Mbps-123.mp4']);
+    const html = fs.readFileSync(path.join(site, 'pages', 'product', 'index.html'), 'utf8');
+    assert.match(html, /<source src="\/_m\/127\.0\.0\.1_\d+\/videos\/c\/vp\/abc\/abc\.HD-720p-1\.6Mbps-123\.mp4" type="video\/mp4">/, 'the HLS <source> plays the MP4 offline');
+  });
+
+  test('a plain HLS stream played from a blob: keeps its playlists (local links) and segments', () => {
+    const master = assets['/media/plain/master.m3u8'];
+    assert.ok(master, 'caught on the network although the DOM only has a blob:');
+    assert.equal(master.stream, true);
+    assert.equal(master.segments, 2);
+    for (const p of ['/media/plain/seg0.ts', '/media/plain/seg1.ts', '/media/plain/media.m3u8']) assert.ok(assets[p] && assets[p].segmentOf, p);
+    const media = fs.readFileSync(path.join(site, assets['/media/plain/media.m3u8'].file), 'utf8');
+    assert.match(media, /^\/_m\/127\.0\.0\.1_\d+\/media\/plain\/seg0\.ts$/m);
+    const m = JSON.parse(fs.readFileSync(path.join(site, 'manifest.json'), 'utf8'));
+    assert.ok(!m.skipped.some((s) => /\.m3u8/.test(s.url)), 'no stream left in skipped');
+  });
+
+  test('the summary lists every video; the offline copy still needs no network', () => {
+    assert.equal((run.stdout.match(/^ {2}video /gm) || []).length, 4, run.stdout);
+    assert.match(run.stdout, /^ {2}stream 2 segments/m);
+    const page = JSON.parse(fs.readFileSync(path.join(site, 'manifest.json'), 'utf8')).pages[0];
+    assert.equal(page.counts.videos, 4);
+    assert.equal(page.counts.streams, 1);
+    for (const label of ['desktop', 'mobile']) {
+      assert.deepEqual(page.check[label].external, [], label);
+      assert.deepEqual(page.check[label].notFound, [], label);
+      assert.ok(page.check[label].diff <= 1, label + ' ' + page.check[label].diff);
+    }
+  });
+});
+
+describe('download-page.js --refresh behind a bot check', LONG, () => {
+  let fx;
+  let theme;
+  let pageDir;
+  before(async () => {
+    fx = await startFixture();
+    theme = tmpDir('download-refresh-');
+    pageDir = path.join(theme, '_work', 'site', 'pages', 'fickle');
+    const r = await runNode([TOOL, fx.origin + '/products/fickle-tee', theme, '--name', 'fickle', '--no-capture']);
+    assert.equal(r.code, 0, r.stdout + r.stderr);
+  });
+  after(() => fx.close());
+
+  test('a viewport blocked this time keeps its previous files', async () => {
+    const before = fs.statSync(path.join(pageDir, 'desktop.png')).mtimeMs;
+    fx.state.blockDesktop = true;
+    const r = await runNode([TOOL, fx.origin + '/products/fickle-tee', theme, '--name', 'fickle', '--refresh', '--no-capture']);
+    fx.state.blockDesktop = false;
+    assert.equal(r.code, 0, r.stdout + r.stderr);
+    assert.match(r.stdout, /desktop: blocked, the previous download of this viewport is kept/);
+    for (const f of ['index.html', 'desktop.png', 'mobile.html', 'mobile.png']) assert.ok(fs.existsSync(path.join(pageDir, f)), f);
+    assert.equal(fs.statSync(path.join(pageDir, 'desktop.png')).mtimeMs, before, 'the old desktop screenshot');
+    const m = JSON.parse(fs.readFileSync(path.join(theme, '_work', 'site', 'manifest.json'), 'utf8'));
+    const page = m.pages.find((p) => p.name === 'fickle');
+    assert.deepEqual(page.blocked, ['desktop']);
+    assert.deepEqual(page.kept, ['desktop']);
+    assert.ok(!fs.existsSync(pageDir + '.previous'));
+  });
+
+  test('blocked on both viewports: the previous download stays whole', async () => {
+    fx.state.blockAll = true;
+    const r = await runNode([TOOL, fx.origin + '/products/fickle-tee', theme, '--name', 'fickle', '--refresh', '--no-capture']);
+    fx.state.blockAll = false;
+    assert.equal(r.code, 2, r.stdout + r.stderr);
+    assert.match(r.stderr, /previous download of "fickle" is kept/);
+    for (const f of ['index.html', 'desktop.png', 'mobile.html', 'mobile.png']) assert.ok(fs.existsSync(path.join(pageDir, f)), f);
+  });
+});

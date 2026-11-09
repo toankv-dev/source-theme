@@ -1,0 +1,54 @@
+{{!-- Maggie's size finder: a "Size Chart" box that opens in place (not a popup) with height / weight / full bust →
+      the recommended size (ui.js initSizeFinder). Every text and the size table: Theme settings → Maggie's – Home middle
+      → Size chart & size finder (mt_sf_*, mt_size_*), shared by the home product block and the product page's Size
+      chart block. label = the block's button text ("" = the setting). Callers pass label (a partial also sees the
+      caller's context). Look: assets/css/mt-size.css, linked here (one finder per page). --}}
+<link rel="stylesheet" href="{{@root.assets_url}}/css/mt-size.css">
+<div class="mt-sf" data-size-finder data-sf-table="{{@root.settings.mt_sf_table}}" data-sf-missing="{{@root.settings.mt_sf_missing}}" data-sf-note="{{@root.settings.mt_sf_note}}" data-sf-note-bust="{{@root.settings.mt_sf_note_bust}}" data-sf-pick="{{@root.settings.mt_sf_pick}}">
+  <button type="button" class="mt-sf__toggle" aria-expanded="false" data-sf-toggle>
+    <svg class="mt-sf__ruler" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7.5 3.5h9a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1zM6.5 7.5h3M6.5 11h2M6.5 14.5h3M6.5 18h2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="mt-sf__label">{{#if label}}{{label}}{{else if @root.settings.mt_size_label}}{{@root.settings.mt_size_label}}{{else}}Size Chart{{/if}}</span>
+    <svg class="mt-sf__chev" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="mt-sf__panel" data-sf-panel hidden>
+    <label class="mt-sf__step">
+      <span class="mt-sf__name">{{@root.settings.mt_sf_height}}</span>
+      <select class="mt-sf__field" data-sf-height><option value="" disabled selected>Select</option></select>
+      {{#if @root.settings.mt_sf_height_hint}}<span class="mt-sf__hint">{{@root.settings.mt_sf_height_hint}}</span>{{/if}}
+    </label>
+    <label class="mt-sf__step">
+      <span class="mt-sf__name">{{@root.settings.mt_sf_weight}}</span>
+      <input class="mt-sf__field" data-sf-weight type="number" inputmode="numeric" min="60" max="600" placeholder="{{@root.settings.mt_sf_weight_ph}}">
+      {{#if @root.settings.mt_sf_weight_hint}}<span class="mt-sf__hint">{{@root.settings.mt_sf_weight_hint}}</span>{{/if}}
+    </label>
+    <div class="mt-sf__step">
+      <label>
+        <span class="mt-sf__name">{{@root.settings.mt_sf_bust}}{{#if @root.settings.mt_sf_bust_tag}} <span class="mt-sf__tag">{{@root.settings.mt_sf_bust_tag}}</span>{{/if}}</span>
+        <input class="mt-sf__field" data-sf-bust type="text" inputmode="decimal" autocomplete="off" placeholder="{{@root.settings.mt_sf_bust_ph}}">
+      </label>
+      {{#if @root.settings.mt_sf_bust_warn}}<p class="mt-sf__warn">{{@root.settings.mt_sf_bust_warn}}</p>{{/if}}
+      {{#if @root.settings.mt_sf_how_steps}}
+      <button type="button" class="mt-sf__how" aria-expanded="false" data-sf-how>{{@root.settings.mt_sf_how}}</button>
+      <div class="mt-sf__howpanel" data-sf-howpanel hidden>
+        {{#if @root.settings.mt_sf_how_image}}<img src="{{@root.settings.mt_sf_how_image}}" alt="" loading="lazy">{{/if}}
+        {{{@root.settings.mt_sf_how_steps}}}
+      </div>
+      {{/if}}
+    </div>
+    <button type="button" class="mt-sf__go" data-sf-go>{{@root.settings.mt_sf_button}}</button>
+    <p class="mt-sf__error" data-sf-error role="alert" hidden></p>
+    <div class="mt-sf__result" data-sf-result role="status" hidden>
+      <span class="mt-sf__lead">{{@root.settings.mt_sf_result}}</span>
+      <strong class="mt-sf__size" data-sf-size></strong>
+      <span class="mt-sf__note" data-sf-note-out></span>
+      <span class="mt-sf__pick" data-sf-pick-out></span>
+    </div>
+    <details class="mt-sf__chart">
+      <summary>{{#if @root.settings.mt_size_title}}{{@root.settings.mt_size_title}}{{else}}See the full size chart{{/if}}</summary>
+      <div data-sf-chart></div>
+      {{#if @root.settings.mt_size_image}}<img class="mt-sf__chartimg" src="{{@root.settings.mt_size_image}}" alt="Size chart" loading="lazy">{{/if}}
+      {{#if @root.settings.mt_size_text}}<div class="b-rte">{{{applyTokens @root.settings.mt_size_text}}}</div>{{/if}}
+    </details>
+    {{#if @root.settings.mt_sf_between}}<p class="mt-sf__between">{{{@root.settings.mt_sf_between}}}</p>{{/if}}
+  </div>
+</div>

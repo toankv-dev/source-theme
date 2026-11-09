@@ -1,0 +1,10 @@
+{{!-- Maggie's: "How It Compares" (Theme settings → Maggie's – Home bottom; the table is built by assets/js/mt-home.js).
+      Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-sec--cream mt-compare">
+    <div class="b-wrap">
+      <h2 class="mt-h2 mt-h2--sans">{{@root.settings.mt_cmp_heading}}</h2>
+      {{#if @root.settings.mt_cmp_sub}}<p class="mt-sub">{{@root.settings.mt_cmp_sub}}</p>{{/if}}
+      <div class="mt-compare__wrap" data-mt-compare="{{@root.settings.mt_cmp_rows}}" data-cols="{{@root.settings.mt_cmp_cols}}" data-score="{{@root.settings.mt_cmp_score}}"></div>
+      {{#if @root.settings.mt_cmp_note}}<p class="mt-compare__note">{{@root.settings.mt_cmp_note}}</p>{{/if}}
+    </div>
+  </section>

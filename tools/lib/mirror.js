@@ -11,6 +11,9 @@
  *   pageName(url)         → home / product / collection / search / contact / tracking / policy / page
  *   isBlocked({ status, title, text }) → true for bot-check / access-denied pages
  *   looksLikeMedia(value) → true when an attribute value looks like an image / video URL
+ *   hlsVariants(text, base) / hlsMedia(text, base) → HLS master variants (best first) / media playlist segments
+ *   shopifyMp4(variantUrl) → the progressive MP4 Shopify serves for an HLS rendition, or null
+ *   videoUrlsIn(text, base) → video URLs written in JSON / scripts / attributes
  */
 'use strict';
 
@@ -153,5 +156,61 @@ function isStream(u) {
   return /^blob:/i.test(String(u)) || /\.(m3u8|mpd)(\?|#|$)/i.test(String(u));
 }
 
+// HLS master playlist → its variant streams, best (highest BANDWIDTH) first: [{ url, bandwidth, resolution }].
+// A media playlist (no #EXT-X-STREAM-INF) gives [].
+function hlsVariants(text, base) {
+  const lines = String(text || '').split(/\r?\n/).map((l) => l.trim());
+  const out = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (!/^#EXT-X-STREAM-INF:/i.test(lines[i])) continue;
+    const bandwidth = Number((lines[i].match(/[:,]BANDWIDTH=(\d+)/i) || [])[1]) || 0;
+    const resolution = (lines[i].match(/RESOLUTION=(\d+x\d+)/i) || [])[1] || '';
+    let j = i + 1;
+    while (j < lines.length && (!lines[j] || lines[j].startsWith('#'))) j++;
+    const url = j < lines.length ? absUrl(lines[j], base) : null;
+    if (url) out.push({ url, bandwidth, resolution });
+    i = j;
+  }
+  return out.sort((a, b) => b.bandwidth - a.bandwidth);
+}
+
+// HLS media playlist → { segments: [url], map: init segment url | null, encrypted, byteRange }.
+function hlsMedia(text, base) {
+  const out = { segments: [], map: null, encrypted: false, byteRange: false };
+  String(text || '').split(/\r?\n/).map((l) => l.trim()).forEach((l) => {
+    if (!l) return;
+    if (/^#EXT-X-KEY:/i.test(l)) { if (!/METHOD=NONE/i.test(l)) out.encrypted = true; return; }
+    if (/^#EXT-X-BYTERANGE/i.test(l)) { out.byteRange = true; return; }
+    if (/^#EXT-X-MAP:/i.test(l)) {
+      const m = l.match(/URI="([^"]+)"/i);
+      if (m) out.map = absUrl(m[1], base);
+      if (/BYTERANGE=/i.test(l)) out.byteRange = true;
+      return;
+    }
+    if (!l.startsWith('#')) { const u = absUrl(l, base); if (u) out.segments.push(u); }
+  });
+  return out;
+}
+
+// Shopify serves every HLS rendition as one progressive MP4 too:
+// "…/abc.HD-1080p.2.5Mbps.hls.94731942_.m3u8" → "…/abc.HD-1080p-2.5Mbps-94731942.mp4"; null for any other stream.
+function shopifyMp4(variantUrl) {
+  const m = String(variantUrl || '').match(/^(.*\/[^/]+?)\.((?:UHD|HD|SD)-\d+p)\.([\d.]+Mbps)\.hls\.(\d+)_\.m3u8(\?[^#]*)?(?:#.*)?$/);
+  return m ? m[1] + '.' + m[2] + '-' + m[3] + '-' + m[4] + '.mp4' + (m[5] || '') : null;
+}
+
+// Video URLs written in text — JSON (slashes escaped as \/ or / too), inline scripts, attributes — as absolute
+// http(s) URLs, each once. Root-relative paths count; bare relative names ("a.mp4") do not (too many false hits).
+function videoUrlsIn(text, base) {
+  const s = String(text || '').replace(/\\\//g, '/').replace(/\\u002[fF]/g, '/');
+  const re = /(?<![\w.\/-])(?:(?:https?:)?\/\/|\/)[^\s"'<>()\\,]*?\.(?:mp4|webm|mov|m4v|ogv|m3u8)(?:\?[^\s"'<>()\\,]*)?(?![\w.\/-])/gi;
+  const out = [];
+  for (const m of s.matchAll(re)) {
+    const a = absUrl(m[0], base);
+    if (a && out.indexOf(a) < 0) out.push(a);
+  }
+  return out;
+}
+
 module.exports = { hash, localPath, localUrl, absUrl, isLocal, rewriteCss, parseSrcset, largestCandidate, rewriteSrcset,
-  pageName, isBlocked, looksLikeMedia, isStream };
+  pageName, isBlocked, looksLikeMedia, isStream, hlsVariants, hlsMedia, shopifyMp4, videoUrlsIn };

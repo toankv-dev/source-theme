@@ -1,8 +1,10 @@
 {{!-- Option pickers, one fieldset per option group (product.variants). theme.js maps the chosen labels to
       a variant through config.variants, and hides the group a Pack cards block already controls.
-      `custom_name` (set per value in the listing) is only the text shown; the value stays `label`. --}}
+      `custom_name` (set per value in the listing) is only the text shown; the value stays `label`.
+      hide_pickers (Buy buttons → hide_options, "bundles only"): rendered but hidden — the pack unit rows read their
+      option names / values from these pickers; ui.js shows them again when the page has no pack unit rows. --}}
 {{#if @root.product.variants.length}}
-<div class="b-options" data-options>
+<div class="b-options" data-options{{#if hide_pickers}} hidden data-options-hidden{{/if}}>
   {{#each @root.product.variants}}
   <fieldset class="b-opt" data-opt="{{@index}}">
     <legend class="b-opt__legend">{{name}}: <span data-opt-current>{{#each options}}{{#if active}}{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}{{/if}}{{/each}}</span></legend>

@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
 const { tmpDir } = require('./helpers');
-const { findOriginalMedia, isContent } = require('../lib/media-guard');
+const { findOriginalMedia, isContent, videoBytes } = require('../lib/media-guard');
 
 const bytes = (seed, n) => Buffer.alloc(n || 8000, seed);
 
@@ -36,21 +36,29 @@ test('isContent: product-only, main area, not an icon', () => {
   assert.ok(!isContent({ file: 'a', contentType: 'image/svg+xml', bytes: 9000, pages: ['product'], area: 'main' }));
   assert.ok(!isContent({ file: 'a', contentType: 'image/png', bytes: 1000, pages: ['product'], area: 'main', rendered: { w: 400, h: 400 } }), 'tiny file');
   assert.ok(!isContent({ file: 'a', contentType: 'image/jpeg', bytes: 9000, pages: [], area: 'main' }));
+  assert.ok(!isContent({ file: 'a', contentType: 'video/mp4', bytes: 9e6, pages: ['product'], area: 'main', rendered: { w: 600, h: 600 } }), 'videos may ship');
 });
 
-test('a copied product-page image or video is an error; logo, icon, shared banner are not', () => {
+test('a copied product-page image is an error; its video, logo, icon, shared banner are not', () => {
   const t = theme(true);
   t.put('assets/images/hero.jpg', bytes(1)); // the product photo, renamed
   t.put('assets/images/logo.png', bytes(2));
   t.put('assets/images/badge.png', bytes(3));
   t.put('assets/images/banner.jpg', bytes(5));
-  t.put('sample/clip.mp4', bytes(4, 20000));
+  t.put('assets/videos/mt/clip.mp4', bytes(4, 20000)); // the original's video as a slot default: allowed
   t.put('_work/notes/shorts-1.jpg', bytes(1)); // _work is never packed
   const r = findOriginalMedia(t.dir);
-  assert.equal(r.errors.length, 2, r.errors.join('\n'));
-  assert.ok(r.errors.some((e) => e.startsWith('assets/images/hero.jpg is a product-page image')));
-  assert.ok(r.errors.some((e) => e.startsWith('sample/clip.mp4')));
+  assert.equal(r.errors.length, 1, r.errors.join('\n'));
+  assert.ok(r.errors[0].startsWith('assets/images/hero.jpg is a product-page image'));
   assert.deepEqual(r.warnings, []);
+});
+
+test('videoBytes: shipped videos only (not _work)', () => {
+  const t = theme(true);
+  t.put('assets/videos/mt/a.mp4', bytes(4, 20000));
+  t.put('assets/videos/mt/b.webm', bytes(5, 10000));
+  t.put('_work/site/_m/x/c.mp4', bytes(6, 50000));
+  assert.deepEqual(videoBytes(t.dir), { files: 2, bytes: 30000 });
 });
 
 test('the same name under another format is a warning', () => {

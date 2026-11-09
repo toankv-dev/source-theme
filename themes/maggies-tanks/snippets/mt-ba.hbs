@@ -1,0 +1,22 @@
+{{!-- Maggie's: "Real Women. Real Comfort. Real Relief." — before / after cards (Theme settings → Maggie's – Home top).
+      Home: templates/index.hbs; product page: sections/mt-story.hbs (slot = true: empty pictures stay upload frames;
+      nocta = true: no "Buy now" row under the cards, as the original product page). --}}
+  <section class="mt-sec mt-ba">
+    <div class="b-wrap">
+      <h2 class="mt-h2 mt-h2--green">{{@root.settings.mt_ba_heading}}</h2>
+      {{#if @root.settings.mt_ba_sub}}<p class="mt-sub">{{@root.settings.mt_ba_sub}}</p>{{/if}}
+      {{#if @root.settings.mt_ba_rating}}<p class="mt-ba__rating"><span aria-hidden="true">★★★★★</span>{{@root.settings.mt_ba_rating}}</p>{{/if}}
+      <ul class="mt-ba__grid">
+        {{> mt-ba-card img=@root.settings.mt_ba_1_image def="ba-1" quote=@root.settings.mt_ba_1_quote name=@root.settings.mt_ba_1_name slot=slot}}
+        {{> mt-ba-card img=@root.settings.mt_ba_2_image def="ba-2" quote=@root.settings.mt_ba_2_quote name=@root.settings.mt_ba_2_name slot=slot}}
+        {{> mt-ba-card img=@root.settings.mt_ba_3_image def="ba-3" quote=@root.settings.mt_ba_3_quote name=@root.settings.mt_ba_3_name slot=slot}}
+        {{> mt-ba-card img=@root.settings.mt_ba_4_image def="ba-4" quote=@root.settings.mt_ba_4_quote name=@root.settings.mt_ba_4_name slot=slot}}
+      </ul>
+      {{#unless nocta}}
+      <div class="mt-cta-row">
+        <a class="mt-btn" href="#mt-product">{{@root.settings.mt_ba_button}}</a>
+        {{> mt-ticks}}
+      </div>
+      {{/unless}}
+    </div>
+  </section>

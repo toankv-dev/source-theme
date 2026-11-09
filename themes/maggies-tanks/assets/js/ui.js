@@ -555,6 +555,15 @@
       });
     }
 
+    // Buy buttons → hide_options ("bundles only"): the pickers stay in the page because the pack unit rows read
+    // their names / values. Without unit rows nothing else would pick the variant, so they show again; with them
+    // the sticky bar's variant select goes too (the rows pick every unit).
+    var hiddenPickers = $$('[data-options-hidden]');
+    if (hiddenPickers.length) {
+      if (!unitRowsOn()) hiddenPickers.forEach(function (o) { o.hidden = false; });
+      else $$('[data-sticky-variant]').forEach(function (s) { (s.closest('.b-sticky__variant') || s).hidden = true; });
+    }
+
     $$('[data-opt]').forEach(function (group) {
       $$('[data-opt-value]', group).forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -1410,34 +1419,367 @@
 
   // ---------------------------------------------------------------------------------------------
   // Home: featured product (loads its product page for gallery + variants), comparison rows.
+  // The block also takes that product page's quantity pack cards (Buy 1 / Buy 2 Get 1…, settings from its
+  // product template; one Size / Color row per unit when unit_pickers is on), else one select per option;
+  // the combined select stays the last fallback. core.js only knows the page it runs on (no variants, no
+  // offers on the home page), so the variants come from the product page's #sf-variants-data and every pack
+  // price from the server quote (POST /api/storefront/cart/price): the theme never sets a price.
+  // Theme setting mt_prod_packs = false (data-featured-packs="0") turns the pack cards off.
   // ---------------------------------------------------------------------------------------------
+  function featuredRecord(v) {
+    return {
+      id: v.id,
+      options: v.option_values || v.options || [],
+      price: num(v.price),
+      compare: num(v.compare_at_price),
+      image: v.featured_image || '',
+      available: v.available !== false
+    };
+  }
+
+  function lowKey(x) { return String(x == null ? '' : x).trim().toLowerCase(); }
+
+  /** Variant of `list` with these option values: case-insensitive, then ignoring the option order (as core.js). */
+  function featuredFind(list, values) {
+    var want = values.map(lowKey);
+    var hit = list.filter(function (v) {
+      var o = v.options.map(lowKey);
+      return o.length === want.length && o.every(function (x, i) { return x === want[i]; });
+    })[0];
+    if (hit) return hit;
+    var sorted = want.slice().sort().join('|');
+    return list.filter(function (v) { return v.options.map(lowKey).sort().join('|') === sorted; })[0] || null;
+  }
+
+  /** Option groups of the product page ([data-opt]: name, values, swatch buttons), topped up from the variants. */
+  function featuredGroups(doc, list) {
+    var groups = $$('[data-opt]', doc).sort(function (a, b) {
+      return Number(a.getAttribute('data-opt')) - Number(b.getAttribute('data-opt'));
+    }).map(function (g) {
+      var legend = $('legend', g), sel = $('[data-opt-select]', g);
+      return {
+        name: legend && legend.firstChild ? legend.firstChild.textContent.replace(/:\s*$/, '').trim() : '',
+        choices: sel ? [].map.call(sel.options, function (o) { return { value: o.value, label: o.text }; })
+          : $$('[data-opt-value]', g).map(function (b) {
+            return { value: b.getAttribute('data-opt-value'), label: b.getAttribute('data-opt-display') || b.getAttribute('data-opt-value'), btn: b };
+          })
+      };
+    });
+    var n = list.length ? list[0].options.length : 0;
+    for (var i = groups.length; i < n; i++) {
+      var seen = [];
+      list.forEach(function (v) { if (seen.indexOf(v.options[i]) < 0) seen.push(v.options[i]); });
+      groups.push({ name: '', choices: seen.map(function (s) { return { value: s, label: s }; }) });
+    }
+    groups = groups.slice(0, n);
+    groups.forEach(function (g, k) { if (!g.name) g.name = 'Option ' + (k + 1); });
+    return groups;
+  }
+
+  /** The product page's pack cards block when its packs are quantity packs (not one option shown as cards). */
+  function featuredPackBlock(doc) {
+    var block = $('[data-cards-block]', doc);
+    if (!block || !$('[data-qcards] [data-qcard]', block)) return null;
+    var mode = block.getAttribute('data-mode') || 'auto';
+    if (mode === 'option') return null;
+    if (mode === 'auto' && $$('[data-cards]', block).some(function (g) { return PACK_NAME.test(g.getAttribute('data-cards-name') || ''); })) return null;
+    return block;
+  }
+
   function initFeatured() {
     var root = $('[data-featured]');
     if (!root) return;
     var url = root.getAttribute('data-featured'), thumbs = $('[data-featured-thumbs]', root), strip = $('[data-featured-strip]', root);
     var select = $('[data-featured-select]', root), atc = $('[data-featured-atc]', root), qty = $('[data-featured-qty-input]', root);
-    var pcfg = null, pvars = [];
+    var packBox = $('[data-featured-pack-box]', root), optsBox = $('[data-featured-opts]', root);
+    var pcfg = null, pvars = [], list = [], groups = [];
+    var mode = 'select'; // 'packs' (pack cards) · 'opts' (one select per option + quantity) · 'select' (combined select)
+    var pack = null; // { el: [data-qcards], settings }
+    var mainVals = [], unitVals = [], quotes = {}, requote = null;
+    // The price line rendered hidden for the pack cards (templates/index.hbs) comes back outside the 'packs' mode.
+    var showPrice = function () { var p = $('[data-featured-price-auto]', root); if (p) p.hidden = false; };
+
     $$('[data-featured-qty-step]', root).forEach(function (b) {
       b.addEventListener('click', function () { qty.value = String(Math.min(999, Math.max(1, (parseInt(qty.value, 10) || 1) + Number(b.getAttribute('data-featured-qty-step'))))); });
     });
+
     var chosen = function () {
-      var list = (pcfg && pcfg.variants) || [];
-      return list.filter(function (v) { return v.id === (select && select.value); })[0] || list[0] || null;
+      var all = (pcfg && pcfg.variants) || [];
+      return all.filter(function (v) { return v.id === (select && select.value); })[0] || all[0] || null;
     };
     var full = function (v) { return pvars.filter(function (x) { return x.id === v.id; })[0] || {}; };
-    var paint = function () {
+    var showImage = function (src) {
+      var main = $('[data-featured-main]', root);
+      if (!src || !main) return;
+      swapMedia(main, src, 'data-featured-main');
+      markThumb(thumbs, src);
+    };
+    var paintHead = function (total, compare) {
+      var priceEl = $('[data-featured-price]', root), cmpEl = $('[data-featured-compare]', root);
+      if (priceEl) priceEl.textContent = money(total);
+      if (!cmpEl && priceEl && compare > total) {
+        cmpEl = el('s');
+        cmpEl.setAttribute('data-featured-compare', '');
+        priceEl.parentNode.appendChild(document.createTextNode(' '));
+        priceEl.parentNode.appendChild(cmpEl);
+      }
+      if (cmpEl) cmpEl.textContent = compare > total ? money(compare) : '';
+    };
+    var paint = function () { // 'select' mode: the combined select (unchanged behaviour)
       var v = chosen();
       if (!v) return;
-      var f = full(v), priceEl = $('[data-featured-price]', root), cmpEl = $('[data-featured-compare]', root), cmp = num(f.compare_at_price);
-      if (priceEl) priceEl.textContent = money(v.price);
-      if (cmpEl) cmpEl.textContent = cmp > v.price ? money(cmp) : '';
-      if (f.featured_image && $('[data-featured-main]', root)) { swapMedia($('[data-featured-main]', root), f.featured_image, 'data-featured-main'); markThumb(thumbs, f.featured_image); }
+      var f = full(v), cmp = num(f.compare_at_price);
+      paintHead(v.price, cmp);
+      if (f.featured_image) showImage(f.featured_image);
     };
+
+    // --- 'opts' / 'packs': one variant from the per-option selects, quantity packs priced by the server ----
+    var mainVariant = function () { return featuredFind(list, mainVals); };
+    var line = function (v, q) {
+      return {
+        variantId: v.id, variant: v.options.join(' / '),
+        opts: v.options.map(function (value, i) { return { name: groups[i] ? groups[i].name : 'Option ' + (i + 1), value: value }; }),
+        qty: q, title: pcfg.title || '', handle: pcfg.handle || '', productId: pcfg.productId || '', url: url,
+        image: v.image || pcfg.image || '', price: v.price, comparePrice: v.compare || undefined
+      };
+    };
+    var unitsOn = function () { return mode === 'packs' && !!(pack.settings || {}).unit_pickers && groups.length > 0; };
+    var selectedCard = function () { return pack ? $('[data-qcard].is-selected', pack.el) : null; };
+    var cardQty = function (card) { return Math.min(999, Math.max(1, Number(card.getAttribute('data-qty')) || 1)); };
+
+    /** [{ v, q }] of a pack card: the chosen card's unit rows (one entry per variant), else N × the main variant. */
+    var packParts = function (card) {
+      var n = cardQty(card), base = mainVariant();
+      if (!(unitsOn() && card.classList.contains('is-selected'))) return base ? [{ v: base, q: n }] : null;
+      var by = {}, out = [];
+      for (var k = 0; k < Math.min(n, 12); k++) {
+        var v = featuredFind(list, unitVals[k] || mainVals);
+        if (!v) return null;
+        if (!by[v.id]) { by[v.id] = { v: v, q: 0 }; out.push(by[v.id]); }
+        by[v.id].q++;
+      }
+      if (n > 12 && out.length) out[0].q += n - 12; // rows stop at 12; the extra units follow the first row
+      return out;
+    };
+    var gross = function (parts) { return Base.round2(parts.reduce(function (s, p) { return s + p.v.price * p.q; }, 0)); };
+    var grossCompare = function (parts) { return Base.round2(parts.reduce(function (s, p) { return s + Math.max(p.v.compare, p.v.price) * p.q; }, 0)); };
+    var partsKey = function (parts) { return parts.map(function (p) { return p.v.id + 'x' + p.q; }).sort().join(','); };
+
+    /** The checkout's price for these lines (subtotal − discount), cached; null when the quote fails. */
+    var quote = function (parts) {
+      var key = partsKey(parts);
+      if (!quotes[key]) {
+        quotes[key] = Base.postJson('/api/storefront/cart/price', {
+          domain: cfg.domain || undefined, handle: pcfg.handle || undefined, protection: false,
+          items: parts.map(function (p) { return { variantId: p.v.id, qty: p.q }; })
+        }).then(function (r) {
+          var q = r && r.ok && r.data && r.data.data;
+          if (!q || (q.currency && cfg.currency && q.currency !== cfg.currency)) throw new Error('quote');
+          return Base.round2((Number(q.subtotal) || 0) - (Number(q.discount) || 0));
+        }).catch(function () { delete quotes[key]; return null; });
+      }
+      return quotes[key];
+    };
+
+    var paintCard = function (card) {
+      var s = pack.settings || {}, pos = Number(card.getAttribute('data-card-pos')) || 1;
+      var suffix = s.currency_code === false ? '' : ' ' + (cfg.currency || 'USD');
+      var fmt = function (n) { return money(n) + suffix; };
+      var priceEl = $('[data-card-price]', card), cmpEl = $('[data-card-compare]', card), unitEl = $('[data-card-unit]', card);
+      var parts = packParts(card), selected = card.classList.contains('is-selected');
+      card.classList.toggle('is-unavailable', !parts);
+      var sub = $('[data-card-sub]', card), badge = $('[data-card-badge]', card), inc = $('[data-card-includes]', card), gift = $('[data-card-gift]', card);
+      if (sub) sub.textContent = s['card_' + pos + '_sub'] || '';
+      if (badge) { badge.textContent = s['card_' + pos + '_badge'] || ''; badge.hidden = !badge.textContent; }
+      if (inc) {
+        var html = s['card_' + pos + '_includes'] || '';
+        inc.innerHTML = html;
+        inc.hidden = !html || (!s.includes_all && !selected);
+      }
+      if (gift) gift.hidden = true; // free gifts need the product page's #sf-gifts-data
+      var base = mainVariant(), img = $('[data-qcard-img]', card), mark = $('.b-card__qty', card), src = (base && base.image) || pcfg.image || '';
+      if (img && src) { img.src = src; img.hidden = false; if (mark) mark.hidden = false; }
+      if (!parts) {
+        if (priceEl) priceEl.textContent = '';
+        if (cmpEl) cmpEl.textContent = '';
+        if (unitEl) unitEl.hidden = true;
+        return;
+      }
+      var key = partsKey(parts), compare = grossCompare(parts), n = cardQty(card);
+      card.__featuredKey = key;
+      var show = function (total) {
+        if (card.__featuredKey !== key) return; // a newer pick of this card is on its way
+        if (priceEl) priceEl.textContent = fmt(total);
+        if (cmpEl) cmpEl.textContent = compare > total ? fmt(compare) : '';
+        if (unitEl) {
+          var unitText = s.unit_label && n > 1 && total > 0 ? money(Base.round2(total / n)) + ' / ' + s.unit_label : '';
+          unitEl.textContent = unitText;
+          unitEl.hidden = !unitText;
+        }
+        if (card.classList.contains('is-selected')) paintHead(total, compare);
+      };
+      if (priceEl && !priceEl.textContent) priceEl.textContent = '…';
+      quote(parts).then(function (total) { show(total == null ? gross(parts) : total); });
+    };
+
+    var paintCards = function () {
+      if (mode !== 'packs') return;
+      $$('[data-qcard]', pack.el).forEach(paintCard);
+      var card = selectedCard();
+      if (atc) atc.disabled = !(card && packParts(card));
+    };
+
+    var unitRow = function (k, names) {
+      var vals = unitVals[k] = unitVals[k] || mainVals.slice();
+      var row = el('div', 'b-unit');
+      // Picking inside a row must not re-select (and re-render) the card.
+      ['click', 'keydown'].forEach(function (t) { row.addEventListener(t, function (e) { e.stopPropagation(); }); });
+      var img = el('img', 'b-unit__img');
+      img.alt = '';
+      img.width = 36;
+      img.height = 44;
+      row.appendChild(img);
+      var dots = [];
+      var paintRow = function () {
+        var v = featuredFind(list, vals), src = (v && v.image) || pcfg.image || '';
+        if (src && img.getAttribute('src') !== src) img.src = src;
+        row.classList.toggle('is-unavailable', !v);
+        dots.forEach(function (d) {
+          var c = dotColor(groups[d.i].choices.filter(function (x) { return x.value === vals[d.i]; })[0]);
+          d.el.style.background = c;
+          d.el.hidden = !c;
+        });
+        return v;
+      };
+      names.forEach(function (name, i) {
+        var wrap = el('span', 'b-unit__sel');
+        if (/colou?r/i.test(name)) {
+          var dot = el('span', 'b-unit__dot');
+          dot.setAttribute('aria-hidden', 'true');
+          wrap.appendChild(dot);
+          wrap.classList.add('has-dot');
+          dots.push({ i: i, el: dot });
+        }
+        var s = el('select', 'b-unit__select');
+        s.setAttribute('aria-label', name + ' ' + (k + 1));
+        s.setAttribute('data-unit-select', String(i));
+        groups[i].choices.forEach(function (c) {
+          var o = el('option', null, c.label);
+          o.value = c.value;
+          s.appendChild(o);
+        });
+        s.value = vals[i];
+        s.addEventListener('change', function () {
+          vals[i] = s.value;
+          var v = paintRow();
+          if (v && v.image && k === 0) showImage(v.image);
+          clearTimeout(requote);
+          requote = setTimeout(paintCards, 150);
+        });
+        wrap.appendChild(s);
+        row.appendChild(wrap);
+      });
+      paintRow();
+      return row;
+    };
+
+    var renderUnits = function () {
+      if (mode !== 'packs') return;
+      var on = unitsOn(), names = groups.map(function (g) { return g.name; });
+      $$('[data-qcard]', pack.el).forEach(function (card) {
+        var box = $('[data-unit-rows]', card);
+        if (!box) return;
+        var show = on && card.classList.contains('is-selected');
+        box.innerHTML = '';
+        box.hidden = !show;
+        if (!show) return;
+        box.appendChild(el('p', 'b-units__label', names.join(', ')));
+        for (var k = 0; k < Math.min(12, cardQty(card)); k++) box.appendChild(unitRow(k, names));
+      });
+    };
+
+    var selectCard = function (card) {
+      $$('[data-qcard]', pack.el).forEach(function (c) {
+        var on = c === card;
+        c.classList.toggle('is-selected', on);
+        c.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      renderUnits();
+      paintCards();
+    };
+
+    var buildOpts = function () {
+      optsBox.innerHTML = '';
+      groups.forEach(function (g, i) {
+        var label = el('label', 'mt-product__opt');
+        label.appendChild(el('span', 'mt-product__opt-name', g.name));
+        var s = el('select', 'b-select');
+        s.setAttribute('data-featured-opt', String(i));
+        g.choices.forEach(function (c) {
+          var o = el('option', null, c.label);
+          o.value = c.value;
+          s.appendChild(o);
+        });
+        s.value = mainVals[i];
+        s.addEventListener('change', function () {
+          mainVals[i] = s.value;
+          var v = mainVariant();
+          if (v && v.image) showImage(v.image);
+          if (mode === 'packs') { unitVals = []; renderUnits(); paintCards(); return; }
+          if (v) paintHead(v.price, Math.max(v.compare, v.price));
+          if (atc) atc.disabled = !v;
+        });
+        label.appendChild(s);
+        optsBox.appendChild(label);
+      });
+    };
+
+    /** Pack cards (or per-option selects) from the product page; false keeps the combined select. */
+    var setupPicker = function (doc) {
+      list = (pvars.length ? pvars : (pcfg.variants || []).map(function (v) {
+        return { id: v.id, option_values: v.options, price: v.price };
+      })).map(featuredRecord);
+      groups = featuredGroups(doc, list);
+      var src = packBox && root.getAttribute('data-featured-packs') !== '0' ? featuredPackBlock(doc) : null;
+      if (!optsBox || (!groups.length && !src)) return false;
+      var first = list.filter(function (v) { return v.available; })[0] || list[0];
+      mainVals = first.options.slice();
+      if (src) {
+        var block = document.importNode(src, true);
+        // Not the product page's own block: ui.js initProductForm must never pick this copy up.
+        block.removeAttribute('data-cards-block');
+        block.setAttribute('data-featured-cards', '');
+        $$('[data-cards], [data-cards-price]', block).forEach(function (n) { n.parentNode.removeChild(n); });
+        var qcards = $('[data-qcards]', block);
+        qcards.hidden = false;
+        if (!$('[data-qcard].is-selected', qcards)) $('[data-qcard]', qcards).classList.add('is-selected');
+        pack = { el: qcards, settings: Base.readJson($('[data-cards-settings]', block), {}) || {} };
+        packBox.appendChild(block);
+        packBox.hidden = false;
+        mode = 'packs';
+        $$('[data-qcard]', qcards).forEach(function (card) {
+          card.addEventListener('click', function () { selectCard(card); });
+          card.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(card); } });
+        });
+        var qtyBox = $('[data-featured-qty]', root);
+        if (qtyBox) qtyBox.hidden = true;
+      } else {
+        mode = 'opts';
+      }
+      // Unit rows carry their own Size / Color; without them the per-option selects pick the variant.
+      if (!unitsOn() && groups.length) { buildOpts(); optsBox.hidden = false; }
+      if (mode === 'packs') { renderUnits(); paintCards(); } else {
+        var v = mainVariant();
+        if (v) paintHead(v.price, Math.max(v.compare, v.price));
+      }
+      return true;
+    };
+
     fetch(url, { credentials: 'include' }).then(function (r) { return r.text(); }).then(function (html) {
       var doc = new DOMParser().parseFromString(html, 'text/html');
       pcfg = Base.readJson(doc.getElementById('sf-config'), null);
       pvars = Base.readJson(doc.getElementById('sf-variants-data'), []) || [];
-      if (!pcfg || !(pcfg.variants || []).length) return;
+      if (!pcfg || !(pcfg.variants || []).length) return showPrice();
       var media = $$('[data-gallery-thumb]', doc).map(function (t) {
         var img = t.querySelector('img');
         return { src: t.getAttribute('data-gallery-thumb'), preview: img ? img.getAttribute('src') : '' };
@@ -1468,6 +1810,12 @@
           });
         });
       }
+      var picked = setupPicker(doc);
+      if (mode !== 'packs') showPrice();
+      if (picked) {
+        if (atc && mode === 'opts') atc.disabled = !mainVariant();
+        return;
+      }
       if (pcfg.variants.length > 1 && select) {
         pcfg.variants.forEach(function (v) {
           var o = el('option', '', (v.display_name || (v.options || []).join(' / ')) + ' — ' + money(v.price));
@@ -1479,13 +1827,29 @@
       }
       paint();
       atc.disabled = false;
-    }).catch(function () {});
+    }).catch(showPrice);
+
     if (atc) atc.addEventListener('click', function () {
+      if (!pcfg) return;
+      if (mode === 'packs') {
+        var card = selectedCard(), parts = card && packParts(card);
+        if (!parts) return;
+        quote(parts).then(function (total) {
+          Base.cart.add(parts.map(function (p) { return line(p.v, p.q); }), { mode: 'cart', value: total == null ? gross(parts) : total });
+        });
+        return;
+      }
+      var n = Math.min(999, Math.max(1, parseInt(qty.value, 10) || 1));
+      if (mode === 'opts') {
+        var mv = mainVariant();
+        if (mv) Base.cart.add(line(mv, n));
+        return;
+      }
       var v = chosen();
-      if (!v || !pcfg) return;
+      if (!v) return;
       var f = full(v);
       Base.cart.add({
-        variantId: v.id, variant: (v.options || []).join(' / '), qty: Math.min(999, Math.max(1, parseInt(qty.value, 10) || 1)),
+        variantId: v.id, variant: (v.options || []).join(' / '), qty: n,
         title: pcfg.title || '', handle: pcfg.handle || '', productId: pcfg.productId || '', url: url,
         image: f.featured_image || pcfg.image || '', price: v.price, comparePrice: num(f.compare_at_price) || undefined
       });
@@ -1675,13 +2039,96 @@
     });
   }
 
-  // Size chart block: with an option name set, only products that have that option keep it.
+  // Size chart block: with an option name set, only products that have that option keep it. Only ever hides: a block
+  // rendered hidden (no size chart picture or text anywhere) stays hidden.
   function initSizeChart() {
     $$('[data-size-chart]').forEach(function (box) {
       var want = String(box.getAttribute('data-option') || '').trim().toLowerCase();
       if (!want) return;
       var names = String(box.getAttribute('data-options') || '').toLowerCase().split('|').map(function (n) { return n.trim(); });
-      box.hidden = names.indexOf(want) === -1;
+      if (names.indexOf(want) === -1) box.hidden = true;
+    });
+  }
+
+  // Maggie's size finder (snippets/mt-size-finder.hbs): a box that opens in place; height + weight (+ full bust) → the
+  // size from the store's table (Theme settings, one line per size: "Size | weight lb | full bust in").
+  // Weight is read for a woman about 5'5": at the same girth, weight grows with height, so it is scaled by 65 / height.
+  // Size by weight, size by bust (when given): the larger one wins. Past the table = the largest size.
+  function sizeFinderRows(text) {
+    var top = function (s) { var n = String(s || '').match(/\d+(?:\.\d+)?/g); return n ? parseFloat(n[n.length - 1]) : NaN; };
+    return String(text || '').split(/\r?\n/).map(function (line) {
+      var c = line.split('|').map(function (s) { return s.trim(); });
+      return c[0] ? { size: c[0], weight: c[1] || '', bust: c[2] || '', wMax: top(c[1]), bMax: top(c[2]) } : null;
+    }).filter(Boolean);
+  }
+  function sizeFinderPick(rows, heightIn, weightLb, bustIn) {
+    var find = function (key, v) {
+      var last = -1;
+      for (var i = 0; i < rows.length; i++) {
+        if (isNaN(rows[i][key])) continue;
+        if (v <= rows[i][key]) return i;
+        last = i;
+      }
+      return last;
+    };
+    var byWeight = find('wMax', weightLb * 65 / heightIn), byBust = bustIn ? find('bMax', bustIn) : -1;
+    var i = Math.max(byWeight, byBust);
+    return i < 0 ? null : { size: rows[i].size, byBust: byBust > byWeight };
+  }
+  function initSizeFinder() {
+    $$('[data-size-finder]').forEach(function (box, n) {
+      var rows = sizeFinderRows(box.getAttribute('data-sf-table'));
+      var toggle = $('[data-sf-toggle]', box), panel = $('[data-sf-panel]', box);
+      if (!toggle || !panel) return;
+      panel.id = panel.id || 'mt-sf-panel-' + n;
+      toggle.setAttribute('aria-controls', panel.id);
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        box.classList.toggle('is-open', open);
+        panel.hidden = !open;
+      });
+      var height = $('[data-sf-height]', box);
+      for (var h = 52; h <= 76; h++) {
+        var o = el('option', '', Math.floor(h / 12) + '\' ' + (h % 12) + '"');
+        o.value = String(h);
+        height.appendChild(o);
+      }
+      var how = $('[data-sf-how]', box), howPanel = $('[data-sf-howpanel]', box);
+      if (how && howPanel) how.addEventListener('click', function () {
+        var open = how.getAttribute('aria-expanded') !== 'true';
+        how.setAttribute('aria-expanded', String(open));
+        howPanel.hidden = !open;
+      });
+      var chart = $('[data-sf-chart]', box);
+      if (chart && rows.length) {
+        var table = el('table', 'mt-sf__table'), head = el('tr');
+        ['Size', 'Weight (lb)', 'Full bust (in)'].forEach(function (t) { head.appendChild(el('th', '', t)); });
+        table.appendChild(el('thead')).appendChild(head);
+        var body = table.appendChild(el('tbody'));
+        rows.forEach(function (r) {
+          var tr = body.appendChild(el('tr'));
+          [r.size, r.weight, r.bust].forEach(function (t) { tr.appendChild(el('td', '', t)); });
+        });
+        chart.appendChild(table);
+      }
+      var error = $('[data-sf-error]', box), result = $('[data-sf-result]', box);
+      var fill = function (tpl, map) { return String(tpl || '').replace(/\{(\w+)\}/g, function (m, k) { return k in map ? map[k] : m; }); };
+      $('[data-sf-go]', box).addEventListener('click', function () {
+        var hIn = parseInt(height.value, 10), wLb = parseFloat($('[data-sf-weight]', box).value);
+        var raw = String($('[data-sf-bust]', box).value || '').toLowerCase(), b = parseFloat(raw.replace(',', '.'));
+        // Bust in cm when it says so or is too large for inches (a full bust is 25–70 in, 60–180 cm).
+        var bustIn = isNaN(b) ? 0 : (/cm/.test(raw) || b > 70 ? b / 2.54 : b);
+        if (bustIn && (bustIn < 24 || bustIn > 72)) bustIn = 0;
+        var pick = (!hIn || !(wLb >= 60 && wLb <= 600)) ? null : sizeFinderPick(rows, hIn, wLb, bustIn);
+        error.hidden = !!pick;
+        result.hidden = !pick;
+        if (!pick) { error.textContent = box.getAttribute('data-sf-missing') || ''; return; }
+        var bustText = (Math.round(bustIn * 10) / 10) + '" (' + Math.round(bustIn * 2.54) + ' cm)';
+        $('[data-sf-size]', box).textContent = pick.size;
+        $('[data-sf-note-out]', box).textContent = fill(box.getAttribute(pick.byBust ? 'data-sf-note-bust' : 'data-sf-note'), { bust: bustText, size: pick.size });
+        $('[data-sf-pick-out]', box).textContent = fill(box.getAttribute('data-sf-pick'), { bust: bustText, size: pick.size });
+      });
     });
   }
 
@@ -1787,7 +2234,7 @@
   function start() {
     [initTopbar, initHeader, initGallery, initProductForm, initSticky, initUrgency, initCart, initReviews,
       initTestimonials, initHomeReviews, initDragScroll, initForms, initCollection, initSearchPage, initFeatured, initHomeCompare,
-      initMarquee, initAccordions, initReels, initSizeChart, initModals, initCardEntrance, initFeatureNumbers, initRelatedFill].forEach(function (fn) {
+      initMarquee, initAccordions, initReels, initSizeChart, initSizeFinder, initModals, initCardEntrance, initFeatureNumbers, initRelatedFill].forEach(function (fn) {
       try { fn(); } catch (e) { if (window.console) console.error(e); }
     });
   }

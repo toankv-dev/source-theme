@@ -1,0 +1,15 @@
+<div class="b-stats">
+  <div class="b-wrap">
+    {{#if section.settings.eyebrow}}<p class="b-eyebrow b-eyebrow--light">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="b-stats__heading" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    <div class="b-stats__grid">
+      {{#each section.blocks}}
+      <div class="b-stat" {{{this.attributes}}}>
+        <p class="b-stat__value">{{this.settings.value}}</p>
+        <p class="b-stat__label">{{this.settings.label}}</p>
+      </div>
+      {{/each}}
+    </div>
+    {{#if section.settings.note}}<p class="b-stats__note">{{section.settings.note}}</p>{{/if}}
+  </div>
+</div>

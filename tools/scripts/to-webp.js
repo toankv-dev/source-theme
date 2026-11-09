@@ -2,11 +2,12 @@
 // node tools/scripts/to-webp.js <maxWidth> <quality 0-1> in1=out1 [in2=out2 …]
 // Resizes each image down to maxWidth (never up) and encodes it as WebP through headless Chromium (no native deps).
 // Use D:/ paths, not /d/… — Git Bash rewrites /d/ inside a=b arguments into D:\d\….
+// Split at the LAST "=": files saved by download-page.js keep their query in the name (…__v=123.png).
 'use strict';
 const fs=require('fs'),path=require('path');const {chromium}=require('playwright');
 const [mw,q,...pairs]=process.argv.slice(2);
 (async()=>{const b=await chromium.launch();const p=await b.newPage();await p.setContent('<canvas id=c></canvas>');
-for(const pr of pairs){const [i,o]=pr.split('=');const buf=fs.readFileSync(i);const ext=path.extname(i).slice(1).toLowerCase();
+for(const pr of pairs){const k=pr.lastIndexOf('=');const i=pr.slice(0,k),o=pr.slice(k+1);const buf=fs.readFileSync(i);const ext=path.extname(i).slice(1).toLowerCase();
  let mime={jpg:'jpeg',jpeg:'jpeg',png:'png',webp:'webp',svg:'svg+xml',gif:'gif'}[ext];
  if(!mime){mime=buf.slice(0,4).toString('hex')==='89504e47'?'png':buf.slice(8,12).toString()==='WEBP'?'webp':'jpeg'}
  const url='data:image/'+mime+';base64,'+buf.toString('base64');

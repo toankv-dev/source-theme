@@ -1,0 +1,11 @@
+{{!-- Maggie's: "Your New Morning Routine" (Theme settings → Maggie's – Home bottom). Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-routine">
+    <div class="b-wrap mt-narrow">
+      <h2 class="mt-routine__h2">{{@root.settings.mt_rt_heading}}</h2>
+      <ol class="mt-routine__steps">
+        {{#if @root.settings.mt_rt_1_title}}<li><span class="mt-routine__num">1</span><h3>{{@root.settings.mt_rt_1_title}}</h3><p>{{@root.settings.mt_rt_1_text}}</p></li>{{/if}}
+        {{#if @root.settings.mt_rt_2_title}}<li><span class="mt-routine__num">2</span><h3>{{@root.settings.mt_rt_2_title}}</h3><p>{{@root.settings.mt_rt_2_text}}</p></li>{{/if}}
+        {{#if @root.settings.mt_rt_3_title}}<li><span class="mt-routine__num">3</span><h3>{{@root.settings.mt_rt_3_title}}</h3><p>{{@root.settings.mt_rt_3_text}}</p></li>{{/if}}
+      </ol>
+    </div>
+  </section>

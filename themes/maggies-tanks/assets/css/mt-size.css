@@ -1,0 +1,46 @@
+/* maggies-tanks — size finder (snippets/mt-size-finder.hbs), linked by that snippet only (home product block and the
+   product page's Size chart block). Own rules; sizes and colours measured on the original's Size Chart box. */
+.mt-sf { margin: 22px 0 24px; border-radius: 12px; font-family: "DM Sans", Arial, sans-serif; color: #2b2926; }
+.mt-sf.is-open { box-shadow: 0 14px 20px rgba(33, 31, 28, .14); }
+.mt-sf__toggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; margin: 0; padding: 0 16px; border: 1px solid #d8d2c6; border-radius: 12px; background: #fff; color: #2b2926; font: 700 17px/1.3 "DM Sans", Arial, sans-serif; letter-spacing: normal; text-align: left; text-transform: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.mt-sf__toggle:focus-visible { outline: 2px solid #1f5c3d; outline-offset: 2px; }
+.mt-sf__label { flex: 1; }
+.mt-sf__ruler, .mt-sf__chev { flex: none; }
+.mt-sf__chev { transition: transform .2s; }
+.mt-sf.is-open .mt-sf__toggle { border-bottom: 0; border-radius: 12px 12px 0 0; background: #f3efe8; }
+.mt-sf.is-open .mt-sf__chev { transform: rotate(180deg); }
+.mt-sf__panel { padding: 12px 17px 17px; border: 1px solid #d8d2c6; border-top: 0; border-radius: 0 0 12px 12px; background: #fff; }
+.mt-sf__step { display: block; margin: 0 0 18px; }
+.mt-sf__step label { display: block; }
+.mt-sf__name { display: block; margin: 0 0 8px; font-size: 13px; font-weight: 700; line-height: 1.4; letter-spacing: .06em; text-transform: uppercase; color: #6b6764; }
+.mt-sf__tag { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 99px; background: #ece6da; font-size: 11px; letter-spacing: .04em; vertical-align: 1px; white-space: nowrap; }
+.mt-sf__field { box-sizing: border-box; display: block; width: 100%; min-height: 48px; margin: 0; padding: 0 12px; border: 1px solid #d8d2c6; border-radius: 10px; background-color: #fff; color: #2b2926; font: 400 16px/1.3 "DM Sans", Arial, sans-serif; }
+.mt-sf__field:focus { border-color: #1f5c3d; outline: 2px solid rgba(31, 92, 61, .25); outline-offset: 0; }
+.mt-sf__hint { display: block; margin-top: 5px; font-size: 12px; color: #6b6764; }
+.mt-sf__warn { margin: 8px 0 6px; font-size: 13px; font-weight: 600; line-height: 1.45; color: #2b2926; }
+.mt-sf__how { min-height: 32px; margin: 0; padding: 0; border: 0; background: none; color: #1f5c3d; font: 600 13.5px/1.3 "DM Sans", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; text-transform: none; letter-spacing: normal; cursor: pointer; }
+.mt-sf__howpanel { margin-top: 10px; padding: 14px; border: 1px solid #e7e2d9; border-radius: 12px; background: #f7f4ee; font-size: 13px; line-height: 1.55; color: #4a4744; }
+.mt-sf__howpanel img { display: block; width: 100%; height: auto; margin: 0 0 12px; border-radius: 8px; }
+.mt-sf__howpanel ol { margin: 0; padding-left: 18px; }
+.mt-sf__howpanel li + li { margin-top: 7px; }
+.mt-sf__howpanel strong { color: #2b2926; }
+.mt-sf__go { display: block; width: 100%; min-height: 50px; margin: 0; padding: 0 14px; border: 0; border-radius: 10px; background: #1f5c3d; color: #fff; font: 700 15px/1 "DM Sans", Arial, sans-serif; letter-spacing: .03em; text-transform: uppercase; cursor: pointer; }
+.mt-sf__go:hover { background: #184a31; }
+.mt-sf__error { margin: 10px 0 0; font-size: 14px; color: #b42318; }
+.mt-sf__result { display: flex; flex-direction: column; gap: 2px; margin-top: 14px; padding: 16px; border: 1px solid #cfe0d5; border-radius: 12px; background: #f2f6f3; }
+.mt-sf__lead { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #1f5c3d; }
+.mt-sf__size { font-size: 28px; font-weight: 700; line-height: 1.2; color: #1f5c3d; }
+.mt-sf__note { margin-top: 2px; font-size: 14px; line-height: 1.45; color: #4a4744; }
+.mt-sf__pick { margin-top: 6px; font-size: 14px; font-weight: 700; line-height: 1.45; color: #1f5c3d; }
+.mt-sf__chart { margin-top: 16px; padding-top: 10px; border-top: 1px solid #e7e2d9; }
+.mt-sf__chart summary { padding: 6px 0; font-size: 15px; font-weight: 600; color: #1f5c3d; cursor: pointer; }
+.mt-sf__table { width: 100%; margin: 8px 0 10px; border-collapse: collapse; font-size: 14px; }
+.mt-sf__table th, .mt-sf__table td { padding: 8px 6px; border-bottom: 1px solid #e7e2d9; text-align: left; }
+.mt-sf__table th { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6b6764; }
+.mt-sf__table td:first-child { font-weight: 700; }
+.mt-sf__chartimg { display: block; width: 100%; height: auto; margin: 8px 0; border-radius: 8px; }
+.mt-sf__between { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #e7e2d9; font-size: 14px; line-height: 1.5; color: #6b6764; }
+.mt-sf__between strong { color: #4a4744; }
+@media (max-width: 768px) {
+  .mt-sf__panel { padding: 10px 12px 14px; }
+}

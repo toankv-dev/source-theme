@@ -20,7 +20,7 @@ So với skill `new-theme` hiện có:
 | --- | --- | --- |
 | Đầu vào | link của từng trang, hoặc ảnh chụp | link của từng trang (ảnh chụp vẫn dùng `new-theme`) |
 | Lưu lại | DOM đã render, ảnh chụp, tối đa 160 ảnh, font đang dùng | thêm **toàn bộ CSS / JS / font / ảnh / video**, xem lại offline |
-| Ảnh / video trang SP | không tải | tải **hết** vào `_work/` để tham khảo, không bao giờ vào theme |
+| Ảnh / video trang SP | không tải | tải **hết** vào `_work/`; ảnh chỉ để tham khảo, video thành mặc định của ô video (từ 2026-11-09) |
 | Đo và so sánh | trên site thật (có thể bị chặn bot, có thể đổi giữa chừng) | trên bản offline, ổn định, chạy lại không cần mạng |
 
 ### Quyết định đã chốt (2026-11-08)
@@ -28,7 +28,9 @@ So với skill `new-theme` hiện có:
 1. Phạm vi: **một link = một trang**. Không tự tìm hay tải trang nào khác. Trang nào không có link thì theme dùng
    bố cục của base, phủ màu và font của theme.
 2. Tải **tất cả ảnh và video** của trang, **không giới hạn** số file hay dung lượng (tool in tổng dung lượng).
-3. Ảnh / video trang SP: chỉ để tham khảo trong `_work/`. Trong theme, các ô media vẫn để trống như quy tắc cũ.
+3. Ảnh trang SP: chỉ để tham khảo trong `_work/`; trong theme, các ô ảnh vẫn để trống. **Sửa ngày 2026-11-09**
+   ([docs/SPEC-theme-from-link-videos.md](docs/SPEC-theme-from-link-videos.md)): video của bản gốc, ở mọi trang kể cả
+   trang SP, được chép nguyên file vào theme làm mặc định của ô video.
 4. Cách dựng: **dựng lại trên markup của base**. Mọi quy tắc của `new-theme` giữ nguyên, không bê nguyên CSS/HTML gốc.
 5. Cấu trúc theme: **cấu trúc chung của `themes/*`** (bản sao `base-theme`, khởi tạo bằng `tools/new-theme.js`).
 6. Template SP thứ hai (ví dụ trang bundle): **chỉ khi người dùng gửi link** của trang đó.
@@ -52,10 +54,12 @@ Mỗi ảnh hoặc video **khác nhau** mà trang tham chiếu ở 1440 hoặc 3
   của cùng một ảnh không tải; `srcset` được viết lại chỉ còn những bản đã tải;
 - `data-src` (ảnh lazy), ảnh trong tab, slide hay accordion đang ẩn;
 - ảnh nền trong `style` inline và trong mọi file CSS của trang, kể cả ảnh của breakpoint khác;
-- `video[src]`, `video source` (mọi file trực tiếp như mp4 / webm / mov), `poster`.
+- `video[src]`, `video source` (mọi file trực tiếp như mp4 / webm / mov), `poster`;
+- từ 2026-11-09: video trong `<template>`, trong JSON / script inline, sau link `.mp4`; stream HLS (cả loại phát qua
+  `blob:`) → MP4 của bản cao nhất với Shopify, các đoạn + playlist với stream khác.
 
-Không tải được và chỉ ghi vào `skipped`: video stream (`.m3u8`, `blob:`) và iframe nhúng của bên thứ ba
-(YouTube, Vimeo…). Iframe được giữ khung, đổi `src` thành `about:blank`.
+Không tải được và chỉ ghi vào `skipped`: iframe nhúng của bên thứ ba (YouTube, Vimeo…; giữ khung, `src` →
+`about:blank`), stream mã hoá / byte-range / DASH.
 
 ## Luồng
 

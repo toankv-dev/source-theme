@@ -1,0 +1,21 @@
+{
+  "name": "Tredvik",
+  "version": "2026.11.09.1",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/js/core.js",
+    "assets/js/ui.js"
+  ],
+  "description": "Tredvik storefront theme, built on the Base theme 2026.11.06.6.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

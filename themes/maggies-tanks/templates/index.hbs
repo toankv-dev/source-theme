@@ -1,151 +1,237 @@
-{{!-- Home page. Settings-driven (Theme settings → Home …): the sections editor covers product pages only.
-      Blocks, top to bottom, each switchable: hero, promises strip, featured product, product grid (all products
-      or one grid per collection), image banner, comparison, customer reviews carousel, FAQ, newsletter, contact.
-      Lists typed into textareas (promises, comparison rows) are split into markup by ui.js. --}}
+{{!-- Maggie's Tanks home page, rebuilt from the downloaded original (themes/maggies-tanks/_work/plan.md).
+      Settings-driven: Theme settings → "Home – hero" (title, text, button, link), "Home – promises" (ticker),
+      "FAQ" (questions) and "Maggie's – Home top / middle / bottom" (every other block, each switchable).
+      Empty pictures fall back to the theme's pictures in assets/images/mt; videos stay empty until uploaded.
+      The product block is the store's first product (base featured product: gallery, options, quantity, add to
+      cart through ui.js); the comparison table and the video cards are run by assets/js/mt-home.js. --}}
 <!doctype html>
 <html lang="en">
 <head>
 {{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/inter-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-serif-display.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-sans.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/mt-home.css">
 </head>
 <body class="b-body b-body--home">
 {{{trackingBody}}}
 <a class="b-skip" href="#MainContent">Skip to content</a>
 {{> header}}
-<main id="MainContent" class="b-main">
+<main id="MainContent" class="b-main mt-home">
   {{#unless (eq settings.home_hero_show false)}}
-  <section class="b-hero b-hero--{{#if settings.home_hero_align}}{{settings.home_hero_align}}{{else}}left{{/if}}" style="--overlay:{{#if settings.home_hero_overlay}}{{settings.home_hero_overlay}}{{else}}0{{/if}}">
-    {{#if settings.home_hero_image}}
-    <picture class="b-hero__media">
-      {{#if settings.home_hero_mobile_image}}<source media="(max-width: 749px)" srcset="{{settings.home_hero_mobile_image}}">{{/if}}
-      <img src="{{settings.home_hero_image}}" alt="" fetchpriority="high">
-    </picture>
-    {{/if}}
-    <div class="b-wrap b-hero__inner">
-      <div class="b-hero__copy">
-        {{#if settings.home_hero_eyebrow}}<p class="b-hero__eyebrow">{{settings.home_hero_eyebrow}}</p>{{/if}}
-        <h1 class="b-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
-        {{#if settings.home_hero_text}}<p class="b-hero__text">{{settings.home_hero_text}}</p>{{/if}}
-        <a class="b-btn b-btn--hero" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}} {{> icon-arrow}}</a>
+  <section class="mt-hero">
+    <div class="b-wrap mt-hero__inner">
+      {{#if settings.mt_hero_rating}}<p class="mt-pill"><span class="mt-pill__stars" aria-hidden="true">★★★★★</span>{{settings.mt_hero_rating}}</p>{{/if}}
+      <h1 class="mt-hero__title">{{#if settings.home_hero_title}}{{settings.home_hero_title}}{{else}}{{brand.name}}{{/if}}</h1>
+      {{#if settings.home_hero_text}}<p class="mt-hero__text">{{settings.home_hero_text}}</p>{{/if}}
+      <a class="mt-btn" href="{{#if settings.home_hero_link}}{{settings.home_hero_link}}{{else}}#mt-product{{/if}}">{{#if settings.home_hero_button}}{{settings.home_hero_button}}{{else}}Shop now{{/if}}</a>
+      {{> mt-ticks}}
+      <div class="mt-hero__media">
+        <img src="{{#if settings.home_hero_image}}{{settings.home_hero_image}}{{else}}{{assets_url}}/images/mt/hero.webp{{/if}}" alt="" width="720" height="720" fetchpriority="high">
+        {{!-- The poster picture stays the LCP; the video (uploaded, else the original's in assets/videos/mt) plays over it. --}}
+        <video class="mt-hero__video" src="{{#if settings.mt_hero_video}}{{settings.mt_hero_video}}{{else}}{{assets_url}}/videos/mt/hero.mp4{{/if}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
       </div>
     </div>
   </section>
   {{/unless}}
 
   {{#if settings.home_promises}}
-  <div class="b-marquee" aria-label="Store promises" data-split-marquee="{{settings.home_promises}}">
+  <div class="b-marquee mt-ticker" aria-label="Store promises" data-split-marquee="{{settings.home_promises}}">
     <div class="b-marquee__track"></div>
   </div>
   {{/if}}
 
-  {{#if settings.home_featured_show}}
-  {{!-- Featured product: the first product. ui.js loads its gallery + variants from its own product page
-        (#sf-config / #sf-variants-data), so Quantity + Add to cart work right here. --}}
+  {{#unless (eq settings.mt_ba_show false)}}
+  {{> mt-ba}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_iwt_show false)}}
+  <section class="mt-sec mt-sec--warm mt-iwt">
+    <div class="b-wrap mt-iwt__grid">
+      <div class="mt-iwt__text mt-only-desktop">
+        <h2 class="mt-h2 mt-h2--left">{{settings.mt_iwt_heading}}</h2>
+        <p class="mt-iwt__lead">{{settings.mt_iwt_text}}</p>
+        <ul class="mt-iwt__list">
+          {{#if settings.mt_iwt_li_1}}<li>{{settings.mt_iwt_li_1}}</li>{{/if}}
+          {{#if settings.mt_iwt_li_2}}<li>{{settings.mt_iwt_li_2}}</li>{{/if}}
+          {{#if settings.mt_iwt_li_3}}<li>{{settings.mt_iwt_li_3}}</li>{{/if}}
+          {{#if settings.mt_iwt_li_4}}<li>{{settings.mt_iwt_li_4}}</li>{{/if}}
+        </ul>
+        {{#if settings.mt_iwt_note}}<p class="mt-iwt__note">{{settings.mt_iwt_note}}</p>{{/if}}
+      </div>
+      <div class="mt-iwt__text mt-only-phone">
+        <h2 class="mt-h2 mt-h2--left">{{settings.mt_iwt_m_heading}}</h2>
+        <p class="mt-iwt__sub">{{settings.mt_iwt_m_text}}</p>
+        <div class="mt-vs mt-vs--old">
+          <p class="mt-vs__title">{{settings.mt_iwt_m_old}}</p>
+          <ul>
+            {{#if settings.mt_iwt_m_old_1}}<li>{{settings.mt_iwt_m_old_1}}</li>{{/if}}
+            {{#if settings.mt_iwt_m_old_2}}<li>{{settings.mt_iwt_m_old_2}}</li>{{/if}}
+            {{#if settings.mt_iwt_m_old_3}}<li>{{settings.mt_iwt_m_old_3}}</li>{{/if}}
+          </ul>
+        </div>
+        <div class="mt-vs mt-vs--new">
+          <p class="mt-vs__title">{{settings.mt_iwt_m_new}}</p>
+          <ul>
+            {{#if settings.mt_iwt_m_new_1}}<li>{{settings.mt_iwt_m_new_1}}</li>{{/if}}
+            {{#if settings.mt_iwt_m_new_2}}<li>{{settings.mt_iwt_m_new_2}}</li>{{/if}}
+            {{#if settings.mt_iwt_m_new_3}}<li>{{settings.mt_iwt_m_new_3}}</li>{{/if}}
+          </ul>
+        </div>
+        {{#if settings.mt_iwt_m_note}}<p class="mt-iwt__mnote">{{settings.mt_iwt_m_note}}</p>{{/if}}
+      </div>
+      <div class="mt-iwt__media"><img src="{{#if settings.mt_iwt_image}}{{settings.mt_iwt_image}}{{else}}{{assets_url}}/images/mt/iwt.webp{{/if}}" alt="" width="800" height="800" loading="lazy"></div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.mt_why_show false)}}
+  <section class="mt-sec mt-why">
+    <div class="b-wrap mt-narrow">
+      <h2 class="mt-h2">{{settings.mt_why_heading}}</h2>
+      {{#if settings.mt_why_lead}}<p class="mt-why__lead">{{settings.mt_why_lead}}</p>{{/if}}
+      {{#if settings.mt_why_text}}<p class="mt-why__text">{{settings.mt_why_text}}</p>{{/if}}
+      <ul class="mt-why__x">
+        {{#if settings.mt_why_x_1}}<li>{{settings.mt_why_x_1}}</li>{{/if}}
+        {{#if settings.mt_why_x_2}}<li>{{settings.mt_why_x_2}}</li>{{/if}}
+        {{#if settings.mt_why_x_3}}<li>{{settings.mt_why_x_3}}</li>{{/if}}
+      </ul>
+      {{#if settings.mt_why_close}}<p class="mt-why__close">{{settings.mt_why_close}}</p>{{/if}}
+      <div class="mt-cta-row mt-cta-row--tight">
+        <a class="mt-btn" href="#mt-product">{{settings.mt_why_button}}</a>
+        {{> mt-ticks}}
+      </div>
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.mt_list_show false)}}
+  <section class="mt-sec mt-sec--warm mt-list">
+    <div class="b-wrap mt-narrow">
+      <h2 class="mt-h2">{{settings.mt_list_heading}}</h2>
+      <dl class="mt-list__items">
+        {{#if settings.mt_list_1_title}}<dt>{{settings.mt_list_1_title}}</dt><dd>{{settings.mt_list_1_text}}</dd>{{/if}}
+        {{#if settings.mt_list_2_title}}<dt>{{settings.mt_list_2_title}}</dt><dd>{{settings.mt_list_2_text}}</dd>{{/if}}
+        {{#if settings.mt_list_3_title}}<dt>{{settings.mt_list_3_title}}</dt><dd>{{settings.mt_list_3_text}}</dd>{{/if}}
+        {{#if settings.mt_list_4_title}}<dt>{{settings.mt_list_4_title}}</dt><dd>{{settings.mt_list_4_text}}</dd>{{/if}}
+      </dl>
+      {{#if settings.mt_list_quote}}<p class="mt-list__quote">{{settings.mt_list_quote}}</p>{{/if}}
+    </div>
+  </section>
+  {{/unless}}
+
+  {{#unless (eq settings.home_featured_show false)}}
   {{#each (limit products 1)}}
-  <section class="b-wrap b-featured" data-featured="{{url}}" data-featured-handle="{{handle}}">
-    <h2 class="b-h2">{{#if @root.settings.home_featured_heading}}{{@root.settings.home_featured_heading}}{{else}}Our product{{/if}}</h2>
-    <div class="b-featured__grid">
-      <div class="b-featured__gallery">
-        <div class="b-featured__media">
+  <section class="mt-sec mt-product" id="mt-product">
+    <div class="b-wrap mt-product__grid b-featured" data-featured="{{url}}" data-featured-handle="{{handle}}" data-featured-packs="{{#if (eq @root.settings.mt_prod_packs false)}}0{{else}}1{{/if}}" data-product-card>
+      <div class="mt-product__gallery">
+        <div class="b-featured__media mt-product__media">
           {{#if imageUrl}}<img data-featured-main src="{{imageUrl}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}
         </div>
-        <div class="b-featured__strip" data-featured-strip hidden>
+        <div class="b-featured__strip mt-product__strip" data-featured-strip hidden>
           <button type="button" class="b-round-btn" data-featured-step="-1" aria-label="Previous image">‹</button>
           <div class="b-featured__thumbs" data-featured-thumbs></div>
           <button type="button" class="b-round-btn" data-featured-step="1" aria-label="Next image">›</button>
         </div>
       </div>
-      <div class="b-featured__info">
-        <h3 class="b-featured__title">{{title}}</h3>
-        {{#if reviewCount}}<p class="b-featured__rating"><span class="b-stars" style="--r:{{rating}}" aria-hidden="true"></span> {{rating}} ({{reviewCount}} reviews)</p>{{/if}}
-        <p class="b-featured__price"><span data-featured-price>{{money sellingPrice}}</span>{{#if (gt compareAtPrice sellingPrice)}} <s data-featured-compare>{{money compareAtPrice}}</s>{{/if}}</p>
-        <div class="b-featured__variant" data-featured-variant hidden>
+      <div class="mt-product__info">
+        <img class="mt-product__badge" src="{{#if @root.settings.mt_prod_badge}}{{@root.settings.mt_prod_badge}}{{else}}{{@root.assets_url}}/images/mt/bestseller.webp{{/if}}" alt="#1 Bestseller" width="320" height="65" loading="lazy">
+        {{#if @root.settings.mt_prod_title}}<p class="mt-product__title">{{@root.settings.mt_prod_title}}</p>{{/if}}
+        <h2 class="mt-product__name">{{title}}</h2>
+        <ul class="mt-product__ticks">
+          {{#if @root.settings.mt_prod_tick_1}}<li>{{{@root.settings.mt_prod_tick_1}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_2}}<li>{{{@root.settings.mt_prod_tick_2}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_3}}<li>{{{@root.settings.mt_prod_tick_3}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_4}}<li>{{{@root.settings.mt_prod_tick_4}}}</li>{{/if}}
+        </ul>
+        {{!-- Price line: with the pack cards on and "Show the price above the pack cards" off it is rendered hidden (the
+              cards carry the prices); ui.js initFeatured shows it again whenever the pack cards do not come up. --}}
+        <p class="b-featured__price mt-product__price"{{#unless (eq @root.settings.mt_prod_packs false)}}{{#unless @root.settings.mt_prod_price}} hidden data-featured-price-auto{{/unless}}{{/unless}}><span data-featured-price>{{money sellingPrice}}</span>{{#if (gt compareAtPrice sellingPrice)}} <s data-featured-compare>{{money compareAtPrice}}</s>{{/if}}</p>
+        {{!-- Size Chart: Theme settings → Maggie's – Home middle → Size chart & size finder (shared with the product
+              pages). A size table → the size finder (opens in place); no table but a picture / text → the popup. --}}
+        {{#if @root.settings.mt_sf_table}}{{> mt-size-finder label=""}}{{else if @root.settings.mt_size_image}}<div class="b-sizechart mt-product__size">{{> mt-size-chart label="" title="" image="" text=""}}</div>{{else if @root.settings.mt_size_text}}<div class="b-sizechart mt-product__size">{{> mt-size-chart label="" title="" image="" text=""}}</div>{{/if}}
+        {{!-- Filled by ui.js initFeatured from the product page: its pack cards (Buy 1 / Buy 2 Get 1…, one Size +
+              Color row per unit) when mt_prod_packs is on, else one select per option. The combined select below
+              stays as the last fallback. --}}
+        <div class="mt-product__packs" data-featured-pack-box hidden></div>
+        <div class="mt-product__opts" data-featured-opts hidden></div>
+        <div class="b-featured__variant mt-product__variant" data-featured-variant hidden>
           <label>Option<select class="b-select" data-featured-select></select></label>
         </div>
-        <p class="b-featured__qty-label">Quantity</p>
-        <div class="b-qty" data-featured-qty>
-          <button type="button" data-featured-qty-step="-1" aria-label="Decrease quantity">−</button>
-          <input type="number" min="1" max="999" value="1" data-featured-qty-input aria-label="Quantity">
-          <button type="button" data-featured-qty-step="1" aria-label="Increase quantity">+</button>
+        <div class="mt-product__buy">
+          <div class="b-qty" data-featured-qty>
+            <button type="button" data-featured-qty-step="-1" aria-label="Decrease quantity">−</button>
+            <input type="number" min="1" max="999" value="1" data-featured-qty-input aria-label="Quantity">
+            <button type="button" data-featured-qty-step="1" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="b-btn b-btn--block b-btn--lg mt-product__atc" data-testid="add-to-cart" data-featured-atc disabled>{{#if @root.settings.atc_label}}{{@root.settings.atc_label}}{{else}}Add to cart{{/if}}</button>
         </div>
-        <button type="button" class="b-btn b-btn--block b-btn--lg" data-testid="add-to-cart" data-featured-atc disabled>{{#if @root.settings.atc_label}}{{@root.settings.atc_label}}{{else}}Add to cart{{/if}}</button>
-        <a class="b-btn b-btn--block b-btn--ghost" href="{{url}}">More info</a>
         <p class="b-form-msg" data-featured-msg role="status"></p>
+        <p class="mt-product__ships"><span><i class="mt-dot" aria-hidden="true"></i>{{@root.settings.mt_prod_ships}}</span><span>{{{@root.settings.mt_prod_free}}}</span></p>
+        <div class="mt-product__guarantee">
+          <img src="{{@root.assets_url}}/images/mt/seal-90.webp" alt="" width="52" height="52" loading="lazy">
+          <div><p class="mt-product__g-title">{{@root.settings.mt_prod_g_title}}</p><p class="mt-product__g-text">{{{@root.settings.mt_prod_g_text}}}</p></div>
+        </div>
+        {{#if @root.settings.mt_prod_quote}}
+        <blockquote class="mt-product__quote">
+          <p>{{{@root.settings.mt_prod_quote}}}</p>
+          <footer><img src="{{@root.assets_url}}/images/mt/founder.webp" alt="" width="44" height="44" loading="lazy"><span><strong>{{@root.settings.mt_prod_founder}}</strong><small>{{@root.settings.mt_prod_role}}</small></span></footer>
+        </blockquote>
+        {{/if}}
+        <a class="mt-product__more" href="{{url}}">See all colours, sizes &amp; bundles →</a>
       </div>
     </div>
   </section>
   {{/each}}
-  {{/if}}
-
-  {{#unless (eq settings.home_products_show false)}}
-  {{#if (eq settings.home_products_source "collections")}}
-  {{#each collections}}{{#if products.length}}
-  <section class="b-wrap b-home-grid">
-    <div class="b-home-grid__head">
-      <h2 class="b-h2 b-h2--left">{{title}}</h2>
-      <a class="b-link" href="/collections/{{handle}}" data-local-domain>View all {{> icon-arrow}}</a>
-    </div>
-    <div class="b-grid">{{#if @root.settings.home_products_limit}}{{#each (limit products @root.settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
-  </section>
-  {{/if}}{{/each}}
-  {{else}}
-  {{#if products.length}}
-  <section class="b-wrap b-home-grid" id="products">
-    <h2 class="b-h2">{{#if settings.home_products_heading}}{{settings.home_products_heading}}{{else}}Best sellers{{/if}}</h2>
-    <div class="b-grid">{{#if settings.home_products_limit}}{{#each (limit products settings.home_products_limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 8)}}{{> card-product}}{{/each}}{{/if}}</div>
-    <div class="b-center b-home-grid__more"><a class="b-btn b-btn--ghost" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>View all</a></div>
-  </section>
-  {{/if}}
-  {{/if}}
   {{/unless}}
 
-  {{#if settings.home_banner_show}}
-  <section class="b-wrap b-iwt b-iwt--image-{{#if settings.home_banner_side}}{{settings.home_banner_side}}{{else}}left{{/if}}">
-    <div class="b-iwt__media">{{#if settings.home_banner_image}}<img src="{{settings.home_banner_image}}" alt="" loading="lazy">{{else}}<div class="b-ph" aria-hidden="true"></div>{{/if}}</div>
-    <div class="b-iwt__text">
-      {{#if settings.home_banner_title}}<h2 class="b-h2 b-h2--left">{{settings.home_banner_title}}</h2>{{/if}}
-      {{#if settings.home_banner_text}}<div class="b-rte"><p>{{settings.home_banner_text}}</p></div>{{/if}}
-      <a class="b-btn" href="{{#if settings.home_banner_link}}{{settings.home_banner_link}}{{else}}{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}{{/if}}" data-local-domain>{{#if settings.home_banner_button}}{{settings.home_banner_button}}{{else}}Shop now{{/if}}</a>
-    </div>
-  </section>
-  {{/if}}
-
-  {{#if settings.home_compare_show}}
-  {{!-- Us vs. them. Rows come from a textarea (Feature|yes|no) and are built by ui.js. --}}
-  <section class="b-wrap b-compare" data-home-compare="{{settings.home_compare_rows}}" data-ours="{{#if settings.home_compare_ours}}{{settings.home_compare_ours}}{{else}}{{brand.name}}{{/if}}" data-theirs="{{#if settings.home_compare_theirs}}{{settings.home_compare_theirs}}{{else}}Others{{/if}}">
-    <h2 class="b-h2">{{#if settings.home_compare_heading}}{{settings.home_compare_heading}}{{else}}How we compare{{/if}}</h2>
-    <div class="b-compare__table" role="table" data-compare-table></div>
-  </section>
-  {{/if}}
-
-  {{#unless (eq settings.home_reviews_show false)}}
-  <section class="b-home-reviews" data-home-reviews hidden>
+  {{#unless (eq settings.mt_vr_show false)}}
+  <section class="mt-sec mt-vr">
     <div class="b-wrap">
-      <h2 class="b-h2 b-h2--tight">{{#if settings.home_reviews_heading}}{{settings.home_reviews_heading}}{{else}}What our customers are saying{{/if}}</h2>
-      {{#if settings.home_reviews_sub}}<p class="b-home-reviews__sub">{{settings.home_reviews_sub}}</p>{{/if}}
-      <div class="b-carousel" data-carousel>
-        <div class="b-carousel__track" data-carousel-track></div>
-      </div>
-      <div class="b-carousel__dots" data-carousel-dots role="tablist" aria-label="Choose reviews"></div>
+      {{#if settings.mt_vr_pill}}<p class="mt-vr__pill"><i aria-hidden="true"></i>{{settings.mt_vr_pill}}</p>{{/if}}
+      <h2 class="mt-vr__heading">{{{settings.mt_vr_heading}}}</h2>
     </div>
-    <script type="application/json" data-home-product-ids>[{{#each (limit products 60)}}{{#unless @first}},{{/unless}}"{{id}}"{{/each}}]</script>
+    <ul class="mt-vr__track" data-mt-track>
+      {{> mt-vr-card video=settings.mt_vr_1_video poster=settings.mt_vr_1_poster def="vr-1" defvideo="vr-1" title=settings.mt_vr_1_title name=settings.mt_vr_1_name}}
+      {{> mt-vr-card video=settings.mt_vr_2_video poster=settings.mt_vr_2_poster def="vr-2" defvideo="vr-2" title=settings.mt_vr_2_title name=settings.mt_vr_2_name}}
+      {{> mt-vr-card video=settings.mt_vr_3_video poster=settings.mt_vr_3_poster def="vr-3" defvideo="vr-3" title=settings.mt_vr_3_title name=settings.mt_vr_3_name}}
+      {{> mt-vr-card video=settings.mt_vr_4_video poster=settings.mt_vr_4_poster def="vr-4" defvideo="vr-4" title=settings.mt_vr_4_title name=settings.mt_vr_4_name}}
+      {{> mt-vr-card video=settings.mt_vr_5_video poster=settings.mt_vr_5_poster def="vr-5" defvideo="vr-5" title=settings.mt_vr_5_title name=settings.mt_vr_5_name}}
+      {{> mt-vr-card video=settings.mt_vr_6_video poster=settings.mt_vr_6_poster def="vr-6" defvideo="vr-6" title=settings.mt_vr_6_title name=settings.mt_vr_6_name}}
+    </ul>
+    <div class="mt-vr__arrows">
+      <button type="button" class="mt-arrow" data-mt-step="-1" aria-label="Previous videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button type="button" class="mt-arrow" data-mt-step="1" aria-label="Next videos"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
   </section>
   {{/unless}}
 
-  {{#if settings.home_faq_show}}{{> faq}}{{/if}}
+  {{#unless (eq settings.mt_ch_show false)}}
+  {{> mt-changed}}
+  {{/unless}}
 
-  {{#if settings.home_newsletter_show}}
-  <section class="b-newsletter-sec">
-    <div class="b-wrap b-newsletter-sec__inner">
-      <h2 class="b-h2">{{#if settings.newsletter_heading}}{{settings.newsletter_heading}}{{else}}Join our newsletter{{/if}}</h2>
-      {{#if settings.newsletter_text}}<p class="b-newsletter-sec__text">{{settings.newsletter_text}}</p>{{/if}}
-      {{> newsletter-form id="home"}}
-    </div>
-  </section>
-  {{/if}}
+  {{#unless (eq settings.mt_rt_show false)}}
+  {{> mt-routine}}
+  {{/unless}}
 
-  {{#if settings.home_contact_show}}{{> contact-form-body heading=settings.home_contact_heading}}{{/if}}
+  {{#unless (eq settings.mt_cmp_show false)}}
+  {{> mt-compare}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_cf_show false)}}
+  {{> mt-comfort}}
+  {{/unless}}
+
+  {{#unless (eq settings.home_faq_show false)}}
+  {{> mt-faq}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_cta_show false)}}
+  {{> mt-last}}
+  {{/unless}}
 </main>
 {{> footer}}
 {{> scripts}}
+<script src="{{assets_url}}/js/mt-home.js" defer></script>
 </body>
 </html>

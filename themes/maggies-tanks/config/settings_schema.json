@@ -6,7 +6,7 @@
         "type": "color",
         "id": "primary",
         "label": "Primary (buttons, accents)",
-        "default": "#14203b"
+        "default": "#3e3e3e"
       },
       {
         "type": "color",
@@ -18,13 +18,13 @@
         "type": "color",
         "id": "accent",
         "label": "Accent",
-        "default": "#14203b"
+        "default": "#25745c"
       },
       {
         "type": "color",
         "id": "text_color",
         "label": "Body text",
-        "default": "#15171c"
+        "default": "#3d3d3d"
       },
       {
         "type": "color",
@@ -36,19 +36,19 @@
         "type": "color",
         "id": "check",
         "label": "Check marks / success",
-        "default": "#1fa463"
+        "default": "#16a34a"
       },
       {
         "type": "color",
         "id": "badge",
         "label": "Badges",
-        "default": "#3b9dea"
+        "default": "#000000"
       },
       {
         "type": "color",
         "id": "sale",
         "label": "Sale price / discount",
-        "default": "#e0392b"
+        "default": "#3d3d3d"
       },
       {
         "type": "color",
@@ -60,7 +60,7 @@
         "type": "color",
         "id": "star",
         "label": "Stars",
-        "default": "#17b26a"
+        "default": "#000000"
       },
       {
         "type": "header",
@@ -76,19 +76,19 @@
         "type": "color",
         "id": "header_text",
         "label": "Header text",
-        "default": "#15171c"
+        "default": "#000000"
       },
       {
         "type": "color",
         "id": "footer_bg",
         "label": "Footer background",
-        "default": "#14203b"
+        "default": "#14382e"
       },
       {
         "type": "color",
         "id": "footer_text",
         "label": "Footer text",
-        "default": "#ffffff"
+        "default": "#b7c3bd"
       },
       {
         "type": "header",
@@ -109,28 +109,28 @@
         "type": "text",
         "id": "font",
         "label": "Body font (Google Fonts name)",
-        "default": "Manrope",
+        "default": "Inter",
         "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
       },
       {
         "type": "text",
         "id": "font_heading",
         "label": "Heading font (optional)",
-        "default": "",
+        "default": "DM Serif Display",
         "info": "Empty = same as the body font."
       },
       {
         "type": "text",
         "id": "font_weights",
         "label": "Google Fonts weights",
-        "default": "400;500;600;700;800",
+        "default": "400;500;700",
         "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
       },
       {
         "type": "checkbox",
         "id": "load_google_fonts",
         "label": "Load the fonts from Google Fonts",
-        "default": true,
+        "default": false,
         "info": "Off when the theme ships its own font files (@font-face in skin.css)."
       },
       {
@@ -140,7 +140,7 @@
         "min": 0,
         "max": 24,
         "step": 1,
-        "default": 12,
+        "default": 8,
         "unit": "px"
       },
       {
@@ -150,7 +150,7 @@
         "min": 0,
         "max": 40,
         "step": 1,
-        "default": 8,
+        "default": 4,
         "unit": "px"
       },
       {
@@ -180,7 +180,7 @@
         "min": 960,
         "max": 1600,
         "step": 20,
-        "default": 1200,
+        "default": 1440,
         "unit": "px"
       }
     ]
@@ -198,7 +198,7 @@
         "type": "select",
         "id": "topbar_style",
         "label": "Style",
-        "default": "rotate",
+        "default": "countdown",
         "options": [
           {
             "value": "rotate",
@@ -226,7 +226,7 @@
         "type": "color",
         "id": "topbar_bg",
         "label": "Background",
-        "default": "#14203b"
+        "default": "#1d4533"
       },
       {
         "type": "color",
@@ -242,19 +242,19 @@
         "type": "text",
         "id": "countdown_title",
         "label": "Title",
-        "default": "FLASH SALE"
+        "default": "Fall Sale"
       },
       {
         "type": "text",
         "id": "countdown_subtitle",
         "label": "Subtitle",
-        "default": "Up to 50% off – today only"
+        "default": "Offer ends in:"
       },
       {
         "type": "number",
         "id": "countdown_hours",
         "label": "Restart every (hours)",
-        "default": 2,
+        "default": 3,
         "info": "The timer counts down and restarts for each visitor."
       }
     ]
@@ -272,7 +272,7 @@
         "type": "select",
         "id": "logo_position",
         "label": "Logo position (desktop)",
-        "default": "left",
+        "default": "center",
         "options": [
           {
             "value": "left",
@@ -298,13 +298,13 @@
         "type": "checkbox",
         "id": "show_search",
         "label": "Show search",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
         "id": "show_account",
         "label": "Show orders link",
-        "default": true
+        "default": false
       },
       {
         "type": "checkbox",
@@ -357,13 +357,13 @@
         "type": "textarea",
         "id": "footer_about",
         "label": "About text",
-        "default": ""
+        "default": "The built-in-bra tank that feels like nothing and looks smooth under everything."
       },
       {
         "type": "text",
         "id": "footer_links_title",
         "label": "Links column title",
-        "default": "Customer care"
+        "default": "Help"
       },
       {
         "type": "checkbox",
@@ -391,7 +391,7 @@
         "type": "checkbox",
         "id": "footer_newsletter",
         "label": "Show newsletter in the footer",
-        "default": true
+        "default": false
       },
       {
         "type": "text",
@@ -490,7 +490,7 @@
         "type": "checkbox",
         "id": "pay_paypal",
         "label": "PayPal",
-        "default": true
+        "default": false
       }
     ]
   },
@@ -701,73 +701,73 @@
         "type": "text",
         "id": "faq_1_q",
         "label": "Question 1",
-        "default": "How long does shipping take?"
+        "default": "What is this tank made of?"
       },
       {
         "type": "richtext",
         "id": "faq_1_a",
         "label": "Answer 1",
-        "default": "<p>Orders are processed within 1–3 business days, then delivered in 5–10 business days. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+        "default": "<p>80% premium Nylon, 20% Spandex. We tested dozens of fabric blends to find the exact ratio that gives you enough stretch and hold without feeling tight or suffocating. It's soft against the skin, breathes well, and holds its shape after repeated washing.</p>"
       },
       {
         "type": "text",
         "id": "faq_2_q",
         "label": "Question 2",
-        "default": "How can I track my order?"
+        "default": "Will the padding shift or fall out like other built-in bras?"
       },
       {
         "type": "richtext",
         "id": "faq_2_a",
         "label": "Answer 2",
-        "default": "<p>As soon as your package ships we email you a tracking number. You can also check any time on the <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+        "default": "<p>No. The padding stays in place while you wear it, it won't move around or bunch up. When you want to take it out, it comes out easily. Put it back in and it stays put, every single time.</p>"
       },
       {
         "type": "text",
         "id": "faq_3_q",
         "label": "Question 3",
-        "default": "Can I change or cancel my order?"
+        "default": "Will this work for my body type? I have a larger chest."
       },
       {
         "type": "richtext",
         "id": "faq_3_a",
         "label": "Answer 3",
-        "default": "<p>Yes, within 12 hours of purchase. Email {{CompanyEmail}} with your order number.</p>"
+        "default": "<p>The tank is designed to accommodate a wide range of body types and bust sizes. The distributed support structure means the hold comes from the entire garment, not just a narrow band - so there’s no single point bearing all the weight.</p>"
       },
       {
         "type": "text",
         "id": "faq_4_q",
         "label": "Question 4",
-        "default": "What is your return and refund policy?"
+        "default": "Can I really wear this instead of a bra?"
       },
       {
         "type": "richtext",
         "id": "faq_4_a",
         "label": "Answer 4",
-        "default": "<p>You have 30 days from delivery to return an item. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+        "default": "<p>That's exactly what it's designed for. Most of our customers wear it as their complete bra replacement for everyday activities: errands, school pickup, work, brunch, WFH, travel, lounging. It provides 'supported enough' comfort for daily life.</p>"
       },
       {
         "type": "text",
         "id": "faq_5_q",
         "label": "Question 5",
-        "default": "My item arrived damaged or isn't what I ordered"
+        "default": "Will this show through white or light-coloured clothing?"
       },
       {
         "type": "richtext",
         "id": "faq_5_a",
         "label": "Answer 5",
-        "default": "<p>We are sorry! <a href=\"{{ContactLink}}\">Contact us</a> with a photo and we will make it right.</p>"
+        "default": "<p>The tank is designed with layering in mind. In neutral colours, it sits discreetly under light tops. For sheer or very thin white fabric, we recommend choosing a shade that’s close to your skin tone.</p>"
       },
       {
         "type": "text",
         "id": "faq_6_q",
         "label": "Question 6",
-        "default": "How can I reach customer support?"
+        "default": "How do I wash it?"
       },
       {
         "type": "richtext",
         "id": "faq_6_a",
         "label": "Answer 6",
-        "default": "<p>Email {{CompanyEmail}} — we reply within one business day.</p>"
+        "default": "<p>Machine wash on a gentle cycle, cold water. Lay flat to dry or tumble dry on low. The fabric and padding are engineered to hold their shape and support through repeated washes. No special care required.</p>"
       }
     ]
   },
@@ -800,24 +800,25 @@
         "type": "text",
         "id": "home_hero_title",
         "label": "Heading",
-        "default": "Everyday essentials, made better"
+        "default": "The Tank That Has Everyone Asking \"Have You Lost Weight?\""
       },
       {
         "type": "textarea",
         "id": "home_hero_text",
         "label": "Text",
-        "default": "Free shipping and 30-day returns on every order."
+        "default": "No band. No straps. No wire. Support spread across the whole top, so your back looks smooth, bra lines vanish, and you forget you're wearing it."
       },
       {
         "type": "text",
         "id": "home_hero_button",
         "label": "Button",
-        "default": "Shop now"
+        "default": "Buy Now - Save 70%"
       },
       {
         "type": "url",
         "id": "home_hero_link",
-        "label": "Button link"
+        "label": "Button link",
+        "default": "#mt-product"
       },
       {
         "type": "select",
@@ -848,7 +849,7 @@
         "type": "textarea",
         "id": "home_promises",
         "label": "Promises strip (separate with ||, empty = hidden)",
-        "default": "Free shipping || 30-day returns || Secure checkout || 24/7 support"
+        "default": "FREE SHIPPING||PREMIUM FABRIC||FAST SHIPPING||90 DAY GUARANTEE||DESIGNED IN THE USA"
       }
     ]
   },
@@ -859,7 +860,7 @@
         "type": "checkbox",
         "id": "home_featured_show",
         "label": "Show the featured product (first product)",
-        "default": false
+        "default": true
       },
       {
         "type": "text",
@@ -871,7 +872,7 @@
         "type": "checkbox",
         "id": "home_products_show",
         "label": "Show the product grid",
-        "default": true
+        "default": false
       },
       {
         "type": "select",
@@ -999,7 +1000,7 @@
         "type": "checkbox",
         "id": "home_reviews_show",
         "label": "Show customer reviews",
-        "default": true
+        "default": false
       },
       {
         "type": "text",
@@ -1017,7 +1018,7 @@
         "type": "checkbox",
         "id": "home_faq_show",
         "label": "Show the FAQ (Theme settings → FAQ)",
-        "default": false
+        "default": true
       },
       {
         "type": "checkbox",
@@ -1036,6 +1037,1141 @@
         "id": "home_contact_heading",
         "label": "Contact heading",
         "default": "Contact us"
+      }
+    ]
+  },
+  {
+    "name": "Maggie's – Home top",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero (title, text, button: Home – hero)"
+      },
+      {
+        "type": "text",
+        "id": "mt_hero_rating",
+        "label": "Rating pill",
+        "default": "Excellent 4.8/5 (100,000+ happy customers)"
+      },
+      {
+        "type": "text",
+        "id": "mt_tick_1",
+        "label": "Tick 1 (under every button)",
+        "default": "90-Day Perfect Fit Guarantee"
+      },
+      {
+        "type": "text",
+        "id": "mt_tick_2",
+        "label": "Tick 2",
+        "default": "Free Shipping"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_hero_video",
+        "label": "Hero video (MP4 / WebM, square)",
+        "info": "Plays muted in a loop over the picture. Leave empty to use the theme video. Recommended 720 × 720."
+      },
+      {
+        "type": "header",
+        "content": "Before & after"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_ba_show",
+        "label": "Show before & after",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_heading",
+        "label": "Heading",
+        "default": "Real Women. Real Comfort. Real Relief."
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_sub",
+        "label": "Subheading",
+        "default": "Their before & afters say it better than we can."
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_rating",
+        "label": "Rating line",
+        "default": "4.8/5 · 100,000+ happy customers"
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_button",
+        "label": "Button",
+        "default": "Buy Now - Save 70%"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_ba_1_image",
+        "label": "Card 1 picture (before | after, square)",
+        "info": "Leave empty to use the theme picture. Recommended 800 × 800."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ba_1_quote",
+        "label": "Card 1 quote (HTML: <strong> for bold)",
+        "default": "\"The back bulge my old bra dug in for years? <strong>Gone.</strong> Smooth across, and I feel good from behind again.\""
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_1_name",
+        "label": "Card 1 name",
+        "default": "Linda M."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_ba_2_image",
+        "label": "Card 2 picture (before | after, square)",
+        "info": "Leave empty to use the theme picture. Recommended 800 × 800."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ba_2_quote",
+        "label": "Card 2 quote (HTML: <strong> for bold)",
+        "default": "\"Look at the lift. No wire doing that, just the tank. <strong>I look ten years younger from the side</strong> and nothing digs in.\""
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_2_name",
+        "label": "Card 2 name",
+        "default": "Patricia R."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_ba_3_image",
+        "label": "Card 3 picture (before | after, square)",
+        "info": "Leave empty to use the theme picture. Recommended 800 × 800."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ba_3_quote",
+        "label": "Card 3 quote (HTML: <strong> for bold)",
+        "default": "\"A strap used to slide down every time I reached. Now I just <strong>reach, smooth and go</strong>, no readjusting all day.\""
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_3_name",
+        "label": "Card 3 name",
+        "default": "Susan D."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_ba_4_image",
+        "label": "Card 4 picture (before | after, square)",
+        "info": "Leave empty to use the theme picture. Recommended 800 × 800."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ba_4_quote",
+        "label": "Card 4 quote (HTML: <strong> for bold)",
+        "default": "\"Same me, completely different shape. The support pulls everything into place. <strong>I finally feel put-together</strong>, no hooks.\""
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_4_name",
+        "label": "Card 4 name",
+        "default": "Karen B."
+      },
+      {
+        "type": "text",
+        "id": "mt_ba_verified",
+        "label": "Verified label",
+        "default": "Verified Customer"
+      }
+    ]
+  },
+  {
+    "name": "Maggie's – Home middle",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Picture + text (desktop) / old bra vs tank (phone)"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_iwt_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_iwt_image",
+        "label": "Picture (square)",
+        "info": "Leave empty to use the theme picture. Recommended 1200 × 1200."
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_heading",
+        "label": "Heading (desktop)",
+        "default": "What If Getting Dressed Was The Simplest Part Of Your Day?"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_iwt_text",
+        "label": "Text (desktop)",
+        "default": "Imagine pulling on one piece in the morning and not thinking about it again until you're back in your pyjamas."
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_li_1",
+        "label": "List line 1 (desktop)",
+        "default": "- No straps to adjust before you leave the house"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_li_2",
+        "label": "List line 2 (desktop)",
+        "default": "- No band riding up after lunch"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_li_3",
+        "label": "List line 3 (desktop)",
+        "default": "- No checking the mirror for lines under your top"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_li_4",
+        "label": "List line 4 (desktop)",
+        "default": "- No ripping anything off the second you walk through the door"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_iwt_note",
+        "label": "Closing line (desktop)",
+        "default": "Just smooth, covered, comfortable - and completely free to get on with your actual day."
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_heading",
+        "label": "Heading (phone)",
+        "default": "What If You Never Thought About Your Bra Again?"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_text",
+        "label": "Text (phone)",
+        "default": "Wear it on in the morning, forget it's there till bedtime."
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_old",
+        "label": "Old bra title",
+        "default": "Your Old Bra"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_old_1",
+        "label": "Old bra ✕ 1",
+        "default": "Adjusting the straps before you leave"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_old_2",
+        "label": "Old bra ✕ 2",
+        "default": "Bra lines under every top you wear"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_old_3",
+        "label": "Old bra ✕ 3",
+        "default": "Counting the hours till you take it off"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_new",
+        "label": "Tank title",
+        "default": "With Maggie's Tank"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_new_1",
+        "label": "Tank ✓ 1",
+        "default": "Nothing to adjust before you leave"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_new_2",
+        "label": "Tank ✓ 2",
+        "default": "Stays put right through lunch"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_new_3",
+        "label": "Tank ✓ 3",
+        "default": "Smooth under everything you wear"
+      },
+      {
+        "type": "text",
+        "id": "mt_iwt_m_note",
+        "label": "Closing line (phone)",
+        "default": "Just smooth, comfortable, and free to get on with your day."
+      },
+      {
+        "type": "header",
+        "content": "Why bras stopped working"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_why_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_why_heading",
+        "label": "Heading",
+        "default": "Here's Why Bras Stopped Working For You"
+      },
+      {
+        "type": "text",
+        "id": "mt_why_lead",
+        "label": "Lead",
+        "default": "It's not your body. It's the design."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_why_text",
+        "label": "Text",
+        "default": "Traditional bras force all their support into three pressure zones: two straps and a band. That's it. Every gram of hold your body needs gets concentrated into those three narrow points."
+      },
+      {
+        "type": "text",
+        "id": "mt_why_x_1",
+        "label": "✕ 1",
+        "default": "Straps dig into your shoulders."
+      },
+      {
+        "type": "text",
+        "id": "mt_why_x_2",
+        "label": "✕ 2",
+        "default": "Bands tighten across your ribs."
+      },
+      {
+        "type": "text",
+        "id": "mt_why_x_3",
+        "label": "✕ 3",
+        "default": "Wires press into tissue."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_why_close",
+        "label": "Bold closing text",
+        "default": "And because the support is concentrated, not distributed, those pressure points only get worse as the day goes on."
+      },
+      {
+        "type": "text",
+        "id": "mt_why_button",
+        "label": "Button",
+        "default": "Buy Now · Save 70%"
+      },
+      {
+        "type": "header",
+        "content": "Nothing else has worked"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_list_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_list_heading",
+        "label": "Heading",
+        "default": "And Here's Why Nothing Else Has Worked Either"
+      },
+      {
+        "type": "text",
+        "id": "mt_list_1_title",
+        "label": "Item 1 title",
+        "default": "Bralettes"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_list_1_text",
+        "label": "Item 1 text",
+        "default": "Soft? Yes. Supportive? Barely. They feel lovely in the store, but under a real top, there's nothing there. No smoothing. No coverage."
+      },
+      {
+        "type": "text",
+        "id": "mt_list_2_title",
+        "label": "Item 2 title",
+        "default": "Shelf Tanks"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_list_2_text",
+        "label": "Item 2 text",
+        "default": "The elastic gives up after three washes. They roll up at the waist. The built-in 'bra' is a thin strip of fabric that flattens instead of supports."
+      },
+      {
+        "type": "text",
+        "id": "mt_list_3_title",
+        "label": "Item 3 title",
+        "default": "Sports Bras"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_list_3_text",
+        "label": "Item 3 text",
+        "default": "Designed for an hour at the gym, not twelve hours of living. Too tight. Too compressive. A nightmare to get on and off."
+      },
+      {
+        "type": "text",
+        "id": "mt_list_4_title",
+        "label": "Item 4 title",
+        "default": "Wireless Bras"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_list_4_text",
+        "label": "Item 4 text",
+        "default": "Better than underwire, but they still use the same architecture: a band, two straps, and concentrated pressure."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_list_quote",
+        "label": "Closing quote",
+        "default": "The problem isn't that you haven't found the right bra.The problem is that you keep looking for the answer inside the same category that created the discomfort."
+      },
+      {
+        "type": "header",
+        "content": "Product (the first product of the store: gallery, options, add to cart)"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_prod_packs",
+        "label": "Show the pack cards of the product page (Buy 1 / Buy 2 Get 1…, set in its product template)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_prod_price",
+        "label": "Show the price above the pack cards",
+        "default": false,
+        "info": "Off: the pack cards carry the prices (like the original). The price always shows when the pack cards are off or cannot load."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_prod_badge",
+        "label": "#1 badge picture",
+        "info": "Leave empty to use the theme picture. Recommended 640 × 130."
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_title",
+        "label": "Title",
+        "default": "Say Goodbye To Bras Forever, Without Sacrificing Support"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_tick_1",
+        "label": "✓ 1 (HTML: <strong>)",
+        "default": "<strong>Holds a full D+</strong>, no wire, no clasp, no band"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_tick_2",
+        "label": "✓ 2 (HTML: <strong>)",
+        "default": "<strong>Smooth back</strong> with no bulge, lines, or red marks"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_tick_3",
+        "label": "✓ 3 (HTML: <strong>)",
+        "default": "<strong>Double lined</strong>, so nothing shows through"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_tick_4",
+        "label": "✓ 4 (HTML: <strong>)",
+        "default": "<strong>Breathable fabric</strong> that stays cool, even in summer"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_ships",
+        "label": "Shipping line",
+        "default": "Ships by Tomorrow"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_free",
+        "label": "Free shipping line (HTML)",
+        "default": "<strong>Free Shipping</strong> worldwide"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_g_title",
+        "label": "Guarantee title",
+        "default": "90-Day Perfect Fit Guarantee"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_g_text",
+        "label": "Guarantee text (HTML)",
+        "default": "<strong>Zero risk to you.</strong> If your size isn’t quite right, email us within 90 days and we’ll send the correct size free."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_prod_quote",
+        "label": "Founder quote (HTML)",
+        "default": "\"I'm 67. Every bra hurts in the same spots, so I made one that doesn't. I even <strong>sleep in it.</strong>\""
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_founder",
+        "label": "Founder name",
+        "default": "Maggie"
+      },
+      {
+        "type": "text",
+        "id": "mt_prod_role",
+        "label": "Founder role",
+        "default": "Founder"
+      },
+      {
+        "type": "header",
+        "content": "Size chart & size finder (home product block + the product page's Size chart block)"
+      },
+      {
+        "type": "text",
+        "id": "mt_size_label",
+        "label": "Button text",
+        "default": "Size Chart"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_sf_table",
+        "label": "Size table: one size per line, Size | weight (lb) | full bust (in)",
+        "default": "S | 100-120 | 31-33\nM | 121-140 | 33-35\nL | 141-160 | 35-37\nXL | 161-180 | 37-40\n2XL | 181-200 | 40-43\n3XL | 201-220 | 43-46\n4XL | 221-245 | 46-49\n5XL | 246-275 | 49-52",
+        "info": "EXAMPLE values: replace them with your supplier's size chart. Size names = your Size option values (S, M, L…). Weights are for a woman about 5'5\" (the finder adjusts for height). Empty = no size finder."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_height",
+        "label": "Height label",
+        "default": "Your height"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_height_hint",
+        "label": "Height hint",
+        "default": "Feet and inches"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_weight",
+        "label": "Weight label",
+        "default": "Your weight"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_weight_hint",
+        "label": "Weight hint",
+        "default": "Pounds"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_weight_ph",
+        "label": "Weight placeholder",
+        "default": "e.g. 165"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_bust",
+        "label": "Bust label",
+        "default": "Your full bust"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_bust_tag",
+        "label": "Bust tag",
+        "default": "Optional, for a better fit"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_bust_ph",
+        "label": "Bust placeholder",
+        "default": "e.g. 43 in or 109 cm"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_bust_warn",
+        "label": "Bust note",
+        "default": "This is not your bra size: measure around the fullest part of your bust, over your bra."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_how",
+        "label": "How-to-measure link",
+        "default": "How do I measure my full bust?"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_sf_how_image",
+        "label": "How-to-measure picture",
+        "info": "Optional. Shown above the steps."
+      },
+      {
+        "type": "richtext",
+        "id": "mt_sf_how_steps",
+        "label": "How-to-measure steps",
+        "default": "<ol><li><strong>Tape around you</strong>, across the fullest part of your bust.</li><li><strong>Keep it level</strong> all the way round your back.</li><li><strong>Snug, not tight</strong>: stand straight and breathe out normally.</li><li><strong>Read the inches</strong> (or cm) and type that number above.</li></ol>"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_button",
+        "label": "Button",
+        "default": "Show my size"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_result",
+        "label": "Result title",
+        "default": "Your size is"
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_note",
+        "label": "Result note",
+        "default": "Based on your height and weight."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_note_bust",
+        "label": "Result note when the bust sizes up ({bust} = the bust)",
+        "default": "Sized up for your {bust} bust, which needs more room than your height and weight alone suggest."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_pick",
+        "label": "Result line ({size} = the size)",
+        "default": "Choose {size} below when you pick your colors."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_missing",
+        "label": "Message when height or weight is missing",
+        "default": "Choose your height and type your weight first."
+      },
+      {
+        "type": "text",
+        "id": "mt_sf_between",
+        "label": "Line under the finder (HTML)",
+        "default": "Between two sizes? <strong>Go one size up</strong> for a more comfortable fit."
+      },
+      {
+        "type": "text",
+        "id": "mt_size_title",
+        "label": "Full size chart link",
+        "default": "See the full size chart"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_size_image",
+        "label": "Size chart picture",
+        "info": "Optional: your size table as a picture (e.g. 1200 px wide), shown under \"See the full size chart\" (and in the Size chart popup)."
+      },
+      {
+        "type": "richtext",
+        "id": "mt_size_text",
+        "label": "Size chart text (below the picture)",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Video reviews"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_vr_show",
+        "label": "Show video reviews",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_pill",
+        "label": "Pill",
+        "default": "Going viral on Facebook"
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_heading",
+        "label": "Heading (HTML: <em> = green)",
+        "default": "See Why Over 100,000 Women Ditched Their Bra Because Of <em>Maggie's Tanks</em>"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_1_video",
+        "label": "Video 1 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_1_poster",
+        "label": "Video 1 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_1_title",
+        "label": "Video 1 title",
+        "default": "\"I Wore It All Day Long\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_1_name",
+        "label": "Video 1 name",
+        "default": "Judy - Age 74"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_2_video",
+        "label": "Video 2 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_2_poster",
+        "label": "Video 2 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_2_title",
+        "label": "Video 2 title",
+        "default": "\"Thinking About Us Old Ladies\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_2_name",
+        "label": "Video 2 name",
+        "default": "Donna - Age 78"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_3_video",
+        "label": "Video 3 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_3_poster",
+        "label": "Video 3 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_3_title",
+        "label": "Video 3 title",
+        "default": "\"Theme Park With My Grandkids\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_3_name",
+        "label": "Video 3 name",
+        "default": "Stephanie - Age 67"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_4_video",
+        "label": "Video 4 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_4_poster",
+        "label": "Video 4 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_4_title",
+        "label": "Video 4 title",
+        "default": "\"I'm Sold\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_4_name",
+        "label": "Video 4 name",
+        "default": "Karen - Age 83"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_5_video",
+        "label": "Video 5 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_5_poster",
+        "label": "Video 5 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_5_title",
+        "label": "Video 5 title",
+        "default": "\"Pleasantly Surprised At 76\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_5_name",
+        "label": "Video 5 name",
+        "default": "Andrea - Age 76"
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_6_video",
+        "label": "Video 6 (MP4 / WebM, portrait 3:5)",
+        "info": "Plays on tap. Leave empty to use the theme video. Recommended 600 × 1000."
+      },
+      {
+        "type": "image_picker",
+        "id": "mt_vr_6_poster",
+        "label": "Video 6 poster",
+        "info": "Leave empty to use the theme picture. Recommended 600 × 1000."
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_6_title",
+        "label": "Video 6 title",
+        "default": "\"Feels Like A Little Hug\""
+      },
+      {
+        "type": "text",
+        "id": "mt_vr_6_name",
+        "label": "Video 6 name",
+        "default": "Ren - Age 68"
+      }
+    ]
+  },
+  {
+    "name": "Maggie's – Home bottom",
+    "settings": [
+      {
+        "type": "header",
+        "content": "What we changed"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_ch_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_heading",
+        "label": "Heading",
+        "default": "What We Changed - And Why It Feels Different"
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_sub",
+        "label": "Subheading",
+        "default": "We didn't build a better bra. We stopped building bras entirely."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_text",
+        "label": "Box text",
+        "default": "Instead of forcing support into two straps and a band, we spread it across the entire tank. No concentrated pressure points. No hardware. No architecture that digs, pinches, or rolls."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_italic",
+        "label": "Box italic text",
+        "default": "This isn't shapewear. This isn't compression. This is \"supported enough\" - the feeling of being gently held and smoothly covered, without a single part of the tank fighting against your body."
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_layers",
+        "label": "Layers heading",
+        "default": "How It Works - Layer By Layer"
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_1_title",
+        "label": "Layer 1 title",
+        "default": "Distributed Support Layer"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_1_text",
+        "label": "Layer 1 text",
+        "default": "The inner layer provides gentle, even hold across the entire torso. No narrow bands concentrating pressure."
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_2_title",
+        "label": "Layer 2 title",
+        "default": "Soft Padding, Real Support"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_2_text",
+        "label": "Layer 2 text",
+        "default": "The padding feels soft against your skin. The support underneath still holds a full D+."
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_3_title",
+        "label": "Layer 3 title",
+        "default": "Zero Pressure-Point Design"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_3_text",
+        "label": "Layer 3 text",
+        "default": "No underwire. No hooks. Wide shoulder coverage distributes weight evenly so nothing digs into your shoulders."
+      },
+      {
+        "type": "text",
+        "id": "mt_ch_4_title",
+        "label": "Layer 4 title",
+        "default": "Smoothing Outer Layer"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_ch_4_text",
+        "label": "Layer 4 text",
+        "default": "The outer layer sits flat against your body and creates a clean silhouette under clothes. Just a smooth, polished look."
+      },
+      {
+        "type": "header",
+        "content": "Morning routine"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_rt_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_rt_heading",
+        "label": "Heading",
+        "default": "Your New Morning Routine"
+      },
+      {
+        "type": "text",
+        "id": "mt_rt_1_title",
+        "label": "Step 1 title",
+        "default": "Pull it on"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_rt_1_text",
+        "label": "Step 1 text",
+        "default": "No clasps. No hooks. No fumbling behind your back. Just pull it over your head like any tank top."
+      },
+      {
+        "type": "text",
+        "id": "mt_rt_2_title",
+        "label": "Step 2 title",
+        "default": "Walk out the door"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_rt_2_text",
+        "label": "Step 2 text",
+        "default": "You're smooth. You're covered. You're supported. Grab your keys and go."
+      },
+      {
+        "type": "text",
+        "id": "mt_rt_3_title",
+        "label": "Step 3 title",
+        "default": "Forget you're wearing it"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_rt_3_text",
+        "label": "Step 3 text",
+        "default": "No mid-morning strap adjustment. No post-lunch band tug. Just comfort that lasts from coffee to couch."
+      },
+      {
+        "type": "header",
+        "content": "Comparison"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_cmp_show",
+        "label": "Show comparison",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_cmp_heading",
+        "label": "Heading",
+        "default": "How It Compares"
+      },
+      {
+        "type": "text",
+        "id": "mt_cmp_sub",
+        "label": "Subheading",
+        "default": "Not all support is created equal."
+      },
+      {
+        "type": "text",
+        "id": "mt_cmp_cols",
+        "label": "Columns, separated by | (the last one is highlighted)",
+        "default": "Trad Bra|Sports Bra|Shelf Tank|Bralette|Braless|Maggie's Tanks"
+      },
+      {
+        "type": "textarea",
+        "id": "mt_cmp_rows",
+        "label": "Rows: Feature|1|0|… (1 = ✓, 0 = ✗), one per line",
+        "default": "Comfortable all day|0|0|0|1|1|1\nEnough support|1|1|0|0|0|1\nSmooth under clothes|0|0|1|0|0|1\nStays put all day|0|1|0|0|0|1\nNo adjusting needed|0|1|0|1|1|1\nPads stay after washing|1|0|0|0|0|1\nBreathable|0|0|1|1|1|1\nEasy on/off|0|0|1|1|1|1"
+      },
+      {
+        "type": "text",
+        "id": "mt_cmp_score",
+        "label": "Score row label (empty hides the row)",
+        "default": "Score"
+      },
+      {
+        "type": "text",
+        "id": "mt_cmp_note",
+        "label": "Note",
+        "default": "One column with all checkmarks. That's the one you want."
+      },
+      {
+        "type": "header",
+        "content": "Comfort guarantee"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_cf_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_cf_heading",
+        "label": "Heading",
+        "default": "Your Comfort Comes First."
+      },
+      {
+        "type": "textarea",
+        "id": "mt_cf_text",
+        "label": "Text",
+        "default": "If your tank doesn't fit the way you hoped, simply let us know within 90 days. We'll send you a new size, free of charge."
+      },
+      {
+        "type": "text",
+        "id": "mt_cf_bold",
+        "label": "Bold line",
+        "default": "No hassle. No fine print. No risk."
+      },
+      {
+        "type": "text",
+        "id": "mt_cf_tick_1",
+        "label": "Tick 1",
+        "default": "100% Satisfaction"
+      },
+      {
+        "type": "text",
+        "id": "mt_cf_tick_2",
+        "label": "Tick 2",
+        "default": "Fast Shipping"
+      },
+      {
+        "type": "text",
+        "id": "mt_cf_tick_3",
+        "label": "Tick 3",
+        "default": "Easy Returns"
+      },
+      {
+        "type": "header",
+        "content": "FAQ (questions: Theme settings → FAQ)"
+      },
+      {
+        "type": "text",
+        "id": "mt_faq_heading",
+        "label": "Heading",
+        "default": "Frequently Asked Questions"
+      },
+      {
+        "type": "text",
+        "id": "mt_faq_sub",
+        "label": "Subheading",
+        "default": "Everything you need to know before you make the switch."
+      },
+      {
+        "type": "header",
+        "content": "Last call"
+      },
+      {
+        "type": "checkbox",
+        "id": "mt_cta_show",
+        "label": "Show this block",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_heading",
+        "label": "Heading",
+        "default": "This Is The Last Bra Alternative You'll Ever Need."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_line_1",
+        "label": "Line 1",
+        "default": "No more ripping off your bra the second you walk through the door."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_line_2",
+        "label": "Line 2",
+        "default": "No more yanking at straps in the middle of a conversation."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_line_3",
+        "label": "Line 3",
+        "default": "No more checking the mirror for lines, lumps, or bulge under your top."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_bold_1",
+        "label": "Bold line 1",
+        "default": "Just pull it on. Walk out the door."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_bold_2",
+        "label": "Bold line 2",
+        "default": "Feel smooth, supported, and completely yourself."
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_button",
+        "label": "Button",
+        "default": "Add to cart – Buy 2 Get 1 Free"
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_link",
+        "label": "Button link",
+        "default": "#mt-product"
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_small",
+        "label": "Small line",
+        "default": "90-Day Perfect Fit Guarantee | Free US Shipping | Easy Exchanges"
+      },
+      {
+        "type": "text",
+        "id": "mt_cta_note",
+        "label": "Italic note",
+        "default": "Join the women who stopped wearing bras and never looked back."
       }
     ]
   }

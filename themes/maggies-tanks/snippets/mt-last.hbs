@@ -1,0 +1,14 @@
+{{!-- Maggie's: "Last call" (Theme settings → Maggie's – Home bottom). Home + product page (sections/mt-story.hbs). --}}
+  <section class="mt-sec mt-last">
+    <div class="b-wrap mt-mid">
+      <h2 class="mt-last__h2">{{@root.settings.mt_cta_heading}}</h2>
+      {{#if @root.settings.mt_cta_line_1}}<p class="mt-last__line">{{@root.settings.mt_cta_line_1}}</p>{{/if}}
+      {{#if @root.settings.mt_cta_line_2}}<p class="mt-last__line">{{@root.settings.mt_cta_line_2}}</p>{{/if}}
+      {{#if @root.settings.mt_cta_line_3}}<p class="mt-last__line">{{@root.settings.mt_cta_line_3}}</p>{{/if}}
+      {{#if @root.settings.mt_cta_bold_1}}<p class="mt-last__bold mt-last__bold--first">{{@root.settings.mt_cta_bold_1}}</p>{{/if}}
+      {{#if @root.settings.mt_cta_bold_2}}<p class="mt-last__bold">{{@root.settings.mt_cta_bold_2}}</p>{{/if}}
+      <a class="mt-btn mt-btn--big" href="{{#if @root.settings.mt_cta_link}}{{@root.settings.mt_cta_link}}{{else}}#mt-product{{/if}}">{{@root.settings.mt_cta_button}}</a>
+      {{#if @root.settings.mt_cta_small}}<p class="mt-last__small">{{@root.settings.mt_cta_small}}</p>{{/if}}
+      {{#if @root.settings.mt_cta_note}}<p class="mt-last__note">{{@root.settings.mt_cta_note}}</p>{{/if}}
+    </div>
+  </section>

@@ -1,0 +1,122 @@
+{{!-- Maggie's landing: the home page's <main> (hero … last call), used by templates/index.hbs (Home page =
+      Maggie's landing, items = the store's products) and by templates/collection.hbs for the collection named in Theme
+      settings → Maggie's – Home layout → Landing link (snippets/mt-landing-page.hbs, items = that collection's products).
+      The buy box sells the first of `items`. Called at the top level: `settings` / `products` … are the page's. --}}
+<main id="MainContent" class="b-main mt-home">
+  {{#unless (eq settings.home_hero_show false)}}
+  {{> mt-hero}}
+  {{/unless}}
+
+  {{#if settings.home_promises}}
+  {{> mt-ticker}}
+  {{/if}}
+
+  {{#unless (eq settings.mt_ba_show false)}}
+  {{> mt-ba}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_iwt_show false)}}
+  {{> mt-iwt}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_why_show false)}}
+  {{> mt-why}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_list_show false)}}
+  {{> mt-list}}
+  {{/unless}}
+
+  {{#unless (eq settings.home_featured_show false)}}
+  {{#each (limit items 1)}}
+  <section class="mt-sec mt-product" id="mt-product">
+    <div class="b-wrap mt-product__grid b-featured" data-featured="{{url}}" data-featured-handle="{{handle}}" data-featured-packs="{{#if (eq @root.settings.mt_prod_packs false)}}0{{else}}1{{/if}}" data-product-card>
+      <div class="mt-product__gallery">
+        <div class="b-featured__media mt-product__media">
+          {{#if imageUrl}}<img data-featured-main src="{{imageUrl}}" alt="{{title}}" loading="lazy"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}>{{/if}}
+        </div>
+        <div class="b-featured__strip mt-product__strip" data-featured-strip hidden>
+          <button type="button" class="b-round-btn" data-featured-step="-1" aria-label="Previous image">‹</button>
+          <div class="b-featured__thumbs" data-featured-thumbs></div>
+          <button type="button" class="b-round-btn" data-featured-step="1" aria-label="Next image">›</button>
+        </div>
+      </div>
+      <div class="mt-product__info">
+        <img class="mt-product__badge" src="{{#if @root.settings.mt_prod_badge}}{{@root.settings.mt_prod_badge}}{{else}}{{@root.assets_url}}/images/mt/bestseller.webp{{/if}}" alt="#1 Bestseller" width="320" height="65" loading="lazy">
+        {{#if @root.settings.mt_prod_title}}<p class="mt-product__title">{{@root.settings.mt_prod_title}}</p>{{/if}}
+        <h2 class="mt-product__name">{{title}}</h2>
+        <ul class="mt-product__ticks">
+          {{#if @root.settings.mt_prod_tick_1}}<li>{{{@root.settings.mt_prod_tick_1}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_2}}<li>{{{@root.settings.mt_prod_tick_2}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_3}}<li>{{{@root.settings.mt_prod_tick_3}}}</li>{{/if}}
+          {{#if @root.settings.mt_prod_tick_4}}<li>{{{@root.settings.mt_prod_tick_4}}}</li>{{/if}}
+        </ul>
+        {{!-- Price line: with the pack cards on and "Show the price above the pack cards" off it is rendered hidden (the
+              cards carry the prices); ui.js initFeatured shows it again whenever the pack cards do not come up. --}}
+        <p class="b-featured__price mt-product__price"{{#unless (eq @root.settings.mt_prod_packs false)}}{{#unless @root.settings.mt_prod_price}} hidden data-featured-price-auto{{/unless}}{{/unless}}><span data-featured-price>{{money sellingPrice}}</span>{{#if (gt compareAtPrice sellingPrice)}} <s data-featured-compare>{{money compareAtPrice}}</s>{{/if}}</p>
+        {{!-- Size Chart: Theme settings → Maggie's – Home middle → Size chart & size finder (shared with the product
+              pages). A size table → the size finder (opens in place); no table but a picture / text → the popup. --}}
+        {{#if @root.settings.mt_sf_table}}{{> mt-size-finder label=""}}{{else if @root.settings.mt_size_image}}<div class="b-sizechart mt-product__size">{{> mt-size-chart label="" title="" image="" text=""}}</div>{{else if @root.settings.mt_size_text}}<div class="b-sizechart mt-product__size">{{> mt-size-chart label="" title="" image="" text=""}}</div>{{/if}}
+        {{!-- Filled by ui.js initFeatured from the product page: its pack cards (Buy 1 / Buy 2 Get 1…, one Size +
+              Color row per unit) when mt_prod_packs is on, else one select per option. The combined select below
+              stays as the last fallback. --}}
+        <div class="mt-product__packs" data-featured-pack-box hidden></div>
+        <div class="mt-product__opts" data-featured-opts hidden></div>
+        <div class="b-featured__variant mt-product__variant" data-featured-variant hidden>
+          <label>Option<select class="b-select" data-featured-select></select></label>
+        </div>
+        <div class="mt-product__buy">
+          <div class="b-qty" data-featured-qty>
+            <button type="button" data-featured-qty-step="-1" aria-label="Decrease quantity">−</button>
+            <input type="number" min="1" max="999" value="1" data-featured-qty-input aria-label="Quantity">
+            <button type="button" data-featured-qty-step="1" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="b-btn b-btn--block b-btn--lg mt-product__atc" data-testid="add-to-cart" data-featured-atc disabled>{{#if @root.settings.atc_label}}{{@root.settings.atc_label}}{{else}}Add to cart{{/if}}</button>
+        </div>
+        <p class="b-form-msg" data-featured-msg role="status"></p>
+        <p class="mt-product__ships"><span><i class="mt-dot" aria-hidden="true"></i>{{@root.settings.mt_prod_ships}}</span><span>{{{@root.settings.mt_prod_free}}}</span></p>
+        <div class="mt-product__guarantee">
+          <img src="{{@root.assets_url}}/images/mt/seal-90.webp" alt="" width="52" height="52" loading="lazy">
+          <div><p class="mt-product__g-title">{{@root.settings.mt_prod_g_title}}</p><p class="mt-product__g-text">{{{@root.settings.mt_prod_g_text}}}</p></div>
+        </div>
+        {{#if @root.settings.mt_prod_quote}}
+        <blockquote class="mt-product__quote">
+          <p>{{{@root.settings.mt_prod_quote}}}</p>
+          <footer><img src="{{@root.assets_url}}/images/mt/founder.webp" alt="" width="44" height="44" loading="lazy"><span><strong>{{@root.settings.mt_prod_founder}}</strong><small>{{@root.settings.mt_prod_role}}</small></span></footer>
+        </blockquote>
+        {{/if}}
+        <a class="mt-product__more" href="{{url}}">See all colours, sizes &amp; bundles →</a>
+      </div>
+    </div>
+  </section>
+  {{/each}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_vr_show false)}}
+  {{> mt-vr}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_ch_show false)}}
+  {{> mt-changed}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_rt_show false)}}
+  {{> mt-routine}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_cmp_show false)}}
+  {{> mt-compare}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_cf_show false)}}
+  {{> mt-comfort}}
+  {{/unless}}
+
+  {{#unless (eq settings.home_faq_show false)}}
+  {{> mt-faq}}
+  {{/unless}}
+
+  {{#unless (eq settings.mt_cta_show false)}}
+  {{> mt-last}}
+  {{/unless}}
+</main>

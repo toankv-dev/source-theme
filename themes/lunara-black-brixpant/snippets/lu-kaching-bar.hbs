@@ -1,0 +1,11 @@
+{{!-- 1 goi cua block Kaching (snippets/lu-kaching.hbs). Hash: n, qty (0 = an), title, sub, badge, gift, gift_img, gift_value, p (tien to id setting). --}}
+{{#if qty}}
+<div class="kaching-bundles__bar" data-lu-bar data-lu-qty="{{qty}}" data-n="{{n}}" tabindex="0" role="radio">
+<input type="radio" name="lu-deal-{{@root.section.id}}" value="{{qty}}" tabindex="-1" aria-hidden="true">
+<div class="kaching-bundles__bar-container" style="--badge-border-thickness: 22px; --badge-border-gap: 0px; --badge-border-gap-border: none;">
+{{#if badge}}<div class="kaching-bundles__bar-most-popular kaching-bundles__bar-most-popular--simple" style="--bar-most-popular-background-color: var(--lu-k-accent); --bar-most-popular-color: var(--lu-k-badge-text); --badge-text-size: 13px;"><div class="kaching-bundles__bar-most-popular__content">{{badge}}</div></div>{{/if}}
+<div class="kaching-bundles__bar-wrapper"><div class="kaching-bundles__bar-main"><div class="kaching-bundles__bar-radio"></div><div class="kaching-bundles__bar-content"><div class="kaching-bundles__bar-content-left"><div class="kaching-bundles__bar-first-line"><span class="kaching-bundles__bar-title">{{title}}</span></div>{{#if sub}}<div class="kaching-bundles__bar-second-line"><div class="kaching-bundles__bar-subtitle" data-lu-sub="{{sub}}"></div></div>{{/if}}</div><div class="kaching-bundles__bar-pricing"><div class="kaching-bundles__bar-price" data-a11y-label="Price:" data-lu-price></div><div class="kaching-bundles__bar-full-price" data-a11y-label="Original price:" data-lu-was></div></div></div></div>
+<div class="kaching-bundles__bar-variants" data-lu-units></div></div>
+{{!-- Qua tang (backend Adlux gift_offers) - theme.js do anh + "+ FREE ..." + gia goc; gift_img / gift_value cua goi (neu co) duoc uu tien. --}}<div class="kaching-bundles__free-gift" data-lu-free-gift data-img="{{gift_img}}" data-value="{{gift_value}}" style="display:none !important;"></div>
+</div></div>
+{{/if}}

@@ -458,7 +458,8 @@ const server = http.createServer(async (req, res) => {
       const handle = p.split('/')[2] || 'all';
       const ctx = buildContext(req);
       const col = ctx.collections.find((c) => c.handle === handle);
-      ctx.collection = col ? { title: col.title, description: '', products: col.products } : { title: 'All products', products: ctx.products };
+      // Same shape as the platform's current collection (storefront-pages.routes.ts → mappedCollections): handle + url too.
+      ctx.collection = col ? { title: col.title, handle: col.handle, url: '/collections/' + col.handle, description: '', products: col.products } : { title: 'All products', products: ctx.products };
       return send(res, engine(), exists(path.join(THEME, 'templates/collection.hbs')) ? 'templates/collection.hbs' : 'templates/index.hbs', ctx);
     }
     if (p === '/search') return send(res, engine(), 'templates/search.hbs', buildContext(req));

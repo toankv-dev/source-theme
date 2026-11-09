@@ -1,0 +1,23 @@
+{{!-- Maggie's landing as a whole page for templates/collection.hbs: the collection named in Theme settings → Maggie's –
+      Home layout → Landing link (e.g. /collections/shaper-tank) shows the home page as it was — a second link for ads,
+      whatever the home page shows. Same head / scripts as templates/index.hbs (Home page = Maggie's landing);
+      items = the collection's products (the buy box sells the first). --}}
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/inter-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-serif-display.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/dm-sans.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/mt-home.css">
+</head>
+<body class="b-body b-body--home b-body--landing">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+{{> mt-landing-main items=items}}
+{{> footer}}
+{{> scripts}}
+<script src="{{assets_url}}/js/mt-home.js" defer></script>
+</body>
+</html>

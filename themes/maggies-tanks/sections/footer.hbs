@@ -29,7 +29,7 @@
     <div>
       <p class="b-footer__title">Shop</p>
       <ul>
-        {{#each (limit collections 6)}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/each}}
+        {{#each (limit collections 6)}}{{#unless (eq handle @root.settings.mt_landing_collection)}}<li><a href="/collections/{{handle}}" data-local-domain>{{title}}</a></li>{{/unless}}{{/each}}
       </ul>
     </div>
     {{/if}}{{/if}}

@@ -1061,6 +1061,13 @@
         "info": "Simple product list: a short intro and your products in lists, like a catalogue. The landing can live on a product's own link: product template \"Maggie's landing (ad page)\"."
       },
       {
+        "type": "text",
+        "id": "mt_landing_collection",
+        "label": "Landing link: collection handle",
+        "default": "",
+        "info": "A second link with this landing (the home page as it was), e.g. for ads: create a collection with the product (Products → Collections), put its handle here (e.g. shaper-tank) → your-store/collections/shaper-tank shows the landing, with the collection's first product in the buy box. That collection stays out of the menu, the footer and the simple home lists. Empty = off."
+      },
+      {
         "type": "header",
         "content": "Simple product list"
       },

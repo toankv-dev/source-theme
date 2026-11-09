@@ -2,12 +2,14 @@
    → Maggie's – Home layout → Home page = Simple product list (instead of mt-home.css). Cards and grid: the collection
    page's (.b-grid, snippets/card-product.hbs), already in the theme CSS. */
 .mt-simple { padding-bottom: 0; }
-.mt-simple__intro { max-width: 760px; padding-top: 48px; padding-bottom: 8px; text-align: center; }
-.mt-simple__title { margin: 0; font-family: var(--font-heading); font-size: clamp(28px, 4vw, 40px); line-height: 1.2; }
-.mt-simple__text { margin: 14px auto 0; max-width: 620px; font-size: 16px; line-height: 1.6; color: var(--c-muted, #6b6b6b); }
+/* Heading + intro like a plain catalogue (davystore.com): left-aligned on the lists' edge, a bold sans heading, the
+   intro in body text — skin.css pins h1–h3 to the serif heading font with !important, hence the !important here. */
+.mt-simple__intro { padding-top: 44px; padding-bottom: 4px; text-align: left; }
+.mt-simple .mt-simple__title { margin: 0; font-family: var(--font) !important; font-size: 28px; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; color: #111; }
+.mt-simple__text { margin: 12px 0 0; max-width: 1080px; font-size: 16px; line-height: 1.65; color: #222; }
 .mt-simple__list { padding-top: 40px; padding-bottom: 8px; }
 .mt-simple__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--c-line, #e5e5e5); }
-.mt-simple__h2 { margin: 0; font-family: var(--font-heading); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; letter-spacing: .02em; text-transform: uppercase; }
+.mt-simple .mt-simple__h2 { margin: 0; font-family: var(--font) !important; font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: .02em; text-transform: uppercase; color: #111; }
 .mt-simple__all { flex: none; font-size: 14px; font-weight: 600; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .mt-simple__empty { margin: 8px 0 0; color: var(--c-muted, #6b6b6b); }
 .mt-simple__help { margin-top: 56px; padding: 48px 0; background: var(--c-soft, #f6f6f6); text-align: center; }
@@ -15,7 +17,10 @@
 .mt-simple__help-text { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--c-muted, #6b6b6b); }
 .mt-simple__btn { margin-top: 20px; min-width: 200px; }
 @media (max-width: 749px) {
-  .mt-simple__intro { padding-top: 32px; }
+  .mt-simple__intro { padding-top: 28px; }
+  .mt-simple .mt-simple__title { font-size: 24px; }
+  .mt-simple__text { font-size: 15px; }
+  .mt-simple .mt-simple__h2 { font-size: 19px; }
   .mt-simple__list { padding-top: 28px; }
   .mt-simple__help { margin-top: 40px; padding: 36px 0; }
 }

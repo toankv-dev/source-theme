@@ -2,6 +2,34 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## Maggies Tanks 2026.11.09.5 — Comparison headers on phones, heading spacing, simple home heading (requested)
+### Fixed
+- How It Compares on phones: the column names broke mid-word ("Tra d Bra", "Vesnac harm": ~40px columns + the table's
+  overflow-wrap). mt-home.js wraps each name in `.mt-compare__col`; under 750px it stands upright (vertical-rl,
+  rotated, read bottom to top), never broken. Desktop unchanged.
+- "How It Works – Layer By Layer" sat right under the box above it: the block reset `.mt-home h3 { margin: 0 }`
+  outranked `.mt-changed__h3 { margin-top: 58px }`. Same for the product name (6px), founder quote (18px), video
+  reviews heading (22px) and "Your Comfort Comes First" (30px): restored with `.mt-home .<class>` (phones: How It
+  Works 40px). Home, collection landing and product pages (mt-story.css / mt-landing.css regenerated).
+### Changed
+- Simple home: heading + intro like a plain catalogue — left-aligned on the lists' edge, bold sans heading (28px /
+  phones 24px), intro in dark body text; list headings in the same sans (uppercase, 22px / 19px).
+
+## Maggies Tanks 2026.11.09.4 — A second ads link: the old home landing on a collection URL (requested)
+### Added
+- Theme settings → Maggie's – Home layout → "Landing link: collection handle" (`mt_landing_collection`, default empty):
+  that collection's page (`/collections/<handle>`) renders the Maggie's landing — the home page as it was, the buy box
+  selling the collection's first product — whatever the home page shows. With the product's own link (template
+  "Maggie's product page" or "Maggie's landing") that makes two ads links, one product, no platform change.
+  (A product has one link and one template per store; Shopdy has no per-link template switch.)
+- The landing `<main>` moved from `templates/index.hbs` to `snippets/mt-landing-main.hbs` (`items` = the products the buy
+  box sells); `snippets/mt-landing-page.hbs` = the whole landing page for `templates/collection.hbs`. Home, collection,
+  product and contact pages unchanged byte for byte while the setting is empty.
+- The landing collection stays out of the menu (nav-links), the footer's collections column and the simple home's
+  lists (when it is the only collection, the simple home lists every product).
+### Tools
+- `tools/preview-server.js`: `/collections/<handle>` gets `collection.handle` / `url`, like the platform's.
+
 ## Maggies Tanks 2026.11.09.3 — Menu on Shopdy's platform pages (fix)
 ### Fixed
 - `/contact` (and the other pages Shopdy renders inside the theme's header / footer: verification, order list, order

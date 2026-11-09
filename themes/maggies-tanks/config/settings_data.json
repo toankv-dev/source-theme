@@ -298,6 +298,7 @@
     "mt_simple_help_heading": "How can we help you?",
     "mt_simple_help_text": "A question about an order, a size or a return? Write to us and we will get back to you within one business day.",
     "mt_simple_help_button": "Contact us",
-    "mt_simple_help_link": "/pages/contact-us"
+    "mt_simple_help_link": "/pages/contact-us",
+    "mt_landing_collection": ""
   }
 }

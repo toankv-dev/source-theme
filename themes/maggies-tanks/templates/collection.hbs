@@ -2,6 +2,12 @@
       for a specific collection. Filtering and sorting run client-side over the cards on the page, using only
       data the platform really sends (price, title, the merchant's order). The store has no stock tracking:
       every product listed here is for sale, so Availability shows them all as in stock. --}}
+{{!-- The collection named in Theme settings → Maggie's – Home layout → Landing link renders the Maggie's landing (the
+      home page as it was: snippets/mt-landing-page.hbs) instead of the grid — a second link for ads. The setting's
+      default is "" (never equal to a handle), so /collections/all (no collection) keeps the grid. --}}
+{{#if (eq collection.handle settings.mt_landing_collection)}}
+{{> mt-landing-page items=collection.products}}
+{{else}}
 <!doctype html>
 <html lang="en">
 <head>
@@ -102,3 +108,4 @@
 {{> scripts}}
 </body>
 </html>
+{{/if}}

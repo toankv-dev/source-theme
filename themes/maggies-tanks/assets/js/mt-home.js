@@ -22,7 +22,8 @@
     var last = cols.length - 1;
     var score = cols.map(function () { return 0; });
     var html = '<table class="mt-compare__table"><thead><tr><th scope="col"><span class="mt-sr">Feature</span></th>' +
-      cols.map(function (c, i) { return '<th scope="col"' + (i === last ? ' class="is-ours"' : '') + '>' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+      // span: on phones the column names stand upright (mt-home.css), never broken mid-word.
+      cols.map(function (c, i) { return '<th scope="col"' + (i === last ? ' class="is-ours"' : '') + '><span class="mt-compare__col">' + esc(c) + '</span></th>'; }).join('') + '</tr></thead><tbody>';
     rows.forEach(function (r) {
       html += '<tr><th scope="row">' + esc(r[0]) + '</th>' + cols.map(function (c, i) {
         var ok = r[i + 1] === '1' || /^(y|yes|✓|true)$/i.test(r[i + 1] || '');

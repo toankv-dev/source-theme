@@ -1,7 +1,8 @@
 {{!-- Main menu links, shared by the desktop nav and the mobile drawer. ui.js marks the current page.
-      Collections are listed when Theme settings → Header → "Show collections in the menu" is on. --}}
+      Collections are listed when Theme settings → Header → "Show collections in the menu" is on — never the Maggie's landing
+      collection (Theme settings → Maggie's – Home layout → Landing link). --}}
 <a href="{{#if @root.config.homeUrl}}{{@root.config.homeUrl}}{{else}}{{#if @root.policyLinks.home}}{{@root.policyLinks.home}}{{else}}/{{/if}}{{/if}}" data-nav="home">{{#if @root.settings.nav_home_label}}{{@root.settings.nav_home_label}}{{else}}Home{{/if}}</a>
 {{#unless (eq @root.settings.nav_show_shop false)}}<a href="{{#if @root.config.allProductsUrl}}{{@root.config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-nav="shop" data-local-domain>{{#if @root.settings.nav_shop_label}}{{@root.settings.nav_shop_label}}{{else}}Shop{{/if}}</a>{{/unless}}
-{{#if @root.settings.nav_collections}}{{#each (limit @root.collections 6)}}<a href="/collections/{{handle}}" data-nav="collection-{{handle}}" data-local-domain>{{title}}</a>{{/each}}{{/if}}
+{{#if @root.settings.nav_collections}}{{#each (limit @root.collections 6)}}{{#unless (eq handle @root.settings.mt_landing_collection)}}<a href="/collections/{{handle}}" data-nav="collection-{{handle}}" data-local-domain>{{title}}</a>{{/unless}}{{/each}}{{/if}}
 <a href="{{#if @root.policyLinks.contact}}{{@root.policyLinks.contact}}{{else}}/contact{{/if}}" data-nav="contact" data-local-domain>{{#if @root.settings.nav_contact_label}}{{@root.settings.nav_contact_label}}{{else}}Contact{{/if}}</a>
 {{#unless (eq @root.settings.show_track_link false)}}<a href="{{#if @root.config.trackUrl}}{{@root.config.trackUrl}}{{else}}{{#if @root.policyLinks.track}}{{@root.policyLinks.track}}{{else}}/pages/track-your-order{{/if}}{{/if}}" data-nav="track" data-local-domain>{{#if @root.settings.nav_track_label}}{{@root.settings.nav_track_label}}{{else}}Track order{{/if}}</a>{{/unless}}

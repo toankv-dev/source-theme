@@ -1,0 +1,31 @@
+<!doctype html>
+<html class="js" lang="en">
+<head>
+{{> gs-head}}
+<title>{{product.title}} – {{brand.name}}</title>
+<meta name="description" content="{{metaDesc}}">
+<link rel="canonical" href="{{canonical}}">
+<script type="application/json" id="sf-config">{{{configJson}}}</script>
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="{{brand.name}}">
+<meta property="og:title" content="{{product.title}}">
+<meta property="og:description" content="{{metaDesc}}">
+<meta property="og:url" content="{{canonical}}">
+{{#if product.media.main_image}}<meta property="og:image" content="{{product.media.main_image}}">{{/if}}
+{{{productJsonLd}}}
+{{{trackingHead}}}
+{{#if __designMode}}<style>html{scroll-behavior:auto!important}</style>{{/if}}
+</head>
+<body class="gradient link-btns--arrow action-btns--center">
+{{{trackingBody}}}
+<a class="skip-to-content-link button visually-hidden" href="#MainContent">Skip to content</a>
+{{> header}}
+{{> cart-drawer}}
+{{!-- Schema v2: cac section cua templates/product*.json, engine render theo thu tu roi chen vao day. --}}
+<main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">{{{content_for_layout}}}</main>
+{{> footer}}
+{{> product-scripts}}
+<script src="{{assets_url}}/js/lu-gallery.js" defer></script>
+<script src="{{assets_url}}/js/theme.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "name": "Tredvik – Reviews",
+  "tag": "section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Cards (masonry grid, Show more)"
+        },
+        {
+          "value": "list",
+          "label": "List (avatar + date, numbered pages)"
+        }
+      ],
+      "info": "List: one review per row with the initial, name, Verified and date; average + count beside icon-only Filter / Sort; photo strip; numbered pages (Reviews per page sets the page length)."
+    },
+    {
+      "type": "range",
+      "id": "page_size",
+      "label": "Reviews per page",
+      "min": 3,
+      "max": 24,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom",
+      "label": "Show the rating summary under the list",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Shows the product's real reviews, added in the admin. There is no review form on the storefront."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_more",
+      "label": "List layout: \"Show more\" button instead of page numbers",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "category": "Trust",
+      "description": "Average rating, distribution, photo grid, filters, review list and a write-a-review form."
+    }
+  ]
+}

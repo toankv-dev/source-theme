@@ -12,7 +12,15 @@
   {{else}}
   {{#if @root.collections.length}}
   {{#each @root.collections}}
+  {{!-- The Maggie's landing collection (Theme settings → Maggie's – Home layout → Landing link) is an ads page, not a
+        list; when it is the only collection, the home lists every product instead. --}}
+  {{#if (eq handle @root.settings.mt_landing_collection)}}
+  {{#if (eq @root.collections.length 1)}}
+  {{> mt-simple-list items=@root.products title="" url="" eager=true}}
+  {{/if}}
+  {{else}}
   {{> mt-simple-list items=products title=title url=url eager=@first}}
+  {{/if}}
   {{/each}}
   {{else}}
   {{> mt-simple-list items=@root.products title="" url="" eager=true}}

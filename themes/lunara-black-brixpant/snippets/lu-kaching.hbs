@@ -1,0 +1,43 @@
+{{!-- Block "Kaching bundle" cua section Product (sections/product.schema.json) - markup app Kaching cua trang goc.
+      4 goi (so luong 0 = an goi). Gia goi = cong thuc gio / checkout cua Adlux (bac Discount "TIERED_NEXT_ITEM" dang chay,
+      backend gui nextItemTiers); chua co Discount -> gia x so luong. Theme KHONG tu dat giam gia.
+      Chon goi = so luong ma Add to cart doc; moi mon chon bien the rieng (nhu Kaching) -> gio co tung dong bien the.
+      Option Display type = Swatches (Adlux): van la dropdown (select[data-lu-swopt]); o anh dong (.lu-k-swfill) do mau/anh swatch cua gia tri dang chon (theme.js).
+      {each} / {total} / {save} / {qty} trong phu de = gia moi mon / tong / tiet kiem / so luong (tinh nhu tren).
+      {save} theo setting "SAVE style": percent = % discount Adlux, amount = so tien discount Adlux, compare = so voi gia gach.
+      compare_pct = % so voi gia gach ((gach - gia goi) / gach). Them {save_pct} / {save_amount} / {save_compare} / {save_compare_pct}. "SAVE {save}" duoc boc span.lu-k-save va an khi khong co giam. --}}
+<div class="lu-kaching" {{{attributes}}} data-gs-block data-lu-kaching data-tiers="{{#if @root.settings.allow_tiered_discount}}{{@root.nextItemTiers}}{{/if}}" data-bxgy="{{#if @root.settings.allow_bxgy_discount}}{{@root.bxgyOffers}}{{/if}}" data-amountoff="{{#unless (eq @root.settings.allow_amount_off_discount false)}}{{@root.amountOffOffers}}{{/unless}}" data-save-style="{{#if settings.save_style}}{{settings.save_style}}{{else}}percent{{/if}}" data-pid="{{@root.config.productId}}"
+  data-price="{{@root.config.priceNum}}" data-compare="{{@root.config.compareNum}}" data-selected="{{settings.selected}}"
+  style="--lu-k-save-bg:{{#if settings.accent}}{{settings.accent}}{{else}}#124F9F{{/if}};--lu-k-accent:{{#if settings.accent}}{{settings.accent}}{{else}}var(--lu-primary, #000000){{/if}};--lu-k-price:{{#if settings.price_color}}{{settings.price_color}}{{else}}var(--lu-k-accent){{/if}};--lu-k-bar-bg:{{#if settings.bar_bg}}{{settings.bar_bg}}{{else}}#F7F7F7{{/if}};--lu-k-sel-bg:{{#if settings.selected_bg}}{{settings.selected_bg}}{{else}}#FFFFFF{{/if}};--lu-k-title:{{#if settings.title_color}}{{settings.title_color}}{{else}}#000000{{/if}};--lu-k-badge-text:{{#if settings.badge_text_color}}{{settings.badge_text_color}}{{else}}#FFFFFF{{/if}};--kaching-free-gift-background-color:rgba(179,179,179,1);--kaching-free-gift-text-color:#000;--kaching-free-gift-selected-background-color:var(--lu-k-accent);--kaching-free-gift-selected-text-color:#fff;--kaching-free-gift-font-size:13px;--kaching-free-gift-font-weight:bold;--kaching-free-gift-font-style:normal;--kaching-free-gift-image-border-radius:4px;--kaching-free-gift-image-height:38px;">
+<div class="kaching-bundles"><div class="kaching-bundles__block kaching-bundles__block--loaded" style="--block-title-color: rgba(0, 0, 0, 1); --block-title-font-size: 16px; --block-title-font-weight: bold; --block-title-font-style: normal; --block-spacing: 1; --bar-border-radius: 8px; --badge-concave-depth: 8px; --bar-background-color: var(--lu-k-bar-bg); --bar-selected-background-color: var(--lu-k-sel-bg); --bar-border-color: color-mix(in srgb, var(--lu-k-accent) 16%, transparent); --bar-selected-border-color: var(--lu-k-accent); --block-block-title-color: var(--lu-k-accent); --bar-title-color: var(--lu-k-title); --bar-title-font-size: 20px; --bar-title-font-weight: bold; --bar-title-font-style: normal; --bar-subtitle-color: rgba(85, 85, 85, 1); --bar-subtitle-font-size: 15px; --bar-subtitle-font-weight: 500; --bar-subtitle-font-style: normal; --bar-price-color: var(--lu-k-price); --bar-full-price-color: rgba(85, 85, 85, 1); --bar-label-border-top-radius: 7px; --bar-label-background-color: rgba(217, 217, 217, 1); --bar-label-color: rgba(0, 0, 0, 1); --bar-label-font-size: 14px; --bar-label-font-weight: normal; --bar-label-font-style: normal; --bar-most-popular-background-color: var(--lu-k-accent); --bar-most-popular-color: rgba(255, 255, 255, 1); --bar-variant-select-border-radius: 4px; --bar-image-size: 48px; --bar-image-border-radius: 6px; --kaching-bundle-products-image-border-radius: 4px; --kaching-bundles-unit-label-font-size: 14px; --kaching-bundles-unit-label-font-weight: normal; --kaching-bundles-unit-label-font-style: normal; --bundle-bars-per-row: 1;">
+{{#if settings.heading}}<div class="kaching-bundles__block-title"><span {{{editable "heading"}}}>{{settings.heading}}</span></div>{{/if}}
+<div class="kaching-bundles__bars" style="--badge-border-thickness: 22px; --badge-border-gap: 0px; --badge-border-gap-border: none;">
+{{> lu-kaching-bar n=1 qty=settings.pack1_qty title=settings.pack1_title sub=settings.pack1_subtitle badge=settings.pack1_badge gift=settings.pack1_gift gift_img=settings.pack1_gift_image gift_value=settings.pack1_gift_value p="pack1_"}}
+{{> lu-kaching-bar n=2 qty=settings.pack2_qty title=settings.pack2_title sub=settings.pack2_subtitle badge=settings.pack2_badge gift=settings.pack2_gift gift_img=settings.pack2_gift_image gift_value=settings.pack2_gift_value p="pack2_"}}
+{{> lu-kaching-bar n=3 qty=settings.pack3_qty title=settings.pack3_title sub=settings.pack3_subtitle badge=settings.pack3_badge gift=settings.pack3_gift gift_img=settings.pack3_gift_image gift_value=settings.pack3_gift_value p="pack3_"}}
+{{> lu-kaching-bar n=4 qty=settings.pack4_qty title=settings.pack4_title sub=settings.pack4_subtitle badge=settings.pack4_badge gift=settings.pack4_gift gift_img=settings.pack4_gift_image gift_value=settings.pack4_gift_value p="pack4_"}}
+</div></div></div>
+{{!-- 1 dong chon bien the (mau) - script nhan ban theo so luong goi --}}
+{{#if @root.product.variants.length}}<template data-lu-unit-tpl><div class="kaching-bundles__bar-variant-selector-wrapper" data-lu-unit><div class="kaching-bundles__bar-variant"><div class="kaching-bundles__bar-variant__content"><img alt="" class="kaching-bundles__bar-variant-image" src="{{@root.product.media.main_image}}"><span class="lu-k-swfill" aria-hidden="true"></span><div class="kaching-bundles__bar-variant-main"><div class="kaching-bundles__bar-variant-selects">{{#each @root.product.variants}}<select class="kaching-bundles__bar-variant-select kaching-bundles-option" aria-label="{{name}}" data-name="{{name}}"{{#if (eq displayType "swatches")}} data-lu-swopt{{/if}}>{{#each options}}<option class="kaching-bundles-option-value" value="{{label}}"{{#if active}} selected{{/if}}>{{#if custom_name}}{{custom_name}}{{else}}{{label}}{{/if}}</option>{{/each}}</select>{{/each}}</div></div></div></div></div></template>
+<template data-lu-names-tpl><div class="kaching-bundles__bar-variant-names">{{#each @root.product.variants}}<span>{{name}}</span>{{/each}}</div></template>{{/if}}
+<script type="application/json" data-lu-variants-json></script><template data-lu-json="{{lookup (json @root.product.variants_list) "string"}}"></template><script>(function(s){var t=s.previousElementSibling,j=t&&t.previousElementSibling;if(j&&t.hasAttribute("data-lu-json")){j.textContent=t.getAttribute("data-lu-json");t.parentNode.removeChild(t);}})(document.currentScript);</script>
+<script type="application/json" data-lu-options-json></script><template data-lu-json="{{lookup (json @root.product.variants) "string"}}"></template><script>(function(s){var t=s.previousElementSibling,j=t&&t.previousElementSibling;if(j&&t.hasAttribute("data-lu-json")){j.textContent=t.getAttribute("data-lu-json");t.parentNode.removeChild(t);}})(document.currentScript);</script>
+<script type="application/json" data-lu-gifts-json></script><template data-lu-json="{{lookup (json @root.product.gift_offers) "string"}}"></template><script>(function(s){var t=s.previousElementSibling,j=t&&t.previousElementSibling;if(j&&t.hasAttribute("data-lu-json")){j.textContent=t.getAttribute("data-lu-json");t.parentNode.removeChild(t);}})(document.currentScript);</script>
+<script>
+(function () {
+  function run() {
+    if (typeof window.initLuKaching === 'function') {
+      window.initLuKaching(document);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  setTimeout(run, 50);
+  setTimeout(run, 200);
+  setTimeout(run, 600);
+})();
+</script>
+</div>

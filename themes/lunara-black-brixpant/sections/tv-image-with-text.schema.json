@@ -1,0 +1,155 @@
+{
+  "name": "Tredvik – Image with text",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Until an image is picked, an empty square frame shows here."
+    },
+    {
+      "type": "text",
+      "id": "default_image",
+      "label": "Theme file while empty",
+      "info": "Path inside assets/, e.g. images/xx-sections/photo.webp. Shown until a file is picked above."
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text layout"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align_mobile",
+      "label": "Text alignment on phones",
+      "default": "same",
+      "options": [
+        {
+          "value": "same",
+          "label": "Same as above"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Text position next to the image",
+      "default": "middle",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "info": "Desktop only — on phones the text sits under the image."
+    },
+    {
+      "type": "select",
+      "id": "text_width",
+      "label": "Text width",
+      "default": "full",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full column"
+        },
+        {
+          "value": "wide",
+          "label": "Wide (600 px), centred"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow (460 px), centred"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text above",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed for everyday comfort"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<p>Explain one benefit with a picture.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": ""
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "category": "Content",
+      "description": "Image beside a heading, text and button."
+    }
+  ]
+}

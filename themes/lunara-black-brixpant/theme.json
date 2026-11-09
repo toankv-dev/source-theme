@@ -1,0 +1,18 @@
+{
+  "name": "Lunara Black",
+  "version": "2026.11.09.1",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/theme.css",
+    "assets/js/theme.js"
+  ],
+  "description": "Comfort-wear theme (Lunara / Shrine PRO design): sale bar with countdown, banner, product grid and real reviews on the home page; product page with gallery, Kaching-style bundle packs (per-item Color / Size), description, reviews with write-a-review form and FAQ; cart drawer, Products catalog, About / policy pages, order tracking and checkout. Black edition: primary colour #000000 with glossy buttons, editable. Extra product template \"Tredvik – Brixpant bundle\": the Tredvik product page (gallery, 1–4 packs with Color / Size per item, picture + text blocks, steps, comparison, customer quotes, FAQ, reviews) inside Lunara's header, footer and cart drawer.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

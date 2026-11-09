@@ -316,6 +316,21 @@
 @media (max-width: 1199px) { .mt-home .mt-vr__track { padding: 0 24px; } }
 @media (max-width: 749px) { .mt-home .mt-vr__track { padding: 0 20px; } }
 .mt-home .b-select, .mt-home input, .mt-home select { font-size: 16px; }
+/* The block reset (.mt-home h2 / h3 / blockquote { margin: 0 }) outranks a single class: these get back the top margin
+   their own rule asks for ("How It Works – Layer By Layer" sat right under the box above it). */
+.mt-home .mt-product__name { margin-top: 6px; }
+.mt-home .mt-product__quote { margin-top: 18px; }
+.mt-home .mt-vr__heading { margin-top: 22px; }
+.mt-home .mt-changed__h3 { margin-top: 58px; }
+.mt-home .mt-comfort__h2 { margin-top: 30px; }
+@media (max-width: 749px) {
+  .mt-home .mt-changed__h3 { margin-top: 40px; }
+  /* Comparison table on phones: ~40px columns cannot hold "Bralette" or the brand on one line, and the table's
+     overflow-wrap broke them mid-word ("Tra d Bra"). The column names (mt-home.js: <span class="mt-compare__col">)
+     stand upright instead, read bottom to top, never broken. */
+  .mt-compare__table thead th:not(:first-child) { vertical-align: bottom; padding: 14px 0 12px; }
+  .mt-compare__col { display: inline-block; writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; text-align: left; line-height: 1.15; }
+}
 
 /* Home product block: pack cards / per-option selects taken from the product page (ui.js initFeatured,
    setting mt_prod_packs). The pack-card look below is the product page's (mt-product.css, which the home page

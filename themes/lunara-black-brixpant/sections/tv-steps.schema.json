@@ -1,0 +1,80 @@
+{
+  "name": "Tredvik – Numbered steps",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Comfortable Support in 3 Steps"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture (square)",
+          "info": "Recommended 700 × 700."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/tv-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number on the picture",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pull Bandage Over Knee"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Pull the brace upward for a secure and comfortable fit."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Numbered steps",
+      "category": "Product",
+      "description": "Square pictures with a number, a title and a text.",
+      "blocks": [
+        {
+          "type": "step"
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "2",
+            "title": "Align Patella Gel Pad",
+            "text": "Place the gel pad centrally around the kneecap."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "number": "3",
+            "title": "Adjust Compression",
+            "text": "Turn the dial to individually adjust support and stability."
+          }
+        }
+      ]
+    }
+  ]
+}

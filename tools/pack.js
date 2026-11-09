@@ -6,7 +6,8 @@
  *
  * Checks (errors stop the zip, warnings do not):
  *   - theme.json fields, every JSON file parses, assets listed in theme.json exist, no assets/css/theme.css
- *   - every .hbs compiles; every {{> partial}} exists; only helpers the platform engine provides are used
+ *   - every .hbs compiles; every {{> partial}} exists (a file's own {{#*inline}} partials count); only helpers the
+ *     platform engine provides are used
  *   - templates/*.json: section types exist, block types are declared in the section schema
  *   - pixel / platform hooks: trackingHead, trackingBody, #sf-config, #sf-variants-data, #addToCart,
  *     data-testid="add-to-cart", #CartDrawer-Checkout, data-testid="checkout-button"
@@ -77,10 +78,15 @@ for (const f of hbsFiles) {
   sources[rel(f)] = src;
   let ast;
   try { ast = Handlebars.parse(src); } catch (e) { errors.push(rel(f) + ': ' + e.message.split('\n')[0]); continue; }
+  // {{#*inline "name"}}…{{/inline}} declares a partial for this file only (Handlebars inline partials).
+  const inline = new Set();
+  visit(ast, (n) => {
+    if (n.type === 'DecoratorBlock' && n.path && n.path.original === 'inline' && n.params[0] && n.params[0].type === 'StringLiteral') inline.add(n.params[0].value);
+  });
   visit(ast, (n) => {
     if (n.type === 'PartialStatement' || n.type === 'PartialBlockStatement') {
       const name = n.name.original;
-      if (!partials.has(name) && !partials.has(String(name).replace(/_/g, '-'))) errors.push(rel(f) + ': partial "' + name + '" not found');
+      if (!inline.has(name) && !partials.has(name) && !partials.has(String(name).replace(/_/g, '-'))) errors.push(rel(f) + ': partial "' + name + '" not found');
     }
     const isCall = (n.type === 'SubExpression' || n.type === 'BlockStatement') || (n.type === 'MustacheStatement' && (n.params.length || (n.hash && n.hash.pairs.length)));
     if (isCall && n.path && n.path.type === 'PathExpression' && !n.path.data && n.path.parts.length === 1) {

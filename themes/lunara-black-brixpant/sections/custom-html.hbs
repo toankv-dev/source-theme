@@ -1,0 +1,14 @@
+{{!-- Custom HTML — schema v2 section (sections/custom-html.schema.json), this
+      theme's "Custom Liquid": the merchant's own HTML, CSS and JavaScript printed
+      as given. The HTML goes through applyTokens so store tokens ({{CompanyEmail}},
+      {{RefundLink}}, {{ShippingInfo}}…) resolve per store; any other brace is
+      left untouched (the helper only knows its own tokens). CSS and JS print in
+      their own tags; the wrapper's .ch class is the hook for scoping rules. --}}
+<style>
+  .ch{padding:24px 16px;font-family:var(--font,inherit);color:var(--ink,#000000);line-height:1.5}
+  .ch--contain{max-width:1190px;margin:0 auto}
+  .ch img,.ch video,.ch iframe{max-width:100%}
+{{#if section.settings.css}}{{{section.settings.css}}}{{/if}}
+</style>
+<div class="ch{{#if section.settings.contain}} ch--contain{{/if}}" style="padding-top:{{section.settings.padding}}px;padding-bottom:{{section.settings.padding}}px">{{{applyTokens section.settings.html}}}</div>
+{{#if section.settings.js}}<script>{{{section.settings.js}}}</script>{{/if}}

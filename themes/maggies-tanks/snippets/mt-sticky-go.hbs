@@ -1,0 +1,4 @@
+{{!-- The buy now bar's button (Theme settings → Maggie's – Home layout → Buy now bar): scrolls to the buy box (#mt-product,
+      smooth through base.css). The buy box keeps the real Add to cart. Bar: sections/product.hbs (Look = Maggie's) and
+      snippets/mt-landing-main.hbs; ui.js initSticky shows it. --}}
+<a class="b-btn b-sticky__go" href="#mt-product" data-testid="sticky-buy-now">{{#if @root.settings.mt_sticky_label}}{{@root.settings.mt_sticky_label}}{{else}}BUY NOW - SAVE 70%{{/if}}</a>

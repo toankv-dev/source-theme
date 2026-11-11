@@ -20,11 +20,10 @@
 --c-header-text:{{#if @root.settings.header_text}}{{@root.settings.header_text}}{{else}}var(--c-text){{/if}};
 --c-footer-bg:{{#if @root.settings.footer_bg}}{{@root.settings.footer_bg}}{{else}}var(--c-ink){{/if}};
 --c-footer-text:{{#if @root.settings.footer_text}}{{@root.settings.footer_text}}{{else}}var(--c-on-ink){{/if}};
---font:'{{#if @root.settings.tv_font}}{{@root.settings.tv_font}}{{else}}Manrope{{/if}}',system-ui,-apple-system,'Segoe UI',sans-serif;
---font-heading:{{#if @root.settings.tv_font_heading}}'{{@root.settings.tv_font_heading}}',{{/if}}var(--font);
+--font:Archivo,sans-serif;
+--font-heading:var(--font);
 --radius:{{#if @root.settings.tv_radius}}{{@root.settings.tv_radius}}{{else}}12{{/if}}px;
 --btn-radius:{{#if @root.settings.tv_btn_radius}}{{@root.settings.tv_btn_radius}}{{else}}8{{/if}}px;
 --btn-case:{{#if @root.settings.tv_btn_case}}{{@root.settings.tv_btn_case}}{{else}}uppercase{{/if}};
 --wrap:{{#if @root.settings.tv_page_width}}{{@root.settings.tv_page_width}}{{else}}1200{{/if}}px;
 }</style>
-{{#unless (eq @root.settings.tv_load_google_fonts false)}}<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{#if @root.settings.tv_font}}{{@root.settings.tv_font}}{{else}}Manrope{{/if}}:wght@{{#if @root.settings.tv_font_weights}}{{@root.settings.tv_font_weights}}{{else}}400;500;600;700;800{{/if}}{{#if @root.settings.tv_font_heading}}&family={{@root.settings.tv_font_heading}}:wght@{{#if @root.settings.tv_font_weights}}{{@root.settings.tv_font_weights}}{{else}}400;500;600;700;800{{/if}}{{/if}}&display=swap">{{/unless}}

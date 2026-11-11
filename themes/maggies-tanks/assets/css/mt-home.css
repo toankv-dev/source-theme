@@ -1,11 +1,11 @@
 /* Maggie's Tanks — home page only (linked by templates/index.hbs). Values measured on the downloaded original
    (_work/probe-1440.txt, _work/probe-390.txt, pixel.js): desktop 1440, phone 390. Fonts per block as on the original. */
 .mt-home {
-  --mt-serif: "DM Serif Display", Georgia, serif;
-  --mt-sans: "DM Sans", Arial, sans-serif;
-  --mt-georgia: Georgia, "Times New Roman", serif;
-  --mt-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mt-helv: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mt-serif: "Poppins", Arial, sans-serif;
+  --mt-sans: "Poppins", Arial, sans-serif;
+  --mt-georgia: "Poppins", Arial, sans-serif;
+  --mt-system: "Poppins", Arial, sans-serif;
+  --mt-helv: "Poppins", Arial, sans-serif;
   --mt-ink: #3d3d3d;
   --mt-green: #25745c;
   --mt-line: #d3ccc5;
@@ -155,7 +155,7 @@
   font: 700 14px/1.4 var(--font); letter-spacing: .5px; text-transform: uppercase; color: #fff; }
 .mt-vr__pill i { width: 9px; height: 9px; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 0 3px rgba(255, 59, 48, .25); }
 .mt-vr__heading { max-width: 900px; margin: 22px auto 0; font: 500 36px/1.42 var(--font); color: #1e1e1e; }
-.mt-vr__heading em { font-style: normal; font-weight: 700; color: #1f5c3d; }
+.mt-vr__heading em { font-style: normal; font-weight: 700; color: #000; }
 .mt-vr__track { display: flex; gap: 20px; margin-top: 22px !important; padding: 0 calc((100% - 1240px) / 2 + 150px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .mt-vr__track::-webkit-scrollbar { display: none; }
 .mt-vr__card { position: relative; flex: 0 0 300px; aspect-ratio: 300 / 470; border-radius: 8px; overflow: hidden; background: #222; scroll-snap-align: start; text-align: left; }
@@ -316,11 +316,12 @@
 @media (max-width: 1199px) { .mt-home .mt-vr__track { padding: 0 24px; } }
 @media (max-width: 749px) { .mt-home .mt-vr__track { padding: 0 20px; } }
 .mt-home .b-select, .mt-home input, .mt-home select { font-size: 16px; }
-/* The block reset (.mt-home h2 / h3 / blockquote { margin: 0 }) outranks a single class: these get back the top margin
-   their own rule asks for ("How It Works – Layer By Layer" sat right under the box above it). */
+/* The block reset (.mt-home h2 / h3 / blockquote { margin: 0 }) outranks a single class: these get back the margin
+   their own rule asks for ("How It Works – Layer By Layer" sat right under the box above it; the video reviews heading,
+   900px wide, sat left of the page's centre without its auto margins). */
 .mt-home .mt-product__name { margin-top: 6px; }
 .mt-home .mt-product__quote { margin-top: 18px; }
-.mt-home .mt-vr__heading { margin-top: 22px; }
+.mt-home .mt-vr__heading { margin: 22px auto 0; }
 .mt-home .mt-changed__h3 { margin-top: 58px; }
 .mt-home .mt-comfort__h2 { margin-top: 30px; }
 @media (max-width: 749px) {
@@ -412,7 +413,7 @@
 .mt-product__packs .b-cards-block--tiers .b-card__sub:empty { display: none; }
 .mt-product__packs .b-cards-block--tiers .b-card__prices strong { font-size: 14px; font-weight: 700; color: rgba(0, 0, 0, 0.81); }
 .mt-product__packs .b-cards-block--tiers .b-card__prices s { font-size: 13px; color: #8a8a8a; }
-.mt-product__packs .b-cards-block--tiers .b-card__badge { top: -10px; right: 15px; padding: 4px 10px; border-radius: 20px; background: #000; color: #fff; font-size: 12px; font-weight: 400; letter-spacing: normal; text-transform: none; clip-path: none; }
+.mt-product__packs .b-cards-block--tiers .b-card__badge { top: -10px; right: 15px; padding: 4px 10px; border-radius: 20px; background: #1f5c3d; color: #fff; font-size: 12px; font-weight: 400; letter-spacing: normal; text-transform: none; clip-path: none; }
 .mt-product__packs .b-cards-block--tiers .b-units { margin-top: 12px; }
 .mt-product__packs .b-cards-block--tiers .b-unit { flex-wrap: nowrap; gap: 8px; margin-top: 8px; min-width: 0; }
 .mt-product__packs .b-cards-block--tiers .b-unit__img { order: -2; }

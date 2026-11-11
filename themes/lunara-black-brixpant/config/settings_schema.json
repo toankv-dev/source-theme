@@ -61,17 +61,6 @@
     ]
   },
   {
-    "name": "Typography",
-    "settings": [
-      {
-        "type": "text",
-        "id": "font",
-        "label": "Checkout font (Google Fonts name)",
-        "default": "Archivo"
-      }
-    ]
-  },
-  {
     "name": "Top bar",
     "settings": [
       {
@@ -296,6 +285,13 @@
         "id": "atc_label",
         "label": "Add-to-cart label",
         "default": "Add to cart"
+      },
+      {
+        "type": "text",
+        "id": "sticky_buy_label",
+        "label": "Sticky Buy now button label",
+        "default": "BUY NOW - SAVE 70%",
+        "info": "Button pinned to the bottom of product pages. It scrolls to the pack / option picker; it does not add to cart."
       },
       {
         "type": "checkbox",
@@ -997,34 +993,6 @@
         "id": "tv_star",
         "label": "Stars",
         "default": "#f3cc4b"
-      },
-      {
-        "type": "text",
-        "id": "tv_font",
-        "label": "Body font (Google Fonts name)",
-        "default": "Montserrat",
-        "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
-      },
-      {
-        "type": "text",
-        "id": "tv_font_heading",
-        "label": "Heading font (optional)",
-        "default": "DM Serif Display",
-        "info": "Empty = same as the body font."
-      },
-      {
-        "type": "text",
-        "id": "tv_font_weights",
-        "label": "Google Fonts weights",
-        "default": "400;700",
-        "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
-      },
-      {
-        "type": "checkbox",
-        "id": "tv_load_google_fonts",
-        "label": "Load the fonts from Google Fonts",
-        "default": false,
-        "info": "Off when the theme ships its own font files (@font-face in skin.css)."
       },
       {
         "type": "range",

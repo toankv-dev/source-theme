@@ -7,7 +7,7 @@
     <h1 class="mt-simple__title">{{#if @root.settings.mt_simple_heading}}{{@root.settings.mt_simple_heading}}{{else}}{{@root.brand.name}}{{/if}}</h1>
     {{#if @root.settings.mt_simple_text}}<p class="mt-simple__text">{{@root.settings.mt_simple_text}}</p>{{/if}}
   </section>
-  {{#if (eq @root.settings.mt_simple_source "all")}}
+  {{#unless (eq @root.settings.mt_simple_lists "collections")}}
   {{> mt-simple-list items=@root.products title="" url="" eager=true}}
   {{else}}
   {{#if @root.collections.length}}
@@ -25,7 +25,7 @@
   {{else}}
   {{> mt-simple-list items=@root.products title="" url="" eager=true}}
   {{/if}}
-  {{/if}}
+  {{/unless}}
   {{#unless (eq @root.settings.mt_simple_help_show false)}}
   <section class="mt-simple__help">
     <div class="b-wrap mt-simple__help-inner">

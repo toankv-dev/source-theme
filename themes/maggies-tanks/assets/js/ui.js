@@ -195,6 +195,28 @@
     if (hit) centerInStrip(strip, hit);
   }
 
+  function fileName(url) { return String(url || '').split(/[?#]/)[0].split('/').pop(); }
+
+  /** The gallery entry (in `strip`) that shows a colour swatch's picture, as its data-gallery-thumb URL, else ''.
+   *  A swatch picture chosen among the product's images (Products → Options → the value's image) is the same upload
+   *  as its gallery entry, so the file names match; a picture cropped for the swatch is in no gallery. Reads the
+   *  style attribute: the landing's swatches come from a parsed copy of the product page. */
+  function swatchGalleryUrl(strip, btn) {
+    var m = btn && /url\(\s*['"]?([^'")]+)/.exec(btn.getAttribute('style') || '');
+    var name = m && fileName(m[1]);
+    if (!strip || !name) return '';
+    var hit = $$('[data-gallery-thumb]', strip).filter(function (t) { return fileName(t.getAttribute('data-gallery-thumb')) === name; })[0];
+    return hit ? hit.getAttribute('data-gallery-thumb') : '';
+  }
+
+  /** Product page gallery: the main image shows this picture; its thumbnail is marked and scrolled into view. */
+  function showGalleryUrl(src) {
+    var main = $('[data-gallery-main]');
+    if (!src || !main) return;
+    swapMedia(main, src, 'data-gallery-main');
+    markThumb($('[data-gallery-thumbs]'), src);
+  }
+
   function initGallery() {
     var thumbs = $$('[data-gallery-thumb]');
     if (!thumbs.length) return;
@@ -275,6 +297,18 @@
     return { total: p.total, compare: Base.round2(Math.max(v.compare, v.price) * qty), qty: qty };
   }
 
+  /** A pack card's "SAVE x%" pill (Pack cards block: show_save, save_label, save_color), from its price and crossed-out
+   *  price. A template saved before these settings existed has none of them: on, "SAVE {pct}%", the CSS colour. */
+  function paintSave(card, s, total, compare) {
+    var el = $('[data-card-save]', card);
+    if (!el) return;
+    var pct = compare > total && total > 0 ? Math.round((1 - total / compare) * 100) : 0;
+    el.hidden = s.show_save === false || pct <= 0;
+    if (el.hidden) return;
+    el.textContent = String(s.save_label || 'SAVE {pct}%').replace('{pct}', String(pct));
+    el.style.background = s.save_color || '';
+  }
+
   /** "+ FREE Travel pouch $19.99" lines for the gifts a pack unlocks (product.gift_offers). */
   function paintGifts(box, gifts) {
     box.innerHTML = '';
@@ -311,6 +345,7 @@
         var compare = v ? Base.round2(Math.max(v.compare, v.price) * qty) : 0;
         if (priceEl) priceEl.textContent = v ? fmt(total) : '';
         if (compareEl) compareEl.textContent = v && compare > total ? fmt(compare) : '';
+        paintSave(card, s, v ? total : 0, v ? compare : 0);
         var img = $('[data-qcard-img]', card), qtyMark = $('.b-card__qty', card), src = (v && v.image) || cfg.image || '';
         if (img && src) { img.src = src; img.hidden = false; if (qtyMark) qtyMark.hidden = false; }
         // "$18.00 / Pair": the pack total per unit (block setting unit_label; empty = hidden, 1-packs hidden).
@@ -377,13 +412,122 @@
     });
   }
 
-  /** Dot colour of a colour value: the swatch's own colour, else its first word when CSS knows it. */
+  // Colour names CSS has no word for, so the dots work before anyone fills in the product's swatches.
+  var COLOR_NAMES = {
+    nude: '#e3bfa3', coffee: '#6f4e37', khaki: '#c3b091', 'red wine': '#722f37', 'blush pink': '#f1c4cc', grey: '#8d8d8d', gray: '#8d8d8d',
+    'pastel pink': '#f8c8dc', 'pastel yellow': '#fbf0a6', 'pastel purple': '#cdbbe8', 'pastel blue': '#b7d5ee', 'navy blue': '#1f2a44',
+    burgundy: '#7b1e2f', wine: '#722f37', cream: '#f5efdc', mocha: '#7b5b4a', taupe: '#b09f91', sand: '#d9c7a8', mint: '#bfe3d0', rose: '#e8b4b8', blush: '#f1c4cc'
+  };
+
+  /** Dot of a colour value, as a CSS background: the swatch's own picture or colour, else what its name says. */
   function dotColor(choice) {
     if (!choice) return '';
-    var bg = choice.btn && choice.btn.style.backgroundColor;
-    if (bg) return bg;
-    var word = String(choice.value || '').trim().split(/[\s&\/-]+/)[0].toLowerCase();
-    return word && window.CSS && CSS.supports && CSS.supports('color', word) ? word : '';
+    var st = choice.btn && choice.btn.style;
+    // The swatch button's style is "background:<colour>" or "background-image:url(…)". The shorthand leaves
+    // backgroundImage as "initial", not "none": only a real url() is a picture.
+    if (st && /url\(/.test(st.backgroundImage || '')) return st.backgroundImage + ' center / cover';
+    if (st && st.backgroundColor) return st.backgroundColor;
+    var name = String(choice.value || '').replace(/\(.*?\)/g, '').trim().toLowerCase(); // "White (selling out fast)" = white
+    if (COLOR_NAMES[name]) return COLOR_NAMES[name];
+    var words = name.split(/[\s&\/-]+/);
+    var known = [name.replace(/\s+/g, ''), words[0], words[words.length - 1]].filter(function (w) {
+      return w && window.CSS && CSS.supports && CSS.supports('color', w);
+    });
+    return known[0] || '';
+  }
+
+  // The colour field of a unit row: a list that shows each colour's dot, which a native <select> cannot. The <select>
+  // stays under it, invisible, as the value: the row's change handler, the cart lines and tools/smoke.js use it as before.
+  var openColors = null;
+  function closeColors(refocus) {
+    if (!openColors) return;
+    var o = openColors;
+    openColors = null;
+    o.list.hidden = true;
+    o.wrap.classList.remove('is-open');
+    o.btn.setAttribute('aria-expanded', 'false');
+    if (refocus) o.btn.focus();
+  }
+  document.addEventListener('pointerdown', function (e) {
+    if (openColors && !openColors.wrap.contains(e.target)) closeColors();
+  }, true);
+
+  function colorField(s, choices, wrap) {
+    var label = s.getAttribute('aria-label') || '';
+    var btn = el('button', 'b-unit__select b-unit__color');
+    btn.type = 'button';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', label);
+    var list = el('ul', 'b-colors');
+    list.setAttribute('role', 'listbox');
+    list.setAttribute('aria-label', label);
+    list.hidden = true;
+    var items = choices.map(function (c) {
+      var li = el('li', 'b-colors__item');
+      li.setAttribute('role', 'option');
+      li.tabIndex = -1;
+      var dot = el('span', 'b-colors__dot');
+      dot.setAttribute('aria-hidden', 'true');
+      dot.style.background = dotColor(c);
+      li.appendChild(dot);
+      li.appendChild(el('span', null, c.label));
+      list.appendChild(li);
+      return li;
+    });
+    var current = function () { return choices.map(function (c) { return c.value; }).indexOf(s.value); };
+    var sync = function () {
+      var at = current();
+      btn.textContent = at > -1 ? choices[at].label : '';
+      items.forEach(function (li, i) { li.setAttribute('aria-selected', i === at ? 'true' : 'false'); });
+    };
+    var move = function (i) {
+      var li = items[Math.max(0, Math.min(items.length - 1, i))];
+      if (!li) return;
+      li.focus({ preventScroll: true });
+      list.scrollTop = Math.max(0, li.offsetTop - (list.clientHeight - li.offsetHeight) / 2);
+    };
+    var open = function () {
+      closeColors();
+      var r = btn.getBoundingClientRect();
+      wrap.classList.toggle('is-up', r.bottom + 290 > window.innerHeight && r.top > 290);
+      wrap.classList.add('is-open');
+      list.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      openColors = { btn: btn, list: list, wrap: wrap };
+      move(current());
+    };
+    var pick = function (i) {
+      if (!choices[i]) return;
+      s.value = choices[i].value;
+      s.dispatchEvent(new Event('change', { bubbles: true }));
+      closeColors(true);
+    };
+    btn.addEventListener('click', function () { if (openColors && openColors.btn === btn) closeColors(); else open(); });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); open(); }
+    });
+    list.addEventListener('click', function (e) {
+      var li = e.target.closest ? e.target.closest('.b-colors__item') : null;
+      if (li) pick(items.indexOf(li));
+    });
+    list.addEventListener('keydown', function (e) {
+      var at = items.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(at + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(at - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); move(0); }
+      else if (e.key === 'End') { e.preventDefault(); move(items.length - 1); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(at); }
+      else if (e.key === 'Escape') { e.preventDefault(); closeColors(true); }
+      else if (e.key === 'Tab') closeColors();
+    });
+    s.addEventListener('change', sync);
+    s.className = 'b-unit__native';
+    s.tabIndex = -1;
+    s.setAttribute('aria-hidden', 'true');
+    wrap.appendChild(btn);
+    wrap.appendChild(list);
+    sync();
   }
 
   function renderUnits() {
@@ -444,8 +588,15 @@
         s.appendChild(o);
       });
       s.value = vals[i];
-      s.addEventListener('change', function () { vals[i] = s.value; paint(); });
+      s.addEventListener('change', function () {
+        vals[i] = s.value;
+        paint();
+        // The gallery shows this unit: its variant's picture, else the picked colour's picture when the gallery has it.
+        var v = Base.variants.find(vals), c = choices[i].filter(function (x) { return x.value === s.value; })[0];
+        showGalleryUrl((v && v.image) || swatchGalleryUrl($('[data-gallery-thumbs]'), c && c.btn));
+      });
       wrap.appendChild(s);
+      if (wrap.classList.contains('has-dot')) colorField(s, choices[i], wrap);
       row.appendChild(wrap);
     });
     paint();
@@ -463,6 +614,8 @@
     }
     return order.map(function (id) { return cartLine(groups[id].v, groups[id].q); });
   }
+
+  var shownVariant = null; // id of the variant the gallery and ?variant= follow (refreshProduct)
 
   function refreshProduct() {
     var values = selectedValues(), v = Base.variants.find(values);
@@ -497,11 +650,14 @@
       if (sPct) sOff.textContent = sOff.textContent.replace(/\d+%/, sPct + '%');
     }
     if (sSel && sSel.value !== String(v.id)) sSel.value = String(v.id);
-    if (v.image && $('[data-gallery-main]')) {
-      swapMedia($('[data-gallery-main]'), v.image, 'data-gallery-main');
-      markThumb($('[data-gallery-thumbs]'), v.image);
+    // Only a change of variant moves the gallery to its picture and writes ?variant= (a pack card, the quantity or a
+    // repaint leaves both). Page load without ?variant=: initProductForm marks the default one as shown, so the
+    // address stays clean and the product's main image stays until the shopper picks another variant.
+    if (String(v.id) !== shownVariant) {
+      shownVariant = String(v.id);
+      if (v.image) showGalleryUrl(v.image);
+      if ($('[data-pdp]')) Base.variants.setUrl(v.id);
     }
-    if ($('[data-pdp]')) Base.variants.setUrl(v.id);
   }
 
   function selectCard(card) {
@@ -572,6 +728,9 @@
             b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
           });
           refreshProduct();
+          // A variant without a picture of its own: the gallery goes to the picked colour's picture, when it has it.
+          var v = currentVariant();
+          if (!(v && v.image)) showGalleryUrl(swatchGalleryUrl($('[data-gallery-thumbs]'), btn));
         });
       });
       var sel = $('[data-opt-select]', group);
@@ -580,7 +739,7 @@
 
     // ?variant= restores the selection; a default selection that is no real variant falls back to the
     // first available one, so prices and the buy button work on first paint.
-    var fromUrl = Base.variants.fromUrl();
+    var fromUrl = Base.variants.fromUrl(), inUrl = !!fromUrl;
     if (!fromUrl && !currentVariant()) {
       var list = Base.variants.list();
       var first = list.filter(function (v) { return v.available !== false; })[0] || list[0];
@@ -616,6 +775,9 @@
       });
     });
 
+    // Opened without ?variant=: the default selection is no pick of the shopper. No ?variant= is added and the main
+    // image stays the product's. With ?variant= (a shared link) that variant's picture shows, as before.
+    if (!inUrl) { var dv = currentVariant(); shownVariant = dv ? String(dv.id) : null; }
     if ($('[data-pdp]')) refreshProduct();
   }
 
@@ -678,12 +840,21 @@
         if (v) applyVariantValues(v.options);
       });
     }
-    var bar = $('[data-sticky]'), main = $('[data-main-atc]');
-    if (!bar || !main || !('IntersectionObserver' in window)) return;
-    new IntersectionObserver(function (entries) {
-      var e = entries[0];
-      bar.hidden = e.isIntersecting || e.boundingClientRect.top > 0;
-    }).observe(main);
+    // Shown once the buy button has scrolled away. A buy box further down the page (#mt-product on a landing) also
+    // shows it from the first scroll on, until the box reaches the screen: the bar's button goes there.
+    var bar = $('[data-sticky]'), main = $('[data-main-atc]') || $('[data-featured-atc]'), box = $('#mt-product');
+    if (!bar || !main) return;
+    var raf = 0;
+    var update = function () {
+      raf = 0;
+      var passed = main.getBoundingClientRect().bottom < 0;
+      var ahead = !!box && box.getBoundingClientRect().top > window.innerHeight && window.pageYOffset > 200;
+      bar.hidden = !(passed || ahead);
+    };
+    var schedule = function () { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    update();
   }
 
   function initUrgency() {
@@ -1524,6 +1695,8 @@
         priceEl.parentNode.appendChild(cmpEl);
       }
       if (cmpEl) cmpEl.textContent = compare > total ? money(compare) : '';
+      var barPrice = $('[data-sticky-price]');
+      if (barPrice) barPrice.textContent = money(total);
     };
     var paint = function () { // 'select' mode: the combined select (unchanged behaviour)
       var v = chosen();
@@ -1603,6 +1776,7 @@
         if (priceEl) priceEl.textContent = '';
         if (cmpEl) cmpEl.textContent = '';
         if (unitEl) unitEl.hidden = true;
+        paintSave(card, s, 0, 0);
         return;
       }
       var key = partsKey(parts), compare = grossCompare(parts), n = cardQty(card);
@@ -1611,6 +1785,7 @@
         if (card.__featuredKey !== key) return; // a newer pick of this card is on its way
         if (priceEl) priceEl.textContent = fmt(total);
         if (cmpEl) cmpEl.textContent = compare > total ? fmt(compare) : '';
+        paintSave(card, s, total, compare);
         if (unitEl) {
           var unitText = s.unit_label && n > 1 && total > 0 ? money(Base.round2(total / n)) + ' / ' + s.unit_label : '';
           unitEl.textContent = unitText;
@@ -1671,12 +1846,14 @@
         s.value = vals[i];
         s.addEventListener('change', function () {
           vals[i] = s.value;
-          var v = paintRow();
-          if (v && v.image && k === 0) showImage(v.image);
+          var v = paintRow(), c = groups[i].choices.filter(function (x) { return x.value === s.value; })[0];
+          // The gallery shows this unit: its variant's picture, else the picked colour's picture when the gallery has it.
+          showImage((v && v.image) || swatchGalleryUrl(thumbs, c && c.btn));
           clearTimeout(requote);
           requote = setTimeout(paintCards, 150);
         });
         wrap.appendChild(s);
+        if (wrap.classList.contains('has-dot')) colorField(s, groups[i].choices, wrap);
         row.appendChild(wrap);
       });
       paintRow();
@@ -1723,8 +1900,8 @@
         s.value = mainVals[i];
         s.addEventListener('change', function () {
           mainVals[i] = s.value;
-          var v = mainVariant();
-          if (v && v.image) showImage(v.image);
+          var v = mainVariant(), c = g.choices.filter(function (x) { return x.value === s.value; })[0];
+          showImage((v && v.image) || swatchGalleryUrl(thumbs, c && c.btn));
           if (mode === 'packs') { unitVals = []; renderUnits(); paintCards(); return; }
           if (v) paintHead(v.price, Math.max(v.compare, v.price));
           if (atc) atc.disabled = !v;

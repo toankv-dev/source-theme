@@ -13,10 +13,11 @@ The product page of `themes/tredvik` inside Lunara's header, top bar, footer and
 2 picture + text blocks, numbered steps, comparison, customer quotes, FAQ, reviews. Texts and pictures are Tredvik's
 (knee sleeve) as defaults: replace them in Customize.
 - **Sections** `tv-product`, `tv-image-with-text`, `tv-steps`, `tv-comparison`, `tv-quotes`, `tv-faq`, `tv-reviews`
-  (+ `snippets/tv-*`): only for this template. `tv-product` loads what they all need (CSS, fonts, scripts), so keep it
-  in the template.
-- **Look**: Theme settings → "Tredvik template" (`tv_*`: colours, fonts, corners, buttons, payment icons, Add to cart
-  label). Lunara's own settings do not change it, and it does not change the rest of the store.
+  (+ `snippets/tv-*`): only for this template. `tv-product` loads what they all need (CSS, scripts), so keep it in the
+  template.
+- **Look**: Theme settings → "Tredvik template" (`tv_*`: colours, corners, buttons, payment icons, Add to cart label).
+  Lunara's own settings do not change it, and it does not change the rest of the store. Font: the store's one font
+  (below); the build ships no Tredvik font and offers no font setting.
 - **Prices**: no price in the theme. Pack cards use the same live discounts and the same switches as Lunara's cart
   drawer (Theme settings → Discounts: tiered and Buy X Get Y only when ticked, amount off unless unticked), so a pack
   card always shows the total the drawer shows next.
@@ -31,9 +32,26 @@ The product page of `themes/tredvik` inside Lunara's header, top bar, footer and
   `tv-ui.js`, the template JSON, or the `tv_*` settings block by hand: change `_work/build-tvb.js` (or
   `_work/tvb-overrides.css`) and run `node themes/lunara-black-brixpant/_work/build-tvb.js`. Hand-written:
   `assets/js/tv-bridge.js`, the ViewContent guard line in `sections/product-scripts.hbs`.
+- **Sticky bar**: the store's Buy now bar (below), not Tredvik's card: the build drops the card and its style setting.
 - Checks: `node --test themes/lunara-black-brixpant/_work/scope-css.test.js`, `_work/tvb-e2e.js` (cart, events,
-  gifts, popups), `_work/cmp-main.js` (body vs the Tredvik original), `_work/snap.js` + `_work/regress.js` (Lunara
-  pages unchanged).
+  gifts, popups), `_work/sticky-buy-e2e.js` (Buy now bar, home heading), `_work/bundle-select-e2e.js` (pack selects),
+  `_work/one-font-e2e.js` (one font, every page), `_work/cmp-main.js` (body vs the Tredvik original), `_work/snap.js` +
+  `_work/regress.js` (Lunara pages unchanged). The e2e scripts take `--live` (where they say so) to check brixpant.com
+  with this folder's CSS swapped in the test browser only.
+
+## One font (Archivo) on every page
+Every text of every template is Archivo (`assets/fonts/archivo_*`, `@font-face` in `custom.css`), headings 600. The last
+rule of `custom.css` pins it on every element, form control and ::before / ::after (merchant HTML included); the
+checkout does not link custom.css, so `templates/checkout.hbs` carries the same faces and rule. Only the FAQ check box
+icons keep their icon font (Material Symbols). There is no font setting: a new font = change that rule, the checkout's
+copy and `ONE_FONT` in `_work/build-tvb.js`. `base.css` (vendor) still declares Poppins faces; nothing uses them, so
+they are never downloaded.
+
+## Buy now bar (`snippets/lu-sticky-buy.hbs`, every product template)
+A click scrolls to the pack / option picker; it never adds to cart. Desktop: small card at the bottom right (picture,
+title, price of the chosen pack, button), shown once the main Add to cart button is above the screen. Phone: only the
+button, full width, pinned from the start, stepping aside only while the main button is on screen. Label: Theme settings
+→ Cart & checkout (one text for all products, not computed from a product's discount).
 
 ## Editor (Themes > Customize)
 - **Product page** = `templates/product.json`: section `product` = gallery + blocks you can drag in the outline (Star rating, Title, Variant picker, Size finder, **Kaching bundle**, Custom HTML, Image / video slider (snippets/lu-media-slider.hbs, 10 image_picker slots, a video URL becomes a <video> server side), FAQ (snippets/lu-pi-faq.hbs: 8 own Q/A, else listing FAQ, else Theme settings FAQ), Buy buttons, Trust line, Payment icons, Description; a product section with only Kaching / Custom HTML blocks keeps the old fixed order) (gallery, star rating, block **Kaching bundle**,

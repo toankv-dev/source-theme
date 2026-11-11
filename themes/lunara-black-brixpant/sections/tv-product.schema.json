@@ -65,24 +65,8 @@
     {
       "type": "checkbox",
       "id": "sticky_atc",
-      "label": "Sticky Add to cart bar",
+      "label": "Sticky Buy now bar",
       "default": true
-    },
-    {
-      "type": "select",
-      "id": "sticky_style",
-      "label": "Sticky bar style",
-      "default": "compact",
-      "options": [
-        {
-          "value": "compact",
-          "label": "Compact (small card, bottom right on desktop)"
-        },
-        {
-          "value": "full",
-          "label": "Full width (price, SAVE badge, variant select, button)"
-        }
-      ]
     },
     {
       "type": "paragraph",

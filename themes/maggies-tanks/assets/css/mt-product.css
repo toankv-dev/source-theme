@@ -1,6 +1,6 @@
 /* maggies-tanks — product page only (linked by layout/theme.hbs). Moved by split-product-css.js. */
 .b-compare { overflow: hidden; padding-top: 48px; padding-bottom: 48px; }
-.b-compare .b-h2 { font-family: Georgia, Times New Roman, serif; font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.35; max-width: 520px; margin: 0 auto 28px; letter-spacing: 0.01em; }
+.b-compare .b-h2 { font-family: var(--font-heading); font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.35; max-width: 520px; margin: 0 auto 28px; letter-spacing: 0.01em; }
 .b-compare__table { position: relative; width: 100%; max-width: 720px; margin: 0 auto; border: 0; padding: 0; }
 .b-compare__table:after { content: ""; position: absolute; left: -100vw; right: -100vw; bottom: 0; height: 1px; background: #2f0147; }
 .b-compare__head, .b-compare__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
@@ -171,7 +171,6 @@
 .b-description { margin: 12px 0; }
 .b-block-image { width: 100%; margin: 12px 0; border-radius: var(--radius); }
 .b-divider { border: 0; border-top: 1px solid var(--c-line); margin: 16px 0; }
-.b-sticky__img { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; flex: 0 0 44px; }
 .b-reviews--empty { padding: 48px 16px; text-align: center; }
 .b-iwt { display: grid; gap: 24px; align-items: center; padding-top: 48px; padding-bottom: 48px; }
 @media (min-width: 900px) {
@@ -309,7 +308,7 @@ video.b-mslider__media { cursor: pointer; }
 .b-cards-block--tiers .b-card__sub:empty { display: none; }
 .b-cards-block--tiers .b-card__prices strong { font-size: 14px; font-weight: 700; color: rgba(0, 0, 0, 0.81); }
 .b-cards-block--tiers .b-card__prices s { font-size: 13px; color: #8a8a8a; }
-.b-cards-block--tiers .b-card__badge { top: -10px; right: 15px; padding: 4px 10px; border-radius: 20px; background: #000; color: #fff; font-size: 12px; font-weight: 400; letter-spacing: normal; text-transform: none; clip-path: none; }
+.b-cards-block--tiers .b-card__badge { top: -10px; right: 15px; padding: 4px 10px; border-radius: 20px; background: #1f5c3d; color: #fff; font-size: 12px; font-weight: 400; letter-spacing: normal; text-transform: none; clip-path: none; }
 .b-cards-block--tiers .b-units { margin-top: 12px; }
 .b-cards-block--tiers .b-unit { flex-wrap: nowrap; gap: 8px; margin-top: 8px; min-width: 0; }
 .b-cards-block--tiers .b-unit__img { order: -2; }

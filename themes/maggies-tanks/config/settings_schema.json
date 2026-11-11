@@ -109,21 +109,21 @@
         "type": "text",
         "id": "font",
         "label": "Body font (Google Fonts name)",
-        "default": "Inter",
+        "default": "Poppins",
         "info": "Exact family name, e.g. Poppins, Inter, Montserrat, DM Sans."
       },
       {
         "type": "text",
         "id": "font_heading",
         "label": "Heading font (optional)",
-        "default": "DM Serif Display",
+        "default": "Poppins",
         "info": "Empty = same as the body font."
       },
       {
         "type": "text",
         "id": "font_weights",
         "label": "Google Fonts weights",
-        "default": "400;500;700",
+        "default": "400;500;600;700;800",
         "info": "Only weights the font really has (e.g. Crimson Text: 400;600;700), else Google returns nothing."
       },
       {
@@ -314,27 +314,31 @@
       },
       {
         "type": "checkbox",
-        "id": "nav_collections",
+        "id": "nav_list_collections",
         "label": "Show collections in the menu",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "nav_show_shop",
-        "label": "Show the Shop link in the menu",
         "default": true
       },
       {
         "type": "text",
-        "id": "nav_home_label",
-        "label": "Menu: Home label",
-        "default": "Home"
+        "id": "nav_all_label",
+        "label": "Menu: All products label",
+        "default": "All products"
       },
       {
-        "type": "text",
-        "id": "nav_shop_label",
-        "label": "Menu: Shop label",
-        "default": "Shop"
+        "type": "select",
+        "id": "nav_all_target",
+        "label": "Menu: All products goes to",
+        "default": "home",
+        "options": [
+          {
+            "value": "home",
+            "label": "The home page"
+          },
+          {
+            "value": "all",
+            "label": "The All products page (/collections/all-products)"
+          }
+        ]
       },
       {
         "type": "text",
@@ -1085,17 +1089,17 @@
       },
       {
         "type": "select",
-        "id": "mt_simple_source",
+        "id": "mt_simple_lists",
         "label": "Lists",
-        "default": "collections",
+        "default": "all",
         "options": [
-          {
-            "value": "collections",
-            "label": "One list per collection (its title + products)"
-          },
           {
             "value": "all",
             "label": "One list with every product"
+          },
+          {
+            "value": "collections",
+            "label": "One list per collection (its title + products)"
           }
         ],
         "info": "No collection with products yet = one list with every product. Collection order: Products → Collections."
@@ -1141,6 +1145,17 @@
         "id": "mt_simple_help_link",
         "label": "Help button link",
         "default": "/pages/contact-us"
+      },
+      {
+        "type": "header",
+        "content": "Buy now bar (landing and product pages)"
+      },
+      {
+        "type": "text",
+        "id": "mt_sticky_label",
+        "label": "Button text",
+        "default": "BUY NOW - SAVE 70%",
+        "info": "The bar appears while scrolling and pins to the bottom of the screen on phones. Its button scrolls to the buy box."
       }
     ]
   },

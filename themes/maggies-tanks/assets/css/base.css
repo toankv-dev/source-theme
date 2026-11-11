@@ -852,13 +852,45 @@ button {
   font-size: 14px;
   color: var(--c-muted);
 }
+.b-sticky__img {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.b-sticky__go {
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+#mt-product {
+  scroll-margin-top: 88px;
+}
 @media (min-width: 900px) {
   .b-sticky {
     left: auto;
     right: 24px;
     bottom: 24px;
-    width: 420px;
+    width: 460px;
     border-radius: var(--radius);
+  }
+}
+/* Phones: the buy now bar stays pinned, so the page ends above it. */
+@media (max-width: 899px) {
+  body.b-body:has(.b-sticky__go) {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+  .b-sticky__go {
+    flex: 1 1 auto;
+  }
+  .b-sticky:has(.b-sticky__go) .b-sticky__info {
+    flex: none;
+  }
+  .b-sticky:has(.b-sticky__go) .b-sticky__title {
+    display: none;
   }
 }
 .b-marquee {

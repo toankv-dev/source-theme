@@ -250,6 +250,11 @@
     </select>
   </label>
   {{/if}}{{/if}}
+  {{!-- Look = Maggie's has the buy box #mt-product: the bar's button goes there. Any other look keeps Add to cart. --}}
+  {{#if (eq section.settings.style "maggies")}}
+  {{> mt-sticky-go}}
+  {{else}}
   <button type="button" class="b-btn" data-testid="sticky-add-to-cart" data-add-to-cart data-sticky-btn>{{#if settings.atc_label}}{{settings.atc_label}}{{else}}Add to cart{{/if}}</button>
+  {{/if}}
 </div>
 {{/unless}}

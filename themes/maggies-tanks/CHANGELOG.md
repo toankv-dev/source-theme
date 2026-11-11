@@ -2,6 +2,94 @@
 
 Versions follow `YYYY.MM.DD.N`. Each entry names the theme(s) it came from.
 
+## Maggies Tanks 2026.11.10.13 — Product opened without ?variant= stays on its main image (requested)
+### Fixed
+- Opening a product page without ?variant= added ?variant=<default variant> to the address and swapped the main image
+  to that variant's picture (refreshProduct ran its gallery + URL sync on page load too). Now the default selection
+  is no pick: the address stays clean and the product's first media shows until the shopper picks another variant.
+  A link with ?variant= keeps showing that variant (its picture, the pickers and the bundle rows on it).
+### Changed
+- The gallery and ?variant= follow a change of variant only (`shownVariant`): a pack card, the quantity or a repaint no
+  longer snap the gallery back to the variant's picture after the shopper browsed it. Colour picks in the bundle rows
+  (.12) still show their picture and do not touch the address.
+
+## Maggies Tanks 2026.11.10.12 — Colour picked in the bundle: the gallery goes to its picture (requested)
+### Fixed
+- Picking a colour in a pack card's unit rows (Buy 2 / Buy 3…: one Size / Color row per unit) left the gallery where it
+  was; only the top colour swatches moved it. Each row now shows its unit's picture: the variant's picture, the main
+  image swaps and its thumbnail is marked and scrolled into the strip. Product page (`unitRow`) and the landing / home
+  buy box (`initFeatured` unit rows, which did it for the first row only). Size picks in a row do the same, as the top
+  pickers already did.
+### Added
+- A variant without a picture of its own: picking its colour (top swatches, unit rows, the landing's selects) shows the
+  swatch's picture when the gallery has that same file (`swatchGalleryUrl`, matched by file name). A picture cropped
+  for the swatch is in no gallery and changes nothing. The page itself does not scroll.
+
+## Maggies Tanks 2026.11.09.11 — Bundle colour list: swatch colours (fix)
+### Fixed
+- A colour set on the product's swatch (Products → option → Configure swatch) showed as a white dot in the bundle's colour
+  list (since .7): the swatch button's style is "background:<colour>", which leaves backgroundImage = "initial", and
+  dotColor took that for a picture. Only a real url() counts as a picture now. Picture swatches were not affected.
+
+## Maggies Tanks 2026.11.09.10 — Menu: All products goes home (requested)
+### Changed
+- Menu "All products" links to the home page (the simple home lists every product) and is marked current there.
+  Theme settings → Header → "Menu: All products goes to" (`nav_all_target`, new id: home | all) brings back
+  /collections/all-products.
+
+## Maggies Tanks 2026.11.09.9 — SAVE pill colour (requested)
+### Changed
+- "SAVE x%" pill in the pack cards: default background #124f9f (CSS, Pack cards → SAVE badge colour default, generated
+  templates). A colour already set on the block wins.
+
+## Maggies Tanks 2026.11.09.8 — "SAVE x%" inside each pack card (requested, as brixpant.com/compression-tank)
+### Added
+- Quantity pack cards (`snippets/pack-qcard.hbs`): a "SAVE x%" pill right after the title (`[data-card-save]`), x = the
+  pack's price against its crossed-out price, rounded. It follows the picked colours / sizes and the live discounts, on the
+  product page (`updatePackCards`) and in the landing / home buy box (`paintCard`), both through `paintSave` in ui.js.
+  Same line as the title on desktop; the line wraps, so it drops under the title on a narrow phone card.
+- Pack cards block settings: "Show SAVE x% next to each pack's title" (`show_save`, on), "SAVE badge text" (`save_label`,
+  `SAVE {pct}%`), "SAVE badge colour" (`save_color`, #1f5c3d). A template saved before this version has none of them and
+  gets the defaults (on, `SAVE {pct}%`, #1f5c3d) without being edited.
+
+## Maggies Tanks 2026.11.09.7 — Colour list in the bundle, Poppins everywhere, pack badges (requested)
+### Changed
+- Pack unit rows (product page and landing buy box): the colour field is a list showing each colour's dot + name
+  (`colorField` in ui.js; the native `<select>` stays under it, invisible, as the value, so the row's change handler, the
+  cart lines and tools/smoke.js are untouched). Keyboard: arrows, Home / End, Enter, Escape. Opens upward when there is no room below. Size stays native.
+- Dots (`dotColor`): the product's own swatch (picture, then colour) wins; else `COLOR_NAMES` (Nude, Coffee, Red Wine…);
+  else the name when CSS knows it. Notes like "(running low)" are ignored. Works with no swatch set on the product.
+- Font: Poppins on every page, weights 400–800 self-hosted (`snippets/mt-fonts.hbs`), pinned in skin.css so a stored "font"
+  or "font_heading" setting cannot replace it; `body *` also covers the platform pages that hard-code a font on an element.
+  Inter, DM Sans and DM Serif Display removed. The platform's checkout, thank-you and payment pages load no theme CSS.
+- Pack badges (card style "tiers"): background #1f5c3d. Template defaults: Buy 1 = "Best seller", Buy 2 Get 1 = "Best Value".
+  A template already saved in the theme editor keeps its own texts until they are changed there.
+
+## Maggies Tanks 2026.11.09.6 — Home lists every product, buy now bar, menu by collection (requested)
+New setting ids on purpose: a zip upload keeps every stored value, so changing the default of `mt_simple_source` or
+`nav_collections` would not reach a store that already has them. The old keys stay stored and are no longer read.
+### Added
+- Buy now bar on the landing (`snippets/mt-landing-main.hbs`): picture, title, price and a button "BUY NOW - SAVE 70%"
+  (`snippets/mt-sticky-go.hbs`, Theme settings → Maggie's – Home layout → Buy now bar, `mt_sticky_label`) that scrolls to
+  `#mt-product`. It shows from the first 200px of scrolling, goes while the buy box is on screen, comes back once the buy
+  button has passed. Desktop: card at the bottom right. Phones: pinned to the bottom edge, price + button (no title), and
+  the page ends above it.
+### Changed
+- Product page, Look = Maggie's: the sticky bar's button is the same "BUY NOW - SAVE 70%" scroll to `#mt-product`, no
+  longer Add to cart. The buy box keeps the real Add to cart. Any other look keeps Add to cart in the bar.
+- Simple home: Lists = one list with every product by default (`mt_simple_lists`, replaces `mt_simple_source`).
+- Menu (`snippets/nav-links.hbs`): All products (`nav_all_label`), the collections (`nav_list_collections`, on by default,
+  replaces `nav_collections`), Contact, Track order. No Home (the logo goes home), no Shop (`nav_show_shop`, `nav_home_label`,
+  `nav_shop_label` removed).
+- Menu drawer: near-black panel, close button on the left, policy links under a line at the bottom.
+- `ui.js` initSticky: also takes the landing's buy button and a buy box further down the page; initFeatured keeps the bar's
+  price on the selected pack.
+- `.b-sticky__img` moved from mt-product.css to base.css (the landing does not load mt-product.css); desktop bar 460px wide
+  for the longer label; `#mt-product` keeps clear of the sticky header when scrolled to.
+### Fixed
+- Video reviews heading ("See Why Over 100,000 Women…") sat left of the page's centre: the block reset
+  `.mt-home h2 { margin: 0 }` outranked its auto margins. The brand word in it is black.
+
 ## Maggies Tanks 2026.11.09.5 — Comparison headers on phones, heading spacing, simple home heading (requested)
 ### Fixed
 - How It Compares on phones: the column names broke mid-word ("Tra d Bra", "Vesnac harm": ~40px columns + the table's

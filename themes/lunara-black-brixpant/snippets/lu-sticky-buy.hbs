@@ -1,0 +1,79 @@
+{{!-- "Buy now" bar on every product page: sections/product.hbs and sections/tv-product.hbs (the latter through
+      _work/build-tvb.js). It never adds to cart: a click scrolls to the place where the customer picks a pack / options,
+      and the main Add to cart button there does the rest.
+      Desktop: small card at the bottom right (picture, title, price, button), shown once the main button is above the
+      screen. Phone (< 750 px, as in custom.css): only the button, full width, pinned from the start, stepping aside only
+      while the main button is on screen. The picture and the texts stay display:none there, so a phone never loads it.
+      Price: the chosen pack's total. tv-ui.js writes it into [data-sticky-price] on the Tredvik template; the script below
+      copies it from the selected Kaching pack on Lunara templates; without packs it stays the product's price.
+      theme.js also writes style.transform on <sticky-atc> (Lunara templates) under the "above the screen" condition,
+      which always agrees with the class set here. Label: Theme settings → Cart & checkout. --}}
+<sticky-atc class="lu-sticky-bar sticky-add-to-cart" id="stickyAddToCart" data-sticky-bar><div class="lu-sticky-bar__container">{{#with (lookup product.media.gallery 0)}}<img class="lu-sticky-bar__thumb" src="{{#if thumb_url}}{{thumb_url}}{{else if poster_url}}{{poster_url}}{{else}}{{url}}{{/if}}" alt="" width="44" height="44" loading="lazy">{{/with}}<div class="lu-sticky-bar__info"><p class="lu-sticky-bar__title">{{product.title}}</p><p class="lu-sticky-bar__price" data-sticky-price>{{product.price}}</p></div><button type="button" class="lu-sticky-bar__btn" id="stickyAddToCartBtn" data-testid="sticky-buy-now"><span class="button-text">{{#if settings.sticky_buy_label}}{{settings.sticky_buy_label}}{{else}}BUY NOW - SAVE 70%{{/if}}</span></button></div></sticky-atc>
+<script>
+(function () {
+  function init() {
+    var bar = document.getElementById("stickyAddToCart");
+    if (!bar) return;
+    var atc = document.getElementById("addToCart") || document.querySelector(".main-product-atc");
+    var phone = window.matchMedia("(max-width:749px)");
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var show = true;
+      if (atc) {
+        var r = atc.getBoundingClientRect();
+        show = r.bottom < 0 || (phone.matches && r.top > window.innerHeight);
+      }
+      bar.classList.toggle("show", show);
+    }
+    function schedule() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener("load", schedule);
+    update();
+
+    function visible(selector) {
+      return Array.prototype.filter.call(document.querySelectorAll(selector), function (n) {
+        return !n.closest("#QuickAdd-ms") && n.offsetParent !== null;
+      })[0];
+    }
+
+    var price = bar.querySelector("[data-sticky-price]");
+    var kaching = visible("[data-lu-kaching]");
+    if (price && kaching) {
+      var copyPrice = function () {
+        var p = kaching.querySelector(".kaching-bundles__bar--selected [data-lu-price]");
+        var text = p ? p.textContent.trim() : "";
+        if (text) price.textContent = text;
+      };
+      new MutationObserver(copyPrice).observe(kaching, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["class"] });
+      copyPrice();
+    }
+
+    var PICKERS = ["[data-lu-kaching]", "[data-cards-block]", ".b-picker", ".lu-variants", ".b-buy", "[data-ms-pdp-form]"];
+    function picker() {
+      for (var i = 0; i < PICKERS.length; i++) {
+        var found = visible(PICKERS[i]);
+        if (found) return found;
+      }
+      return atc;
+    }
+    document.getElementById("stickyAddToCartBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      var target = picker();
+      if (!target) return;
+      var hd = document.querySelector("sticky-header, .section-header, #shopify-section-header");
+      var hp = hd ? getComputedStyle(hd).position : "";
+      var off = hd && (hp === "sticky" || hp === "fixed") ? hd.offsetHeight : 0;
+      window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - off - 12), behavior: "smooth" });
+    }, true);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>

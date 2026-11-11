@@ -8,8 +8,7 @@
         "gallery_side": "left",
         "gallery_layout": "thumbs",
         "show_sale_badge": false,
-        "sticky_atc": true,
-        "sticky_style": "compact"
+        "sticky_atc": true
       },
       "blocks": {
         "rating_1": {

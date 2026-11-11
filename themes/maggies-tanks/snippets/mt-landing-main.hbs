@@ -89,6 +89,15 @@
       </div>
     </div>
   </section>
+  {{!-- Buy now bar: ui.js initSticky shows it while scrolling, except while the buy box above is on screen. --}}
+  <div class="b-sticky" data-sticky hidden>
+    {{#if imageUrl}}<img class="b-sticky__img" src="{{#if imageThumbUrl}}{{imageThumbUrl}}{{else}}{{imageUrl}}{{/if}}" alt="" width="44" height="44" loading="lazy">{{/if}}
+    <div class="b-sticky__info">
+      <p class="b-sticky__title">{{title}}</p>
+      <p class="b-sticky__price" data-sticky-price>{{money sellingPrice}}</p>
+    </div>
+    {{> mt-sticky-go}}
+  </div>
   {{/each}}
   {{/unless}}
 

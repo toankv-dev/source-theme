@@ -1119,3 +1119,11 @@ body.b-lock{overflow: hidden}
 .tvb:not(#tvb-x) .b-iwt__media img{display: block; width: 100%; aspect-ratio: 1; object-fit: cover}
 .tvb:not(#tvb-x) .b-info .b-block-image{display: block; width: 100%}
 .tvb:not(#tvb-x) .b-modal,.tvb:not(#tvb-x) .b-lightbox{z-index: 10002}
+.tvb:not(#tvb-x) .b-unit{position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; padding-left: 48px}
+.tvb:not(#tvb-x) .b-unit__img{position: absolute; top: 2px; left: 0; width: 40px; height: 40px}
+.tvb:not(#tvb-x) .b-unit__sel{flex: 1 1 0; min-width: max-content}
+.tvb:not(#tvb-x) .b-unit__select{min-height: 44px; font-size: 16px; border-color: #dddddd; border-radius: 4px}
+.tvb:not(#tvb-x){--font: Archivo, sans-serif !important; --font-heading: Archivo, sans-serif !important}
+.tvb:not(#tvb-x) h1,.tvb:not(#tvb-x) h2,.tvb:not(#tvb-x) h3,.tvb:not(#tvb-x) .b-h1,.tvb:not(#tvb-x) .b-h2{font-weight: 600 !important}
+.tvb:not(#tvb-x) .tv-steps__title{font-weight: 600 !important}
+.tvb:not(#tvb-x) .b-more{min-width: 44px}

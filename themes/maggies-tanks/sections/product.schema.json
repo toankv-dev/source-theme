@@ -387,6 +387,25 @@
         },
         {
           "type": "checkbox",
+          "id": "show_save",
+          "label": "Show \"SAVE x%\" next to each pack's title",
+          "default": true,
+          "info": "The % comes from the pack's price and its crossed-out price, and follows the colour / size picked."
+        },
+        {
+          "type": "text",
+          "id": "save_label",
+          "label": "SAVE badge text ({pct} = the percentage)",
+          "default": "SAVE {pct}%"
+        },
+        {
+          "type": "color",
+          "id": "save_color",
+          "label": "SAVE badge colour",
+          "default": "#124f9f"
+        },
+        {
+          "type": "checkbox",
           "id": "includes_all",
           "label": "Show every pack's \"What's included\" list (not only the chosen one)",
           "default": false

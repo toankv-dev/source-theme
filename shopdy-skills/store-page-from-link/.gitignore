@@ -1,0 +1,5 @@
+# Per-job downloads, screenshots, state and the logged-in browser profile: never committed.
+_work/
+# Shopdy account for the browser (SHOPDY_EMAIL / SHOPDY_PASSWORD): never committed.
+.env
+__pycache__/

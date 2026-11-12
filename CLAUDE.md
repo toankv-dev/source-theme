@@ -26,6 +26,10 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 - `dist/` — uploadable zips.
 - `docs/` — every spec, plan and task list (`docs/SPEC-<topic>.md`, `docs/plan-<topic>.md`,
   `docs/todo-<topic>.md`).
+- `shopdy-skills/` — Claude skills made for the shopdy-promax repo (not used here), e.g. `store-page-from-link`.
+  This is their source: edit here (bump `metadata.version` in `SKILL.md`), then install / update a shopdy-promax
+  checkout with `node tools/install-shopdy-skill.js <shopdy-promax dir>` (keeps its `_work/` and `.env`). Never edit
+  only the installed copy.
 
 ## Rules
 

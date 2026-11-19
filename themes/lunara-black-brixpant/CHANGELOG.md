@@ -1,5 +1,96 @@
 # Lunara Black (brixpant.com) — changelog
 
+## 2026.11.16.5 — new section "Before / after slider"
+### Added
+- `sections/before-after.hbs` + `.schema.json` (Add section → Content → "Before / after slider"), as the "Your body
+  changes instantly" block of tryeverheld.com: the after picture underneath, the before picture on top cut at the
+  line, a 2 px line with a 40 px round handle (44 px wide to touch). Mouse: drag or click; touch: swipe sideways or tap,
+  an up / down swipe still scrolls the page; keyboard: arrow keys / Home / End on the handle (`role="slider"`).
+  Settings: before / after pictures (image_picker + `default_*` theme file), optional BEFORE / AFTER labels, start
+  position 5–95 %, frame square / 4:5 / 4:3 / the after picture's own shape, line colour, pictures left / right
+  (phones: above the text), heading + rich text (default = the brixpant "Reclaim Your Confidence And Power" text),
+  space above / below. No heading and no text → the pictures alone, 600 px, centred. An empty picture keeps its frame
+  (hint in the editor only). Own `<style>` and `<script>` in the section; the script wires every box once
+  (`data-ok`), so two sliders on a page and the editor's section swap (it re-runs section scripts) both work.
+  Replaces the merchant's Custom HTML video + code on /compression-tank.
+### Checked
+- Preview, 3 instances (theme files + labels / picked files, right side, own shape, start 30 %, yellow line / empty):
+  1440 / 1024 / 390 / 360 — layout, drag (stops at 0 / 100 %), click, keys, swipe, tap, vertical swipe scrolls 235 px
+  with the line untouched, the editor's swap re-wires the new section, no sideways scroll, no script errors.
+  `mobile-audit.js`: same 3 errors / 19 warnings with and without the section (menu drawer, top bar — older), none on it.
+- Live brixpant.com/compression-tank with the rendered section in place of the Custom HTML (test browser only):
+  1440 = 539 px square + text right, 390 = 348 px + text below; drag and swipe move the line; Poppins; no errors.
+
+## 2026.11.16.4 — banner Shop Now: hover widens the button again
+### Fixed
+- `assets/css/custom.css`: the banner box's button no longer sets its own padding (2026.11.16.3 did, at id level),
+  so base.css's arrow hover works again — the button grows 30 px on the right (padding-right 3rem → 6rem) and the
+  arrow slides into that room. Was: the button kept its width and the arrow covered "Shop Now".
+### Checked
+- Live brixpant.com, new custom.css swapped in the test browser only, hover at 1920 / 1440 / 1200 / 1100: button
+  +30 px, arrow inside the button, 14–17 px clear of the label.
+
+## 2026.11.16.3 — banner heading box: placed on the picture, scales with it
+### Changed
+- `templates/index.hbs` + `assets/css/custom.css`: from 1200 px wide the heading box is centred at "Heading box: from
+  the left" / "from the top" % of the picture (new range settings `home_banner_box_x` / `home_banner_box_y`, default
+  45 / 65 = right under the banner's "ENGINEERED FOR PERFORMANCE", between the man and the shirts) instead of the
+  bottom centre, and is sized in vw so it keeps that place at every width (1920 px = 533 x 177 as before; heading /
+  button text never under 20 / 13 px; base.css's 45rem minimum width dropped for it). Under 1200 px / "Under the
+  picture": unchanged.
+### Checked
+- Live brixpant.com (new 2000x750 banner), new custom.css swapped in the test browser only, 1920 / 1600 / 1440 /
+  1366 / 1280 / 1200: box 31–59 % across and 52–78 % down the picture at every width — below the headline (ends at
+  48.6 %), clear of the man (28.8 %) and the shirts (63.5 %), heading on one line, no sideways scroll; 1100 / 390:
+  under the picture as before.
+
+## 2026.11.16.2 — Poppins, owearfit.com bar + cards, hushflex.com banner heading
+### Changed
+- **One font = Poppins** (was Archivo), the 400 / 700 faces (normal + italic) `base.css` already declares, headings
+  700 — as owearfit.com. `assets/css/custom.css` (variables + the pin-everything rule), `templates/checkout.hbs` (same
+  rule; it links base.css for the faces, preload = Poppins 400), "Tredvik – Brixpant bundle" (`snippets/tv-vars.hbs`,
+  `.tvb` line of `assets/css/tv-bundle.css`; `_work/build-tvb.js` is not on this machine, so `ONE_FONT` there still
+  says Archivo). The 4 `assets/fonts/archivo_*` files and their `@font-face` rules are gone (zip 2521 → 2382 KB).
+- **Top bar** (`sections/header.hbs`, countdown style), owearfit.com's rules: Title and Subtitle on one line split by a
+  thin "|", 24 px on desktop, clamp(12px, 3.6vw, 16px) on phones, 11 px / 10 px padding. Set Title = `BLACK FRIDAY 70%`,
+  Subtitle = `ENDS IN` (the "|" is drawn by the theme).
+- **Product cards** (`assets/css/custom.css`): Lunara Black's flat, left-aligned card rules are gone, so the cards are
+  base.css's again, as owearfit.com: white, 12 px corners (6 px on phones), shadow, centred text, yellow stars
+  (`#ffb400`, was green), 2-line title box, full-width Add to cart. Also the related products and the cart upsell
+  cards.
+- **Card Add to cart** (`assets/js/theme.js`, quick add): fills the fetched product page's `<template data-lu-json>`
+  holders before reading them (inline scripts never run in DOMParser), as owearfit.com's build. Was: every product
+  read as "no variants" and went into the cart with no colour / size (checked live: the compression tank, 24 variants,
+  went in with `variant ""`). Now the quick add opens with the product's pack / Color / Size picker.
+- **Banner heading box** (`templates/index.hbs`), Lunara's box as hushflex.com: heading + button (link empty = the
+  first product). New settings under Home page → Banner: "Show the heading box", "Heading" (`home_banner_title`, a new
+  id so a stored "Fall Sale…" of the old `home_banner_heading` cannot win; default `Black Friday - Up To 70% Off`),
+  "Button label", "Button link", "Heading box position" (on the picture at the bottom centre from 1200 px wide / under
+  the picture). Under 1200 px and on phones it is under the picture; the picture never shrinks for it.
+- `config/settings_data.json` (new installs): the values brixpant.com now uses.
+### Checked
+- Preview (`tools/preview-server.js`), 1440 / 360: home, product (3 templates), catalog, checkout — only Poppins
+  computed, only Poppins (+ the icon font) downloaded, no script errors, no sideways scroll; heading box text / button
+  / first-product link right. `tools/smoke.js`: every step passes up to `[data-cart-drawer]`, which this theme never
+  had (also fails on the committed version).
+- Live brixpant.com with the new custom.css / theme.js / bar CSS swapped in the test browser only (box markup added
+  by the test): bar on one line at 1920–360; banner = picture size at every width; box at the bottom centre on
+  1920 / 1440, under the picture at 1024 / 768 / 390 / 360; card Add to cart opens the quick add with Color / Size for
+  each item and the cart line carries `Black / S` + its options; no script errors.
+
+## 2026.11.16.1 — home banner never cropped, heavier "BEST SELLER"
+### Changed
+- `assets/css/custom.css`, home banner (`#ms-home` only): as tall as its picture on every screen, so nothing of it is
+  cut (was a 560 px box on desktop / 340 px on phones with the picture cropped to fill it: on a 1920 px screen the
+  2000×750 banner lost 80 px top and bottom, on a 360 px phone the 1374×1145 one lost 24 px each side). Until the
+  picture loads, an 8:3 box (6:5 on phones), the shape of the banners in use, keeps the page from jumping.
+- `assets/css/custom.css`: the home product list heading is weight 800 and upper case (was Lunara's 600, as typed).
+### Checked
+- Live brixpant.com with the new custom.css swapped in the test browser only, at 1920 / 1440 / 1280 / 1024 / 768 /
+  390 / 360: banner box = picture size at every width (no crop), no sideways scroll, heading 800 + upper case;
+  with the banner pictures blocked the box is already the loaded size (1440×540, 360×300); the product page has no
+  `#ms-home` / `.lu-home-products`, so it is untouched.
+
 ## 2026.11.10.1 — one font (Archivo) on every page
 ### Changed
 - `assets/css/custom.css`: last rule pins Archivo on every element, form control and ::before / ::after of every page

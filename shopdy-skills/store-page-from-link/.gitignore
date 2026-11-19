@@ -2,4 +2,6 @@
 _work/
 # Shopdy account for the browser (SHOPDY_EMAIL / SHOPDY_PASSWORD): never committed.
 .env
+# The block catalog the skill builds on each machine and keeps up to date there: never committed.
+catalog/
 __pycache__/

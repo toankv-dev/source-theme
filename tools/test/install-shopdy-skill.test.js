@@ -54,6 +54,25 @@ test('install copies the skill and later updates it without touching _work/ or .
   assert.equal(third.unchanged, 3);
 });
 
+test('install keeps the machine-made catalog/ at the skill root, ships no tests/, and treats deeper names normally', () => {
+  const { root, target, dest } = fixture();
+  const src = path.join(root, 'shopdy-skills', 'demo');
+  put(path.join(src, 'tests', 'test_x.py'), 'import unittest\n');
+  put(path.join(src, 'references', 'catalog', 'notes.md'), 'a folder named catalog, but not at the root');
+  install({ root, target });
+  assert.ok(!fs.existsSync(path.join(dest, 'tests')), 'tests stay in source-theme');
+  assert.ok(fs.existsSync(path.join(dest, 'references', 'catalog', 'notes.md')));
+
+  put(path.join(dest, 'catalog', 'block-catalog.json'), '{"blocks":{}}');
+  put(path.join(dest, 'tests', 'old_test.py'), 'left by a hand copy');
+  fs.rmSync(path.join(src, 'references', 'catalog'), { recursive: true });
+  const [r] = install({ root, target });
+  assert.equal(read(path.join(dest, 'catalog', 'block-catalog.json')), '{"blocks":{}}', 'catalog/ belongs to that machine');
+  assert.ok(!fs.existsSync(path.join(dest, 'references', 'catalog')), 'a deeper "catalog" folder follows the source');
+  assert.ok(!fs.existsSync(path.join(dest, 'tests')), 'a stray tests/ at the destination goes');
+  assert.deepEqual(r.removed.sort(), ['references/catalog/notes.md', 'tests/old_test.py']);
+});
+
 test('--dry reports the plan and writes nothing', () => {
   const { root, target, dest } = fixture();
   const [r] = install({ root, target, dry: true });

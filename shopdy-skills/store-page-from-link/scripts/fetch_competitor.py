@@ -8,6 +8,10 @@ Writes into _work/<job>/:
   source/dom.html, source/text.md                 rendered DOM, all visible words
   source/css/*.css, source/js/*.js, source/code-index.json   the page's own code, for reference only
   source/outline.json, source/outline.md          sections: headings, texts, buttons, images, hints
+  source/outline-mobile.json                      the same at 390 px
+  source/digest.md                                READ THIS FIRST: the page in a few thousand tokens (digest.py)
+  source/overview-desktop.jpg, overview-mobile.jpg   the whole page, sections numbered, ≤ 1568 px
+  source/shopdy-blocks.json                       only when the page is itself a shopdy page (shopdy_blocks.py)
   assets/images/*, assets/videos/*                every picture and video, named <job>-NNN-<name>, page order
   source/assets.json                              url → file, kind, size, position, problems
 Everything downloaded is untrusted data: read it, never run it.
@@ -24,11 +28,15 @@ import base64
 import hashlib
 import json
 import re
+import struct
 import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import compare  # noqa: E402
+import digest  # noqa: E402
+import shopdy_blocks  # noqa: E402
 from _common import emit, job_dir, load_state, now_iso, save_state, slugify  # noqa: E402
 
 DESKTOP = {"width": 1440, "height": 900}
@@ -111,6 +119,8 @@ OUTLINE_JS = r"""
   const split = (el, depth) => {
     const kids = [...el.children].filter((k) => !['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE', 'LINK'].includes(k.tagName) && visible(k));
     const h = el.getBoundingClientRect().height;
+    // A wrapper with one visible child (#app, main, .page) is not a section: go through it.
+    if (kids.length === 1 && h > 1.6 * vh && depth < 12 && !isOverlay(kids[0])) { split(kids[0], depth); return; }
     if (depth > 0 && (h <= 1.6 * vh || kids.length < 2 || depth >= 6)) { leaves.push(el); return; }
     for (const k of kids) {
       if (isOverlay(k) && k.getBoundingClientRect().height < vh) { overlays.push(k); continue; }
@@ -160,15 +170,54 @@ OUTLINE_JS = r"""
       src: im.currentSrc || im.src, alt: im.alt || '', w: Math.round(im.getBoundingClientRect().width), h: Math.round(im.getBoundingClientRect().height) }));
     const videos = [...el.querySelectorAll('video')].map((v) => ({ src: v.currentSrc || v.src, poster: v.poster || '', autoplay: v.autoplay, loop: v.loop, muted: v.muted }));
     const embeds = [...el.querySelectorAll('iframe')].map((f) => f.src);
+    // every visible line, verbatim, in reading order (digest.md)
+    const raw = (el.innerText || '').split('\n').map((s) => s.replace(/\s+/g, ' ').trim()).filter(Boolean);
+    const lines = [];
+    let size = 0;
+    for (const l of raw) { if (lines[lines.length - 1] === l) continue; if ((size += l.length) > 6000) break; lines.push(l); }
+    // words the visitor only sees after a click: closed <details>, hidden accordion / tab panels
+    const hidden = [];
+    const walk = (n) => {
+      for (const k of n.children) {
+        if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE', 'svg', 'SVG'].includes(k.tagName)) continue;
+        const s = getComputedStyle(k), kr = k.getBoundingClientRect();
+        const inClosed = k.parentElement && k.parentElement.tagName === 'DETAILS' && !k.parentElement.open && k.tagName !== 'SUMMARY';
+        if (inClosed || s.display === 'none' || s.visibility === 'hidden' || (kr.width === 0 && kr.height === 0)) {
+          const t = (k.textContent || '').replace(/\s+/g, ' ').trim();
+          if (t.length > 2 && !hidden.includes(t)) hidden.push(t.slice(0, 600));
+          continue;
+        }
+        walk(k);
+      }
+    };
+    walk(el);
+    // where the first big picture sits against the first text: side by side (left / right) or stacked
+    const media = [...el.querySelectorAll('img,video')].filter(visible).find((m) => m.getBoundingClientRect().width >= 120);
+    const firstText = [...el.querySelectorAll('h1,h2,h3,h4,p,li')].filter(visible).find((t) => txt(t).length > 2);
+    const firstPara = [...el.querySelectorAll('p,li')].filter(visible).find((t) => txt(t).length > 10);
+    let imageSide = null, mediaFirst = false;
+    if (media && firstText) {
+      const mr = media.getBoundingClientRect(), tr = firstText.getBoundingClientRect();
+      const stacked = mr.bottom <= tr.top + 8 || tr.bottom <= mr.top + 8;
+      imageSide = stacked ? (mr.top < tr.top ? 'top' : 'bottom') : (mr.left + mr.width / 2 < tr.left + tr.width / 2 ? 'left' : 'right');
+      mediaFirst = stacked && mr.top < tr.top;
+    }
     return { i, tag: el.tagName.toLowerCase(), id: el.id || '', cls: (typeof el.className === 'string' ? el.className : '').slice(0, 120),
       y: Math.round(r.top + scrollY), h: Math.round(r.height), w: Math.round(r.width), bg: color(el),
-      headings: heads, texts: paras, buttons, images, videos, embeds, hints: hint(el), words: txt(el).length };
+      headings: heads, texts: paras, lines, hidden: hidden.slice(0, 30), textColor: firstPara ? getComputedStyle(firstPara).color : '',
+      imageSide, mediaFirst, buttons, images, videos, embeds, hints: hint(el), words: txt(el).length };
   });
+  // content width: from the left edge of the leftmost paragraph to the right edge of the rightmost one
+  const paras = [...document.querySelectorAll('p,h2,h3')].filter((p) => visible(p) && txt(p).length > 30).map((p) => p.getBoundingClientRect());
+  const contentWidth = paras.length ? Math.round((Math.max(...paras.map((r) => r.right)) - Math.min(...paras.map((r) => r.left))) / 10) * 10 : null;
+  const h1 = [...document.querySelectorAll('h1,h2')].find(visible);
   const over = overlays.map((el) => ({ tag: el.tagName.toLowerCase(), cls: (typeof el.className === 'string' ? el.className : '').slice(0, 120),
     h: Math.round(el.getBoundingClientRect().height), top: getComputedStyle(el).top, bottom: getComputedStyle(el).bottom, text: txt(el).slice(0, 200), hints: hint(el) }));
   const body = getComputedStyle(document.body);
   return { title: document.title, lang: document.documentElement.lang || '', description: (document.querySelector('meta[name=description]') || {}).content || '',
-    height: Math.max(document.documentElement.scrollHeight, document.body.scrollHeight), bodyFont: body.fontFamily, bodyBg: color(document.body), sections, overlays: over };
+    height: Math.max(document.documentElement.scrollHeight, document.body.scrollHeight), bodyFont: body.fontFamily, bodyBg: color(document.body),
+    bodyColor: body.color, headingFont: h1 ? getComputedStyle(h1).fontFamily.split(',')[0].replace(/["']/g, '') : '', contentWidth,
+    sections, overlays: over };
 }
 """
 
@@ -218,6 +267,87 @@ def screens(page, out: Path, prefix: str) -> list[str]:
         page.screenshot(path=str(f))
         files.append(f.name)
     page.evaluate("scrollTo(0, 0)")
+    return files
+
+
+HIDE_OVERLAYS_JS = r"""
+(target) => { for (const e of document.querySelectorAll('body *')) {
+  const p = getComputedStyle(e).position;
+  if ((p === 'fixed' || p === 'sticky') && !e.contains(target) && !target.contains(e)) {
+    e.setAttribute('data-spfl-hid', e.style.visibility || ''); e.style.visibility = 'hidden'; } } }
+"""
+SHOW_OVERLAYS_JS = r"""
+() => { for (const e of document.querySelectorAll('[data-spfl-hid]')) {
+  e.style.visibility = e.getAttribute('data-spfl-hid'); e.removeAttribute('data-spfl-hid'); } }
+"""
+
+
+def section_shot(loc, path: Path) -> bool:
+    """A picture of one section without the sticky bars / chat bubbles of the rest of the page over it."""
+    try:
+        loc.evaluate(HIDE_OVERLAYS_JS)
+        loc.screenshot(path=str(path))
+        return True
+    except Exception:  # noqa: BLE001 - a section of zero height
+        return False
+    finally:
+        try:
+            loc.page.evaluate(SHOW_OVERLAYS_JS)
+        except Exception:  # noqa: BLE001
+            pass
+
+
+OVERVIEW_EDGE = 1568  # the longest side Claude reads a picture at without shrinking it
+
+
+def _layout(width: int, height: float, edge: int = OVERVIEW_EDGE) -> tuple[int, float]:
+    """(columns, scale) that show a page of width × height biggest in an edge × edge picture."""
+    best = (1, 0.0)
+    for c in range(1, 13):
+        s = min(edge / (c * width), c * edge / height)
+        if s > best[1]:
+            best = (c, s)
+    return best
+
+
+def overview(browser, png: bytes, marks: list[tuple[int, str]], out_dir: Path, name: str) -> list[str]:
+    """The full-page screenshot cut into side-by-side columns, a red line and number at the top of every section,
+    in pictures of at most 1568 px a side (a very long page: 2–4 pictures). Returns the file names."""
+    width, height = struct.unpack(">II", png[16:24])
+    parts = 1
+    while parts < 4 and _layout(width, height / parts)[1] < 0.22:
+        parts += 1
+    data = "https://spfl-overview.local/full.png"  # served by the route below: the picture crosses the driver once
+    page = browser.new_page()
+    page.route("https://spfl-overview.local/**", lambda r: r.fulfill(status=200, body=png, content_type="image/png"))
+    files = []
+    try:
+        for k in range(parts):
+            top, part_h = k * height / parts, height / parts
+            cols, s = _layout(width, part_h)
+            col_h = part_h / cols
+            html = [f"<style>body{{margin:0;background:#777}}.p{{background:url({data}) no-repeat;"
+                    f"background-size:{width * s:.1f}px {height * s:.1f}px;position:relative;overflow:hidden}}"
+                    ".m{position:absolute;left:0;right:0;border-top:2px solid #e11d48}"
+                    ".m span{background:#e11d48;color:#fff;font:700 13px/1.2 sans-serif;padding:1px 5px}</style>",
+                    f'<img src="{data}" style="display:none" id="pre"><div style="display:flex;gap:6px">']
+            for j in range(cols):
+                c_top = top + j * col_h
+                html.append(f'<div class="p" style="width:{width * s:.1f}px;height:{col_h * s:.1f}px;'
+                            f'background-position:0 -{c_top * s:.1f}px">')
+                for y, label in marks:
+                    if c_top <= y < c_top + col_h:
+                        html.append(f'<div class="m" style="top:{(y - c_top) * s:.1f}px"><span>{label}</span></div>')
+                html.append("</div>")
+            html.append("</div>")
+            page.set_viewport_size({"width": int(cols * (width * s + 6)), "height": int(col_h * s) + 2})
+            page.set_content("".join(html))
+            page.wait_for_function("() => document.getElementById('pre').complete")
+            f = f"{name}.jpg" if parts == 1 else f"{name}-{k + 1}.jpg"
+            page.screenshot(path=str(out_dir / f), type="jpeg", quality=72, full_page=True)
+            files.append(f)
+    finally:
+        page.close()
     return files
 
 
@@ -380,11 +510,20 @@ def main() -> None:
         (src / "text.md").write_text(page.evaluate("document.body.innerText"), encoding="utf-8")
         found = page.evaluate(COLLECT_JS)
         outline = page.evaluate(OUTLINE_JS)
+        # The look of every section (and of every block of a shopdy page): what verify compares the build with.
+        styles = page.evaluate(
+            "() => { const f = " + compare.STYLES_JS + "; const out = {};"
+            " document.querySelectorAll('[data-spc-section]').forEach((e) =>"
+            "   out['s' + String(e.getAttribute('data-spc-section')).padStart(2, '0')] = f(e));"
+            " document.querySelectorAll('section[id^=\"sp-b\"]').forEach((e) => { out[e.id] = f(e); }); return out; }")
+        (src / "styles.json").write_text(json.dumps(styles, ensure_ascii=False, indent=1), encoding="utf-8")
+        desktop_full = page.screenshot(full_page=True)
         desktop_files = screens(page, src / "screens", "desktop")
+        for el in page.locator('section[id^="sp-b"]').all():  # a shopdy page: one picture per block
+            if not section_shot(el, src / "sections" / f"{el.get_attribute('id')}.png"):
+                pass  # a block of zero height
         for s in outline["sections"]:
-            try:
-                page.locator(f'[data-spc-section="{s["i"]}"]').screenshot(path=str(src / "sections" / f"s{s['i']:02d}.png"))
-            except Exception:  # noqa: BLE001
+            if not section_shot(page.locator(f'[data-spc-section="{s["i"]}"]'), src / "sections" / f"s{s['i']:02d}.png"):
                 s["screenshotProblem"] = True
         assets = download_assets(ctx, final_url, found, job, prefix)
 
@@ -403,9 +542,30 @@ def main() -> None:
         extra = [a for a in mobile_found if a["url"] not in known]  # mobile-only pictures (art direction)
         if extra:
             assets += download_assets(mctx, final_url, extra, job, prefix + "-m")
+        mobile_outline = mpage.evaluate(OUTLINE_JS)
+        mobile_full = mpage.screenshot(full_page=True)
         mobile_files = screens(mpage, src / "screens", "mobile")
+        # One picture per width with every section numbered: what Claude looks at instead of every screen.
+        to_desktop = {m["i"]: d for d, m in digest.match_mobile(outline["sections"], mobile_outline["sections"]).items()}
+        overviews: list[str] = []
+        for full, secs, name, label in (
+                (desktop_full, outline["sections"], "overview-desktop", lambda s: f"s{s['i']:02d}"),
+                (mobile_full, mobile_outline["sections"], "overview-mobile",
+                 lambda s: f"s{to_desktop[s['i']]:02d}" if s["i"] in to_desktop else f"m{s['i']:02d}")):
+            try:
+                overviews += overview(browser, full, [(s["y"], label(s)) for s in secs], src, name)
+            except Exception as err:  # noqa: BLE001 - the screens and section shots are still there
+                print(f"{name}: could not be made ({str(err).splitlines()[0][:120]}); read source/screens/ instead",
+                      file=sys.stderr)
         browser.close()
 
+    blocks = shopdy_blocks.parse((src / "dom.html").read_text(encoding="utf-8"), final_url)
+    if blocks:
+        (src / "shopdy-blocks.json").write_text(json.dumps(blocks, ensure_ascii=False, indent=1), encoding="utf-8")
+    (src / "outline-mobile.json").write_text(json.dumps(mobile_outline, ensure_ascii=False, indent=2), encoding="utf-8")
+    (src / "digest.md").write_text(
+        digest.render(outline, mobile_outline, assets, url=final_url, shopdy_blocks=len(blocks["blocks"]) if blocks else None),
+        encoding="utf-8")
     (src / "outline.json").write_text(json.dumps(outline, ensure_ascii=False, indent=2), encoding="utf-8")
     (src / "outline.md").write_text(outline_md(outline, final_url), encoding="utf-8")
     (src / "assets.json").write_text(json.dumps(assets, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -427,7 +587,10 @@ def main() -> None:
         "code": {"css": sum(1 for c in code_index if c["file"].endswith(".css")),
                  "js": sum(1 for c in code_index if c["file"].endswith(".js"))},
         "problems": [{"url": a["url"][:120], "problem": a["problem"]} for a in assets if a.get("problem")][:40],
-        "read_next": ["source/outline.md", "source/screens/desktop-01.png", "source/screens/mobile-01.png"],
+        "shopdyBlocks": len(blocks["blocks"]) if blocks else None,
+        "read_next": ["source/digest.md"] + [f"source/{f}" for f in overviews]
+        + (["source/shopdy-blocks.json (made with shopdy: rebuild block by block from it)"] if blocks else [])
+        + ["only if a section is unclear: source/sections/sNN.png"],
     })
 
 

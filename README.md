@@ -128,10 +128,12 @@ Claude chỉ hỏi hai thứ: **Page name** và **Store**. Layout do Claude tự
 
 Claude sẽ làm như sau:
 
-1. Tải đúng trang đó về: ảnh, video, HTML/CSS/JS, ảnh chụp bản desktop và bản điện thoại. Sau đó chia trang thành
-   từng phần.
+1. Tải đúng trang đó về: ảnh, video, HTML/CSS/JS, ảnh chụp bản desktop và bản điện thoại. Script tóm tắt trang
+   thành `digest.md` và 2 ảnh tổng có đánh số từng phần. Nếu trang đối thủ cũng dựng bằng Shopdy, script tách luôn
+   từng block của nó.
 2. Mở trình duyệt, đăng nhập Shopdy, tạo page mới ở `/store-pages`, rồi dựng lại từng phần bằng các block có sẵn.
-   Chữ và ảnh lấy từ trang đối thủ; ảnh được upload vào mục Media.
+   Script chọn layout và soạn sẵn plan dựng page; Claude chỉ xem lại những chỗ script đánh dấu. Chữ và ảnh lấy từ
+   trang đối thủ; ảnh được upload vào mục Media.
 3. Phần nào block hiện có chưa làm được (ví dụ video YouTube, form đăng ký, slider kéo trước/sau), Claude soạn nội
    dung ticket và xin bạn **mã Jira**. Có mã rồi thì Claude lên spec và plan cho bạn duyệt.
 4. Trong lúc chờ, Claude làm hết những phần làm được, rồi dừng lại.
@@ -149,8 +151,27 @@ Khi phần code còn thiếu đã lên production, gõ lệnh dưới đây đ�
 
 Có bản mới thì `cd D:\source-theme`, `git pull`, rồi chạy lại `node tools/install-shopdy-skill.js D:\shopdy-promax`
 (hoặc `node D:\source-theme\tools\install-shopdy-skill.js` khi đang ở trong shopdy-promax). Lệnh in ra
-phiên bản cũ → mới và các file đã thêm, sửa, xoá. Nó giữ nguyên `_work/` (các page đang làm, phiên đăng nhập) và `.env`
-(tài khoản) trên máy bạn.
+phiên bản cũ → mới và các file đã thêm, sửa, xoá. Nó giữ nguyên trên máy bạn:
+- `_work/`: các page đang làm và phiên đăng nhập;
+- `catalog/`: catalog block;
+- `.env`: tài khoản.
+
+### Catalog block (tự động, không phải làm gì)
+
+Catalog block là bảng ghi mọi block của trình tạo page Shopdy: các ô, loại ô, lựa chọn, giới hạn. Claude đọc bảng
+này thay cho việc đọc code Shopdy, nên đỡ tốn token. Bảng nằm ở
+`D:\shopdy-promax\.claude\skills\store-page-from-link\catalog\`, thư mục mà git của shopdy bỏ qua.
+
+- **Lần đầu:** `create` tự quét editor và tạo bảng, mất khoảng 30 giây.
+- **Các lần sau:** dùng lại bảng. Nếu thấy editor khác bảng (ô mới, đổi tên, đổi giới hạn, block mới), skill tự ghi
+  lại đúng phần đó và thêm một dòng vào `catalog/changes.log`. Shopdy đổi hằng ngày cũng không cần dựng lại hay pull.
+- **Muốn quét lại từ đầu:** `python -I .claude/skills/store-page-from-link/scripts/shopdy.py catalog --job <job> --refresh`.
+
+Những điều editor không tự cho biết (block tự vẽ gì, luật của HTML block, block nào hợp với phần nào của trang đối
+thủ) nằm trong `references/block-notes.md` của skill. Muốn bổ sung thì sửa ở repo này rồi phát hành cùng bản skill
+kế tiếp. Claude ghi những điều mới gặp vào `_work/<job>/catalog-gaps.md`.
+
+Đo token của một lần chạy: `node tools/transcript-cost.js --project D:\shopdy-promax --latest`.
 
 Muốn sửa skill thì sửa trong `shopdy-skills/store-page-from-link/` của repo này, tăng `version` trong `SKILL.md`,
 commit, rồi cài lại. Đừng sửa bản đã cài trong shopdy-promax: lần cài sau sẽ ghi đè mất.

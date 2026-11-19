@@ -149,13 +149,75 @@
         "type": "image_picker",
         "id": "home_banner_image",
         "label": "Banner image",
-        "info": "Empty = the theme sample image. Recommended 2000 x 750 px (keep text and product in the middle 800 x 580 px: phones crop the sides)."
+        "info": "Empty = the theme sample image. Recommended 2000 x 750 px. The banner is as tall as the picture, so no part of it is cut."
       },
       {
         "type": "image_picker",
         "id": "home_banner_image_mobile",
         "label": "Mobile banner image",
         "info": "Shown on phones (under 750px) instead of the banner image. Recommended 1200 x 1000 px. Empty = the banner image."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_home_banner_text",
+        "label": "Show the heading box",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "home_banner_title",
+        "label": "Heading",
+        "default": "Black Friday - Up To 70% Off"
+      },
+      {
+        "type": "text",
+        "id": "home_banner_button",
+        "label": "Button label (empty = no button)",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "home_banner_link",
+        "label": "Button link",
+        "info": "Empty = the first product."
+      },
+      {
+        "type": "select",
+        "id": "home_banner_text_pos",
+        "label": "Heading box position",
+        "default": "overlay",
+        "options": [
+          {
+            "value": "overlay",
+            "label": "On the picture (screens 1200 px and wider; under it on smaller ones)"
+          },
+          {
+            "value": "below",
+            "label": "Under the picture"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "home_banner_box_x",
+        "label": "Heading box: from the left",
+        "min": 10,
+        "max": 90,
+        "step": 1,
+        "unit": "%",
+        "default": 45,
+        "info": "Centre of the box, on the picture (screens 1200 px and wider). 50 = the middle."
+      },
+      {
+        "type": "range",
+        "id": "home_banner_box_y",
+        "label": "Heading box: from the top",
+        "min": 10,
+        "max": 90,
+        "step": 1,
+        "unit": "%",
+        "default": 65,
+        "info": "Centre of the box, on the picture. 50 = the middle, 80 = near the bottom."
       },
       {
         "type": "header",

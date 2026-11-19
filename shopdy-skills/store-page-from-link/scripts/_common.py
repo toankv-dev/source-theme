@@ -15,6 +15,8 @@ import os
 import re
 import sys
 import time
+from collections.abc import Iterator
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -130,11 +132,30 @@ ALLOWED_WRITES: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 
+# While the block catalog is scanned (scan mode) every write is blocked, even to the job's own page; only these go
+# through, as neither changes anything on shopdy: keeping the session alive, and the editor's Main product preview.
+SCAN_ALLOWED: list[tuple[str, re.Pattern[str]]] = [
+    ("POST", re.compile(r"/api/auth/(refresh|me)\b")),
+    ("POST", re.compile(r"/api/store-pages/[^/]+/main-product-preview$")),
+]
+
+
 class Guard:
-    def __init__(self, job: Path | None, page_id: str | None):
+    def __init__(self, job: Path | None, page_id: str | None, scan: bool = False):
         self.job = job
         self.page_id = page_id
+        self.scan = scan
         self.blocked: list[str] = []
+
+    @contextmanager
+    def scanning(self) -> Iterator[None]:
+        """`with guard.scanning():` — read only (catalog scan); the old mode comes back even on error."""
+        before = self.scan
+        self.scan = True
+        try:
+            yield
+        finally:
+            self.scan = before
 
     def _block(self, route: Any, why: str) -> None:
         req = route.request
@@ -152,6 +173,12 @@ class Guard:
             route.fallback()
             return
         path = re.sub(r"[?#].*$", "", req.url)
+        if self.scan:
+            if any(method == verb and pattern.search(path) for verb, pattern in SCAN_ALLOWED):
+                route.fallback()
+            else:
+                self._block(route, "catalog scan is read-only")
+            return
         body_text = req.post_data or ""
         body: Any = None
         if body_text and "multipart/form-data" not in (req.headers.get("content-type") or ""):
@@ -203,11 +230,12 @@ class Session:
         headless_flag: bool | None = None,
         viewport: dict[str, int] | None = None,
         phone: bool = False,
+        scan: bool = False,
     ):
         self.env = load_env()
         self.base = base_url(self.env)
         self.job = job
-        self.guard = Guard(job, page_id)
+        self.guard = Guard(job, page_id, scan=scan)
         self.headless = headless(self.env, headless_flag)
         self.viewport = viewport or (PHONE_VIEWPORT if phone else DESKTOP_VIEWPORT)
         self.phone = phone

@@ -1,83 +1,65 @@
 # Driving the shopdy page editor
 
-All browser work goes through `scripts/shopdy.py` (Playwright for Python, sync API). Run every command from the
-skill folder with `python -I`, one command at a time (one browser profile cannot be opened twice). Each command
-prints one JSON object; read it before the next step.
+All browser work goes through the scripts (Playwright for Python, sync API), run with `python -I`, one at a time
+(one browser profile cannot be opened twice). `shopdy.py ops` prints the op table, `shopdy.py help <command>` one
+command — never read the scripts themselves.
 
 ```
-S=.claude/skills/store-page-from-link/scripts
-python -I $S/shopdy.py login                       # once; the profile in _work/.profile keeps the session
-python -I $S/shopdy.py options                     # stores (+ products) and layouts with their block lists
-python -I $S/shopdy.py create --job J --name "…" --store "<domain>" --layout "Advertorial" [--product "…"]
-python -I $S/shopdy.py upload-media --job J --plan _work/J/build-plan.json
-python -I $S/shopdy.py build --job J --plan _work/J/build-plan.json [--from N]
-python -I $S/shopdy.py inspect --job J [--block "#5" --fields]
-python -I $S/shopdy.py shot --job J --view mobile|pc  |  --phone
-python -I $S/shopdy.py verify --job J
-python -I $S/shopdy.py exec --job J --script _work/J/snippet.py
+S=${CLAUDE_SKILL_DIR}/scripts
+python -I $S/fetch_competitor.py "<url>" --job J  # digest.md, overview-*.jpg, shopdy-blocks.json, styles.json, assets
+python -I $S/shopdy.py login                      # once; the profile in _work/.profile keeps the session
+python -I $S/shopdy.py options                    # short list; full JSON in _work/options.json
+python -I $S/plan.py layout --job J               # which layout keeps most of the competitor's blocks, in order
+python -I $S/shopdy.py create --job J --name "…" --store "<domain>" --layout "<name>" [--product "…"]
+                                                  # + the block catalog: made the first time (≈30 s), else checked
+python -I $S/plan.py draft --job J                # build-plan.draft.json + what to check
+python -I $S/shopdy.py upload-media --job J --plan <plan>
+python -I $S/shopdy.py build --job J --plan <plan> [--from N]
+python -I $S/shopdy.py verify --job J             # Draft, content, phone checks, compare with the competitor
+python -I $S/shopdy.py inspect --job J [--block REF [--fields | --values]]
+python -I $S/shopdy.py catalog [--job J --refresh] | --show <type>
+python -I $S/shopdy.py shot --job J --view mobile|pc | --phone
+python -I $S/shopdy.py exec --job J --script <file>   # last resort; `help exec` lists what is in scope
 ```
 
-Exit codes: 3 = the page is not Draft (stop, tell the user) · 4 = not signed in (run `login`) · 5 = a build op
-failed (JSON has the op, the error, a screenshot and the inspector's fields) · 6 = the guard blocked a request
-(read `_work/J/guard.log`).
+Exit codes: 3 = the page is not Draft (stop, tell the user) · 4 = not signed in (`login`) · 5 = a build op failed
+(the JSON has the op, the error, a screenshot and the inspector's fields) · 6 = the guard blocked a request
+(`_work/J/guard.log`).
 
 ## The guard (scripts/_common.py)
 
-Every command routes `**/api/**` through a guard. Allowed writes: sign-in/refresh, `POST /api/store-pages` (create),
-`PATCH /api/store-pages/<this job's page>`, the editor's main-product preview, `POST /api/media/upload*`. Blocked
-and logged: any body with `"status": "published"`, every `DELETE`, a `PATCH` to another page, the AI autoflow, any
-other write. Never widen the allow-list to publish, delete, or touch other pages, layouts, products or stores.
+Every command routes `**/api/**` through a guard. Allowed writes: sign-in/refresh, `POST /api/store-pages`
+(create), `PATCH /api/store-pages/<this job's page>`, the editor's main-product preview, `POST /api/media/upload*`.
+Blocked and logged: any body with `"status": "published"`, every `DELETE`, a `PATCH` to another page, any other
+write. While the catalog is scanned every write is blocked, the job's page too. Never widen the allow-list.
 
 ## Build plan
 
-`_work/<job>/build-plan.json` = `{"ops": [ … ]}`, run top to bottom in one editor session. Put a `save` op after
-every section: progress is recorded at each save, and a failed run resumes from the last save (`build` picks it up
-itself; `--from N` forces a start).
+`{"ops": [ … ]}`, run top to bottom in one editor session; progress is kept at every `save` op, and a failed run
+resumes after the last save. `plan.py draft` writes one; edit it rather than writing one by hand.
 
 | op | fields | does |
 | --- | --- | --- |
-| `add` | `type` (block type), `as` (alias) | clicks "Add <Label> block" (appends, selects it, opens all inspector groups) |
-| `select` | `block` (alias, block id, or `#N` = Nth block) | focuses the block and presses Enter |
-| `fill` | `label`, `value` or `value_file` (path in the job folder), `nth` | text / textarea / rich text / CodeMirror (HTML, CSS); blurs to commit |
-| `fill` + `html` | `label`, `html` | rich text with formatting (`<b>`, `<a>`, lists): sets the box's HTML |
-| `number` | `label`, `value` | number input or slider |
-| `color` | `label`, `value` (`#RRGGBB`) | the hex box beside the colour swatch |
-| `choose` | `label`, `option` (visible text) | Radix select / `<select>` / toggle buttons |
-| `toggle` | `label`, `value` (true/false) | switch / checkbox |
-| `image` | `label`, `media` (file name from `assets/` or URL) | pastes the media-library URL into "<label> URL" / "…or paste a URL" |
-| `click` | `name`, `role` (button), `scope` (inspector/page), `nth` | e.g. "Add review", "Add step", "Add blank slide" |
-| `action` | `name` | selected block's toolbar: Move up · Move down · Duplicate · Delete · Convert to editable blocks |
-| `page` | — | deselect; the right panel shows Page settings |
-| `press` / `wait` / `note` | `key` / `ms` / `text` | keyboard, pause, comment |
-| `save` | — | clicks Save, waits for the PATCH, fails unless the page is still Draft |
+| `set` | `label`, `value` [, `nth`] | fills the field the way its kind in the catalog says (text, rich HTML, number, slider, colour, select option, switch true/false, image media) |
+| `set` + `match` | `label`, `match` (regex) | picks the select option matching it at run time (options that depend on the page, e.g. "Scroll to the Main Product block") |
+| `optional: true` | on any field op | a field that may only show after an earlier op (a reviews style): skipped with a warning if it never shows |
+| `add` | `type`, `as` (alias) | "Add <Label> block": appended at the END of the page, selected |
+| `select` | `block` (alias, block id, `#N`) | selects the block (keyboard, not a click) and checks it against the catalog |
+| `action` | `name` | toolbar of the selected block: Move up · Move down · Duplicate · Delete · Convert to editable blocks |
+| `fill` | `label`, `value` / `html` / `value_file` | a text, rich text or CodeMirror box (`value_file`: a file in the job folder) |
+| `item-image` | `item` ("Review 2"), `media` (file or `{{media:<file>}}`) | that row's photo from the media library |
+| `click` | `name` [, `role`, `scope`, `nth`] | e.g. "Add review", "Add link", "Add step" |
+| `page` | — | Page settings; later ops with `"scope": "page"` act there (Font, Content width, Page background…) |
+| `note` | `text`, or `section` + `block` | a comment; `section` + `block` tells verify which block stands for which competitor section |
+| `save` / `press` / `wait` | — / `key` / `ms` | Save (fails unless still Draft) / keyboard / pause |
+| `number` `slider` `color` `choose` `toggle` `image` | `label` + value | what `set` picks itself |
 
-Any op with `"scope": "page"` works on Page settings (Font, Content width, Page background, Layout, Product this
-page sells). `{{media:<file>}}` in any value becomes that file's shopdy URL (`upload-media --plan` uploads only the
-files a plan names, `media-map.json` keeps file → URL).
+`{{media:<file>}}` in a value becomes the file's media-library URL (`upload-media --plan` uploads only the files a
+plan uses; `media-map.json` keeps file → URL). Labels come from `catalog/block-catalog.md`; numbered rows
+("Review 3 name", "Link 2 address") exist after the "Add …" click.
 
-List items: click the "Add …" button, then fill the item's own label — `Review 3 name`, `Review 3 text`,
-`Step 2 title`, `Row 4 ours`, `Bullet 1`, `Link 2 address`, `Slide 3 image`, `Trust line 1 icon`. When a label is
-unknown, run `inspect --job J --block <alias> --fields` and use what it lists.
-
-Example (a hero, a reason, an FAQ in HTML):
-
-```json
-{"ops": [
-  {"op": "note", "text": "s01 hero"},
-  {"op": "select", "block": "#3"},
-  {"op": "fill", "label": "Text", "value": "The 30-second fix for squeaky floors"},
-  {"op": "choose", "label": "Level", "option": "H1: page title"},
-  {"op": "select", "block": "#4"},
-  {"op": "image", "label": "Image", "media": "j-004-hero.webp"},
-  {"op": "fill", "label": "Alt text", "value": "Fixing a floor gap"},
-  {"op": "save"},
-  {"op": "note", "text": "s07 faq"},
-  {"op": "add", "type": "html", "as": "faq"},
-  {"op": "fill", "label": "HTML", "value_file": "sections/s07-faq.html"},
-  {"op": "fill", "label": "CSS", "value_file": "sections/s07-faq.css"},
-  {"op": "save"}
-]}
-```
+When a field op does not find its field, the build reads the block again, fixes the catalog and tries the op once
+more; the build's output lists every catalog fix (`catalogFixed`).
 
 ## Selectors the scripts rely on (verified against the code, 2026-11-12)
 
@@ -85,29 +67,27 @@ Example (a hero, a reason, an FAQ in HTML):
 | --- | --- | --- |
 | Sign in | test ids `login-email`, `login-password`, `login-submit` | `apps/web/src/components/login-form.tsx` |
 | New page | button "New page" on `/store-pages` | `store-pages.page.tsx` |
-| Store picker | combobox "Pick a store", search "Search domain", options | `store-picker.tsx` |
-| Product picker | **button** "Product it sells" (not a combobox), search "Search products", listbox "Products" | `product-picker.tsx` |
-| Layout cards | radiogroup "Layout", radio named after the layout | `layout-picker.tsx` |
-| Page name | placeholder "Floor Gap Fixer story"; slug "Page slug" | `create-store-page-dialog.tsx` |
-| AI autoflow | checkbox "Write the copy and make the photos with AI after creating" (on by default when a product is picked — the script unticks it) | same |
-| Palette | test id `block-palette`, buttons "Add <Label> block" | `block-palette.tsx` |
-| Canvas | test id `canvas-scroll`; each block `[data-block-id]`; its shell role=button "Select <Label> block" | `page-canvas.tsx` |
-| Inspector | test id `block-inspector`; groups are Radix Collapsibles ("Spacing & layout", "Visibility" start closed) | `block-inspector.tsx`, `inspector-fields.tsx` |
-| Save / Publish | header buttons "Save" and "**Publish**" side by side — never click Publish | `store-page-editor.page.tsx` |
-| PC / Mobile preview | buttons "PC", "Mobile" inside `[data-page-header]` | `viewport-toggle.tsx` |
-| Phone frame | test ids `device-frame`, `device-screen` | `device-frame.tsx` |
-| Media upload | `#media-upload-file-trigger` → dialog `input[type=file]` → `#media-upload-btn` | `media.page.tsx`, `media-upload-dialog.tsx` |
+| Store / product / layout | combobox "Pick a store"; **button** "Product it sells"; radiogroup "Layout" | `store-picker.tsx`, `product-picker.tsx`, `layout-picker.tsx` |
+| AI autoflow | checkbox "Write the copy and make the photos with AI…" (unticked by the script) | `create-store-page-dialog.tsx` |
+| Palette | test id `block-palette`, buttons aria-label "Add <Label> block" | `block-palette.tsx` |
+| Canvas | test id `canvas-scroll`; blocks `[data-block-id]`; shell "Select <Label> block"; toolbar "<Label> block actions" | `page-canvas.tsx`, `block-toolbar.tsx` |
+| Inspector | test id `block-inspector`; Section = `div.border-b` > trigger; Row = label + control | `block-inspector.tsx`, `inspector-fields.tsx` |
+| Save / Publish | header buttons "Save" and "**Publish**" — never click Publish | `store-page-editor.page.tsx` |
+| PC / Mobile | buttons inside `[data-page-header]`; phone frame `device-frame` / `device-screen` | `viewport-toggle.tsx`, `device-frame.tsx` |
+| Media | upload `#media-upload-file-trigger` → `#media-upload-btn`; picker dialog "Media library", "Search media", tiles `media-pick-<id>`, "Done" | `media.page.tsx`, `media-selector-modal.tsx` |
 
-## Gotchas found while testing the scripts on local
+## Gotchas (found on the real editor)
 
-- Clicking a block selects whatever is under the pointer: an empty Image block opens its "Image options" menu.
-  The script focuses the block shell and presses Enter instead.
-- A label can point at a wrapper: the HTML/CSS labels name CodeMirror's `div[role=group]`; rich text rows also hold
-  their toolbar's `<select>`s. The script steps into the editable box.
-- Text edits commit on blur (`EditableText`); the script blurs after every fill.
-- Escape is ignored while a field has focus; to reach Page settings the script blurs first.
-- The upload dialog hands files to a background uploader and closes itself; the script counts the upload responses.
-  A re-run maps files that are already in the library instead of uploading them twice.
-- The storefront renders only Published pages (`storefront-pages.routes.ts`), so a Draft can only be checked in the
-  editor preview: PC / Mobile toggle, and the editor itself opened on a 360 px phone (`verify` does both).
-- Media URLs are absolute (`<SHOPDY_URL>/uploads/media/…`); images are stored as WebP by the server.
+- Escape deselects the block (the inspector becomes Page settings): a Radix select is closed by picking the option it
+  already has, never with Escape.
+- Clicking a block lands on its widgets (an empty Image opens "Image options"): blocks are selected with the keyboard.
+- A slider (`RangeField`) has its label in a row of its own and cannot be `fill`ed: `set` / `slider` find it by
+  label and set it the React way.
+- Which fields and options an inspector shows depends on the block's settings and on the page (a "Photo wall"
+  reviews block has more fields; "Scroll to the Main Product block" only once there is one). Checks during a build
+  only add to the catalog; only `catalog --refresh` drops fields.
+- Text edits commit on blur; the scripts blur after every fill.
+- Uploads are handed to a background uploader; the script counts the upload responses and maps files already in
+  the library instead of uploading them twice.
+- The storefront renders only Published pages: a Draft is checked in the editor (PC / Mobile) and in the editor on a
+  360 px phone (`verify`).

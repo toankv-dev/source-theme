@@ -29,16 +29,22 @@ expect_response https://playwright.dev/python/docs/network
 from __future__ import annotations
 
 import argparse
+import base64
 import fnmatch
 import json
 import re
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import catalog  # noqa: E402
+import compare  # noqa: E402
+import inspector_js  # noqa: E402
 from _common import (  # noqa: E402
     PHONE_VIEWPORT,
+    WORK_DIR,
     Session,
     die,
     emit,
@@ -60,6 +66,10 @@ BLOCK_LABELS = {
     "spacer": "Spacer", "footer": "Footer",
 }
 BUTTON_TYPES = {"cta", "offer", "product", "stickybar"}
+# Field kind in the catalog → the Editor method the `set` op uses.
+SET_METHOD = {"text": "fill", "textarea": "fill", "code": "fill", "rich": "rich", "number": "number",
+              "slider": "slider", "color": "color", "select": "choose", "choice": "choose", "radio": "choose",
+              "switch": "toggle", "checkbox": "toggle", "image": "image"}
 UPLOADABLE = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif", ".mp4", ".webm", ".ogv", ".ogg", ".mov"}
 
 
@@ -180,27 +190,46 @@ class Editor:
         return bid
 
     def add(self, btype: str, alias: str | None) -> str:
-        label = BLOCK_LABELS.get(btype)
+        label = BLOCK_LABELS.get(btype) or (catalog.load().get("blocks", {}).get(btype) or {}).get("label")
         if not label:
             raise ValueError(f"unknown block type {btype!r}; one of {sorted(BLOCK_LABELS)}")
+        bid = self.add_button(f"Add {label} block")
+        if alias:
+            self.aliases[alias] = bid
+        return bid
+
+    def add_button(self, name: str, timeout: int = 10_000) -> str:
+        """Click a palette tile by its accessible name ("Add Reviews block"); returns the new block's id."""
         self.scope = "block"
         before = set(self.ids())
-        self.page.get_by_test_id("block-palette").get_by_role(
-            "button", name=f"Add {label} block", exact=True
-        ).click()
+        self.page.get_by_test_id("block-palette").get_by_role("button", name=name, exact=True).click(timeout=timeout)
         self.page.wait_for_function(
             "n => new Set([...document.querySelectorAll('[data-testid=canvas-scroll] [data-block-id]')]"
             ".map(e => e.dataset.blockId)).size > n",
-            arg=len(before),
+            arg=len(before), timeout=timeout,
         )
-        new = [i for i in self.ids() if i not in before]
-        bid = new[0]
-        if alias:
-            self.aliases[alias] = bid
+        bid = [i for i in self.ids() if i not in before][0]
         self.current = bid
-        self.inspector().wait_for(timeout=10_000)
+        self.inspector().wait_for(timeout=timeout)
         self.open_sections()
         return bid
+
+    def palette(self) -> list[dict[str, Any]]:
+        """Every palette tile: [{name: "Add Reviews block", disabled}] (block-palette.tsx aria-label)."""
+        return self.page.get_by_test_id("block-palette").evaluate(
+            """el => [...el.querySelectorAll('button[aria-label]')]
+                .map(b => ({ name: b.getAttribute('aria-label'), disabled: b.disabled || b.getAttribute('aria-disabled') === 'true' }))
+                .filter(b => /^Add .+ block$/.test(b.name))"""
+        )
+
+    def existing(self, label: str) -> str | None:
+        """Id of a block of that label already on the canvas (its shell is "Select <label> block")."""
+        return self.page.evaluate(
+            """label => { const s = [...document.querySelectorAll('[data-testid=canvas-scroll] [aria-label]')]
+                .find(e => e.getAttribute('aria-label') === `Select ${label} block`);
+              const w = s && s.closest('[data-block-id]'); return w ? w.dataset.blockId : null; }""",
+            label,
+        )
 
     # inspector fields
     def row(self, label: str, nth: int = 0):
@@ -268,7 +297,13 @@ class Editor:
             self.page.keyboard.insert_text(text)
 
     def number(self, label: str, value: int | float, nth: int = 0) -> None:
-        inp = self.row(label, nth).locator("input[type=number], input[type=range]").first
+        # By its label first: RangeField's label sits in a row of its own (with the value), so the label's parent
+        # does not hold the slider (that is why "Star size" failed before).
+        cands = self.inspector().get_by_label(label, exact=True)
+        found = [cands.nth(i) for i in range(cands.count())
+                 if cands.nth(i).evaluate("e => e.matches('input[type=number], input[type=range]')")]
+        inp = found[nth] if len(found) > nth else \
+            self.row(label, nth).locator("input[type=number], input[type=range]").first
         if inp.get_attribute("type") == "range":
             inp.evaluate(
                 "(e, v) => { const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;"
@@ -279,6 +314,71 @@ class Editor:
         else:
             inp.fill(str(value))
             inp.blur()
+
+    def slider(self, label: str, value: int | float, nth: int = 0) -> None:
+        self.number(label, value, nth)
+
+    # the block catalog
+    def block_type(self, bid: str | None = None) -> str | None:
+        """Type of a block on the canvas, from its shell's "Select <Label> block"."""
+        label = self.page.evaluate(
+            """id => { const w = document.querySelector(`[data-testid=canvas-scroll] [data-block-id="${CSS.escape(id)}"]`);
+              const s = w && w.querySelector('[aria-label^="Select "][aria-label$=" block"]');
+              return s ? s.getAttribute('aria-label').replace(/^Select /, '').replace(/ block$/, '') : null; }""",
+            bid or self.current or "",
+        )
+        if not label:
+            return None
+        return catalog.type_for(f"Add {label} block", {**BLOCK_LABELS, **{
+            t: e.get("label", "") for t, e in self.cat().get("blocks", {}).items()}})
+
+    def cat(self) -> dict[str, Any]:
+        if getattr(self, "_cat", None) is None:
+            self._cat = catalog.load()
+        return self._cat
+
+    def kind_of(self, label: str) -> str | None:
+        entry = self.cat().get("page") if self.scope == "page" else self.cat().get("blocks", {}).get(self.block_type() or "")
+        fld = catalog.find_field(entry, label)
+        return fld.get("kind") if fld else None
+
+    def set(self, label: str, value: Any, nth: int = 0) -> Any:
+        """Fill a field the way its kind in the catalog says (fill / rich / number / slider / colour / choose /
+        toggle / image)."""
+        kind = self.kind_of(label)
+        if kind is None:
+            raise LookupError(f'"{label}" is not a field of {self.block_type() or "this panel"} in the catalog '
+                              "(run `catalog --show <type>`)")
+        how = SET_METHOD[kind]
+        if how == "rich":
+            return self.fill(label, html=str(value), nth=nth)
+        if how == "fill":
+            return self.fill(label, str(value), nth=nth)
+        if how == "toggle":
+            return self.toggle(label, bool(value), nth)
+        return getattr(self, how)(label, value, nth)
+
+    def check_catalog(self, deep: bool = False) -> list[str]:
+        """Compare the open inspector with the catalog; on a difference read it fully and write the catalog again.
+        Returns the changes ("reviews: +\\"Badge text\\""). `deep` reads the options of every select first."""
+        if self.scope == "page" or not self.current:
+            return []
+        btype = self.block_type()
+        if not btype:
+            return []
+        old = self.cat().get("blocks", {}).get(btype)
+        new = {"label": (old or {}).get("label") or BLOCK_LABELS.get(btype, btype),
+               "palette": (old or {}).get("palette") or f"Add {BLOCK_LABELS.get(btype, btype)} block",
+               "fields": inspector_js.read(self.page, self.inspector(), with_options=deep),
+               "actions": self.actions()}
+        if old is not None and not catalog.entry_diff(catalog.generic(old),
+                                                      catalog.generic(catalog.merge_entry(old, new))):
+            return []
+        if not deep:
+            new["fields"] = inspector_js.read(self.page, self.inspector(), with_options=True)
+        changes = catalog.save(catalog.CATALOG_DIR, {btype: new}, job=self.job.name, merge=True)
+        self._cat = None
+        return changes
 
     def color(self, label: str, value: str, nth: int = 0) -> None:
         txt = self.row(label, nth).locator("input:not([type=color])").first
@@ -308,6 +408,23 @@ class Editor:
                 target.first.click()
                 return
         raise LookupError(f"no option {option!r} under {label!r}")
+
+    def choose_match(self, label: str, pattern: str, nth: int = 0) -> str:
+        """Pick the option of a select whose text matches `pattern` (case-insensitive), whatever its exact wording;
+        for options that exist only on some pages ("Scroll to the Main Product block")."""
+        combo = self.inspector().get_by_role("combobox", name=label, exact=True)
+        if not combo.count():
+            combo = self.row(label, nth).locator("[role=combobox]")
+        combo.nth(nth if combo.count() > nth else 0).click()
+        box = self.page.get_by_role("listbox").last
+        box.wait_for(timeout=5_000)
+        texts = [t.strip() for t in box.get_by_role("option").all_inner_texts()]
+        hit = next((t for t in texts if re.search(pattern, t, re.I)), None)
+        if hit is None:
+            box.get_by_role("option").first.click()  # close it without Escape (Escape deselects the block)
+            raise LookupError(f"no option of {label!r} matches {pattern!r}: {' | '.join(texts)}")
+        box.get_by_role("option", name=hit, exact=True).click()
+        return hit
 
     def toggle(self, label: str, value: bool, nth: int = 0) -> None:
         insp = self.inspector()
@@ -341,6 +458,38 @@ class Editor:
             except LookupError:
                 continue
         raise LookupError(f"no image URL box for {label!r}")
+
+    def item_image(self, item: str, media: str) -> str:
+        """A picture for one row of a list (a review's photo): the row's own Photo button → Media library → search the
+        file → its tile → Done. `item` = the row's label prefix ("Review 2"); `media` = a file or {{media:<file>}}."""
+        m = MEDIA_TOKEN.search(media)
+        name = (m.group(1) if m else media).strip()
+        hit = media_map(self.job).get(name)
+        if not hit:
+            raise LookupError(f"{name} is not in media-map.json — run upload-media first")
+        ref = self.inspector().evaluate(
+            """(root, item) => {
+                const field = [...root.querySelectorAll('[aria-label]')].find(e => e.getAttribute('aria-label').startsWith(item + ' '));
+                for (let n = field && field.parentElement; n && n !== root; n = n.parentElement) {
+                  const b = [...n.querySelectorAll('button')].find(x => /photo|image|picture/i.test(x.innerText || x.getAttribute('aria-label') || ''));
+                  if (b) { b.setAttribute('data-spfl-photo', '1'); return true; }
+                }
+                return false; }""",
+            item,
+        )
+        if not ref:
+            raise LookupError(f"no photo button in the row {item!r}")
+        self.inspector().locator("[data-spfl-photo]").click()
+        self.inspector().evaluate("r => r.querySelectorAll('[data-spfl-photo]').forEach(b => b.removeAttribute('data-spfl-photo'))")
+        dlg = self.page.get_by_role("dialog").filter(has_text="Media library")
+        dlg.wait_for(timeout=15_000)
+        dlg.get_by_placeholder("Search media").fill(name.rsplit(".", 1)[0])
+        tile = dlg.get_by_test_id(f"media-pick-{hit['id']}")
+        tile.wait_for(timeout=20_000)
+        tile.click()
+        dlg.get_by_role("button", name="Done", exact=True).click()
+        dlg.wait_for(state="hidden", timeout=15_000)
+        return name
 
     def click(self, name: str, role: str = "button", scope: str = "inspector", nth: int = 0) -> None:
         root = self.inspector() if scope == "inspector" else self.page
@@ -377,38 +526,11 @@ class Editor:
         return out
 
     def fields(self) -> list[dict[str, Any]]:
-        return self.inspector().evaluate(
-            """root => {
-                const out = [];
-                const FIELD = 'input:not([type=hidden]):not([type=file]),textarea,select,[contenteditable],[role=combobox],[role=switch],[role=checkbox],.cm-content';
-                // Editable box first: a rich text row also holds its toolbar's <select>s.
-                const pick = (el) => el && (el.querySelector('[contenteditable]') || el.querySelector('.cm-content') ||
-                  el.querySelector('textarea') || el.querySelector('input:not([type=hidden]):not([type=file]):not([type=color])') ||
-                  el.querySelector('[role=combobox],[role=switch],[role=checkbox]') || el.querySelector('input[type=color]') || el.querySelector('select'));
-                for (const lab of root.querySelectorAll('label')) {
-                  const row = lab.parentElement;
-                  let ctl = lab.htmlFor && document.getElementById(lab.htmlFor);
-                  if (ctl && !ctl.matches(FIELD)) ctl = pick(ctl);
-                  if (!ctl) ctl = pick(row);
-                  let kind = '', value = '';
-                  if (ctl) {
-                    kind = ctl.classList && ctl.classList.contains('cm-content') ? 'code'
-                      : ctl.isContentEditable ? 'rich' : (ctl.getAttribute('role') || ctl.type || ctl.tagName.toLowerCase());
-                    value = ctl.isContentEditable || kind === 'code' ? ctl.innerText : (ctl.value ?? ctl.getAttribute('aria-checked') ?? ctl.innerText);
-                  }
-                  out.push({ label: lab.innerText.trim(), kind, value: String(value || '').slice(0, 120) });
-                }
-                for (const el of root.querySelectorAll('[aria-label]')) {
-                  if (el.closest('label')) continue;
-                  const tag = el.tagName.toLowerCase();
-                  if (['input', 'textarea'].includes(tag) || el.isContentEditable || el.getAttribute('role') === 'combobox')
-                    out.push({ label: el.getAttribute('aria-label'), kind: el.isContentEditable ? 'rich' : (el.getAttribute('role') || el.type || tag), value: String(el.value ?? el.innerText ?? '').slice(0, 120), via: 'aria-label' });
-                }
-                const buttons = [...root.querySelectorAll('button')].map(b => (b.getAttribute('aria-label') || b.innerText || '').trim()).filter(Boolean);
-                out.push({ buttons: [...new Set(buttons)] });
-                return out;
-            }"""
-        )
+        """Every field of the open inspector: label, kind, options, min/max/step, value (inspector_js.py)."""
+        return inspector_js.read(self.page, self.inspector())
+
+    def actions(self, bid: str | None = None) -> list[str]:
+        return inspector_js.read_actions(self.page, bid or self.current or "")
 
     def screens(self, out_dir: Path, prefix: str, max_n: int = 30) -> list[str]:
         """The canvas only (no admin chrome), one screen per file, top to bottom."""
@@ -457,6 +579,117 @@ def media_url(job: Path, ref: str) -> str:
 # ── commands ────────────────────────────────────────────────────────────────
 
 
+# ── block catalog (catalog.py: the file; here: reading it off the editor) ───
+
+
+def layouts_of(s: Session) -> list[dict[str, Any]]:
+    rows = s.api("GET", "/page-layouts")
+    return [{"id": r.get("id"), "name": r.get("name"), "builtinKey": r.get("builtinKey"),
+             "description": r.get("description", ""),
+             "blocks": [b.get("type") for b in ((r.get("document") or {}).get("blocks") or [])]}
+            for r in (rows if isinstance(rows, list) else rows.get("items", []))]
+
+
+def health_sha(s: Session) -> str | None:
+    """The commit the running shopdy was built from (GET /api/health → data.sha; null on a dev build)."""
+    try:
+        sha = (s.api("GET", "/health") or {}).get("sha")
+        return sha[:12] if sha else None
+    except Exception:  # noqa: BLE001 - only a label on the catalog
+        return None
+
+
+def _scan_one(ed: Editor, tile: dict[str, Any]) -> dict[str, Any]:
+    """Add one block of this palette tile (or select the one already there when the tile is disabled) and read it."""
+    name = tile["name"]
+    label = re.sub(r"^Add\s+|\s+block$", "", name)
+    entry: dict[str, Any] = {"label": label, "palette": name}
+    try:
+        bid = None
+        if tile.get("disabled"):
+            bid = ed.existing(label)
+            if not bid:
+                raise RuntimeError("palette tile is disabled and no such block is on the page")
+            ed.select(bid)
+        else:
+            bid = ed.add_button(name, timeout=8_000)
+        if ed.page.get_by_role("dialog").count():
+            ed.page.keyboard.press("Escape")  # a block that opens a dialog on add: its inspector is still there
+        entry["fields"] = ed.fields()
+        entry["actions"] = ed.actions(bid)
+    except Exception as err:  # noqa: BLE001 - one block that will not scan must not stop the others
+        crashed = "crashed" in str(err).lower() or "closed" in str(err).lower()
+        if not crashed:
+            try:
+                ed.page.keyboard.press("Escape")
+            except Exception:  # noqa: BLE001
+                crashed = True
+        entry.update(fields=[], actions=[], status="scanFailed", error=str(err).splitlines()[0][:160])
+        if crashed:
+            entry["crashed"] = True
+    return entry
+
+
+def catalog_ensure(s: Session, ed: Editor, job: Path, refresh: bool = False) -> dict[str, Any]:
+    """Make sure the catalog knows every palette tile: a full scan the first time (or --refresh), else only the tiles
+    it has not seen. Read only: the guard blocks every write meanwhile and the editor is reloaded without saving."""
+    cat = catalog.load()
+    ed.open()
+    tiles = ed.palette()
+    names = [t["name"] for t in tiles]
+    full = refresh or not cat.get("blocks")
+    if full:
+        todo = tiles
+        removed = [t for t, e in cat.get("blocks", {}).items() if e.get("palette") not in names]
+    else:
+        new, removed = catalog.palette_diff(cat, names)
+        todo = [t for t in tiles if t["name"] in new]
+    started = time.time()
+    updates: dict[str, dict[str, Any]] = {}
+    page_settings = None
+    if todo or full:
+        before = len(s.guard.blocked)
+        with s.guard.scanning():
+            for n, tile in enumerate(todo, 1):
+                btype = catalog.type_for(tile["name"], BLOCK_LABELS)
+                print(f"catalog scan {n}/{len(todo)} {tile['name']}", file=sys.stderr, flush=True)
+                updates[btype] = _scan_one(ed, tile)
+                if ed.page.is_closed() or updates[btype].get("crashed"):
+                    # The tab died (seen once on a heavy block): a new tab, the editor again, go on with the next.
+                    s.page = ed.page = s.ctx.new_page()
+                    ed.open()
+            if full:
+                ed.page_settings()
+                page_settings = {"fields": ed.fields()}
+            ed.open()  # reload: everything added for the scan goes, nothing was saved
+        blocked = len(s.guard.blocked) - before
+    else:
+        blocked = 0
+    changes = catalog.save(catalog.CATALOG_DIR, updates, job=job.name, sha=health_sha(s), full=full,
+                           removed=removed, layouts=layouts_of(s), page=page_settings, base=s.base)
+    cat = catalog.load()
+    failed = [t for t, e in updates.items() if e.get("status") == "scanFailed"]
+    return {
+        "catalog": "created" if full and not refresh else ("refreshed" if full else ("updated" if changes else "ok")),
+        "blocks": len(cat.get("blocks", {})), "scanned": len(updates), "seconds": round(time.time() - started),
+        "writesBlocked": blocked, "scanFailed": failed, "changes": changes[:20],
+        "file": str(catalog.CATALOG_DIR / "block-catalog.md"),
+    }
+
+
+def cmd_catalog(args: argparse.Namespace) -> None:
+    if args.show:
+        print(catalog.show(catalog.load(), args.show, catalog.notes_text()))
+        return
+    job = job_dir(args.job)
+    state = load_state(job)
+    with Session(job=job, page_id=page_id_of(state), headless_flag=args.headless) as s:
+        s.ensure_logged_in()
+        assert_draft(fetch_page(s, page_id_of(state)))
+        out = catalog_ensure(s, Editor(s, job, state), job, refresh=args.refresh)
+    emit(out)
+
+
 def cmd_login(args: argparse.Namespace) -> None:
     with Session(headless_flag=args.headless) as s:
         s.goto("/store-pages")
@@ -492,17 +725,26 @@ def cmd_options(args: argparse.Namespace) -> None:
     with Session(headless_flag=True) as s:
         s.ensure_logged_in()
         opts = s.api("GET", "/store-pages/options")
-        layouts = s.api("GET", "/page-layouts")
-    emit({
+        layouts = layouts_of(s)
+    full = {
         "stores": [{"id": st["id"], "name": st["name"], "products": [
             {"listingId": p["listingId"], "title": p["title"]} for p in st.get("products", [])][:50]}
             for st in opts.get("stores", [])],
-        "layouts": [{"id": layout_row.get("id"), "name": layout_row.get("name"),
-                     "builtinKey": layout_row.get("builtinKey"), "description": layout_row.get("description", ""),
-                     "blocks": [b.get("type") for b in ((layout_row.get("document") or {}).get("blocks") or [])]}
-                    for layout_row in (layouts if isinstance(layouts, list) else layouts.get("items", []))],
+        "layouts": layouts,
         "note": "'Blank page' is always available as layout 'blank'.",
-    })
+    }
+    out = WORK_DIR / "options.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(full, ensure_ascii=False, indent=1), encoding="utf-8")
+    stores = full["stores"]
+    print(f"stores ({len(stores)}): name · products")
+    for st in stores[:15]:
+        titles = [p["title"] for p in st["products"]]
+        print(f"  {st['name']} · {len(titles)}" + (f": {', '.join(titles[:3])}{' …' if len(titles) > 3 else ''}" if titles else ""))
+    if len(stores) > 15:
+        print(f"  … {len(stores) - 15} more (search {out.name} for a store)")
+    print("layouts: " + " | ".join(f"{x['name']} ({len(x['blocks'])})" for x in layouts) + " | Blank page (0)")
+    print(f"full: {out}")
 
 
 def cmd_create(args: argparse.Namespace) -> None:
@@ -553,9 +795,16 @@ def cmd_create(args: argparse.Namespace) -> None:
                      product=data.get("productTitle"), createdPageAt=now_iso())
         save_state(job, state)
         p.wait_for_url(re.compile(rf"/store-pages/{data['id']}/edit"), timeout=30_000)
+        s.guard.page_id = data["id"]
+        # The block catalog: made here the first time (full scan of the empty-ish new page), else only new tiles.
+        try:
+            cat = catalog_ensure(s, Editor(s, job, state), job)
+        except Exception as err:  # noqa: BLE001 - the page exists: never lose this output over the catalog
+            cat = {"catalog": "failed", "error": str(err).splitlines()[0][:200],
+                   "next": f"python -I scripts/shopdy.py catalog --job {job.name}"}
         emit({"pageId": data["id"], "name": data.get("name"), "slug": data.get("slug"),
               "store": data.get("storeName"), "status": data.get("status"), "layout": layout,
-              "editor": f"{s.base}/store-pages/{data['id']}/edit"})
+              "editor": f"{s.base}/store-pages/{data['id']}/edit", "catalog": cat})
 
 
 def cmd_upload_media(args: argparse.Namespace) -> None:
@@ -653,7 +902,8 @@ def media_refs(ops: list[dict[str, Any]]) -> set[str]:
     names: set[str] = set()
     for op in ops:
         if op.get("media"):
-            names.add(Path(op["media"]).name)
+            tok = MEDIA_TOKEN.search(op["media"])
+            names.add(Path(tok.group(1).strip() if tok else op["media"]).name)
         for key in ("value", "html"):
             if isinstance(op.get(key), str):
                 names.update(Path(m.strip()).name for m in MEDIA_TOKEN.findall(op[key]))
@@ -674,7 +924,35 @@ def resolve_values(ed: Editor, op: dict[str, Any]) -> dict[str, Any]:
     return op
 
 
+RETRY_OPS = {"set", "fill", "number", "slider", "color", "choose", "toggle", "image"}
+
+
+def _retryable(err: Exception) -> bool:
+    """A field not found / not answering: the editor may have changed since the catalog was made."""
+    return isinstance(err, LookupError) or type(err).__name__ == "TimeoutError"
+
+
 def run_op(ed: Editor, op: dict[str, Any]) -> Any:
+    """One op; when a field op fails because the field is not where the catalog says, the open block is read again,
+    the catalog fixed, and the op tried once more."""
+    try:
+        return _run_op(ed, op)
+    except Exception as err:  # noqa: BLE001
+        if op.get("op") not in RETRY_OPS or not _retryable(err):
+            raise
+        changes = ed.check_catalog(deep=True)
+        try:
+            out = _run_op(ed, op)
+        except Exception as again:  # noqa: BLE001
+            if op.get("optional") and _retryable(again):
+                print(f"skipped optional op {op.get('op')} {op.get('label') or op.get('item')}: "
+                      f"{str(again).splitlines()[0][:120]}", file=sys.stderr)
+                return {"skipped": str(again).splitlines()[0][:160], "catalog": changes}
+            raise
+        return {"retried": True, "catalog": changes, "out": out}
+
+
+def _run_op(ed: Editor, op: dict[str, Any]) -> Any:
     op = resolve_values(ed, op)
     kind = op["op"]
     nth = int(op.get("nth", 0))
@@ -682,10 +960,18 @@ def run_op(ed: Editor, op: dict[str, Any]) -> Any:
         ed.page_settings()
     if kind == "page":
         return ed.page_settings()
-    if kind == "add":
-        return ed.add(op["type"], op.get("as"))
-    if kind == "select":
-        return ed.select(op.get("block", op.get("index")))
+    if kind in ("add", "select"):
+        bid = ed.add(op["type"], op.get("as")) if kind == "add" else ed.select(op.get("block", op.get("index")))
+        changes = ed.check_catalog()
+        return {"block": bid, "catalog": changes} if changes else bid
+    if kind == "set" and op.get("match"):
+        return ed.choose_match(op["label"], op["match"], nth)
+    if kind == "set":
+        return ed.set(op["label"], op.get("value"), nth)
+    if kind == "item-image":
+        return ed.item_image(op["item"], op["media"])
+    if kind == "slider":
+        return ed.slider(op["label"], op["value"], nth)
     if kind == "fill":
         return ed.fill(op["label"], op.get("value"), op.get("html"), nth)
     if kind == "number":
@@ -711,8 +997,41 @@ def run_op(ed: Editor, op: dict[str, Any]) -> Any:
     if kind == "save":
         return ed.save()
     if kind == "note":
+        if op.get("section") and op.get("block"):
+            # which block stands for which competitor section: verify compares them (compare.py)
+            bid = ed.resolve(op["block"])
+            ed.state.setdefault("sectionBlocks", {})[op["section"]] = bid
+            return {"section": op["section"], "block": bid}
         return op.get("text")
     raise ValueError(f"unknown op {kind!r}")
+
+
+# What `shopdy.py ops` prints: every op of a build plan (the plan is {"ops": [...]}).
+OPS_HELP = """\
+page                                  open Page settings; later ops with "scope": "page" act there
+select  block: alias | block id | "#N"     select a block (N = position on the canvas, 1-based)
+add     type: <block type>, as: <alias>    add a block at the END of the page (then "Move up")
+action  name: Move up | Move down | Duplicate | Delete | Convert to editable blocks   block toolbar
+set     label, value [, nth]              fill any field the way its catalog kind says (text, rich html, number,
+                                          slider, colour, select option, switch true/false, image media)
+fill    label, value | html | value_file [, nth]   text / code box (value_file: a file in the job folder)
+number / slider / color / choose / toggle / image   label + value (option / media) — `set` picks these itself
+item-image  item: "Review 2", media: <file> | {{media:<file>}}   a row's photo from the media library
+click   name [, role, scope: inspector|page, nth]   e.g. "Add review", "Add link"
+press   key        wait  ms        save        note  text | section + block (verify pairs them)
+Values may hold {{media:<file>}} (the file's media-library URL after upload-media). Labels: catalog/block-catalog.md.
+"""
+
+HELP = {
+    "exec": "exec --job J --script FILE: runs FILE with s (Session), page, job (Path), state (dict), ed (Editor, page "
+            "opened with ed.open()), re, json in scope; set `result` to return data. Editor: open(), ids(), select(ref), "
+            "add(type, alias), set(label, value), fields(), check_catalog(deep), save(), inspector(), block_type(id).",
+    "build": "build --job J --plan FILE [--from N]: runs the ops (shopdy.py ops), saves at every `save` op and at the "
+             "end, resumes after the last save; exit 5 = an op failed (read the JSON), 6 = the guard blocked a write.",
+    "catalog": "catalog --job J [--refresh] | --show TYPE: the block catalog (made by `create`, fixed while building).",
+    "inspect": "inspect --job J [--block REF [--fields] [--values]]: blocks of the page; one block's inspector fields "
+               "(fixes the catalog) or its saved values.",
+}
 
 
 def cmd_build(args: argparse.Namespace) -> None:
@@ -725,6 +1044,7 @@ def cmd_build(args: argparse.Namespace) -> None:
     start = args.start if args.start is not None else (int(prev.get("next", 0)) if same_plan else 0)
     done_since_save = 0
     results = []
+    catalog_fixed: list[str] = []
     with Session(job=job, page_id=page_id_of(state), headless_flag=args.headless) as s:
         s.ensure_logged_in()
         assert_draft(fetch_page(s, page_id_of(state)))
@@ -736,6 +1056,8 @@ def cmd_build(args: argparse.Namespace) -> None:
                 op = ops[i]
                 out = run_op(ed, op)
                 results.append({"i": i, "op": op["op"], "out": out})
+                if isinstance(out, dict) and out.get("catalog"):
+                    catalog_fixed += out["catalog"]
                 done_since_save = 0 if op["op"] == "save" else done_since_save + 1
                 if op["op"] == "save":
                     state["build"] = {"plan": str(Path(args.plan).resolve()), "next": i + 1, "at": now_iso()}
@@ -761,8 +1083,10 @@ def cmd_build(args: argparse.Namespace) -> None:
                   "blockedRequests": s.guard.blocked,
                   "note": "work since the last `save` op is NOT saved; fix the plan and re-run with --from"})
             sys.exit(5)
-    emit({"ran": len(results), "from": start, "results": results[-15:], "aliases": state.get("aliases"),
-          "blockedRequests": s.guard.blocked})
+    (job / "build.out.json").write_text(json.dumps(results, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    emit({"ran": len(results), "from": start, "saves": sum(1 for r in results if r["op"] == "save"),
+          "last": results[-3:], "catalogFixed": catalog_fixed, "sections": len(state.get("sectionBlocks") or {}),
+          "blockedRequests": s.guard.blocked, "full": str(job / "build.out.json")})
     if s.guard.blocked:
         sys.exit(6)  # something tried a write the skill never makes: look at guard.log before going on
 
@@ -782,11 +1106,21 @@ def cmd_inspect(args: argparse.Namespace) -> None:
             "blocks": [{"n": n + 1, "id": b["id"], "alias": rev.get(b["id"]), "type": b["type"],
                         "summary": _summary(b)} for n, b in enumerate(blocks)],
         }
+        if args.block and args.values:
+            ref = state.get("aliases", {}).get(args.block, args.block)
+            if ref.startswith("#"):
+                ref = blocks[int(ref[1:]) - 1]["id"]
+            one = next((b for b in blocks if b["id"] == ref), None)
+            emit(one if one else {"error": f"no block {args.block!r}"})
+            return
         if args.block:
             ed = Editor(s, job, state)
             ed.open()
             ed.select(args.block)
             if args.fields:
+                changes = ed.check_catalog(deep=True)
+                if changes:
+                    out["catalogFixed"] = changes
                 out["fields"] = ed.fields()
     emit(out)
 
@@ -870,6 +1204,57 @@ PHONE_CHECKS_JS = r"""
 """
 
 
+def _data_url(f: Path) -> str:
+    return "data:image/png;base64," + base64.b64encode(f.read_bytes()).decode()
+
+
+def compare_with_competitor(s: Session, job: Path, state: dict[str, Any], blocks: list[dict[str, Any]],
+                            out_dir: Path) -> dict[str, Any]:
+    """Every block that stands for a competitor section (state.sectionBlocks, written by the plan's `note` ops):
+    its look against source/styles.json, its picture against source/sections/<section>.png, and the tags the
+    sanitizer took from its HTML. Only sections below compare.SIMILAR get a side-by-side picture to look at."""
+    styles_f = job / "source" / "styles.json"
+    styles = json.loads(styles_f.read_text(encoding="utf-8")) if styles_f.exists() else {}
+    by_id = {b["id"]: b for b in blocks}
+    rows, look = [], []
+    for sec, bid in (state.get("sectionBlocks") or {}).items():
+        loc = s.page.locator(f'[data-testid=canvas-scroll] [data-block-id="{bid}"]').first
+        if not loc.count():
+            rows.append({"section": sec, "block": bid, "error": "block not on the canvas"})
+            continue
+        btype = (by_id.get(bid) or {}).get("type", "")
+        row: dict[str, Any] = {"section": sec, "block": bid, "type": btype, "diffs": []}
+        sent = job / "sections" / f"{sec}.html"
+        if sent.exists() and bid in by_id:
+            row["tagLoss"] = compare.tag_loss(sent.read_text(encoding="utf-8"), by_id[bid].get("html") or "")
+        if btype not in compare.COMPARED_TYPES:
+            rows.append(row)
+            continue
+        row["diffs"] = compare.style_diff(styles.get(sec) or {}, loc.evaluate(compare.STYLES_JS))
+        ref = job / "source" / "sections" / f"{sec}.png"
+        box = loc.bounding_box() or {}
+        if ref.exists() and (box.get("height") or 0) >= compare.MIN_HEIGHT:
+            shot = out_dir / f"blk-{sec}.png"
+            loc.scroll_into_view_if_needed()
+            loc.screenshot(path=str(shot))
+            score = s.page.evaluate(compare.SIMILARITY_JS, [_data_url(ref), _data_url(shot), compare.SIMILAR_WIDTH])
+            row["score"] = round(score, 2)
+            if score < compare.SIMILAR and len(look) < 4:
+                pic = out_dir / f"cmp-{sec}.jpg"
+                side = s.ctx.new_page()
+                side.set_content(f'<body style="margin:0;display:flex;gap:8px;background:#777">'
+                                 f'<img src="{_data_url(ref)}" style="width:600px"><img src="{_data_url(shot)}" style="width:600px">')
+                side.screenshot(path=str(pic), type="jpeg", quality=75, full_page=True)
+                side.close()
+                look.append(str(pic))
+        rows.append(row)
+    (job / "compare.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+    lines = [f"{r['section']}: " + "; ".join(r.get("diffs", []) + [f"lost {x}" for x in r.get("tagLoss", [])]
+                                             + ([f"looks {r['score']:.0%} alike"] if r.get("score", 1) < compare.SIMILAR else []))
+             for r in rows if r.get("diffs") or r.get("tagLoss") or r.get("score", 1) < compare.SIMILAR or r.get("error")]
+    return {"sections": len(rows), "differ": lines, "lookAt": look, "full": str(job / "compare.json")}
+
+
 def cmd_verify(args: argparse.Namespace) -> None:
     job = job_dir(args.job)
     state = load_state(job)
@@ -904,6 +1289,7 @@ def cmd_verify(args: argparse.Namespace) -> None:
         s.goto(f"/store-pages/{pid}/edit")
         s.page.get_by_test_id("canvas-scroll").wait_for(timeout=30_000)
         ed.viewport("pc")
+        report["compare"] = compare_with_competitor(s, job, state, blocks, out_dir)
         report["desktopShots"] = ed.screens(out_dir, "verify-pc")
         ed.viewport("mobile")
         report["mobileFrame"] = s.page.evaluate(PHONE_CHECKS_JS)
@@ -971,10 +1357,19 @@ def main() -> None:
     sp = add("inspect", cmd_inspect)
     sp.add_argument("--block", help="alias, block id or #N")
     sp.add_argument("--fields", action="store_true")
+    sp.add_argument("--values", action="store_true", help="the block's saved values (from the page, no editor)")
+    sp = add("ops", lambda a: print(OPS_HELP), job=False)
+    sp = add("help", lambda a: print(HELP.get(a.topic, OPS_HELP if a.topic == "ops" else
+                                               f"topics: {', '.join(sorted(HELP))}, ops")), job=False)
+    sp.add_argument("topic", nargs="?", default="")
     sp = add("shot", cmd_shot)
     sp.add_argument("--view", choices=["pc", "mobile"], default="mobile")
     sp.add_argument("--phone", action="store_true", help="open the editor in a 360 px phone instead")
     add("verify", cmd_verify)
+    sp = add("catalog", cmd_catalog, job=False)
+    sp.add_argument("--job", help="the job whose Draft page is used for the scan (not needed with --show)")
+    sp.add_argument("--refresh", action="store_true", help="scan every block again")
+    sp.add_argument("--show", metavar="TYPE", help="print one block of the catalog (no browser)")
     sp = add("exec", cmd_exec)
     sp.add_argument("--script", required=True)
     args = ap.parse_args()

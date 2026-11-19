@@ -8,26 +8,30 @@
  *
  * Folder: the argument, else $SHOPDY_PROMAX_DIR, else the current folder if it is shopdy-promax, else
  * ../shopdy-promax next to this repo. Every file of the skill is
- * replaced and files the source no longer has are removed, EXCEPT what belongs to that machine: `_work/` (jobs,
- * browser login), `.env` (account) and `__pycache__/`. Refuses a folder that is not shopdy-promax and a skill folder
- * that is a link (it would write into the repo the link points at). shopdy-promax git-ignores `.claude`, so the
- * install never shows up in its `git status`.
+ * replaced and files the source no longer has are removed, EXCEPT what belongs to that machine, at the skill's root:
+ * `_work/` (jobs, browser login), `catalog/` (the block catalog the skill builds and keeps up to date there), `.env`
+ * (account); and `__pycache__/` at any depth. The source's `tests/` stay here. Refuses a folder that is not
+ * shopdy-promax and a skill folder that is a link (it would write into the repo the link points at). shopdy-promax
+ * git-ignores `.claude`, so the install never shows up in its `git status`.
  */
 'use strict';
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const KEEP = new Set(['_work', '.env', '__pycache__']);
+const KEEP_ROOT = new Set(['_work', 'catalog', '.env']); // that machine's own files, at the skill's root only
+const SKIP_ANY = new Set(['__pycache__']);
+const SOURCE_ONLY = new Set(['tests']); // never installed
 
-// Every file under dir, as forward-slash paths relative to it, skipping the KEEP names at any depth.
-function listFiles(dir, rel = '') {
+// Every file under dir, as forward-slash paths relative to it. Skips SKIP_ANY at any depth and `skipRoot` names at
+// the root only.
+function listFiles(dir, rel = '', skipRoot = KEEP_ROOT) {
   if (!fs.existsSync(dir)) return [];
   const out = [];
   for (const entry of fs.readdirSync(path.join(dir, rel), { withFileTypes: true })) {
-    if (KEEP.has(entry.name)) continue;
+    if (SKIP_ANY.has(entry.name) || (!rel && skipRoot.has(entry.name))) continue;
     const r = rel ? `${rel}/${entry.name}` : entry.name;
-    if (entry.isDirectory()) out.push(...listFiles(dir, r));
+    if (entry.isDirectory()) out.push(...listFiles(dir, r, skipRoot));
     else if (entry.isFile()) out.push(r);
   }
   return out;
@@ -58,11 +62,11 @@ function assertShopdyPromax(target) {
   }
 }
 
-function removeEmptyDirs(dir) {
+function removeEmptyDirs(dir, isRoot = true) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (!entry.isDirectory() || KEEP.has(entry.name)) continue;
+    if (!entry.isDirectory() || SKIP_ANY.has(entry.name) || (isRoot && KEEP_ROOT.has(entry.name))) continue;
     const sub = path.join(dir, entry.name);
-    removeEmptyDirs(sub);
+    removeEmptyDirs(sub, false);
     if (!fs.readdirSync(sub).length) fs.rmdirSync(sub);
   }
 }
@@ -85,7 +89,7 @@ function install({ target, root = ROOT, only = null, dry = false }) {
     const report = { skill: name, dest, existed: fs.existsSync(path.join(dest, 'SKILL.md')),
       from: versionOf(path.join(dest, 'SKILL.md')), to: versionOf(path.join(src, 'SKILL.md')),
       added: [], updated: [], removed: [], unchanged: 0 };
-    const srcFiles = listFiles(src);
+    const srcFiles = listFiles(src, '', new Set([...KEEP_ROOT, ...SOURCE_ONLY]));
     const srcSet = new Set(srcFiles);
     for (const rel of srcFiles) {
       const from = path.join(src, rel);
@@ -132,7 +136,7 @@ function main() {
     for (const f of r.updated) console.log(`  ~ ${f}`);
     for (const f of r.removed) console.log(`  - ${f}`);
   }
-  console.log(dry ? 'Nothing written (--dry).' : 'Kept on that machine: _work/, .env. Open Claude Code in the shopdy-promax folder to use it.');
+  console.log(dry ? 'Nothing written (--dry).' : 'Kept on that machine: _work/, catalog/, .env. Open Claude Code in the shopdy-promax folder to use it.');
 }
 
 if (require.main === module) main();

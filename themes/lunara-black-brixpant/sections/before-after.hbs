@@ -1,0 +1,115 @@
+{{!-- Before / after slider — schema v2 section (sections/before-after.schema.json), as the "Your body changes
+      instantly" block of tryeverheld.com: the after picture lies underneath, the before picture on top is cut at
+      --pos, and a white line with a round handle marks the cut. Shoppers drag it (mouse), swipe it sideways or tap
+      (touch; an up / down swipe still scrolls the page) or move it with the arrow keys. Heading + rich text beside
+      it (under it on phones). An empty picture slot keeps its frame, with a hint in the editor only.
+      Self-contained: its own <style>, and a <script> that wires every .lu-ba__box not yet marked data-ok — the
+      editor re-runs it when it swaps the section in, so a changed section works without a reload. Placeholders are
+      <span>s: base.css hides every empty <div>. --}}
+<style>
+  .lu-ba-wrap{max-width:1190px;margin:0 auto;padding:24px 16px;box-sizing:border-box}
+  .lu-ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:center;padding:0 24px}
+  .lu-ba--right .lu-ba__media{order:2}
+  .lu-ba--solo{grid-template-columns:minmax(0,600px);justify-content:center}
+  .lu-ba__box{position:relative;aspect-ratio:var(--ar,1/1);overflow:hidden;background:#e9e9e9;cursor:ew-resize;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+  .lu-ba__box--natural{aspect-ratio:auto}
+  .lu-ba__img,.lu-ba__ph{position:absolute;top:0;left:0;width:100%!important;height:100%!important;max-width:none!important;margin:0;display:block;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+  .lu-ba__box--natural .lu-ba__after{position:relative;height:auto!important}
+  .lu-ba__box--natural .lu-ba__ph--after{position:relative;height:auto!important;aspect-ratio:1/1}
+  .lu-ba__before{-webkit-clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0);clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+  .lu-ba__ph{display:flex;align-items:center;padding:16px;box-sizing:border-box;font-size:14px;line-height:1.4;color:#555;background:#e9e9e9}
+  .lu-ba__ph--before{background:#dcdcdc}
+  .lu-ba__ph--after{justify-content:flex-end;text-align:right}
+  .lu-ba__lb{position:absolute;top:12px;z-index:1;padding:4px 10px;border-radius:4px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:700;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;pointer-events:none}
+  .lu-ba__lb--b{left:12px}
+  .lu-ba__lb--a{right:12px}
+  .lu-ba__handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);z-index:2;width:44px;margin-left:-22px;display:flex;align-items:center;justify-content:center;outline:none;color:var(--line,#fff)}
+  .lu-ba__handle:before,.lu-ba__handle:after{content:"";position:absolute;left:50%;width:2px;margin-left:-1px;background:currentColor;box-shadow:0 0 4px rgba(0,0,0,.4)}
+  .lu-ba__handle:before{top:0;bottom:calc(50% + 20px)}
+  .lu-ba__handle:after{top:calc(50% + 20px);bottom:0}
+  .lu-ba__knob{display:flex;align-items:center;justify-content:center;gap:4px;width:40px;height:40px;box-sizing:border-box;border:2px solid currentColor;border-radius:50%;box-shadow:0 0 4px rgba(0,0,0,.4)}
+  .lu-ba__knob svg{display:block;fill:currentColor;filter:drop-shadow(0 0 4px rgba(0,0,0,.4))}
+  .lu-ba__handle:focus-visible .lu-ba__knob{outline:2px solid #000;outline-offset:2px}
+  .lu-ba__h{margin:0 0 8px;font-weight:700;font-size:35px;line-height:1.2;color:rgb(var(--color-foreground,0,0,0))}
+  .lu-ba__body{color:rgb(var(--color-foreground,18,18,18))}
+  .lu-ba__body p{margin:0 0 1.8em;font-size:18px;line-height:1.8}
+  .lu-ba__body p:last-child{margin-bottom:0}
+  @media (max-width:749px){
+    .lu-ba{grid-template-columns:minmax(0,1fr);gap:16px;padding:0 5px}
+    .lu-ba--right .lu-ba__media{order:0}
+    .lu-ba__h{font-size:25px}
+    .lu-ba__body p{font-size:16px}
+  }
+</style>
+<div class="lu-ba-wrap" style="padding-top:{{section.settings.padding}}px;padding-bottom:{{section.settings.padding}}px">
+<div class="lu-ba{{#if (eq section.settings.image_side "right")}} lu-ba--right{{/if}}{{#unless section.settings.heading}}{{#unless section.settings.body}} lu-ba--solo{{/unless}}{{/unless}}">
+  <div class="lu-ba__media">
+    <div class="lu-ba__box{{#if (eq section.settings.ratio "natural")}} lu-ba__box--natural{{/if}}" data-start="{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}" style="--pos:{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}%{{#unless (eq section.settings.ratio "natural")}};--ar:{{#if section.settings.ratio}}{{section.settings.ratio}}{{else}}1/1{{/if}}{{/unless}}{{#if section.settings.line_color}};--line:{{section.settings.line_color}}{{/if}}">
+      {{#if section.settings.after_image}}<img class="lu-ba__img lu-ba__after" src="{{section.settings.after_image}}" alt="{{#if section.settings.after_label}}{{section.settings.after_label}}{{else}}After{{/if}}" loading="lazy" draggable="false">{{else if section.settings.default_after_image}}<img class="lu-ba__img lu-ba__after" src="{{@root.assets_url}}/{{section.settings.default_after_image}}" alt="{{#if section.settings.after_label}}{{section.settings.after_label}}{{else}}After{{/if}}" loading="lazy" draggable="false">{{else}}<span class="lu-ba__ph lu-ba__ph--after">{{#if @root.__designMode}}Pick the after picture{{/if}}</span>{{/if}}
+      {{#if section.settings.before_image}}<img class="lu-ba__img lu-ba__before" src="{{section.settings.before_image}}" alt="{{#if section.settings.before_label}}{{section.settings.before_label}}{{else}}Before{{/if}}" loading="lazy" draggable="false">{{else if section.settings.default_before_image}}<img class="lu-ba__img lu-ba__before" src="{{@root.assets_url}}/{{section.settings.default_before_image}}" alt="{{#if section.settings.before_label}}{{section.settings.before_label}}{{else}}Before{{/if}}" loading="lazy" draggable="false">{{else}}<span class="lu-ba__ph lu-ba__ph--before lu-ba__before">{{#if @root.__designMode}}Pick the before picture{{/if}}</span>{{/if}}
+      {{#if section.settings.before_label}}<span class="lu-ba__lb lu-ba__lb--b">{{section.settings.before_label}}</span>{{/if}}
+      {{#if section.settings.after_label}}<span class="lu-ba__lb lu-ba__lb--a">{{section.settings.after_label}}</span>{{/if}}
+      <div class="lu-ba__handle" role="slider" tabindex="0" aria-label="Drag to compare the before and after pictures" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}"><span class="lu-ba__knob" aria-hidden="true"><svg width="6" height="12" viewBox="0 0 6 12"><path d="M0 6L6 0V12L0 6Z"/></svg><svg width="6" height="12" viewBox="0 0 6 12"><path d="M6 6L0 12V0L6 6Z"/></svg></span></div>
+    </div>
+  </div>
+  {{!-- One line on purpose: with no heading and no text it is a truly empty div, which base.css hides. --}}
+  <div class="lu-ba__text">{{#if section.settings.heading}}<h2 class="lu-ba__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}{{#if section.settings.body}}<div class="lu-ba__body" {{{editable "body"}}}>{{{applyTokens section.settings.body}}}</div>{{/if}}</div>
+</div>
+</div>
+<script>(function(){
+  // One wiring for every slider on the page; a second copy of this script (two sections, or the editor
+  // swapping the section in) only wires the boxes not yet marked data-ok.
+  if (window.__luBa) return window.__luBa();
+  window.__luBa = function () {
+    document.querySelectorAll('.lu-ba__box:not([data-ok])').forEach(function (box) {
+      box.setAttribute('data-ok', '');
+      var h = box.querySelector('.lu-ba__handle');
+      var pos = parseFloat(box.getAttribute('data-start')) || 50, id = null, moved = false, sx = 0, sy = 0;
+      function set(p) {
+        pos = Math.max(0, Math.min(100, p));
+        box.style.setProperty('--pos', pos + '%');
+        if (h) h.setAttribute('aria-valuenow', String(Math.round(pos)));
+      }
+      function at(x) {
+        var r = box.getBoundingClientRect();
+        if (r.width) set(((x - r.left) / r.width) * 100);
+      }
+      box.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        id = e.pointerId; moved = false; sx = e.clientX; sy = e.clientY;
+        if (e.pointerType === 'mouse') {
+          e.preventDefault();
+          at(e.clientX);
+          try { box.setPointerCapture(id); } catch (err) {}
+        }
+      });
+      box.addEventListener('pointermove', function (e) {
+        if (e.pointerId !== id) return;
+        if (!moved && e.pointerType !== 'mouse') {
+          var dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
+          if (dx < 4 && dy < 4) return;
+          if (dy > dx) { id = null; return; } // an up / down swipe: leave it to the page scroll
+        }
+        moved = true;
+        at(e.clientX);
+      });
+      box.addEventListener('pointerup', function (e) {
+        if (e.pointerId !== id) return;
+        if (e.pointerType !== 'mouse' && !moved) at(e.clientX); // a tap moves the line there
+        id = null;
+      });
+      box.addEventListener('pointercancel', function () { id = null; });
+      box.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      if (h) h.addEventListener('keydown', function (e) {
+        var step = e.shiftKey ? 10 : 2, k = e.key;
+        if (k === 'ArrowLeft' || k === 'ArrowDown') set(pos - step);
+        else if (k === 'ArrowRight' || k === 'ArrowUp') set(pos + step);
+        else if (k === 'Home') set(0);
+        else if (k === 'End') set(100);
+        else return;
+        e.preventDefault();
+      });
+    });
+  };
+  window.__luBa();
+})();</script>

@@ -39,13 +39,14 @@ The product page of `themes/tredvik` inside Lunara's header, top bar, footer and
   `_work/regress.js` (Lunara pages unchanged). The e2e scripts take `--live` (where they say so) to check brixpant.com
   with this folder's CSS swapped in the test browser only.
 
-## One font (Archivo) on every page
-Every text of every template is Archivo (`assets/fonts/archivo_*`, `@font-face` in `custom.css`), headings 600. The last
-rule of `custom.css` pins it on every element, form control and ::before / ::after (merchant HTML included); the
-checkout does not link custom.css, so `templates/checkout.hbs` carries the same faces and rule. Only the FAQ check box
-icons keep their icon font (Material Symbols). There is no font setting: a new font = change that rule, the checkout's
-copy and `ONE_FONT` in `_work/build-tvb.js`. `base.css` (vendor) still declares Poppins faces; nothing uses them, so
-they are never downloaded.
+## One font (Poppins) on every page
+Every text of every template is Poppins: the 400 / 700 faces (normal + italic) that `base.css` declares
+(`assets/fonts/poppins_*`), headings 700 — the same as owearfit.com. A 500 / 600 weight shows the nearest face. The
+last rule of `custom.css` pins it on every element, form control and ::before / ::after (merchant HTML included); the
+checkout does not link custom.css, so `templates/checkout.hbs` carries the same rule (it links base.css for the faces).
+Only the FAQ check box icons keep their icon font (Material Symbols). There is no font setting: a new font = change that
+rule, the checkout's copy, `snippets/tv-vars.hbs`, the `.tvb` line of `assets/css/tv-bundle.css` and `ONE_FONT` in
+`_work/build-tvb.js`.
 
 ## Buy now bar (`snippets/lu-sticky-buy.hbs`, every product template)
 A click scrolls to the pack / option picker; it never adds to cart. Desktop: small card at the bottom right (picture,
@@ -57,6 +58,11 @@ button, full width, pinned from the start, stepping aside only while the main bu
 - **Product page** = `templates/product.json`: section `product` = gallery + blocks you can drag in the outline (Star rating, Title, Variant picker, Size finder, **Kaching bundle**, Custom HTML, Image / video slider (snippets/lu-media-slider.hbs, 10 image_picker slots, a video URL becomes a <video> server side), FAQ (snippets/lu-pi-faq.hbs: 8 own Q/A, else listing FAQ, else Theme settings FAQ), Buy buttons, Trust line, Payment icons, Description; a product section with only Kaching / Custom HTML blocks keeps the old fixed order) (gallery, star rating, block **Kaching bundle**,
   block Custom HTML, Add to cart, description), `reviews`, `faq` ("Questions? We've Got Answers"). Template
   `product.simple.json` = no bundle (variant pills + one Add to cart).
+- **Before / after slider** section (`sections/before-after.hbs`, Add section → Content): two pictures of the same
+  pose and framing, shoppers drag the line between them (mouse, swipe, tap, arrow keys; an up / down swipe still
+  scrolls), heading + text beside it (under it on phones). Pictures left / right, frame square / 4:5 / 4:3 / own
+  shape, start position, optional BEFORE / AFTER labels, line colour. Self-contained style + script (re-run by the
+  editor's section swap).
 - **Kaching bundle** block: heading, up to 4 packs (quantity 0 hides one), title / subtitle / badge / gift line,
   colours. Every item of the selected pack gets its own Color / Size pickers (one cart line per variant).
   Prices = what the Adlux checkout charges: the best of the live automatic discounts the backend sends
@@ -64,8 +70,11 @@ button, full width, pinned from the start, stepping aside only while the main bu
   `discount-engine.ts` (snippets/gs-head.hbs `LuDisc`, also used by the cart drawer). No discount = price x quantity.
   The theme sets no prices.
 - **Theme settings**: Colors (primary `#000000` drives buttons, menu, top bar, footer, badges, checkout button),
-  Top bar (sale text + countdown), Home page (banner, product list, real reviews of random products), Cart drawer,
-  Brand contact, FAQ (default questions for every product page without its own FAQ).
+  Top bar (sale text + countdown: Title and Subtitle on one line split by a thin "|", as owearfit.com), Home page
+  (banner as tall as its picture + a heading box with button as hushflex.com, product list, real reviews of random
+  products), Product cards (white rounded cards as owearfit.com; "Show Add to cart button" opens the quick add with
+  the product's own pack / Color / Size picker), Cart drawer, Brand contact, FAQ (default questions for every product
+  page without its own FAQ).
 
 ## Pages
 Home (`templates/index.hbs`, Shop All catalog on `#collection/<handle>`), policies / About us (`page.hbs`, About

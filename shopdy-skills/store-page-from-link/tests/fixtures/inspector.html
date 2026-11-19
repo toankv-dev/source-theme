@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>inspector fixture</title>
+<!-- The markup of shopdy's inspector (inspector-fields.tsx Section / Row / NumberField / RangeField / ColorField /
+     ImageField, a Radix Select, a Switch, the rich text toolbar, CodeMirror, list rows with numbered aria-labels,
+     aria-pressed choice buttons), written by hand with made-up content. -->
+<style>.hidden { display: none; }</style>
+</head>
+<body>
+<aside data-testid="block-inspector">
+  <div class="header"><span>Reviews</span><span>blk_1</span></div>
+
+  <div class="border-b">
+    <button type="button" aria-expanded="true"><span>Content</span></button>
+    <div class="space-y-3">
+      <div class="space-y-1.5"><label for="r1">Heading</label><input id="r1" value="What our customers say"></div>
+
+      <div class="space-y-1.5"><label for="r2">Style</label>
+        <button type="button" role="combobox" aria-expanded="false" data-options="Simple|Product"><span>Product</span></button>
+      </div>
+      <div class="space-y-1.5"><label for="r3">Reviews from</label>
+        <button type="button" role="combobox" aria-label="Reviews from" aria-expanded="false" data-options="Written here|Product reviews|Both"><span>Written here</span></button>
+      </div>
+
+      <div class="space-y-1.5"><label for="r4">Columns on desktop</label><input id="r4" type="number" min="1" max="4" value="3"></div>
+
+      <div class="space-y-1.5">
+        <div class="flex"><label for="r5">Star size</label><span>13px</span></div>
+        <input id="r5" type="range" min="10" max="32" step="1" value="13">
+      </div>
+
+      <div class="space-y-1.5"><label for="r6">Background</label>
+        <div id="r6" class="flex"><input type="color" aria-label="Background" value="#ffffff"><input value="#FFFFFF" placeholder="#49BF50"></div>
+        <div><button type="button" aria-label="Use #49BF50"></button></div>
+      </div>
+
+      <div class="space-y-2">
+        <label>Hero image</label>
+        <div>No image yet</div>
+        <div><button type="button">Choose or upload</button></div>
+        <input aria-label="Hero image URL" placeholder="…or paste an image URL" value="">
+      </div>
+
+      <div><button type="button">Choose or upload image</button></div>
+      <div class="space-y-1.5"><label for="r11">…or paste a URL</label><input id="r11" placeholder="https://…" value=""></div>
+
+      <div class="space-y-1.5"><label for="r7">Show stars</label><button id="r7" type="button" role="switch" aria-checked="true"></button></div>
+
+      <div class="space-y-1.5"><label for="r8">Text</label>
+        <div id="r8">
+          <div role="toolbar" aria-label="Text formatting">
+            <select aria-label="Paragraph style"><option>Normal</option><option>Heading 2</option></select>
+            <select aria-label="Font size"><option>16</option></select>
+          </div>
+          <div contenteditable="true"><p>Real reviews from real customers.</p></div>
+        </div>
+      </div>
+
+      <div class="space-y-1.5"><label>Align</label>
+        <div><button type="button" aria-pressed="true">Left</button><button type="button" aria-pressed="false">Center</button><button type="button" aria-pressed="false">Right</button></div>
+      </div>
+
+      <div class="space-y-1.5"><label for="r9">Note</label><textarea id="r9">x</textarea></div>
+
+      <div role="group" aria-label="HTML"><div class="cm-editor"><div class="cm-content" contenteditable="true" role="textbox">&lt;p&gt;hi&lt;/p&gt;</div></div></div>
+
+      <div class="review"><input aria-label="Review 1 name" value="Riley"><input aria-label="Rating" type="number" min="1" max="5" value="5"></div>
+      <div class="review"><input aria-label="Review 2 name" value="Sam"><input aria-label="Rating" type="number" min="1" max="5" value="4"></div>
+
+      <div class="hidden"><label for="r10">Hidden field</label><input id="r10"></div>
+    </div>
+  </div>
+
+  <div class="border-b">
+    <button type="button" aria-expanded="false" onclick="this.setAttribute('aria-expanded','true');document.getElementById('spacing').classList.remove('hidden')"><span>Spacing &amp; layout</span></button>
+    <div id="spacing" class="hidden space-y-3">
+      <div class="space-y-1.5"><label for="s1">Padding top</label><input id="s1" type="number" min="0" max="200" value="24"></div>
+    </div>
+  </div>
+</aside>
+
+<section data-block-id="blk_1">
+  <div aria-label="Reviews block actions">
+    <button title="Move up" aria-label="Move up"></button><button title="Move down" aria-label="Move down"></button>
+    <button title="Duplicate" aria-label="Duplicate"></button><button title="Delete" aria-label="Delete"></button>
+  </div>
+</section>
+
+<script>
+  // A Radix Select: the options exist only while it is open (a listbox in a portal at the end of <body>).
+  document.querySelectorAll('[role=combobox]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[role=listbox]').forEach((l) => l.remove());
+      const lb = document.createElement('div');
+      lb.setAttribute('role', 'listbox');
+      for (const o of btn.dataset.options.split('|')) {
+        const op = document.createElement('div');
+        op.setAttribute('role', 'option');
+        op.textContent = o;
+        op.addEventListener('click', () => {
+          btn.querySelector('span').textContent = o;
+          lb.remove();
+          btn.setAttribute('aria-expanded', 'false');
+        });
+        lb.appendChild(op);
+      }
+      document.body.appendChild(lb);
+      btn.setAttribute('aria-expanded', 'true');
+    });
+  });
+  // In the real editor Escape also deselects the block: the block inspector goes away (Page settings instead).
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('[role=listbox]').forEach((l) => l.remove());
+      document.querySelectorAll('[role=combobox]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+      document.querySelector('[data-testid=block-inspector]').style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>

@@ -14,7 +14,11 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 - `tools/` — `preview-server.js` (local engine, v1 + v2), `download-page.js` (one store page → offline copy in
   `_work/site/`: DOM, CSS, JS, fonts, every image / video, live screenshots, offline check, then capture.js on it),
   `media-grab.js` (every picture + video of one link, grouped and named, no mirror: `downloads/<host>-<handle>/`,
-  `--to-theme <dir> --prefix <xx>` adds them to a theme's media library),
+  `--to-theme <dir> --prefix <xx>` adds them to a theme's media library; `--headed` = the user passes a bot check),
+  `section-grab.js` (one part of a page by its heading → `section.md`: texts, fonts, colours, layout, interactions,
+  media), `edit-check.js` (check a theme change in one command: part at 1440 + 360, sideways scroll, console errors,
+  `--ref` original, pack; keeps one preview running), `run-brief.js` (what a theme-from-link run needs, ≤ 40 lines),
+  `platform-guide-check.js` (which shopdy-admin guide entries rest on changed shopdy code),
   `site-server.js` (serves that copy, no network), `probe-sections.js` (every block's text styles in one table),
   `capture.js` (original page → screenshots, tokens,
   sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
@@ -34,7 +38,7 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   This is their source: edit here (bump `metadata.version` in `SKILL.md`), then install / update a shopdy-promax
   checkout with `node tools/install-shopdy-skill.js <shopdy-promax dir>` (keeps its `_work/` and `.env`). Never edit
   only the installed copy.
-- `.claude/` — this repo's own skills `new-theme`, `theme-from-link`, `update-base` (committed). Everything else
+- `.claude/` — this repo's own skills `new-theme`, `theme-from-link`, `theme-edit`, `update-base` (committed). Everything else
   there (the other skills, `agents/`, `commands/`, `references/`) is a junction into an
   [agent-skills](https://github.com/addyosmani/agent-skills) checkout (`D:\agent-skills`): engineering skills from
   spec to ship, the `/spec` `/plan` `/build` `/test` `/review` `/code-simplify` `/ship` `/webperf` commands,
@@ -48,6 +52,8 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   download only the page of each link (offline copy), put all its pictures and videos into the theme as slot defaults (the user replaces them later), then build it with the `new-theme` rules. From screenshots →
   the `new-theme` skill (`.claude/skills/new-theme/SKILL.md`). Both: start from `base-theme`, match the input
   exactly, deliver a zip.
+- A change to a theme that exists (fix, restyle, feature, a part like another page, an admin how-to, work that also
+  needs shopdy code) → follow the `theme-edit` skill (`.claude/skills/theme-edit/SKILL.md`): one request per session.
 - A theme zip given to improve the base → follow the `update-base` skill (`.claude/skills/update-base/SKILL.md`):
   absorb platform behaviour always and recurring sections/settings, bump the version, log it in
   `base-theme/CHANGELOG.md`, sync core files into `themes/*`.

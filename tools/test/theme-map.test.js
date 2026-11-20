@@ -36,8 +36,10 @@ test('scan reads the parts of a theme from its files (and never _work/site)', ()
   assert.ok(p.style.bytes > 0);
   assert.deepEqual(p.styledIn.map((c) => [c.id, c.hits, c.from, c.to]), [['bundle.css', 20, null, null], ['base.css', 3, 7, 11]],
     'most hits first; no lines in a minified file');
-  assert.deepEqual(p.editedBy, [{ script: '_work/patch-x.js', kind: 'patches', files: ['sections/product.hbs'] }]);
-  assert.deepEqual(m.sections.find((s) => s.id === 'banner').editedBy, [{ script: '_work/build-x.js', kind: 'generates', files: ['sections/banner.hbs'] }]);
+  assert.deepEqual(p.editedBy, [{ script: '_work/patch-x.js', kind: 'patches', files: ['sections/product.hbs'], at: { 'sections/product.hbs': [6, 6] } }],
+    'and the lines of the script that write it');
+  assert.deepEqual(m.sections.find((s) => s.id === 'banner').editedBy,
+    [{ script: '_work/build-x.js', kind: 'generates', files: ['sections/banner.hbs'], at: { 'sections/banner.hbs': [6, 6] } }]);
   assert.deepEqual(m.snippets.find((s) => s.id === 'stars').usedBy, ['footer', 'product', 'reviews']);
 
   const css = Object.fromEntries(m.css.map((c) => [c.id, c]));
@@ -133,7 +135,7 @@ test('--part prints one part with the lines to open', async () => {
   assert.equal(r.code, 0, r.stderr);
   assert.match(r.stdout, /blocks in the markup: title 5-7 · price 8-10 · pack 11-13/);
   assert.match(r.stdout, /bundle\.css \(minified: grep -o/);
-  assert.match(r.stdout, /edited by: _work\/patch-x\.js patches sections\/product\.hbs/);
+  assert.match(r.stdout, /edited by: _work\/patch-x\.js patches sections\/product\.hbs \(script lines 6-6\)/);
   assert.ok(r.stdout.length <= 4000);
   assert.match((await run(FIXTURE, '--part', 'design')).stdout, /primary\s+#790236/);
   assert.match((await run(FIXTURE, '--part', 'product.bundle.json')).stdout, /k: pack · default_image images\/fx-sections\/pack\.webp/);

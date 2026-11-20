@@ -1,0 +1,58 @@
+# Platform guide: what the shopdy admin does (answer "làm sao để…" from here, not from shopdy's code)
+
+Each entry: where in the admin → steps → limits. `Nguồn:` = the shopdy-promax files that prove it; run
+`node tools/platform-guide-check.js` to see which entries' sources changed since they were checked (then re-check only
+those). A theme's own settings and blocks (Kaching packs, top bar text, colours…) are in its design map:
+`node tools/theme-map.js themes/<slug> --part design` / `--part <section>`, and its README.
+
+## Admin menu
+Dashboard · Analytics · Orders · Products (Product Catalog, Collections, Inventory, Customer Reviews) · Online Stores
+(Pages, Themes) · Discounts · Media · Settings (Shipping, Policy, Cookie banner) · Payment Gateway.
+Nguồn: apps/web/src/components/app-sidebar.tsx
+
+## Change a page's layout (theme editor)
+Online Stores → Themes → open the theme → editor:
+- Sections (left): drag the handle ("Drag to reorder") to change the order; "Add section"; a section's menu: Duplicate,
+  Remove. A section's blocks are dragged inside it.
+- Click a section → its Settings (right). "Theme settings" = the whole theme (colours, fonts, top bar, footer …).
+- "Template": which template is edited (product.json, product.<x>.json …). "Preview with": the product shown.
+- Changes stay a draft ("Unpublished changes") until published; "Discard draft" drops them.
+- Example "put Questions? before You Will Also Love": pick the template → drag the FAQ section above Related → publish.
+Nguồn: apps/web/src/features/theme-editor/components/section-outline.tsx, apps/web/src/features/theme-editor/components/section-inspector.tsx
+
+## A product's template
+Products → open the product → its template card ("Page template") → choose the template (e.g. product.triple-zone-bodysuit).
+A theme's extra product templates appear only after its zip is uploaded.
+Nguồn: apps/web/src/features/products/components/product-template-card.tsx, apps/web/src/features/products/components/product-theme-selector-dialog.tsx
+
+## Discounts
+Discounts → create. Method: Discount code or Automatic (Automatic needs a Title). Type:
+- Amount off products / Amount off order: percent or fixed amount.
+- Buy X Get Y: buy X, get Y free or discounted (a gift).
+- Free shipping.
+- Tiered next item ("Next-item discount tiers"): the 1st item full price, each extra item discounted by its tier,
+  typed `qty:percent`, e.g. `2:10, 3:15, 4:20`.
+- Example "2 for $62.99, 3 for $89.98" on a $39.99 item: 2nd item = 62.99 − 39.99 = 23.00 → −42.5 %; 3rd = 89.98 −
+  62.99 = 26.99 → −32.5 % → tiers `2:42.5, 3:32.5`. A Kaching-style theme shows what the checkout will charge.
+Nguồn: apps/web/src/features/discounts/pages/discount-edit.page.tsx, apps/web/src/features/discounts/pages/discounts.page.tsx
+
+## Complete the bundle (sold with another product)
+Product editor → "Product sold with this one": the other product, the bundle price, a badge (e.g. Hot Pick), "Show this
+bundle on the product page". Only once SHOPDY-127 is on production (it is a branch, not main, as of 2026-11-20).
+Nguồn: origin/SHOPDY-items/SHOPDY-127:apps/web/src/features/products/components/companion-bundles-builder.tsx
+
+## Customer reviews
+A review sent from the storefront is saved as pending: not shown. Products → Customer Reviews → "Publish this review?"
+(or Remove). Photos come with the review.
+Nguồn: apps/api/src/features/storefront/storefront.routes.ts, apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx
+
+## "−xx %" badge, crossed-out price
+The theme shows them from the product's compare-at price: set it above the price on the product / variant. (chưa kiểm:
+the label of that field in the product editor)
+
+## Only the theme can do it (no admin setting)
+New markup, a new block type, animations, phone layout → change the theme (theme-edit flow A).
+
+## Needs shopdy code
+Price / cart / checkout logic, storefront API, a new editor setting type, a new discount type → theme-edit flow D
+(table "shopdy does / theme does", user approves, Jira key, spec in shopdy-promax).

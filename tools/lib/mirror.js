@@ -143,8 +143,8 @@ function isBlocked(o) {
   const title = String((o && o.title) || '');
   const text = String((o && o.text) || '').slice(0, 3000);
   if ([403, 429, 503].indexOf(status) > -1) return true;
-  if (/just a moment|attention required|access denied|verify you are human|are you a robot|security check|captcha|ddos-guard/i.test(title)) return true;
-  return text.length < 1500 && /checking your browser|enable javascript and cookies to continue|verify you are human/i.test(text);
+  if (/just a moment|attention required|access denied|verify you are human|are you a robot|security check|captcha|ddos-guard|browser verification/i.test(title)) return true;
+  return text.length < 1500 && /checking your browser|enable javascript and cookies to continue|verify you are human|verifying your browser/i.test(text);
 }
 
 function looksLikeMedia(v) {

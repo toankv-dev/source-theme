@@ -59,7 +59,7 @@ function classify(name, input = {}, cwd = '') {
     if (RUN_JS.test(cmd) && TEMP_DIR.test(cmd)) return 'temp script';
     if (WEB.test(cmd)) return 'fetch web';
     if (SHOPDY_CODE.test(cmd) && !/\.claude[\\/]skills/.test(cmd)) return 'read shopdy code';
-    if (THEME_PATH.test(n)) {
+    if (THEME_PATH.test(n) || THEME_PATH.test(norm(cwd) + '/')) { // the command names a theme, or runs inside one
       if (WRITER.test(cmd)) return 'write';
       if (DESIGN_MAP.test(n)) return 'read design map';
       if (READER.test(cmd)) return 'read theme code';

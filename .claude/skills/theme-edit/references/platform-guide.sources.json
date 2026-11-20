@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "checked": "2026-11-20",
+  "sources": {
+    "apps/web/src/components/app-sidebar.tsx": "7f06a2fc66c0b60768ffea69c35664989ca2d617",
+    "apps/web/src/features/theme-editor/components/section-outline.tsx": "e7a4206dacfe13682478eefbe29f91a904eb701d",
+    "apps/web/src/features/theme-editor/components/section-inspector.tsx": "b83c3a4769418413d31cf5b8f9fefbe4b25e9d90",
+    "apps/web/src/features/products/components/product-template-card.tsx": "620dd5c7365c0c798df59cfde4e48c92a3e7fd38",
+    "apps/web/src/features/products/components/product-theme-selector-dialog.tsx": "add0b9a49208223d3afe7a384b89ca17484bb653",
+    "apps/web/src/features/discounts/pages/discount-edit.page.tsx": "a7ac875ed130c423758322420abb33010ae6c87a",
+    "apps/web/src/features/discounts/pages/discounts.page.tsx": "a9896e16837c15a43bd2eb850a8f0f80fde11c5c",
+    "origin/SHOPDY-items/SHOPDY-127:apps/web/src/features/products/components/companion-bundles-builder.tsx": "a41dd77eea7a041186c586dba2fc95f7d1b13c22",
+    "apps/api/src/features/storefront/storefront.routes.ts": "d7244a204029cf12034ec03a17c7c55c1511fecc",
+    "apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx": "c70355b506d1b8b237f7578e044c3520d104d952"
+  }
+}

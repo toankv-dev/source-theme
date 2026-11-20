@@ -11,9 +11,16 @@ Spec từng module (viết theo thứ tự làm, mỗi đợt duyệt riêng):
 | `cost-meter` | [SPEC-cost-meter.md](SPEC-cost-meter.md) | **xong** 2026-11-20 · [plan](plan-theme-token-cost.md) |
 | `media-grab` | [SPEC-media-grab.md](SPEC-media-grab.md) | **xong** 2026-11-20 · [plan](plan-theme-token-cost.md) |
 | `theme-map` | [SPEC-theme-map.md](SPEC-theme-map.md) | **xong** 2026-11-20 · [plan](plan-theme-token-cost.md) |
-| `edit-check`, `platform-guide`, `section-grab` | đợt 2 | chưa viết |
-| `theme-edit` | đợt 3 | chưa viết |
-| `link-slim` | đợt 4 | chưa viết |
+| `edit-check` | [SPEC-edit-check.md](SPEC-edit-check.md) | **xong** 2026-11-20 (đợt 2) |
+| `section-grab` | [SPEC-section-grab.md](SPEC-section-grab.md) | **xong** 2026-11-20 (đợt 2) |
+| `platform-guide` | [SPEC-platform-guide.md](SPEC-platform-guide.md) | **xong** 2026-11-20 (đợt 2) |
+| `theme-edit` | [SPEC-theme-edit.md](SPEC-theme-edit.md) | **xong** 2026-11-20 (đợt 3) |
+| `link-slim` | [SPEC-link-slim.md](SPEC-link-slim.md) | **xong** 2026-11-20 (đợt 4) |
+
+Đợt 2–4 làm liền một mạch theo yêu cầu "tiếp tục code hết tất cả các đợt" (không dừng duyệt từng spec). Cùng lúc sửa lỗi
+`media-grab` trên shape-curve.com: đó là bot check thật (403 "Browser verification", sau đó 429), không phải lỗi tải —
+thêm chờ 429 một lần theo `Retry-After`, `--headed` để người dùng tự qua bước xác minh trong cửa sổ, thông báo rõ hơn
+(`lib/page.js openPage`, dùng chung với section-grab).
 
 Yêu cầu của người dùng:
 1. `/theme-from-link` tốn token → tìm lý do, chuyển phần làm được bằng code sang code.

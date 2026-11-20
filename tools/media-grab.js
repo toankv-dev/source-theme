@@ -15,6 +15,9 @@
  *   --to-theme     then put them into that theme as media-library.js does (WebP in assets/images/<xx>-<group>/, videos,
  *                  originals in _work/images/, _work/media-map.json) and print the default_* paths; needs --prefix
  *   --sheet        also <out>/contact-<group>.png, one look at each group (for the user; skills do not read them)
+ *   --headed       visible browser windows: when the site shows a bot check, YOU pass it in the window (the tool waits
+ *                  up to 3 min, then goes on with what the site shows you). A rate limit (HTTP 429) is waited out once.
+ *                  The tool itself never gets around a bot check.
  *
  * Where the media comes from: the rendered page at 1440 and 390 px, scrolled to the end, pop-ups closed
  * (tools/lib/collect-refs.js: img / srcset, picture sources, CSS backgrounds, video, <template>, JSON and script
@@ -33,10 +36,11 @@ const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 const { chromium } = require('playwright');
 const M = require('./lib/mirror');
-const { UA, UA_M, settle, clearPopups, injectMirror } = require('./lib/page');
+const { UA, UA_M, settle, clearPopups, injectMirror, openPage, blockedHint } = require('./lib/page');
 const { collectRefs } = require('./lib/collect-refs');
 const { plan, pictureKey, realExt } = require('./lib/media-pick');
 const G = require('./lib/media-grab');
+const { createFetcher } = require('./lib/fetch-media');
 
 const ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
@@ -45,7 +49,7 @@ const opt = (k, d) => (args.includes('--' + k) ? args[args.indexOf('--' + k) + 1
 const flag = (k) => args.includes('--' + k);
 const url = args.find((a, i) => /^https?:\/\//i.test(a) && !VALUED.includes(args[i - 1]));
 const USAGE = 'usage: node tools/media-grab.js <url> [--out <dir>] [--only <groups>] [--desktop-only] [--refresh] [--max-mb 300] '
-  + '[--to-theme <theme-dir> --prefix <xx>] [--sheet]';
+  + '[--to-theme <theme-dir> --prefix <xx>] [--sheet] [--headed]';
 if (!url) { console.error(USAGE); process.exit(1); }
 if (opt('to-theme') && !opt('prefix')) { console.error('--to-theme needs --prefix <xx> (the folder prefix of these pictures in the theme)'); process.exit(1); }
 
@@ -54,6 +58,9 @@ const OUT = path.resolve(opt('out', path.join(ROOT, 'downloads', T.outName)));
 const TMP = path.join(OUT, '.tmp');
 const MAX = Number(opt('max-mb', 300)) * 1048576;
 const ONLY = opt('only') ? new Set(opt('only').split(',').map((s) => s.trim())) : null;
+const HEADED = flag('headed');
+let COOKIES = []; // the store's cookies from the browser windows (a bot check a person passed): sent with the downloads
+const F = createFetcher({ referer: url, maxBytes: MAX, ua: UA });
 const show = (f) => { const r = path.relative(ROOT, f).replace(/\\/g, '/'); return r.startsWith('..') ? f.replace(/\\/g, '/') : r; };
 const VIEWPORTS = [
   { label: 'desktop', width: 1440, height: 900, ua: UA, mobile: false },
@@ -103,9 +110,10 @@ function pageExtras() {
   return { description: inside(desc), review: inside(reviews), json, external, shopify, shopdy: !!variants };
 }
 
-async function pass(browser, vp) {
+async function pass(browser, vp, cookies) {
   const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, userAgent: vp.ua, deviceScaleFactor: 1,
     isMobile: vp.mobile, hasTouch: vp.mobile });
+  if (cookies.length) await ctx.addCookies(cookies).catch(() => {}); // a check passed in the first window stays passed
   const page = await ctx.newPage();
   const streams = new Set();
   const media = new Set();
@@ -116,12 +124,8 @@ async function pass(browser, vp) {
     else if (req.resourceType() === 'media') media.add(u);
   });
   try {
-    const resp = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForLoadState('load', { timeout: 30000 }).catch(() => {});
-    const status = resp ? resp.status() : 0;
-    const title = await page.title().catch(() => '');
-    const text = await page.evaluate(() => (document.body ? document.body.innerText : '').slice(0, 3000)).catch(() => '');
-    if (M.isBlocked({ status, title, text })) return { blocked: true };
+    const open = await openPage(page, url, { headed: HEADED, say: (s) => console.error(`${vp.label}: ${s}`) });
+    if (open.blocked) return { blocked: true, open };
     await clearPopups(page);
     await settle(page);
     await clearPopups(page);
@@ -129,81 +133,33 @@ async function pass(browser, vp) {
     await injectMirror(page);
     const refs = await page.evaluate(collectRefs);
     const extras = await page.evaluate(pageExtras);
-    return { blocked: false, refs, extras, streams: [...streams], media: [...media] };
+    return { blocked: false, refs, extras, streams: [...streams], media: [...media], cookies: await ctx.cookies().catch(() => []) };
   } finally {
     await ctx.close();
   }
 }
 
-// ---- files ---------------------------------------------------------------------------------------------------------
-
-const BY_EXT = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif', avif: 'image/avif',
-  svg: 'image/svg+xml', mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', mov: 'video/quicktime' };
-
-/** Saves one picture / video (image/* or video/* only, at most --max-mb). → { bytes, type } | { tooBig } | { error } */
-async function fetchFile(u, dest) {
-  let res;
-  try {
-    res = await fetch(u, { headers: { 'User-Agent': UA, Referer: url, Accept: '*/*' }, signal: AbortSignal.timeout(10 * 60000) });
-  } catch (e) { return { error: String((e && e.message) || e).slice(0, 80) }; }
-  if (!res.ok || !res.body) return { error: 'HTTP ' + res.status, status: res.status };
-  let type = String(res.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
-  if (!/^(image|video)\//.test(type)) {
-    const ext = ((new URL(u).pathname.match(/\.([a-z0-9]+)$/i) || [])[1] || '').toLowerCase();
-    if (!BY_EXT[ext] || (type && !/octet-stream|binary/.test(type))) {
-      await res.body.cancel().catch(() => {});
-      return { error: 'not a picture or video (' + (type || 'no type') + ')' };
-    }
-    type = BY_EXT[ext];
-  }
-  const len = Number(res.headers.get('content-length') || 0);
-  if (len > MAX) { await res.body.cancel().catch(() => {}); return { tooBig: len }; }
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  const fh = fs.openSync(dest, 'w');
-  let bytes = 0;
-  let over = false;
-  try {
-    for await (const chunk of res.body) {
-      bytes += chunk.length;
-      if (bytes > MAX) { over = true; break; }
-      fs.writeSync(fh, chunk);
-    }
-  } catch (e) {
-    fs.closeSync(fh);
-    fs.rmSync(dest, { force: true });
-    return { error: String((e && e.message) || e).slice(0, 80) };
-  }
-  fs.closeSync(fh);
-  if (over) { fs.rmSync(dest, { force: true }); return { tooBig: bytes }; }
-  return { bytes, type };
-}
-
-async function fetchText(u, accept) {
-  try {
-    const res = await fetch(u, { headers: { 'User-Agent': UA, Referer: url, Accept: accept || '*/*' }, signal: AbortSignal.timeout(60000) });
-    return res.ok ? await res.text() : null;
-  } catch (e) { return null; }
-}
-
-async function pool(items, n, fn) {
-  let i = 0;
-  await Promise.all(Array.from({ length: Math.min(n, items.length) }, async () => { while (i < items.length) { const k = i++; await fn(items[k]); } }));
-}
+// Files: tools/lib/fetch-media.js (image/* and video/* only, --max-mb, cookies, slower retries).
 
 // ---- main ----------------------------------------------------------------------------------------------------------
 
 async function main() {
-  const browser = await chromium.launch();
+  // --headed: a visible window, so a person can pass a bot check (MEDIA_GRAB_HEADLESS=1 keeps it hidden, for the tests)
+  const browser = await chromium.launch({ headless: !HEADED || process.env.MEDIA_GRAB_HEADLESS === '1' });
   const passes = [];
   try {
-    for (const vp of VIEWPORTS) passes.push({ vp, ...(await pass(browser, vp)) });
+    for (const vp of VIEWPORTS) {
+      const p = await pass(browser, vp, COOKIES);
+      if (p.cookies) COOKIES = p.cookies;
+      passes.push({ vp, ...p });
+    }
   } finally {
     await browser.close();
   }
   const blocked = passes.filter((p) => p.blocked).map((p) => p.vp.label);
   const ok = passes.filter((p) => !p.blocked);
   if (!ok.length) {
-    console.error(`the page is behind a bot check (${blocked.join(', ')}): nothing downloaded. Ask for screenshots, or try later.`);
+    console.error(`${blocked.join(' + ')}: ${blockedHint(passes[0].open, 'media-grab')}. Nothing downloaded.`);
     process.exit(2);
   }
 
@@ -253,7 +209,7 @@ async function main() {
   // The product data of this one product.
   let data = null;
   if (T.productJs) {
-    const text = await fetchText(T.productJs, 'application/json');
+    const text = await F.fetchText(T.productJs, 'application/json');
     try { data = text ? G.productJsMedia(JSON.parse(text), T.productJs) : null; } catch (e) { data = null; }
     if (data && !data.images.length && !data.videos.length) data = null;
   }
@@ -282,7 +238,7 @@ async function main() {
   const notes = [];
   let streamSkips = 0;
   for (const [u, s] of streams) {
-    const text = /\.mpd(\?|#|$)/i.test(u) ? null : await fetchText(u);
+    const text = /\.mpd(\?|#|$)/i.test(u) ? null : await F.fetchText(u);
     const best = text ? M.hlsVariants(text, u)[0] : null;
     const mp4 = best ? M.shopifyMp4(best.url) : null;
     if (!mp4) { streamSkips++; notes.push(`stream (not one file): ${u}`); continue; }
@@ -295,19 +251,9 @@ async function main() {
   const list = [...cand.values()];
   const failed = [];
   const tooBig = [];
-  const attempt = async (c) => { c.result = await fetchFile(c.url, c.tmp); };
-  await pool(list, 6, async (c) => {
-    c.tmp = path.join(TMP, crypto.createHash('sha1').update(c.url).digest('hex').slice(0, 16));
-    await attempt(c);
-  });
-  // A CDN that refuses a burst (403 / 429 / 5xx right after the page load) usually answers a slower second try.
-  const RETRY = new Set([403, 408, 429, 500, 502, 503, 504]);
-  for (const wait of [1500, 5000]) {
-    const again = list.filter((c) => c.result && RETRY.has(c.result.status));
-    if (!again.length) break;
-    await new Promise((ok) => setTimeout(ok, wait));
-    await pool(again, 2, attempt);
-  }
+  for (const c of list) c.tmp = path.join(TMP, crypto.createHash('sha1').update(c.url).digest('hex').slice(0, 16));
+  F.setCookies(COOKIES);
+  await F.download(list, (c) => c.tmp);
   for (const c of list) {
     const r = c.result;
     if (r.error) failed.push(`${c.url} (${r.error})`);

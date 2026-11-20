@@ -192,3 +192,21 @@ Sửa những gì trang thật khác fixture (thêm vào fixture rồi test). Th
 ### Checkpoint 4 (2026-11-20)
 - [x] test 99/100 (còn test cũ `install-shopdy-skill`) · [x] link thật: shopdy đạt; Shopify đạt trên getionix.com,
   shape-curve.com bị bot check · [x] trạng thái các spec cập nhật · [ ] duyệt với người dùng, rồi viết spec đợt 2
+
+## Đợt 2–4 (2026-11-20, làm liền theo yêu cầu "code hết tất cả các đợt")
+
+- [x] Sửa media-grab khi bị chặn: `lib/page.js openPage` (429 → chờ `Retry-After` ≤ 60 s rồi thử lại một lần; `--headed`
+  → người dùng tự qua bot check, tool chờ ≤ 3 phút; cookie mang sang lượt mobile và các lần tải), thông báo phân biệt
+  429 / trang xác minh. Test: 429 có Retry-After, trang xác minh tự qua (giả lập người bấm), ảnh cần cookie.
+- [x] `cost-meter`: lệnh grep / sed / cat chạy sau khi `cd` vào theme cũng là đọc code theme (cwd của dòng transcript).
+- [x] `theme-map`: số dòng của mỗi file đích trong script `_src/` (`--part`, "edited by … (script lines a-b)").
+- [x] `edit-check` ([SPEC](SPEC-edit-check.md)) · `tools/edit-check.js`, `tools/test/edit-check.test.js` (4 test).
+- [x] `lib/fetch-media.js`: tải file dùng chung (media-grab chuyển sang dùng, 12 test vẫn xanh).
+- [x] `section-grab` ([SPEC](SPEC-section-grab.md)) · `tools/section-grab.js`, fixture `section.html`, 2 test; chạy thật
+  trên tammycharm.com.
+- [x] `platform-guide` ([SPEC](SPEC-platform-guide.md)) · guide 9 mục, `tools/platform-guide-check.js`, 1 test.
+- [x] `theme-edit` ([SPEC](SPEC-theme-edit.md)) · `.claude/skills/theme-edit/` (SKILL + 2 reference).
+- [x] `link-slim` ([SPEC](SPEC-link-slim.md)) · `tools/run-brief.js` + test; theme-from-link và new-theme SKILL.
+- [x] CLAUDE.md, README.
+- [ ] Đo ở các phiên thật tiếp theo (`transcript-cost.js --by-request --fresh`) và ghi vào SPEC-theme-token-cost.
+- [ ] shape-curve.com: chạy lại `media-grab … --headed` khi hết giới hạn 429 (người dùng tự qua bước xác minh).

@@ -187,15 +187,24 @@ function scan(dir) {
     const name = base(file).toLowerCase();
     // Only build-* and patch-* scripts edit the theme; the others are helpers and checks (a copy, a test, a scan).
     const kind = /^build[-_]/.test(name) ? 'generates' : /^patch[-_]/.test(name) ? 'patches' : 'reads';
-    if (kind !== 'reads') for (const t of targets) (roles[t] = roles[t] || []).push({ script: file, kind });
-    return { file, kind, targets, committed: file.startsWith('_src/') };
+    // where in the script each target is written: open those lines instead of the whole script
+    const rawLines = read(file).split('\n');
+    const lines = {};
+    for (const t of targets) {
+      const hits = [];
+      rawLines.forEach((l, i) => { if (l.includes(base(t))) hits.push(i + 1); });
+      if (hits.length) lines[t] = [hits[0], hits[hits.length - 1]];
+    }
+    if (kind !== 'reads') for (const t of targets) (roles[t] = roles[t] || []).push({ script: file, kind, lines: lines[t] || null });
+    return { file, kind, targets, lines, committed: file.startsWith('_src/') };
   });
   const editedBy = (list) => {
     const out = new Map();
     for (const f of list) {
       for (const r of roles[f] || []) {
-        const e = out.get(r.script) || { script: r.script, kind: r.kind, files: [] };
+        const e = out.get(r.script) || { script: r.script, kind: r.kind, files: [], at: {} };
         e.files.push(f);
+        if (r.lines) e.at[f] = r.lines;
         out.set(r.script, e);
       }
     }
@@ -466,7 +475,7 @@ function styledLines(list) {
 function hbsDetail(m, p, kind) {
   const L = [`${kind} ${p.id} · ${p.file} (${p.lines} lines)${p.schemaFile ? ' · schema ' + p.schemaFile : ''}`];
   L.push(`used by: ${p.usedBy.join(', ') || '—'}`);
-  if (p.editedBy.length) L.push('edited by: ' + p.editedBy.map((e) => `${e.script} ${e.kind} ${e.files.join(', ')}`).join(' · ') + ' → edit the script, then run it');
+  if (p.editedBy.length) L.push('edited by: ' + p.editedBy.map((e) => `${e.script} ${e.kind} ${e.files.map((x) => x + (e.at && e.at[x] ? ` (script lines ${e.at[x][0]}-${e.at[x][1]})` : '')).join(', ')}`).join(' · ') + ' → edit the script, then run it');
   if (p.settings && p.settings.length) {
     const s = p.settings.map((x) => `${x.id}${x.label ? ` "${x.label}"` : ''}${x.options.length ? ` [${x.options.map((o) => (o === '' ? '""' : o)).join('|')}]` : ''}`);
     L.push(`settings (${p.settings.length}): ${cap(s, 30)}`);
@@ -488,7 +497,7 @@ function hbsDetail(m, p, kind) {
 
 function templateDetail(t) {
   const L = [`template ${t.id}${t.name ? ` "${t.name}"` : ''} · ${t.file}${t.kind === 'layout' ? ' (layout)' : ''}`];
-  if (t.editedBy.length) L.push('edited by: ' + t.editedBy.map((e) => `${e.script} ${e.kind} ${e.files.join(', ')}`).join(' · ') + ' → edit the script, then run it');
+  if (t.editedBy.length) L.push('edited by: ' + t.editedBy.map((e) => `${e.script} ${e.kind} ${e.files.map((x) => x + (e.at && e.at[x] ? ` (script lines ${e.at[x][0]}-${e.at[x][1]})` : '')).join(', ')}`).join(' · ') + ' → edit the script, then run it');
   if (t.kind !== 'json') {
     L.push('partials: ' + (t.partials.join(', ') || '—'));
     if (t.links.length) L.push('links: ' + t.links.join(', '));
@@ -537,7 +546,7 @@ function part(m, id) {
     return L.join('\n');
   }
   if (id === 'sources') {
-    return ['sources', ...m.sources.map((s) => `${s.file} ${s.kind}: ${s.targets.join(', ') || '—'}`), ...sourcesLines(m).filter((l) => /WARNING|_src\/[^ ]+\/:/.test(l))].join('\n');
+    return ['sources', ...m.sources.map((s) => `${s.file} ${s.kind}: ${s.targets.map((x) => x + (s.lines && s.lines[x] ? ` ${s.lines[x][0]}-${s.lines[x][1]}` : '')).join(', ') || '—'}`), ...sourcesLines(m).filter((l) => /WARNING|_src\/[^ ]+\/:/.test(l))].join('\n');
   }
   return null;
 }

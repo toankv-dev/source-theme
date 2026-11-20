@@ -133,6 +133,12 @@ apply its **Shortcuts** and watch the step that was slowest last time.
   (FAQ) come from small `_src/build-*.js` scripts you edit and re-run (`_src/` is committed, `_work/` is not).
 - **Batch the checks**: one `shot.js` call per page and width; while iterating re-run only what failed; smoke +
   mobile-audit + pack once at the end.
+- **Check a part with numbers, not pictures**: `node tools/edit-check.js themes/<slug> --page <route> --selector "<css>"
+  [--ref <original url> --ref-selector "<css>"] [--eval "<js>"] [--shot]` — box, font, colours, sideways scroll, small
+  taps, console errors at 1440 + 360, the styles that differ from the original, then pack. It keeps one preview
+  running per theme (the preview re-reads files on every request: never restart it after an edit).
+- **One part of the original**: `node tools/section-grab.js <url> --heading "<text>"` → `section.md` (texts, fonts,
+  colours, layout, interactions, media) instead of reading the whole capture.
 
 At the end (after the report), update `RUNLOG.md`: add one line to **Runs** (date · theme · rough minutes per
 step · slowest step) and turn what slowed you into a concrete **Shortcut**. If the same step is slowest in two

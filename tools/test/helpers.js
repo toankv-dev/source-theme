@@ -22,7 +22,7 @@ const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBR
 
 function startFixture(port = 0) {
   const log = [];
-  const state = { blockDesktop: false, blockAll: false }; // /products/fickle-tee: a bot check the test switches on
+  const state = { blockDesktop: false, blockAll: false, limited: 0 }; // /products/fickle-tee: a bot check the test switches on
 
   const server = http.createServer((req, res) => {
     const u = new URL(req.url, 'http://x');
@@ -72,9 +72,23 @@ function startFixture(port = 0) {
     if (p === '/products/grab-tee') return file(path.join(GRAB, 'shopify.html'));
     if (p === '/products/grab-tee.js') return send(200, 'application/json', fs.readFileSync(path.join(GRAB, 'grab-tee.json')));
     if (p === '/shopdy-dress') return file(path.join(GRAB, 'shopdy.html'));
+    if (p === '/products/section-tee') return file(path.join(GRAB, 'section.html')); // tools/section-grab.js
     if (p === '/products/grab-blocked') return send(403, 'text/html', '<!doctype html><title>Just a moment...</title><p>Checking your browser</p>');
     if (p.startsWith('/cdn/shop/files/')) return file(path.join(SAMPLE, path.basename(p)));
     if (p === '/pixel.gif') return send(200, 'image/gif', PIXEL);
+    // A rate limit (the first visit gets 429 + Retry-After: 1) and a bot check that "a person" passes: the check page sets
+    // the cookie itself after 0.8 s; /vimg/ pictures need that cookie too.
+    if (p === '/products/grab-limited') {
+      if (state.limited++ === 0) return send(429, 'text/plain', 'Too Many Requests', { 'Retry-After': '1' });
+      return file(path.join(GRAB, 'shopify.html'));
+    }
+    const verified = /(^|;\s*)verified=1/.test(req.headers.cookie || '');
+    if (p === '/products/grab-verify') {
+      if (verified) return file(path.join(GRAB, 'verified.html'));
+      return send(403, 'text/html', '<!doctype html><title>Browser verification</title><p>Verifying your browser</p>'
+        + "<script>setTimeout(function () { document.cookie = 'verified=1; path=/'; location.reload(); }, 800);</script>");
+    }
+    if (p.startsWith('/vimg/')) return verified ? file(path.join(SAMPLE, path.basename(p))) : send(403, 'text/plain', 'forbidden');
     const f = path.join(SITE, path.normalize(decodeURIComponent(p)));
     return f.startsWith(SITE) ? file(f) : send(404, 'text/plain', 'not found');
   });

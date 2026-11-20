@@ -20,6 +20,7 @@ Mở Claude Code ở thư mục gốc của repo.
 
 - **Có link trang gốc** → `/theme-from-link`
 - **Chỉ có ảnh chụp** → `/new-theme`
+- **Sửa một theme đã có** → `/theme-edit`, xem [mục bên dưới](#theme-edit-sửa-theme-đã-có)
 - **Cần một page kéo thả trên Shopdy giống trang đối thủ (không phải theme)** → `/store-page-from-link`, chạy trong
   repo shopdy-promax, xem [mục bên dưới](#store-page-from-link-page-kéo-thả-từ-link-đối-thủ)
 
@@ -77,6 +78,27 @@ có ảnh chụp để nhìn, còn `/theme-from-link` tải cả trang thật v�
 **Tóm lại:** có link thì dùng `/theme-from-link`, vì theme giống bản gốc hơn và bạn đỡ việc hơn. Chỉ dùng `/new-theme`
 khi không có link, hoặc link bị chặn không tải được.
 
+## `/theme-edit`: sửa theme đã có
+
+Mở Claude Code ở `D:\source-theme`, mỗi yêu cầu một phiên (gõ `/clear` trước):
+
+```
+/theme-edit lunara---vesnacharm: footer đổi sang màu chủ đạo, chữ trắng; nút Add to cart bo tròn hơn.
+/theme-edit lunara---vesnacharm: thêm phần video giống phần "See them in motion" ở https://doi-thu.com/products/x
+/theme-edit lunara---vesnacharm: làm sao để đưa phần Questions lên trước You Will Also Love?
+```
+
+Claude tự phân loại yêu cầu:
+
+| Loại | Ví dụ | Claude làm gì |
+| --- | --- | --- |
+| Sửa code theme | màu, bố cục, mobile, thêm chức năng | Đọc design map, sửa đúng chỗ, kiểm tra 1440 + 360 bằng một lệnh, tạo zip |
+| Giống một phần của link khác | "làm giống phần … ở link này" | Chỉ lấy đúng phần đó (chữ, font, màu, bố cục, ảnh, video), dựng lại, so với bản gốc |
+| Bạn tự làm được trong admin | giảm giá, đổi thứ tự section, chọn template, duyệt review | Hướng dẫn từng bước, không sửa code |
+| Cần sửa cả shopdy | logic giá, giỏ hàng, API | Dừng lại, trình bày phần shopdy làm / theme làm để bạn duyệt, làm phần theme, viết spec + nháp ticket Jira cho shopdy |
+
+Xong mỗi yêu cầu: zip mới trong `dist/`, design map được cập nhật, một dòng ghi vào `themes/<tên>/_map/edit-log.md`.
+
 ## Dùng ít token hơn
 
 ### Mỗi yêu cầu một phiên
@@ -112,7 +134,29 @@ Lệnh này tải hết ảnh và video của đúng trang đó vào `downloads/
 
 - Đưa thẳng vào theme: thêm `--to-theme themes/<tên> --prefix <2 chữ cái>`.
 - Chỉ lấy vài nhóm: `--only gallery,variants`. Muốn nhanh hơn: `--desktop-only`.
-- Trang chặn bot thì lệnh dừng, không tải gì.
+- Trang bị chặn:
+  - báo **HTTP 429**: site đang giới hạn máy bạn, lệnh tự chờ rồi thử lại một lần; vẫn bị thì đợi vài phút rồi chạy lại.
+  - báo **bot check**: chạy lại với `--headed`. Một cửa sổ trình duyệt mở ra, **bạn tự bấm qua bước xác minh**, lệnh
+    chờ tối đa 3 phút rồi tải tiếp. Lệnh không bao giờ tự lách bot check.
+
+### Lấy đúng một phần của trang đối thủ
+
+```
+node tools/section-grab.js https://doi-thu.com/products/x --heading "See them in motion"
+```
+
+Lệnh tìm phần có tiêu đề đó và ghi lại `section.md`: chữ, font, màu, cỡ chữ trên điện thoại, nút, số item mỗi hàng,
+cuộn ngang, slider. Kèm theo là ảnh chụp phần đó ở desktop và điện thoại, cùng ảnh và video của riêng phần đó. Không
+thấy tiêu đề thì lệnh liệt kê các tiêu đề có trên trang.
+
+### Kiểm tra một chỗ vừa sửa
+
+```
+node tools/edit-check.js themes/<tên> --page /product --selector "#addToCart"
+```
+
+Một lệnh đo phần tử ở 1440 và 360 (cỡ, font, màu, viền), báo cuộn ngang, nút quá nhỏ, lỗi console, rồi chạy pack.
+`--ref <link gốc>` để chỉ ra chỗ khác bản gốc. Server xem thử được giữ chạy, sửa xong không cần bật lại.
 
 ### Đo token đã dùng
 

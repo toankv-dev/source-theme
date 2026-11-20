@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section Tee</title>
+<style>
+  body { margin: 0; font-family: Arial, sans-serif; }
+  img, video { max-width: 100%; }
+  .hero { padding: 40px 16px; }
+  .motion { padding: 40px 0; background: #f7f0f3; }
+  .motion .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  .motion h2 { font: 700 32px/40px Arial, sans-serif; color: #222222; text-align: center; margin: 0 0 8px; }
+  .motion .sub { font-size: 16px; color: #555555; text-align: center; margin: 0 0 24px; }
+  .track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .clip { flex: 0 0 220px; scroll-snap-align: start; }
+  .clip video { display: block; width: 220px; height: 390px; object-fit: cover; border-radius: 12px; }
+  .btn { display: inline-block; margin-top: 24px; background: #790236; color: #ffffff; border-radius: 30px; padding: 14px 40px; text-decoration: none; }
+  .faq { padding: 40px 16px; }
+</style>
+</head>
+<body>
+<section class="hero"><h1>Section Tee</h1></section>
+<section class="motion">
+  <div class="wrap">
+    <h2>See them in motion</h2>
+    <p class="sub">Real customers, real moves</p>
+    <div class="track">
+      <div class="clip"><video src="/media/clip1.mp4" poster="/img/Wine_Red.jpg" autoplay muted loop playsinline></video></div>
+      <div class="clip"><video src="/media/clip2.mp4" autoplay muted loop playsinline></video></div>
+      <div class="clip"><video src="/media/clip3.mp4" muted playsinline></video></div>
+    </div>
+    <a class="btn" href="#shop">Shop now</a>
+  </div>
+</section>
+<section class="faq"><h2>Questions?</h2><img src="/img/rose_tank.jpg" width="300" height="300" alt="Rose"></section>
+</body>
+</html>

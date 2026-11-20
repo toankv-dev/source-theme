@@ -148,6 +148,31 @@ test('a page behind a bot check: exit 2, nothing written', async (t) => {
   assert.ok(!fs.existsSync(path.join(out, 'media.json')));
 });
 
+test('a rate limit (HTTP 429) is waited out once, as long as the site asks', async (t) => {
+  const store = await startFixture();
+  t.after(() => store.close());
+  const out = path.join(tmpDir('media-grab-'), 'out');
+  const r = await runNode([CLI, store.origin + '/products/grab-limited', '--out', out, '--desktop-only']);
+  assert.equal(r.code, 0, r.stdout + r.stderr);
+  assert.match(r.stderr, /rate limited \(HTTP 429\): waiting 1 s/);
+  assert.ok(fs.existsSync(path.join(out, 'media.json')));
+});
+
+test('a bot check: without --headed exit 2 and say what to do; with --headed a person passes it, the downloads carry its cookie', async (t) => {
+  const store = await startFixture();
+  t.after(() => store.close());
+  const out = path.join(tmpDir('media-grab-'), 'out');
+  const blocked = await runNode([CLI, store.origin + '/products/grab-verify', '--out', out, '--desktop-only']);
+  assert.equal(blocked.code, 2, blocked.stdout + blocked.stderr);
+  assert.match(blocked.stderr, /bot check \(HTTP 403 "Browser verification"\): run again with --headed/);
+  const env = { ...process.env, MEDIA_GRAB_HEADLESS: '1' }; // the window stays hidden in the tests; the check page passes itself
+  const r = await runNode([CLI, store.origin + '/products/grab-verify', '--out', out, '--headed'], { env });
+  assert.equal(r.code, 0, r.stdout + r.stderr);
+  assert.match(r.stderr, /pass it yourself/);
+  const list = JSON.parse(fs.readFileSync(path.join(out, 'media.json'), 'utf8'));
+  assert.deepEqual(list.map((e) => [e.group, path.basename(new URL(e.url).pathname)]), [['gallery', 'Wine_Red.jpg']]);
+});
+
 test('--to-theme adds the media to a theme and keeps its library; a name taken by another picture is refused', async (t) => {
   const store = await startFixture();
   t.after(() => store.close());

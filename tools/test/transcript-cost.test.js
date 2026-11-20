@@ -187,6 +187,9 @@ test('classify knows the steps of theme work', () => {
   assert.equal(classify('Bash', { command: T + 'grep -n "review" sections/reviews.hbs | head -40' }), 'read theme code');
   assert.equal(classify('Bash', { command: T + 'node -e "const s=require(\'fs\').readFileSync(\'sections/sc-reviews.hbs\',\'utf8\')"' }), 'read theme code');
   assert.equal(classify('Bash', { command: heredoc }), 'write');
+  assert.equal(classify('Bash', { command: 'grep -n "review" sections/reviews.hbs' }, 'D:\\source-theme\\themes\\x'), 'read theme code', 'after a cd into the theme');
+  assert.equal(classify('Bash', { command: 'ls sections' }, 'D:\\source-theme\\themes\\x'), 'shell');
+  assert.equal(classify('Bash', { command: 'grep -n x README.md' }, 'D:\\source-theme'), 'shell');
   assert.equal(classify('Bash', { command: 'cat themes/x/_map/design-map.md' }), 'read design map');
   assert.equal(classify('Read', { file_path: 'D:\\source-theme\\themes\\x\\_map\\design-map.md' }), 'read design map');
   assert.equal(classify('Read', { file_path: 'D:\\source-theme\\themes\\x\\sections\\product.hbs' }), 'read theme code');

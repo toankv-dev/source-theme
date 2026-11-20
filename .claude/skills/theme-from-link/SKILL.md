@@ -10,9 +10,14 @@ Input: one store page link, or several (each link = one page). Output: what `new
 `base-theme`), looking like the downloaded page at 1440 and 390, every platform behaviour of the base intact.
 Talk to the user in Vietnamese. Specs: `docs/SPEC-theme-from-link.md`, `docs/SPEC-theme-from-link-images.md`.
 
-**The build rules are new-theme's.** Read `.claude/skills/new-theme/SKILL.md` — *Rules*, *Fonts and colours*,
-*Speed* — and its `RUNLOG.md` first, and follow them. This skill replaces how the input is taken (an offline
-copy instead of live captures), what the theme is compared with, and the media rules (below).
+**The build rules are new-theme's.** Start with `node tools/run-brief.js [themes/<slug>]`: it prints the lines of
+`.claude/skills/new-theme/SKILL.md` (*Rules*, *Fonts and colours*, *Speed*) and of its `RUNLOG.md` (lessons) to read —
+read those lines only, and follow them — plus the state of the theme and the next step. Do not read README, git logs,
+or the specs / plans / CHANGELOGs of other themes. This skill replaces how the input is taken (an offline copy instead
+of live captures), what the theme is compared with, and the media rules (below).
+
+**Cost.** One session per link (a long session re-reads everything on every call). When the zip is out, stop: later
+changes to the theme are `/theme-edit` requests, each in a new session.
 
 ## Rules (on top of new-theme's)
 
@@ -73,7 +78,11 @@ copy instead of live captures), what the theme is compared with, and the media r
    shown size, section, hidden, gallery — handy for the media-slot sizes and ratios in `plan.md`.
    Run `node tools/media-library.js themes/<slug> --prefix <xx>` (background): its `slots` list gives the `default_image` paths.
 4. **Build** = new-theme steps 3–8 (map → build → compare → verify → pack → report), with:
-   - reference screenshots `_work/site/pages/<name>/desktop.png` and `mobile.png`:
+   - one part at a time, by numbers first: `node tools/edit-check.js themes/<slug> --page /product --selector "<css>"
+     --ref http://localhost:8092/<name> --ref-selector "<css of the original>"` prints only the styles that differ
+     (font, colours, border, radius, padding, size) at 1440 and 360; `--shot` adds one side-by-side picture per width
+     when the numbers cannot tell. edit-check keeps one preview running: do not start preview-server yourself;
+   - the whole page, at the end: reference screenshots `_work/site/pages/<name>/desktop.png` and `mobile.png`:
      `node tools/visual-diff.js themes/<slug>/_work/site/pages/product/desktop.png http://localhost:8091/product --out themes/<slug>/_work/diff`
      and `… /mobile.png http://localhost:8091/product --width 390 …`;
    - where each page goes: `home` → `templates/index.hbs` + `home_*` settings · `product` → `templates/product.json`

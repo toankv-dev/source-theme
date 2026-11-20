@@ -1,0 +1,3 @@
+{{!-- Block "Highlights box" of the product section (Shapecurve look): up to 5 short lines in a grey box; an emoji at the
+      start of a line is its icon. One line on purpose: with no line the list is truly empty and sc-product.css hides it. --}}
+<ul class="sc-hlbox">{{#if settings.line_1}}<li>{{settings.line_1}}</li>{{/if}}{{#if settings.line_2}}<li>{{settings.line_2}}</li>{{/if}}{{#if settings.line_3}}<li>{{settings.line_3}}</li>{{/if}}{{#if settings.line_4}}<li>{{settings.line_4}}</li>{{/if}}{{#if settings.line_5}}<li>{{settings.line_5}}</li>{{/if}}</ul>

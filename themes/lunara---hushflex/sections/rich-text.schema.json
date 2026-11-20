@@ -1,0 +1,40 @@
+{
+  "name": "Rich text",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Talk about your product" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Share the story behind this product, who it is for and why they will love it.</p>"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 480,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text",
+      "category": "Content",
+      "description": "A heading and a paragraph of formatted text."
+    }
+  ]
+}

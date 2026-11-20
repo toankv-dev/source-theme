@@ -1,0 +1,184 @@
+/* Lunara Vesnacharm — theme chrome in the look of shape-curve.com (docs/SPEC-lunara-vesnacharm.md).
+   Linked by snippets/gs-head.hbs after custom.css on every page except checkout. Measured on the download of
+   2026-11-19: probe = _work/probe-1440.txt / probe-390.txt, live = _work/site/pages/product-shapecurve/desktop.png.
+   Font stays the theme's Poppins; the original's violets become the highlight (--vn-hl, Colors > Highlight colour). */
+
+/* ---- Highlight tints: the original's 120deg #eaeaf5 / #d3cbf9 / #e9c3f1 / #e1dcf9 gradient → 7 / 20 / 13 / 10 % of
+   the highlight on white (same stops as --sc-grad of the bodysuit template). --vn-hl is set again from the setting
+   in gs-head. */
+:root {
+  --vn-hl: #790236;
+  --vn-hl-rgb: 121, 2, 54; /* set again from the setting by gs-head */
+  --vn-hl-07: color-mix(in srgb, var(--vn-hl) 7%, #fff);
+  --vn-grad: linear-gradient(120deg, color-mix(in srgb, var(--vn-hl) 7%, #fff) 0, color-mix(in srgb, var(--vn-hl) 20%, #fff) 20%, color-mix(in srgb, var(--vn-hl) 13%, #fff) 80%, color-mix(in srgb, var(--vn-hl) 10%, #fff) 100%);
+}
+
+/* ---- Top bar (rotating messages), as tammycharm.com (user 2026-11-20: "darker background, bigger text"): solid main
+   colour (header.hbs, when no background is set), white Poppins 14px/600 (size = Theme settings > Top bar > Text size,
+   --vn-tb-size), h40 desktop / 44 phone, ‹ › chevrons near the edges of a 1300 px row. Colour = settings topbar_color. */
+#lunara-topbar .vn-tb { display: flex; align-items: center; justify-content: center; height: 40px; max-width: 1300px; margin: 0 auto; padding: 0 6px; }
+#lunara-topbar .vn-tb .lt-in { flex: 1 1 auto; min-width: 0; height: 40px; margin: 0; padding: 0; }
+#lunara-topbar .vn-tb .lt-msg { inset: 0 8px; font-size: var(--vn-tb-size, 14px); font-weight: 600; line-height: 1.6; letter-spacing: .02em; }
+#lunara-topbar .vn-tb__arrow { position: relative; z-index: 2; flex: 0 0 44px; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -2px 0; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+#lunara-topbar .vn-tb__arrow svg { width: 8px; height: 14px; }
+#lunara-topbar .vn-tb__arrow[hidden] { display: none; }
+#lunara-topbar .vn-tb__arrow:focus-visible { outline: 2px solid currentColor; outline-offset: -6px; }
+@media (max-width: 749px) {
+  #lunara-topbar .vn-tb, #lunara-topbar .vn-tb .lt-in { height: 44px; }
+  #lunara-topbar .vn-tb { padding: 0; }
+  #lunara-topbar .vn-tb .lt-msg { white-space: normal; line-height: 1.3; }
+}
+
+/* ---- Header: logo centred on row 1, menu centred on row 2, search + cart on the right of row 2; no line under it
+   on desktop (live desktop.png y 36-169: logo centre y 86, menu text centre y 131, header h133). Menu = Montserrat
+   14px/600 ls .28px #232323 (probe-1440 "New") → Poppins 14px (the theme ships 400 / 700), ~40 px between items.
+   Cart count = #1a2531 circle (pixel.js live 1413,144). Phone (capture mobile.png y 36-86): logo centred, h50.
+   Dawn hides a search nested in .header__icons for header--top-center on desktop: shown again here. Phone keeps
+   Lunara's grid (search hidden there, as on hushflex); only the logo is centred. */
+.section-header .header.header--top-center .header__icons > .header__search { display: inline-flex; }
+.section-header .cart-count-bubble { background-color: #1a2531; color: #fff; }
+.section-header .header__inline-menu .header__menu-item,
+.section-header .header__inline-menu .header__menu-item span { color: #232323; font-size: 14px; letter-spacing: .28px; }
+@media screen and (min-width: 990px) {
+  .section-header .header.header--top-center { padding-top: 27px; padding-bottom: 16px; }
+  .section-header .header.header--top-center .header__inline-menu { margin-top: 0; }
+  .section-header .header.header--top-center .header__inline-menu .list-menu__item { padding-left: 20px; padding-right: 20px; }
+  .section-header .header.header--top-center .header__icons { grid-row: 2; grid-column: 3; align-self: center; }
+  .section-header .header-wrapper--border-bottom { border-bottom: 0; }
+}
+@media screen and (max-width: 989px) {
+  .section-header .header.header--top-center { padding-top: 3px; padding-bottom: 3px; }
+  .section-header .header.header--top-center .header__heading { justify-self: center; }
+}
+
+/* ---- Footer (live / capture desktop.png y 10526-10984, probe-1440 "ababcabd"): band in the theme's main colour (user
+   2026-11-19: Theme settings > Colors > Footer background, empty = the highlight; the original is black) with 5 columns, widths ≈ 1.25 : 1 : 1 : 1 : 1.5;
+   headings Montserrat 18px/600 ls .36px #fff → Poppins 18px/700; links + texts 14px lh30 #d1d1d1 (= 82 % of the footer
+   text on black); email 16px; SUBMIT 130 x 40, 16px/700 uppercase #111 on the violet gradient (→ --vn-grad) with a
+   #5e4887 border (→ highlight); bottom bar #111111 (pixel.js capture desktop.png --y 10930-10990), © 14px #d4d4d4.
+   Phone (probe-390): headings 14px, columns stacked two by two, taps ≥ 44 px. */
+footer#lu-ft.lu-ft { --ft-bg: var(--vn-footer, var(--vn-hl, #790236)); --ft-fg: rgb(var(--lu-footer-text-rgb, var(--color-base-solid-button-labels))); --vn-ft-soft: color-mix(in srgb, var(--ft-fg) 82%, var(--ft-bg)); }
+#lu-ft .vn-ft { background: var(--ft-bg); color: var(--ft-fg); }
+#lu-ft .vn-ft__main { display: grid; grid-template-columns: 1.25fr 1fr 1fr 1fr 1.5fr; column-gap: 24px; padding: 60px 0; }
+#lu-ft .vn-ft__logo { display: inline-block; color: var(--ft-fg); text-decoration: none; margin-top: 20px; }
+#lu-ft .vn-ft__logo img { display: block; width: auto; max-width: 230px; height: auto; max-height: 60px; object-fit: contain; }
+#lu-ft .vn-ft__name { display: block; font-size: 30px; line-height: 1.2; font-weight: 700; letter-spacing: .01em; color: var(--ft-fg); }
+#lu-ft .vn-ft__tag { margin: 10px 0 0; font-size: 14px; line-height: 20px; color: var(--vn-ft-soft); }
+#lu-ft .vn-ft__mail { display: flex; align-items: center; gap: 16px; margin: 50px 0 0; font-size: 16px; line-height: 18px; color: var(--vn-ft-soft); }
+#lu-ft .vn-ft__mail svg { flex: none; color: var(--ft-fg); }
+#lu-ft .vn-ft__mail a { color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+#lu-ft .vn-ft__h { margin: 0 0 8px; font-family: inherit; font-size: 18px; line-height: 24px; font-weight: 700; letter-spacing: .36px; color: var(--ft-fg); }
+#lu-ft .vn-ft__list { margin: 0; padding: 0; list-style: none; }
+#lu-ft .vn-ft__list a { display: inline-block; font-size: 14px; line-height: 30px; letter-spacing: .28px; color: var(--vn-ft-soft); text-decoration: none; }
+#lu-ft .vn-ft__list a:hover, #lu-ft .vn-ft__mail a:hover { color: var(--ft-fg); text-decoration: underline; }
+#lu-ft .vn-ft__p { margin: 0 0 24px; font-size: 14px; line-height: 20px; letter-spacing: .28px; color: var(--vn-ft-soft); }
+#lu-ft .vn-ft__form { display: flex; gap: 15px; }
+#lu-ft .vn-ft__email { flex: 0 1 200px; min-width: 0; height: 40px; padding: 0 16px; border: 1px solid #fff; border-radius: 0; background: #fff; color: #232323; font: inherit; font-size: 14px; }
+#lu-ft .vn-ft__btn { flex: 0 0 130px; height: 40px; padding: 0 12px; border: 1px solid var(--vn-hl); border-radius: 0; background: var(--vn-hl-07); background-image: var(--vn-grad); color: #111111; font: inherit; font-size: 16px; font-weight: 700; letter-spacing: .32px; text-transform: uppercase; cursor: pointer; }
+#lu-ft .vn-ft__btn:hover { filter: brightness(.96); }
+#lu-ft .vn-ft__btn:disabled { cursor: default; opacity: .8; }
+#lu-ft .vn-ft__bottom { background: color-mix(in srgb, var(--ft-bg) 80%, #000); } /* original: #111 under #000 → a darker shade of the footer */
+#lu-ft .vn-ft__bin { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 62px; padding-top: 10px; padding-bottom: 10px; }
+#lu-ft .vn-ft__copy { margin: 0; font-size: 14px; line-height: 35px; letter-spacing: .28px; color: var(--vn-ft-soft); }
+#lu-ft .vn-ft__copy a { color: inherit; text-decoration: none; }
+#lu-ft .vn-ft__pay { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; padding: 0; justify-content: flex-end; }
+#lu-ft .vn-ft__pay .ft-pay-icon { width: auto; height: 30px; }
+@media screen and (max-width: 989px) {
+  #lu-ft .vn-ft__main { grid-template-columns: 1fr 1fr; row-gap: 32px; padding: 40px 0; }
+  #lu-ft .vn-ft__brand, #lu-ft .vn-ft__news { grid-column: 1 / -1; }
+  #lu-ft .vn-ft__news { order: 1; }
+  #lu-ft .vn-ft__logo { margin-top: 0; }
+  #lu-ft .vn-ft__mail { margin-top: 24px; }
+  #lu-ft .vn-ft__h { font-size: 14px; letter-spacing: .28px; }
+  #lu-ft .vn-ft__list a, #lu-ft .vn-ft__mail a { display: inline-flex; align-items: center; min-height: 44px; }
+  #lu-ft .vn-ft__email { flex: 1 1 auto; height: 44px; font-size: 16px; }
+  #lu-ft .vn-ft__btn { height: 44px; }
+  #lu-ft .vn-ft__bin { flex-direction: column; align-items: flex-start; padding-top: 16px; padding-bottom: 16px; }
+  #lu-ft .vn-ft__pay { justify-content: flex-start; gap: 10px; }
+}
+
+/* ---- Product cards, theme-wide (home catalog + related; #ms-card-tpl). Badge and sale price in the main colour since
+   2026-11-19 (user: the whole theme in #790236; the original's were red). Measured: "NN% OFF" badge top-right, Inter 12px/700
+   ls .24px #fff on #e13f3f, 9 px from the picture's corner (probe-1440 "35% OFF", pixel.js capture desktop.png
+   640,9240); sale price #ff0000 (probe "$45.99", pixel.js --y 9610-9635); stars yellow #F9C40F (as the bodysuit
+   rating) instead of Lunara's green. A card without a compare-at price gets an empty badge: hidden. */
+.card-wrapper .card__inner > .vn-badge { position: absolute; top: 9px; right: 9px; z-index: 3; display: block; width: auto; height: auto; padding: 4px 7px; background: var(--vn-hl, #790236); color: #fff; font-size: 12px; line-height: 14.4px; font-weight: 700; letter-spacing: .24px; text-transform: uppercase; pointer-events: none; }
+.card-wrapper .card__inner > .vn-badge:empty { display: none; }
+.card-wrapper .price--on-sale .price-item--sale { color: var(--vn-hl, #790236); }
+.lu-card-rating .stars { color: #F9C40F; }
+
+/* ---- "You Will Also Love" (product-recommendations, probe-1440 top 9104 h710 bg #f8f8f8): full-width #f8f8f8 band,
+   heading Montserrat 16px/600 lh36 ls .32px uppercase #232323 → Poppins 16px/700, flat white cards (no radius, no
+   shadow) with a 4:5 picture, text left: title on one line (… as the original) 14px/400 ls .28px #232323, price 16px/700 with the compare-at price
+   (#232323, struck) before the sale price. */
+.lu-related { background: #f8f8f8; padding: 50px 0 70px; }
+.lu-related .lu-related__h { margin: 0 0 30px; font-size: 16px; line-height: 36px; font-weight: 700; letter-spacing: .32px; text-transform: uppercase; color: #232323; }
+.lu-related .card { border-radius: 0; --border-radius: 0; --shadow-opacity: 0; box-shadow: none; text-align: left; }
+.lu-related .card::after, .lu-related .card .card__inner::after { box-shadow: none; }
+.lu-related .card__inner.ratio { --ratio-percent: 125% !important; border-radius: 0; }
+.lu-related .card > .card__content { text-align: left; padding: 12px 0 16px; }
+.lu-related .card > .card__content .card__information { padding: 0; text-align: left; }
+.lu-related .lu-card-rating { justify-content: flex-start; }
+.lu-related .product-card-wrapper .card__information .card__heading.h5 { -webkit-line-clamp: 1; min-height: 0; margin-bottom: 10px; font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: .28px; color: #232323; }
+.lu-related .card-information .price { margin-top: 0; }
+.lu-related .price, .lu-related .price__container { text-align: left; justify-content: flex-start; }
+.lu-related .price .price-item { font-size: 16px; line-height: 18px; font-weight: 700; letter-spacing: normal; }
+.lu-related .price__sale { display: inline-flex; flex-direction: row-reverse; align-items: baseline; gap: 10px; }
+.lu-related .price__compare-price s.price-item { color: #232323; }
+@media screen and (max-width: 749px) {
+  .lu-related { padding: 32px 0 40px; }
+  .lu-related .lu-related__h { margin-bottom: 16px; }
+}
+
+/* ---- Logo size (Theme settings > Header; user 2026-11-19 "as big as the original"): Shapecurve's logo letters are
+   170 x 35 px at 1440 and 111 x 23 px on a phone; a wide word logo of the same weight is ~280 / ~180 px wide.
+   Lunara capped it at 200 x 50 / 150 x 40 px. */
+.section-header .header__heading-link.gs-logo-link img.header__heading-logo { width: var(--vn-logo-w, 280px); max-width: 100%; height: auto; max-height: none; }
+@media screen and (max-width: 749px) {
+  .section-header .header__heading-link.gs-logo-link img.header__heading-logo { width: var(--vn-logo-wm, 180px); }
+}
+
+/* ---- Add to cart / quick add / sticky bar in the theme's main colour (the highlight, white text; user 2026-11-19) on
+   every template; Lunara used the primary colour (and hard-coded #124f9f on the sticky bar). Pill + hover kept. */
+#addToCart.main-product-atc, .card-wrapper .quick-add__submit { --color-button: var(--vn-hl-rgb, 121, 2, 54); --color-button-text: 255, 255, 255; }
+#QuickAdd-ms #addToCart { background: var(--vn-hl, #790236) !important; }
+.lu-sticky-bar .lu-sticky-bar__btn { background: var(--vn-hl, #790236) !important; color: #fff !important; }
+/* Cart drawer Checkout: its background comes from cart-drawer.hbs (Cart drawer > checkout colour, empty = the highlight);
+   Lunara also sets an orange --color-button on it for Dawn's hover layer: the main colour there too. */
+#CartDrawer #CartDrawer-Checkout { --color-button: var(--vn-hl-rgb, 121, 2, 54); }
+
+/* ---- Scroll-to-top button: the highlight colour (user 2026-11-19), was Lunara's accent = the primary colour. A thin
+   white ring keeps it visible over the footer, which has the same colour. */
+#shopify-section-scroll-to-top-btn .scroll-to-top-btn { background-color: var(--vn-hl, #790236); color: #fff; box-shadow: 0 0 0 2px #fff, .1rem .1rem 1rem #0000004d; }
+
+/* ---- The whole theme in the main colour (user 2026-11-19): every control's border and fill in the highlight, no black or
+   grey button borders. Lunara's own rules use the primary / text colour (#121212, #292929, #2e2f32): overridden here. */
+.product-form__input:not(.product-form__input--quantity-breaks) input[type="radio"] + label { border-color: var(--vn-hl, #790236); }
+.product-form__input:not(.product-form__input--quantity-breaks) input[type="radio"]:checked + label { background-color: var(--vn-hl, #790236); border-color: var(--vn-hl, #790236); color: #fff; }
+#MainProduct-template--28236351668559__main .lu-vs-shapermint .product-form__input:not(.product-form__input--quantity-breaks) input[type="radio"] + label { border-color: var(--vn-hl, #790236) !important; }
+#MainProduct-template--28236351668559__main .lu-vs-shapermint .product-form__input:not(.product-form__input--quantity-breaks) input[type="radio"]:checked + label { background: var(--vn-hl, #790236) !important; border-color: var(--vn-hl, #790236) !important; color: #fff !important; }
+#MainProduct-template--28236351668559__main .lu-vs-walmart .product-form__input:not(.product-form__input--quantity-breaks) input[type="radio"]:checked + label { box-shadow: var(--vn-hl, #790236) 0 0 0 3px inset !important; }
+#MainProduct-template--28236351668559__main .thumbnail[aria-current] { border-color: var(--vn-hl, #790236); }
+
+/* ---- Menu (user 2026-11-19): bold; the current page and hover in the main colour with a thin underline. Lunara marks
+   the current page with a filled accent pill (.header__active-menu-item-v2.color-accent-1) that, in the main colour and
+   with this header's dark text, looked broken. */
+.section-header .header__inline-menu .header__menu-item,
+.section-header .header__inline-menu .header__menu-item span { font-weight: 700; }
+.section-header .header__inline-menu .header__menu-item:hover,
+.section-header .header__inline-menu .header__menu-item:hover span { color: var(--vn-hl, #790236); }
+.section-header .header__active-menu-item-v2,
+.menu-drawer .header__active-menu-item-v2 { padding: 0 !important; background: none !important; color: var(--vn-hl, #790236) !important; box-shadow: inset 0 -2px 0 var(--vn-hl, #790236); }
+.section-header .header__active-menu-item-v2::before, .section-header .header__active-menu-item-v2::after,
+.menu-drawer .header__active-menu-item-v2::before, .menu-drawer .header__active-menu-item-v2::after { display: none !important; }
+.menu-drawer .menu-drawer__menu-item { font-weight: 700; }
+.menu-drawer .menu-drawer__menu-item--active, .menu-drawer .menu-drawer__menu-item[aria-current="page"] { color: var(--vn-hl, #790236); }
+
+/* Pack "SAVE xx%" right after the pack title, in the main colour (user 2026-11-19, screenshot "Single [SAVE 70%]").
+   theme.js moves the subtitle's .lu-k-save into [data-lu-save-slot]; the rest of the subtitle stays below
+   (bodysuit look: on the same row, as its "$31.50 Each" pill). */
+.lu-k-save-slot:empty { display: none; }
+.kaching-bundles .kaching-bundles__bar-first-line:has(.lu-k-save) { display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px; row-gap: 4px; }
+.kaching-bundles .kaching-bundles__bar-content-left:has([data-lu-save-slot] .lu-k-save) { display: flex; flex-direction: column !important; align-items: flex-start; row-gap: 2px; }
+.sc-skin .kaching-bundles .kaching-bundles__bar-content-left:has([data-lu-save-slot] .lu-k-save) { flex-direction: row !important; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.lu-kaching .kaching-bundles .lu-k-save { display: inline-block; padding: 3px 7px !important; border-radius: 4px !important; background: var(--vn-hl, #790236) !important; color: #fff !important; font-size: 11px !important; line-height: 1.3; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }

@@ -1,0 +1,50 @@
+{
+  "name": "Custom HTML",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "html",
+      "label": "HTML",
+      "info": "Printed as is. Store tokens such as {{CompanyEmail}}, {{RefundLink}} or {{ShippingInfo}} are filled in; everything else is left alone.",
+      "default": "<div style=\"text-align:center\">\n  <h2>Your heading</h2>\n  <p>Paste any HTML here — a banner, an embed, a table, a video.</p>\n</div>"
+    },
+    {
+      "type": "css",
+      "id": "css",
+      "label": "CSS",
+      "info": "Printed in a <style> tag with this section. Prefix selectors with .ch to keep the rules to it.",
+      "default": ""
+    },
+    {
+      "type": "javascript",
+      "id": "js",
+      "label": "JavaScript",
+      "info": "Printed in a <script> tag after the HTML, so it runs once the section is on the page.",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "contain",
+      "label": "Keep inside the page width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom HTML",
+      "category": "Content",
+      "description": "Your own HTML, CSS and JavaScript — Shopify's \"Custom Liquid\"."
+    }
+  ]
+}

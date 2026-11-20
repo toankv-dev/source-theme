@@ -8,7 +8,8 @@ reference/*/_inspect.json
 reference/*/_base-update.md
 tools/node_modules/
 
-# Junctions to D:\agent-skills (local machine only, not committed)
+# >>> agent-skills links
+# Written by tools/link-agent-skills.js: junctions into the agent-skills checkout, local to each machine.
 /.claude/agents
 /.claude/commands
 /.claude/references
@@ -37,3 +38,4 @@ tools/node_modules/
 /.claude/skills/spec-driven-development
 /.claude/skills/test-driven-development
 /.claude/skills/using-agent-skills
+# <<< agent-skills links

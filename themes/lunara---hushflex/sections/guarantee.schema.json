@@ -1,0 +1,60 @@
+{
+  "name": "Guarantee",
+  "tag": "div",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "⭐ OUR GUARANTEE ⭐"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Guarantee line",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "45-day money-back guarantee"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee",
+      "category": "Trust",
+      "description": "A boxed list of promises with check marks.",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "text": "45-day money-back guarantee"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Free shipping on every order"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "text": "Real support, real people"
+          }
+        }
+      ]
+    }
+  ]
+}

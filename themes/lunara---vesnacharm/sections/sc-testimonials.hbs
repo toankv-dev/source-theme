@@ -1,0 +1,77 @@
+{{!-- Photo testimonials (sections/sc-testimonials.schema.json) — Shapecurve template "Loved By 12,000+ Ladies Worldwide".
+      Hand-picked quotes typed in the editor (not the product's reviews): photo, name + verified tick, stars + "5/5",
+      text. A swipeable row (scroll-snap) with one dot per screenful and a button to the reviews (#lu-reviews). Photos =
+      picked file, else default_image (theme file), else an empty frame. Own <style> + <script>; the script wires every
+      row once (data-ok), so the editor's section swap re-runs it safely. --}}
+<style>
+  .sct{letter-spacing:normal;--sc-hl:#790236;background:var(--sct-bg,#f6edf1);color:#333}
+  .sct__wrap{max-width:1200px;margin:0 auto;padding:0 15px;box-sizing:border-box}
+  .sct__h{margin:15px 0 40px;font-size:36px;line-height:50.4px;font-weight:700;letter-spacing:.72px;text-align:center;color:#333}
+  .sct__row{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 15px;padding:0 15px 10px;margin:0;list-style:none;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .sct__row::-webkit-scrollbar{display:none}
+  .sct__slide{flex:0 0 335px;padding:0 15px;box-sizing:border-box;scroll-snap-align:start}
+  .sct__card{height:100%;padding:20px 16px;box-sizing:border-box;border-radius:20px;background:rgba(255,255,255,.8);box-shadow:4px 4px 10px rgba(0,0,0,.15)}
+  .sct__photo{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:10px;background:#e9e9e9}
+  .sct__img,.sct__ph{position:absolute;top:0;left:0;width:100%!important;height:100%!important;max-width:none!important;margin:0;display:block;object-fit:cover}
+  .sct__ph{display:flex;align-items:center;justify-content:center;padding:12px;box-sizing:border-box;font-size:13px;color:#666;text-align:center}
+  .sct__name{display:flex;align-items:center;justify-content:center;gap:6px;margin:28px 0 0;font-size:18px;line-height:27px;font-weight:700;letter-spacing:.36px;color:#222}
+  .sct__name .sc-ic{flex:0 0 auto;color:#000}
+  .sct__stars{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 0 12px;font-size:16px;line-height:18px;color:#333}
+  .sct__starbox{position:relative;display:block;width:96px;height:17px}
+  .sct__starbox svg{position:absolute;top:0;left:0;display:block;width:96px;height:17px}
+  .sct__s0{color:#dcdcdc}
+  .sct__s1{color:var(--sct-star,#F5A623);clip-path:inset(0 calc(100% - var(--r,5) * 20%) 0 0)}
+  .sct__q{margin:0;font-size:16px;line-height:22.4px;color:#333}
+  .sct__dots{display:flex;justify-content:center;margin:-4px 0 -16px;min-height:4px}
+  .sct__dot{position:relative;width:44px;height:44px;margin:0 -7px;padding:0;border:0;background:none;cursor:pointer}
+  .sct__dot:after{content:"";position:absolute;left:12px;top:20px;width:20px;height:4px;background:#b8b8b8}
+  .sct__dot[aria-current="true"]:after{background:var(--vn-hl,#790236)}
+  .sct__btnrow{text-align:center;margin:30px 0 0}
+  .sct__btn{display:inline-flex;align-items:center;justify-content:center;min-width:185px;min-height:50px;padding:0 24px;box-sizing:border-box;border-radius:10px;background:#333;color:#fff;font-size:20px;line-height:20px;font-weight:700;text-decoration:none}
+  .sct__btn:hover{background:#000;color:#fff}
+  @media (max-width:749px){
+    .sct__wrap{padding:0}
+    .sct__h{margin:10px 15px 24px;font-size:24px;line-height:33.6px;letter-spacing:.48px}
+    .sct__row{padding:0 7px 10px;scroll-padding:0 7px}
+    .sct__slide{flex-basis:66%;padding:0 8px}
+    .sct__card{padding:10px 10px 16px}
+    .sct__name{margin-top:14px;font-size:16px;line-height:24px;letter-spacing:.32px}
+    .sct__q{font-size:14px;line-height:19.6px}
+    .sct__btnrow{margin-top:24px}
+    .sct__btn{min-width:164px;min-height:44px;font-size:15px;line-height:15px}
+  }
+</style>
+<div class="sct" style="--sct-bg:{{#if section.settings.bg}}{{section.settings.bg}}{{else}}#F6EDF1{{/if}};--sc-hl:{{#if section.settings.highlight}}{{section.settings.highlight}}{{else}}#790236{{/if}};--sct-star:{{#if section.settings.star}}{{section.settings.star}}{{else}}#F5A623{{/if}};padding-top:{{#if section}}{{section.settings.pad_top}}{{else}}20{{/if}}px;padding-bottom:{{#if section}}{{section.settings.pad_bottom}}{{else}}20{{/if}}px">
+  <div class="sct__wrap">
+    {{#if section.settings.heading}}<h2 class="sct__h" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    <ul class="sct__row" data-sct-row>
+      {{#each section.blocks}}
+      <li class="sct__slide" {{{this.attributes}}}><div class="sct__card">
+        <div class="sct__photo">{{#if this.settings.image}}<img class="sct__img" src="{{this.settings.image}}" alt="{{this.settings.name}}" width="273" height="364" loading="lazy">{{else if this.settings.default_image}}<img class="sct__img" src="{{@root.assets_url}}/{{this.settings.default_image}}" alt="{{this.settings.name}}" width="273" height="364" loading="lazy">{{else}}<span class="sct__ph">{{#if @root.__designMode}}Pick a 3:4 photo{{/if}}</span>{{/if}}</div>
+        {{#if this.settings.name}}<p class="sct__name"><span>{{this.settings.name}}</span>{{#unless (eq this.settings.verified false)}}{{> sc-icon name="check"}}{{/unless}}</p>{{/if}}
+        <p class="sct__stars" aria-label="{{#if this.settings.rating}}{{this.settings.rating}}{{else}}5{{/if}} out of 5 stars"><span class="sct__starbox" style="--r:{{#if this.settings.rating}}{{this.settings.rating}}{{else}}5{{/if}}" aria-hidden="true"><svg viewBox="0 0 120 22" width="96" height="17" class="sct__s0">{{> sc-stars}}</svg><svg viewBox="0 0 120 22" width="96" height="17" class="sct__s1">{{> sc-stars}}</svg></span><span>{{#if this.settings.rating}}{{this.settings.rating}}{{else}}5{{/if}}/5</span></p>
+        {{#if this.settings.text}}<p class="sct__q">{{this.settings.text}}</p>{{/if}}
+      </div></li>
+      {{/each}}
+    </ul>
+    <div class="sct__dots" data-sct-dots></div>
+    {{#if section.settings.button_label}}<p class="sct__btnrow"><a class="sct__btn" href="{{#if section.settings.button_link}}{{section.settings.button_link}}{{else}}#lu-reviews{{/if}}">{{section.settings.button_label}}</a></p>{{/if}}
+  </div>
+</div>
+<script>(function(){
+  // One dot per screenful of cards; a tap scrolls there, scrolling moves the current dot. Wires each row once.
+  function wire(row){
+    if(row.getAttribute('data-ok'))return;row.setAttribute('data-ok','1');
+    var dots=row.parentNode.querySelector('[data-sct-dots]');if(!dots)return;
+    function pages(){return Math.max(1,Math.ceil((row.scrollWidth-4)/Math.max(1,row.clientWidth)));}
+    function cur(){var n=pages();return n<2?0:Math.min(n-1,Math.round(row.scrollLeft/Math.max(1,row.scrollWidth-row.clientWidth)*(n-1)));}
+    function draw(){
+      var n=pages();if(dots.childNodes.length!==(n>1?n:0)){dots.innerHTML='';if(n>1)for(var i=0;i<n;i++){var b=document.createElement('button');b.type='button';b.className='sct__dot';b.setAttribute('aria-label','Show testimonials page '+(i+1));(function(k){b.addEventListener('click',function(){row.scrollTo({left:k/(n-1)*(row.scrollWidth-row.clientWidth),behavior:'smooth'});});})(i);dots.appendChild(b);}}
+      var c=cur();Array.prototype.forEach.call(dots.childNodes,function(b,i){b.setAttribute('aria-current',i===c?'true':'false');});
+    }
+    var t=0;row.addEventListener('scroll',function(){if(!t)t=requestAnimationFrame(function(){t=0;draw();});},{passive:true});
+    addEventListener('resize',draw);draw();
+  }
+  function run(){Array.prototype.forEach.call(document.querySelectorAll('[data-sct-row]'),wire);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();</script>

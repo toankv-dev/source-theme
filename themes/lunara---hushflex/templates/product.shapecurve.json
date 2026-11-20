@@ -1,0 +1,390 @@
+{
+  "name": "Shapecurve – Drop-seat bodysuit",
+  "description": "Shapecurve bodysuit page in Lunara: picture colour tiles + size pills, Find My Size, Buy 1 / 2 / 3 packs, Express checkout, shipping box, info rows, feature cards, details, photo testimonials, trust badges, reviews, related products. Highlight #790236, Poppins.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "skin": "shapecurve",
+        "skin_highlight": "#790236",
+        "buy_now_label": "Express checkout now",
+        "show_rating": true,
+        "show_variants": true,
+        "show_description": false,
+        "show_trust": false,
+        "show_size_finder": false
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "sc_price",
+          "settings": {
+            "badge": "Buy More Save More",
+            "show_compare": true
+          }
+        },
+        "highlights": {
+          "type": "sc_highlights",
+          "settings": {
+            "line_1": "✨ Smooth All Over, Instantly",
+            "line_2": "💦 Bathroom Breaks Made Easy",
+            "line_3": "🤍 Held In, Never Squeezed"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "fit": {
+          "type": "sc_fit",
+          "settings": {
+            "button_label": "Find my size",
+            "option_name": "Size",
+            "units": "us",
+            "eyebrow": "",
+            "title": "Find your size",
+            "subtitle": "One number you already know. No tape measure.",
+            "chart_label": "See the full size chart",
+            "chart_open": true,
+            "chart": "Size | Weight | US size\nXS | 95-110 | 0\nS | 110-125 | 2-4\nM | 125-140 | 6-8\nL | 140-160 | 10-12\nXL | 160-180 | 14-16\n2XL | 180-205 | 18-20\n3XL | 205-240 | 22-24",
+            "note": "Every body is different. If you land between two sizes, we’ll show you both.",
+            "chart2_label": "Body measurements",
+            "chart2_note": "Measured on the body, not the garment. Handy when you land between two sizes.",
+            "chart2": "Size | Bust (in) | Waist (in) | Hip (in)\nXS | 32-34 | 25-27 | 35-37\nS | 35-37 | 28-30 | 38-40\nM | 38-40 | 31-33 | 41-43\nL | 41-43 | 34-36 | 44-46\nXL | 44-46 | 37-39 | 47-49\n2XL | 47-49 | 40-42 | 50-52\n3XL | 50-52 | 43-45 | 53-55",
+            "proof_strong": "12,000+ customers",
+            "proof_text": "have found their fit"
+          }
+        },
+        "kaching": {
+          "type": "kaching",
+          "settings": {
+            "heading": "BUY MORE - SAVE MORE",
+            "selected": 2,
+            "save_style": "percent",
+            "accent": "#790236",
+            "price_color": "#000000",
+            "bar_bg": "#F8F2F5",
+            "selected_bg": "#FFFFFF",
+            "title_color": "#000000",
+            "badge_text_color": "#FFFFFF",
+            "pack1_qty": 1,
+            "pack1_title": "Buy 1",
+            "pack1_subtitle": "Standard price",
+            "pack1_badge": "",
+            "pack2_qty": 2,
+            "pack2_title": "Buy 2-Better Deal Unlocked",
+            "pack2_subtitle": "{each} Each",
+            "pack2_badge": "Flash Sale⚡",
+            "pack3_qty": 3,
+            "pack3_title": "Buy 3-Maximum Savings",
+            "pack3_subtitle": "{each} Each",
+            "pack3_badge": "Free Shipping🚚",
+            "pack4_qty": 0,
+            "pack4_title": "",
+            "pack4_subtitle": "",
+            "pack4_badge": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "ship": {
+          "type": "sc_ship",
+          "settings": {
+            "title": "Free Shipping Over $79",
+            "note": "*Same-Day Shipping— for Orders Before 12pm PST",
+            "item_1": "Secure Checkout",
+            "item_2": "Easy Returns"
+          }
+        },
+        "tabs": {
+          "type": "sc_tabs",
+          "settings": {
+            "tab_1_title": "Shipping & Return",
+            "tab_1_body": "<p><strong>Shipping Policy</strong></p><p>We offer <strong>FREE</strong> worldwide shipping for <strong>orders over $79 USD.</strong> For in-stock items, your order will be processed and <strong>shipped within 3-5 business days</strong> after order verification, depending on the shipping method you select. Depending on your location, delivery typically takes approximately <strong>7-14 business days.</strong> You can track your order directly from the \"<strong>Track My Order</strong>\" menu.</p><p><strong>Return/Exchange Policy</strong></p><p>If you're not satisfied with your purchase, you may return them for a <strong>refund within 30 days of delivery.</strong></p>",
+            "tab_2_title": "Care Guide",
+            "tab_2_body": "<p><strong>Hand Wash or Use a Delicate Cycle:</strong> To keep our products looking great, handle them with care. Hand washing is the gentlest method, but if you use a washing machine, be sure to use the delicate cycle.</p><p><strong>Use Mild Detergent:</strong> Gentle detergents are best for our delicate fabrics. Avoid using fabric softeners and bleach, as they can damage the material.</p><p><strong>Air Dry:</strong> After washing, avoid the dryer. Instead, lay your product flat or hang it to air dry. Keep it out of direct sunlight to prevent fading.</p><p><strong>Store Carefully:</strong> To avoid stretching, fold your product neatly and store it in a drawer or hang it up. Keep it out of direct sunlight and humid places.</p><p><strong>Replace When Necessary:</strong> Our products are designed to support and contour your body, but over time, they might lose some elasticity. Replace your item when it doesn't provide the same support or shows signs of wear.</p>",
+            "tab_3_title": "",
+            "tab_3_body": "",
+            "chart_title": "Size Chart",
+            "chart": "Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32–34 | 25–27 | 35–37 | 95–110\nS | 2–4 | 35–37 | 28–30 | 38–40 | 110–125\nM | 6–8 | 38–40 | 31–33 | 41–43 | 125–140\nL | 10–12 | 41–43 | 34–36 | 44–46 | 140–160\nXL | 14–16 | 44–46 | 37–39 | 47–49 | 160–180\n2XL | 18–20 | 47–49 | 40–42 | 50–52 | 180–205\n3XL | 22–24 | 50–52 | 43–45 | 53–55 | 205–240",
+            "chart_note": ""
+          }
+        }
+      },
+      "blockOrder": [
+        "title",
+        "rating",
+        "price",
+        "highlights",
+        "variant_picker",
+        "fit",
+        "kaching",
+        "buy_buttons",
+        "ship",
+        "tabs"
+      ]
+    },
+    "features": {
+      "type": "sc-features",
+      "settings": {
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 50,
+        "pad_bottom": 10
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/0806.webp",
+            "tag": "Easy-Slide Drop Seat",
+            "heading": "Bathroom Breaks, Made Easy",
+            "body": "<p>No more struggling with your shapewear. The easy-slide drop seat design makes <strong>bathroom breaks quicker and more convenient</strong>, so you can stay shaped, supported, and comfortable throughout the day.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/0806-2.webp",
+            "tag": "Full-Body Sculpting Fit",
+            "heading": "Sleek From Every Angle",
+            "body": "<p>Designed to <strong>shape the waist, tummy, hips, and thighs</strong>, this bodysuit creates a smoother line under clothes. It helps your favorite dresses, pants, and fitted outfits look cleaner and more flattering.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/3_zone_compression.webp",
+            "tag": "Zoned Smart Compression",
+            "heading": "Smooth Where It Matters",
+            "body": "<p>Different compression levels target different areas, <strong>giving your body the right support where it needs it most.</strong> It helps smooth bumps, refine your shape, and create a more confident, sculpted look.</p>"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/fabric_b9f16534-5521-4906-91b3-33c7b30bb3a7.webp",
+            "tag": "Seamless Stretch Fabric",
+            "heading": "Held In, Not Held Back",
+            "body": "<p>Made with flexible, skin-friendly fabric, this shapewear moves with your body while maintaining a smooth fit. Enjoy <strong>breathable comfort and confident support</strong> whether you’re dressing up or wearing it daily.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ]
+    },
+    "details": {
+      "type": "sc-details",
+      "settings": {
+        "heading": "Crafted In Every Detail",
+        "image": "",
+        "default_image": "images/sc-sections/model_a2dd1128-20e3-4f0b-a45f-2be6713e6296.webp",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 20
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/bust.webp",
+            "title": "Wavy Bust Lifting Band",
+            "text": "Gently lifts and supports the bust for a naturally fuller, more flattering shape."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/easy_off.webp",
+            "title": "Drop-Seat Design",
+            "text": "Makes bathroom breaks easier without having to fully remove your shapewear."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/butt.webp",
+            "title": "Wavy Hip-Shaping Band",
+            "text": "Helps lift and contour the hips for a smoother, more sculpted curve."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/fabric1.webp",
+            "title": "Stretchy Skin-Friendly Fabric",
+            "text": "Feels soft, breathable, and flexible for comfortable all-day wear."
+          }
+        }
+      },
+      "blockOrder": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "testimonials": {
+      "type": "sc-testimonials",
+      "settings": {
+        "heading": "Loved By 12,000+ Ladies Worldwide",
+        "button_label": "View All",
+        "button_link": "#lu-reviews",
+        "star": "#F5A623",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 20
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_2.webp",
+            "name": "Samantha R.",
+            "verified": true,
+            "rating": 5,
+            "text": "Wow, this bodysuit really surprised me. It smooths my tummy and thighs nicely, but still feels breathable enough to wear for hours."
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_4.webp",
+            "name": "Kayla M.",
+            "verified": true,
+            "rating": 5,
+            "text": "Honestly, I love this shapewear. The drop-seat design is such a relief, and I didn’t have to fight with it in the restroom."
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_3.webp",
+            "name": "Brianna Hayes",
+            "verified": true,
+            "rating": 5,
+            "text": "Oh my gosh, this body shaper gives such a clean look under dresses. It holds me in without feeling stiff or painful."
+          }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_1.webp",
+            "name": "Danielle P.",
+            "verified": true,
+            "rating": 5,
+            "text": "So happy with this bodysuit. The compression feels smart, not harsh, and my waist, hips, and thighs look smoother right away."
+          }
+        }
+      },
+      "blockOrder": [
+        "quote_1",
+        "quote_2",
+        "quote_3",
+        "quote_4"
+      ]
+    },
+    "trust": {
+      "type": "sc-trust",
+      "settings": {
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 35
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "image": "",
+            "title": "Free Shipping",
+            "text": "<p>Enjoy free shipping on all orders over $79 USD</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "money",
+            "image": "",
+            "title": "100% Money Back",
+            "text": "<p>Free returns within the first 30 days after purchasing</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "card",
+            "image": "",
+            "title": "Secure Checkout",
+            "text": "<p>Payment from the most popular &amp; secure payment methods</p>"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "support",
+            "image": "",
+            "title": "24/7 Live Support",
+            "text": "<p>Reach out to our support team via email: <strong>{{CompanyEmail}}</strong></p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "show_write": false,
+        "star_color": "#F9C40F"
+      }
+    },
+    "related": {
+      "type": "related",
+      "settings": {
+        "heading": "You Will Also Love"
+      }
+    }
+  },
+  "order": [
+    "product",
+    "features",
+    "details",
+    "testimonials",
+    "trust",
+    "reviews",
+    "related"
+  ]
+}

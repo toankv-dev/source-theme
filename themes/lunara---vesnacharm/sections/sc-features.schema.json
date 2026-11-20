@@ -1,0 +1,85 @@
+{
+  "name": "Feature cards (picture + text)",
+  "tag": "section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Picture or GIF",
+          "info": "Square, 1110 x 1110 recommended. Animated GIF / WebP plays. Cards alternate sides on desktop."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Feature heading"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text",
+          "default": "<p>Describe the benefit in one or two sentences.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature cards",
+      "category": "Content",
+      "description": "White cards on a tinted band: picture one side, tag + heading + text the other."
+    }
+  ]
+}

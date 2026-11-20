@@ -30,6 +30,13 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   This is their source: edit here (bump `metadata.version` in `SKILL.md`), then install / update a shopdy-promax
   checkout with `node tools/install-shopdy-skill.js <shopdy-promax dir>` (keeps its `_work/` and `.env`). Never edit
   only the installed copy.
+- `.claude/` — this repo's own skills `new-theme`, `theme-from-link`, `update-base` (committed). Everything else
+  there (the other skills, `agents/`, `commands/`, `references/`) is a junction into an
+  [agent-skills](https://github.com/addyosmani/agent-skills) checkout (`D:\agent-skills`): engineering skills from
+  spec to ship, the `/spec` `/plan` `/build` `/test` `/review` `/code-simplify` `/ship` `/webperf` commands,
+  reviewer agents and checklists. Read-only from here: a change belongs in agent-skills. After a clone, or when
+  agent-skills adds or drops a skill, run `node tools/link-agent-skills.js [<agent-skills dir>]`. It never touches
+  a real folder of this repo and keeps the links' block in `.gitignore`.
 
 ## Rules
 
@@ -40,9 +47,10 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 - A theme zip given to improve the base → follow the `update-base` skill (`.claude/skills/update-base/SKILL.md`):
   absorb platform behaviour always and recurring sections/settings, bump the version, log it in
   `base-theme/CHANGELOG.md`, sync core files into `themes/*`.
-- Specs, plans and task lists go in `docs/` — never at the repo root or in `tasks/`, whatever a skill's default
-  path says (spec-driven-development → `docs/SPEC-<topic>.md`, planning-and-task-breakdown →
-  `docs/plan-<topic>.md` + `docs/todo-<topic>.md`). Link between them with relative paths inside `docs/`.
+- Specs, plans and task lists go in `docs/` — never at the repo root or in `tasks/`, whatever a skill's or
+  command's default path says (spec-driven-development and `/spec` → `docs/SPEC-<topic>.md`,
+  planning-and-task-breakdown and `/plan` → `docs/plan-<topic>.md` + `docs/todo-<topic>.md`; `/build` reads them
+  there, not `SPEC.md` / `tasks/`). Link between them with relative paths inside `docs/`.
 - The deliverable of a theme is always the zip from `node tools/pack.js <theme-dir>` (0 errors).
 - Never edit a theme's `assets/js/core.js` or the checkout logic; keep the pixel / platform hooks.
 - Only the platform engine's Handlebars helpers (listed in `base-theme/README.md`); `pack.js` enforces it.

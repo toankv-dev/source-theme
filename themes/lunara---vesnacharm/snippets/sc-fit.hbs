@@ -1,0 +1,275 @@
+{{!-- Block "Find my size" of the product section (sections/product.schema.json, type sc_fit), as the size recommender of
+      shape-curve.com (user 2026-11-19; was getionix's): a pill button opens a dialog with in / lbs ⇄ cm / kg, Weight
+      (required) + Bust / Waist / Hips (optional, shown when the chart has the column), "Find My Size" → the recommended size
+      (weight only: one size, or both when it sits on the line between two; with measurements: the size that fits the
+      largest one), "Select M" sets the size in the main picker and every pack row; under it the complete size chart.
+      Chart = setting "rec_chart" (first line = column names, one size per line, cells split by |): columns found by name
+      (Weight in lbs, Bust / Waist / Hip in inches); cm / kg converts them. The size option is the "Size option name"
+      setting, else the option whose values match the chart's sizes (a product with "Side" still works).
+      Self-contained (own <style> and <script>, any product template). Accent = --sc-hl (bodysuit look) else #790236. --}}
+<div class="scfit" data-scfit data-unit="{{#if (eq settings.units "metric")}}metric{{else}}imperial{{/if}}" data-option="{{#if settings.option_name}}{{settings.option_name}}{{else}}Size{{/if}}" data-chart="{{settings.rec_chart}}" data-l-weight="{{#if settings.rec_weight}}{{settings.rec_weight}}{{else}}Weight{{/if}}" data-l-bust="{{#if settings.rec_bust}}{{settings.rec_bust}}{{else}}Bust{{/if}}" data-l-waist="{{#if settings.rec_waist}}{{settings.rec_waist}}{{else}}Waist{{/if}}" data-l-hip="{{#if settings.rec_hips}}{{settings.rec_hips}}{{else}}Hips{{/if}}" data-select="{{#if settings.rec_select}}{{settings.rec_select}}{{else}}Select {size}{{/if}}" data-one="{{#if settings.rec_l_one}}{{settings.rec_l_one}}{{else}}{size} fits your {measures}.{{/if}}" data-two="{{#if settings.rec_l_two}}{{settings.rec_l_two}}{{else}}You land between {a} and {b}: {a} fits snug, {b} gives more room.{{/if}}" data-edge="{{#if settings.rec_l_edge}}{{settings.rec_l_edge}}{{else}}Your {measure} is outside our chart, so {size} is the closest size.{{/if}}">
+<style>
+  /* Measured on the user's screenshot of shape-curve.com's size recommender (1566 px): dialog 980 px, r24; eyebrow 11px/700
+     ls 1.5px; title ~36px/800; toggle 214 x 40; fields 320 x 47 r8 on a 2-column grid; button 656 x 50 r8 #8061c4; chart
+     card r12 border #ddd3f2; table head #a98ae8 with the first cell #8061c4, rows ~36 px. Violets → the main colour and
+     tints of it; font = the theme's Poppins. */
+  .scfit{--fit-hl:var(--sc-hl,#790236);--fit-ink:#1f1a22;--fit-mute:#77727c;--fit-t3:#fdfafb;--fit-t10:#f2e6eb;--fit-t18:#ead3dd;--fit-head:#9b4268;--fit-bg:#fbf7f9;--fit-glow:#f0c6d8;margin:4px 0 0;letter-spacing:normal}
+  @supports (background:color-mix(in srgb,red 50%,#fff)){.scfit{--fit-t3:color-mix(in srgb,var(--fit-hl) 2%,#fff);--fit-t10:color-mix(in srgb,var(--fit-hl) 10%,#fff);--fit-t18:color-mix(in srgb,var(--fit-hl) 18%,#fff);--fit-head:color-mix(in srgb,var(--fit-hl) 75%,#fff);--fit-bg:color-mix(in srgb,var(--fit-hl) 3%,#fff);--fit-glow:color-mix(in srgb,var(--fit-hl) 25%,#fff)}}
+  .scfit,.scfit *{box-sizing:border-box}
+  .scfit [hidden]{display:none!important}
+  /* the pill that opens it (kept from the previous finder) */
+  .scfit__open{position:relative;display:inline-flex;padding:1.5px;border:0;border-radius:999px;overflow:hidden;cursor:pointer;background:rgba(121,2,54,.35);box-shadow:0 6px 22px rgba(121,2,54,.16);font:inherit;transition:box-shadow .3s,transform .3s}
+  .scfit__open:before{content:"";position:absolute;left:50%;top:50%;width:300%;height:0;padding-bottom:300%;background:conic-gradient(from 0deg,rgba(121,2,54,.35) 0deg,rgba(121,2,54,.35) 60%,var(--fit-hl) 76%,var(--fit-glow) 85%,rgba(121,2,54,.35) 100%);transform:translate(-50%,-50%);animation:scfit-orbit 4s linear infinite}
+  @keyframes scfit-orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .scfit__open-in{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:13px 26px;border-radius:inherit;background:var(--fit-bg);color:#333;font-size:12.5px;line-height:1.2;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;transition:background .25s,color .25s}
+  .scfit__open svg{flex:0 0 auto;color:var(--fit-hl)}
+  .scfit__open:hover{box-shadow:0 10px 28px rgba(121,2,54,.26);transform:translateY(-1px)}
+  .scfit__open:hover .scfit__open-in{background:var(--fit-hl);color:#fff}
+  .scfit__open:hover svg{color:#fff}
+  .scfit__open:focus-visible{outline:3px solid var(--fit-hl);outline-offset:3px}
+  /* dialog */
+  .scfit__dlg{width:min(980px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:24px;background:#fff;color:var(--fit-ink);box-shadow:0 30px 80px rgba(20,8,14,.35);overflow:auto;overscroll-behavior:contain}
+  .scfit__dlg::backdrop{background:rgba(20,16,22,.55)}
+  /* scrolls, without a visible scrollbar (user 2026-11-19) */
+  .scfit__dlg{scrollbar-width:none;-ms-overflow-style:none}
+  .scfit__dlg::-webkit-scrollbar{display:none;width:0;height:0}
+  .scfit__dlg[open]{animation:scfit-in .28s ease-out}
+  @keyframes scfit-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .scfit__modal{position:relative;padding:40px 22px 22px;background:linear-gradient(180deg,var(--fit-t3),#fff 320px)}
+  .scfit__x{position:absolute;top:12px;right:12px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--fit-t18);border-radius:50%;background:#fff;color:var(--fit-ink);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .scfit__x:hover{border-color:var(--fit-hl);color:var(--fit-hl)}
+  .scfit__form{max-width:656px;margin:0 auto}
+  .scfit__eyebrow{margin:0 0 6px;text-align:center;font-size:11px;line-height:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--fit-hl)}
+  .scfit__title{margin:0;text-align:center;font-size:36px;line-height:1.2;font-weight:800;letter-spacing:-.2px;color:var(--fit-ink)}
+  .scfit__sub{margin:10px 0 0;text-align:center;font-size:13px;line-height:20px;color:var(--fit-mute)}
+  .scfit__sub strong{color:var(--fit-hl);font-weight:700}
+  .scfit__units{position:relative;display:flex;width:214px;margin:18px auto 24px;padding:4px;border-radius:999px;background:var(--fit-t10)}
+  .scfit__unit{position:relative;z-index:1;flex:1 1 50%;min-height:36px;padding:0 10px;border:0;border-radius:999px;background:none;color:var(--fit-mute);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:color .2s}
+  .scfit__unit[aria-pressed="true"]{color:var(--fit-hl)}
+  .scfit__units:before{content:"";position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);border-radius:999px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);transition:transform .25s}
+  .scfit[data-unit="metric"] .scfit__units:before{transform:translateX(100%)}
+  .scfit__grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 14px}
+  .scfit__f{display:block;min-width:0}
+  .scfit__lab{display:flex;align-items:baseline;gap:8px;margin:0 0 7px;font-size:13.5px;line-height:18px;font-weight:700;color:var(--fit-ink)}
+  .scfit__req{padding:1px 6px;border-radius:4px;background:var(--fit-t10);color:var(--fit-hl);font-size:10px;line-height:15px;font-weight:600}
+  .scfit__opt{color:var(--fit-mute);font-size:10px;line-height:15px;font-weight:500}
+  .scfit__box{position:relative;display:block}
+  .scfit__in{display:block;width:100%;height:47px;margin:0;padding:0 52px 0 14px;border:1px solid var(--fit-t18);border-radius:8px;background:#fff;color:var(--fit-ink);font:inherit;font-size:16px;-moz-appearance:textfield;appearance:textfield}
+  .scfit__in::-webkit-outer-spin-button,.scfit__in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .scfit__in:focus{outline:none;border-color:var(--fit-hl);box-shadow:0 0 0 3px var(--fit-t10)}
+  .scfit__in[aria-invalid="true"]{border-color:#c0392b;box-shadow:0 0 0 3px rgba(192,57,43,.12)}
+  .scfit__suf{position:absolute;top:50%;right:14px;transform:translateY(-50%);font-size:11px;font-weight:700;color:var(--fit-mute);pointer-events:none}
+  .scfit__go{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;margin:16px 0 0;padding:0 16px;border:1px solid var(--fit-hl);border-radius:8px;background:var(--fit-hl);color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(121,2,54,.22);transition:filter .2s,transform .2s}
+  .scfit__go:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .scfit__err{margin:10px 0 0;text-align:center;font-size:13px;color:#c0392b}
+  .scfit__res{margin:18px 0 0;padding:18px;border:1px solid var(--fit-t18);border-radius:12px;background:var(--fit-t3);text-align:center}
+  .scfit__kick{margin:0;font-size:11px;line-height:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--fit-hl)}
+  .scfit__size{margin:6px 0 0;font-size:40px;line-height:1.1;font-weight:800;color:var(--fit-hl)}
+  .scfit__line{margin:8px auto 0;max-width:520px;font-size:13.5px;line-height:21px;color:var(--fit-ink)}
+  .scfit__picks{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:14px 0 0}
+  .scfit__pick{min-height:44px;padding:0 22px;border:1px solid var(--fit-hl);border-radius:8px;background:var(--fit-hl);color:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  .scfit__pick + .scfit__pick{background:#fff;color:var(--fit-hl)}
+  .scfit__card{margin:26px 0 0;padding:20px 18px 18px;border:1px solid var(--fit-t18);border-radius:12px;background:#fff}
+  .scfit__ctop{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:0 0 14px}
+  .scfit__ceyebrow{margin:0 0 6px;font-size:11px;line-height:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--fit-hl)}
+  .scfit__ctitle{margin:0;font-size:22px;line-height:1.25;font-weight:800;color:var(--fit-ink)}
+  .scfit__swipe{flex:none;font-size:10.5px;color:var(--fit-mute)}
+  .scfit__tw{overflow-x:auto;border:1px solid var(--fit-t18);border-radius:10px;-webkit-overflow-scrolling:touch}
+  .scfit table{width:100%;min-width:560px;border-collapse:collapse;font-size:12.5px;line-height:16px}
+  .scfit th{padding:10px 8px;background:var(--fit-head);color:#fff;font-weight:700;text-align:center;white-space:nowrap}
+  .scfit th:first-child{background:var(--fit-hl)}
+  .scfit td{padding:10px 8px;border-top:1px solid var(--fit-t18);text-align:center;color:var(--fit-ink);white-space:nowrap}
+  .scfit td:first-child{font-weight:700}
+  .scfit th + th,.scfit td + td{border-left:1px solid var(--fit-t18)}
+  .scfit th + th{border-left-color:rgba(255,255,255,.25)}
+  .scfit tr.is-hit td{background:var(--fit-t10);color:var(--fit-hl);font-weight:700}
+  @media (max-width:749px){
+    .scfit__open{display:flex;width:100%}
+    .scfit__open-in{width:100%}
+    .scfit__dlg{width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:18px}
+    .scfit__modal{padding:52px 14px 14px}
+    .scfit__title{font-size:26px}
+    .scfit__units{margin:14px auto 18px}
+    .scfit__unit{min-height:40px}
+    .scfit__grid{gap:12px 10px}
+    .scfit__card{padding:16px 12px 12px}
+    .scfit__ctitle{font-size:18px}
+  }
+  @media (prefers-reduced-motion:reduce){.scfit__open:before,.scfit__dlg[open]{animation:none}}
+</style>
+<button type="button" class="scfit__open" data-scfit-open aria-haspopup="dialog"><span class="scfit__open-in"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/></svg><span>{{#if settings.button_label}}{{settings.button_label}}{{else}}Find my size{{/if}}</span></span></button>
+<dialog class="scfit__dlg" aria-labelledby="scfit-title">
+  <div class="scfit__modal">
+    <button type="button" class="scfit__x" data-scfit-close aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="scfit__form">
+      <p class="scfit__eyebrow">{{#if settings.rec_eyebrow}}{{settings.rec_eyebrow}}{{else}}Size recommender{{/if}}</p>
+      <h2 class="scfit__title" id="scfit-title">{{#if settings.rec_title}}{{settings.rec_title}}{{else}}Find Your Best Size{{/if}}</h2>
+      <p class="scfit__sub"><strong>{{#if settings.rec_required}}{{settings.rec_required}}{{else}}Weight is required.{{/if}}</strong> {{#if settings.rec_optional}}{{settings.rec_optional}}{{else}}Other measurements are optional.{{/if}}</p>
+      <div class="scfit__units" role="group" aria-label="Units"><button type="button" class="scfit__unit" data-u="imperial" aria-pressed="true">in / lbs</button><button type="button" class="scfit__unit" data-u="metric" aria-pressed="false">cm / kg</button></div>
+      <div class="scfit__grid">
+        <label class="scfit__f" data-scfit-f="w"><span class="scfit__lab"><span>{{#if settings.rec_weight}}{{settings.rec_weight}}{{else}}Weight{{/if}}</span><span class="scfit__req">{{#if settings.rec_badge_req}}{{settings.rec_badge_req}}{{else}}Required{{/if}}</span></span><span class="scfit__box"><input class="scfit__in" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" data-scfit-w aria-required="true"><span class="scfit__suf" data-scfit-su="w">Lbs</span></span></label>
+        <label class="scfit__f" data-scfit-f="bust"><span class="scfit__lab"><span>{{#if settings.rec_bust}}{{settings.rec_bust}}{{else}}Bust{{/if}}</span><span class="scfit__opt">{{#if settings.rec_badge_opt}}{{settings.rec_badge_opt}}{{else}}Optional{{/if}}</span></span><span class="scfit__box"><input class="scfit__in" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" data-scfit-m="bust"><span class="scfit__suf" data-scfit-su="l">In</span></span></label>
+        <label class="scfit__f" data-scfit-f="waist"><span class="scfit__lab"><span>{{#if settings.rec_waist}}{{settings.rec_waist}}{{else}}Waist{{/if}}</span><span class="scfit__opt">{{#if settings.rec_badge_opt}}{{settings.rec_badge_opt}}{{else}}Optional{{/if}}</span></span><span class="scfit__box"><input class="scfit__in" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" data-scfit-m="waist"><span class="scfit__suf" data-scfit-su="l">In</span></span></label>
+        <label class="scfit__f" data-scfit-f="hip"><span class="scfit__lab"><span>{{#if settings.rec_hips}}{{settings.rec_hips}}{{else}}Hips{{/if}}</span><span class="scfit__opt">{{#if settings.rec_badge_opt}}{{settings.rec_badge_opt}}{{else}}Optional{{/if}}</span></span><span class="scfit__box"><input class="scfit__in" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" data-scfit-m="hip"><span class="scfit__suf" data-scfit-su="l">In</span></span></label>
+      </div>
+      <button type="button" class="scfit__go" data-scfit-go>{{#if settings.rec_button}}{{settings.rec_button}}{{else}}Find My Size{{/if}}</button>
+      <p class="scfit__err" data-scfit-err role="alert" hidden>{{#if settings.rec_error}}{{settings.rec_error}}{{else}}Enter your weight to find your size.{{/if}}</p>
+      <div class="scfit__res" data-scfit-res aria-live="polite" hidden><p class="scfit__kick">{{#if settings.rec_kicker}}{{settings.rec_kicker}}{{else}}Your recommended size{{/if}}</p><p class="scfit__size" data-scfit-size></p><p class="scfit__line" data-scfit-line></p><div class="scfit__picks" data-scfit-picks></div></div>
+    </div>
+    <div class="scfit__card">
+      <div class="scfit__ctop"><div><p class="scfit__ceyebrow">{{#if settings.rec_chart_eyebrow}}{{settings.rec_chart_eyebrow}}{{else}}Body measurements{{/if}}</p><h3 class="scfit__ctitle">{{#if settings.rec_chart_title}}{{settings.rec_chart_title}}{{else}}Complete Size Chart{{/if}}</h3></div><span class="scfit__swipe">{{#if settings.rec_swipe}}{{settings.rec_swipe}}{{else}}Swipe to view{{/if}}</span></div>
+      <div class="scfit__tw" data-scfit-t></div>
+    </div>
+  </div>
+</dialog>
+<script>
+(function () {
+  var root = document.currentScript && document.currentScript.closest('[data-scfit]');
+  if (!root || root.__ok) return;
+  root.__ok = 1;
+  var q = function (s, el) { return (el || root).querySelector(s); };
+  var qa = function (s, el) { return Array.prototype.slice.call((el || root).querySelectorAll(s)); };
+  var A = function (k, d) { var v = root.getAttribute('data-' + k); return v == null || v === '' ? d : v; };
+  var dlg = q('dialog'), scope = root.closest('[data-ms-pdp]') || root.closest('section') || document;
+  var DEF = 'Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240';
+  var lines = A('chart', DEF).split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+  var head = lines[0].split('|').map(function (s) { return s.trim(); });
+  var rows = lines.slice(1).map(function (l) { return l.split('|').map(function (s) { return s.trim(); }); }).filter(function (r) { return r[0]; });
+  var col = function (re) { for (var i = 1; i < head.length; i++) if (re.test(head[i])) return i; return -1; };
+  var C = { w: col(/weight/i), bust: col(/bust|chest/i), waist: col(/waist/i), hip: col(/hip/i) };
+  var LBS_KG = 0.45359237, IN_CM = 2.54;
+  var unit = A('unit', 'imperial') === 'metric' ? 'metric' : 'imperial';
+  function range(s) {
+    var m = String(s).replace(/[–—]/g, '-').match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)/);
+    if (m) return [+m[1], +m[2]];
+    var n = parseFloat(s); return isNaN(n) ? null : [n, n];
+  }
+  function key(v) { var t = String(v).trim().toUpperCase().split(/[\s(\/,]/)[0]; return t === 'XXL' ? '2XL' : t === 'XXXL' ? '3XL' : t === 'XXXXL' ? '4XL' : t; }
+  var SIZES = rows.map(function (r) { return key(r[0]); });
+  // fields without a chart column are hidden (Weight is always there)
+  ['bust', 'waist', 'hip'].forEach(function (k) { if (C[k] < 0) { var f = q('[data-scfit-f="' + k + '"]'); if (f) f.hidden = true; } });
+
+  // ---- chart (converted for cm / kg)
+  function cell(v, c) {
+    if (unit !== 'metric' || c < 1) return String(v).replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+    var isW = c === C.w, isL = /\(in\)|″|inch/i.test(head[c]) || c === C.bust || c === C.waist || c === C.hip;
+    if (!isW && !isL) return String(v).replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+    var f = isW ? LBS_KG : IN_CM;
+    return String(v).replace(/\d+(?:\.\d+)?/g, function (n) { return String(Math.round(parseFloat(n) * f)); }).replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+  }
+  function title(h, c) {
+    if (unit !== 'metric') return h;
+    if (c === C.w) return h.replace(/\(\s*lbs?\s*\)/i, '(kg)').replace(/\blbs?\b/i, 'kg');
+    return h.replace(/\(\s*in\s*\)/i, '(cm)');
+  }
+  var hits = [];
+  function drawChart() {
+    var t = '<table><thead><tr>' + head.map(function (h, c) { return '<th scope="col">' + esc(title(h, c)) + '</th>'; }).join('') + '</tr></thead><tbody>'
+      + rows.map(function (r, i) { return '<tr' + (hits.indexOf(i) > -1 ? ' class="is-hit"' : '') + '>' + head.map(function (h, c) { return '<td>' + esc(cell(r[c] == null ? '' : r[c], c)) + '</td>'; }).join('') + '</tr>'; }).join('')
+      + '</tbody></table>';
+    q('[data-scfit-t]').innerHTML = t;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // ---- size from one measurement: the sizes whose range holds it (two on a shared edge); else the nearest (ties → larger)
+  function sizesFor(c, v) {
+    var hit = [], best = -1, bestD = Infinity;
+    rows.forEach(function (r, i) {
+      var g = range(r[c]); if (!g) return;
+      if (v >= g[0] && v <= g[1]) hit.push(i);
+      var d = v < g[0] ? g[0] - v : v > g[1] ? v - g[1] : 0;
+      if (d < bestD || (d === bestD && i > best)) { bestD = d; best = i; }
+    });
+    if (hit.length) return { idx: hit, edge: false };
+    var lo = range(rows[0][c]), hi = range(rows[rows.length - 1][c]);
+    return { idx: [best], edge: !!((lo && v < lo[0]) || (hi && v > hi[1])) };
+  }
+  function num(el) { var v = parseFloat(String(el.value).replace(',', '.')); return v > 0 ? v : 0; }
+  function words(list) { return list.length < 2 ? list.join('') : list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1]; }
+  var LBL = { w: A('l-weight', 'Weight'), bust: A('l-bust', 'Bust'), waist: A('l-waist', 'Waist'), hip: A('l-hip', 'Hips') };
+
+  var w = q('[data-scfit-w]'), err = q('[data-scfit-err]'), res = q('[data-scfit-res]');
+  function find() {
+    var wv = num(w);
+    if (!wv) { w.setAttribute('aria-invalid', 'true'); err.hidden = false; res.hidden = true; w.focus(); return; }
+    w.removeAttribute('aria-invalid'); err.hidden = true;
+    var kw = unit === 'metric' ? 1 / LBS_KG : 1, kl = unit === 'metric' ? 1 / IN_CM : 1;
+    var W = sizesFor(C.w, wv * kw), used = [LBL.w.toLowerCase()], edge = W.edge ? LBL.w.toLowerCase() : '', m = [];
+    qa('[data-scfit-m]').forEach(function (inp) {
+      var k = inp.getAttribute('data-scfit-m'), v = num(inp);
+      if (!v || C[k] < 0) return;
+      var r = sizesFor(C[k], v * kl);
+      m.push(Math.max.apply(null, r.idx)); used.push(LBL[k].toLowerCase());
+      if (r.edge && !edge) edge = LBL[k].toLowerCase();
+    });
+    var pick = m.length ? [Math.max(Math.min.apply(null, W.idx), Math.max.apply(null, m))] : W.idx;
+    var names = pick.map(function (i) { return rows[i][0]; });
+    q('[data-scfit-size]').textContent = names.join(' / ');
+    var line = names.length > 1
+      ? A('two', '').replace(/\{a\}/g, names[0]).replace(/\{b\}/g, names[1])
+      : A('one', '').replace(/\{size\}/g, names[0]).replace(/\{measures\}/g, words(used));
+    if (edge) line += ' ' + A('edge', '').replace(/\{measure\}/g, edge).replace(/\{size\}/g, names[names.length - 1]);
+    q('[data-scfit-line]').textContent = line;
+    var box = q('[data-scfit-picks]'); box.innerHTML = '';
+    names.slice().reverse().forEach(function (n, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'scfit__pick'; b.textContent = A('select', 'Select {size}').replace(/\{size\}/g, n);
+      b.addEventListener('click', function () { apply(key(n)); if (dlg.open) dlg.close(); });
+      if (i === 0) box.appendChild(b); else box.insertBefore(b, box.firstChild);
+    });
+    hits = pick; drawChart(); res.hidden = false;
+  }
+
+  // ---- the size option: the setting's name, else the option whose values match the chart's sizes
+  function options() {
+    var o = {};
+    qa('.ms-variant-group[data-option-name]', scope).forEach(function (g) { var n = g.getAttribute('data-option-name'); o[n] = (o[n] || []).concat(qa('input[type=radio], option', g).map(function (i) { return i.value; })); });
+    qa('[data-lu-unit] select[data-name]', scope).forEach(function (s) { var n = s.getAttribute('data-name'); o[n] = (o[n] || []).concat(qa('option', s).map(function (x) { return x.value; })); });
+    return o;
+  }
+  function optionName() {
+    var o = options(), want = A('option', 'Size').trim().toLowerCase(), n, best = null, bc = 1;
+    for (n in o) if (n.trim().toLowerCase() === want) return n;
+    for (n in o) { var c = o[n].filter(function (v) { return SIZES.indexOf(key(v)) > -1; }).length; if (c > bc) { bc = c; best = n; } }
+    return best;
+  }
+  function apply(k) {
+    var name = optionName(); if (!name) return;
+    qa('.ms-variant-group[data-option-name]', scope).forEach(function (g) {
+      if (g.getAttribute('data-option-name') !== name) return;
+      var s = g.querySelector('select');
+      if (s) { var o = qa('option', s).filter(function (x) { return key(x.value) === k; })[0]; if (o && s.value !== o.value) { s.value = o.value; s.dispatchEvent(new Event('change', { bubbles: true })); } return; }
+      qa('input[type=radio]', g).forEach(function (i) { if (key(i.value) === k && !i.checked) { i.checked = true; i.dispatchEvent(new Event('change', { bubbles: true })); } });
+    });
+    qa('[data-lu-unit] select[data-name]', scope).forEach(function (s) {
+      if (s.getAttribute('data-name') !== name) return;
+      var o = qa('option', s).filter(function (x) { return key(x.value) === k; })[0];
+      if (o && s.value !== o.value) { s.value = o.value; s.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+  }
+
+  // ---- units
+  function setUnit(u) {
+    if (u === unit) return;
+    var to = u === 'metric';
+    var cw = to ? LBS_KG : 1 / LBS_KG, cl = to ? IN_CM : 1 / IN_CM;
+    if (num(w)) w.value = Math.round(num(w) * cw);
+    qa('[data-scfit-m]').forEach(function (i) { if (num(i)) i.value = Math.round(num(i) * cl); });
+    unit = u; root.setAttribute('data-unit', u);
+    qa('.scfit__unit').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-u') === u)); });
+    qa('[data-scfit-su="w"]').forEach(function (s) { s.textContent = to ? 'Kg' : 'Lbs'; });
+    qa('[data-scfit-su="l"]').forEach(function (s) { s.textContent = to ? 'Cm' : 'In'; });
+    if (!res.hidden) find(); else drawChart();
+  }
+  qa('.scfit__unit').forEach(function (b) { b.addEventListener('click', function () { setUnit(b.getAttribute('data-u')); }); });
+  if (unit === 'metric') { unit = 'imperial'; setUnit('metric'); }
+
+  q('[data-scfit-go]').addEventListener('click', find);
+  qa('.scfit__in').forEach(function (i) { i.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); find(); } }); });
+  w.addEventListener('input', function () { if (num(w)) { w.removeAttribute('aria-invalid'); err.hidden = true; } });
+  q('[data-scfit-open]').addEventListener('click', function () { if (dlg.showModal) { dlg.showModal(); setTimeout(function () { w.focus(); }, 30); } });
+  q('[data-scfit-close]').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  drawChart();
+})();
+</script>
+</div>

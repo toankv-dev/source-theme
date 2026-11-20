@@ -1,0 +1,294 @@
+{{!-- Block "Find my size (weight)" of the product section (sections/product.schema.json, type sc_fit), as the "Find your
+      size" pop-up of getionix.com: a pill button opens a dialog with US / Metric, Weight (+ Height when the chart has a
+      Height column), a live result (one size, or both when you land between two), the full chart and an optional second
+      table, then a one-tap "Select M" that sets the size option of the main picker and of every pack row.
+      Chart = text setting (first line = column names, one size per line, cells split by |): a "Weight" column in lbs
+      (95-110), a "Height" column in inches (61-65) or feet (5'1-5'5), columns marked (in) or with ″ in inches (cm in
+      Metric), any other column shown as typed. Self-contained (own <style> and <script>; works in any product template);
+      the script wires each finder once (data-ok). Fonts = the theme's; accent = --sc-hl (Shapecurve look) else #790236. --}}
+<div class="scfit" data-scfit data-unit="{{#if (eq settings.units "metric")}}metric{{else}}imperial{{/if}}" data-option="{{#if settings.option_name}}{{settings.option_name}}{{else}}Size{{/if}}" data-chart="{{settings.chart}}" data-chart2="{{settings.chart2}}" data-select="{{#if settings.select_label}}{{settings.select_label}}{{else}}Select {size}{{/if}}" data-k1="{{#if settings.kicker}}{{settings.kicker}}{{else}}Your size{{/if}}" data-k2="{{#if settings.kicker_two}}{{settings.kicker_two}}{{else}}Between two sizes{{/if}}" data-b1="{{#if settings.basis}}{{settings.basis}}{{else}}Based on your weight{{/if}}" data-b2="{{#if settings.basis_height}}{{settings.basis_height}}{{else}}Based on your weight and height{{/if}}" data-l1="{{#if settings.line_one}}{{settings.line_one}}{{else}}{weight} sits in the {size} range of our chart.{{/if}}" data-l2="{{#if settings.line_two}}{{settings.line_two}}{{else}}You land between {a} and {b}: {a} fits snug, {b} gives more room.{{/if}}" data-l3="{{#if settings.line_edge}}{{settings.line_edge}}{{else}}{weight} is outside our chart; {size} is the closest size.{{/if}}">
+<style>
+  .scfit{--fit-hl:var(--sc-hl,#790236);--fit-ink:#333;--fit-mute:#6b6b6b;--fit-line:rgba(0,0,0,.09);--fit-bg:#fbf7f9;--fit-head:#f2e6eb;--fit-glow:#f0c6d8;margin:4px 0 0;letter-spacing:normal}
+  @supports (background:color-mix(in srgb,red 50%,#fff)){.scfit{--fit-bg:color-mix(in srgb,var(--fit-hl) 3%,#fff);--fit-head:color-mix(in srgb,var(--fit-hl) 10%,#fff);--fit-glow:color-mix(in srgb,var(--fit-hl) 25%,#fff)}}
+  .scfit,.scfit *{box-sizing:border-box}
+  .scfit [hidden]{display:none!important}
+  .scfit__open{position:relative;display:inline-flex;padding:1.5px;border:0;border-radius:999px;overflow:hidden;cursor:pointer;background:rgba(121,2,54,.35);box-shadow:0 6px 22px rgba(121,2,54,.16);font:inherit;transition:box-shadow .3s,transform .3s}
+  .scfit__open:before{content:"";position:absolute;left:50%;top:50%;width:300%;height:0;padding-bottom:300%;background:conic-gradient(from 0deg,rgba(121,2,54,.35) 0deg,rgba(121,2,54,.35) 60%,var(--fit-hl) 76%,var(--fit-glow) 85%,rgba(121,2,54,.35) 100%);transform:translate(-50%,-50%);animation:scfit-orbit 4s linear infinite}
+  @keyframes scfit-orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .scfit__open-in{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:13px 26px;border-radius:inherit;background:var(--fit-bg);color:var(--fit-ink);font-size:12.5px;line-height:1.2;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;transition:background .25s,color .25s}
+  .scfit__open svg{flex:0 0 auto;color:var(--fit-hl)}
+  .scfit__open:hover{box-shadow:0 10px 28px rgba(121,2,54,.26);transform:translateY(-1px)}
+  .scfit__open:hover .scfit__open-in{background:var(--fit-ink);color:#fff}
+  .scfit__open:hover svg{color:var(--fit-glow)}
+  .scfit__open:focus-visible{outline:3px solid var(--fit-hl);outline-offset:3px}
+  .scfit__dlg{margin:0;padding:16px;border:0;width:100vw;height:100vh;height:100dvh;max-width:100vw;max-height:100vh;max-height:100dvh;background:transparent;color:var(--fit-ink);font-family:var(--font-body-family,Poppins),sans-serif;letter-spacing:normal}
+  .scfit__dlg[open]{display:flex;align-items:center;justify-content:center}
+  .scfit__dlg::backdrop{background:rgba(0,0,0,.55)}
+  .scfit__modal{position:relative;display:flex;flex-direction:column;width:100%;max-width:520px;max-height:100%;overflow:hidden;border-radius:18px;background:var(--fit-bg);box-shadow:0 30px 80px rgba(0,0,0,.35);animation:scfit-in .35s ease-out}
+  @keyframes scfit-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .scfit__x{position:absolute;top:6px;right:6px;z-index:3;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:none;color:var(--fit-ink);cursor:pointer}
+  .scfit__x span{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.9)}
+  .scfit__x:focus-visible{outline:3px solid var(--fit-hl);outline-offset:-2px;border-radius:50%}
+  .scfit__head{padding:28px 24px 16px;border-bottom:1px solid var(--fit-line);text-align:center}
+  .scfit__eyebrow{margin:0 40px 6px;font-size:10.5px;line-height:1.4;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:var(--fit-mute)}
+  .scfit__title{margin:0;font-size:30px;line-height:1.1;font-weight:700;color:var(--fit-ink)}
+  .scfit__lede{margin:8px 0 0;font-size:13px;line-height:1.4;color:var(--fit-mute)}
+  .scfit__units{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:340px;margin:16px auto 0;padding:4px;border:1px solid rgba(0,0,0,.12);border-radius:999px;background:#fff}
+  .scfit__units:before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--fit-ink);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .scfit[data-unit="metric"] .scfit__units:before{transform:translateX(100%)}
+  .scfit__unit{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:44px;padding:7px 10px;border:0;border-radius:999px;background:none;color:var(--fit-mute);font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.4px;cursor:pointer;transition:color .25s}
+  .scfit__unit small{font-size:10.5px;font-weight:400;letter-spacing:.3px;opacity:.85}
+  .scfit__unit[aria-pressed="true"]{color:#fff}
+  .scfit__unit:focus-visible{outline:3px solid var(--fit-hl);outline-offset:2px}
+  .scfit__body{flex:1 1 auto;overflow-y:auto;padding:18px 20px 22px;-webkit-overflow-scrolling:touch}
+  .scfit__finder{padding:16px;border:1px solid var(--fit-line);border-radius:14px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+  .scfit__fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+  .scfit__fields--one{grid-template-columns:minmax(0,1fr)}
+  .scfit__label{display:block;margin:0 0 6px;font-size:11.5px;font-weight:700;letter-spacing:.4px;color:var(--fit-ink)}
+  .scfit__label span{font-weight:400;color:var(--fit-mute)}
+  .scfit__row{display:flex;align-items:center;gap:6px;min-height:48px;padding:0 10px;border:1.5px solid rgba(0,0,0,.14);border-radius:10px;background:var(--fit-bg);transition:border-color .2s}
+  .scfit__row:focus-within{border-color:var(--fit-hl)}
+  .scfit__in{flex:1 1 0;width:100%;min-width:0;height:auto;min-height:0;margin:0;padding:8px 0;border:0!important;border-radius:0;outline:0;box-shadow:none!important;background:transparent!important;color:var(--fit-ink);font:inherit;font-size:18px;font-weight:700;letter-spacing:normal;-moz-appearance:textfield;appearance:textfield}
+  .scfit__in::-webkit-outer-spin-button,.scfit__in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .scfit__in:focus{outline:none}
+  .scfit__in::placeholder{color:rgba(0,0,0,.3);font-weight:400}
+  .scfit__suf{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--fit-mute)}
+  .scfit[data-unit="metric"] .scfit__in--b,.scfit[data-unit="metric"] .scfit__suf--b{display:none}
+  .scfit__result{margin-top:14px}
+  .scfit__empty{margin:0;padding:8px 0 2px;font-size:13px;color:var(--fit-mute);text-align:center}
+  .scfit__card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:16px 18px;border-radius:12px;background:var(--fit-hl);color:#fff}
+  .scfit__size{min-width:64px;padding:10px 12px;border:1.5px solid rgba(255,255,255,.6);border-radius:10px;background:rgba(255,255,255,.12);font-size:40px;line-height:1;font-weight:700;text-align:center;white-space:nowrap}
+  .scfit__size--two{font-size:28px}
+  .scfit__txt{min-width:0}
+  .scfit__kicker{margin:0 0 2px;font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--fit-glow)}
+  .scfit__basis{margin:0;font-size:13.5px;font-weight:700;color:#fff}
+  .scfit__line{margin:6px 0 0;font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.85)}
+  .scfit__line strong{font-weight:700;color:#fff}
+  .scfit__picks{display:flex;flex-wrap:wrap;gap:8px;grid-column:1/-1}
+  .scfit__pick{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:var(--fit-hl);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .scfit__pick:hover{background:var(--fit-glow)}
+  .scfit__pick:focus-visible{outline:3px solid #fff;outline-offset:2px}
+  .scfit__chart{margin-top:16px}
+  .scfit__chart>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0;list-style:none;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--fit-ink)}
+  .scfit__chart>summary::-webkit-details-marker,.scfit__g>summary::-webkit-details-marker{display:none}
+  .scfit__chart>summary svg{color:var(--fit-hl);transition:transform .25s}
+  .scfit__chart[open]>summary svg{transform:rotate(180deg)}
+  .scfit__tw{overflow-x:auto;border:1px solid var(--fit-line);border-radius:12px;background:#fff}
+  .scfit table{width:100%;border-collapse:collapse}
+  .scfit__t{font-size:13px}
+  .scfit__t thead th{padding:11px 6px;border-bottom:1px solid var(--fit-line);background:var(--fit-head);color:var(--fit-mute);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;text-align:center}
+  .scfit__t thead th:first-child,.scfit__t tbody td:first-child{padding-left:16px;text-align:left}
+  .scfit__t tbody tr{border-bottom:1px solid rgba(0,0,0,.05)}
+  .scfit__t tbody tr:last-child{border-bottom:0}
+  .scfit__t tbody tr.is-match{background:var(--fit-bg);box-shadow:inset 3px 0 0 var(--fit-hl)}
+  .scfit__t tbody td{padding:11px 6px;text-align:center;white-space:nowrap;color:var(--fit-ink);font-weight:400}
+  .scfit__sz{font-size:20px;font-weight:700;color:var(--fit-ink)}
+  .scfit__note{margin:12px 0 0;font-size:12px;line-height:1.5;color:var(--fit-mute)}
+  .scfit__g{margin-top:10px;padding:0 14px;border:1px solid var(--fit-line);border-radius:10px;background:#fff}
+  .scfit__g>summary{display:flex;align-items:center;min-height:44px;list-style:none;cursor:pointer;font-size:12px;font-weight:700;color:var(--fit-mute)}
+  .scfit__g>summary:before{content:"+";width:14px;color:var(--fit-hl);font-weight:700}
+  .scfit__g[open]>summary:before{content:"\2212"}
+  .scfit__gnote{margin:0 0 6px;font-size:12px;line-height:1.45;color:var(--fit-mute)}
+  .scfit__t2{margin:0 0 12px;font-size:12px}
+  .scfit__t2 th{padding:7px 4px;background:var(--fit-ink);color:#fff;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+  .scfit__t2 td{padding:8px 4px;border-bottom:1px solid rgba(0,0,0,.06);text-align:center;color:var(--fit-ink);white-space:nowrap}
+  .scfit__t2 tbody tr:nth-child(2n){background:var(--fit-bg)}
+  .scfit__proof{display:flex;align-items:center;gap:10px;margin:16px 0 0;font-size:12.5px;color:var(--fit-mute)}
+  .scfit__proof svg{flex:0 0 auto;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--fit-head);color:var(--fit-hl)}
+  .scfit__proof strong{font-weight:700;color:var(--fit-ink)}
+  @media (max-width:520px){.scfit__open{display:flex;width:100%}.scfit__open-in{width:100%}}
+  @media (max-width:480px){
+    .scfit__dlg{padding:10px}
+    .scfit__head{padding:24px 18px 14px}
+    .scfit__title{font-size:26px}
+    .scfit__body{padding:14px 14px 18px}
+    .scfit__finder{padding:14px}
+    .scfit__fields{grid-template-columns:minmax(0,1fr)}
+    .scfit__card{padding:14px;gap:12px}
+    .scfit__size{min-width:56px;font-size:34px}
+    .scfit__size--two{font-size:24px}
+    .scfit__t tbody td{padding:10px 4px;font-size:12px}
+    .scfit__sz{font-size:17px}
+    .scfit__eyebrow,.scfit__unit small,.scfit__kicker,.scfit__label,.scfit__t thead th,.scfit__t2 th{font-size:12px}
+    .scfit__eyebrow{letter-spacing:1.4px}
+    .scfit__kicker,.scfit__t thead th{letter-spacing:.8px}
+    .scfit__t2 th{letter-spacing:.3px}
+  }
+  @media (prefers-reduced-motion:reduce){.scfit__open:before{animation:none}.scfit__modal{animation:none}.scfit__units:before,.scfit__chart>summary svg{transition:none}}
+</style>
+<button type="button" class="scfit__open" data-scfit-open aria-haspopup="dialog"><span class="scfit__open-in"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17.5L17.5 3 21 6.5 6.5 21z"/><path d="M7 13.5l1.5 1.5M9.5 11l2 2M12 8.5l1.5 1.5M14.5 6l2 2"/></svg><span>{{#if settings.button_label}}{{settings.button_label}}{{else}}Find my size{{/if}}</span></span></button>
+<dialog class="scfit__dlg" aria-label="{{#if settings.title}}{{settings.title}}{{else}}Find your size{{/if}}">
+  <div class="scfit__modal">
+    <button type="button" class="scfit__x" data-scfit-close aria-label="Close"><span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button>
+    <div class="scfit__head">
+      <p class="scfit__eyebrow">{{#if settings.eyebrow}}{{settings.eyebrow}}{{else}}{{@root.product.title}}{{/if}}</p>
+      <h2 class="scfit__title">{{#if settings.title}}{{settings.title}}{{else}}Find your size{{/if}}</h2>
+      {{#if settings.subtitle}}<p class="scfit__lede">{{settings.subtitle}}</p>{{/if}}
+      <div class="scfit__units" role="group" aria-label="Units"><button type="button" class="scfit__unit" data-u="imperial" aria-pressed="true">US <small>lbs · ft</small></button><button type="button" class="scfit__unit" data-u="metric" aria-pressed="false">Metric <small>kg · cm</small></button></div>
+    </div>
+    <div class="scfit__body">
+      <div class="scfit__finder">
+        <div class="scfit__fields scfit__fields--one" data-scfit-fields>
+          <label class="scfit__field"><span class="scfit__label">{{#if settings.weight_label}}{{settings.weight_label}}{{else}}Weight{{/if}}</span><span class="scfit__row"><input class="scfit__in" type="number" inputmode="decimal" min="0" step="1" placeholder="140" autocomplete="off" data-scfit-w><span class="scfit__suf" data-scfit-wu>lbs</span></span></label>
+          <div class="scfit__field" data-scfit-hf hidden><span class="scfit__label">{{#if settings.height_label}}{{settings.height_label}}{{else}}Height{{/if}} <span>{{#if settings.optional_label}}{{settings.optional_label}}{{else}}(optional){{/if}}</span></span><span class="scfit__row"><input class="scfit__in" type="number" inputmode="numeric" min="0" step="1" placeholder="5" autocomplete="off" aria-label="Height, feet" data-scfit-ha><span class="scfit__suf" data-scfit-hu>ft</span><input class="scfit__in scfit__in--b" type="number" inputmode="numeric" min="0" max="11" step="1" placeholder="3" autocomplete="off" aria-label="Height, inches" data-scfit-hb><span class="scfit__suf scfit__suf--b">in</span></span></div>
+        </div>
+        <div class="scfit__result" data-scfit-result aria-live="polite"><p class="scfit__empty" data-scfit-hint>{{#if settings.hint}}{{settings.hint}}{{else}}Enter your weight and we’ll match you to the chart.{{/if}}</p></div>
+      </div>
+      <details class="scfit__chart"{{#unless (eq settings.chart_open false)}} open{{/unless}}><summary><span>{{#if settings.chart_label}}{{settings.chart_label}}{{else}}See the full size chart{{/if}}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></summary><div class="scfit__tw" data-scfit-t1></div></details>
+      {{#if settings.note}}<p class="scfit__note">{{settings.note}}</p>{{/if}}
+      {{#if settings.chart2}}<details class="scfit__g"><summary>{{#if settings.chart2_label}}{{settings.chart2_label}}{{else}}Garment measurements (laid flat){{/if}}</summary>{{#if settings.chart2_note}}<p class="scfit__gnote">{{settings.chart2_note}}</p>{{/if}}<div data-scfit-t2></div></details>{{/if}}
+      {{#if settings.proof_strong}}<p class="scfit__proof"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>{{settings.proof_strong}}</strong> {{settings.proof_text}}</span></p>{{/if}}
+    </div>
+  </div>
+</dialog>
+<script>(function () {
+  var LB = 0.45359237, IN = 2.54;
+  function qa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fill(t, map) { return String(t).replace(/\{(\w+)\}/g, function (m, k) { return k in map ? map[k] : m; }); }
+  // "XS", "XXL", "2XL", "XS (95-110 lbs)", "Extra small" -> one comparable key
+  function key(v) {
+    var n = String(v == null ? '' : v).replace(/\s*\([^)]*\)\s*$/, '').toUpperCase().replace(/[\s._-]+/g, '');
+    n = n.replace(/^EXTRASMALL$/, 'XS').replace(/^SMALL$/, 'S').replace(/^MEDIUM$/, 'M').replace(/^LARGE$/, 'L').replace(/^EXTRALARGE$/, 'XL');
+    return n.replace(/^(\d)X(S|L)$/, function (m, d, s) { return new Array(+d + 1).join('X') + s; });
+  }
+  function feet(s) { var m = String(s).match(/(\d+)\s*['′]\s*(\d+(?:\.\d+)?)?/); return m ? +m[1] * 12 + (m[2] ? +m[2] : 0) : NaN; }
+  function nums(cell, kind) {
+    var parts = String(cell).split(/\s*[–—-]\s*|\s+to\s+/i).filter(function (p) { return p.trim(); });
+    var v = parts.map(function (p) { return kind === 'h' && /['′]/.test(p) ? feet(p) : parseFloat(String(p).replace(',', '.').replace(/[^\d.]/g, '')); });
+    if (!v.length || v.some(isNaN)) return null;
+    if (/\+\s*$/.test(cell)) return [v[0], Infinity];
+    return [v[0], v.length > 1 ? v[v.length - 1] : v[0]];
+  }
+  function parse(text) {
+    var lines = String(text || '').split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean)
+      .map(function (l) { return l.split('|').map(function (c) { return c.trim(); }); });
+    if (lines.length < 2) return null;
+    var head = lines[0], body = lines.slice(1);
+    var kinds = head.map(function (h, i) {
+      if (!i) return 'size';
+      var l = h.toLowerCase();
+      if (/weight/.test(l)) return 'w';
+      if (/height/.test(l)) return 'h';
+      if (/\((in|inch|inches)\)/.test(l) || body.some(function (r) { return /[″"]\s*$/.test(r[i] || ''); })) return 'in';
+      return 'raw';
+    });
+    return { head: head.map(function (h) { return h.replace(/\s*\((in|inch|inches|lbs?|kg|cm|ft)\)\s*/i, ' ').trim(); }), kinds: kinds,
+      rows: body.map(function (r) { var o = { size: r[0], cells: r }; kinds.forEach(function (k, i) { if (k === 'w' || k === 'h' || k === 'in') o[k === 'in' ? 'in' + i : k] = nums(r[i] || '', k); }); return o; }) };
+  }
+  function fmtFt(i) { i = Math.round(i); return Math.floor(i / 12) + '′' + (i % 12) + '″'; }
+  function fmt(r, kind, metric, raw) {
+    if (!r) return esc(raw);
+    var one = r[0] === r[1], hi = r[1] === Infinity;
+    if (kind === 'w') { var a = metric ? Math.round(r[0] * LB) : Math.round(r[0]), b = metric ? Math.round(r[1] * LB) : Math.round(r[1]); return (hi ? a + '+' : one ? a : a + '–' + b) + (metric ? ' kg' : ' lbs'); }
+    if (kind === 'h') { return metric ? (one ? Math.round(r[0] * IN) : Math.round(r[0] * IN) + '–' + Math.round(r[1] * IN)) + ' cm' : (one ? fmtFt(r[0]) : fmtFt(r[0]) + '–' + fmtFt(r[1])); }
+    var d = function (x) { return metric ? Math.round(x * IN) : (Math.round(x * 10) / 10); };
+    return (one ? d(r[0]) : d(r[0]) + '–' + d(r[1])) + (metric ? ' cm' : '″');
+  }
+  function table(c, cls, metric, match, strongFirst) {
+    var h = '<table class="' + cls + '"><thead><tr>' + c.head.map(function (x) { return '<th scope="col">' + esc(x) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    c.rows.forEach(function (r) {
+      h += '<tr' + (match && match.indexOf(r) > -1 ? ' class="is-match"' : '') + '>' + c.kinds.map(function (k, i) {
+        if (!i) return '<td>' + (strongFirst ? '<span class="scfit__sz">' + esc(r.size) + '</span>' : '<strong>' + esc(r.size) + '</strong>') + '</td>';
+        var v = k === 'w' ? fmt(r.w, 'w', metric, r.cells[i]) : k === 'h' ? fmt(r.h, 'h', metric, r.cells[i]) : k === 'in' ? fmt(r['in' + i], 'in', metric, r.cells[i]) : esc(r.cells[i] || '');
+        return '<td>' + v + '</td>';
+      }).join('') + '</tr>';
+    });
+    return h + '</tbody></table>';
+  }
+  function wire(root) {
+    if (root.getAttribute('data-ok')) return; root.setAttribute('data-ok', '1');
+    var dlg = root.querySelector('dialog'), c1 = parse(root.getAttribute('data-chart')), c2 = parse(root.getAttribute('data-chart2'));
+    var scope = root.closest('[data-ms-pdp]') || root.closest('.product') || document;
+    var W = root.querySelector('[data-scfit-w]'), HA = root.querySelector('[data-scfit-ha]'), HB = root.querySelector('[data-scfit-hb]');
+    var out = root.querySelector('[data-scfit-result]'), hint = out.innerHTML, t1 = root.querySelector('[data-scfit-t1]'), t2 = root.querySelector('[data-scfit-t2]');
+    var hasH = !!(c1 && c1.kinds.indexOf('h') > -1), last = null;
+    if (hasH) { root.querySelector('[data-scfit-hf]').hidden = false; root.querySelector('[data-scfit-fields]').classList.remove('scfit__fields--one'); }
+    var metric = function () { return root.getAttribute('data-unit') === 'metric'; };
+    function lbs() { var v = parseFloat(W.value); return v > 0 ? (metric() ? v / LB : v) : NaN; }
+    function inch() {
+      if (!hasH) return NaN;
+      if (metric()) { var cm = parseFloat(HA.value); return cm > 0 ? cm / IN : NaN; }
+      var f = parseFloat(HA.value), i = parseFloat(HB.value) || 0; return f > 0 ? f * 12 + i : NaN;
+    }
+    function match(w, h) {
+      var rows = c1 ? c1.rows.filter(function (r) { return r.w; }) : [];
+      if (!rows.length || !(w > 0)) return null;
+      var c = rows.filter(function (r) { return w >= r.w[0] && w <= r.w[1]; }), edge = false, i;
+      if (!c.length) {
+        if (w < rows[0].w[0]) { c = [rows[0]]; edge = true; }
+        else if (w > rows[rows.length - 1].w[1]) { c = [rows[rows.length - 1]]; edge = true; }
+        else for (i = 0; i < rows.length - 1; i++) if (w > rows[i].w[1] && w < rows[i + 1].w[0]) c = [rows[i], rows[i + 1]];
+      }
+      if (h > 0 && !edge) {
+        if (c.length === 2) { var f = c.filter(function (r) { return r.h && h >= r.h[0] && h <= r.h[1]; }); if (f.length === 1) c = f; }
+        else if (c.length === 1 && c[0].h) { i = rows.indexOf(c[0]); if (h > c[0].h[1] && rows[i + 1]) c = [c[0], rows[i + 1]]; else if (h < c[0].h[0] && rows[i - 1]) c = [rows[i - 1], c[0]]; }
+      }
+      return { rows: c.slice(0, 2), edge: edge, h: h > 0 };
+    }
+    // the product's option values for a chart size ("M" -> "M (125-140 lbs)")
+    var OPT = String(root.getAttribute('data-option') || 'Size').trim().toLowerCase();
+    function values() {
+      var v = [];
+      qa('.ms-variant-group', scope).forEach(function (g) { if (String(g.getAttribute('data-option-name') || '').trim().toLowerCase() === OPT) qa('input[type=radio], option', g).forEach(function (i) { v.push(i.value); }); });
+      qa('[data-lu-unit] select[data-name]', scope).forEach(function (s) { if (String(s.getAttribute('data-name')).trim().toLowerCase() === OPT) qa('option', s).forEach(function (o) { v.push(o.value); }); });
+      return v;
+    }
+    function valueFor(size) { var k = key(size), v = values(); for (var i = 0; i < v.length; i++) if (key(v[i]) === k) return v[i]; return null; }
+    function setSel(s, v) { if (s.value !== v) { s.value = v; s.dispatchEvent(new Event('change', { bubbles: true })); } }
+    function apply(v) {
+      qa('.ms-variant-group', scope).forEach(function (g) {
+        if (String(g.getAttribute('data-option-name') || '').trim().toLowerCase() !== OPT) return;
+        var s = g.querySelector('select'); if (s) { setSel(s, v); return; }
+        qa('input[type=radio]', g).forEach(function (i) { if (i.value === v && !i.checked) { i.checked = true; i.dispatchEvent(new Event('change', { bubbles: true })); } });
+      });
+      qa('[data-lu-unit] select[data-name]', scope).forEach(function (s) { if (String(s.getAttribute('data-name')).trim().toLowerCase() === OPT) setSel(s, v); });
+    }
+    function draw() {
+      var m = metric();
+      if (t1) t1.innerHTML = c1 ? table(c1, 'scfit__t', m, last && last.rows, true) : '';
+      if (t2) t2.innerHTML = c2 ? table(c2, 'scfit__t2', m, null, false) : '';
+    }
+    function update() {
+      var w = lbs(), res = match(w, inch());
+      last = res; draw();
+      if (!res) { out.innerHTML = hint; return; }
+      var names = res.rows.map(function (r) { return r.size; }), two = names.length > 1;
+      var wTxt = metric() ? Math.round(w * LB) + ' kg' : Math.round(w) + ' lbs';
+      var line = res.edge ? root.getAttribute('data-l3') : two ? root.getAttribute('data-l2') : root.getAttribute('data-l1');
+      line = fill(esc(line), { weight: '<strong>' + esc(wTxt) + '</strong>', size: '<strong>' + esc(names[0]) + '</strong>', a: '<strong>' + esc(names[0]) + '</strong>', b: '<strong>' + esc(names[1] || '') + '</strong>' });
+      var picks = names.map(function (n) { var v = valueFor(n); return v ? '<button type="button" class="scfit__pick" data-v="' + esc(v) + '">' + esc(fill(root.getAttribute('data-select'), { size: n })) + '</button>' : ''; }).join('');
+      out.innerHTML = '<div class="scfit__card"><div class="scfit__size' + (two ? ' scfit__size--two' : '') + '">' + names.map(esc).join(' / ') + '</div><div class="scfit__txt"><p class="scfit__kicker">' + esc(root.getAttribute(two ? 'data-k2' : 'data-k1')) + '</p><p class="scfit__basis">' + esc(root.getAttribute(res.h ? 'data-b2' : 'data-b1')) + '</p><p class="scfit__line">' + line + '</p></div>' + (picks ? '<div class="scfit__picks">' + picks + '</div>' : '') + '</div>';
+    }
+    out.addEventListener('click', function (e) { var b = e.target.closest('.scfit__pick'); if (!b) return; apply(b.getAttribute('data-v')); close(); });
+    function setUnit(u) {
+      var was = metric(), now = u === 'metric'; if (was === now) return;
+      var w = parseFloat(W.value), h = inch();
+      root.setAttribute('data-unit', now ? 'metric' : 'imperial');
+      if (w > 0) W.value = now ? Math.round(w * LB) : Math.round(w / LB);
+      if (h > 0) { if (now) { HA.value = Math.round(h * IN); HB.value = ''; } else { var i = Math.round(h / IN); HA.value = Math.floor(i / 12); HB.value = i % 12; } }
+      sync(); update();
+    }
+    function sync() {
+      var m = metric();
+      root.querySelector('[data-scfit-wu]').textContent = m ? 'kg' : 'lbs';
+      W.placeholder = m ? '64' : '140';
+      root.querySelector('[data-scfit-hu]').textContent = m ? 'cm' : 'ft';
+      HA.placeholder = m ? '160' : '5'; HA.setAttribute('aria-label', m ? 'Height, centimetres' : 'Height, feet');
+      qa('.scfit__unit', root).forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-u') === (m ? 'metric' : 'imperial'))); });
+    }
+    qa('.scfit__unit', root).forEach(function (b) { b.addEventListener('click', function () { setUnit(b.getAttribute('data-u')); }); });
+    [W, HA, HB].forEach(function (i) { i.addEventListener('input', update); });
+    var lock = '';
+    function open() { lock = document.documentElement.style.overflow; document.documentElement.style.overflow = 'hidden'; if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); setTimeout(function () { try { W.focus({ preventScroll: true }); } catch (e) {} }, 60); }
+    function close() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+    dlg.addEventListener('close', function () { document.documentElement.style.overflow = lock; });
+    root.querySelector('[data-scfit-open]').addEventListener('click', open);
+    root.querySelector('[data-scfit-close]').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    sync(); draw();
+  }
+  function run() { qa('[data-scfit]').forEach(wire); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();</script>
+</div>

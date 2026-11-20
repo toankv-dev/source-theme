@@ -1,0 +1,16 @@
+{{!-- Benefits marquee — schema v2 section (sections/marquee.schema.json). "item"
+      blocks scroll in a slim strip; with no blocks the five legacy lines print so
+      an old render is identical in text. The track is printed twice (the second
+      copy aria-hidden, without block attributes) so the loop is seamless. Styles
+      are self-contained: the shared css bundle has no .marquee rules. --}}
+<style>
+  .marquee{display:flex;overflow:hidden;background:var(--ink,#1b1b1b);color:#fff;font-family:var(--font,inherit);font-size:14px;font-weight:600;line-height:1;padding:10px 0;white-space:nowrap}
+  .marquee-track{flex:0 0 auto;min-width:100%;box-sizing:border-box;display:flex;justify-content:space-around;gap:32px;padding:0 16px;animation:marquee-scroll 30s linear infinite;will-change:transform}
+  .marquee-item{display:inline-block;flex:0 0 auto}
+  @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+  @media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+</style>
+<div class="marquee" aria-label="Benefits">
+  <div class="marquee-track">{{#each section.blocks}}<span class="marquee-item" {{{this.attributes}}} {{{editable "text"}}}>{{this.settings.text}}</span>{{/each}}{{#unless section.blocks.length}}<span class="marquee-item">✔ Wirefree comfort</span><span class="marquee-item">✔ 3D memory-foam cups</span><span class="marquee-item">✔ Anti-bulge fit</span><span class="marquee-item">✔ 200% stretch</span><span class="marquee-item">✔ 45-day returns</span>{{/unless}}</div>
+  <div class="marquee-track" aria-hidden="true">{{#each section.blocks}}<span class="marquee-item">{{this.settings.text}}</span>{{/each}}{{#unless section.blocks.length}}<span class="marquee-item">✔ Wirefree comfort</span><span class="marquee-item">✔ 3D memory-foam cups</span><span class="marquee-item">✔ Anti-bulge fit</span><span class="marquee-item">✔ 200% stretch</span><span class="marquee-item">✔ 45-day returns</span>{{/unless}}</div>
+</div>

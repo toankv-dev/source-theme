@@ -1,0 +1,18 @@
+{
+  "name": "Lunara Vesnacharm",
+  "version": "2026.11.19.16",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/theme.css",
+    "assets/js/theme.js"
+  ],
+  "description": "Shapewear theme on Lunara (hushflex) with the look of shape-curve.com: rotating top bar on a #790236 tint gradient, two-row header (logo centred, menu below), white page, buttons, borders, footer and accents in the main colour #790236, \"% OFF\" product cards on a light grey band, black 5-column footer. Product template \"Triple-Zone Drop-Seat Bodysuit\": picture colour tiles + size pills, Find my size (size recommender: weight + bust / waist / hips, in / lbs or cm / kg), Buy 1 / 2 / 3 packs, Express checkout, shipping box, info rows with size chart, feature cards, details, photo testimonials, trust badges, reviews, related products. Also the Lunara templates (default, bundle, sizes, tiles), home, catalog, policy pages, order tracking, cart drawer and checkout. Font Poppins, highlight #790236.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

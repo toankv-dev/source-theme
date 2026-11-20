@@ -1,0 +1,93 @@
+{
+  "name": "Bundle (Kaching)",
+  "description": "Lunara product page with the Kaching bundle: every item picks its own Color / Size.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "show_size_finder": false
+      },
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_finder": {
+          "type": "size_finder",
+          "settings": {}
+        },
+        "kaching": {
+          "type": "kaching",
+          "settings": {
+            "heading": "SALE ENDS TONIGHT",
+            "selected": 2,
+            "pack1_qty": 1,
+            "pack1_title": "Buy 1",
+            "pack1_subtitle": "SAVE {save}",
+            "pack1_badge": "",
+            "pack2_qty": 3,
+            "pack2_title": "Buy 2, get 1 FREE",
+            "pack2_subtitle": "SAVE {save}",
+            "pack2_badge": "60% OFF + FREE SHIPPING",
+            "pack3_qty": 5,
+            "pack3_title": "Buy 3, get 2 FREE",
+            "pack3_subtitle": "SAVE {save}",
+            "pack3_badge": "70% OFF + FREE SHIPPING",
+            "pack4_qty": 0,
+            "pack4_title": "Buy 5, get 5 FREE",
+            "pack4_subtitle": "SAVE {save}",
+            "pack4_badge": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "trust": {
+          "type": "trust",
+          "settings": {}
+        },
+        "payment_badges": {
+          "type": "payment_badges",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "variant_picker",
+        "size_finder",
+        "kaching",
+        "buy_buttons",
+        "trust",
+        "payment_badges",
+        "description"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq"
+  ]
+}

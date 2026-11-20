@@ -6,8 +6,13 @@ admin.
 ## Cài đặt (một lần)
 
 ```
+node tools/link-agent-skills.js
 cd tools && npm install && npx playwright install chromium
 ```
+
+Lệnh đầu nối bộ [agent-skills](https://github.com/addyosmani/agent-skills) (cần clone sẵn ở `D:\agent-skills`,
+hoặc truyền đường dẫn khác làm tham số) vào `.claude/`: các skill kỹ thuật và lệnh `/spec`, `/plan`, `/build`,
+`/test`, `/review`, `/code-simplify`, `/ship`. Khi `git pull` agent-skills có thêm hoặc bớt skill, chạy lại lệnh này.
 
 Mở Claude Code ở thư mục gốc của repo.
 

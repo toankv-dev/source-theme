@@ -1,0 +1,120 @@
+{
+  "name": "Photo testimonials",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved By 12,000+ Ladies Worldwide"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "View All",
+      "info": "Empty = no button."
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "#lu-reviews",
+      "info": "#lu-reviews = the reviews of this page."
+    },
+    {
+      "type": "color",
+      "id": "star",
+      "label": "Star colour",
+      "default": "#F5A623"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "3:4, 546 x 728 recommended."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Customer name"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified tick",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "What the customer said."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Photo testimonials",
+      "category": "Reviews",
+      "description": "Swipeable cards: photo, name, stars, short quote, and a button to the reviews."
+    }
+  ]
+}

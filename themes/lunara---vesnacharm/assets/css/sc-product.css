@@ -1,0 +1,184 @@
+/* Shapecurve look of the Lunara product section (Product > Look of this product section = Shapecurve).
+   Linked by sections/product.hbs only for that setting; every rule sits under .sc-skin, so other templates never see it.
+   Measured on shape-curve.com (2026-11-19, 1440 / 390). Font = the theme's Poppins (user's choice), highlight = --sc-hl
+   (setting, default #790236) and tints of it in place of the original's violets:
+     #853aff radio / frame / badge, #a98ae8 Find My Size   -> --sc-hl
+     #f6f1ff pack background                               -> 5 % of --sc-hl   (--sc-hl-05)
+     #ede1ff "Each" pill                                   -> 10 %             (--sc-hl-10)
+     #d3cbf9 "Buy More Save More" badge                    -> 20 %             (--sc-hl-20)
+     120deg #eaeaf5 / #d3cbf9 / #e9c3f1 / #e1dcf9 gradient -> 7 / 20 / 13 / 10 %
+   Neutrals as measured: text #333, grey boxes #f2f2f2, buttons #333 r10. */
+
+.sc-skin{
+  --sc-hl-05:#f8f2f5;--sc-hl-10:#f2e6eb;--sc-hl-20:#e4ccd7;--sc-hl-30:#d7b3c3;
+  --sc-grad:linear-gradient(120deg,#f6edf1 0,#e4ccd7 20%,#efdde5 80%,#f2e6eb 100%);
+  --lu-primary:var(--sc-hl,#790236);
+}
+@supports (background:color-mix(in srgb,red 50%,#fff)){
+  .sc-skin{
+    --sc-hl-05:color-mix(in srgb,var(--sc-hl) 5%,#fff);--sc-hl-10:color-mix(in srgb,var(--sc-hl) 10%,#fff);
+    --sc-hl-20:color-mix(in srgb,var(--sc-hl) 20%,#fff);--sc-hl-30:color-mix(in srgb,var(--sc-hl) 30%,#fff);
+    --sc-grad:linear-gradient(120deg,color-mix(in srgb,var(--sc-hl) 7%,#fff) 0,var(--sc-hl-20) 20%,color-mix(in srgb,var(--sc-hl) 13%,#fff) 80%,var(--sc-hl-10) 100%);
+  }
+}
+
+/* ---- Columns: gallery | info 50 / 50, 30 px apart, inside the theme's own edges (header line) ---- */
+@media screen and (min-width:750px){
+  .sc-skin .product.grid{column-gap:30px;flex-wrap:nowrap}
+  .sc-skin .product__media-wrapper,.sc-skin .product__info-wrapper{width:calc(50% - 15px);max-width:calc(50% - 15px);padding:0}
+  .sc-skin .product__info-container{max-width:none}
+  .sc-skin .product__media-list,.sc-skin .thumbnail-slider{max-width:none;width:100%;margin-left:0;margin-right:0}
+  .sc-skin .product__media-wrapper slider-component,.sc-skin .product__media-wrapper media-gallery{max-width:none}
+  .sc-skin #MainProduct-template--28236351668559__main media-gallery{max-width:none;margin-left:0}
+}
+/* Gallery: portrait frame (4:5, as the original); a picture of another shape is shown whole */
+.sc-skin .product__media-item .product-media-container{--ratio:.8!important;--preview-ratio:.8!important;border-radius:0}
+.sc-skin .product__media-item .product__media{padding-top:125%!important}
+.sc-skin .product__media-item .product__media img{object-fit:contain}
+.sc-skin .thumbnail-list{gap:10px}
+.sc-skin #MainProduct-template--28236351668559__main .thumbnail-list__item.slider__slide{width:calc((100% - 40px) / 5)!important;flex:0 0 calc((100% - 40px) / 5)!important;max-width:none}
+.sc-skin .thumbnail{border-radius:0}
+.sc-skin .thumbnail[aria-current="true"]{box-shadow:0 0 0 1px var(--sc-hl,#790236)!important;border-color:var(--sc-hl,#790236)}
+
+/* ---- Text column ---- */
+.sc-skin .product__info-container,.sc-skin .product__info-container *{letter-spacing:normal}
+.sc-skin .product__info-container{color:#333}
+.sc-skin .product__info-container>.lu-pb{margin:0}
+.sc-skin .product__title{margin:0}
+.sc-skin .product__title h1{margin:0;font-size:32px;line-height:44px;font-weight:700;color:#333}
+
+/* Rating: 5 yellow stars + "617 Reviews". Lunara draws Trustpilot boxes; here they are hidden and the stars are drawn
+   twice (grey, then yellow cut at --rating / 5) from one inline SVG */
+.sc-skin .trustpilot-rating{margin:6px 0 4px!important;gap:8px}
+.sc-skin .trustpilot-rating a{gap:9px!important;min-height:44px;margin:-11px 0}
+.sc-skin .trustpilot-stars{position:relative;width:101px!important;height:18px!important}
+.sc-skin .trustpilot-stars svg{display:none!important}
+.sc-skin .trustpilot-stars:before,.sc-skin .trustpilot-stars:after{content:"";position:absolute;inset:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 101 18'%3E%3Cpath d='M9 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L9 13.5l-5.4 3.1 1.2-6.1L0.3 6.3l6.1-.7zM29.6 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L29.6 13.5l-5.4 3.1 1.2-6.1L20.9 6.3l6.1-.7zM50.2 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L50.2 13.5l-5.4 3.1 1.2-6.1L41.5 6.3l6.1-.7zM70.8 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L70.8 13.5l-5.4 3.1 1.2-6.1L62.1 6.3l6.1-.7zM91.4 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L91.4 13.5l-5.4 3.1 1.2-6.1L82.7 6.3l6.1-.7z'/%3E%3C/svg%3E") 0 0 / 101px 18px no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 101 18'%3E%3Cpath d='M9 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L9 13.5l-5.4 3.1 1.2-6.1L0.3 6.3l6.1-.7zM29.6 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L29.6 13.5l-5.4 3.1 1.2-6.1L20.9 6.3l6.1-.7zM50.2 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L50.2 13.5l-5.4 3.1 1.2-6.1L41.5 6.3l6.1-.7zM70.8 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L70.8 13.5l-5.4 3.1 1.2-6.1L62.1 6.3l6.1-.7zM91.4 0l2.6 5.6 6.1.7-4.5 4.2 1.2 6.1L91.4 13.5l-5.4 3.1 1.2-6.1L82.7 6.3l6.1-.7z'/%3E%3C/svg%3E") 0 0 / 101px 18px no-repeat}
+.sc-skin .trustpilot-stars:before{color:#dcdcdc}
+.sc-skin .trustpilot-stars:after{color:#F9C40F;clip-path:inset(0 calc(100% - var(--rating,5) / 5 * 100%) 0 0)}
+.sc-skin .trustpilot-rating-text{font-size:14px;line-height:22.4px;color:#000}
+
+/* Price row */
+.sc-skin .sc-price{display:flex;align-items:center;flex-wrap:wrap;gap:6px 0;margin:6px 0 0;min-height:30px}
+.sc-skin .sc-price__now{font-size:30px;line-height:30px;font-weight:500;color:#333}
+.sc-skin .sc-price__was{display:inline-block;margin-left:10px;font-size:20px;line-height:16px;color:#7b7b7b;text-decoration:line-through}
+.sc-skin .sc-price__was:empty{display:none}
+.sc-skin .sc-price__badge{margin-left:20px;padding:5px 10px;border-radius:5px;background:var(--sc-hl-20);box-shadow:1px 1px 0 rgba(0,0,0,.25);font-size:13px;line-height:16px;font-weight:700;letter-spacing:1px!important;color:#333}
+
+/* Highlights box */
+.sc-skin .sc-hlbox{margin:20px 0 0;padding:14px 15px;border-radius:10px;background:#f2f2f2;list-style:none}
+.sc-skin .sc-hlbox:empty{display:none}
+.sc-skin .sc-hlbox li{margin:0;font-size:16px;line-height:28px;color:#333}
+
+/* Variant picker: shown here (Lunara hides it next to the packs), "Color" / "Size" labels without the value,
+   picture tiles for the option whose values have their own variant pictures (sc-product.js), pills for the others */
+.sc-skin.sc-skin [data-ms-pdp] .lu-variants,.sc-skin.sc-skin [data-ms-pdp]:has([data-lu-kaching]) .lu-variants{display:block!important;margin:20px 0 0!important}
+.sc-skin .lu-variants .ms-variant-group{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 17px;padding:0;border:0}
+.sc-skin .lu-variants .ms-variant-group .product-form__label-container{flex:0 0 100%;margin:0 0 2px}
+.sc-skin .lu-variants .form__label{margin:0;font-size:16px;line-height:24px;font-weight:400;color:#333}
+.sc-skin .lu-variants [data-ms-opt-label]{font-size:0}
+.sc-skin .lu-variants [data-ms-opt-label]:before{content:attr(data-ms-opt-label);font-size:16px;line-height:24px}
+.sc-skin .lu-variants .ms-variant-group input[type=radio]+label{display:inline-flex;align-items:center;justify-content:center;min-height:40px;margin:0;padding:8px 20px;box-sizing:border-box;border:1px solid var(--sc-hl,#790236);border-radius:10px;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,.016);font-size:14px;line-height:22px;font-weight:400;letter-spacing:normal;color:#333;text-decoration:none;text-transform:none}
+.sc-skin .lu-variants .ms-variant-group input[type=radio]:checked+label{border-color:var(--sc-hl,#790236);background:var(--sc-hl,#790236);color:#fff;font-weight:700;text-decoration:none}
+.sc-skin .lu-variants .ms-variant-group input[type=radio]+label.sc-swimg{width:80px;height:100px;min-height:0;padding:0;overflow:hidden;white-space:nowrap;text-indent:200%;border:1px solid var(--sc-hl,#790236);background:#f2f2f2 var(--sc-sw) center / cover no-repeat;font-size:12px;color:transparent}
+.sc-skin .lu-variants .ms-variant-group input[type=radio]:checked+label.sc-swimg{border:2px solid var(--sc-hl,#790236);box-shadow:inset 0 0 0 2px #fff;background:#f2f2f2 var(--sc-sw) center / cover no-repeat;color:transparent}
+.sc-skin .lu-variants .ms-variant-group input[type=radio]:focus-visible+label{outline:2px solid var(--sc-hl);outline-offset:2px}
+
+/* Find My Size: a filled 32 px pill drawn inside a 44 px tap area */
+.sc-skin .lu-sf{margin:-15px 0 -6px}
+.sc-skin .lu-sf-open{position:relative;z-index:0;height:44px;padding:0 12px;border-radius:999px;background:none;color:#fff;font-size:13px;line-height:18.85px;font-weight:700;text-decoration:none}
+.sc-skin .lu-sf-open:before{content:"";position:absolute;z-index:-1;left:0;right:0;top:6px;bottom:6px;border-radius:999px;background:var(--sc-hl);box-shadow:0 6px 16px rgba(121,2,54,.28)}
+.sc-skin .lu-sf-open:hover{color:#fff}
+.sc-skin .lu-sf-open:hover:before{filter:brightness(1.12)}
+.sc-skin .lu-sf-open svg{display:none}
+
+/* Packs (Kaching): "BUY MORE - SAVE MORE" between thin lines, pale bars, a highlight frame on the picked one */
+.sc-skin .lu-kaching{margin:18px 0 0}
+/* Heading (BUY MORE - SAVE MORE): the block's Accent colour (user 2026-11-19; the original's is black) */
+.sc-skin .kaching-bundles__block-title{font-size:14px!important;line-height:19.6px;font-weight:700;color:var(--lu-k-accent,var(--sc-hl,#790236))!important;letter-spacing:normal!important}
+.sc-skin .kaching-bundles__block-title span{color:inherit}
+.sc-skin .kaching-bundles__block-title:before,.sc-skin .kaching-bundles__block-title:after{background:var(--sc-hl-30)!important;border-color:var(--sc-hl-30)!important}
+.sc-skin .kaching-bundles__bar-title{font-size:20px!important;line-height:22px!important;font-weight:700!important;color:#000}
+.sc-skin .kaching-bundles__bar-subtitle{font-size:14px;line-height:18px;font-weight:400;color:#555}
+.sc-skin .kaching-bundles__bar-price{font-size:20px!important;line-height:22px!important;font-weight:700!important;color:#000!important}
+.sc-skin .kaching-bundles__bar-full-price{font-size:14px;color:#555}
+.sc-skin .kaching-bundles__bar-content-left:has(.kaching-bundles__bar-subtitle[data-lu-sub*="{each}"]){display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px 10px}
+.sc-skin .kaching-bundles__bar-subtitle[data-lu-sub*="{each}"]{display:inline-block;padding:4px 8px;border-radius:8px;background:var(--sc-hl-10);font-size:12px;line-height:18px;color:#000}
+.sc-skin .kaching-bundles__bar-most-popular__content{font-family:var(--font-body-family,Poppins,sans-serif)!important;font-size:12px!important;font-weight:700}
+.sc-skin .kaching-bundles__bar-variant-names{font-size:12px;font-weight:500;color:#555}
+.sc-skin .kaching-bundles__bar-variant-select{font-size:14px;border-radius:4px}
+
+/* Add to cart + Express checkout */
+.sc-skin .product-form__buttons{display:flex;flex-direction:column;gap:10px}
+/* Add to cart keeps Lunara's own pill button and its hover (vesnacharm, user 2026-11-19), in the main colour (see the block at the end). Only the express button is restyled here. */
+.sc-skin .sc-buynow{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;margin:0;padding:16px 0;border:0;border-radius:10px;box-shadow:none;font-size:20px!important;line-height:20px;font-weight:700;letter-spacing:1px!important;text-transform:uppercase}
+.sc-skin .sc-buynow:after,.sc-skin .sc-buynow:before{display:none}
+.sc-skin .sc-buynow{background:#f0f0f0 var(--sc-grad)!important;color:#333!important;cursor:pointer}
+.sc-skin .sc-buynow:hover{filter:brightness(.97)}
+.sc-skin .product-form{margin:20px 0 0}
+
+/* Shipping box */
+.sc-skin .sc-ship{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:30px 0 0;padding:20px;border-radius:10px;background:#f2f2f2;color:#333}
+.sc-skin .sc-ship p{display:flex;align-items:center;gap:6px;margin:0}
+.sc-skin .sc-ship .sc-ic{flex:0 0 auto;width:20px;height:20px}
+.sc-skin .sc-ship__title{font-size:16px;line-height:18px;font-weight:700;letter-spacing:.32px!important}
+.sc-skin .sc-ship__note{margin:10px 0 0!important;font-size:13px;line-height:18px}
+.sc-skin .sc-ship__side{display:flex;flex-direction:column;align-items:flex-end}
+.sc-skin .sc-ship__side p{font-size:14px;line-height:36px;font-weight:700;letter-spacing:.28px!important}
+
+/* Info rows */
+.sc-skin .sc-tabs{margin:5px 0 0}
+.sc-skin .sc-tab{margin:5px 0 0;border-radius:10px;background:#f2f2f2}
+.sc-skin .sc-tab summary{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:47px;padding:0 15px;list-style:none;cursor:pointer;font-size:14px;line-height:17px;font-weight:700;color:#333}
+.sc-skin .sc-tab summary::-webkit-details-marker{display:none}
+.sc-skin .sc-tab summary .sc-ic{flex:0 0 auto;width:18px;height:18px;transition:transform .2s}
+.sc-skin .sc-tab[open] summary .sc-ic{transform:rotate(90deg)}
+.sc-skin .sc-tab__body{padding:0 15px 15px;font-size:14px;line-height:22px;color:#333}
+.sc-skin .sc-tab__body p{margin:0 0 10px}
+.sc-skin .sc-tab__body p:last-child{margin:0}
+.sc-skin .sc-chart{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.sc-skin .sc-chart table{width:100%;min-width:460px;border-collapse:collapse;background:#fff;font-size:13px;line-height:18px;text-align:center}
+.sc-skin .sc-chart th,.sc-skin .sc-chart td{padding:8px 6px;border:1px solid #e2e2e2}
+.sc-skin .sc-chart thead th{background:var(--sc-hl-10);font-weight:700;color:#333}
+.sc-skin .sc-chart tbody th{font-weight:700}
+.sc-skin .sc-chart__note{margin:8px 0 0;font-size:12px}
+
+/* ---- Phones ---- */
+@media screen and (max-width:749px){
+  .sc-skin .product__info-container{padding-top:16px}
+  .sc-skin .product__title h1{font-size:22px;line-height:28px}
+  .sc-skin .sc-price__now{font-size:26px}
+  .sc-skin .sc-price__was{font-size:16px;margin-left:8px}
+  .sc-skin .sc-price__badge{margin-left:12px;padding:3px 6px;font-size:12px;line-height:14px;letter-spacing:.3px!important}
+  .sc-skin .kaching-bundles__bar-variant-select{font-size:16px;min-height:44px}
+  .sc-skin .sc-chart table{min-width:0;font-size:12px}
+  .sc-skin .sc-chart th,.sc-skin .sc-chart td{padding:6px 2px}
+  .sc-skin .sc-hlbox{padding:12px 12px}
+  .sc-skin .sc-hlbox li{font-size:14px;line-height:28px}
+  .sc-skin .lu-variants .ms-variant-group input[type=radio]+label{padding:8px 16px}
+  .sc-skin .sc-buynow{min-height:46px;padding:14px 0;font-size:14px!important;line-height:14px}
+  .sc-skin .kaching-bundles__bar-title,.sc-skin .kaching-bundles__bar-price{font-size:18px!important}
+  .sc-skin .sc-ship{flex-direction:column;align-items:stretch;gap:6px;padding:16px 15px}
+  .sc-skin .sc-ship__main{text-align:center}
+  .sc-skin .sc-ship__title{justify-content:center}
+  .sc-skin .sc-ship__note{justify-content:center;font-size:12px}
+  .sc-skin .sc-ship__side{flex-direction:row;justify-content:space-between;align-items:center}
+  .sc-skin .sc-ship__side p{font-size:12px}
+}
+
+/* ---- vesnacharm, user 2026-11-19 (after the first live upload) */
+/* Add to cart: Lunara's pill + hover kept, in the theme's main colour (the highlight, white text; user 2026-11-19),
+   whatever the store's primary colour. Sticky bar button the same. */
+.sc-skin #addToCart.main-product-atc { --color-button: var(--vn-hl-rgb, 121, 2, 54); --color-button-text: 255, 255, 255; }
+.sc-skin #addToCart.main-product-atc:after { background-color: rgb(var(--vn-hl-rgb, 121, 2, 54)); background-image: none; }
+.sc-skin .lu-sticky-bar .lu-sticky-bar__btn { background: var(--vn-hl, #790236) !important; color: #fff !important; }
+/* Pack rows: no "Size, Color" line above the per-item pickers. */
+.sc-skin .kaching-bundles__bar-variant-names { display: none; }
+/* Highlights as a check list: round 22 px check, 12 px gap, 32 px rows, 16 px text, all in the highlight colour. */
+.sc-skin .sc-hlbox--check { margin: 16px 0 0; padding: 0; border-radius: 0; background: none; }
+.sc-skin .sc-hlbox--check li { display: flex; align-items: center; gap: 12px; min-height: 32px; font-size: 16px; line-height: 22px; color: var(--sc-hl, #790236); }
+.sc-skin .sc-hlbox__ic { flex: none; width: 22px; height: 22px; }
+@media screen and (max-width: 749px) {
+  .sc-skin .sc-hlbox--check { padding: 0; }
+  .sc-skin .sc-hlbox--check li { font-size: 15px; line-height: 21px; }
+}

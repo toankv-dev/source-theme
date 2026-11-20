@@ -1,0 +1,36 @@
+{{!-- Under the Add to cart of the bodysuit look (rendered by sections/product.hbs right after the buy_buttons block;
+      user 2026-11-19, as tammycharm.com): a "Guaranteed safe checkout" box with the payment icons, then a grey box with the
+      delivery estimate (today + min / max days, "Thu, Nov 26") and the money-back guarantee with a link to the refund
+      policy. Product section settings vn_safe_* / vn_eta_* / vn_guarantee_* (new ids: on by default, also for a template
+      saved before). Context = the product section's (passed as ..). Own <style>; the dates are set by an inline script
+      while the page is parsed (no flash). --}}
+<style>
+  /* Measured on the user's screenshot (640 px): box border #e3e3e3 r8, legend 15px/700 #222 with the highlighted word in
+     the main colour, icons 38 x 24; grey box #f8f8f8 r10, 15px #222, icons 22 px in the main colour, dates bold. */
+  .sc-safe{min-width:0;margin:16px 0 0;padding:4px 14px 14px;border:1px solid #e3e3e3;border-radius:8px}
+  .sc-safe legend{margin:0 auto;padding:0 8px;font-size:15px;line-height:20px;font-weight:700;letter-spacing:normal;color:#222;text-align:center}
+  .sc-safe legend em{font-style:normal;color:var(--sc-hl,#790236)}
+  .sc-safe__pay{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0 0;padding:0;list-style:none}
+  .sc-safe__pay li{margin:0}
+  .sc-safe__pay img{display:block;width:38px;height:24px;object-fit:contain}
+  .sc-eta{display:flex;flex-direction:column;gap:10px;margin:12px 0 0;padding:14px 16px;border-radius:10px;background:#f8f8f8;list-style:none;color:#222;font-size:15px;line-height:22px;letter-spacing:normal}
+  .sc-eta:empty{display:none}
+  .sc-eta li{display:flex;align-items:center;gap:10px;margin:0}
+  .sc-eta svg{flex:none;color:var(--sc-hl,#790236)}
+  .sc-eta strong{font-weight:700}
+  .sc-eta a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+  .sc-eta a:hover{color:var(--sc-hl,#790236)}
+  @media (max-width:749px){.sc-eta{font-size:14px;line-height:20px;padding:12px 14px}.sc-safe legend{font-size:14px}}
+</style>
+{{#unless (eq section.settings.vn_safe_show false)}}<fieldset class="sc-safe"><legend>{{#if section.settings.vn_safe_before}}{{section.settings.vn_safe_before}}{{else}}Guaranteed{{/if}} <em>{{#if section.settings.vn_safe_em}}{{section.settings.vn_safe_em}}{{else}}safe{{/if}}</em> {{#if section.settings.vn_safe_after}}{{section.settings.vn_safe_after}}{{else}}checkout{{/if}}</legend><ul class="sc-safe__pay" aria-label="Accepted payment methods"><li><img src="{{@root.assets_url}}/images/pay/visa.svg" alt="Visa" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/master.svg" alt="Mastercard" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/amex.svg" alt="American Express" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/discover.svg" alt="Discover" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/apple_pay.svg" alt="Apple Pay" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/google_pay.svg" alt="Google Pay" width="38" height="24" loading="lazy"></li><li><img src="{{@root.assets_url}}/images/pay/paypal.svg" alt="PayPal" width="38" height="24" loading="lazy"></li></ul></fieldset>{{/unless}}
+<ul class="sc-eta" data-sc-eta data-min="{{#if section.settings.vn_eta_min}}{{section.settings.vn_eta_min}}{{else}}7{{/if}}" data-max="{{#if section.settings.vn_eta_max}}{{section.settings.vn_eta_max}}{{else}}15{{/if}}" data-text="{{#if section.settings.vn_eta_text}}{{section.settings.vn_eta_text}}{{else}}Order today, get it between {from} and {to}{{/if}}">{{#unless (eq section.settings.vn_eta_show false)}}<li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3.2v2.8h-7"/><circle cx="6.5" cy="17" r="1.8" fill="#f8f8f8"/><circle cx="17" cy="17" r="1.8" fill="#f8f8f8"/></svg><span data-sc-eta-text>Delivered in {{#if section.settings.vn_eta_min}}{{section.settings.vn_eta_min}}{{else}}7{{/if}}–{{#if section.settings.vn_eta_max}}{{section.settings.vn_eta_max}}{{else}}15{{/if}} days</span></li>{{/unless}}{{#unless (eq section.settings.vn_guarantee_show false)}}<li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 3 8.3 7 9.5 4-1.2 7-5.1 7-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg><span>{{#if section.settings.vn_guarantee_text}}{{section.settings.vn_guarantee_text}}{{else}}45-day money-back guarantee.{{/if}} <a href="{{#if section.settings.vn_guarantee_link}}{{section.settings.vn_guarantee_link}}{{else}}{{@root.policyLinks.refund}}{{/if}}">{{#if section.settings.vn_guarantee_link_label}}{{section.settings.vn_guarantee_link_label}}{{else}}Read the policy{{/if}}</a></span></li>{{/unless}}</ul>
+<script>(function (u) {
+  var t = u && u.querySelector('[data-sc-eta-text]'); if (!t) return;
+  var a = parseInt(u.getAttribute('data-min'), 10), b = parseInt(u.getAttribute('data-max'), 10);
+  if (!(a >= 0)) a = 7; if (!(b >= 0)) b = 15; if (b < a) { var x = a; a = b; b = x; }
+  var day = function (n) { var d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return c === '&' ? '&amp;' : c === '<' ? '&lt;' : c === '>' ? '&gt;' : '&quot;'; }); };
+  var tpl = u.getAttribute('data-text') || '';
+  if (tpl.indexOf('{from}') < 0 && tpl.indexOf('{to}') < 0) return;
+  t.innerHTML = esc(tpl).replace('{from}', '<strong>' + esc(day(a)) + '</strong>').replace('{to}', '<strong>' + esc(day(b)) + '</strong>');
+})(document.currentScript.previousElementSibling);</script>

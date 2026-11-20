@@ -41,6 +41,11 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
   `_work/` is not committed: reuse the newest builder on this machine if present.
 - A product page whose blocks the home already has: move the home blocks into snippets (check the home HTML is byte-identical before / after) and render them with a section; copy their CSS with a generator into a file only that template links ONCE (one link per section = parsed N times, mobile-audit counts each).
 
+- A link → an extra template in a built **Lunara (Shrine PRO)** theme (no build script here): reuse its `product` section
+  behind a `skin` setting (CSS / JS linked only when set) + new `<prefix>-*` sections with own `<style>`; Lunara edits in an
+  anchored `_work/patch-sc.js`; save old templates' HTML before, diff after. Lunara wins with `#MainProduct-…` + `!important`
+  (gallery 530 px, thumbs, ATC radius): copy that prefix. Compare on a copy with a product-like sample (`_work/compare-copy.js`).
+
 ## Runs
 <!-- date · theme · minutes per step (scaffold/capture-or-download/map/build product/build other pages/compare/verify/pack+report) · slowest step -->
 - 2026-11-06 · resilia (5 pages) · 1/9/6/15/14/8/6/6 · build (throwaway scripts → now tools)
@@ -53,3 +58,4 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
 - 2026-11-08 · maggies-tanks product page (theme-from-link, 2nd link on a built theme; reuse the home blocks) · 0/1.5/4/25/0/15/10/2 · build product (one source with home: snippets + generated mt-story.css; CSS budget)
 - 2026-11-09 · tredvik (theme-from-link, 1 link: product, desktop pop-up; 2 new sections) · 0.5/1.5/10/12/0/20/5/1 · compare (block positions measured by hand, base decorations found late)
 - 2026-11-09 · tredvik again with its media (the rule of docs/SPEC-theme-from-link-images.md; tools + base first) · 0/2/1/4/0/6/3/1 · compare (phone: a pop-up in the live shot, `.b-buy` is `!important` in the base)
+- 2026-11-19 · lunara---hushflex + Shapecurve template (theme-from-link, 1 link: product, phone bot-checked; Lunara skin, 4 sections) · 0/2/10/30/15/15/15/5 · build product (Lunara id-level !important rules)

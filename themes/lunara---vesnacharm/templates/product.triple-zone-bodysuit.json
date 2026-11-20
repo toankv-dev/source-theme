@@ -93,6 +93,28 @@
           "type": "buy_buttons",
           "settings": {}
         },
+        "videos": {
+          "type": "media_slider",
+          "settings": {
+            "heading": "",
+            "per_view": 3,
+            "per_view_mobile": "3",
+            "ratio": "9/16",
+            "gap": 12,
+            "radius": 0,
+            "show_arrows": true,
+            "media_1": "",
+            "media_2": "",
+            "media_3": "",
+            "media_4": "",
+            "media_5": "",
+            "media_6": "",
+            "media_7": "",
+            "media_8": "",
+            "media_9": "",
+            "media_10": ""
+          }
+        },
         "ship": {
           "type": "sc_ship",
           "settings": {
@@ -126,6 +148,7 @@
         "fit",
         "kaching",
         "buy_buttons",
+        "videos",
         "ship",
         "tabs"
       ]
@@ -242,6 +265,34 @@
         "item_3",
         "item_4"
       ]
+    },
+    "before_after": {
+      "type": "sc-before-after",
+      "settings": {
+        "before_image": "",
+        "default_before_image": "",
+        "after_image": "",
+        "default_after_image": "",
+        "before_label": "Before",
+        "after_label": "After",
+        "start": 50,
+        "ratio": "4/3",
+        "line_color": "#ffffff",
+        "image_side": "left",
+        "heading": "Sculpt Your Curves",
+        "heading_em": "Without the Struggle",
+        "body": "<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>",
+        "review_rating": 5,
+        "review_star_color": "#00b67a",
+        "review_title": "",
+        "review_text": "",
+        "review_author": "",
+        "bg_style": "gradient",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 36,
+        "pad_bottom": 36
+      }
     },
     "testimonials": {
       "disabled": true,
@@ -471,16 +522,31 @@
         "heading": "You Will Also Love",
         "show_quick_add": false
       }
+    },
+    "reviews_lunara": {
+      "type": "reviews",
+      "settings": {
+        "show_write": false
+      },
+      "disabled": true
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "disabled": true
     }
   },
   "order": [
     "product",
     "features",
     "details",
+    "before_after",
     "reels",
     "testimonials",
     "trust",
     "reviews",
+    "reviews_lunara",
+    "faq",
     "related"
   ]
 }

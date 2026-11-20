@@ -196,3 +196,46 @@ test('pack warns when the design map is missing or stale, and never packs _map/'
   const zip = fs.readdirSync(out).find((f) => f.endsWith('.zip'));
   assert.ok(zip && !fs.readFileSync(path.join(out, zip)).includes('_map/'), 'no _map/ in the zip');
 });
+
+test('a loose source file in _src/ is listed with the scripts that read it, and hashed', () => {
+  const d = copyTheme();
+  fs.mkdirSync(path.join(d, '_src'));
+  write(path.join(d, '_src', 'patch-y.js'), "const s = require('fs').readFileSync(__dirname + '/block-y.hbs', 'utf8'); // sections/banner.hbs\n");
+  write(path.join(d, '_src', 'block-y.hbs'), '<div class="y"></div>\n');
+  write(path.join(d, '_src', 'notes.txt'), 'nobody reads me\n');
+  const m = M.scan(d);
+  assert.deepEqual(m.srcFiles, [
+    { file: '_src/block-y.hbs', readBy: ['_src/patch-y.js'] },
+    { file: '_src/notes.txt', readBy: [] },
+  ]);
+  assert.ok(m.files['_src/block-y.hbs'], 'hashed, so a change to it is seen');
+  const md = M.renderIndex(m);
+  assert.match(md, /- _src\/block-y\.hbs: source read by _src\/patch-y\.js → edit it, then run that script/);
+  assert.match(md, /- _src\/notes\.txt: not read by any script/);
+});
+
+test('a path named only in a script comment is not a target of that script (a URL is not a comment)', () => {
+  const d = copyTheme();
+  fs.mkdirSync(path.join(d, '_src'));
+  write(path.join(d, '_src', 'build-z.js'), [
+    '// renders sections/footer.hbs from the settings (a comment: not a target)',
+    '/* block comment: sections/product.hbs */',
+    "const url = 'https://example.com/x'; fs.writeFileSync('sections/banner.hbs', url); // and sections/footer.hbs",
+    '',
+  ].join('\n'));
+  const s = M.scan(d).sources.find((x) => x.file === '_src/build-z.js');
+  assert.deepEqual(s.targets, ['sections/banner.hbs']);
+});
+
+test('a path inside a sentence of a string (an info text) is not a target; one that starts a string is', () => {
+  const d = copyTheme();
+  fs.mkdirSync(path.join(d, '_src'));
+  write(path.join(d, '_src', 'build-w.js'), [
+    "const info = 'This look loads sections/footer.hbs for this section only.';",
+    "write('sections/banner.hbs', info);",
+    'fs.writeFileSync(`${T}/sections/product.hbs`, info);',
+    '',
+  ].join('\n'));
+  const s = M.scan(d).sources.find((x) => x.file === '_src/build-w.js');
+  assert.deepEqual(s.targets, ['sections/banner.hbs', 'sections/product.hbs']);
+});

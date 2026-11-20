@@ -1,0 +1,239 @@
+{
+  "name": "Before / after slider",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Pictures"
+    },
+    {
+      "type": "paragraph",
+      "content": "Two photos of the same pose and framing, same size (e.g. 1200 x 900). Shoppers drag the line between them. The section shows on the store once both photos are set."
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before photo (left side)",
+      "info": "Shown on the left of the line."
+    },
+    {
+      "type": "text",
+      "id": "default_before_image",
+      "label": "Theme file while empty",
+      "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After photo (right side)",
+      "info": "Shown on the right of the line."
+    },
+    {
+      "type": "text",
+      "id": "default_after_image",
+      "label": "Theme file while empty",
+      "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Label on the before side",
+      "default": "Before",
+      "info": "White capitals in the bottom corner. Empty = no label."
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "Label on the after side",
+      "default": "After",
+      "info": "Empty = no label."
+    },
+    {
+      "type": "range",
+      "id": "start",
+      "label": "Line starts at",
+      "min": 5,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Photo frame",
+      "default": "4/3",
+      "options": [
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "1/1",
+          "label": "Square"
+        },
+        {
+          "value": "4/5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "natural",
+          "label": "Same shape as the after photo"
+        }
+      ],
+      "info": "Landscape, square and portrait crop the photos to fill the frame."
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line and handle colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Photos side (computer)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "info": "On phones: photos, then the heading, text and review."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sculpt Your Curves"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading: highlighted end",
+      "default": "Without the Struggle",
+      "info": "Right after the heading, in the highlight colour. Empty = none."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>",
+      "info": "A bulleted list = the check list (italic, round checks in the highlight colour). Bold words are in the highlight colour. Put the review in the card below, not here."
+    },
+    {
+      "type": "header",
+      "content": "Review card"
+    },
+    {
+      "type": "paragraph",
+      "content": "A white card under the text: stars, a short title, the quote and the name. Shows when the title or the quote is filled in. Use a real review of this product."
+    },
+    {
+      "type": "range",
+      "id": "review_rating",
+      "label": "Stars",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 5,
+      "info": "0 = no stars."
+    },
+    {
+      "type": "color",
+      "id": "review_star_color",
+      "label": "Star boxes colour",
+      "default": "#00b67a"
+    },
+    {
+      "type": "text",
+      "id": "review_title",
+      "label": "Title",
+      "default": "",
+      "info": "e.g. Still Comfortable Hours Later"
+    },
+    {
+      "type": "textarea",
+      "id": "review_text",
+      "label": "Quote",
+      "default": "",
+      "info": "The review text, with its quotation marks."
+    },
+    {
+      "type": "text",
+      "id": "review_author",
+      "label": "Name",
+      "default": "",
+      "info": "e.g. Penny L. – Verified Buyer"
+    },
+    {
+      "type": "header",
+      "content": "Band"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Background",
+      "default": "gradient",
+      "options": [
+        {
+          "value": "gradient",
+          "label": "Soft gradient of the highlight colour"
+        },
+        {
+          "value": "solid",
+          "label": "One colour (below)"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background colour (one colour)",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / after slider",
+      "category": "Content",
+      "description": "Two photos with a line shoppers drag to compare them, beside a heading, a check list and a review card."
+    }
+  ]
+}

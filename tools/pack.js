@@ -28,8 +28,8 @@ const errors = [];
 const warnings = [];
 const rel = (f) => path.relative(dir, f).replace(/\\/g, '/');
 
-const HELPERS = new Set(['if', 'unless', 'each', 'with', 'lookup', 'log', 'eq', 'gt', 'limit', 'json', 'money', 'applyTokens',
-  'faqItems', 'stars5', 'swatchStyle', 'contains', 'editable', 'editableSetting']);
+// The platform engine's helpers (tools/lib/engine-helpers.js): any other one fails the store page with a 500.
+const HELPERS = require('./lib/engine-helpers').NAMES;
 
 function walk(d, out) {
   for (const f of fs.readdirSync(d)) {

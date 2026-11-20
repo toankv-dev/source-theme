@@ -24,8 +24,7 @@ const dir = path.resolve(args.find((a) => !a.startsWith('--')) || '');
 const jsonOut = args.includes('--json') ? args[args.indexOf('--json') + 1] : null;
 if (!fs.existsSync(path.join(dir, 'theme.json'))) { console.error('No theme.json in ' + dir); process.exit(1); }
 
-const ENGINE_HELPERS = new Set(['if', 'unless', 'each', 'with', 'lookup', 'log', 'else', 'eq', 'gt', 'limit', 'json', 'money', 'applyTokens',
-  'faqItems', 'stars5', 'swatchStyle', 'contains', 'editable', 'editableSetting']);
+const ENGINE_HELPERS = new Set([...require('./lib/engine-helpers').NAMES, 'else']);
 const ALIASES = [
   ['faq', 'faqs', 'questions', 'accordion-faq'], ['feature-rows', 'features', 'image-with-text-rows', 'alternating'],
   ['image-banner', 'hero', 'banner', 'slideshow'], ['logo-bar', 'press', 'logos', 'as-seen-in'], ['reviews', 'product-reviews'],

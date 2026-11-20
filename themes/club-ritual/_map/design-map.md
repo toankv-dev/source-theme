@@ -2,7 +2,7 @@
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
 Club Ritual 2026.11.05.1 · schema v2 · 12 templates · 25 sections · 21 snippets · 3 CSS · 3 JS
 One part in detail: `node tools/theme-map.js themes/club-ritual --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Layers — what a child theme may change L28 · Platform contract (keep in every theme) L41 · JavaScript API (`window.Base`, core.js) L62 · Section catalog (product templates) L70 · Pages L97 · Mobile first L104 · Work on it L113
+README.md: Layers — what a child theme may change L28 · Platform contract (keep in every theme) L41 · JavaScript API (`window.Base`, core.js) L64 · Section catalog (product templates) L72 · Pages L99 · Mobile first L106 · Work on it L115
 
 ## Design
 | setting | value | Theme settings | read by |

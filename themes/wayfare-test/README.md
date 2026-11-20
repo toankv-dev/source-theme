@@ -30,8 +30,10 @@ what the original page has on top.
 - Events through `window.__adluxTrack`: ViewContent, AddToCart, InitiateCheckout, Lead, Search (core.js).
 - Discounts: never set a price in the theme. `#b-offers` (nextItemTiers / bxgyOffers / amountOffOffers) +
   the checkout's own formula, corrected by `POST /api/storefront/cart/price`.
-- Only the engine's helpers: `if unless each with lookup eq gt limit json money applyTokens faqItems stars5
-  swatchStyle contains editable editableSetting`. Checkboxes default ON: test them with `(eq settings.x false)`.
+- Only the engine's helpers (`tools/lib/engine-helpers.js`, copied from the platform's theme-engine.ts): `if unless
+  each with lookup eq gt limit json money applyTokens faqItems stars5 swatchStyle editable editableSetting isColorGroup
+  stars number usdAmount truncate exceeds`. Any other one (`contains`, `and`, `or` …) fails the store page with a 500;
+  pack.js stops on it. Checkboxes default ON: test them with `(eq settings.x false)`.
 - `templates/product.hbs` (schema v1 entry) must render on its own: sections fall back when `section` is undefined.
 
 ## JavaScript API (`window.Base`, core.js)

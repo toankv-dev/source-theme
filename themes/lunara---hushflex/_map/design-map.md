@@ -106,7 +106,7 @@ Every page (theme.json): theme.css, theme.js
 
 ## Sources
 - _src/anim-webp.py: a helper or check, does not edit the theme
-- _src/build-sc.js generates assets/css/sc-product.css, assets/js/sc-product.js, sections/product.schema.json, sections/reviews.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json +3 → edit the script, then run it
+- _src/build-sc.js generates sections/product.schema.json, sections/reviews.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json, sections/sc-testimonials.schema.json, sections/sc-trust.schema.json +1 → edit the script, then run it
 - _src/compare-copy.js: a helper or check, does not edit the theme
 - _src/patch-sc.js patches sections/product.hbs, sections/reviews.hbs, snippets/lu-size-finder.hbs (anchored edits) → edit the script, then run it
 - _src/sc-e2e.js: a helper or check, does not edit the theme

@@ -2,7 +2,7 @@
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
 Maggies Tanks 2026.11.10.13 · schema v2 · 12 templates · 26 sections · 45 snippets · 9 CSS · 4 JS
 One part in detail: `node tools/theme-map.js themes/maggies-tanks --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L44 · Section catalog (product templates) L52 · Pages L86 · Mobile first L93 · Work on it L102
+README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L46 · Section catalog (product templates) L54 · Pages L88 · Mobile first L95 · Work on it L104
 
 ## Design
 | setting | value | Theme settings | read by |

@@ -101,6 +101,29 @@ theme-map + edit-check + media-grab ──→ link-slim
 cost-meter: đo trước và sau mỗi module
 ```
 
+## Đo sau đợt 1 (căn cứ để xếp thứ tự đợt 2)
+
+Phiên sửa đầu tiên có design map: `d--source-theme/06a2156e…` "Topbar và banner theme lunara---vesnacharm",
+2026-11-20, 4 yêu cầu (topbar + banner; before / after kéo thả như đối thủ; làm slider đó dùng cho mọi template; sửa
+sau khi dùng thử).
+
+| | Phiên A (trước) | Phiên 06a2156e (sau đợt 1) |
+|---|---|---|
+| Context trung bình | 468k | **187k** |
+| Lượt gọi mỗi yêu cầu | TB 19 | 93 · 42 · 125 · 14 (yêu cầu lớn hơn: tính năng mới) |
+| Chi phí | 42,4M / 38 yêu cầu | 7,0M / 4 yêu cầu |
+| Đọc code theme | ~7 lệnh mỗi yêu cầu | 42 lệnh có đường dẫn theme + phần lớn 30 grep / 17 sed / 9 `node -e` / 6 cat chạy sau `cd` vào theme |
+| Đọc design map | — | 10 lần, `theme-map.js` 10 lần |
+
+Còn tốn ở đâu (số lần dùng tool):
+- **Kiểm tra sau khi sửa: ~1/3 số lần dùng tool.** `shot.js` 22, đọc ảnh 22, `preview-server.js` 18 (khởi động lại
+  nhiều lần), `mobile-audit.js` 12, `visual-diff` / `pixel` / `crop` / `side-by-side` 13, script tạm 15 (thử kéo
+  slider) → `edit-check` lên đầu đợt 2.
+- **Làm giống một phần của đối thủ: yêu cầu 2 + 3 = 65% phiên**, `download-page.js` 4 lần → `section-grab` thứ hai.
+- **Đọc code vẫn nhiều:** map nói ở đâu, nhưng tính năng mới (JS của slider) vẫn phải đọc code. `cost-meter` cần tính
+  lệnh chạy sau `cd` vào theme là đọc code theme (theo dõi `cd` trong cùng lệnh / cwd của dòng transcript).
+- Không có câu hỏi admin hay shopdy trong phiên này → `platform-guide` xếp thứ ba.
+
 ## Mục tiêu đo được (chi tiết trong spec từng module)
 
 Đo bằng `cost-meter` trên các lần chạy thật tiếp theo, so với phiên A / B:

@@ -219,26 +219,43 @@ async function run(browser, width) {
   const atc = await page.evaluate(() => { const b = document.querySelector('#addToCart'), a = getComputedStyle(b, '::after'); return { bg: a.backgroundColor, color: getComputedStyle(b).color, radius: getComputedStyle(b).borderRadius }; });
   ok(atc.bg === 'rgb(121, 2, 54)' && atc.color === 'rgb(255, 255, 255)' && atc.radius === '40px', 'Add to cart: pill, white text on the main colour #790236', atc);
   ok(await page.locator('.kaching-bundles__bar--selected .kaching-bundles__bar-variant-names').evaluateAll((l) => l.every((e) => getComputedStyle(e).display === 'none')), 'no "Size, Color" line in the pack rows');
+  // pack rows: the colour picker left of the size picker (user 2026-11-20), whatever the product's option order
+  const cf = await page.evaluate(() => [...document.querySelectorAll('.kaching-bundles__bar--selected [data-lu-unit]')].map((u) => [...u.querySelectorAll('select')]
+    .sort((x, y) => x.getBoundingClientRect().left - y.getBoundingClientRect().left).map((x) => x.getAttribute('data-name')).join(' / ')));
+  ok(cf.length > 0 && cf.every((x) => /^colou?r \/ /i.test(x)), 'pack rows: Color picker first, then Size', cf);
   const hl = await page.locator('.sc-hlbox--check li').evaluateAll((l) => l.map((e) => [e.querySelector('svg') ? 1 : 0, e.textContent.trim()]));
   ok(hl.length === 3 && hl.every((x) => x[0] === 1 && /^[A-Z]/.test(x[1])), 'highlights: check list, emoji left out', hl);
-  // under the Add to cart: Guaranteed safe checkout + delivery estimate / guarantee (as tammycharm.com)
+  // under the Add to cart: Guaranteed safe checkout (as tammycharm.com), then the money-back guarantee box (as
+  // brixpant.com, 2026-11-20: the delivery estimate / guarantee line box is gone)
   const tb = await page.evaluate(() => {
-    const atc = document.querySelector('#addToCart'), box = document.querySelector('.sc-safe'), eta = document.querySelector('.sc-eta');
-    const day = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); };
+    const atc = document.querySelector('#addToCart'), box = document.querySelector('.sc-safe'), mbg = document.querySelector('.sc-mbg');
+    const cs = mbg ? getComputedStyle(mbg) : null;
     return {
       after: !!(box && atc && (atc.compareDocumentPosition(box) & Node.DOCUMENT_POSITION_FOLLOWING) && box.offsetParent),
       legend: box ? box.querySelector('legend').textContent.replace(/\s+/g, ' ').trim() : '',
       em: box ? getComputedStyle(box.querySelector('legend em')).color : '',
       icons: box ? [...box.querySelectorAll('img')].length : 0,
-      eta: eta ? eta.querySelector('[data-sc-eta-text]').textContent.trim() : '',
-      want: 'Order today, get it between ' + day(7) + ' and ' + day(15),
-      bold: eta ? eta.querySelectorAll('[data-sc-eta-text] strong').length : 0,
-      link: eta ? (eta.querySelector('a') || {}).getAttribute('href') : '',
+      eta: !!document.querySelector('.sc-eta') || /Order today/.test(document.body.innerText),
+      mbgAfter: !!(mbg && box && (box.compareDocumentPosition(mbg) & Node.DOCUMENT_POSITION_FOLLOWING) && mbg.offsetParent),
+      mbgText: mbg ? mbg.querySelector('.sc-mbg__txt').innerText.replace(/\s+/g, ' ').trim() : '',
+      // vs an unselected pack row (2026-11-20: the same background and border); colours compared as canvas RGB, since
+      // Chrome writes a color-mix() result as color(srgb …) and a hex setting as rgb(…)
+      mbgBox: (() => {
+        const bar = [...document.querySelectorAll('.kaching-bundles__bar-container')].find((e) => !e.closest('.kaching-bundles__bar--selected'));
+        if (!cs || !bar) return 'missing';
+        const ctx = document.createElement('canvas').getContext('2d');
+        const rgb = (c) => { ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 1, 1); ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1); return [...ctx.getImageData(0, 0, 1, 1).data].slice(0, 3).join(','); };
+        const bs = getComputedStyle(bar), ring = (bs.boxShadow.match(/^(.*\)) 0px 0px 0px 1px inset$/) || [])[1];
+        return [rgb(cs.backgroundColor) === rgb(bs.backgroundColor), cs.borderTopStyle === 'solid' && cs.borderTopWidth === '1px' && cs.borderTopColor === ring, cs.borderRadius === bs.borderTopLeftRadius].join(' ');
+      })(),
+      seal: mbg ? !!mbg.querySelector('.sc-mbg__seal svg, .sc-mbg__seal img') : false,
     };
   });
   ok(tb.after && tb.legend === 'Guaranteed safe checkout' && tb.em === 'rgb(121, 2, 54)' && tb.icons === 7, 'Guaranteed safe checkout box under Add to cart, 7 payment icons', tb);
-  ok(tb.eta === tb.want && tb.bold === 2, 'delivery estimate: today + 7 / + 15 days, dates in bold', [tb.eta, tb.want]);
-  ok(/refund/.test(tb.link || ''), 'guarantee links to the refund policy', tb.link);
+  ok(!tb.eta, 'no delivery estimate / guarantee line under Add to cart (removed 2026-11-20)');
+  ok(tb.mbgAfter && tb.mbgText === '45-Day Money Back Guarantee Less than 1% of customers have used our Money Back Guarantee' && tb.seal,
+    'money-back guarantee box under the safe checkout box, seal + title + line', tb.mbgText);
+  ok(tb.mbgBox === 'true true true', 'guarantee box: the background, border and corners of a pack row', tb.mbgBox);
 
   // Express checkout (copy-only template with the second button, fresh page, Buy 1)
   await page.goto(BASE + '/product?template=buynow', { waitUntil: 'load' });

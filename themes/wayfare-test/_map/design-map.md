@@ -2,7 +2,7 @@
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
 Wayfare Test 2026.11.04.1 · schema v2 · 10 templates · 25 sections · 18 snippets · 3 CSS · 2 JS
 One part in detail: `node tools/theme-map.js themes/wayfare-test --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L37 · Section catalog (product templates) L45 · Pages L72 · Work on it L79
+README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L39 · Section catalog (product templates) L47 · Pages L74 · Work on it L81
 
 ## Design
 | setting | value | Theme settings | read by |

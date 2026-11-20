@@ -82,11 +82,79 @@ const EDITS = [
     find: '{{else}}#790236{{/if}};}</style>',
     replace: '{{else}}#790236{{/if}};--vn-logo-w:{{#if settings.vn_logo_width}}{{settings.vn_logo_width}}{{else}}280{{/if}}px;--vn-logo-wm:{{#if settings.vn_logo_width_mobile}}{{settings.vn_logo_width_mobile}}{{else}}180{{/if}}px;}</style>',
   },
-  // ---- live fix 2: the countdown top bar without its own background takes the highlight (was the primary colour)
+  // ---- live fix 2: the countdown top bar without its own background takes the highlight (was the primary colour).
+  //      Superseded by the countdown bar below (vn-countdown.hbs); kept so a fresh copy patches the same way.
   {
-    file: 'sections/header.hbs', done: '{{else}}var(--vn-hl,#790236){{/if}};--lt-fg:',
+    file: 'sections/header.hbs', done: '{{else}}var(--vn-hl,#790236){{/if}};--lt-fg:', optional: true,
     find: '--lt-c:{{#if settings.topbar_bg}}{{settings.topbar_bg}}{{else}}var(--lu-primary,#124F9F){{/if}};--lt-fg:',
     replace: '--lt-c:{{#if settings.topbar_bg}}{{settings.topbar_bg}}{{else}}var(--vn-hl,#790236){{/if}};--lt-fg:',
+  },
+  // ---- countdown top bar (Theme settings > Top bar > Style = Countdown timer; user 2026-11-20, screenshot of a
+  //      "BLACK FRIDAY IS LIVE • ENDS MON, NOV 30 • 11 DAYS : 03 HRS … • Shop Now →" bar): one row on a computer,
+  //      title · subtitle on top of timer · link on phones (a long title wraps instead of running off the screen),
+  //      a DAYS box, a fixed end date, link text + link (the whole bar is the link). Source: _src/vn-countdown.hbs.
+  //      always: the block is rewritten on every run (its first line is the start anchor again), so edit the .hbs.
+  {
+    file: 'sections/header.hbs', done: 'lt-cd vn-cd', always: true,
+    start: '{{#if (eq settings.topbar_style "countdown")}}',
+    end: '{{else}}<div id="lunara-topbar" class="shopify-section-group-header-group" role="region"',
+    replace: fs.readFileSync(path.join(__dirname, 'vn-countdown.hbs'), 'utf8').trim(),
+  },
+  // ---- home banner picture as a link (Theme settings > Home page > Banner image link; user 2026-11-20: "click the
+  //      banner, open the product"). Empty = not a link, as before. The text box button keeps its own link.
+  {
+    file: 'templates/index.hbs', done: 'class="lu-hb-link"',
+    find: '<div class="slideshow__media banner__media media"><picture style="display:contents">',
+    replace: '<div class="slideshow__media banner__media media">{{#if settings.home_banner_image_link}}<a class="lu-hb-link" href="{{settings.home_banner_image_link}}" aria-label="{{#if settings.home_banner_heading}}{{settings.home_banner_heading}}{{else}}{{brand.name}}{{/if}}">{{/if}}<picture style="display:contents">',
+  },
+  {
+    file: 'templates/index.hbs', done: '</picture>{{#if settings.home_banner_image_link}}</a>{{/if}}',
+    find: 'sizes="100vw" class=""></picture></div>',
+    replace: 'sizes="100vw" class=""></picture>{{#if settings.home_banner_image_link}}</a>{{/if}}</div>',
+  },
+  {
+    file: 'templates/index.hbs', done: '.lu-hb .lu-hb-link{',
+    find: '.lu-hb .slideshow__media img{width:100%;height:100%;object-fit:cover}',
+    replace: '.lu-hb .slideshow__media img{width:100%;height:100%;object-fit:cover}.lu-hb .lu-hb-link{display:block;width:100%;height:100%}',
+  },
+  //      Dawn's overlays (.banner::after, .banner__media::after; transparent here, z-index 0) lie over the picture on a
+  //      computer and took the click: they let it through, and still paint (overlay opacity keeps working).
+  {
+    file: 'templates/index.hbs', done: '.lu-hb .banner::after,.lu-hb .banner__media::after{pointer-events:none}',
+    find: '.lu-hb .lu-hb-link{display:block;width:100%;height:100%}',
+    replace: '.lu-hb .lu-hb-link{display:block;width:100%;height:100%}.lu-hb .banner::after,.lu-hb .banner__media::after{pointer-events:none}',
+  },
+  // ---- product cards (home grid, catalog, upsell: theme.js ht()) show the whole picture, all of one list the same
+  //      height (user 2026-11-20: "the photo is cut", then "cards must be the same height"). ht() marks each card
+  //      .lu-card--fit + data-lu-r (its photo's height / width in %, 100 without sizes) and queues vnEq() as a
+  //      microtask (after the caller has put the cards in their list, before the first paint): every card of one list
+  //      (the card's grandparent: li > ul) gets one box, --ratio-percent = Theme settings > Home page > "Product cards:
+  //      picture shape" (:root --vn-card-r, gs-head) or, on "auto", the shape most photos of that list have (whole %,
+  //      ties: the taller; 50-150 %). The list gets .lu-eqlist: its rows stretch, so a card with a taller text part
+  //      (a price not on sale is 16 px, a sale price 13 px) does not stick out of its row. vn-chrome.css .lu-card--fit
+  //      draws the photo with object-fit: contain. Related products keep their 4:5 crop.
+  {
+    file: 'assets/js/theme.js', done: 'function vnEq(',
+    find: 'window.MSCart=dt;function ht(e,n){',
+    replace: 'window.MSCart=dt;var vnEqQ=0;function vnEqSoon(){vnEqQ||(vnEqQ=1,Promise.resolve().then(vnEq))}'
+      + 'function vnEq(){vnEqQ=0;var fx=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--vn-card-r"))||0,g=[];'
+      + 'u(".lu-card--fit[data-lu-r]").forEach(function(c){var l=c.parentElement&&c.parentElement.parentElement,x=null,v=Math.round(+c.getAttribute("data-lu-r")||100);'
+      + 'for(var k=0;k<g.length;k++)if(g[k].l===l){x=g[k];break}x||g.push(x={l:l,c:[],n:{}}),x.c.push(c),x.n[v]=(x.n[v]||0)+1});'
+      + 'g.forEach(function(x){var m=100,b=0;for(var v in x.n)(x.n[v]>b||x.n[v]===b&&+v>m)&&(b=x.n[v],m=+v);'
+      + 'var r=(fx>0?fx:Math.min(Math.max(m,50),150))+"%";x.l&&x.l.classList&&x.l.classList.add("lu-eqlist");'
+      + 'x.c.forEach(function(c){[c].concat(u(".card,.card__inner",c)).forEach(function(v){v.style.setProperty("--ratio-percent",r)})})})}'
+      + 'function ht(e,n){',
+  },
+  {
+    file: 'assets/js/theme.js', done: 'data-lu-r",',
+    find: 'e.imageWidth&&o.setAttribute("width",e.imageWidth),e.imageHeight&&o.setAttribute("height",e.imageHeight),',
+    replace: 'e.imageWidth&&o.setAttribute("width",e.imageWidth),e.imageHeight&&o.setAttribute("height",e.imageHeight),'
+      + 'i.classList.add("lu-card--fit"),i.setAttribute("data-lu-r",+e.imageWidth>0&&+e.imageHeight>0?Math.round(e.imageHeight/e.imageWidth*1e4)/100:100),vnEqSoon(),',
+  },
+  {
+    file: 'snippets/gs-head.hbs', done: '--vn-card-r:',
+    find: '{{else}}180{{/if}}px;{{#if settings.vn_footer_bg}}',
+    replace: '{{else}}180{{/if}}px;--vn-card-r:{{#if settings.vn_card_ratio}}{{settings.vn_card_ratio}}{{else}}auto{{/if}};{{#if settings.vn_footer_bg}}',
   },
   // ---- "Show variant pickers" off also hides the main picker in the bodysuit look (sc-product.css forces it visible with
   //      .sc-skin.sc-skin [data-ms-pdp] .lu-variants{display:block!important}); user 2026-11-19
@@ -142,6 +210,13 @@ const EDITS = [
     find: '{{#if (eq type "buy_buttons")}}{{> lu_p_buy_buttons ..}}{{/if}}',
     replace: '{{#if (eq type "buy_buttons")}}{{> lu_p_buy_buttons ..}}{{#if (eq ../section.settings.skin "shapecurve")}}{{> sc-trustbox ..}}{{/if}}{{/if}}',
   },
+  //      ... and in the Lunara look too when "Show them in the Lunara look too" (vn_trust_any) is on (user 2026-11-20:
+  //      "every feature in every template")
+  {
+    file: 'sections/product.hbs', done: 'vn_trust_any',
+    find: '{{#if (eq ../section.settings.skin "shapecurve")}}{{> sc-trustbox ..}}{{/if}}',
+    replace: '{{#if (eq ../section.settings.skin "shapecurve")}}{{> sc-trustbox ..}}{{else if ../section.settings.vn_trust_any}}{{> sc-trustbox ..}}{{/if}}',
+  },
   // ---- the "SAVE xx%" of a pack subtitle sits right after the pack title, the rest of the subtitle stays on the line
   //      below (user 2026-11-19, screenshot: "Single [SAVE 70%]", in the main colour). theme.js still writes the
   //      subtitle; it now moves its .lu-k-save into the slot after the title and hides the line when nothing is left.
@@ -155,13 +230,37 @@ const EDITS = [
     find: 'F.innerHTML=Q;var mt=F.closest(".kaching-bundles__bar-second-line");mt&&(mt.hidden=!Q)',
     replace: 'F.innerHTML=Q;var sl=t("[data-lu-save-slot]",q);if(sl){sl.innerHTML="";var sv=t(".lu-k-save",F);sv&&(sl.appendChild(sv),Q=F.innerHTML.replace(/^(\\s|&nbsp;|[\\u00b7|+\\-\\u2013\\u2014,])+|(\\s|&nbsp;|[\\u00b7|+\\-\\u2013\\u2014,])+$/g,""),F.innerHTML=Q)}var mt=F.closest(".kaching-bundles__bar-second-line");mt&&(mt.hidden=!Q)',
   },
+  // ---- the bodysuit blocks in every look (user 2026-11-20: "every feature in every template"). The product section
+  //      always carries .sc-any: sc-product.css styles the blocks (Price + badge, Highlights, Shipping box, Info rows,
+  //      second button) under .sc-any and only the look itself under .sc-skin. Outside the bodysuit look each of them
+  //      links sc-product.css itself (snippets/sc-pb-*.hbs; the second button here).
+  {
+    file: 'sections/product.hbs', done: 'section sc-any{{#if',
+    find: 'class="shopify-section section{{#if (eq section.settings.skin "shapecurve")}} sc-skin{{/if}}"',
+    replace: 'class="shopify-section section sc-any{{#if (eq section.settings.skin "shapecurve")}} sc-skin{{/if}}"',
+  },
+  {
+    file: 'sections/product.hbs', done: '{{/unless}}<button type="button" class="button button--full-width sc-buynow"',
+    find: '{{#if section.settings.buy_now_label}}<button type="button" class="button button--full-width sc-buynow"',
+    replace: '{{#if section.settings.buy_now_label}}{{#unless (eq section.settings.skin "shapecurve")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/sc-product.css">{{/unless}}<button type="button" class="button button--full-width sc-buynow"',
+  },
+  // ---- pack rows: the colour option first, the size after it (user 2026-11-20). The selects only change their visual
+  //      order (vn-chrome.css, order: -1: scripts find them by DOM index / data-name); the names line above them is
+  //      printed colour first here with the engine's own isColorGroup helper (/colou?r/i). Never "contains": the
+  //      platform has no such helper and the whole page fails with a 500 (2026.11.20.5, user 2026-11-20).
+  {
+    file: 'snippets/lu-kaching.hbs', done: '{{#if (isColorGroup name)}}',
+    find: '<template data-lu-names-tpl><div class="kaching-bundles__bar-variant-names">{{#each @root.product.variants}}<span>{{name}}</span>{{/each}}</div></template>',
+    replace: '<template data-lu-names-tpl><div class="kaching-bundles__bar-variant-names">{{#each @root.product.variants}}{{#if (isColorGroup name)}}<span>{{name}}</span>{{/if}}{{/each}}{{#each @root.product.variants}}{{#unless (isColorGroup name)}}<span>{{name}}</span>{{/unless}}{{/each}}</div></template>',
+  },
 ];
 
 let applied = 0;
 for (const e of EDITS) {
   const f = path.join(THEME, e.file);
   let s = fs.readFileSync(f, 'utf8');
-  if (s.includes(e.done)) { console.log('already  ' + e.file + '  ' + e.done); continue; }
+  const before = s;
+  if (s.includes(e.done) && !e.always) { console.log('already  ' + e.file + '  ' + e.done); continue; }
   const count = (a) => s.split(a).length - 1;
   if (e.optional && e.find && count(e.find) === 0) { console.log('skip     ' + e.file + '  ' + e.done); continue; }
   for (const a of e.start ? [e.start, e.end] : [e.find]) {
@@ -173,6 +272,7 @@ for (const e of EDITS) {
     if (j < i) { console.error('ANCHOR order in ' + e.file); process.exit(1); }
     s = s.slice(0, i) + e.replace + s.slice(j);
   } else s = s.replace(e.find, () => e.replace);
+  if (s === before) { console.log('same     ' + e.file + '  ' + e.done); continue; }
   fs.writeFileSync(f, s);
   applied++;
   console.log('applied  ' + e.file + '  ' + e.done);

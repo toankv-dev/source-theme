@@ -17,7 +17,9 @@ const { HOOKS } = require('./platform-hooks');
 
 const TEXT_DIRS = ['layout', 'templates', 'sections', 'snippets', 'config', 'locales', 'assets/css', 'assets/js'];
 const TEXT_EXT = /\.(hbs|json|css|js|md|txt|html|py)$/i;
-const TARGET = /(?:layout|templates|sections|snippets|config|locales|assets)\/[\w./-]+\.\w+/g;
+// A path a script works on starts a string ('sections/x.hbs', `${T}/assets/y.css`, '/assets/…'); one inside a
+// sentence ('Look loads assets/css/x.css for …', an info text) is prose, not a file the script writes.
+const TARGET = /(?<=['"`]|['"`}]\/)(?:layout|templates|sections|snippets|config|locales|assets)\/[\w./-]+\.\w+/g;
 const TARGET_PARTS = /['"`](layout|templates|sections|snippets|config|locales|assets)['"`]\s*,\s*((?:['"`][\w.-]+['"`]\s*,\s*)*['"`][\w.-]+\.\w+['"`])/g;
 const LINK = /assets_url\}\}\/((?:css|js)\/[\w.-]+)/g;
 // `(eq block.type "x")`, or `(eq type "x")` / `(eq this.type "x")` inside {{#each section.blocks}} (Lunara).
@@ -140,6 +142,11 @@ function defaultsOf(settings) {
   return Object.entries(settings || {}).filter(([k, v]) => /^default_/.test(k) && typeof v === 'string' && v).map(([k, v]) => `${k} ${v}`);
 }
 
+/** JS source without its comments: block comments, and line comments not inside a URL (https://). */
+function stripComments(js) {
+  return js.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:\\'"`\w])\/\/.*$/gm, '$1');
+}
+
 /** The model of a theme folder. */
 function scan(dir) {
   const T = path.resolve(dir);
@@ -159,8 +166,12 @@ function scan(dir) {
   }
   const srcFolders = has('_src') ? fs.readdirSync(path.join(T, '_src')).sort()
     .filter((n) => fs.statSync(path.join(T, '_src', n)).isDirectory()).map((n) => ({ dir: `_src/${n}`, files: walk(T, `_src/${n}`, []).length })) : [];
+  // Loose source files next to the scripts (e.g. a markup block a patch script pastes in): listed with their readers.
+  const srcFiles = has('_src') ? fs.readdirSync(path.join(T, '_src')).sort()
+    .filter((n) => !/\.(js|py)$/.test(n) && fs.statSync(path.join(T, '_src', n)).isFile())
+    .map((n) => ({ file: `_src/${n}`, readBy: scripts.filter((s) => read(s).includes(n)) })) : [];
   const shas = {};
-  for (const f of [...files, ...scripts, ...srcFolders.flatMap((s) => walk(T, s.dir, []))].sort()) shas[f] = sha1(read(f));
+  for (const f of [...files, ...scripts, ...srcFiles.map((s) => s.file), ...srcFolders.flatMap((s) => walk(T, s.dir, []))].sort()) shas[f] = sha1(read(f));
 
   const theme = json('theme.json') || {};
   const hbs = files.filter((f) => /^(layout|templates|sections|snippets)\/.+\.hbs$/.test(f));
@@ -168,7 +179,8 @@ function scan(dir) {
   // Source scripts: which theme files each one writes (build-* generates, patch-* patches) or only reads (a check).
   const roles = {};
   const sources = scripts.map((file) => {
-    const src = read(file);
+    // A path named only in a comment ("see sections/x.hbs") is not written by the script: match code, not comments.
+    const src = file.endsWith('.js') ? stripComments(read(file)) : read(file);
     const found = new Set([...src.matchAll(TARGET)].map((m) => m[0]));
     for (const m of src.matchAll(TARGET_PARTS)) found.add(m[1] + '/' + m[2].split(/\s*,\s*/).map((x) => x.slice(1, -1)).join('/'));
     const targets = [...found].filter((t) => has(t)).sort();
@@ -303,7 +315,7 @@ function scan(dir) {
   parts.sources = [...scripts];
   for (const c of css) delete c.src;
 
-  return { dir: T, slug: path.basename(T), theme, files: shas, templates, sections, snippets, css, js, design, sources, srcFolders,
+  return { dir: T, slug: path.basename(T), theme, files: shas, templates, sections, snippets, css, js, design, sources, srcFolders, srcFiles,
     hooks, readme, parts };
 }
 
@@ -338,6 +350,9 @@ function sourcesLines(m) {
     if (s.kind === 'reads') return `- ${s.file}: a helper or check, does not edit the theme`;
     return `- ${s.file} ${s.kind}${t}${s.kind === 'patches' ? ' (anchored edits)' : ''} → edit the script, then run it`;
   });
+  for (const f of m.srcFiles || []) {
+    out.push(`- ${f.file}: ${f.readBy.length ? `source read by ${f.readBy.join(', ')} → edit it, then run that script` : 'not read by any script'}`);
+  }
   for (const f of m.srcFolders) out.push(`- ${f.dir}/: ${f.files} source files of the scripts`);
   if (m.sources.some((s) => !s.committed)) {
     out.push('- WARNING: _work/ is not committed: the scripts there exist only on this machine. Move them to _src/.');

@@ -238,7 +238,14 @@
     },
     {
       "type": "header",
-      "content": "Under the buttons (bodysuit look)"
+      "content": "Under the buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "vn_trust_any",
+      "label": "Show them in the Lunara look too",
+      "default": false,
+      "info": "The bodysuit look always shows them (each one has its own switch below). On = also with the Lunara look, right under the Buy buttons block."
     },
     {
       "type": "checkbox",
@@ -267,53 +274,40 @@
     },
     {
       "type": "checkbox",
-      "id": "vn_eta_show",
-      "label": "Show the delivery estimate",
-      "default": true
-    },
-    {
-      "type": "number",
-      "id": "vn_eta_min",
-      "label": "Delivery: from (days after today)",
-      "default": 7
-    },
-    {
-      "type": "number",
-      "id": "vn_eta_max",
-      "label": "Delivery: to (days after today)",
-      "default": 15
+      "id": "vn_mbg_show",
+      "label": "Show the money-back guarantee box",
+      "default": true,
+      "info": "Grey box with a dashed border: a seal, a bold title and a short line."
     },
     {
       "type": "text",
-      "id": "vn_eta_text",
-      "label": "Delivery line",
-      "default": "Order today, get it between {from} and {to}",
-      "info": "{from} / {to} = today + the days above, in bold (e.g. Thu, Nov 26), in the shopper's own date."
+      "id": "vn_mbg_title",
+      "label": "Guarantee: title",
+      "default": "45-Day Money Back Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "vn_mbg_text",
+      "label": "Guarantee: line under it",
+      "default": "Less than 1% of customers have used our Money Back Guarantee"
+    },
+    {
+      "type": "number",
+      "id": "vn_mbg_days",
+      "label": "Guarantee: days on the seal",
+      "default": 45
+    },
+    {
+      "type": "image_picker",
+      "id": "vn_mbg_badge",
+      "label": "Guarantee: seal picture",
+      "info": "Empty = the gold seal with the days above. Square, at least 96 x 96."
     },
     {
       "type": "checkbox",
-      "id": "vn_guarantee_show",
-      "label": "Show the guarantee line",
+      "id": "vn_mbg_shine",
+      "label": "Guarantee: gold shine crossing the box",
       "default": true
-    },
-    {
-      "type": "text",
-      "id": "vn_guarantee_text",
-      "label": "Guarantee line",
-      "default": "45-day money-back guarantee."
-    },
-    {
-      "type": "text",
-      "id": "vn_guarantee_link_label",
-      "label": "Guarantee link text",
-      "default": "Read the policy"
-    },
-    {
-      "type": "text",
-      "id": "vn_guarantee_link",
-      "label": "Guarantee link",
-      "default": "",
-      "info": "Empty = the store's refund policy."
     }
   ],
   "blocks": [

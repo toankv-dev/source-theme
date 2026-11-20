@@ -132,6 +132,12 @@
     "vn_logo_width": 280,
     "vn_logo_width_mobile": 180,
     "vn_footer_bg": "",
-    "vn_topbar_size": 14
+    "vn_topbar_size": 14,
+    "vn_cd_link_text": "",
+    "vn_cd_days": 0,
+    "vn_cd_end": "",
+    "vn_cd_bg": "#050100",
+    "vn_cd_accent": "#f58634",
+    "vn_card_ratio": "auto"
   }
 }

@@ -55,31 +55,10 @@ const TOKENS = {
   ShippingInfo: 'Orders ship within 1–3 business days.',
 };
 
+// The engine's helpers and nothing else (tools/lib/engine-helpers.js, copied from the platform's theme-engine.ts):
+// a helper the store lacks must fail here too, not only on the live store (500).
 function registerHelpers(hb) {
-  hb.registerHelper('eq', (a, b) => a === b);
-  hb.registerHelper('gt', (a, b) => Number(a) > Number(b));
-  hb.registerHelper('contains', (hay, needle) =>
-    hay != null && String(Array.isArray(hay) ? hay.join('\n') : hay).indexOf(needle) > -1);
-  hb.registerHelper('limit', (arr, n) => (Array.isArray(arr) ? arr.slice(0, Math.max(0, Number(n) || 0)) : []));
-  hb.registerHelper('json', (v) => new hb.SafeString(JSON.stringify(v === undefined ? null : v)));
-  hb.registerHelper('money', (v) => '$' + (Math.round((Number(v) || 0) * 100) / 100).toFixed(2));
-  hb.registerHelper('applyTokens', (text) =>
-    new hb.SafeString(String(text || '').replace(/\{\{\s*(\w+)\s*\}\}/g, (m, k) => (k in TOKENS ? TOKENS[k] : m))));
-  hb.registerHelper('faqItems', (s) =>
-    [1, 2, 3, 4, 5, 6].map((n) => ({ q: s && s['faq_' + n + '_q'], a: s && s['faq_' + n + '_a'] })).filter((x) => x.q && x.a));
-  hb.registerHelper('stars5', (r) => {
-    const v = Math.round(Math.max(0, Math.min(5, Number(r) || 0)) * 2) / 2;
-    const out = [];
-    for (let i = 1; i <= 5; i++) out.push(i <= Math.floor(v) ? 'full' : i === Math.floor(v) + 1 && v % 1 ? 'half' : 'empty');
-    return out;
-  });
-  hb.registerHelper('swatchStyle', (label) => new hb.SafeString('background:' + swatchColor(label) + ';'));
-  // Used by the TwinklingTree reference theme only (so its preview renders); the base does not use them.
-  hb.registerHelper('isColorGroup', (name) => /colou?r/i.test(String(name)));
-  hb.registerHelper('stars', (r) => { const n = Math.max(0, Math.min(5, Math.round(Number(r) || 0))); return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n); });
-  // Theme editor hooks: the editor injects data attributes; on the store they print nothing.
-  hb.registerHelper('editable', () => '');
-  hb.registerHelper('editableSetting', () => '');
+  require('./lib/engine-helpers').register(hb, { tokens: TOKENS, swatchColor });
 }
 
 const SWATCHES = { white: '#f4f4f2', black: '#1b1b1b', grey: '#9a9a9a', gray: '#9a9a9a', rose: '#e6a8b5', rosewood: '#8c4a52',

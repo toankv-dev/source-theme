@@ -1,6 +1,6 @@
-/* Shapecurve look of the Lunara product section — loaded (defer) by sections/product.hbs only when
-   Product > "Look of this product section" = Shapecurve. Reads the page, never the cart: theme.js keeps every cart,
-   price and pixel job.
+/* Shapecurve look of the Lunara product section — loaded (defer) by sections/product.hbs when
+   Product > "Look of this product section" = Shapecurve, and by the Info rows block in any other look (size chart
+   only). Reads the page, never the cart: theme.js keeps every cart, price and pixel job.
    1. Picture tiles: the option whose values have their own variant pictures (#sf-variants-data featured_image, e.g.
       Color) shows each value as an 80 x 100 tile of that picture (label.sc-swimg, --sc-sw). No pictures = pills.
    2. The main Color / Size picker feeds the pack rows (Kaching units), as on the original: a change of the main picker
@@ -8,6 +8,9 @@
    3. Size chart rows (data-sc-chart: lines, cells split by |, first line = header) become a <table>. */
 (function () {
   'use strict';
+  // linked by the bodysuit look and again by an Info rows block outside it: run once
+  if (window.__scProduct) return;
+  window.__scProduct = true;
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   function variants() {
@@ -77,8 +80,8 @@
       var root = skin.querySelector('[data-ms-pdp]') || skin;
       tiles(skin);
       feedUnits(root);
-      charts(skin);
     });
+    charts(document); // the Info rows block in any look (user 2026-11-20)
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
 })();

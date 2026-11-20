@@ -1,4 +1,5 @@
 {{!-- Block "Price + badge" of the product section (Shapecurve look, sections/product.schema.json). theme.js rewrites every
       [data-ms-price] of the product on each variant change: .price-item--sale = the variant price,
-      .price__compare-price s = its compare-at price (empty when not on sale). The theme sets no price. --}}
-<div class="sc-price" data-ms-price><span class="sc-price__now price-item price-item--sale">{{@root.product.price}}</span>{{#unless (eq settings.show_compare false)}}<span class="price__compare-price"><s class="sc-price__was">{{@root.product.compare_at_price}}</s></span>{{/unless}}{{#if settings.badge}}<span class="sc-price__badge">{{settings.badge}}</span>{{/if}}</div>
+      .price__compare-price s = its compare-at price (empty when not on sale). The theme sets no price.
+      Any look: outside the bodysuit look the block links sc-product.css itself (rules under .sc-any; user 2026-11-20). --}}
+{{#unless (eq @root.section.settings.skin "shapecurve")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/sc-product.css">{{/unless}}<div class="sc-price" data-ms-price><span class="sc-price__now price-item price-item--sale">{{@root.product.price}}</span>{{#unless (eq settings.show_compare false)}}<span class="price__compare-price"><s class="sc-price__was">{{@root.product.compare_at_price}}</s></span>{{/unless}}{{#if settings.badge}}<span class="sc-price__badge">{{settings.badge}}</span>{{/if}}</div>

@@ -1,0 +1,170 @@
+{{!-- Before / after slider (sections/sc-before-after.schema.json, written by _src/build-sc.js) — user 2026-11-20: "a
+      before / after you can drag, as shape-curve.com's 'Sculpt Your Curves Without the Struggle'"; restyled 2026-11-20
+      on the downloaded original (cooling bodysuit page, _work/capture/cooling section 01) with the user's "Still
+      Comfortable Hours Later" review card. Measured there, font = the theme's Poppins, violet #4e35ce = --sc-hl:
+        band     soft 120deg gradient (rgba violet / pink tints at .6 on white = 5 / 12 / 13 / 8 % of --sc-hl here),
+                 27 px top / bottom + 15 px sides on phones, 36 px + 50 px from 1024 px, content max 1600 px (phones
+                 take 3 / 4 of the Space above / below settings: 36 -> 27)
+        layout   phones: photos, then heading, check list, review card (24 px apart); 1024 px+: photos | text, 60 px gap,
+                 both halves the same width, text centred on the photos
+        photos   4:3 frame, square corners, no shadow; BEFORE / AFTER white 700, 16 px (24 px from 1024), 10 px from the
+                 bottom corners; line 2 px white; handle 40 px ring (2 px white, blur 7 px behind, shadow 0 0 7 px .35)
+                 with two white chevrons
+        heading  24 / 36 px 700 #222, line 1.3; the second part (heading_em) in --sc-hl
+        list     16 px below; 14 / 16 px italic 500 #222, line 1.5; round check 16 / 20 px in --sc-hl, 8 / 10 px gap,
+                 rows 4 / 6 px apart
+        review   16 px below; white card, 1 px #ececec, radius 10, padding 16 / 20; 5 green Trustpilot boxes 18 / 20 px
+                 (5 px gap); title 18 / 20 px 700 #121212; quote 14 / 16 px (Inter 300 there: Poppins 400 #4d4d4d here);
+                 name 12 / 14 px 600, 12 / 16 px above it
+      The after picture lies underneath, the before picture on top is cut at --pos. Drag the line (mouse), swipe sideways
+      or tap (touch; an up / down swipe still scrolls the page), or move it with the arrow keys (role=slider).
+      Mechanism = themes/lunara-black-brixpant/sections/before-after.hbs.
+      Live store: the section prints NOTHING until BOTH pictures are set (picked or default_*): a half slider looks
+      broken, and two unrelated photos must not pass as a before / after. It sits in every product template (user
+      2026-11-20), so an empty one costs no bytes. The editor always shows it, empty frames with a hint.
+      Body = inline partial "scba_body"; the #if chain at the end picks when to print it (no "or" helper). --}}
+{{#*inline "scba_star"}}<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" fill="{{#if on}}var(--scba-star,#00b67a){{else}}#dcdce6{{/if}}"/><path d="M10 3.4l1.9 4.6 4.9.4-3.7 3.2 1.1 4.8L10 13.8l-4.2 2.6 1.1-4.8-3.7-3.2 4.9-.4z" fill="#fff"/></svg>{{/inline}}
+{{#*inline "scba_review"}}<div class="lu-ba__rv">{{#if (gt section.settings.review_rating 0)}}<div class="lu-ba__stars" role="img" aria-label="{{section.settings.review_rating}} out of 5 stars">{{> scba_star on=true}}{{> scba_star on=(gt section.settings.review_rating 1)}}{{> scba_star on=(gt section.settings.review_rating 2)}}{{> scba_star on=(gt section.settings.review_rating 3)}}{{> scba_star on=(gt section.settings.review_rating 4)}}</div>{{/if}}{{#if section.settings.review_title}}<p class="lu-ba__rvt" {{{editable "review_title"}}}>{{section.settings.review_title}}</p>{{/if}}{{#if section.settings.review_text}}<p class="lu-ba__rvq" {{{editable "review_text"}}}>{{section.settings.review_text}}</p>{{/if}}{{#if section.settings.review_author}}<p class="lu-ba__rva" {{{editable "review_author"}}}>{{section.settings.review_author}}</p>{{/if}}</div>{{/inline}}
+{{#*inline "scba_body"}}<style>
+  .scba{padding:calc(var(--scba-pt,36px) * .75) 0 calc(var(--scba-pb,36px) * .75);letter-spacing:normal;background:var(--scba-bg,#f6edf1);color:#222}
+  .scba--grad{--scba-g1:#f8f2f5;--scba-g2:#efe1e7;--scba-g3:#eedee5;--scba-g4:#f4ebef;background:#fff linear-gradient(120deg,var(--scba-g1) 0,var(--scba-g2) 20%,var(--scba-g3) 80%,var(--scba-g4) 100%)}
+  @supports (background:color-mix(in srgb,red 50%,#fff)){
+    .scba--grad{--scba-g1:color-mix(in srgb,var(--sc-hl) 5%,#fff);--scba-g2:color-mix(in srgb,var(--sc-hl) 12%,#fff);--scba-g3:color-mix(in srgb,var(--sc-hl) 13%,#fff);--scba-g4:color-mix(in srgb,var(--sc-hl) 8%,#fff)}
+  }
+  .scba__wrap{max-width:1600px;margin:0 auto;padding:0 15px;box-sizing:border-box}
+  .lu-ba{display:flex;flex-direction:column;gap:24px}
+  .lu-ba__media,.lu-ba__text{width:100%;min-width:0}
+  .lu-ba--solo .lu-ba__media{max-width:640px;margin:0 auto}
+  .lu-ba__box{position:relative;aspect-ratio:var(--ar,4/3);overflow:hidden;background:#e9e9e9;cursor:ew-resize;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+  .lu-ba__box--natural{aspect-ratio:auto}
+  .lu-ba__img,.lu-ba__ph{position:absolute;top:0;left:0;width:100%!important;height:100%!important;max-width:none!important;margin:0;display:block;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+  .lu-ba__box--natural .lu-ba__after{position:relative;height:auto!important}
+  .lu-ba__box--natural .lu-ba__ph--after{position:relative;height:auto!important;aspect-ratio:4/3}
+  .lu-ba__before{-webkit-clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0);clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+  .lu-ba__ph{display:flex;align-items:center;padding:16px;box-sizing:border-box;font-size:14px;line-height:1.4;color:#555;background:#e9e9e9}
+  .lu-ba__ph--before{background:#dcdcdc}
+  .lu-ba__ph--after{justify-content:flex-end;text-align:right}
+  .lu-ba__lb{position:absolute;bottom:10px;z-index:1;margin:0;color:#fff;font-size:16px;line-height:1.3;font-weight:700;text-transform:uppercase;pointer-events:none}
+  .lu-ba__lb--b{left:10px}
+  .lu-ba__lb--a{right:10px}
+  .lu-ba__handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);z-index:2;width:44px;margin-left:-22px;display:flex;align-items:center;justify-content:center;outline:none;color:var(--line,#fff)}
+  .lu-ba__handle:before,.lu-ba__handle:after{content:"";position:absolute;left:50%;width:2px;margin-left:-1px;background:currentColor}
+  .lu-ba__handle:before{top:0;bottom:calc(50% + 20px)}
+  .lu-ba__handle:after{top:calc(50% + 20px);bottom:0}
+  .lu-ba__knob{display:flex;align-items:center;justify-content:center;width:40px;height:40px;box-sizing:border-box;border:2px solid currentColor;border-radius:50%;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);box-shadow:0 0 7px rgba(0,0,0,.35)}
+  .lu-ba__knob svg{display:block}
+  .lu-ba__handle:focus-visible .lu-ba__knob{outline:2px solid var(--sc-hl,#790236);outline-offset:3px}
+  .lu-ba__h{margin:0;font-size:24px;line-height:1.3;font-weight:700;letter-spacing:normal;color:#222}
+  .lu-ba__h em{font-style:normal;color:var(--sc-hl,#790236)}
+  .lu-ba__body{margin-top:16px;font-size:14px;line-height:1.5;color:#222}
+  .lu-ba__text>:first-child{margin-top:0}
+  .lu-ba__body p{margin:0 0 8px}
+  .lu-ba__body ul{margin:0 0 8px;padding:0;list-style:none}
+  .lu-ba__body li{position:relative;margin:4px 0 0;padding-left:24px;font-style:italic;font-weight:500}
+  .lu-ba__body li:first-child{margin-top:0}
+  .lu-ba__body li:before{content:"";position:absolute;left:0;top:2.5px;width:16px;height:16px;border-radius:50%;background:var(--sc-hl,#790236) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.6 10.3l2.9 2.9 5.9-6.2' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+  .lu-ba__body>:last-child{margin-bottom:0}
+  .lu-ba__body strong{color:var(--sc-hl,#790236)}
+  .lu-ba__rv{margin-top:16px;padding:16px;border:1px solid #ececec;border-radius:10px;background:#fff;color:#121212}
+  .lu-ba__stars{display:flex;gap:5px}
+  .lu-ba__stars svg{display:block;width:18px;height:18px}
+  .lu-ba__rvt{margin:10px 0 0;font-size:18px;line-height:1.5;font-weight:700}
+  .lu-ba__rvq{margin:8px 0 0;font-size:14px;line-height:1.5;font-weight:400;color:#4d4d4d;white-space:pre-line}
+  .lu-ba__rva{margin:12px 0 0;font-size:12px;line-height:1.5;font-weight:600}
+  .lu-ba__rv>:first-child{margin-top:0}
+  @media (min-width:1024px){
+    .scba{padding:var(--scba-pt,36px) 0 var(--scba-pb,36px)}
+    .scba__wrap{padding:0 50px}
+    .lu-ba{flex-direction:row;align-items:center;gap:60px}
+    .lu-ba__media,.lu-ba__text{flex:1 1 0}
+    .lu-ba--right .lu-ba__media{order:2}
+    .lu-ba--solo .lu-ba__media{flex:0 1 640px}
+    .lu-ba--solo{justify-content:center}
+    .lu-ba__lb{font-size:24px}
+    .lu-ba__h{font-size:36px}
+    .lu-ba__body{font-size:16px}
+    .lu-ba__body li{margin-top:6px;padding-left:30px}
+    .lu-ba__body li:before{top:2px;width:20px;height:20px}
+    .lu-ba__rv{padding:20px}
+    .lu-ba__stars svg{width:20px;height:20px}
+    .lu-ba__rvt{margin-top:12px;font-size:20px}
+    .lu-ba__rvq{margin-top:12px;font-size:16px}
+    .lu-ba__rva{margin-top:16px;font-size:14px}
+  }
+</style>
+<div class="scba{{#unless (eq section.settings.bg_style "solid")}} scba--grad{{/unless}}" style="--scba-bg:{{#if section.settings.bg}}{{section.settings.bg}}{{else}}#F6EDF1{{/if}};--sc-hl:{{#if section.settings.highlight}}{{section.settings.highlight}}{{else}}#790236{{/if}};{{#if section.settings.review_star_color}}--scba-star:{{section.settings.review_star_color}};{{/if}}--scba-pt:{{#if section}}{{section.settings.pad_top}}{{else}}36{{/if}}px;--scba-pb:{{#if section}}{{section.settings.pad_bottom}}{{else}}36{{/if}}px">
+<div class="scba__wrap">
+<div class="lu-ba{{#if (eq section.settings.image_side "right")}} lu-ba--right{{/if}}{{#unless section.settings.heading}}{{#unless section.settings.heading_em}}{{#unless section.settings.body}}{{#unless section.settings.review_title}}{{#unless section.settings.review_text}} lu-ba--solo{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}">
+  <div class="lu-ba__media">
+    <div class="lu-ba__box{{#if (eq section.settings.ratio "natural")}} lu-ba__box--natural{{/if}}" data-start="{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}" style="--pos:{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}%{{#unless (eq section.settings.ratio "natural")}};--ar:{{#if section.settings.ratio}}{{section.settings.ratio}}{{else}}4/3{{/if}}{{/unless}}{{#if section.settings.line_color}};--line:{{section.settings.line_color}}{{/if}}">
+      {{#if section.settings.after_image}}<img class="lu-ba__img lu-ba__after" src="{{section.settings.after_image}}" alt="{{#if section.settings.after_label}}{{section.settings.after_label}}{{else}}After{{/if}}" width="1200" height="900" loading="lazy" draggable="false">{{else if section.settings.default_after_image}}<img class="lu-ba__img lu-ba__after" src="{{@root.assets_url}}/{{section.settings.default_after_image}}" alt="{{#if section.settings.after_label}}{{section.settings.after_label}}{{else}}After{{/if}}" width="1200" height="900" loading="lazy" draggable="false">{{else}}<span class="lu-ba__ph lu-ba__ph--after">{{#if @root.__designMode}}Pick the after picture{{/if}}</span>{{/if}}
+      {{#if section.settings.before_image}}<img class="lu-ba__img lu-ba__before" src="{{section.settings.before_image}}" alt="{{#if section.settings.before_label}}{{section.settings.before_label}}{{else}}Before{{/if}}" width="1200" height="900" loading="lazy" draggable="false">{{else if section.settings.default_before_image}}<img class="lu-ba__img lu-ba__before" src="{{@root.assets_url}}/{{section.settings.default_before_image}}" alt="{{#if section.settings.before_label}}{{section.settings.before_label}}{{else}}Before{{/if}}" width="1200" height="900" loading="lazy" draggable="false">{{else}}<span class="lu-ba__ph lu-ba__ph--before lu-ba__before">{{#if @root.__designMode}}Pick the before picture{{/if}}</span>{{/if}}
+      {{#if section.settings.before_label}}<span class="lu-ba__lb lu-ba__lb--b">{{section.settings.before_label}}</span>{{/if}}
+      {{#if section.settings.after_label}}<span class="lu-ba__lb lu-ba__lb--a">{{section.settings.after_label}}</span>{{/if}}
+      <div class="lu-ba__handle" role="slider" tabindex="0" aria-label="Drag to compare the before and after pictures" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{#if section.settings.start}}{{section.settings.start}}{{else}}50{{/if}}"><span class="lu-ba__knob" aria-hidden="true"><svg width="22" height="12" viewBox="0 0 22 12"><path d="M8 1.5L3.5 6 8 10.5M14 1.5L18.5 6 14 10.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </div>
+  </div>
+  {{!-- One line on purpose: with no heading, text or review it is a truly empty div, which base.css hides. --}}
+  <div class="lu-ba__text">{{#if section.settings.heading}}<h2 class="lu-ba__h"><span {{{editable "heading"}}}>{{section.settings.heading}}</span>{{#if section.settings.heading_em}} <em {{{editable "heading_em"}}}>{{section.settings.heading_em}}</em>{{/if}}</h2>{{else if section.settings.heading_em}}<h2 class="lu-ba__h"><em {{{editable "heading_em"}}}>{{section.settings.heading_em}}</em></h2>{{/if}}{{#if section.settings.body}}<div class="lu-ba__body" {{{editable "body"}}}>{{{applyTokens section.settings.body}}}</div>{{/if}}{{#if section.settings.review_title}}{{> scba_review}}{{else if section.settings.review_text}}{{> scba_review}}{{/if}}</div>
+</div>
+</div>
+</div>
+<script>(function(){
+  // One wiring for every slider on the page; a second copy of this script (two sections, or the editor
+  // swapping the section in) only wires the boxes not yet marked data-ok.
+  if (window.__luBa) return window.__luBa();
+  window.__luBa = function () {
+    document.querySelectorAll('.lu-ba__box:not([data-ok])').forEach(function (box) {
+      box.setAttribute('data-ok', '');
+      var h = box.querySelector('.lu-ba__handle');
+      var pos = parseFloat(box.getAttribute('data-start')) || 50, id = null, moved = false, sx = 0, sy = 0;
+      function set(p) {
+        pos = Math.max(0, Math.min(100, p));
+        box.style.setProperty('--pos', pos + '%');
+        if (h) h.setAttribute('aria-valuenow', String(Math.round(pos)));
+      }
+      function at(x) {
+        var r = box.getBoundingClientRect();
+        if (r.width) set(((x - r.left) / r.width) * 100);
+      }
+      box.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        id = e.pointerId; moved = false; sx = e.clientX; sy = e.clientY;
+        if (e.pointerType === 'mouse') {
+          e.preventDefault();
+          at(e.clientX);
+          try { box.setPointerCapture(id); } catch (err) {}
+        }
+      });
+      box.addEventListener('pointermove', function (e) {
+        if (e.pointerId !== id) return;
+        if (!moved && e.pointerType !== 'mouse') {
+          var dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
+          if (dx < 4 && dy < 4) return;
+          if (dy > dx) { id = null; return; } // an up / down swipe: leave it to the page scroll
+        }
+        moved = true;
+        at(e.clientX);
+      });
+      box.addEventListener('pointerup', function (e) {
+        if (e.pointerId !== id) return;
+        if (e.pointerType !== 'mouse' && !moved) at(e.clientX); // a tap moves the line there
+        id = null;
+      });
+      box.addEventListener('pointercancel', function () { id = null; });
+      box.addEventListener('dragstart', function (e) { e.preventDefault(); });
+      if (h) h.addEventListener('keydown', function (e) {
+        var step = e.shiftKey ? 10 : 2, k = e.key;
+        if (k === 'ArrowLeft' || k === 'ArrowDown') set(pos - step);
+        else if (k === 'ArrowRight' || k === 'ArrowUp') set(pos + step);
+        else if (k === 'Home') set(0);
+        else if (k === 'End') set(100);
+        else return;
+        e.preventDefault();
+      });
+    });
+  };
+  window.__luBa();
+})();</script>{{/inline}}
+{{#*inline "scba_if_after"}}{{#if section.settings.after_image}}{{> scba_body}}{{else if section.settings.default_after_image}}{{> scba_body}}{{/if}}{{/inline}}
+{{#if @root.__designMode}}{{> scba_body}}{{else if section.settings.before_image}}{{> scba_if_after}}{{else if section.settings.default_before_image}}{{> scba_if_after}}{{/if}}

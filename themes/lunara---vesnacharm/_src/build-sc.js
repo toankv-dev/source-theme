@@ -8,6 +8,7 @@
  *   sections/reviews.schema.json   + show_write (default on = old templates unchanged)
  *   sections/sc-*.schema.json      the 4 content sections + sc-reviews (Okendo-style reviews, user 2026-11-19)
  *   templates/product.triple-zone-bodysuit.json
+ *   templates/product*.json        every product template gets the product-page sections it lacks (added, never changed)
  * Fonts: the theme's Poppins (user's choice). Highlight: #790236 (user's choice) and tints of it.
  *
  *   node themes/lunara---vesnacharm/_src/build-sc.js
@@ -27,8 +28,10 @@ const IMG = 'images/sc-sections/';
 // ---------------------------------------------------------------------------------------------------------------
 // product.schema.json
 const product = read('sections/product.schema.json');
-const OWN_SETTINGS = ['sc_header', 'skin', 'skin_highlight', 'buy_now_label', 'vn_safe_show', 'vn_safe_before', 'vn_safe_em', 'vn_safe_after', 'vn_eta_show', 'vn_eta_min', 'vn_eta_max', 'vn_eta_text', 'vn_guarantee_show', 'vn_guarantee_text', 'vn_guarantee_link_label', 'vn_guarantee_link'];
-product.settings = product.settings.filter((s) => !OWN_SETTINGS.includes(s.id) && s.content !== 'Template look' && s.content !== 'Under the buttons (bodysuit look)');
+const OWN_SETTINGS = ['sc_header', 'skin', 'skin_highlight', 'buy_now_label', 'vn_trust_any', 'vn_safe_show', 'vn_safe_before', 'vn_safe_em', 'vn_safe_after', 'vn_mbg_show', 'vn_mbg_title', 'vn_mbg_text', 'vn_mbg_days', 'vn_mbg_badge', 'vn_mbg_shine',
+  // removed 2026-11-20 (user: "remove Order today… and 45-day money-back guarantee. Read the policy"): kept here so a run drops them
+  'vn_eta_show', 'vn_eta_min', 'vn_eta_max', 'vn_eta_text', 'vn_guarantee_show', 'vn_guarantee_text', 'vn_guarantee_link_label', 'vn_guarantee_link'];
+product.settings = product.settings.filter((s) => !OWN_SETTINGS.includes(s.id) && s.content !== 'Template look' && s.content !== 'Under the buttons (bodysuit look)' && s.content !== 'Under the buttons');
 product.settings.push(
   { type: 'header', content: 'Template look' },
   {
@@ -39,19 +42,21 @@ product.settings.push(
   { type: 'color', id: 'skin_highlight', label: 'Bodysuit look: highlight colour', default: HL, info: 'Radio, selected pack frame, badges, Find My Size, tinted backgrounds.' },
   { type: 'text', id: 'buy_now_label', label: 'Second button (straight to checkout)', default: '', info: 'e.g. Express checkout now. Empty = no second button. Adds the same items as Add to cart, then opens the checkout.' },
   // Under the Add to cart of the bodysuit look (snippets/sc-trustbox.hbs; user 2026-11-19, as tammycharm.com)
-  { type: 'header', content: 'Under the buttons (bodysuit look)' },
+  { type: 'header', content: 'Under the buttons' },
+  // in the bodysuit look always; in the Lunara look when switched on (user 2026-11-20: "every feature in every template")
+  { type: 'checkbox', id: 'vn_trust_any', label: 'Show them in the Lunara look too', default: false, info: 'The bodysuit look always shows them (each one has its own switch below). On = also with the Lunara look, right under the Buy buttons block.' },
   { type: 'checkbox', id: 'vn_safe_show', label: 'Show the "Guaranteed safe checkout" box', default: true, info: 'The payment icons under a heading; the middle word in the main colour.' },
   { type: 'text', id: 'vn_safe_before', label: 'Heading: first words', default: 'Guaranteed' },
   { type: 'text', id: 'vn_safe_em', label: 'Heading: highlighted word', default: 'safe' },
   { type: 'text', id: 'vn_safe_after', label: 'Heading: last words', default: 'checkout' },
-  { type: 'checkbox', id: 'vn_eta_show', label: 'Show the delivery estimate', default: true },
-  { type: 'number', id: 'vn_eta_min', label: 'Delivery: from (days after today)', default: 7 },
-  { type: 'number', id: 'vn_eta_max', label: 'Delivery: to (days after today)', default: 15 },
-  { type: 'text', id: 'vn_eta_text', label: 'Delivery line', default: 'Order today, get it between {from} and {to}', info: '{from} / {to} = today + the days above, in bold (e.g. Thu, Nov 26), in the shopper\'s own date.' },
-  { type: 'checkbox', id: 'vn_guarantee_show', label: 'Show the guarantee line', default: true },
-  { type: 'text', id: 'vn_guarantee_text', label: 'Guarantee line', default: '45-day money-back guarantee.' },
-  { type: 'text', id: 'vn_guarantee_link_label', label: 'Guarantee link text', default: 'Read the policy' },
-  { type: 'text', id: 'vn_guarantee_link', label: 'Guarantee link', default: '', info: 'Empty = the store\'s refund policy.' }
+  // money-back guarantee box as brixpant.com/compression-tank (user 2026-11-20), in place of the delivery estimate +
+  // guarantee line; the 3 videos under it are the "Image / video slider" block (media_slider) of the template
+  { type: 'checkbox', id: 'vn_mbg_show', label: 'Show the money-back guarantee box', default: true, info: 'Grey box with a dashed border: a seal, a bold title and a short line.' },
+  { type: 'text', id: 'vn_mbg_title', label: 'Guarantee: title', default: '45-Day Money Back Guarantee' },
+  { type: 'text', id: 'vn_mbg_text', label: 'Guarantee: line under it', default: 'Less than 1% of customers have used our Money Back Guarantee' },
+  { type: 'number', id: 'vn_mbg_days', label: 'Guarantee: days on the seal', default: 45 },
+  { type: 'image_picker', id: 'vn_mbg_badge', label: 'Guarantee: seal picture', info: 'Empty = the gold seal with the days above. Square, at least 96 x 96.' },
+  { type: 'checkbox', id: 'vn_mbg_shine', label: 'Guarantee: gold shine crossing the box', default: true },
 );
 
 const OWN_BLOCKS = ['sc_price', 'sc_highlights', 'sc_ship', 'sc_tabs', 'sc_fit'];
@@ -191,6 +196,60 @@ write('sections/sc-details.schema.json', {
     ],
   }],
   presets: [{ name: 'Details', category: 'Content', description: 'Heading, a large picture and cards with a round picture, alternating sides.' }],
+});
+
+// Before / after slider (user 2026-11-20: "as shape-curve.com's 'Sculpt Your Curves Without the Struggle'", a page that
+// could not be downloaded). Hidden on the live store until both pictures are set (sections/sc-before-after.hbs).
+// As shape-curve.com's "Sculpt Your Curves Without the Struggle" (cooling bodysuit page, downloaded 2026-11-20): 4:3 photos,
+// heading with a highlighted end, italic check list, a white review card with green star boxes, soft gradient band.
+write('sections/sc-before-after.schema.json', {
+  name: 'Before / after slider',
+  tag: 'section',
+  settings: [
+    { type: 'header', content: 'Pictures' },
+    { type: 'paragraph', content: 'Two photos of the same pose and framing, same size (e.g. 1200 x 900). Shoppers drag the line between them. The section shows on the store once both photos are set.' },
+    ...pic('before_image', 'Before photo (left side)', 'Shown on the left of the line.'),
+    ...pic('after_image', 'After photo (right side)', 'Shown on the right of the line.'),
+    { type: 'text', id: 'before_label', label: 'Label on the before side', default: 'Before', info: 'White capitals in the bottom corner. Empty = no label.' },
+    { type: 'text', id: 'after_label', label: 'Label on the after side', default: 'After', info: 'Empty = no label.' },
+    { type: 'range', id: 'start', label: 'Line starts at', min: 5, max: 95, step: 5, unit: '%', default: 50 },
+    {
+      type: 'select', id: 'ratio', label: 'Photo frame', default: '4/3',
+      options: [
+        { value: '4/3', label: 'Landscape (4:3)' }, { value: '1/1', label: 'Square' }, { value: '4/5', label: 'Portrait (4:5)' },
+        { value: 'natural', label: 'Same shape as the after photo' },
+      ],
+      info: 'Landscape, square and portrait crop the photos to fill the frame.',
+    },
+    { type: 'color', id: 'line_color', label: 'Line and handle colour', default: '#ffffff' },
+    { type: 'header', content: 'Text' },
+    {
+      type: 'select', id: 'image_side', label: 'Photos side (computer)', default: 'left',
+      options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
+      info: 'On phones: photos, then the heading, text and review.',
+    },
+    { type: 'text', id: 'heading', label: 'Heading', default: 'Sculpt Your Curves' },
+    { type: 'text', id: 'heading_em', label: 'Heading: highlighted end', default: 'Without the Struggle', info: 'Right after the heading, in the highlight colour. Empty = none.' },
+    {
+      type: 'richtext', id: 'body', label: 'Text',
+      default: '<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>',
+      info: 'A bulleted list = the check list (italic, round checks in the highlight colour). Bold words are in the highlight colour. Put the review in the card below, not here.',
+    },
+    { type: 'header', content: 'Review card' },
+    { type: 'paragraph', content: 'A white card under the text: stars, a short title, the quote and the name. Shows when the title or the quote is filled in. Use a real review of this product.' },
+    { type: 'range', id: 'review_rating', label: 'Stars', min: 0, max: 5, step: 1, default: 5, info: '0 = no stars.' },
+    { type: 'color', id: 'review_star_color', label: 'Star boxes colour', default: '#00b67a' },
+    { type: 'text', id: 'review_title', label: 'Title', default: '', info: 'e.g. Still Comfortable Hours Later' },
+    { type: 'textarea', id: 'review_text', label: 'Quote', default: '', info: 'The review text, with its quotation marks.' },
+    { type: 'text', id: 'review_author', label: 'Name', default: '', info: 'e.g. Penny L. – Verified Buyer' },
+    { type: 'header', content: 'Band' },
+    {
+      type: 'select', id: 'bg_style', label: 'Background', default: 'gradient',
+      options: [{ value: 'gradient', label: 'Soft gradient of the highlight colour' }, { value: 'solid', label: 'One colour (below)' }],
+    },
+    ...band.map((s) => (s.id === 'bg' ? { ...s, label: 'Background colour (one colour)' } : s.id === 'pad_top' || s.id === 'pad_bottom' ? { ...s, default: 36 } : s)),
+  ],
+  presets: [{ name: 'Before / after slider', category: 'Content', description: 'Two photos with a line shoppers drag to compare them, beside a heading, a check list and a review card.' }],
 });
 
 write('sections/sc-testimonials.schema.json', {
@@ -338,6 +397,12 @@ add('kaching', 'kaching', {
   pack4_qty: 0, pack4_title: '', pack4_subtitle: '', pack4_badge: '',
 });
 add('buy_buttons', 'buy_buttons');
+// 3 portrait videos side by side under the guarantee box, as brixpant.com/compression-tank (user 2026-11-20). Empty: the
+// store shows nothing until videos are picked (vn-chrome.css hides an empty slider); the server turns a video into <video>.
+add('videos', 'media_slider', {
+  heading: '', per_view: 3, per_view_mobile: '3', ratio: '9/16', gap: 12, radius: 0, show_arrows: true,
+  media_1: '', media_2: '', media_3: '', media_4: '', media_5: '', media_6: '', media_7: '', media_8: '', media_9: '', media_10: '',
+});
 add('ship', 'sc_ship', {
   title: 'Free Shipping Over $79', note: '*Same-Day Shipping— for Orders Before 12pm PST', item_1: 'Secure Checkout', item_2: 'Easy Returns',
 });
@@ -390,6 +455,18 @@ const sections = {
     item('butt.webp', 'Wavy Hip-Shaping Band', 'Helps lift and contour the hips for a smoother, more sculpted curve.'),
     item('fabric1.webp', 'Stretchy Skin-Friendly Fabric', 'Feels soft, breathable, and flexible for comfortable all-day wear.'),
   ]),
+  // Before / after slider (user 2026-11-20): photos empty = hidden on the store until both are picked in the editor
+  before_after: {
+    type: 'sc-before-after',
+    settings: {
+      before_image: '', default_before_image: '', after_image: '', default_after_image: '', before_label: 'Before', after_label: 'After',
+      start: 50, ratio: '4/3', line_color: '#ffffff', image_side: 'left', heading: 'Sculpt Your Curves', heading_em: 'Without the Struggle',
+      body: '<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>',
+      // review card empty: fill it with a real review of the product (no made-up quote in the theme)
+      review_rating: 5, review_star_color: '#00b67a', review_title: '', review_text: '', review_author: '',
+      bg_style: 'gradient', bg: BAND, highlight: HL, pad_top: 36, pad_bottom: 36,
+    },
+  },
   testimonials: { disabled: true, ...withBlocks('sc-testimonials', {
     heading: 'Loved By 12,000+ Ladies Worldwide', button_label: 'View All', button_link: '#lu-reviews', star: '#F5A623',
     bg: BAND, highlight: HL, pad_top: 20, pad_bottom: 20,
@@ -415,10 +492,60 @@ const sections = {
   reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, show_photos: true, page_size: 5, star_color: '#ffcf2a', pad_top: 40, pad_bottom: 50 } },
   related: { type: 'related', settings: { heading: 'You Will Also Love', show_quick_add: false } }, // the original's cards have no button
 };
-write('templates/product.triple-zone-bodysuit.json', {
+// ---------------------------------------------------------------------------------------------------------------
+// Every product template carries every product-page section of the theme (user 2026-11-20: "the before / after slider
+// for every template, not only the bodysuit one; the same for the other features"). A section type a template lacks
+// is added at its place in PAGE (after the nearest section before it that the template has), switched OFF (the
+// editor's eye icon turns it on) with the bodysuit template's content to start from. The before / after slider is
+// added ON: it stays hidden on the store until both photos are picked. A section a template has is never changed, so
+// running again adds nothing; a section deleted from a template comes back on the next run (switch it off instead).
+const PAGE = [ // [id, id when taken, section] in page order
+  ['features', 'features_2', sections.features],
+  ['details', 'details_2', sections.details],
+  ['before_after', 'before_after_2', sections.before_after],
+  ['reels', 'reels_2', sections.reels],
+  ['testimonials', 'testimonials_2', sections.testimonials],
+  ['trust', 'trust_2', sections.trust],
+  ['reviews_okendo', 'reviews_okendo_2', sections.reviews],
+  ['reviews', 'reviews_lunara', { type: 'reviews', settings: { show_write: false } }], // Lunara's reviews; no review form
+  ['faq', 'faq_2', { type: 'faq', settings: {} }],                                    // blocks empty = listing / Theme FAQ
+  ['related', 'related_2', sections.related],
+];
+function carryAll(t) {
+  const added = [];
+  let prev = 'product';
+  for (const [id, alt, sec] of PAGE) {
+    const own = t.order.find((k) => t.sections[k] && t.sections[k].type === sec.type);
+    if (own) { prev = own; continue; }
+    const nid = t.sections[id] ? alt : id;
+    if (t.sections[nid]) throw new Error('no free id for ' + sec.type);
+    const copy = JSON.parse(JSON.stringify(sec));
+    if (sec.type === 'sc-before-after') delete copy.disabled; else copy.disabled = true;
+    t.sections[nid] = copy;
+    t.order.splice(t.order.indexOf(prev) + 1, 0, nid);
+    prev = nid;
+    added.push(nid);
+  }
+  return added;
+}
+
+const triple = {
   name: 'Triple-Zone Drop-Seat Bodysuit',
   description: 'Triple-Zone Compression Drop-Seat bodysuit page: picture colour tiles + size pills, Find My Size, Buy 1 / 2 / 3 packs, shipping box, info rows, feature cards, details, customer videos, trust badges, reviews, related products. Highlight #790236, Poppins.',
   sections,
   // the photo testimonials stay, hidden (disabled), right after the videos: the editor's eye icon brings them back
-  order: ['product', 'features', 'details', 'reels', 'testimonials', 'trust', 'reviews', 'related'],
-});
+  order: ['product', 'features', 'details', 'before_after', 'reels', 'testimonials', 'trust', 'reviews', 'related'],
+};
+carryAll(triple);
+write('templates/product.triple-zone-bodysuit.json', triple);
+
+for (const file of fs.readdirSync(path.join(THEME, 'templates')).filter((x) => /^product\..*json$/.test(x))) {
+  if (file === 'product.triple-zone-bodysuit.json') continue;
+  const p = path.join(THEME, 'templates', file);
+  const src = fs.readFileSync(p, 'utf8');
+  const t = JSON.parse(src);
+  const added = carryAll(t);
+  if (!added.length) continue;
+  fs.writeFileSync(p, JSON.stringify(t, null, 2) + (src.endsWith('\n') ? '\n' : ''));
+  console.log('added to templates/' + file + ': ' + added.join(', '));
+}

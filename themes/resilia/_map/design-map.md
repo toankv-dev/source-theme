@@ -2,7 +2,7 @@
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
 Resilia 2026.11.06.2 · schema v2 · 10 templates · 25 sections · 32 snippets · 8 CSS · 3 JS
 One part in detail: `node tools/theme-map.js themes/resilia --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Layers — what a child theme may change L41 · Platform contract (keep in every theme) L54 · JavaScript API (`window.Base`, core.js) L75 · Section catalog (product templates) L83 · Pages L112 · Mobile first L119 · Work on it L128
+README.md: Layers — what a child theme may change L41 · Platform contract (keep in every theme) L54 · JavaScript API (`window.Base`, core.js) L77 · Section catalog (product templates) L85 · Pages L114 · Mobile first L121 · Work on it L130
 
 ## Design
 | setting | value | Theme settings | read by |

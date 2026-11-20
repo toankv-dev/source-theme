@@ -32,11 +32,11 @@
 /* ---- Header: logo centred on row 1, menu centred on row 2, search + cart on the right of row 2; no line under it
    on desktop (live desktop.png y 36-169: logo centre y 86, menu text centre y 131, header h133). Menu = Montserrat
    14px/600 ls .28px #232323 (probe-1440 "New") → Poppins 14px (the theme ships 400 / 700), ~40 px between items.
-   Cart count = #1a2531 circle (pixel.js live 1413,144). Phone (capture mobile.png y 36-86): logo centred, h50.
+   Cart count: a circle in the theme's main colour (was #1a2531 as the original; user 2026-11-20: "stand out"). Phone (capture mobile.png y 36-86): logo centred, h50.
    Dawn hides a search nested in .header__icons for header--top-center on desktop: shown again here. Phone keeps
    Lunara's grid (search hidden there, as on hushflex); only the logo is centred. */
 .section-header .header.header--top-center .header__icons > .header__search { display: inline-flex; }
-.section-header .cart-count-bubble { background-color: #1a2531; color: #fff; }
+.section-header .cart-count-bubble { background-color: var(--vn-hl, #790236); color: #fff; }
 .section-header .header__inline-menu .header__menu-item,
 .section-header .header__inline-menu .header__menu-item span { color: #232323; font-size: 14px; letter-spacing: .28px; }
 @media screen and (min-width: 990px) {
@@ -182,3 +182,21 @@ footer#lu-ft.lu-ft { --ft-bg: var(--vn-footer, var(--vn-hl, #790236)); --ft-fg: 
 .kaching-bundles .kaching-bundles__bar-content-left:has([data-lu-save-slot] .lu-k-save) { display: flex; flex-direction: column !important; align-items: flex-start; row-gap: 2px; }
 .sc-skin .kaching-bundles .kaching-bundles__bar-content-left:has([data-lu-save-slot] .lu-k-save) { flex-direction: row !important; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .lu-kaching .kaching-bundles .lu-k-save { display: inline-block; padding: 3px 7px !important; border-radius: 4px !important; background: var(--vn-hl, #790236) !important; color: #fff !important; font-size: 11px !important; line-height: 1.3; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; white-space: nowrap; vertical-align: middle; }
+
+/* Product cards (home grid, catalog, upsell) show the whole picture, every card of a list the same height (user
+   2026-11-20). theme.js ht() adds .lu-card--fit and gives all cards of one list one box (Theme settings > Home page >
+   "Product cards: picture shape", else the shape most photos of the list have); contain = never cut, blank space
+   around a photo of another shape. The list (.lu-eqlist) stretches its rows: cards of a row end level, buttons in
+   line. Related products (.lu-related) keep their 4:5 crop. */
+.lu-card--fit .card__media .media img { object-fit: contain; }
+.lu-eqlist { align-items: stretch; }
+
+/* Pack rows (Kaching bundles, every template): the colour picker first, the size after it (user 2026-11-20). Visual
+   order only: theme.js, sc-product.js and the size finders find the selects by their DOM index or data-name, so the
+   markup keeps the product's option order. The names line (Lunara look) is printed colour first by lu-kaching.hbs. */
+.lu-kaching [data-lu-unit] select[data-name*="colo" i] { order: -1; }
+/* Their selects on phones: 16 px (under 16 px iOS zooms the page on tap) and 44 px high, as the bodysuit look. */
+@media screen and (max-width: 749px) { .lu-kaching .kaching-bundles__bar-variant-select { font-size: 16px; min-height: 44px; } }
+
+/* Image / video slider block with no picture or video yet: nothing on the store (was an empty 15 px band). */
+.lu-ms:not(:has(.lu-ms__it)) { display: none; }

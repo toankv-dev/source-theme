@@ -2,7 +2,7 @@
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
 Base 2026.11.09.1 · schema v2 · 10 templates · 25 sections · 20 snippets · 3 CSS · 2 JS
 One part in detail: `node tools/theme-map.js base-theme --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L44 · Section catalog (product templates) L52 · Pages L89 · Mobile first L96 · Work on it L105
+README.md: Layers — what a child theme may change L8 · Platform contract (keep in every theme) L21 · JavaScript API (`window.Base`, core.js) L46 · Section catalog (product templates) L54 · Pages L91 · Mobile first L98 · Work on it L107
 
 ## Design
 | setting | value | Theme settings | read by |

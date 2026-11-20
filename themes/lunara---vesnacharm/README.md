@@ -19,10 +19,12 @@ Clone of lunara-comfort.com (Shopify Shrine PRO 1.2.3), built by `lunnara-theme/
   cart drawer pairs them as the server does (`window.LuCB`, gs-head). Files and anchored edits: `_src/patch-cb.js`
   (sources in `_src/cb/`, edit them there).
 - **Theme settings**: Colors (primary `#124F9F` drives buttons, menu, top bar, footer, badges, checkout button),
-  Top bar (sale text + countdown), Home page (banner, product list, real reviews of random products), Cart drawer,
+  Top bar (sale text + countdown: title, subtitle, link text + link, days + hours or a fixed end, its own colours; on
+  phones one compact row: texts left, timer right), cart count in the main colour,
+  Home page (banner with an optional picture link, product list: whole photos in one picture shape per list so every card is the same height, real reviews of random products), Cart drawer,
   Brand contact, FAQ (default questions for every product page without its own FAQ).
 
-## Template "Shapecurve – Drop-seat bodysuit" (`templates/product.shapecurve.json`)
+## Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`)
 The product page of shape-curve.com (Triple-Zone Compression Drop-Seat bodysuit, 2026-11-19) inside Lunara's header,
 top bar, cart drawer and footer. Font = the theme's Poppins; highlight colour = `#790236` (and tints of it) where the
 original uses violet. Pick it per product in the admin (template list).
@@ -32,12 +34,25 @@ original uses violet. Pick it per product in the admin (template list).
   getionix.com: US / Metric, weight + height when the chart has a Height column, one size or both on a boundary, full
   chart + optional second table, "Select M" sets the main picker and every pack row; self-contained, any template),
   Kaching packs Buy 1 / 2 / 3 (the main picker sets every pack row), Add to cart + **second button** (`buy_now_label`,
-  "Express checkout now" = add the same items, then the checkout), **Shipping box**, **Info rows** (Shipping & Return,
+  "Express checkout now" = add the same items, then the checkout), **Shipping box**, under Add to cart the "Guaranteed safe checkout" box + a **45-day money-back guarantee box** (gold
+  seal, title, line, shine; product section > Under the buttons) and an **Image / video slider** block of 3 portrait
+  videos (as brixpant.com; empty until videos are picked), **Info rows** (Shipping & Return,
   Care Guide, Size Chart table typed as `a | b | c` lines). Bold = new block types (`sc_*`, snippets `sc-pb-*`).
 - Sections (each with its own `<style>`, tinted band colour + highlight settings): `sc-features` (feature cards, the two
-  animated pictures play), `sc-details` (large picture + round-picture cards), `sc-testimonials` (typed quotes with
+  animated pictures play), `sc-details` (large picture + round-picture cards), `sc-before-after` ("Before / after
+  slider" as shape-curve.com's "Sculpt Your Curves Without the Struggle": shoppers drag a line between two photos,
+  heading with a highlighted end, check list, review card with green stars; nothing on the store until both photos
+  are picked; in every product template), `sc-testimonials` (typed quotes with
   photos, swipe + dots + "View All" → reviews), `sc-trust` (4 round icons), then Lunara's `reviews` (with
   `show_write: false`: no "Write a review") and `related` ("You Will Also Love").
+- **Every product template has every section** (Default, Bundle, Size buttons, Variant tiles and this one): the ones a
+  template did not use are in its outline switched off (eye icon in the editor), with this template's content to start
+  from; the before / after slider is on and shows once both photos are picked. Added by `_src/build-sc.js` (never
+  changes a section a template has; a deleted one comes back on the next run, so switch it off instead).
+- **The bodysuit blocks work in every look**: Price + badge, Highlights box, Find my size, Shipping box, Info rows (with
+  the size chart) and the second button can be added to the product section of any template (Lunara look too); the
+  "Under the buttons" box (safe checkout, delivery estimate, guarantee) shows with the Lunara look when "Show them in
+  the Lunara look too" is on.
 - Pictures are theme files (`assets/images/sc-*`, the original store's, to be replaced) set as `default_image`; a file
   picked in the editor wins. The main product's gallery stays product data: upload `assets/images/sc-sections/*_*.webp`
   (17 bodysuit photos) to the product.

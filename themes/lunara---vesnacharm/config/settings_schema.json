@@ -130,22 +130,66 @@
         "type": "text",
         "id": "countdown_title",
         "label": "Title",
-        "default": "🍁 FALL SALE"
+        "default": "🍁 FALL SALE",
+        "info": "In the accent colour, in capitals, e.g. ⚡ Black Friday Is Live. A long title wraps on phones."
       },
       {
         "type": "text",
         "id": "countdown_subtitle",
         "label": "Subtitle",
-        "default": "Shop Now and Get Up To 70% Off"
+        "default": "Shop Now and Get Up To 70% Off",
+        "info": "After the title, e.g. Ends Mon, Nov 30. Empty = none."
+      },
+      {
+        "type": "text",
+        "id": "vn_cd_link_text",
+        "label": "Link text",
+        "default": "",
+        "info": "At the end of the bar, underlined, with an arrow, e.g. Shop Now and Get Up To 60% Off. Empty = none."
+      },
+      {
+        "type": "url",
+        "id": "vn_cd_link",
+        "label": "Link (a click anywhere on the bar opens it)",
+        "info": "e.g. the sale page or a product. Empty: with a link text = all products; without = the bar is not a link."
+      },
+      {
+        "type": "number",
+        "id": "vn_cd_days",
+        "label": "Timer length (days)",
+        "min": 0,
+        "max": 60,
+        "default": 0,
+        "info": "Days + the hours below. A DAYS box shows while at least a whole day is left."
       },
       {
         "type": "number",
         "id": "countdown_hours",
         "label": "Timer length (hours)",
-        "min": 1,
+        "min": 0,
         "max": 72,
         "default": 2,
-        "info": "Restarts for each visitor when it reaches zero."
+        "info": "Added to the days. The timer restarts for each visitor when it reaches zero."
+      },
+      {
+        "type": "text",
+        "id": "vn_cd_end",
+        "label": "Or a fixed end (date and time)",
+        "default": "",
+        "info": "e.g. 2026-11-30 23:59 (each visitor's own time; a date alone = the end of that day). Every visitor counts down to it; once it has passed, the days + hours above take over. Empty = days + hours."
+      },
+      {
+        "type": "color",
+        "id": "vn_cd_bg",
+        "label": "Countdown background",
+        "default": "#050100",
+        "info": "Empty = the Background above (or the main colour)."
+      },
+      {
+        "type": "color",
+        "id": "vn_cd_accent",
+        "label": "Countdown title, numbers and bottom line",
+        "default": "#f58634"
       }
     ]
   },
@@ -259,6 +303,12 @@
         "id": "home_banner_image_mobile",
         "label": "Mobile banner image",
         "info": "Shown on phones (under 750px) instead of the banner image. Recommended 1200 x 1000 px. Empty = the banner image."
+      },
+      {
+        "type": "url",
+        "id": "home_banner_image_link",
+        "label": "Banner image link",
+        "info": "A click on the picture opens this page, e.g. a product link. Empty = the picture is not a link (the button keeps its own link)."
       },
       {
         "type": "number",
@@ -389,6 +439,35 @@
         "min": 1,
         "max": 48,
         "default": 8
+      },
+      {
+        "type": "select",
+        "id": "vn_card_ratio",
+        "label": "Product cards: picture shape",
+        "default": "auto",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Same as most photos of the list"
+          },
+          {
+            "value": "100",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "125",
+            "label": "Portrait (4:5)"
+          },
+          {
+            "value": "133.33",
+            "label": "Portrait (3:4)"
+          },
+          {
+            "value": "150",
+            "label": "Portrait (2:3)"
+          }
+        ],
+        "info": "Every card of a list gets the same picture box, so all cards are the same height. The whole photo always shows (never cut); a photo of another shape gets blank space around it."
       },
       {
         "type": "header",

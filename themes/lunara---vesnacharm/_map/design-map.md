@@ -1,8 +1,8 @@
 # Design map: lunara---vesnacharm
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Lunara Vesnacharm 2026.11.19.16 · schema v2 · 11 templates · 20 sections · 17 snippets · 6 CSS · 5 JS
+Lunara Vesnacharm 2026.11.20.7 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
 One part in detail: `node tools/theme-map.js themes/lunara---vesnacharm --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
-README.md: Editor (Themes > Customize) L6 · Template "Shapecurve – Drop-seat bodysuit" (`templates/product.shapecurve.json`) L25 · Pages L50 · Hooks kept for pixels L54
+README.md: Editor (Themes > Customize) L6 · Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`) L27 · Pages L65 · Hooks kept for pixels L69
 
 ## Design
 | setting | value | Theme settings | read by |
@@ -13,10 +13,12 @@ README.md: Editor (Themes > Customize) L6 · Template "Shapecurve – Drop-seat 
 | accent | #1f9d55 | Colors › Checkout: success colour | checkout.hbs, lu-kaching.hbs, sc-reels.hbs |
 | page_bg | #f7f7f7 | Colors › Checkout: page background | checkout.hbs |
 | vn_footer_bg | — | Colors › Footer background | gs-head.hbs |
-| highlight | #790236 | Colors › Main colour (highlight) | checkout.hbs, gs-head.hbs, page.hbs +4 |
+| highlight | #790236 | Colors › Main colour (highlight) | checkout.hbs, gs-head.hbs, page.hbs +5 |
 | font | Poppins | Typography › Checkout font (Google Fonts name) | checkout.hbs |
 | topbar_bg | — | Top bar › Background | header.hbs |
 | topbar_color | #FFFFFF | Top bar › Text | header.hbs |
+| vn_cd_bg | #050100 | Top bar › Countdown background | header.hbs |
+| vn_cd_accent | #f58634 | Top bar › Countdown title, numbers and bottom line | header.hbs |
 | hf_wave_color | — | Home page › Wave colour | hf-wave-marquee.hbs |
 | hf_strip_bg | — | Home page › Strip background | hf-wave-marquee.hbs |
 | hf_strip_text | #FFFFFF | Home page › Strip text colour | hf-wave-marquee.hbs |
@@ -37,7 +39,7 @@ README.md: Editor (Themes > Customize) L6 · Template "Shapecurve – Drop-seat 
 | cart_checkout_color | #ffffff | Cart drawer › Checkout button text | cart-drawer.hbs |
 CSS variables: --font-body-family: Poppins, sans-serif · --font-body-style: normal · --font-body-weight: 400 · --font-body-weight-bold: 700 · --font-heading-family: Poppins, sans-serif · --font-heading-style: normal · --font-heading-weight: 700 · --font-body-scale: 1 · --font-heading-scale: 1.3 · --font-heading-line-height: .3 · --font-heading-letter-spacing: .06rem · --color-base-text: 18, 18, 18
 Fonts: Poppins 400 700 · Material Symbols Outlined 300
-Breakpoints: 750px ×133 · 749px ×101 · 990px ×28 · 989px ×18 · 768px ×17 · 810px ×9 · 1000px ×8 · 500px ×7
+Breakpoints: 750px ×133 · 749px ×102 · 990px ×28 · 989px ×18 · 768px ×17 · 810px ×9 · 1000px ×8 · 500px ×7
 Every page (theme.json): theme.css, theme.js
 
 ## Templates
@@ -46,12 +48,12 @@ Every page (theme.json): theme.css, theme.js
 | checkout.hbs | — |
 | index.hbs | gs-head · header · cart-drawer · hf-wave-marquee · reviews · footer |
 | page.hbs | gs-head · header · cart-drawer · footer |
-| product.bundle.json "Bundle (Kaching)" | product (9 blocks) · reviews · faq |
+| product.bundle.json "Bundle (Kaching)" | product (9 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · before_after:sc-before-after · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews_okendo:sc-reviews · reviews · faq · related · 13 default media |
 | product.hbs | gs-head · header · cart-drawer · product · reviews · faq · footer · product-scripts |
-| product.json "Default" | product (8 blocks) · reviews · faq |
-| product.sizes.json "Size buttons (Shapermint)" | product (8 blocks) · reviews · faq |
-| product.tiles.json "Variant tiles (Walmart)" | product (8 blocks) · reviews · faq |
-| product.triple-zone-bodysuit.json "Triple-Zone Drop-Seat Bodysuit" | product[skin=shapecurve] (10 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews:sc-reviews · related · 13 default media |
+| product.json "Default" | product (8 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · before_after:sc-before-after · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews_okendo:sc-reviews · reviews · faq · related · 13 default media |
+| product.sizes.json "Size buttons (Shapermint)" | product (8 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · before_after:sc-before-after · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews_okendo:sc-reviews · reviews · faq · related · 13 default media |
+| product.tiles.json "Variant tiles (Walmart)" | product (8 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · before_after:sc-before-after · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews_okendo:sc-reviews · reviews · faq · related · 13 default media |
+| product.triple-zone-bodysuit.json "Triple-Zone Drop-Seat Bodysuit" | product[skin=shapecurve] (11 blocks) · features:sc-features (4 blocks) · details:sc-details (4 blocks) · before_after:sc-before-after · reels:sc-reels (6 blocks) · testimonials:sc-testimonials (4 blocks) · trust:sc-trust (4 blocks) · reviews:sc-reviews · reviews_lunara:reviews · faq · related · 13 default media |
 | theme.hbs (layout) | gs-head · header · cart-drawer · footer · product-scripts |
 | tracking-result.hbs | gs-head · header · cart-drawer · footer |
 
@@ -64,7 +66,7 @@ Every page (theme.json): theme.css, theme.js
 | features | 48 | feature | — | <style> 1.0 KB | — |
 | footer | 95 | — | — | base.css, vn-chrome.css, custom.css, <style> 7.5 KB | patch-vn.js |
 | guarantee | 21 | item | — | <style> 0.6 KB | — |
-| header | 128 | — | — | base.css, vn-chrome.css, custom.css, <style> 5.2 KB | patch-vn.js |
+| header | 137 | — | — | base.css, vn-chrome.css, custom.css, <style> 6.1 KB | patch-vn.js |
 | image-banner | 23 | — | — | <style> 0.8 KB | — |
 | marquee | 17 | item | — | <style> 0.6 KB | — |
 | product-scripts | 120 | — | — | — | — |
@@ -72,10 +74,11 @@ Every page (theme.json): theme.css, theme.js
 | related | 114 | — | — | vn-chrome.css, custom.css, <style> 1.8 KB | patch-vn.js |
 | reviews | 207 | — | — | <style> 38 KB | patch-sc.js, patch-vn.js, build-sc.js (schema) |
 | rich-text | 13 | — | — | <style> 0.4 KB | — |
+| sc-before-after | 171 | — | — | <style> 5.2 KB | build-sc.js (schema) |
 | sc-details | 49 | item | — | <style> 2.2 KB | build-sc.js (schema) |
 | sc-features | 41 | card | — | <style> 2.1 KB | build-sc.js (schema) |
 | sc-reels | 177 | clip | — | custom.css, <style> 5.9 KB | build-sc.js (schema) |
-| sc-reviews | 513 | — | — | <style> 14 KB | build-sc.js (schema) |
+| sc-reviews | 514 | — | — | <style> 14 KB | build-sc.js (schema) |
 | sc-testimonials | 78 | quote | sc-icon, sc-stars | <style> 3.2 KB | build-sc.js (schema) |
 | sc-trust | 35 | item | sc-icon | <style> 1.5 KB | build-sc.js (schema) |
 
@@ -91,36 +94,38 @@ Every page (theme.json): theme.css, theme.js
 - lu-size-finder · 279 lines · used by product · edited by patch-sc.js, patch-vn.js
 - sc-fit · 276 lines · used by product
 - sc-icon · 4 lines · used by sc-pb-ship, sc-pb-tabs, sc-testimonials, sc-trust
-- sc-pb-highlights · 7 lines · used by product
-- sc-pb-price · 5 lines · used by product
-- sc-pb-ship · 4 lines · used by product
-- sc-pb-tabs · 5 lines · used by product
+- sc-pb-highlights · 8 lines · used by product
+- sc-pb-price · 6 lines · used by product
+- sc-pb-ship · 5 lines · used by product
+- sc-pb-tabs · 7 lines · used by product
 - sc-stars · 3 lines · used by sc-testimonials
-- sc-trustbox · 37 lines · used by product · edited by build-sc.js, patch-vn.js
+- sc-trustbox · 42 lines · used by product
 
 ## Assets
 - base.css 524 KB minified · linked by checkout.hbs, gs-head
 - custom.css 56 KB minified · linked by gs-head
 - lu-companion.css 1.5 KB · linked by lu-kaching
-- sc-product.css 16 KB · linked by product
+- sc-product.css 16 KB · linked by product, sc-pb-highlights, sc-pb-price, sc-pb-ship +1
 - theme.css 0.1 KB · linked by theme.json
-- vn-chrome.css 17 KB · linked by gs-head
+- vn-chrome.css 19 KB · linked by gs-head
 - lu-companion.js 13 KB · linked by lu-kaching
 - lu-gallery.js 3.3 KB minified · linked by index.hbs, product.hbs, theme.hbs
 - lu-pack-msg.js 1.2 KB minified · linked by theme.hbs
-- sc-product.js 4.0 KB · linked by product
-- theme.js 110 KB minified · linked by index.hbs, page.hbs, product.hbs, theme.hbs +2
+- sc-product.js 4.3 KB · linked by product, sc-pb-tabs
+- theme.js 111 KB minified · linked by index.hbs, page.hbs, product.hbs, theme.hbs +2
 
 ## Sources
 - _src/anim-webp.py: a helper or check, does not edit the theme
-- _src/build-sc.js generates assets/css/sc-product.css, assets/js/sc-product.js, sections/product.schema.json, sections/reviews.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json +6 → edit the script, then run it
+- _src/build-sc.js generates sections/product.schema.json, sections/reviews.schema.json, sections/sc-before-after.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json, sections/sc-reels.schema.json +4 → edit the script, then run it
 - _src/build-vn-settings.js generates config/settings_data.json, config/settings_schema.json → edit the script, then run it
 - _src/compare-copy.js: a helper or check, does not edit the theme
 - _src/patch-cb.js patches assets/css/lu-companion.css, assets/js/lu-companion.js, assets/js/theme.js, snippets/gs-head.hbs, snippets/lu-companion-bar.hbs, snippets/lu-kaching.hbs (anchored edits) → edit the script, then run it
 - _src/patch-sc.js patches sections/product.hbs, sections/reviews.hbs, snippets/lu-size-finder.hbs (anchored edits) → edit the script, then run it
-- _src/patch-vn.js patches assets/css/base.css, assets/css/custom.css, assets/js/theme.js, layout/theme.hbs, sections/cart-drawer.hbs, sections/footer.hbs +13 (anchored edits) → edit the script, then run it
+- _src/patch-vn.js patches assets/css/base.css, assets/css/custom.css, assets/js/theme.js, layout/theme.hbs, sections/cart-drawer.hbs, sections/footer.hbs +12 (anchored edits) → edit the script, then run it
 - _src/sc-e2e.js: a helper or check, does not edit the theme
 - _src/scan-colors.js: a helper or check, does not edit the theme
+- _src/vn-countdown.hbs: source read by _src/patch-vn.js → edit it, then run that script
+- _src/vn-footer.hbs: source read by _src/patch-vn.js → edit it, then run that script
 - _src/cb/: 3 source files of the scripts
 
 ## Platform hooks
@@ -132,6 +137,32 @@ Every page (theme.json): theme.css, theme.js
 <!-- notes:theme -->
 - Lunara rules win with `#MainProduct-…` ids + `!important` (gallery 530 px, thumbs, ATC radius): override with the same prefix.
 - A Lunara file listed under Sources is changed through its script (`_src/patch-*.js` anchored edits, `_src/build-sc.js` schemas + template): edit the script, run it, check the other templates render the same.
+- Every product template carries every product-page section (user 2026-11-20): `_src/build-sc.js` `carryAll()` adds the section types a `templates/product*.json` lacks, switched off (`disabled`, the editor's eye icon), the before / after slider on (it prints nothing until both photos are set). It never changes a section a template has; a section deleted by hand comes back on the next run: switch it off instead. The map cannot see these writes (file names from a folder listing).
 - Checks: `node <theme>/_src/compare-copy.js <dir>` makes a copy with a bodysuit sample product; `_src/sc-e2e.js <url>` runs on it.
 - Main colour of the theme = setting `highlight` (#790236); `accent`, `page_bg`, `sale` only colour the checkout.
+<!-- /notes -->
+### header
+<!-- notes:header -->
+- Countdown top bar (Style = Countdown timer) = `_src/vn-countdown.hbs`, pasted between `{{#if (eq settings.topbar_style "countdown")}}` and the rotating bar's `{{else}}` by `_src/patch-vn.js` on EVERY run (`always`): edit the .hbs, never header.hbs. Its CSS is inline there (only printed when the style is on).
+- Phone layout (under 750 px; user 2026-11-20, "compact as the reference"): `.cd-bar` is a grid, texts in column 1 (rows 2-4: title, subtitle, link text; rows 1 and 5 are 1fr so a lone title sits centred), the timer in column 2 spanning all rows; `.cd-head` / `.cd-tail` are `display: contents`, dots hidden. Keep `gap: 0 8px` there: the 750-989 px rule's `gap: 6px` would add 6 px per empty row. 750-989 px: two rows. A dot at a row start on a computer = a too-long subtitle, not a bug.
+- Timer: `vn_cd_end` (fixed, the visitor's local time; date alone = 23:59:59) wins while in the future, else days + hours per visitor in localStorage `lunara_sale_end` (an old shorter end is kept until it runs out). DAYS box unhides once ≥ 24 h is left and then stays.
+<!-- /notes -->
+### index.hbs
+<!-- notes:index.hbs -->
+- Banner picture link (`home_banner_image_link`): an `<a class="lu-hb-link">` around the `<picture>`. Dawn's transparent `.banner::after` / `.banner__media::after` (z-index 0) lie on top on a computer: they have `pointer-events: none`, or the click never reaches the link.
+- Product cards (`theme.js` `ht()` + `vnEq()`, patched by `_src/patch-vn.js`): one picture box for every card of a list (li > ul), `object-fit: contain` (`.lu-card--fit`, vn-chrome.css), so the whole photo shows and the cards are the same height. Box = Theme settings > Home page > "Product cards: picture shape" (`:root --vn-card-r`, gs-head), on "auto" the shape most photos of the list have (ties: the taller). The list gets `.lu-eqlist` (rows stretch): a price not on sale is 16 px, a sale price 13 px, so a row with both would end 4 px apart. Related products are not `ht()` cards and keep their 4:5 crop.
+<!-- /notes -->
+### sc-before-after
+<!-- notes:sc-before-after -->
+- Look = shape-curve.com's "Sculpt Your Curves Without the Struggle" (cooling bodysuit page), downloaded 2026-11-20 into `_work/site/pages/cooling` (capture: `_work/capture/cooling/sections/01-*.png`); every size is in the .hbs comment. Compare with `tools/side-by-side.js` on those shots: 1440 px = 552 px high, 390 px = 770 px. The .hbs is hand-written; only the schema and the template settings come from `_src/build-sc.js`.
+- The review ("Still Comfortable Hours Later") goes in the Review card settings, never in the Text richtext (the user's first try: plain lines). Empty by default: a theme must not ship a made-up review. Stars = inline SVG boxes (`scba_star`, `--scba-star` #00b67a as the original's image), grey past the rating.
+- Phones take 3 / 4 of Space above / below (`--scba-pt` / `--scba-pb`): the original is 27 px on phones, 36 px from 1024 px. Side by side from 1024 px, not 750 (as the original).
+- Prints NOTHING on the store until BOTH photos are set (picked or `default_*`): the body is the inline partial `scba_body`, printed by an `#if` / `else if` chain at the end (no `or` helper). The editor always shows it, empty frames with a hint. It sits ON in every product template, so an empty one must cost nothing. Do not fill the defaults with two unrelated photos: they would pass as a real before / after.
+- Same slider script as themes/lunara-black-brixpant `before-after.hbs` (`window.__luBa`, wires `.lu-ba__box:not([data-ok])`): `touch-action: pan-y` keeps vertical swipes scrolling the page; a tap moves the line on touch only.
+<!-- /notes -->
+### product
+<!-- notes:product -->
+- Bodysuit blocks in every look (user 2026-11-20): the section always has `.sc-any`; `assets/css/sc-product.css` styles the blocks (Price + badge, Highlights, Shipping box, Info rows, second button) under `.sc-any` and the look itself (gallery, pickers, packs, Find My Size pill) under `.sc-skin`. Outside the look each block snippet (`sc-pb-*`) and the second button link sc-product.css themselves (`@root.section.settings.skin`); Info rows also links sc-product.js, which then only builds the size chart (runs once: `window.__scProduct`). `--sc-hl` = the look's highlight (inline) else the theme's `--vn-hl`.
+- "Under the buttons" (`snippets/sc-trustbox.hbs`): the safe checkout box, then the money-back guarantee box (as brixpant.com, `vn_mbg_*`; gold seal = inline SVG unless a picture is picked; background + border = an unselected Kaching pack row, from `--sc-hl`: keep them in step if the pack look changes). The delivery estimate + guarantee line box was removed 2026-11-20 at the user's request (its ids stay in build-sc.js OWN_SETTINGS so they are dropped). Always with the bodysuit look, with the Lunara look when `vn_trust_any` is on. The 3 videos under it are a plain "Image / video slider" block (`videos` in the bodysuit template): the platform server turns a video URL into `<video>`, the preview does not (it shows a broken image).
+- Pack rows (`snippets/lu-kaching.hbs`): Color before Size is visual only (`order: -1` on `select[data-name*="colo" i]`, vn-chrome.css) + the names line printed colour first (patch-vn) with the engine's `isColorGroup`. Never `contains` or any helper outside tools/lib/engine-helpers.js: the engine lacks it and the page is a 500 (2026.11.20.5). Never reorder the selects in the markup: theme.js, sc-product.js (main picker → rows) and the size finders read them by DOM index.
 <!-- /notes -->

@@ -2,6 +2,158 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.20.7 — guarantee box in the colours of the pack rows
+### Changed
+- Money-back guarantee box under Add to cart: the background, border and corners of an unselected pack row (user:
+  "in line with the bundle"): 5 % of the highlight colour, 1 px border of it at 30 %, radius 8 (was grey #efefef with
+  a dashed #555 border, as brixpant.com). Follows the section's highlight colour.
+### Checked
+- Preview: box background and border equal to the unselected pack row (`_src/sc-e2e.js` compares them on the page),
+  all checks passed; the platform engine renders every template.
+
+## 2026.11.20.6 — fix: 2026.11.20.5 failed with a 500 on the store
+### Fixed
+- 2026.11.20.5 took the store down (HTTP 500; 2026.11.20.4 fine): the "Color, Size" line of the pack rows
+  (`snippets/lu-kaching.hbs`) called a `contains` helper the platform engine does not have ("Missing helper:
+  "contains"", reproduced with shopdy-promax theme-engine.ts on the Bundle and Triple-Zone templates: every template
+  with a Kaching block). It now uses the engine's own `isColorGroup`. Same result: Color first, then Size.
+- Why it got through: the repo's helper list (base-theme README, pack.js, the preview) named `contains`, which the
+  engine never had. Fixed in tools: one list copied from the engine (`tools/lib/engine-helpers.js`), used by pack.js,
+  inspect-theme.js and the preview; pack.js now stops on `contains` (it reports 4 errors on the 2026.11.20.5 files).
+### Checked
+- The platform's own engine (theme-engine.ts renderThemeDocument / renderThemeFromDir) renders every product template
+  (store and editor), the home and the legacy product entry of this version; also of every other theme in the repo.
+
+## 2026.11.20.5 — compact top bar on phones; guarantee box + videos under Add to cart; colour first in packs
+**Broken on the store (500): do not upload; use 2026.11.20.6.**
+### Changed
+- Top bar, countdown style, phones (under 750 px): one compact row as the user's reference: title (and subtitle, link
+  text) on the left, the timer on the right. 48 px high with a title only (was 70 px), 61 px with the link text at
+  390 px (one line from about 410 px). Labels stay 12 px; the link text has no underline or arrow on phones.
+- Cart count in the header: the theme's main colour (was #1a2531).
+- Under Add to cart (bodysuit look, and the Lunara look with "Show them in the Lunara look too"): the grey box with
+  "Order today, get it between …" and "45-day money-back guarantee. Read the policy" is gone (its settings too). In
+  its place, as brixpant.com/compression-tank: a money-back guarantee box (grey #efefef, dashed #555 border, radius 8,
+  gold seal with the days, "45-Day Money Back Guarantee" + "Less than 1% of customers have used our Money Back
+  Guarantee", a gold shine crossing it every 6 s; off with reduced motion). Settings: show, title, line, days on the
+  seal, own seal picture, shine.
+- Template "Triple-Zone Drop-Seat Bodysuit": an "Image / video slider" block right under it, 3 portrait (9:16) videos
+  side by side, 12 px apart, phones too (as brixpant.com). Its slots are empty: pick the videos in the editor. An
+  empty slider now shows nothing on the store (was an empty band).
+- Pack rows (Kaching bundles, every template): the Color picker first, then Size, whatever the product's option order;
+  the "Color, Size" line above them too. Visual order only (the scripts still read the selects in option order).
+### Fixed
+- Pack row pickers in the Lunara look were 14 px on phones (iOS zoomed the page on tap): 16 px, 44 px high.
+### Checked
+- Top bar at 360 / 390 / 412 / 768 / 1440 with title only, + link text, + subtitle, a long title: no sideways scroll.
+- `_src/sc-e2e.js` all passed (new checks: guarantee box, no delivery estimate, Color before Size); a copy with the
+  options in Size, Color order: Color still first, the packs still follow the main picker (only the test's fixed
+  "Color / Size" strings differ).
+- Guarantee box 360 x 73 at 390 px (brixpant 360 x 70), videos 3 x 112 x 199 (brixpant the same).
+- `mobile-audit.js` on home, bundle and bodysuit templates: only the old menu drawer errors.
+
+## 2026.11.20.4 — before / after slider as shape-curve.com
+### Changed
+- "Before / after slider" rebuilt on shape-curve.com's "Sculpt Your Curves Without the Struggle" section, downloaded
+  this time (cooling bodysuit page; `_work/capture/cooling`, section 01), after the user's live page showed the review
+  ("Still Comfortable Hours Later") as plain text lines. Measured on the original, in the theme's Poppins with the
+  highlight colour for the original's violet:
+  - review card: white, 1 px #ececec border, radius 10, 5 green star boxes, title 20 px bold, quote 16 px, name 14 px
+    (18 / 14 / 12 px on phones). New settings "Review card": stars (0-5), star colour, title, quote, name. Shows when
+    the title or the quote is filled in; empty by default (no made-up review in the theme).
+  - heading 36 px (24 on phones) with a highlighted end (new setting "Heading: highlighted end").
+  - check list italic, 16 px (14), round checks 20 px (16).
+  - photos: 4:3 frame (new default), square corners, no shadow; BEFORE / AFTER in white capitals at the bottom corners;
+    2 px line, 40 px see-through ring handle with two chevrons.
+  - band: soft gradient of the highlight colour (new setting "Background": gradient / one colour), 36 px above and
+    below (27 on phones), content up to 1600 px, photos and text halves side by side from 1024 px, text centred.
+  - phones: photos first, then heading, list and review card.
+- Default content of the section: heading "Sculpt Your Curves" + "Without the Struggle", the check list only.
+### Checked
+- Preview with the user's live content and the original's two photos: 1440 px section 552 px high (original 552),
+  photos 640 x 480 (same); 390 px 770 px high (original 770). Slider test passes (mouse, keys, swipe, tap). Every
+  print case (editor, no photo, one photo, solo, review with 3 stars, quote only, solid band). `mobile-audit.js`:
+  nothing from the section (the 6 menu drawer errors are old), no sideways scroll at 360 px.
+
+## 2026.11.20.3 — every feature in every product template; home cards the same height
+### Changed
+- Every product template has every product-page section (user: "the before / after slider for every template, not only
+  Triple-Zone Drop-Seat Bodysuit; the same for the other features"). Default, Bundle (Kaching), Size buttons and Variant
+  tiles now carry Feature cards, Details, Before / after slider, Customer videos, Photo testimonials, Trust badges,
+  Reviews (Okendo style) and You Will Also Love; the bodysuit template carries Lunara's Reviews and FAQ. Added switched
+  off (the editor's eye icon turns them on) with the bodysuit template's content to start from, so no live page
+  changes; the before / after slider is on and prints nothing until both photos are picked. `_src/build-sc.js` adds
+  what a template lacks and never changes a section it has.
+- The bodysuit blocks work in the Lunara look too: Price + badge, Highlights box, Shipping box, Info rows (size chart
+  table included) and the second button keep their look in any product section (`sc-product.css`: blocks under
+  `.sc-any`, the look itself under `.sc-skin`; outside the look each block links the file itself). "Under the
+  buttons" (safe checkout box, delivery estimate, guarantee) gets "Show them in the Lunara look too" (off by default).
+- Before / after slider: on the store it now prints nothing at all until both photos are set (was printed, then
+  hidden), since it sits in every product template.
+- Home product list (also the catalog and the upsell list): every card of a list has the same picture box, so all
+  cards are the same height (user: "no long and short cards"); the whole photo still shows (never cut), a photo of
+  another shape gets blank space around it. New Theme settings > Home page > "Product cards: picture shape": same as
+  most photos of the list (default), square, 4:5, 3:4, 2:3. Cards of a row also end level, buttons in line (a price
+  not on sale is taller than a sale price).
+### Fixed
+- Reviews (Okendo style): the "Sort reviews" field is 16 px on phones (was 14 px: iOS zoomed the page on tap).
+### Checked
+- Preview, Default template with every section on and every bodysuit block in the Lunara look, 390 / 1440: blocks
+  styled as in the bodysuit look (price 26 / 30 px, highlights in the main colour, grey ship box and rows, chart
+  table built, express button gradient), sections the same heights as in the bodysuit template, no sideways scroll.
+- Templates as shipped vs 2026.11.20.2: Bundle, Default 390 / 1440 pixel-identical; HTML of the bodysuit template
+  differs only by the class `sc-any`. Slider interaction test passes again (mouse, keys, swipe, tap).
+- Home cards with photos 1:1, 2:3, 3:4, 4:5 and one without sizes, 360 / 390 / 1440: one box per list, cards of a row
+  the same height and buttons in line, no sideways scroll.
+- `mobile-audit.js`: home and product pages as before (the menu drawer errors are old); "Sort reviews" error gone.
+
+## 2026.11.20.2 — before / after slider
+### Added
+- Section "Before / after slider" (`sections/sc-before-after.hbs`, schema from `_src/build-sc.js`), asked for as
+  shape-curve.com's "Sculpt Your Curves Without the Struggle" (cooling tummy-control bodysuit page). That page could
+  not be downloaded (bot check, then 429; no web archive copy), so the look follows the theme's other shape-curve
+  sections: photos in a 20 px rounded frame with a shadow, white line + round handle with arrows in the highlight
+  colour, BEFORE / AFTER pills, heading + rich text beside (bulleted list = check marks); phones: heading, photos,
+  text. Drag with the mouse, swipe sideways or tap on a phone (an up / down swipe still scrolls the page), arrow keys /
+  Home / End (role=slider). Mechanism from `themes/lunara-black-brixpant/sections/before-after.hbs`.
+- Settings: before / after photo (+ theme file while empty), labels, start position, frame (4:5, square, 4:3, the
+  after photo's shape), line colour, photos side, heading, text, background, highlight, spacing. Preset "Before /
+  after slider" (Content): addable to any product template from the editor.
+- Template "Triple-Zone Drop-Seat Bodysuit": the section after "Crafted In Every Detail", white band, photos empty.
+  On the store the whole section stays hidden until BOTH photos are set (a half slider looks broken, and two unrelated
+  photos must not pass as a before / after); the editor shows the empty frames with a hint.
+### Checked
+- Preview 1440 / 390 with two test photos: mouse drag 50 → 25 %, click 80 %, ArrowLeft ×5 → 70 %, Home → 0 %; phone
+  (touch, CDP): sideways swipe 50 → 85 %, up swipe scrolls the page (+216 px) and leaves the line, tap → 20 %.
+  Hidden with no / one photo (display none, no request), shown with two; editor render shows both hints.
+  `mobile-audit.js` on the template: nothing from the section, CLS 0 (the 8 errors are the menu drawer and the reviews
+  sort select, as before).
+
+## 2026.11.20.1 — countdown top bar with days and a link; home cards show the whole photo; banner picture link
+### Fixed
+- Top bar, Style = Countdown timer: a long title (e.g. "Black Friday Is Live - Ends Mon, Nov 30") ran off both sides
+  of a phone and squeezed the timer (one nowrap row of 17 px). New bar as the user's screenshot: one row on a computer
+  (title · subtitle · DAYS : HRS : MINS : SECS · link text →), flat background with a 2 px line in the accent colour; on
+  phones the title wraps (balanced) on top, the subtitle sits next to the timer, the link text below; 750–989 px two
+  rows. Timer labels 12 px on phones (were 7 px). The old animated gradient + shine are gone. Source
+  `_src/vn-countdown.hbs`, applied by `_src/patch-vn.js` (an `always` entry: the block is rewritten on every run).
+- Home page product list (and the catalog / search grids, all `theme.js` `ht()`): the card picture was cropped to a
+  square. The card box now takes the picture's own shape (`imageWidth` / `imageHeight` of the product data, so no
+  layout shift) and the picture is drawn with `object-fit: contain` (`.lu-card--fit`, `assets/css/vn-chrome.css`); a
+  product without sizes keeps the square box with the whole picture inside. Related products keep their 4:5 crop.
+### Added
+- Theme settings > Top bar > Countdown timer: "Link text", "Link" (the whole bar is the link; a link text without a
+  link opens all products), "Timer length (days)" (+ the hours, which may now be 0), "Or a fixed end" (e.g.
+  `2026-11-30 23:59`, the visitor's own time; after it the days + hours take over), "Countdown background" (default
+  #050100), "Countdown title, numbers and bottom line" (default #f58634). The DAYS box shows while a whole day is left.
+- Theme settings > Home page > "Banner image link": a click on the banner picture opens it (empty = not a link; the
+  text box button keeps its own link). Dawn's transparent overlays let the click through on a computer.
+### Checked
+- Preview 360 / 390 / 768 / 1000 / 1440, three text lengths: no sideways scroll, bar 87–89 px on phones (143 px with
+  a 3-line title), 45 px on a computer. Timer: fixed end, date only, past end, days + hours. Banner click at 360 /
+  1440, button link kept. `mobile-audit.js` on `/` + `/product` with the countdown on: same 12 errors as before (menu
+  drawer, all pre-existing), 34 warnings (were 54: the old bar's 7–10 px text), CLS 0 (was 0.012).
+
 ## 2026.11.19.16 — top bar as tammycharm.com
 ### Changed
 - Top bar (rotating messages): with no Background set it is the main colour, solid (was a pale gradient of it, made for

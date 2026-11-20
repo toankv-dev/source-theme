@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{assets_url}}/css/base.css">
 <link rel="stylesheet" href="{{assets_url}}/css/custom.css">
 <link rel="stylesheet" href="{{assets_url}}/css/vn-chrome.css">
-<style>:root{--vn-hl:{{#if settings.highlight}}{{settings.highlight}}{{else}}#790236{{/if}};--vn-logo-w:{{#if settings.vn_logo_width}}{{settings.vn_logo_width}}{{else}}280{{/if}}px;--vn-logo-wm:{{#if settings.vn_logo_width_mobile}}{{settings.vn_logo_width_mobile}}{{else}}180{{/if}}px;{{#if settings.vn_footer_bg}}--vn-footer:{{settings.vn_footer_bg}};{{/if}} }</style>
+<style>:root{--vn-hl:{{#if settings.highlight}}{{settings.highlight}}{{else}}#790236{{/if}};--vn-logo-w:{{#if settings.vn_logo_width}}{{settings.vn_logo_width}}{{else}}280{{/if}}px;--vn-logo-wm:{{#if settings.vn_logo_width_mobile}}{{settings.vn_logo_width_mobile}}{{else}}180{{/if}}px;--vn-card-r:{{#if settings.vn_card_ratio}}{{settings.vn_card_ratio}}{{else}}auto{{/if}};{{#if settings.vn_footer_bg}}--vn-footer:{{settings.vn_footer_bg}};{{/if}} }</style>
 <script data-vn-hl="{{settings.highlight}}">(function(){try{var h=String(document.currentScript.getAttribute('data-vn-hl')||'').trim().replace('#','');if(h.length===3)h=h.replace(/./g,'$&$&');if(!/^[0-9a-f]{6}$/i.test(h))return;document.documentElement.style.setProperty('--vn-hl-rgb',[0,2,4].map(function(i){return parseInt(h.substr(i,2),16);}).join(', '));}catch(e){}})();</script>
 <script>window.__gsOpenCart = {{#if (eq settings.open_cart_on_add false)}}false{{else}}true{{/if}};</script>
 {{!-- Mau chu dao (Theme settings > Colors > Primary). Engine khong co helper doi mau -> script nho trong head (chay truoc

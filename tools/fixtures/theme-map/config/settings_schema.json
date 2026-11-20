@@ -1,0 +1,61 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Map Fixture"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "primary",
+        "label": "Primary",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "footer_bg",
+        "label": "Footer background",
+        "default": "#222222"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "select",
+        "id": "font",
+        "label": "Font",
+        "default": "Inter",
+        "options": [
+          {
+            "value": "Inter",
+            "label": "Inter"
+          },
+          {
+            "value": "Poppins",
+            "label": "Poppins"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "radius",
+        "label": "Corner radius",
+        "default": 8
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "open_cart",
+        "label": "Open cart",
+        "default": true
+      }
+    ]
+  }
+]

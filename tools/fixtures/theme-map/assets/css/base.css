@@ -1,0 +1,14 @@
+:root {
+  --radius: 8px;
+  --gap: 16px;
+}
+@font-face { font-family: "Poppins"; font-weight: 400; src: url(../fonts/p.woff2); }
+@font-face { font-family: "Poppins"; font-weight: 700; src: url(../fonts/p7.woff2); }
+.pm { display: grid; }
+.pm__title { font-size: 28px; }
+.rv { padding: 20px; }
+@media (max-width: 749px) {
+  .pm { display: block; }
+  .bn { height: 300px; }
+}
+.site-footer { color: #fff; }

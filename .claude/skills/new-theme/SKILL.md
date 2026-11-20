@@ -106,7 +106,7 @@ Talk to the user in Vietnamese.
   … !important; }` plus `font-family: var(--font) !important` on body text elements (a separate heading / button
   family gets its own variable). Preload the 400 + 700 woff2 after `{{> head}}` in `layout/theme.hbs` and the
   templates. **Never touch the fonts of `templates/checkout.hbs`** (checkout / payment keep the platform's own).
-- **Colours on the theme**: every override goes through `_work/build-*-settings.js`, which writes it into
+- **Colours on the theme**: every override goes through `_src/build-*-settings.js`, which writes it into
   `settings_data.json` **and** as the default in `settings_schema.json` (a live store shows schema defaults when a
   key is not saved). Hard-coded hex in skin.css only for what has no setting, with a comment naming its source.
 - **Check**: `node tools/style-audit.js http://localhost:8091 themes/<slug> [--allow "<intentional other font>"]`
@@ -130,7 +130,7 @@ apply its **Shortcuts** and watch the step that was slowest last time.
 - **Read by need**: the README catalog and class names first; for the base markup of one part `grep` the class
   in `sections.css` / the `.hbs` instead of reading whole files.
 - **Generate, don't hand-patch JSON**: `templates/product.json`, theme-only global settings and long texts
-  (FAQ) come from small `_work/build-*.js` scripts you edit and re-run (see `themes/resilia/_work/`).
+  (FAQ) come from small `_src/build-*.js` scripts you edit and re-run (`_src/` is committed, `_work/` is not).
 - **Batch the checks**: one `shot.js` call per page and width; while iterating re-run only what failed; smoke +
   mobile-audit + pack once at the end.
 
@@ -186,7 +186,10 @@ runs, fix it with tooling (a flag or script in `tools/`) instead of another note
    **Mobile first**: `node tools/mobile-audit.js http://localhost:8091` must report 0 errors (sideways
    overflow, fields < 16 px, LCP / CLS over budget); fix every warning the skin introduced (taps < 44 px, text
    < 12 px, lazy first-screen image) unless the original page has it on purpose — say which remain.
-7. **Pack**: `node tools/pack.js themes/<slug>` → `dist/<slug>-<version>.zip` (0 errors required).
+7. **Design map, then pack**: `node tools/theme-map.js themes/<slug>` (the next session reads `_map/design-map.md`
+   instead of the code), then write ≤ 15 lines in its notes (`### theme` or `### <part id>`) for what the code does not
+   show: the main colour setting, rules that override the base, traps found while building. Then
+   `node tools/pack.js themes/<slug>` → `dist/<slug>-<version>.zip` (0 errors required, no design-map warning).
 8. **Report** (Vietnamese): the zip path, what matches, remaining differences with their cause, sections added
    beyond the base, the list of empty media slots the merchant should fill in the editor (section → slot →
    image or video, recommended size), and that the zip must be uploaded in the Adlux admin (Themes → upload) to check live.

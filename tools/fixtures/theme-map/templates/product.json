@@ -1,0 +1,31 @@
+{
+  "name": "Default",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {},
+      "blocks": {
+        "t": {
+          "type": "title"
+        },
+        "p": {
+          "type": "price"
+        }
+      },
+      "blockOrder": [
+        "t",
+        "p"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "heading": "Loved by"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "reviews"
+  ]
+}

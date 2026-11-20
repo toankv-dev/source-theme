@@ -53,6 +53,7 @@ function gather(entries) {
       gallery: !!(c.gallery || a.gallery),
       hidden: c.hidden === undefined ? a.hidden : a.hidden === undefined ? c.hidden : !!(c.hidden && a.hidden),
     };
+    for (const k of ['variant', 'description', 'review']) if (c[k] || a[k]) place[k] = true; // media-grab's flags
     const heavier = (a.bytes || 0) > (c.bytes || 0);
     best.set(k, Object.assign(heavier ? Object.assign({ url }, a) : c, place));
   }
@@ -74,6 +75,11 @@ function classify(item) {
   if (item.hidden) return 'hidden';
   if (item.area === 'header' || item.area === 'footer') return 'brand';
   if (item.gallery) return 'gallery';
+  // set by tools/media-grab.js only: inside a review block (a product picture shown there too stays in the gallery),
+  // a variant's picture that is not in the gallery, a picture of the description
+  if (item.review) return 'reviews';
+  if (item.variant) return 'variants';
+  if (item.description) return 'description';
   const r = item.rendered;
   if (r && r.w > 0 && r.h > 0 && r.w <= ICON_PX && r.h <= ICON_PX) return 'icons';
   return 'sections';
@@ -81,7 +87,9 @@ function classify(item) {
 
 function classifyVideo(item) {
   if (item.hidden) return 'hidden';
-  return item.gallery ? 'gallery' : 'sections';
+  if (item.review) return 'reviews';
+  if (item.gallery) return 'gallery';
+  return item.description ? 'description' : 'sections';
 }
 
 function safeName(s) {
@@ -113,4 +121,4 @@ function plan(assets) {
   return { images: named(pickImages(assets), classify), videos: named(pickVideos(assets), classifyVideo) };
 }
 
-module.exports = { stem, pickImages, pickVideos, classify, classifyVideo, safeName, realExt, plan };
+module.exports = { stem, pictureKey, pickImages, pickVideos, classify, classifyVideo, safeName, realExt, plan };

@@ -1,0 +1,16 @@
+<section class="pm pm--main" id="MainProduct-{{section.id}}">
+  <style>.pm{display:grid}.pm__title{font-size:24px}</style>
+  {{#if (eq section.settings.skin "bundle")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/bundle.css">{{/if}}
+  {{#each section.blocks}}
+    {{#if (eq block.type "title")}}
+      <h1 class="pm__title">{{../product.title}}</h1>
+    {{/if}}
+    {{#if (eq block.type "price")}}
+      <div class="pm__price">{{money ../product.price}}</div>
+    {{/if}}
+    {{#if (eq block.type "pack")}}
+      <div class="pm__pack" data-pack>{{> stars}}</div>
+    {{/if}}
+  {{/each}}
+  <button id="addToCart" data-testid="add-to-cart" class="pm__atc" style="background:{{settings.primary}}">Add to cart</button>
+</section>

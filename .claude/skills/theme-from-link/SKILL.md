@@ -40,7 +40,9 @@ copy instead of live captures), what the theme is compared with, and the media r
 
 ## Steps
 
-1. **Scaffold** (first link only): `node tools/new-theme.js "<Brand>" --source "<url>"` → `themes/<slug>/`.
+1. **Scaffold** (first link only): `node tools/new-theme.js "<Brand>" --source "<url>"` → `themes/<slug>/` (with its
+   design map). A link for a theme that exists (a new template): read its `_map/design-map.md` and `--part <id>` instead
+   of exploring its code.
 2. **Download** each link, one after another, in the background:
    `node tools/download-page.js <url> themes/<slug>` (name from the URL: home, product, collection, search, contact,
    tracking, policy, page; a second product template: `--name product-<x>`). One command saves the page and every

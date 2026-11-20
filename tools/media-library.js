@@ -27,11 +27,14 @@ const { plan } = require('./lib/media-pick');
 const args = process.argv.slice(2);
 const opt = (k, d) => (args.includes('--' + k) ? args[args.indexOf('--' + k) + 1] : d);
 const dir = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--') && args[i - 1] !== '--no-sheet'))[0];
-if (!dir) { console.error('usage: node tools/media-library.js <theme-dir> [--prefix tv] [--max 1600] [--quality 0.82] [--no-sheet]'); process.exit(1); }
+if (!dir) { console.error('usage: node tools/media-library.js <theme-dir> [--prefix tv] [--max 1600] [--quality 0.82] [--no-sheet] [--from <media-grab dir>]'); process.exit(1); }
 const THEME = path.resolve(dir);
-const SITE = path.join(THEME, '_work', 'site');
+// --from <dir>: the media of tools/media-grab.js (its assets.json), ADDED to the theme's library: nothing of the library is
+// removed, its originals go to _work/images/<prefix>-<group>/, and a name already taken by another picture stops the run.
+const FROM = opt('from') ? path.resolve(opt('from')) : null;
+const SITE = FROM || path.join(THEME, '_work', 'site');
 const ASSETS = path.join(SITE, 'assets.json');
-if (!fs.existsSync(ASSETS)) { console.error('no download in ' + SITE + ': run tools/download-page.js first'); process.exit(1); }
+if (!fs.existsSync(ASSETS)) { console.error('no download in ' + SITE + ': run tools/download-page.js (or media-grab.js) first'); process.exit(1); }
 const PREFIX = opt('prefix', path.basename(THEME).replace(/[^a-z0-9]/gi, '').slice(0, 2).toLowerCase());
 const MAX = Number(opt('max', 1600));
 const QUALITY = Number(opt('quality', 0.82));
@@ -55,6 +58,22 @@ const prev = new Map();
 if (fs.existsSync(MAP)) for (const e of JSON.parse(fs.readFileSync(MAP, 'utf8'))) prev.set(e.shipped, e);
 
 const { images, videos } = plan(JSON.parse(fs.readFileSync(ASSETS, 'utf8')));
+if (FROM) {
+  const taken = [];
+  for (const item of images) {
+    const r = 'assets/images/' + PREFIX + '-' + item.group + '/' + item.name + '.' + (KEEP_FORMAT.has(item.ext) ? item.ext : 'webp');
+    if (prev.has(r) && prev.get(r).url !== item.url) taken.push(r);
+  }
+  for (const item of videos) {
+    const r = 'assets/videos/' + PREFIX + '-' + item.group + '/' + item.name + '.' + item.ext;
+    if (prev.has(r) && prev.get(r).url !== item.url) taken.push(r);
+  }
+  if (taken.length) {
+    console.error('these names are already taken by other pictures of the theme: ' + taken.slice(0, 8).join(', ') + (taken.length > 8 ? ' …' : '')
+      + '\nuse another --prefix for these media (nothing was written)');
+    process.exit(1);
+  }
+}
 const entries = [];
 const kept = [];
 const missing = [];
@@ -86,7 +105,7 @@ for (const item of images) {
   const sourceSha = sha1(src);
   if (seenBytes.has(sourceSha)) { dupes.push(item.url); continue; }
   seenBytes.set(sourceSha, item);
-  const original = path.join(THEME, '_work', 'images', item.group, item.name + '.' + item.ext);
+  const original = path.join(THEME, '_work', 'images', (FROM ? PREFIX + '-' : '') + item.group, item.name + '.' + item.ext);
   copy(src, original);
   const ext = KEEP_FORMAT.has(item.ext) ? item.ext : 'webp';
   const shipped = path.join(THEME, 'assets', 'images', PREFIX + '-' + item.group, item.name + '.' + ext);
@@ -145,14 +164,17 @@ for (const item of videos) {
 // Files of an older run that nothing needs any more; yours (changed sha1) stay.
 const nowShipped = new Set(entries.map((e) => e.shipped));
 for (const [r, before] of prev) {
+  if (FROM) break; // added media: the rest of the library stays as it is
   if (nowShipped.has(r) || !fs.existsSync(abs(r))) continue;
   if (sha1(abs(r)) === before.sha1) fs.unlinkSync(abs(r)); else kept.push(r);
 }
+const added = entries.slice(); // what this run wrote (the summary below)
+if (FROM) entries.unshift(...[...prev.values()].filter((e) => !nowShipped.has(e.shipped)));
 
 fs.writeFileSync(MAP, JSON.stringify(entries, null, 2) + '\n');
 
 // One look at each group.
-const groups = Array.from(new Set(entries.filter((e) => e.kind === 'image').map((e) => e.group)));
+const groups = Array.from(new Set(added.filter((e) => e.kind === 'image').map((e) => e.group)));
 if (!args.includes('--no-sheet')) {
   for (const g of groups) {
     const out = path.join(THEME, '_work', 'images', 'contact-' + g + '.png');
@@ -161,8 +183,8 @@ if (!args.includes('--no-sheet')) {
 }
 
 // Summary
-const pics = entries.filter((e) => e.kind === 'image');
-const vids = entries.filter((e) => e.kind === 'video');
+const pics = added.filter((e) => e.kind === 'image');
+const vids = added.filter((e) => e.kind === 'video');
 const sizeOf = (l) => l.reduce((n, e) => n + (fs.existsSync(abs(e.shipped)) ? fs.statSync(abs(e.shipped)).size : 0), 0);
 const count = (l, g) => l.filter((e) => e.group === g).length;
 console.log('media library: ' + pics.length + ' images → assets/images/' + PREFIX + '-* (' + mb(sizeOf(pics)) + '), originals in _work/images (' + mb(pics.reduce((n, e) => n + e.bytes, 0)) + ')');

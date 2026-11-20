@@ -31,20 +31,20 @@ Read before every run; update after it (see "Speed" in SKILL.md). Keep under ~50
 - Sample product: copy `tools/fixtures/product.json`, change title, price, options, packs; keep variants available
   (smoke picks the 2nd option). Product page with packs needs the `variant_picker` block.
 - Packs with unit rows, no visible pickers: `show_options: false` = no variant (no price, ATC off) → `hide_options`
-  (maggies-tanks, tredvik `_work/patch-tv-options.js`; 2 themes, due for the base). Pop-up in the live desktop shot: diff
+  (maggies-tanks, tredvik `_src/patch-tv-options.js`; 2 themes, due for the base). Pop-up in the live desktop shot: diff
   against `_work/capture/<name>/desktop.png`, close-ups with `crop.js --x --y --w --h`.
 - Compare with one `--eval` list of block tops per pass. Base traps: comparison lines (`.b-compare__table:after`, `__head:before`,
   `__side` border), `[open]:not(.is-closing) summary:after`. CSS: compact sections + base and strip comments ≈ 9 KB.
 - First smoke run right after a server start can fail on contact / AddToCart: re-run once before debugging.
-- Home-heavy originals: own `templates/index.hbs` + `<prefix>-home.css` + `_work/build-<prefix>-settings.js` (theme
+- Home-heavy originals: own `templates/index.hbs` + `<prefix>-home.css` + `_src/build-<prefix>-settings.js` (theme
   groups replaced idempotently, defaults also in schema); theme product card gets `data-product-card` for smoke.js.
   `_work/` is not committed: reuse the newest builder on this machine if present.
 - A product page whose blocks the home already has: move the home blocks into snippets (check the home HTML is byte-identical before / after) and render them with a section; copy their CSS with a generator into a file only that template links ONCE (one link per section = parsed N times, mobile-audit counts each).
 
 - A link → an extra template in a built **Lunara (Shrine PRO)** theme (no build script here): reuse its `product` section
   behind a `skin` setting (CSS / JS linked only when set) + new `<prefix>-*` sections with own `<style>`; Lunara edits in an
-  anchored `_work/patch-sc.js`; save old templates' HTML before, diff after. Lunara wins with `#MainProduct-…` + `!important`
-  (gallery 530 px, thumbs, ATC radius): copy that prefix. Compare on a copy with a product-like sample (`_work/compare-copy.js`).
+  anchored `_src/patch-sc.js`; save old templates' HTML before, diff after. Lunara wins with `#MainProduct-…` + `!important`
+  (gallery 530 px, thumbs, ATC radius): copy that prefix. Compare on a copy with a product-like sample (`_src/compare-copy.js`).
 
 ## Runs
 <!-- date · theme · minutes per step (scaffold/capture-or-download/map/build product/build other pages/compare/verify/pack+report) · slowest step -->

@@ -6,12 +6,15 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
 
 - `base-theme/` — the base every new theme is built from (platform core + recurring sections). Read
   `base-theme/README.md` before changing any theme: layers, platform contract, JS API, section catalog.
-- `themes/<slug>/` — themes built from the base. `_work/` inside a theme holds captures, plans and diffs and is
-  never packed.
+- `themes/<slug>/` — themes built from the base. Inside, never packed: `_map/` = the theme's design map
+  (committed), `_src/` = its build / patch scripts and their sources (committed), `_work/` = downloads, captures,
+  plans and diffs (not committed: never put a script the theme depends on there).
 - `reference/{lunara,twinklingtree,wayfare}/` — the original source themes (unzipped from the `*.zip` files at the
   root). Read-only reference; never build from them.
 - `tools/` — `preview-server.js` (local engine, v1 + v2), `download-page.js` (one store page → offline copy in
   `_work/site/`: DOM, CSS, JS, fonts, every image / video, live screenshots, offline check, then capture.js on it),
+  `media-grab.js` (every picture + video of one link, grouped and named, no mirror: `downloads/<host>-<handle>/`,
+  `--to-theme <dir> --prefix <xx>` adds them to a theme's media library),
   `site-server.js` (serves that copy, no network), `probe-sections.js` (every block's text styles in one table),
   `capture.js` (original page → screenshots, tokens,
   sections, images, texts, used fonts), `visual-diff.js`, `shot.js` (page / `--selector` element shot, `--eval`
@@ -19,7 +22,8 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   colours from a screenshot), `new-theme.js`,
   `media-library.js` (a download → the theme's media: WebP in `assets/images/<prefix>-<group>/`, videos, originals in `_work/images/`, `_work/media-map.json`), `pack.js` (validate + zip to `dist/`), `side-by-side.js` (compare screenshot slices), `crop.js` (slice tall
   screenshots), `contact-sheet.js` (all images of a folder in one picture), `inspect-theme.js`
-  (inventory a theme vs the base), `sync-core.js` (push base core files into built themes), `scripts/prune-css.js`,
+  (inventory a theme vs the base), `theme-map.js` (a theme's design map: `_map/design-map.md`, `--part <id>`,
+  `--check`, `--ack`), `transcript-cost.js` (what a session cost, `--by-request --fresh`), `sync-core.js` (push base core files into built themes), `scripts/prune-css.js`,
   `scripts/build-base-settings.js`, `scripts/to-webp.js`, `scripts/css-compact.js` / `css-merge.js` /
   `css-split.js` (shrink a CSS file under the budget), `lib/` (shared helpers; `lib/media-guard.js` = pack.js check).
   Install once: `cd tools && npm install && npx playwright install chromium`. Tests of the tools: `cd tools && npm test`.
@@ -51,6 +55,10 @@ Handlebars storefront themes for the Adlux platform (schema v2: `layout/theme.hb
   command's default path says (spec-driven-development and `/spec` → `docs/SPEC-<topic>.md`,
   planning-and-task-breakdown and `/plan` → `docs/plan-<topic>.md` + `docs/todo-<topic>.md`; `/build` reads them
   there, not `SPEC.md` / `tasks/`). Link between them with relative paths inside `docs/`.
+- Design map first: before reading a theme's code, read its `_map/design-map.md` (missing → `node tools/theme-map.js
+  <theme-dir>` creates it) and open only what it points to (`--part <id>` gives the lines). After changing a theme, run
+  `node tools/theme-map.js <theme-dir>`, fix the notes it flags (or `--ack <id>` when they still hold), and note what
+  the code does not say (intent, traps, recipes). A map that is wrong about a file is a bug of the tool: fix the tool.
 - The deliverable of a theme is always the zip from `node tools/pack.js <theme-dir>` (0 errors).
 - Never edit a theme's `assets/js/core.js` or the checkout logic; keep the pixel / platform hooks.
 - Only the platform engine's Handlebars helpers (listed in `base-theme/README.md`); `pack.js` enforces it.

@@ -3,6 +3,7 @@
 
 # Generated
 dist/
+downloads/
 themes/*/_work/
 reference/*/_inspect.json
 reference/*/_base-update.md

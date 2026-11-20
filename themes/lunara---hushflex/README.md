@@ -36,11 +36,11 @@ original uses violet. Pick it per product in the admin (template list).
 - Pictures are theme files (`assets/images/sc-*`, the original store's, to be replaced) set as `default_image`; a file
   picked in the editor wins. The main product's gallery stays product data: upload `assets/images/sc-sections/*_*.webp`
   (17 bodysuit photos) to the product.
-- Files of the Lunara build changed by hand (the build script is not in this repo): `_work/patch-sc.js` applies them
+- Files of the Lunara build changed by hand (the build script is not in this repo): `_src/patch-sc.js` applies them
   again and stops if an anchor moved — `sections/product.hbs` (skin, second button, rating text, 4 block types),
   `sections/reviews.hbs` (`show_write`), `snippets/lu-size-finder.hbs` (`XS (95-110 lbs)` counts as XS). Every change
   keeps the other templates' HTML byte-identical except the one size-finder line. Schemas + the template JSON:
-  `_work/build-sc.js`. Checks: `_work/sc-e2e.js` on a copy with a bodysuit sample (`_work/compare-copy.js`).
+  `_src/build-sc.js`. Checks: `_src/sc-e2e.js` on a copy with a bodysuit sample (`_src/compare-copy.js`).
 
 ## Pages
 Home (`templates/index.hbs`, Shop All catalog on `#collection/<handle>`), policies / About us (`page.hbs`, About

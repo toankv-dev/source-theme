@@ -17,6 +17,8 @@ const SAMPLE = path.join(__dirname, '..', 'fixtures', 'sample');
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml',
   '.jpg': 'image/jpeg', '.webp': 'image/webp', '.png': 'image/png', '.woff2': 'font/woff2' };
 const VIDEO = Buffer.alloc(64 * 1024, 7); // not a playable video: only its download matters
+const GRAB = path.join(__dirname, '..', 'fixtures', 'media-grab');
+const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64'); // 1×1 GIF, 43 bytes
 
 function startFixture(port = 0) {
   const log = [];
@@ -65,6 +67,14 @@ function startFixture(port = 0) {
       const end = r[2] ? Math.min(Number(r[2]), VIDEO.length - 1) : VIDEO.length - 1;
       return send(206, type, VIDEO.subarray(start, end + 1), { 'Accept-Ranges': 'bytes', 'Content-Range': 'bytes ' + start + '-' + end + '/' + VIDEO.length });
     }
+    // tools/media-grab.js (fixtures/media-grab): a Shopify-like product page with its /products/<handle>.js, a shopdy-like
+    // page with its variants in the page, Shopify CDN paths (/cdn/shop/files/<sample>) and a 43-byte tracking pixel.
+    if (p === '/products/grab-tee') return file(path.join(GRAB, 'shopify.html'));
+    if (p === '/products/grab-tee.js') return send(200, 'application/json', fs.readFileSync(path.join(GRAB, 'grab-tee.json')));
+    if (p === '/shopdy-dress') return file(path.join(GRAB, 'shopdy.html'));
+    if (p === '/products/grab-blocked') return send(403, 'text/html', '<!doctype html><title>Just a moment...</title><p>Checking your browser</p>');
+    if (p.startsWith('/cdn/shop/files/')) return file(path.join(SAMPLE, path.basename(p)));
+    if (p === '/pixel.gif') return send(200, 'image/gif', PIXEL);
     const f = path.join(SITE, path.normalize(decodeURIComponent(p)));
     return f.startsWith(SITE) ? file(f) : send(404, 'text/plain', 'not found');
   });

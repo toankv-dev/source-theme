@@ -1,0 +1,12 @@
+{
+  "name": "Map Fixture",
+  "version": "2026.11.20.1",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/js/core.js"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "handle": "grab-tee",
+  "title": "Grab Tee",
+  "images": [
+    "/cdn/shop/files/GGG_-_WP1__72064.webp?v=1",
+    "/cdn/shop/files/GGG_-_WP9__39297.webp?v=1",
+    "/cdn/shop/files/GGG_-_WP5__22402.webp?v=1"
+  ],
+  "media": [
+    { "media_type": "image", "src": "/cdn/shop/files/GGG_-_WP1__72064.webp?v=1", "width": 800, "height": 800, "alt": "Front" },
+    { "media_type": "image", "src": "/cdn/shop/files/GGG_-_WP9__39297.webp?v=1", "width": 800, "height": 800, "alt": "Back" },
+    { "media_type": "image", "src": "/cdn/shop/files/GGG_-_WP5__22402.webp?v=1", "width": 800, "height": 800, "alt": "Red" },
+    { "media_type": "video", "preview_image": { "src": "/img/Flickering_Flame_Lantern_-_WP1__35019.jpg" },
+      "sources": [{ "format": "m3u8", "mime_type": "application/x-mpegURL", "url": "/videos/c/vp/abc/abc.m3u8" }] },
+    { "media_type": "external_video", "host": "youtube", "external_id": "xyz" }
+  ],
+  "variants": [
+    { "id": 11, "title": "Red", "featured_image": { "src": "/cdn/shop/files/GGG_-_WP5__22402.webp?v=1" } },
+    { "id": 12, "title": "Blue", "featured_image": { "src": "/cdn/shop/files/GGG_-_WP1__72064.webp?v=1" } }
+  ]
+}

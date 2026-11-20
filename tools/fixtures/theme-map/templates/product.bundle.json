@@ -1,0 +1,35 @@
+{
+  "name": "Bundle",
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "skin": "bundle"
+      },
+      "blocks": {
+        "t": {
+          "type": "title"
+        },
+        "p": {
+          "type": "price"
+        },
+        "k": {
+          "type": "pack",
+          "settings": {
+            "default_image": "images/fx-sections/pack.webp"
+          }
+        }
+      }
+    },
+    "banner": {
+      "type": "banner",
+      "settings": {
+        "default_image": "images/fx-sections/banner.webp"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "banner"
+  ]
+}

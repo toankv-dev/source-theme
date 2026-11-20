@@ -45,7 +45,7 @@ Gửi ảnh chụp nguyên trang, định dạng PNG, cả bản desktop và b�
 ## Kết quả
 
 - File zip trong `dist/`: upload ở admin Shopdy (Themes → upload).
-- Mã nguồn theme trong `themes/<tên>/`.
+- Mã nguồn theme trong `themes/<tên>/`, kèm **design map** của theme trong `_map/` (xem [bên dưới](#design-map-của-theme)).
 - Báo cáo tiếng Việt: phần đã khớp, phần còn khác, và **các ô ảnh / video để trống mà chủ shop cần tự upload**.
 
 Xem thử trên máy: `node tools/preview-server.js themes/<tên> --port 8091` rồi mở `http://localhost:8091`.
@@ -54,7 +54,7 @@ Xem thử trên máy: `node tools/preview-server.js themes/<tên> --port 8091` r
 
 - Dựng từ `base-theme`, giữ nguyên giỏ hàng, checkout, pixel.
 - Font và màu đúng y bản gốc.
-- Ảnh / video trên trang sản phẩm không đưa vào theme, chủ shop tự upload.
+- Ảnh sản phẩm (gallery) là dữ liệu của sản phẩm, không gắn cứng vào theme.
 - Không có form viết đánh giá.
 - Kiểm tra kỹ bản điện thoại trước khi giao.
 
@@ -71,11 +71,57 @@ có ảnh chụp để nhìn, còn `/theme-from-link` tải cả trang thật v�
 | Chữ | Chép lại chữ thấy trên ảnh. Phần bị ẩn (câu trả lời FAQ, tab chưa mở) không có trong ảnh nên bị thiếu | Lấy nguyên văn mọi chữ, kể cả phần bị ẩn |
 | Kích thước, khoảng cách | Ước lượng từ ảnh | Đo chính xác từng khối trên bản tải về |
 | Kiểm tra độ giống | Chụp theme rồi đặt cạnh ảnh gốc, so bằng mắt | Tool so từng điểm ảnh với ảnh chụp trang thật và chỉ ra chỗ lệch |
+| Ảnh, video | Để ô trống, chủ shop tự upload | Tải hết ảnh, video của trang gốc vào theme làm mặc định; chủ shop thay sau |
 | Khi site chặn bot | Không ảnh hưởng, vì không cần vào site | Không tải được thì Claude xin ảnh chụp và chuyển sang `/new-theme` |
-/theme-from-link: Thực hiện tải video, ảnh từ trang gốc.
 
 **Tóm lại:** có link thì dùng `/theme-from-link`, vì theme giống bản gốc hơn và bạn đỡ việc hơn. Chỉ dùng `/new-theme`
 khi không có link, hoặc link bị chặn không tải được.
+
+## Dùng ít token hơn
+
+### Mỗi yêu cầu một phiên
+
+Mỗi lần trả lời, Claude đọc lại cả cuộc trò chuyện, nên phiên càng dài càng tốn. Phiên sửa theme vesnacharm có 38 yêu
+cầu trong một ngày; nếu tách mỗi yêu cầu thành một phiên riêng thì đỡ khoảng **60%**.
+
+- Xong một việc thì gõ `/clear` rồi mới đưa yêu cầu tiếp theo.
+- Sửa theme thì mở Claude Code ở `D:\source-theme`, không mở ở shopdy-promax.
+
+### Design map của theme
+
+Mỗi theme có một "bản đồ" ngắn ở `themes/<tên>/_map/design-map.md`: trang nào gồm những section nào, mỗi phần nằm ở
+file nào, màu và font chỉnh ở setting nào. Claude đọc bản đồ này thay vì đọc lại code mỗi lần sửa.
+
+- Bạn không phải làm gì: theme mới tạo là có map, và Claude cập nhật map sau mỗi lần sửa.
+- Map không nằm trong file zip.
+- Xem chi tiết một phần: `node tools/theme-map.js themes/<tên> --part <tên section>`.
+- Kiểm tra map còn đúng không: `node tools/theme-map.js themes/<tên> --check` (`pack.js` cũng báo khi map đã cũ).
+
+Script dựng hoặc sửa theme để trong `themes/<tên>/_src/` (có lên git). `_work/` chỉ chứa dữ liệu tải về và không lên
+git.
+
+### Tải ảnh, video từ link đối thủ
+
+```
+node tools/media-grab.js https://doi-thu.com/products/san-pham
+```
+
+Lệnh này tải hết ảnh và video của đúng trang đó vào `downloads/<site>-<sản phẩm>/`. File được chia sẵn theo thư mục:
+ảnh sản phẩm, ảnh biến thể, ảnh trong mô tả, ảnh các phần khác, ảnh review, icon, logo. Danh sách đầy đủ nằm trong
+`media.json`.
+
+- Đưa thẳng vào theme: thêm `--to-theme themes/<tên> --prefix <2 chữ cái>`.
+- Chỉ lấy vài nhóm: `--only gallery,variants`. Muốn nhanh hơn: `--desktop-only`.
+- Trang chặn bot thì lệnh dừng, không tải gì.
+
+### Đo token đã dùng
+
+```
+node tools/transcript-cost.js --project D:\source-theme --latest --by-request --fresh
+```
+
+Lệnh in ra mỗi yêu cầu tốn bao nhiêu, và số token sẽ tiết kiệm được nếu tách mỗi yêu cầu thành một phiên. Muốn tìm
+phiên theo tên thì dùng `--title "<tên phiên>"` thay cho `--latest`.
 
 ## `/store-page-from-link`: page kéo thả từ link đối thủ
 

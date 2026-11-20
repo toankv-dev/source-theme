@@ -6,8 +6,9 @@
  *
  * Creates themes/<slug>/ as a copy of base-theme with its own theme.json (name, today's version,
  * description), an empty skin.css, and a _work/ folder (never packed) holding source.json and, later,
- * the capture of the original page. Build the look in skin.css, settings_data.json and, where the layout
- * differs, the theme's own copies of sections/snippets. Never touch core.js.
+ * the capture of the original page, and its design map (_map/, tools/theme-map.js; the base's own map is not copied).
+ * Build the look in skin.css, settings_data.json and, where the layout differs, the theme's own copies of
+ * sections/snippets. Never touch core.js.
  */
 'use strict';
 const fs = require('fs');
@@ -54,6 +55,9 @@ fs.mkdirSync(path.join(dest, '_work'), { recursive: true });
 fs.writeFileSync(path.join(dest, '_work', 'source.json'), JSON.stringify({
   name, slug, created: d.toISOString(), base: baseVersion, source: opt('source') || null,
 }, null, 2) + '\n');
+
+// The design map of the new theme (docs/SPEC-theme-map.md): copy() skips base-theme/_map, so this one is its own.
+require('child_process').spawnSync(process.execPath, [path.join(__dirname, 'theme-map.js'), dest], { stdio: 'inherit' });
 
 console.log('Created ' + path.relative(ROOT, dest) + ' from base-theme ' + baseVersion);
 console.log('Next: node tools/download-page.js <url> themes/' + slug + '   ·   node tools/preview-server.js themes/' + slug);

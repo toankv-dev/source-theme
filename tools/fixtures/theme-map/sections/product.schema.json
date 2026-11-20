@@ -1,0 +1,35 @@
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "skin",
+      "label": "Look",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "bundle",
+          "label": "Bundle"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title"
+    },
+    {
+      "type": "price",
+      "name": "Price"
+    },
+    {
+      "type": "pack",
+      "name": "Pack"
+    }
+  ]
+}

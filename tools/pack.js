@@ -112,21 +112,30 @@ for (const [file, doc] of Object.entries(json)) {
 
 // Platform hooks (searched across all templates, sections and snippets)
 const all = Object.values(sources).join('\n');
-const hooks = [
-  ['{{{trackingHead}}}', /\{\{\{trackingHead\}\}\}/],
-  ['{{{trackingBody}}}', /\{\{\{trackingBody\}\}\}/],
-  ['#sf-config with configJson', /id="sf-config"[^>]*>\{\{\{configJson\}\}\}/],
-  ['#sf-variants-data', /id="sf-variants-data"/],
-  ['#addToCart', /id="addToCart"/],
-  ['data-testid="add-to-cart"', /data-testid="add-to-cart"/],
-  ['#CartDrawer-Checkout', /id="CartDrawer-Checkout"/],
-  ['data-testid="checkout-button"', /data-testid="checkout-button"/],
-];
-for (const [name, re] of hooks) if (!re.test(all)) errors.push('missing platform hook ' + name);
+for (const [name, re] of require('./lib/platform-hooks').HOOKS) if (!re.test(all)) errors.push('missing platform hook ' + name);
 for (const [file, src] of Object.entries(sources)) {
   // The shared platform checkout carries no tracking tags in any Adlux theme: the platform handles its pixels.
   const isPage = /^(templates\/.+|layout\/.+)\.hbs$/.test(file) && file !== 'templates/checkout.hbs' && /<body/i.test(src);
   if (isPage && !src.includes('{{{trackingBody}}}')) errors.push(file + ': page without {{{trackingBody}}} right after <body>');
+}
+
+// The design map (tools/theme-map.js) should say what the theme is now: a warning, never an error. _map/ is not packed.
+{
+  const mapFile = path.join(dir, '_map', 'design-map.md');
+  const fix = 'run node tools/theme-map.js ' + path.relative(path.join(__dirname, '..'), dir).replace(/\\/g, '/');
+  if (!fs.existsSync(mapFile)) warnings.push('no design map (_map/design-map.md): ' + fix);
+  else {
+    try {
+      const TM = require('./lib/theme-map');
+      const store = fs.existsSync(path.join(dir, '_map', 'design-map.json')) ? JSON.parse(fs.readFileSync(path.join(dir, '_map', 'design-map.json'), 'utf8')) : null;
+      const old = fs.readFileSync(mapFile, 'utf8');
+      const built = TM.build(TM.scan(dir), old, store);
+      if (built.md !== old) warnings.push('the design map is out of date: ' + fix);
+      else if (built.flagged.length) warnings.push('design map notes to review: ' + built.flagged.map((f) => f.id).join(', ') + ' (' + fix + ')');
+    } catch (e) {
+      warnings.push('design map: ' + e.message);
+    }
+  }
 }
 
 const mediaGuard = require('./lib/media-guard');

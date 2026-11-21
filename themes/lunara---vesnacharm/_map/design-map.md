@@ -1,6 +1,6 @@
 # Design map: lunara---vesnacharm
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Lunara Vesnacharm 2026.11.20.7 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
+Lunara Vesnacharm 2026.11.21.2 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
 One part in detail: `node tools/theme-map.js themes/lunara---vesnacharm --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
 README.md: Editor (Themes > Customize) L6 · Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`) L27 · Pages L65 · Hooks kept for pixels L69
 
@@ -108,7 +108,7 @@ Every page (theme.json): theme.css, theme.js
 - sc-product.css 16 KB · linked by product, sc-pb-highlights, sc-pb-price, sc-pb-ship +1
 - theme.css 0.1 KB · linked by theme.json
 - vn-chrome.css 19 KB · linked by gs-head
-- lu-companion.js 13 KB · linked by lu-kaching
+- lu-companion.js 15 KB · linked by lu-kaching
 - lu-gallery.js 3.3 KB minified · linked by index.hbs, product.hbs, theme.hbs
 - lu-pack-msg.js 1.2 KB minified · linked by theme.hbs
 - sc-product.js 4.3 KB · linked by product, sc-pb-tabs
@@ -149,7 +149,9 @@ Every page (theme.json): theme.css, theme.js
 <!-- /notes -->
 ### index.hbs
 <!-- notes:index.hbs -->
+- "Products" heading: the room under it (`margin-bottom`, end of vn-chrome.css) = the section's top padding (4rem, custom.css `.lu-home-products`), so it sits centred between the strip and the cards (40 / 40 px at 1440 and 360). custom.css alone gives it margin 0 (it touched the cards). Change both together.
 - Banner picture link (`home_banner_image_link`): an `<a class="lu-hb-link">` around the `<picture>`. Dawn's transparent `.banner::after` / `.banner__media::after` (z-index 0) lie on top on a computer: they have `pointer-events: none`, or the click never reaches the link.
+- Banner on phones (< 750 px; user 2026-11-20, the text on the right of the picture was cut): `vn_hb_mobile_fit` anything but "crop" = the box takes the picture's shape (`aspect-ratio: var(--hb-ar)`, set from the loaded picture by the inline script after the section, cached per src in localStorage `lu_hb_ar:<src>`; first visit guesses 6/5 mobile picture, 8/3 banner, 1/1 sample, img `contain`). "crop" = the old fixed `home_banner_height_mobile` + cover. Both via `_src/patch-vn.js`; never put `{{{`/`}}}` next to a `{{#if}}` in that CSS (triple-stash).
 - Product cards (`theme.js` `ht()` + `vnEq()`, patched by `_src/patch-vn.js`): one picture box for every card of a list (li > ul), `object-fit: contain` (`.lu-card--fit`, vn-chrome.css), so the whole photo shows and the cards are the same height. Box = Theme settings > Home page > "Product cards: picture shape" (`:root --vn-card-r`, gs-head), on "auto" the shape most photos of the list have (ties: the taller). The list gets `.lu-eqlist` (rows stretch): a price not on sale is 16 px, a sale price 13 px, so a row with both would end 4 px apart. Related products are not `ht()` cards and keep their 4:5 crop.
 <!-- /notes -->
 ### sc-before-after
@@ -164,5 +166,6 @@ Every page (theme.json): theme.css, theme.js
 <!-- notes:product -->
 - Bodysuit blocks in every look (user 2026-11-20): the section always has `.sc-any`; `assets/css/sc-product.css` styles the blocks (Price + badge, Highlights, Shipping box, Info rows, second button) under `.sc-any` and the look itself (gallery, pickers, packs, Find My Size pill) under `.sc-skin`. Outside the look each block snippet (`sc-pb-*`) and the second button link sc-product.css themselves (`@root.section.settings.skin`); Info rows also links sc-product.js, which then only builds the size chart (runs once: `window.__scProduct`). `--sc-hl` = the look's highlight (inline) else the theme's `--vn-hl`.
 - "Under the buttons" (`snippets/sc-trustbox.hbs`): the safe checkout box, then the money-back guarantee box (as brixpant.com, `vn_mbg_*`; gold seal = inline SVG unless a picture is picked; background + border = an unselected Kaching pack row, from `--sc-hl`: keep them in step if the pack look changes). The delivery estimate + guarantee line box was removed 2026-11-20 at the user's request (its ids stay in build-sc.js OWN_SETTINGS so they are dropped). Always with the bodysuit look, with the Lunara look when `vn_trust_any` is on. The 3 videos under it are a plain "Image / video slider" block (`videos` in the bodysuit template): the platform server turns a video URL into `<video>`, the preview does not (it shows a broken image).
+- Image / video slider on phones (user 2026-11-20, "at most 3 videos like the sample"): block setting On mobile (`mobile_row`, default 3; not set = 3) = only the first N items, in one row (`--pvm` = N, `.lu-ms[data-mr]` hides the rest, arrows stay hidden as nothing overflows); "all" = the old swipe with Items per view on mobile. Desktop always shows them all. Schema hand-edited in sections/product.schema.json (build-sc.js keeps it).
 - Pack rows (`snippets/lu-kaching.hbs`): Color before Size is visual only (`order: -1` on `select[data-name*="colo" i]`, vn-chrome.css) + the names line printed colour first (patch-vn) with the engine's `isColorGroup`. Never `contains` or any helper outside tools/lib/engine-helpers.js: the engine lacks it and the page is a 500 (2026.11.20.5). Never reorder the selects in the markup: theme.js, sc-product.js (main picker → rows) and the size finders read them by DOM index.
 <!-- /notes -->

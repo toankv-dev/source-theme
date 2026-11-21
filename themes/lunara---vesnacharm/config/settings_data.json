@@ -138,6 +138,7 @@
     "vn_cd_end": "",
     "vn_cd_bg": "#050100",
     "vn_cd_accent": "#f58634",
-    "vn_card_ratio": "auto"
+    "vn_card_ratio": "auto",
+    "vn_hb_mobile_fit": "full"
   }
 }

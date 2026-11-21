@@ -98,6 +98,7 @@
           "settings": {
             "heading": "",
             "per_view": 3,
+            "mobile_row": "3",
             "per_view_mobile": "3",
             "ratio": "9/16",
             "gap": 12,

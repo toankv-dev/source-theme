@@ -722,9 +722,34 @@
         },
         {
           "type": "select",
+          "id": "mobile_row",
+          "label": "On mobile",
+          "default": "3",
+          "options": [
+            {
+              "value": "3",
+              "label": "First 3 in one row"
+            },
+            {
+              "value": "2",
+              "label": "First 2 in one row"
+            },
+            {
+              "value": "4",
+              "label": "First 4 in one row"
+            },
+            {
+              "value": "all",
+              "label": "Swipe through all"
+            }
+          ],
+          "info": "In one row: the items after the first ones are hidden on phones (desktop shows them all)."
+        },
+        {
+          "type": "select",
           "id": "per_view_mobile",
           "label": "Items per view on mobile",
-          "default": "1.5",
+          "default": "3",
           "options": [
             {
               "value": "1",
@@ -750,7 +775,8 @@
               "value": "3",
               "label": "3"
             }
-          ]
+          ],
+          "info": "Used when On mobile = Swipe through all."
         },
         {
           "type": "select",

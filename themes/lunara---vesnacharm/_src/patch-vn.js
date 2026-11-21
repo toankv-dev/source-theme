@@ -124,6 +124,34 @@ const EDITS = [
     find: '.lu-hb .lu-hb-link{display:block;width:100%;height:100%}',
     replace: '.lu-hb .lu-hb-link{display:block;width:100%;height:100%}.lu-hb .banner::after,.lu-hb .banner__media::after{pointer-events:none}',
   },
+  // ---- home banner on phones shows the WHOLE picture (user 2026-11-20, screenshot: "BLACK FRIDAY UP TO 70%" and the
+  //      SHOP button cut off). Was a fixed 340 px box + object-fit: cover: a 1916 x 821 banner kept only its middle
+  //      49 %. Now (Banner on phone = Whole picture, the default; anything but "crop") the box takes the picture's
+  //      own shape: --hb-ar = width / height, set by the script below from the loaded picture and kept per picture in
+  //      localStorage (lu_hb_ar:<src>), so a repeat visit reserves the exact box before the picture arrives (no
+  //      layout shift). First visit: a guess (mobile picture 6/5, banner 8/3, sample 1/1) + contain, never a crop.
+  //      "crop" = the old fixed height (Banner height on phone). Spaces around the {{#if}} in the CSS: "{{{" / "}}}"
+  //      would be read as a triple-stash.
+  {
+    file: 'templates/index.hbs', done: 'settings.vn_hb_mobile_fit',
+    find: '@media screen and (max-width:749px){.lu-hb .slideshow__media{height:{{#if settings.home_banner_height_mobile}}{{settings.home_banner_height_mobile}}{{else}}340{{/if}}px!important}}',
+    replace: '@media screen and (max-width:749px){ {{#if (eq settings.vn_hb_mobile_fit "crop")}}'
+      + '.lu-hb .slideshow__media{height:{{#if settings.home_banner_height_mobile}}{{settings.home_banner_height_mobile}}{{else}}340{{/if}}px!important}'
+      + '{{else}}.lu-hb .slideshow,.lu-hb .slideshow__slide{height:auto!important;min-height:0!important}'
+      + '.lu-hb .slideshow__media{height:auto!important;min-height:0!important;aspect-ratio:var(--hb-ar,{{#if settings.home_banner_image_mobile}}6/5{{else}}{{#if settings.home_banner_image}}8/3{{else}}1/1{{/if}}{{/if}})}'
+      + '.lu-hb .slideshow__media.banner__media img{object-fit:contain}{{/if}} }',
+  },
+  {
+    file: 'templates/index.hbs', done: 'lu_hb_ar:',
+    find: 'setTimeout(f,1500)})();</script>{{/unless}}{{> hf-wave-marquee}}',
+    replace: 'setTimeout(f,1500)})();</script>'
+      + '<script>(function(){var h=document.querySelector(".lu-hb"),i=h&&h.querySelector(".slideshow__media img");if(!i)return;'
+      + 'function k(){var so=h.querySelector(".slideshow__media source");return "lu_hb_ar:"+(so&&matchMedia(so.media).matches?so.srcset:i.getAttribute("src"))}'
+      + 'function put(r){h.style.setProperty("--hb-ar",r)}try{var c=localStorage.getItem(k());if(c)put(c)}catch(e){}'
+      + 'function f(){if(!i.naturalWidth)return;var r=i.naturalWidth+"/"+i.naturalHeight;put(r);try{localStorage.setItem(k(),r)}catch(e){}}'
+      + 'i.addEventListener("load",f);if(i.complete)f()})();</script>'
+      + '{{/unless}}{{> hf-wave-marquee}}',
+  },
   // ---- product cards (home grid, catalog, upsell: theme.js ht()) show the whole picture, all of one list the same
   //      height (user 2026-11-20: "the photo is cut", then "cards must be the same height"). ht() marks each card
   //      .lu-card--fit + data-lu-r (its photo's height / width in %, 100 without sizes) and queues vnEq() as a

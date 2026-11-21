@@ -2,15 +2,15 @@
  "files": {
   "README.md": "ca190245935fbc419add4b37b80fd70d25964a7a",
   "_src/anim-webp.py": "d48e8334584afd82add1783c8212c4f140d37453",
-  "_src/build-sc.js": "690a38127550e293e50a770a6a9d02ff02a09cd9",
-  "_src/build-vn-settings.js": "448f5dd71042decffbfb0e124764a67a3aeff495",
+  "_src/build-sc.js": "79987f9cf817f7e30a0e0247ec229d6df78fb0aa",
+  "_src/build-vn-settings.js": "99ec1f7f214cbf1821440b12f90e363f959f3683",
   "_src/cb/lu-companion-bar.hbs": "3f5b8b47f5f4ad500c307a3230aa9f444dbe600a",
   "_src/cb/lu-companion.css": "60541f3b36a97d0817cb07ee60ec93bd6a86d25c",
-  "_src/cb/lu-companion.js": "db5b0863f96c4ddad948221c0912c3288b461f39",
+  "_src/cb/lu-companion.js": "2d3b4cfddfa88faba3b3838e7e82745733c43a62",
   "_src/compare-copy.js": "d1580fbe86b8046564adccd208ae07e0568ec2c2",
   "_src/patch-cb.js": "ce49d2e23d1bab87d12bb585417ab5da5e19f2f3",
   "_src/patch-sc.js": "bd933dc523fb066ac3412fa73fc0939262b2618b",
-  "_src/patch-vn.js": "b1002e82677955b0b077a40be15ea10ac81c87d6",
+  "_src/patch-vn.js": "c6dac0fd07828a1146c49b75e7a2ff49bf01a6f4",
   "_src/sc-e2e.js": "55e0c272f293f05113478c0bce78ec363a2b196f",
   "_src/scan-colors.js": "4c704b2d044ec944e249cface9b883b4c487cca2",
   "_src/vn-countdown.hbs": "90a1fc2b69f7890ac14cbf89449da11d6eb7aa14",
@@ -20,15 +20,15 @@
   "assets/css/lu-companion.css": "60541f3b36a97d0817cb07ee60ec93bd6a86d25c",
   "assets/css/sc-product.css": "819e4ecdaf7992e3251acf2f9bb8c17f79803c07",
   "assets/css/theme.css": "fa558daf1e4a5202e16133b520d71aa12b1bfa8f",
-  "assets/css/vn-chrome.css": "2927bb3e8c9e78b4235ae4170588b1463a6ca463",
+  "assets/css/vn-chrome.css": "41931ffe4200ec6c432cbc0319754b0b509c39de",
   "assets/js/check_syntax.html": "5bc410656c55583a180e74f4e373b32ab4333ce6",
-  "assets/js/lu-companion.js": "db5b0863f96c4ddad948221c0912c3288b461f39",
+  "assets/js/lu-companion.js": "2d3b4cfddfa88faba3b3838e7e82745733c43a62",
   "assets/js/lu-gallery.js": "266e27cd860a7f5c6a85a3b22bed123e018c5ce1",
   "assets/js/lu-pack-msg.js": "7ceca539233d17a0bd402628cbffc969577b172a",
   "assets/js/sc-product.js": "44fbc1b6a89c288ccf5c2b6747f0a75274d7ef69",
   "assets/js/theme.js": "088552537ee0a5c661e570f74aacb2b6465d0d6d",
-  "config/settings_data.json": "53dc76364e9f51d4e510e2e75d1882a41b47153e",
-  "config/settings_schema.json": "b1b02f0460ca628dffe11ec39c5d5cbb312edf99",
+  "config/settings_data.json": "30ff1af610a1fee848c8caf758b11ff0dbd7b172",
+  "config/settings_schema.json": "10887de4c70cc32dbe3028c5d2e55f8b1924692f",
   "layout/theme.hbs": "8e772960ab915f6566c920901d0ca66be7a45654",
   "locales/en.json": "6c7b68d9ea4945715ca0408933d9c48af8f366ba",
   "sections/cart-drawer.hbs": "a714e616c2a080057494c37a61002e5c51586309",
@@ -48,7 +48,7 @@
   "sections/marquee.schema.json": "019855b59f1e52d74818b6124b8b9bbd4410d09f",
   "sections/product-scripts.hbs": "8ccea068e0eb7f43d9b30e394f486075efc784d7",
   "sections/product.hbs": "14e3403c8f115a59b46fd235162f8d43640a3c85",
-  "sections/product.schema.json": "c23052abcd1821f6c513ab1d09d39be66f1cb519",
+  "sections/product.schema.json": "0be47c1e9b0ec420cc490ca660374189f88bbc7c",
   "sections/related.hbs": "dfa9a55b182cbd09e65253bc5a78070f7805b521",
   "sections/related.schema.json": "1a9ee59d990e5e92e7cf08db57d518eea71e8e65",
   "sections/reviews.hbs": "d437d01fb1924bd67d45b9be80fcde380b997112",
@@ -75,7 +75,7 @@
   "snippets/lu-companion-bar.hbs": "3f5b8b47f5f4ad500c307a3230aa9f444dbe600a",
   "snippets/lu-kaching-bar.hbs": "c4aedca8627bf334879b6726e11cb52edb3d3895",
   "snippets/lu-kaching.hbs": "551641c3422f65e9788f98fc9f3bd53f30e83b02",
-  "snippets/lu-media-slider.hbs": "18914ef2d61066507a99c801a3b17ba53d45000b",
+  "snippets/lu-media-slider.hbs": "dd5a9d0e238d505548f31b75b7485e2e6f81a976",
   "snippets/lu-pi-faq.hbs": "0bedaaf5567cf97bb36bf1dfdbdbffd30c1bd336",
   "snippets/lu-size-finder.hbs": "ff466aac67fc0a675eb2bb9d65a6703c0f8e284f",
   "snippets/sc-fit.hbs": "048583f3a73e148a5822f620894556f185e4471f",
@@ -87,16 +87,16 @@
   "snippets/sc-stars.hbs": "88b9bab0866dc5a340231d7429e357dbbfc4fb0b",
   "snippets/sc-trustbox.hbs": "e4ddc4e01a8ab7b9b619d0435ee5751811f0b43e",
   "templates/checkout.hbs": "9a6fd86e92fa232e3d222796bbbcad1db7a2ef53",
-  "templates/index.hbs": "25eb055ad466fc69620a1360616b71a4700e0152",
+  "templates/index.hbs": "e983b0eb87dd76db438c6c35f90c30086385611a",
   "templates/page.hbs": "824db6cbc2b3ccb0800ed25c1b01a4973206f8aa",
   "templates/product.bundle.json": "697f5a0b59136f4e2a679f9b1b3c1864d2900bc0",
   "templates/product.hbs": "057e908dd88bb8e468d7f413188fb0b754df8489",
   "templates/product.json": "f6bcced50306cb17d4d969252aba808de026e47a",
   "templates/product.sizes.json": "888295d4bb495d454bcb58582fa36e76d37fd7c7",
   "templates/product.tiles.json": "68b1d2b18e36c0fb0bbd80961d7fa84da2eb74b3",
-  "templates/product.triple-zone-bodysuit.json": "e7fa75e2534bd99a6a7a2024dc4a962793de8fa6",
+  "templates/product.triple-zone-bodysuit.json": "984e1370fdf7bdc63a799eb9fd9170d0cac2dcef",
   "templates/tracking-result.hbs": "aaec00e0520049c59be16acb073c27b57017a8e7",
-  "theme.json": "d4e645c2ef5bb9cd21a68f80250441f24e15ad10"
+  "theme.json": "0dacc52c7cc32ae7cf0d1ff227219073600fad31"
  },
  "notes": {
   "header": {
@@ -108,18 +108,18 @@
   },
   "index.hbs": {
    "checked": {
-    "templates/index.hbs": "25eb055ad466fc69620a1360616b71a4700e0152"
+    "templates/index.hbs": "e983b0eb87dd76db438c6c35f90c30086385611a"
    },
    "flagged": null,
-   "text": "4116cc14674d8f73bd3ba0dd8d3a69a212dd6759"
+   "text": "8ec6d6d4077c12d836668d9c03472544bc82aaf1"
   },
   "product": {
    "checked": {
     "sections/product.hbs": "14e3403c8f115a59b46fd235162f8d43640a3c85",
-    "sections/product.schema.json": "c23052abcd1821f6c513ab1d09d39be66f1cb519"
+    "sections/product.schema.json": "0be47c1e9b0ec420cc490ca660374189f88bbc7c"
    },
    "flagged": null,
-   "text": "8e18bcd6f9f6714734508a52778b67fda1389cb6"
+   "text": "cd13859ceb0997e34920a9d78a3ef13efc4af62c"
   },
   "sc-before-after": {
    "checked": {

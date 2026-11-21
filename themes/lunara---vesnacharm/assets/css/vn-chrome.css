@@ -200,3 +200,8 @@ footer#lu-ft.lu-ft { --ft-bg: var(--vn-footer, var(--vn-hl, #790236)); --ft-fg: 
 
 /* Image / video slider block with no picture or video yet: nothing on the store (was an empty 15 px band). */
 .lu-ms:not(:has(.lu-ms__it)) { display: none; }
+
+/* Home "Products" heading (user 2026-11-20: it touched the cards). custom.css gives it margin 0 and the grid no top
+   margin; the room under it = the section's top padding (4rem, custom.css .lu-home-products), so the heading sits
+   centred between the strip above and the cards. Change both together. */
+.lu-home-products .collection-hero__title { margin-bottom: 4rem; }

@@ -42,6 +42,7 @@ const TWEAK = {
   countdown_title: { info: 'In the accent colour, in capitals, e.g. ⚡ Black Friday Is Live. A long title wraps on phones.' },
   countdown_subtitle: { info: 'After the title, e.g. Ends Mon, Nov 30. Empty = none.' },
   countdown_hours: { min: 0, info: 'Added to the days. The timer restarts for each visitor when it reaches zero.' },
+  home_banner_height_mobile: { info: 'Only when "Banner on phone" = Fixed height (the sides of a wide picture are cut).' },
 };
 
 // The theme's own settings, appended to a group (created when missing).
@@ -69,6 +70,14 @@ const OWN = {
     { type: 'color', id: 'vn_cd_accent', label: 'Countdown title, numbers and bottom line', default: '#f58634' },
   ],
   'Home page': [
+    // phones show the whole banner picture (user 2026-11-20: the text on the right of the picture was cut off);
+    // templates/index.hbs (patch-vn.js) treats anything but "crop" as "full"
+    { type: 'select', id: 'vn_hb_mobile_fit', label: 'Banner on phone', default: 'full',
+      options: [
+        { value: 'full', label: 'Whole picture (height follows the picture)' },
+        { value: 'crop', label: 'Fixed height (cuts the sides)' },
+      ],
+      info: 'Whole picture: nothing of the picture is cut on phones. For a taller banner on phones, pick a Mobile banner image (e.g. 1200 x 1000 px).' },
     { type: 'url', id: 'home_banner_image_link', label: 'Banner image link',
       info: 'A click on the picture opens this page, e.g. a product link. Empty = the picture is not a link (the button keeps its own link).' },
     // one picture box for every card of a list (user 2026-11-20: "cards must be the same height"); theme.js ht() reads
@@ -143,7 +152,7 @@ for (const [id, props] of Object.entries(TWEAK)) {
 // Settings shown together, in this order, where the first of them sits (new ones are appended to their group above).
 const ORDER = [
   ['Top bar', ['countdown_title', 'countdown_subtitle', 'vn_cd_link_text', 'vn_cd_link', 'vn_cd_days', 'countdown_hours', 'vn_cd_end', 'vn_cd_bg', 'vn_cd_accent']],
-  ['Home page', ['home_banner_image', 'home_banner_image_mobile', 'home_banner_image_link']],
+  ['Home page', ['home_banner_image', 'home_banner_image_mobile', 'vn_hb_mobile_fit', 'home_banner_height_mobile', 'home_banner_image_link']],
   ['Home page', ['show_home_products', 'home_products_heading', 'home_products_limit', 'vn_card_ratio']],
 ];
 for (const [group, ids] of ORDER) {

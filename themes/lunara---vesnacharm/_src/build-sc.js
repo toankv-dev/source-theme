@@ -400,7 +400,7 @@ add('buy_buttons', 'buy_buttons');
 // 3 portrait videos side by side under the guarantee box, as brixpant.com/compression-tank (user 2026-11-20). Empty: the
 // store shows nothing until videos are picked (vn-chrome.css hides an empty slider); the server turns a video into <video>.
 add('videos', 'media_slider', {
-  heading: '', per_view: 3, per_view_mobile: '3', ratio: '9/16', gap: 12, radius: 0, show_arrows: true,
+  heading: '', per_view: 3, mobile_row: '3', per_view_mobile: '3', ratio: '9/16', gap: 12, radius: 0, show_arrows: true,
   media_1: '', media_2: '', media_3: '', media_4: '', media_5: '', media_6: '', media_7: '', media_8: '', media_9: '', media_10: '',
 });
 add('ship', 'sc_ship', {

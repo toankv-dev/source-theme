@@ -76,12 +76,25 @@
     return String(CFG.title || (h && h.textContent) || document.title || '').trim();
   }
 
+  /**
+   * The order the selects are shown in: colour options first, then the rest as the product lists them — the rule the
+   * Kaching packs use for their option names (the engine's isColorGroup). `data-i` keeps each option's real position,
+   * which is what the variants' `options` are indexed by.
+   */
+  function shownOrder(names) {
+    var idx = (names || []).map(function (_, i) { return i; });
+    var colour = function (i) { return /colou?r/i.test(String(names[i])); };
+    return idx.filter(colour).concat(idx.filter(function (i) { return !colour(i); }));
+  }
+
   /** One row: picture, name, selects (none for a one-variant product), bundle price and struck price. */
   function rowHtml(side, title, role) {
     var vals = optionValues(side);
-    var pick = side.variants.length > 1 && (side.optionNames || []).length > 0;
+    var names = side.optionNames || [];
+    var pick = side.variants.length > 1 && names.length > 0;
     var selects = pick
-      ? (side.optionNames || []).map(function (name, i) {
+      ? shownOrder(names).map(function (i) {
+          var name = names[i];
           return '<select class="kaching-bundles__bar-variant-select lu-cb-select" aria-label="' + esc(name) +
             '" data-name="' + esc(name) + '" data-i="' + i + '">' +
             vals[i].map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + '</option>'; }).join('') +
@@ -96,14 +109,22 @@
       '</div>';
   }
 
-  function picked(row) { return qa('select', row).map(function (s) { return s.value; }); }
+  /** The picked values by the option's real position (data-i), whatever order the selects are shown in. */
+  function picked(row) {
+    var out = [];
+    qa('select', row).forEach(function (s) { out[parseInt(s.getAttribute('data-i'), 10)] = s.value; });
+    return out;
+  }
 
   /** Resolve the row's variant from its selects (snapping them to a variant that exists) and paint it. */
   function syncRow(bar, role, changed) {
     var offer = bar.__luCb, side = offer[role], row = q('[data-lu-cb-side="' + role + '"]', bar);
     if (!row) return;
     var v = variantFor(side, picked(row), changed);
-    qa('select', row).forEach(function (s, i) { var x = (v.options || [])[i]; if (x != null) s.value = x; });
+    qa('select', row).forEach(function (s) {
+      var x = (v.options || [])[parseInt(s.getAttribute('data-i'), 10)];
+      if (x != null) s.value = x;
+    });
     bar['__luCb_' + role] = v;
     var img = q('[data-lu-cb-img]', row);
     if (img) {
@@ -115,18 +136,43 @@
     q('[data-lu-cb-rwas]', row).textContent = cents(was) > cents(bp) ? money(was) : '';
   }
 
-  /** The bar's totals: both bundle prices, both struck prices, and "Save $X". */
+  /**
+   * The bar's "Save …", printed the way the Kaching block's SAVE style setting prints a pack's
+   * (`data-save-style` on .lu-kaching): compare / compare_pct = against both struck prices, as $ or as % of them;
+   * amount / percent = against both variants' own prices. % is rounded as the packs round it (at least 1%).
+   * Empty when the bundle saves nothing.
+   */
+  function saveText(bar, total, m, c) {
+    var block = bar.closest('.lu-kaching');
+    var style = (block && block.getAttribute('data-save-style')) || 'percent';
+    var base = style === 'compare' || style === 'compare_pct' ? struck(m) + struck(c) : num(m.price) + num(c.price);
+    var save = (cents(base) - cents(total)) / 100;
+    if (!(save > 0) || !(base > 0)) return '';
+    var asPct = style === 'percent' || style === 'compare_pct';
+    return 'Save ' + (asPct ? Math.max(1, Math.round((save / base) * 100)) + '%' : money(save));
+  }
+
+  /** The bar's totals: both bundle prices, both struck prices, and its "Save …". */
   function paintTotals(bar) {
     var o = bar.__luCb, m = bar.__luCb_main, c = bar.__luCb_companion;
     if (!m || !c) return;
     var total = num(o.main.bundlePrice) + num(o.companion.bundlePrice);
     var was = struck(m) + struck(c);
-    var save = (cents(was) - cents(total)) / 100;
     q('[data-lu-cb-price]', bar).textContent = money(total);
-    q('[data-lu-cb-was]', bar).textContent = save > 0 ? money(was) : '';
+    q('[data-lu-cb-was]', bar).textContent = cents(was) > cents(total) ? money(was) : '';
+    var text = saveText(bar, total, m, c);
     var line = q('[data-lu-cb-save-line]', bar);
-    q('[data-lu-cb-save]', bar).textContent = save > 0 ? 'Save ' + money(save) : '';
-    if (line) line.hidden = !(save > 0);
+    q('[data-lu-cb-save]', bar).textContent = text;
+    if (line) line.hidden = !text;
+  }
+
+  /**
+   * The page's gallery goes to the main product's picked variant, as it does when a colour is picked in a pack
+   * (theme.js gives the product element a __showImage(src)). The companion is another product: not in this gallery.
+   */
+  function showMainImage(bar) {
+    var v = bar.__luCb_main, pdp = bar.closest('[data-ms-pdp]');
+    if (v && v.image && pdp && typeof pdp.__showImage === 'function') pdp.__showImage(v.image);
   }
 
   /** Start the main row on what the shopper already picked on the page (the first Kaching unit row), by option name. */
@@ -154,7 +200,7 @@
       var rows = q('[data-lu-cb-rows]', b);
       if (rows) rows.hidden = !on;
     });
-    if (bar.hasAttribute('data-lu-cb')) { preselectMain(block, bar); paintTotals(bar); }
+    if (bar.hasAttribute('data-lu-cb')) { preselectMain(block, bar); paintTotals(bar); showMainImage(bar); }
   }
 
   function deselectBars(block) {
@@ -193,9 +239,10 @@
       var s = e.target.closest('select.lu-cb-select');
       if (!s) return;
       e.stopPropagation(); // the Kaching block reprices its packs on every change; this is not one of them
-      var row = s.closest('[data-lu-cb-side]');
-      syncRow(bar, row.getAttribute('data-lu-cb-side'), parseInt(s.getAttribute('data-i'), 10));
+      var side = s.closest('[data-lu-cb-side]').getAttribute('data-lu-cb-side');
+      syncRow(bar, side, parseInt(s.getAttribute('data-i'), 10));
       paintTotals(bar);
+      if (side === 'main') showMainImage(bar);
     });
   }
 

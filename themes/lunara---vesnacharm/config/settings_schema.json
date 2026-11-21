@@ -305,6 +305,30 @@
         "info": "Shown on phones (under 750px) instead of the banner image. Recommended 1200 x 1000 px. Empty = the banner image."
       },
       {
+        "type": "select",
+        "id": "vn_hb_mobile_fit",
+        "label": "Banner on phone",
+        "default": "full",
+        "options": [
+          {
+            "value": "full",
+            "label": "Whole picture (height follows the picture)"
+          },
+          {
+            "value": "crop",
+            "label": "Fixed height (cuts the sides)"
+          }
+        ],
+        "info": "Whole picture: nothing of the picture is cut on phones. For a taller banner on phones, pick a Mobile banner image (e.g. 1200 x 1000 px)."
+      },
+      {
+        "type": "number",
+        "id": "home_banner_height_mobile",
+        "label": "Banner height on phone (px)",
+        "default": 340,
+        "info": "Only when \"Banner on phone\" = Fixed height (the sides of a wide picture are cut)."
+      },
+      {
         "type": "url",
         "id": "home_banner_image_link",
         "label": "Banner image link",
@@ -315,12 +339,6 @@
         "id": "lu_hb_max_h",
         "label": "Banner max height on computer (px, empty = fill the screen)",
         "info": "Empty: the banner always reaches the wave strip at the bottom of the first screen, on every screen size."
-      },
-      {
-        "type": "number",
-        "id": "home_banner_height_mobile",
-        "label": "Banner height on phone (px)",
-        "default": 340
       },
       {
         "type": "checkbox",

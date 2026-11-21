@@ -2,6 +2,40 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.21.2 — "Complete the bundle": SAVE as %, gallery follows the colour
+### Changed
+- The bar's "SAVE …" now follows the Kaching block's SAVE style setting, as the packs do: "Saving vs compare-at price,
+  as %" (vesnacharm) prints SAVE 55% instead of SAVE $72.17 (both struck prices vs the two bundle prices, rounded as the
+  packs, at least 1%); "Saving vs compare-at price" keeps the $; "Discount %" / "Discount amount" compare with the two
+  variants' own prices.
+### Fixed
+- Picking a colour in the bundle did not move the page's gallery (only the row's small picture changed). Picking the
+  bar, or a colour of this product in it, now shows that variant's picture in the gallery, as a pack does (theme.js
+  `__showImage`). The other product's colour changes its row picture only: it is not in this product's gallery.
+- `_src/cb/lu-companion.js` → `assets/js/lu-companion.js` by `_src/patch-cb.js`.
+### Checked
+- On the live page (vesnacharm.com/body-shaping-bodysuit) with this file served in place of the uploaded one, 390 and
+  1280: chip SAVE 55% ($131.87 vs $59.70); gallery untouched until the bar is picked, then on the picked variant, and on
+  Beige when Beige is picked; the bra's colour leaves it; both row pictures follow; Color first; no page errors.
+
+## 2026.11.21.1 — "Complete the bundle": Color select before Size
+### Fixed
+- The two rows of a "Complete the bundle" bar showed their selects in the product's option order, so a product listed
+  as Size, Color showed Size first (XS / Black). They now follow the Kaching packs' rule: colour options first, the rest
+  after in the product's order. The variant picked, and the cart line, are unchanged (`data-i` keeps each option's real
+  position). `_src/cb/lu-companion.js` → `assets/js/lu-companion.js` by `_src/patch-cb.js`.
+### Checked
+- Static page with the real bar, JS and CSS, products listed Size, Color: both rows show Color then Size; picking
+  S / Beige and L / Black adds those two variants with the offer key and bundle prices; no page errors (390 px).
+
+## 2026.11.20.8 — home banner shows the whole picture on phones
+### Changed
+- Home banner under 750 px: the box takes the picture's own shape (was 340 px high + cover, so a wide banner lost its
+  sides, e.g. "BLACK FRIDAY UP TO 70%" and the SHOP button). New setting Home page > Banner on phone: Whole picture
+  (default) / Fixed height (the old look, with Banner height on phone). Computer unchanged.
+### Checked
+- Preview at 360: 2000 x 750 picture → 360 x 135 box, square → 360 x 360, nothing cut, no sideways scroll; 1440 unchanged.
+
 ## 2026.11.20.7 — guarantee box in the colours of the pack rows
 ### Changed
 - Money-back guarantee box under Add to cart: the background, border and corners of an unselected pack row (user:

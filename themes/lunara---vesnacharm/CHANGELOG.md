@@ -2,6 +2,14 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.23.4 — Find my size: Band Size + Cup Size for bras
+### Added
+- Block "Find my size" (sc_fit): a bra chart (first line `SIZE CUP | 34 | 36 …`, one cup per line) now asks Band Size +
+  Cup Size (2 selects) instead of Weight + measurements: no in / lbs ⇄ cm / kg, no "Weight is required" line; the size
+  shows as soon as both are picked, its cell and band column are marked in the chart (scrolled into view on phones), and
+  "Select XL" sets it in the main picker and every pack row. New setting Finder type (Auto / Weight + measurements / Band +
+  Cup) and texts under "Bra: Band Size + Cup Size". Auto = the chart decides, so the bodysuit is unchanged.
+
 ## 2026.11.23.3 — cart: volume tiers only on the products the discount covers
 ### Fixed
 - The cart drawer discounted every line with the store's "Tiered next item" discount, also products the discount does

@@ -36,7 +36,17 @@ Nguồn: apps/web/src/features/products/components/page-template-overview.tsx, a
 ## Discounts
 Discounts → create. Method: Discount code or Automatic (Automatic needs a Title). Type:
 - Amount off products / Amount off order: percent or fixed amount.
-- Buy X Get Y: buy X, get Y free or discounted (a gift).
+- Buy X Get Y: buy X, get Y free or discounted (a gift). TRAP: a unit of a product in BOTH lists counts as bought AND
+  as the gift: "Buy 1 Get 1 FREE" with the bra in X and Y = every bra free, alone too (pack rows SAVE 100 %, the
+  checkout charges $0; vesnacharm 2026-11-23). Gift only with another product → that product alone in X. Same-product
+  BOGO → keep it in X and Y with Buy 2 Get 1 (1 = full price, 2 = one free, 4 = two free).
+- The checkout applies ONE automatic discount per cart, the biggest (tiers OR Buy X Get Y), never both.
+- Same SAVE % packs on another product: give it the same compare-at / price ratio (bodysuit 119.98 / 35.99, bra 99.98 /
+  29.99 → 70 / 74 / 75 %) and ADD it to the same tier discount. Never a 2nd tier discount: themes mirror only the
+  newest one (nextItemTiers), so the other product's packs would show prices the checkout does not charge.
+  In the Discounts list the tier discount = column Type "Next item (progressive)" (Buy X Get Y = "Buy X Get Y (BOGO)");
+  two of them live = themes read the newest CREATED automatic one of the workspace, the checkout takes the biggest.
+  Variant compare-at for all at once: Variants table → tick the header box → bulk bar "Compare at" → apply → Save.
 - Free shipping.
 - Tiered next item ("Next-item discount tiers"): the 1st item full price, each extra item discounted by its tier,
   typed `qty:percent`, e.g. `2:10, 3:15, 4:20`.
@@ -50,7 +60,7 @@ Discounts → create. Method: Discount code or Automatic (Automatic needs a Titl
   with the formula above (per unit, rounded to the cent) before giving a tier list.
 - Discount "Applies to" specific products = only their units take positions and percents (a protection line stays
   full price); Lunara Vesnacharm's cart follows it since 2026.11.23.3 (`nextItemTierProducts`).
-Nguồn: apps/web/src/features/discounts/pages/discount-edit.page.tsx, apps/web/src/features/discounts/pages/discounts.page.tsx
+Nguồn: apps/web/src/features/discounts/pages/discount-edit.page.tsx, apps/web/src/features/discounts/pages/discounts.page.tsx, apps/api/src/features/discounts/discount-engine.ts, apps/web/src/features/products/components/variant-options-builder.tsx
 
 ## Shipping protection (two ways: use ONE, both = the buyer pays twice)
 - Product in the cart drawer (themes with Theme settings › Cart drawer › "Protection product": Lunara, base-theme

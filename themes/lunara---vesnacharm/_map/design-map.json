@@ -2,7 +2,7 @@
  "files": {
   "README.md": "ca190245935fbc419add4b37b80fd70d25964a7a",
   "_src/anim-webp.py": "d48e8334584afd82add1783c8212c4f140d37453",
-  "_src/build-sc.js": "79987f9cf817f7e30a0e0247ec229d6df78fb0aa",
+  "_src/build-sc.js": "16023982996ec9c0bcc8d984cd110d8000f9d0eb",
   "_src/build-vn-settings.js": "0f15c2c3e303fb270e0e27e6c9d44507775a73ac",
   "_src/cb/lu-companion-bar.hbs": "3f5b8b47f5f4ad500c307a3230aa9f444dbe600a",
   "_src/cb/lu-companion.css": "60541f3b36a97d0817cb07ee60ec93bd6a86d25c",
@@ -49,7 +49,7 @@
   "sections/marquee.schema.json": "019855b59f1e52d74818b6124b8b9bbd4410d09f",
   "sections/product-scripts.hbs": "8ccea068e0eb7f43d9b30e394f486075efc784d7",
   "sections/product.hbs": "14e3403c8f115a59b46fd235162f8d43640a3c85",
-  "sections/product.schema.json": "0be47c1e9b0ec420cc490ca660374189f88bbc7c",
+  "sections/product.schema.json": "fd8cb0a1cbfef7f6d14fd56c9beffd7ed89d3f28",
   "sections/related.hbs": "dfa9a55b182cbd09e65253bc5a78070f7805b521",
   "sections/related.schema.json": "1a9ee59d990e5e92e7cf08db57d518eea71e8e65",
   "sections/reviews.hbs": "d437d01fb1924bd67d45b9be80fcde380b997112",
@@ -79,7 +79,7 @@
   "snippets/lu-media-slider.hbs": "dd5a9d0e238d505548f31b75b7485e2e6f81a976",
   "snippets/lu-pi-faq.hbs": "0bedaaf5567cf97bb36bf1dfdbdbffd30c1bd336",
   "snippets/lu-size-finder.hbs": "ff466aac67fc0a675eb2bb9d65a6703c0f8e284f",
-  "snippets/sc-fit.hbs": "048583f3a73e148a5822f620894556f185e4471f",
+  "snippets/sc-fit.hbs": "c5e4baeab5b2a60a364d04201df72b67c5c4a9ae",
   "snippets/sc-icon.hbs": "44a3b33e1c947f8300b7d140f02919c07be0e48a",
   "snippets/sc-pb-highlights.hbs": "f6c9457d689e148fbb82b77708737b730b91e77b",
   "snippets/sc-pb-price.hbs": "0015cbdfa9495d50b2141cfd32c7f718df09609c",
@@ -97,7 +97,7 @@
   "templates/product.tiles.json": "68b1d2b18e36c0fb0bbd80961d7fa84da2eb74b3",
   "templates/product.triple-zone-bodysuit.json": "984e1370fdf7bdc63a799eb9fd9170d0cac2dcef",
   "templates/tracking-result.hbs": "aaec00e0520049c59be16acb073c27b57017a8e7",
-  "theme.json": "95f64c31afb4d0e3025745cc5f1ed5d13de87f6c"
+  "theme.json": "967b61bfd2beff8342b0aedb508e7762030a3013"
  },
  "notes": {
   "cart-drawer": {
@@ -124,10 +124,10 @@
   "product": {
    "checked": {
     "sections/product.hbs": "14e3403c8f115a59b46fd235162f8d43640a3c85",
-    "sections/product.schema.json": "0be47c1e9b0ec420cc490ca660374189f88bbc7c"
+    "sections/product.schema.json": "fd8cb0a1cbfef7f6d14fd56c9beffd7ed89d3f28"
    },
    "flagged": null,
-   "text": "a2a712a32780cedac8e2b8688a64f280d01da47f"
+   "text": "5cb86cad5579623c5ff18cf14233881f560c57d0"
   },
   "sc-before-after": {
    "checked": {

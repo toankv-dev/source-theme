@@ -1,6 +1,6 @@
 # Design map: lunara---vesnacharm
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Lunara Vesnacharm 2026.11.23.3 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
+Lunara Vesnacharm 2026.11.23.4 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
 One part in detail: `node tools/theme-map.js themes/lunara---vesnacharm --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
 README.md: Editor (Themes > Customize) L6 · Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`) L27 · Pages L65 · Hooks kept for pixels L69
 
@@ -92,7 +92,7 @@ Every page (theme.json): theme.css, theme.js
 - lu-media-slider · 3 lines · used by product
 - lu-pi-faq · 3 lines · used by product
 - lu-size-finder · 279 lines · used by product · edited by patch-sc.js, patch-vn.js
-- sc-fit · 276 lines · used by product
+- sc-fit · 327 lines · used by product
 - sc-icon · 4 lines · used by sc-pb-ship, sc-pb-tabs, sc-testimonials, sc-trust
 - sc-pb-highlights · 8 lines · used by product
 - sc-pb-price · 6 lines · used by product
@@ -179,5 +179,6 @@ Every page (theme.json): theme.css, theme.js
 - "Under the buttons" (`snippets/sc-trustbox.hbs`): the safe checkout box, then the money-back guarantee box (as brixpant.com, `vn_mbg_*`; gold seal = inline SVG unless a picture is picked; background + border = an unselected Kaching pack row, from `--sc-hl`: keep them in step if the pack look changes). The delivery estimate + guarantee line box was removed 2026-11-20 at the user's request (its ids stay in build-sc.js OWN_SETTINGS so they are dropped). Always with the bodysuit look, with the Lunara look when `vn_trust_any` is on. The 3 videos under it are a plain "Image / video slider" block (`videos` in the bodysuit template): the platform server turns a video URL into `<video>`, the preview does not (it shows a broken image).
 - Image / video slider on phones (user 2026-11-20, "at most 3 videos like the sample"): block setting On mobile (`mobile_row`, default 3; not set = 3) = only the first N items, in one row (`--pvm` = N, `.lu-ms[data-mr]` hides the rest, arrows stay hidden as nothing overflows); "all" = the old swipe with Items per view on mobile. Desktop always shows them all. Schema hand-edited in sections/product.schema.json (build-sc.js keeps it).
 - Pack prices are never set by the theme: they are the store's live TIERED_NEXT_ITEM tiers (`nextItemTiers`, vesnacharm 2026-11-23: `2:24.98, 3:25.01` = 35.99 / 62.99 / 89.98), the same formula as the cart and checkout. A unit past the last tier takes the last tier's percent (4 units = SAVE 76%); the same unit price as Buy 3 for 4+ = admin tier `4:16.67`. User 2026-11-23: 3 = $29.99 each, 4+ = $29.93 each → `2:24.98, 3:25.03, 4:17.34, 5:16.84` (a tier may be lower than the one before: each unit takes the highest tier ≤ its position). Lines show equal prices only when the total divides by the units: the tiers set that, never the theme.
+- Block "Find my size" (`sc_fit`, `snippets/sc-fit.hbs`, hand-written; schema in `_src/build-sc.js`) has 2 finders (user 2026-11-23): Weight + measurements (bodysuit) or Band Size + Cup Size (bra). Setting `finder` = auto reads the chart: no Weight column + ≥ 2 band numbers in the header (`SIZE CUP | 34 | 36 …`) = bra. The live bra chart is typed with tabs and `46|` (trim handles it). The bra's size option is named "Side" on vesnacharm: the pick button finds it by its values (M…5XL), not by the name. Markup of one finder only = `data-scfit-only="body|bra"`.
 - Pack rows (`snippets/lu-kaching.hbs`): Color before Size is visual only (`order: -1` on `select[data-name*="colo" i]`, vn-chrome.css) + the names line printed colour first (patch-vn) with the engine's `isColorGroup`. Never `contains` or any helper outside tools/lib/engine-helpers.js: the engine lacks it and the page is a 500 (2026.11.20.5). Never reorder the selects in the markup: theme.js, sc-product.js (main picker → rows) and the size finders read them by DOM index.
 <!-- /notes -->

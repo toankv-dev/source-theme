@@ -1265,6 +1265,27 @@
           ]
         },
         {
+          "type": "select",
+          "id": "finder",
+          "label": "Finder type",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Auto (from the chart)"
+            },
+            {
+              "value": "body",
+              "label": "Weight + measurements (bodysuit, shapewear)"
+            },
+            {
+              "value": "bra",
+              "label": "Band Size + Cup Size (bra)"
+            }
+          ],
+          "info": "Auto: a chart whose first line is band sizes (SIZE CUP | 34 | 36 …) and whose first column is cup sizes (B, C, D …) asks Band Size + Cup Size, without in / lbs and without the weight line; any other chart asks Weight + measurements."
+        },
+        {
           "type": "header",
           "content": "Pop-up"
         },
@@ -1379,6 +1400,57 @@
         },
         {
           "type": "header",
+          "content": "Bra: Band Size + Cup Size"
+        },
+        {
+          "type": "paragraph",
+          "content": "Used when the finder asks Band + Cup (see Finder type). The size shows as soon as both are picked and its cell is marked in the chart."
+        },
+        {
+          "type": "text",
+          "id": "bra_sub",
+          "label": "Line under the title",
+          "default": "Pick your usual band and cup size."
+        },
+        {
+          "type": "text",
+          "id": "bra_band",
+          "label": "Band label",
+          "default": "Band Size"
+        },
+        {
+          "type": "text",
+          "id": "bra_cup",
+          "label": "Cup label",
+          "default": "Cup Size"
+        },
+        {
+          "type": "text",
+          "id": "bra_pick",
+          "label": "Empty choice",
+          "default": "Select"
+        },
+        {
+          "type": "text",
+          "id": "bra_kicker",
+          "label": "Result: small title",
+          "default": "Recommended size"
+        },
+        {
+          "type": "text",
+          "id": "bra_line",
+          "label": "Result: line",
+          "default": "Band {band} · Cup {cup}, from our size chart.",
+          "info": "{band}, {cup}, {size} = the picks and the size."
+        },
+        {
+          "type": "text",
+          "id": "bra_none",
+          "label": "Result: empty cell",
+          "default": "This band and cup are not in our size chart."
+        },
+        {
+          "type": "header",
           "content": "Size chart"
         },
         {
@@ -1404,7 +1476,7 @@
           "id": "rec_chart",
           "label": "Chart",
           "default": "Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240",
-          "info": "First line = column names, then one size per line; cells split by |. Columns named Weight (lbs), Bust / Waist / Hip (in) drive the finder; any other column (e.g. US) is shown as typed. cm / kg converts them."
+          "info": "First line = column names, then one size per line; cells split by |. Columns named Weight (lbs), Bust / Waist / Hip (in) drive the finder; any other column (e.g. US) is shown as typed. cm / kg converts them. Bra: first line = SIZE CUP | 34 | 36 … (bands), then one cup per line with the size of each band, e.g. C | M | L | L | XL."
         }
       ]
     }

@@ -1,0 +1,19 @@
+{{!-- FAQ: centred heading, one row per block (question with a tick-box icon and a chevron, answer opens below).
+      Answers accept the store tokens ({{ShippingLink}}, {{RefundLink}}, {{ContactLink}}, {{TrackOrderLink}}). --}}
+<section class="cx-faq" style="--cx-bg:{{section.settings.bg}}">
+  <div class="b-wrap cx-faq__wrap">
+    <h2 class="cx-faq__h">{{section.settings.heading}}</h2>
+    <div class="cx-faq__list">
+      {{#each section.blocks}}
+      <details class="cx-faq__item" {{{this.attributes}}}>
+        <summary class="cx-faq__q">
+          {{#if @root.section.settings.show_icon}}<svg class="cx-faq__box" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m7.5 12.2 3 3 6-6.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{{/if}}
+          <span class="cx-faq__qt">{{this.settings.q}}</span>
+          <svg class="cx-faq__chev" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="cx-faq__a">{{{applyTokens this.settings.a}}}</div>
+      </details>
+      {{/each}}
+    </div>
+  </div>
+</section>

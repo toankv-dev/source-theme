@@ -1,0 +1,79 @@
+{
+  "name": "RF: anatomy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "image_picker",
+      "id": "picture",
+      "label": "Image",
+      "info": "Upload or pick a square photo, about 900 x 900 px. The theme's own picture shows until you pick one."
+    },
+    {
+      "type": "text",
+      "id": "image",
+      "label": "Picture file shipped with the theme",
+      "info": "Used while no picture is picked above. Set by the theme builder, one file per product."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "n",
+          "label": "Number",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "x",
+          "label": "Marker x %",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "y",
+          "label": "Marker y %",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "RF: anatomy",
+      "category": "RANGEFORT"
+    }
+  ]
+}

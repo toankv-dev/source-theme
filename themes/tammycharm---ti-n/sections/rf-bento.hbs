@@ -1,0 +1,15 @@
+{{!-- Use-case tiles: heading, then one tile per block (image from assets/images/rf/, label, caption). First tile is large. --}}
+<section class="rf-sec rf-bento" aria-labelledby="rf-bento-h-{{section.id}}">
+  <div class="b-wrap">
+    {{#if section.settings.eyebrow}}<p class="rf-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+    <h2 class="rf-h2" id="rf-bento-h-{{section.id}}">{{section.settings.heading}}</h2>
+    <ul class="rf-bento__grid">
+      {{#each section.blocks}}
+      <li class="rf-bento__tile" {{{this.attributes}}}>
+        <img src="{{#if this.settings.picture}}{{this.settings.picture}}{{else}}{{@root.assets_url}}/images/rf/{{#if this.settings.image}}{{this.settings.image}}{{else}}bento-1.webp{{/if}}{{/if}}" onerror="this.remove()" alt="{{this.settings.alt}}" width="900" height="900" loading="lazy">
+        <div class="rf-bento__cap"><p class="rf-bento__label">{{this.settings.label}}</p><p class="rf-bento__text">{{this.settings.text}}</p></div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>

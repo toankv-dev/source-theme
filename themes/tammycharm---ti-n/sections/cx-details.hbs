@@ -1,0 +1,67 @@
+{{!-- Details box under the buy box: one rounded panel of rows that open and close.
+      Block "text" = title + rich text. Block "photos" = the before / after row: it shows one tab per "ba" block
+      (customer tab: face, name, before + after pictures, banner, stars, badge, title, quote, up to 3 score bars).
+      Stars and scores show only when the merchant enters them; empty pictures show a plain frame, never a stand-in
+      photo. On wide screens the box lines up with the buy-box column. --}}
+<section class="cx-details" style="--cx-bg:{{section.settings.bg}};--cx-open:{{section.settings.open_bg}};--cx-accent:{{section.settings.accent}};--cx-score:{{section.settings.score_color}}">
+  <div class="b-wrap cx-details__wrap{{#if section.settings.offset}} cx-details__wrap--offset{{/if}}">
+    <div class="cx-details__box">
+      {{#each section.blocks}}{{#unless (eq this.type "ba")}}
+      <details class="cx-details__item" {{{this.attributes}}}{{#if this.settings.open}} open{{/if}}>
+        <summary class="cx-details__sum"><span class="cx-details__t">{{this.settings.title}}</span><svg class="cx-details__ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></summary>
+        <div class="cx-details__body">
+          {{#if (eq this.type "photos")}}
+          <div class="cx-bas" data-cx-bas>
+            <div class="cx-bas__tabs" role="tablist">
+              {{#each @root.section.blocks}}{{#if (eq this.type "ba")}}
+              <button type="button" class="cx-bas__tab" role="tab" data-cx-tab="{{@index}}">
+                {{#if this.settings.avatar}}<img class="cx-bas__face" src="{{this.settings.avatar}}" alt="" width="40" height="40" loading="lazy">{{else}}<span class="cx-bas__face cx-bas__face--ph" aria-hidden="true"></span>{{/if}}
+                <span class="cx-bas__name">{{this.settings.name}}</span>
+              </button>
+              {{/if}}{{/each}}
+            </div>
+            {{#each @root.section.blocks}}{{#if (eq this.type "ba")}}
+            <div class="cx-bas__panel" role="tabpanel" data-cx-panel="{{@index}}" {{{this.attributes}}}>
+              <div class="cx-bas__pics{{#if this.settings.before}}{{#unless this.settings.after}} cx-bas__pics--one{{/unless}}{{/if}}">
+                {{#if this.settings.before}}<img src="{{this.settings.before}}" alt="" width="400" height="560" loading="lazy">{{else}}<span class="cx-bas__ph" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m4 17 5-4.5 3.5 3 3-2.5 4.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>{{/if}}
+                {{#if this.settings.after}}<img src="{{this.settings.after}}" alt="" width="400" height="560" loading="lazy">{{else}}{{#unless this.settings.before}}<span class="cx-bas__ph" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="9" cy="10" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m4 17 5-4.5 3.5 3 3-2.5 4.5 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>{{/unless}}{{/if}}
+              </div>
+              {{#if this.settings.banner}}<p class="cx-bas__banner">{{this.settings.banner}}</p>{{/if}}
+              <div class="cx-bas__card">
+                <div class="cx-bas__top">
+                  {{#if this.settings.rating}}<span class="b-stars cx-bas__stars" style="--r:{{this.settings.rating}}" aria-label="{{this.settings.rating}} / 5"></span>{{/if}}
+                  {{#if this.settings.badge}}<span class="cx-bas__badge">{{this.settings.badge}}</span>{{/if}}
+                </div>
+                {{#if this.settings.title}}<p class="cx-bas__title">{{this.settings.title}}</p>{{/if}}
+                {{#if this.settings.quote}}<blockquote class="cx-bas__quote">{{this.settings.quote}}</blockquote>{{/if}}
+                <ul class="cx-bas__scores">
+                  {{#if this.settings.m1_label}}<li><span>{{this.settings.m1_label}}</span><i style="--v:{{#if this.settings.m1_value}}{{this.settings.m1_value}}{{else}}0{{/if}}"></i><b>{{#if this.settings.m1_value}}{{this.settings.m1_value}}/5{{/if}}</b></li>{{/if}}
+                  {{#if this.settings.m2_label}}<li><span>{{this.settings.m2_label}}</span><i style="--v:{{#if this.settings.m2_value}}{{this.settings.m2_value}}{{else}}0{{/if}}"></i><b>{{#if this.settings.m2_value}}{{this.settings.m2_value}}/5{{/if}}</b></li>{{/if}}
+                  {{#if this.settings.m3_label}}<li><span>{{this.settings.m3_label}}</span><i style="--v:{{#if this.settings.m3_value}}{{this.settings.m3_value}}{{else}}0{{/if}}"></i><b>{{#if this.settings.m3_value}}{{this.settings.m3_value}}/5{{/if}}</b></li>{{/if}}
+                </ul>
+              </div>
+            </div>
+            {{/if}}{{/each}}
+          </div>
+          {{/if}}
+          {{#if this.settings.body}}<div class="cx-details__rte">{{{applyTokens this.settings.body}}}</div>{{/if}}
+        </div>
+      </details>
+      {{/unless}}{{/each}}
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.querySelectorAll('[data-cx-bas]').forEach(function(box){
+    if (box.dataset.cxReady) return; box.dataset.cxReady = '1';
+    var tabs = box.querySelectorAll('[data-cx-tab]'), panels = box.querySelectorAll('[data-cx-panel]');
+    function pick(i){
+      tabs.forEach(function(t){ var on = t.getAttribute('data-cx-tab') === i; t.classList.toggle('is-active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+      panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-cx-panel') === i); });
+    }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ pick(t.getAttribute('data-cx-tab')); }); });
+    if (tabs.length) pick(tabs[0].getAttribute('data-cx-tab'));
+  });
+})();
+</script>

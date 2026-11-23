@@ -1,0 +1,35 @@
+{{!-- Size guide: content from Theme settings > Size guide (sg_*). Table text: 1st line = header, 1 line per row, "|" between columns, "/" inside a cell = 2nd unit (small grey). Empty table = the built-in chart below. --}}
+<div class="rf-sizes">
+  {{#if sz_table}}
+  {{!-- This template's own table (block setting "Size table"); empty = Theme settings > Size guide below. --}}
+  <div class="rf-sizes__scroll" data-sg-src="{{sz_table}}"></div>
+  <script>(function(){var s=document.currentScript.previousElementSibling,t=s.getAttribute("data-sg-src")||"",e=function(x){var d=document.createElement("div");d.textContent=x;return d.innerHTML},c=function(x,tag){var p=x.split("/"),h=e(p[0].trim());if(p.length>1)h+="<small>"+e(p.slice(1).join("/").trim())+"</small>";return"<"+tag+">"+h+"</"+tag+">"},rows=t.split(/\r?\n/).map(function(l){return l.trim()}).filter(Boolean);if(!rows.length)return;var h="<table class=\"rf-sizes__table\"><thead><tr>"+rows[0].split("|").map(function(x){return"<th>"+e(x.trim())+"</th>"}).join("")+"</tr></thead><tbody>";rows.slice(1).forEach(function(r){h+="<tr>"+r.split("|").map(function(x,i){return c(x,i?"td":"th")}).join("")+"</tr>"});s.innerHTML=h+"</tbody></table>"})();</script>
+  {{else}}
+  {{#if @root.settings.sg_image}}<img class="rf-sizes__img" src="{{@root.settings.sg_image}}" alt="Size guide" loading="lazy" style="display:block;max-width:100%;height:auto;margin:0 auto 10px">{{/if}}
+  {{#unless (eq @root.settings.sg_show_table false)}}
+  {{#if @root.settings.sg_table}}
+  <div class="rf-sizes__scroll" data-sg-src="{{@root.settings.sg_table}}"></div>
+  <script>(function(){var s=document.currentScript.previousElementSibling,t=s.getAttribute("data-sg-src")||"",e=function(x){var d=document.createElement("div");d.textContent=x;return d.innerHTML},c=function(x,tag){var p=x.split("/"),h=e(p[0].trim());if(p.length>1)h+="<small>"+e(p.slice(1).join("/").trim())+"</small>";return"<"+tag+">"+h+"</"+tag+">"},rows=t.split(/\r?\n/).map(function(l){return l.trim()}).filter(Boolean);if(!rows.length)return;var h="<table class=\"rf-sizes__table\"><thead><tr>"+rows[0].split("|").map(function(x){return"<th>"+e(x.trim())+"</th>"}).join("")+"</tr></thead><tbody>";rows.slice(1).forEach(function(r){h+="<tr>"+r.split("|").map(function(x,i){return c(x,i?"td":"th")}).join("")+"</tr>"});s.innerHTML=h+"</tbody></table>"})();</script>
+  {{else}}
+  <div class="rf-sizes__scroll">
+    <table class="rf-sizes__table">
+      <thead><tr><th>US Size</th><th>Waist</th><th>Hip</th></tr></thead>
+      <tbody>
+        <tr><th>US 2-4</th><td>26-28 in<small>66-71 cm</small></td><td>30.5-32.5 in<small>77-83 cm</small></td></tr>
+        <tr><th>US 4-6</th><td>28-30 in<small>71-76 cm</small></td><td>33-35 in<small>84-89 cm</small></td></tr>
+        <tr><th>US 8-10</th><td>30-32 in<small>76-81 cm</small></td><td>35.5-37.5 in<small>90-95 cm</small></td></tr>
+        <tr><th>US 12-14</th><td>32-34 in<small>81-86 cm</small></td><td>38-40 in<small>97-102 cm</small></td></tr>
+        <tr><th>US 16-18</th><td>34-36 in<small>86-91 cm</small></td><td>40.5-42.5 in<small>103-108 cm</small></td></tr>
+        <tr><th>US 20-22</th><td>36-38 in<small>91-97 cm</small></td><td>42.5-44.5 in<small>108-113 cm</small></td></tr>
+        <tr><th>US 24-26</th><td>38-40 in<small>97-102 cm</small></td><td>44.5-46.5 in<small>113-118 cm</small></td></tr>
+        <tr><th>US 28-30</th><td>40-42 in<small>102-107 cm</small></td><td>47-49 in<small>119-124 cm</small></td></tr>
+        <tr><th>US 30+</th><td>42-44 in<small>107-112 cm</small></td><td>49-51 in<small>124-130 cm</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+  {{/unless}}
+  {{/if}}
+  {{#if @root.settings.sg_note}}<div class="rf-sizes__note">{{{@root.settings.sg_note}}}</div>{{/if}}
+  {{#if @root.settings.sg_tip}}<div class="rf-sizes__tip">{{{@root.settings.sg_tip}}}</div>{{/if}}
+</div>

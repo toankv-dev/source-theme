@@ -1,0 +1,9 @@
+{{!-- Other products of the store. The platform sends relatedProducts (same collection as this product) and,
+      on some pages, products; on a live product page both can be short or empty. The grid is always printed and
+      ui.js (initRelatedFill) tops it up to "limit" with cards from the store's all-products page (the theme's own
+      card markup), skipping the product on screen and cards another related row already shows.
+      Without a template document (legacy entry) `section` is undefined, so 4 products are shown. --}}
+<div class="b-wrap b-related" data-related data-limit="{{#if section.settings.limit}}{{section.settings.limit}}{{else}}4{{/if}}"{{#unless relatedProducts.length}}{{#unless products.length}} hidden{{/unless}}{{/unless}}>
+  <h2 class="b-h2">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}You may also like{{/if}}</h2>
+  <div class="b-grid b-grid--related" data-related-grid>{{#if relatedProducts.length}}{{#if section.settings.limit}}{{#each (limit relatedProducts section.settings.limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit relatedProducts 4)}}{{> card-product}}{{/each}}{{/if}}{{else}}{{#if products.length}}{{#if section.settings.limit}}{{#each (limit products section.settings.limit)}}{{> card-product}}{{/each}}{{else}}{{#each (limit products 4)}}{{> card-product}}{{/each}}{{/if}}{{/if}}{{/if}}</div>
+</div>

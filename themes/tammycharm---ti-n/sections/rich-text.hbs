@@ -1,0 +1,6 @@
+<div class="b-wrap b-richtext b-richtext--{{#if section.settings.align}}{{section.settings.align}}{{else}}center{{/if}}" style="--rt-max:{{#if section.settings.max_width}}{{section.settings.max_width}}{{else}}760{{/if}}px">
+  {{#if section.settings.eyebrow}}<p class="b-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+  {{#if section.settings.button_label}}<a class="b-btn" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a>{{/if}}
+</div>

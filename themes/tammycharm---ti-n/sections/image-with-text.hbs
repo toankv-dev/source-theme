@@ -1,0 +1,11 @@
+{{!-- Text layout: text_align (desktop, and phone unless text_align_mobile is set), content_position (vertical
+      place of the text next to the image, desktop) and text_width (narrower text box, centred in its column). --}}
+<div class="b-wrap b-iwt b-iwt--image-{{#if section.settings.image_side}}{{section.settings.image_side}}{{else}}left{{/if}}{{#if (eq section.settings.text_align "center")}} b-iwt--text-center{{/if}}{{#if (eq section.settings.text_align "right")}} b-iwt--text-right{{/if}}{{#if (eq section.settings.text_align_mobile "left")}} b-iwt--m-text-left{{/if}}{{#if (eq section.settings.text_align_mobile "center")}} b-iwt--m-text-center{{/if}}{{#if (eq section.settings.content_position "top")}} b-iwt--pos-top{{/if}}{{#if (eq section.settings.content_position "bottom")}} b-iwt--pos-bottom{{/if}}{{#if (eq section.settings.text_width "wide")}} b-iwt--w-wide{{/if}}{{#if (eq section.settings.text_width "narrow")}} b-iwt--w-narrow{{/if}}">
+  <div class="b-iwt__media">{{#if section.settings.image}}<img src="{{section.settings.image}}" alt="{{section.settings.heading}}" loading="lazy">{{else}}<div class="b-ph b-ph--iwt">{{#if @root.__designMode}}Upload an image{{/if}}</div>{{/if}}</div>
+  <div class="b-iwt__text">
+    {{#if section.settings.eyebrow}}<p class="b-eyebrow b-eyebrow--left">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="b-h2 b-h2--left" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{/if}}
+    {{#if section.settings.button_label}}<a class="b-btn" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a>{{/if}}
+  </div>
+</div>

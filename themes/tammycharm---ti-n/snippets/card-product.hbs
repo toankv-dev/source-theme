@@ -1,0 +1,19 @@
+{{!-- Product card for grids (home, collection, search, related). sellingPrice and compareAtPrice are NUMBERS on
+      these cards, so they go through the engine's `money` helper; raw values stay in data-* for sorting.
+      above_fold=true (collection / search) loads the first two rows on phones (4 cards) eagerly for a fast first
+      paint; every other image is lazy. --}}
+<a class="b-pcard" href="{{url}}" data-card-price-num="{{sellingPrice}}" data-card-title="{{title}}" data-card-rating="{{rating}}">
+  <span class="b-pcard__media">
+    {{#if imageUrl}}<img src="{{#if imageThumbUrl}}{{imageThumbUrl}}{{else}}{{imageUrl}}{{/if}}" alt="{{title}}" loading="{{#if above_fold}}{{#if (gt @index 3)}}lazy{{else}}eager{{/if}}{{else}}lazy{{/if}}"{{#if imageWidth}} width="{{imageWidth}}" height="{{imageHeight}}"{{/if}}{{#if imagePosterUrl}} poster="{{imagePosterUrl}}"{{/if}}>{{/if}}
+    {{#if offPct}}<span class="b-badge b-pcard__badge">{{#if @root.settings.card_badge_label}}{{@root.settings.card_badge_label}}{{else}}Save{{/if}} {{offPct}}%</span>{{/if}}
+  </span>
+  <span class="b-pcard__info">
+    <span class="b-pcard__title">{{title}}</span>
+    {{#if reviewCount}}{{#unless (eq @root.settings.card_show_rating false)}}<span class="b-pcard__rating"><span class="b-stars b-stars--sm" style="--r:{{rating}}" aria-hidden="true"></span> <span>({{reviewCount}})</span></span>{{/unless}}{{/if}}
+    <span class="b-pcard__prices">
+      <span class="b-pcard__price">{{money sellingPrice}}</span>
+      {{#if (gt compareAtPrice sellingPrice)}}<s class="b-pcard__was">{{money compareAtPrice}}</s>{{/if}}
+    </span>
+    <span class="pf-pcard-btn">Go to product</span>
+  </span>
+</a>

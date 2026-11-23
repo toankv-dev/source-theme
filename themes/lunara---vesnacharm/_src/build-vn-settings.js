@@ -43,6 +43,10 @@ const TWEAK = {
   countdown_subtitle: { info: 'After the title, e.g. Ends Mon, Nov 30. Empty = none.' },
   countdown_hours: { min: 0, info: 'Added to the days. The timer restarts for each visitor when it reaches zero.' },
   home_banner_height_mobile: { info: 'Only when "Banner on phone" = Fixed height (the sides of a wide picture are cut).' },
+  cart_upsells: {
+    label: 'Protection product (only "Shipping Protected", never a product you sell)',
+    info: 'Pick ONLY your protection product, e.g. "Shipping Protected". Its name must say Shipping / Package Protection or Insurance: any other product picked here is ignored. It shows above the subtotal, switched ON, and is added to the cart as a real item; the buyer can switch it off. Products named so never show in the home grid, search or collections.',
+  },
 };
 
 // The theme's own settings, appended to a group (created when missing).
@@ -108,6 +112,11 @@ const OWN = {
     { type: 'text', id: 'vn_ft_news_placeholder', label: 'Email field placeholder', default: 'Enter your email' },
     { type: 'text', id: 'vn_ft_news_button', label: 'Newsletter button', default: 'SUBMIT' },
   ],
+  // "Customers also add …" off (user 2026-11-23). A new key, as a store's saved picks survive a zip update.
+  'Cart drawer': [
+    { type: 'checkbox', id: 'vn_cart_upsell_show', label: 'Show the upsell products', default: false,
+      info: 'The "Customers also add …" cards under the cart items (the products picked below). Off = none.' },
+  ],
 };
 
 // Lunara's footer_bg is replaced by vn_footer_bg (a saved footer_bg on a store would win over any new default).
@@ -170,6 +179,13 @@ for (const [group, ids] of ORDER) {
   const g = schema.find((x) => x.name === 'Top bar');
   const i = g ? g.settings.findIndex((x) => x.id === 'vn_topbar_size') : -1;
   if (i >= 0) { const it = g.settings.splice(i, 1)[0]; g.settings.splice(g.settings.findIndex((x) => x.id === 'topbar_color') + 1, 0, it); }
+}
+
+// the upsell switch sits right above the products it shows (under the "Upsell products (cart body)" header)
+{
+  const g = schema.find((x) => x.name === 'Cart drawer');
+  const i = g ? g.settings.findIndex((x) => x.id === 'vn_cart_upsell_show') : -1;
+  if (i >= 0) { const it = g.settings.splice(i, 1)[0]; g.settings.splice(g.settings.findIndex((x) => x.id === 'cart_body_upsells'), 0, it); }
 }
 
 fs.writeFileSync(DATA, JSON.stringify(data, null, 2) + '\n');

@@ -1,0 +1,2 @@
+{{!-- Star rating drawn with CSS (--r = 0…5, fractions allowed). Params: rating, size ("sm" | "lg"). --}}
+<span class="b-stars{{#if size}} b-stars--{{size}}{{/if}}" style="--r:{{#if rating}}{{rating}}{{else}}5{{/if}}" role="img" aria-label="{{#if rating}}{{rating}}{{else}}5{{/if}} out of 5 stars"></span>

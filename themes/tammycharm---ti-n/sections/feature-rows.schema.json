@@ -1,0 +1,31 @@
+{
+  "name": "Feature rows",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Built for the road" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Everything you need, nothing you don't" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "" },
+    { "type": "checkbox", "id": "numbered", "label": "Number the rows (01, 02…)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "row", "name": "Row", "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Cordless and rechargeable" },
+        { "type": "richtext", "id": "body", "label": "Text", "default": "<p>Explain one benefit in two or three short sentences.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature rows", "category": "Product", "description": "Alternating image and text rows.",
+      "blocks": [
+        { "type": "row", "settings": { "heading": "Cordless and rechargeable" } },
+        { "type": "row", "settings": { "heading": "Fast and powerful" } },
+        { "type": "row", "settings": { "heading": "Sized for travel" } }
+      ]
+    }
+  ]
+}

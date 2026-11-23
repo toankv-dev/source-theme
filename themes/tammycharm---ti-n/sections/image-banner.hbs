@@ -1,0 +1,15 @@
+{{!-- Full-width image banner with text over it (hero). Separate phone image optional. --}}
+<div class="b-banner-sec b-banner-sec--{{#if section.settings.height}}{{section.settings.height}}{{else}}medium{{/if}} b-banner-sec--{{#if section.settings.align}}{{section.settings.align}}{{else}}center{{/if}}" style="--overlay:{{#if section.settings.overlay}}{{section.settings.overlay}}{{else}}0{{/if}};--banner-text:{{#if section.settings.text_color}}{{section.settings.text_color}}{{else}}#fff{{/if}}">
+  {{#if section.settings.image}}
+  <picture class="b-banner-sec__media">
+    {{#if section.settings.mobile_image}}<source media="(max-width: 749px)" srcset="{{section.settings.mobile_image}}">{{/if}}
+    <img src="{{section.settings.image}}" alt="" loading="lazy">
+  </picture>
+  {{else}}<div class="b-banner-sec__media b-ph" aria-hidden="true"></div>{{/if}}
+  <div class="b-wrap b-banner-sec__copy">
+    {{#if section.settings.eyebrow}}<p class="b-banner-sec__eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="b-banner-sec__title" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.text}}<p class="b-banner-sec__text">{{section.settings.text}}</p>{{/if}}
+    {{#if section.settings.button_label}}<a class="b-btn b-banner-sec__btn" href="{{#if section.settings.button_url}}{{section.settings.button_url}}{{else}}#MainContent{{/if}}">{{section.settings.button_label}}</a>{{/if}}
+  </div>
+</div>

@@ -1,0 +1,4 @@
+{{!-- Wave divider between two sections. "Colour below" must match the background of the next section. --}}
+<div class="rf-waves-sec" style="{{#if section.settings.color}}--wv:{{section.settings.color}};{{/if}}{{#if section.settings.base}}--wv-base:{{section.settings.base}};{{/if}}{{#if section.settings.above}}--wv-above:{{section.settings.above}};{{/if}}--wv-h:{{#if section.settings.height}}{{section.settings.height}}{{else}}40{{/if}}px;--wv-h-m:{{#if section.settings.height_mobile}}{{section.settings.height_mobile}}{{else}}18{{/if}}px;--wv-speed:{{#if section.settings.speed}}{{section.settings.speed}}{{else}}12{{/if}}s">
+  {{> rf-waves flip=section.settings.flip}}
+</div>

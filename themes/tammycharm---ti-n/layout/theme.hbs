@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<link rel="stylesheet" href="{{assets_url}}/css/pf-product.css">
+<link rel="stylesheet" href="{{assets_url}}/css/rf.css">
+<link rel="stylesheet" href="{{assets_url}}/css/rf3.css">
+<link rel="stylesheet" href="{{assets_url}}/css/rf-motion.css">
+<link rel="stylesheet" href="{{assets_url}}/css/rf-type.css">
+<link rel="stylesheet" href="{{assets_url}}/css/rf-brand.css">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{assets_url}}/fonts/poppins_700.woff2">
+<link rel="stylesheet" href="{{assets_url}}/css/zz-custom.css">
+<link rel="stylesheet" href="{{assets_url}}/css/zz-skin.css">
+</head>
+<body class="b-body b-body--product">
+{{{trackingBody}}}
+<a class="b-skip" href="#MainContent">Skip to content</a>
+{{> header}}
+{{!-- Schema v2: the engine renders the sections of templates/product*.json in order and injects them here. --}}
+<main id="MainContent" class="b-main">{{{content_for_layout}}}</main>
+{{> footer}}
+{{> product-scripts}}
+{{> scripts}}
+<script src="{{assets_url}}/js/rf.js" defer></script>
+</body>
+</html>

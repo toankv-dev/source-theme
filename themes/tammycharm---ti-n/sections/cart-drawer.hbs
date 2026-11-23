@@ -1,0 +1,57 @@
+{{!-- Filled by ui.js from localStorage "sf-cart:<domain>" (core.js). The platform /checkout reads the same key.
+      Hooks kept for pixels: #CartDrawer-Checkout + data-testid="checkout-button". --}}
+<div class="b-drawer" id="CartDrawer" data-cart-drawer hidden>
+  <div class="b-drawer__overlay" data-cart-close></div>
+  <aside class="b-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawer-Title">
+    <div class="b-drawer__head">
+      {{#if settings.cart_show_logo}}
+      <p class="b-sr" id="CartDrawer-Title">{{#if settings.cart_title}}{{settings.cart_title}}{{else}}Your cart{{/if}}</p>
+      <span class="b-drawer__logo">{{#if brand.logo}}<img src="{{brand.logo}}" alt="{{brand.name}}" width="110" height="39">{{else}}{{brand.name}}{{/if}}</span>
+      {{else}}
+      <p class="b-drawer__title" id="CartDrawer-Title">{{#if settings.cart_title}}{{settings.cart_title}}{{else}}Your cart{{/if}} <span class="b-drawer__count" data-cart-count-text></span></p>
+      {{/if}}
+      <button type="button" class="b-icon-btn" data-cart-close><span aria-hidden="true">✕</span><span class="b-sr">Close cart</span></button>
+    </div>
+    {{#if settings.cart_notice}}<p class="b-drawer__notice">{{settings.cart_notice}}</p>{{/if}}
+    <div class="b-drawer__body" data-cart-lines></div>
+    <div class="b-drawer__empty" data-cart-empty>
+      <p>{{#if settings.empty_cart_text}}{{settings.empty_cart_text}}{{else}}Your cart is empty.{{/if}}</p>
+      <a class="b-btn" href="{{#if config.allProductsUrl}}{{config.allProductsUrl}}{{else}}/collections/all-products{{/if}}" data-local-domain>{{#if settings.empty_cart_button}}{{settings.empty_cart_button}}{{else}}Continue shopping{{/if}}</a>
+    </div>
+    <div class="b-drawer__foot" data-cart-foot hidden>
+      {{!-- Shipping protection / add-ons (settings.cart_upsells = this store's picked products, resolved by the
+            server). ui.js adds each as a real cart line, switched ON; the buyer can switch it off. --}}
+      {{#if settings.cart_upsells.length}}
+      <div class="b-ups" data-b-ups data-as-line="{{#if settings.cart_upsell_as_line}}1{{/if}}" style="--b-up-bg:{{#if settings.cart_upsell_bg}}{{settings.cart_upsell_bg}}{{else}}#f4f5f7{{/if}};--b-up-color:{{#if settings.cart_upsell_color}}{{settings.cart_upsell_color}}{{else}}var(--c-text){{/if}};--b-up-accent:{{#if settings.cart_upsell_accent}}{{settings.cart_upsell_accent}}{{else}}var(--c-ink){{/if}}" hidden>
+        {{#if settings.cart_upsell_heading}}<p class="b-ups__h">{{settings.cart_upsell_heading}}</p>{{/if}}
+        {{#each settings.cart_upsells}}
+        <div class="b-up" data-b-up data-pid="{{productId}}" data-handle="{{handle}}" data-title="{{title}}" data-image="{{image}}">
+          <span class="b-up__img">{{#if image}}<img src="{{image}}" alt="" loading="lazy" data-b-up-img>{{/if}}</span>
+          <span class="b-up__txt"><strong>{{title}}</strong>{{#if description}}<small class="b-up__desc">{{description}}</small>{{/if}}
+            {{#if (gt variants.length 1)}}<select class="b-up__var" data-b-up-var aria-label="{{title}} option">{{#each variants}}<option value="{{id}}" data-price="{{price}}" data-compare="{{compareAtPrice}}" data-image="{{image}}" data-title="{{title}}">{{title}}</option>{{/each}}</select>{{else}}{{#each variants}}<input type="hidden" data-b-up-var value="{{id}}" data-price="{{price}}" data-compare="{{compareAtPrice}}" data-image="{{image}}" data-title="{{title}}">{{/each}}{{/if}}
+          </span>
+          <span class="b-up__price"><b data-b-up-amt></b><s data-b-up-was hidden></s></span>
+          <button type="button" class="b-up__sw" role="switch" aria-checked="true" aria-label="Add {{title}}" data-b-up-sw><i></i></button>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      {{!-- Prices and the discount come from the server's own cart quote (/api/storefront/cart/price), the
+            same numbers the checkout charges; shipping is added at checkout. --}}
+      <div class="b-drawer__row b-drawer__row--discount" data-cart-discount-row hidden>
+        <span data-cart-discount-title>Discount</span><span data-cart-discount></span>
+      </div>
+      <div class="b-drawer__row b-drawer__row--total"><span>{{#if settings.cart_subtotal_label}}{{settings.cart_subtotal_label}}{{else}}Subtotal{{/if}}</span><strong><s class="b-drawer__was" data-cart-subtotal-was hidden></s> <span data-cart-subtotal></span></strong></div>
+      <p class="b-drawer__note">{{#if settings.cart_footer_note}}{{settings.cart_footer_note}}{{else}}Shipping is calculated at checkout.{{/if}}</p>
+      <button type="button" class="b-btn b-btn--block b-btn--lg b-btn--checkout" id="CartDrawer-Checkout" data-testid="checkout-button" data-cart-checkout>{{#if settings.cart_checkout_label}}{{settings.cart_checkout_label}}{{else}}Checkout{{/if}}</button>
+      {{#if settings.cart_trust_1}}
+      <ul class="b-drawer__trust">
+        <li>{{settings.cart_trust_1}}</li>
+        {{#if settings.cart_trust_2}}<li>{{settings.cart_trust_2}}</li>{{/if}}
+        {{#if settings.cart_trust_3}}<li>{{settings.cart_trust_3}}</li>{{/if}}
+      </ul>
+      {{/if}}
+      {{#unless (eq settings.cart_show_payment false)}}{{> pay-icons}}{{/unless}}
+    </div>
+  </aside>
+</div>

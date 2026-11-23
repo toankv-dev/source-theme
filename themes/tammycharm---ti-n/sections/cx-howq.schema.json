@@ -1,0 +1,36 @@
+{
+  "name": "CX: how it works questions",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "heading_1", "label": "Heading, start", "default": ""},
+    {"type": "text", "id": "heading_em", "label": "Heading, coloured words", "default": ""},
+    {"type": "text", "id": "sub", "label": "Line under the heading", "default": ""},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#F7F3EE"},
+    {"type": "color", "id": "accent", "label": "Accent (coloured words, tags)", "default": "#6B1F3C"}
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Chip",
+      "settings": [
+        {"type": "select", "id": "icon", "label": "Icon", "default": "clock",
+         "options": [{"value": "clock", "label": "Clock"}, {"value": "sparkle", "label": "Sparkle"}]},
+        {"type": "text", "id": "text", "label": "Text", "default": ""}
+      ]
+    },
+    {
+      "type": "q",
+      "name": "Question",
+      "settings": [
+        {"type": "select", "id": "icon", "label": "Tag icon", "default": "info",
+         "options": [{"value": "ruler", "label": "Ruler"}, {"value": "hand", "label": "Hand"}, {"value": "clock", "label": "Clock"}, {"value": "eye", "label": "Eye"}, {"value": "waist", "label": "Waistband"}, {"value": "info", "label": "Info"}]},
+        {"type": "text", "id": "tag", "label": "Small tag above the question", "default": ""},
+        {"type": "text", "id": "question", "label": "Question", "default": ""},
+        {"type": "richtext", "id": "answer", "label": "Answer", "default": ""}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "CX: how it works questions", "category": "Tammycharm"}
+  ]
+}

@@ -1,0 +1,41 @@
+{{!-- The store's FAQ as <details> items, for the FAQ section and the product FAQ block.
+      page.faqFromListing true  → the listing's own questions (page.faq);
+      page.faqFromListing false → page.faq is not the listing's: Theme settings → FAQ first, page.faq if empty;
+      no flag (older engine)    → page.faq when it has questions, else Theme settings → FAQ.
+      open_first=true opens the first question. --}}
+{{#if @root.page.faqFromListing}}
+{{#each @root.page.faq}}
+<details class="b-faq__item"{{#if @first}}{{#if ../open_first}} open{{/if}}{{/if}}>
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{a}}}</div>
+</details>
+{{/each}}
+{{else}}{{#if (eq @root.page.faqFromListing false)}}
+{{#each (faqItems @root.settings)}}
+<details class="b-faq__item"{{#if @first}}{{#if ../open_first}} open{{/if}}{{/if}}>
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{applyTokens a}}}</div>
+</details>
+{{else}}
+{{#each @root.page.faq}}
+<details class="b-faq__item"{{#if @first}}{{#if ../open_first}} open{{/if}}{{/if}}>
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{a}}}</div>
+</details>
+{{/each}}
+{{/each}}
+{{else}}{{#if @root.page.faq.length}}
+{{#each @root.page.faq}}
+<details class="b-faq__item"{{#if @first}}{{#if ../open_first}} open{{/if}}{{/if}}>
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{a}}}</div>
+</details>
+{{/each}}
+{{else}}
+{{#each (faqItems @root.settings)}}
+<details class="b-faq__item"{{#if @first}}{{#if ../open_first}} open{{/if}}{{/if}}>
+  <summary><span class="b-faq__icon" aria-hidden="true">?</span><span>{{q}}</span></summary>
+  <div class="b-rte">{{{applyTokens a}}}</div>
+</details>
+{{/each}}
+{{/if}}{{/if}}{{/if}}

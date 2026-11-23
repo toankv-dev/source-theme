@@ -1,0 +1,12 @@
+{
+  "name": "Testimonials (photo reviews)",
+  "tag": "section",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What our customers have to say" },
+    { "type": "range", "id": "count", "label": "Cards", "default": 3, "min": 2, "max": 6, "step": 1 },
+    { "type": "paragraph", "content": "Real reviews only, photo reviews first. Hidden while the product has none." }
+  ],
+  "presets": [{ "name": "Testimonials (photo reviews)", "category": "Trust", "description": "Photo review cards with title, text and name." }],
+  "enabled_on": { "templates": ["product"] }
+}

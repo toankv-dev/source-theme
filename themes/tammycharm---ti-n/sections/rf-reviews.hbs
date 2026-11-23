@@ -1,0 +1,74 @@
+{{!-- Reviews of this model from AliExpress buyers, imported with their source shown. Summary numbers are the
+      AliExpress totals (all ratings); the list holds the reviews that have a comment or photos. One block = one review
+      (photo_1..4 are file names in assets/images/rf/rv/). Sorting, filters, "Show more" and the photo viewer: rf.js. --}}
+<section class="b-wrap rf-reviews" id="rf-reviews" data-rf-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}6{{/if}}">
+  <div class="rf-reviews__head">
+    <h2 class="rf-reviews__title">{{#if section.settings.heading}}{{section.settings.heading}}{{else}}Customer Reviews{{/if}}</h2>
+    <p class="rf-reviews__source">{{{section.settings.source_note}}}</p>
+  </div>
+  <div class="rf-reviews__summary">
+    <div class="rf-reviews__avg">
+      <strong>{{section.settings.average}}</strong>
+      <span class="b-stars" style="--r:{{section.settings.average}}" aria-hidden="true"></span>
+      <span>{{section.settings.total}} ratings</span>
+    </div>
+    <ul class="rf-reviews__dist" aria-label="Rating distribution">
+      <li><button type="button" data-rf-star="5"><span>5 <span class="st"></span></span><i style="--w:{{section.settings.pct_5}}%"></i><em>{{section.settings.n_5}}</em></button></li>
+      <li><button type="button" data-rf-star="4"><span>4 <span class="st"></span></span><i style="--w:{{section.settings.pct_4}}%"></i><em>{{section.settings.n_4}}</em></button></li>
+      <li><button type="button" data-rf-star="3"><span>3 <span class="st"></span></span><i style="--w:{{section.settings.pct_3}}%"></i><em>{{section.settings.n_3}}</em></button></li>
+      <li><button type="button" data-rf-star="2"><span>2 <span class="st"></span></span><i style="--w:{{section.settings.pct_2}}%"></i><em>{{section.settings.n_2}}</em></button></li>
+      <li><button type="button" data-rf-star="1"><span>1 <span class="st"></span></span><i style="--w:{{section.settings.pct_1}}%"></i><em>{{section.settings.n_1}}</em></button></li>
+    </ul>
+    {{#if section.settings.tags}}<p class="rf-reviews__tags">{{{section.settings.tags}}}</p>{{/if}}
+  </div>
+
+  <div class="rf-reviews__photos" data-rf-photostrip></div>
+
+  <div class="rf-reviews__tools">
+    <label class="rf-check"><input type="checkbox" data-rf-photos-only> With photos</label>
+    <button type="button" class="rf-reviews__clear" data-rf-clear hidden>Show all ratings</button>
+    <label class="rf-sort"><span class="b-sr">Sort reviews</span>
+      <select data-rf-sort>
+        <option value="photos">Pictures first</option>
+        <option value="recent">Most recent</option>
+        <option value="high">Highest rating</option>
+        <option value="low">Lowest rating</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="rf-reviews__list" data-rf-list>
+    {{#each section.blocks}}
+    <article class="rf-review" {{{this.attributes}}} data-rating="{{this.settings.rating}}" data-date="{{this.settings.date_iso}}" data-photos="{{#if this.settings.photo_1}}1{{else}}0{{/if}}" data-order="{{@index}}">
+      <header class="rf-review__head">
+        <span class="rf-review__avatar" aria-hidden="true">{{this.settings.initial}}</span>
+        <div>
+          <p class="rf-review__name">{{this.settings.name}} <span class="rf-review__badge">{{#if ../section.settings.badge}}{{../section.settings.badge}}{{else}}Verified purchase{{/if}}</span></p>
+          <p class="rf-review__meta">{{this.settings.country}} · {{this.settings.date}}</p>
+        </div>
+        <span class="b-stars b-stars--sm rf-review__stars" style="--r:{{this.settings.rating}}" aria-label="{{this.settings.rating}} out of 5"></span>
+      </header>
+      {{#if this.settings.variant}}<p class="rf-review__variant">{{this.settings.variant}}</p>{{/if}}
+      {{#if this.settings.text}}<p class="rf-review__text" data-rf-clamp>{{this.settings.text}}</p>{{/if}}
+      {{#if this.settings.photo_1}}
+      <div class="rf-review__imgs">
+        <button type="button" data-rf-photo="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_1}}"><img src="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_1}}" alt="Photo from {{this.settings.name}}" loading="lazy"></button>
+        {{#if this.settings.photo_2}}<button type="button" data-rf-photo="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_2}}"><img src="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_2}}" alt="Photo from {{this.settings.name}}" loading="lazy"></button>{{/if}}
+        {{#if this.settings.photo_3}}<button type="button" data-rf-photo="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_3}}"><img src="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_3}}" alt="Photo from {{this.settings.name}}" loading="lazy"></button>{{/if}}
+        {{#if this.settings.photo_4}}<button type="button" data-rf-photo="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_4}}"><img src="{{@root.assets_url}}/images/rf/rv/{{this.settings.photo_4}}" alt="Photo from {{this.settings.name}}" loading="lazy"></button>{{/if}}
+      </div>
+      {{/if}}
+      {{#if this.settings.translated}}<p class="rf-review__tr" title="{{this.settings.original}}">Translated by AliExpress</p>{{/if}}
+    </article>
+    {{/each}}
+  </div>
+  <p class="rf-reviews__empty" data-rf-empty hidden>No reviews match this filter.</p>
+  <div class="rf-reviews__more"><button type="button" class="b-btn rf-reviews__morebtn" data-rf-more hidden>Show more reviews</button></div>
+
+  <div class="rf-lightbox" data-rf-lightbox hidden role="dialog" aria-modal="true" aria-label="Review photo">
+    <button type="button" class="rf-lightbox__close" data-rf-lb-close aria-label="Close">✕</button>
+    <button type="button" class="rf-lightbox__nav rf-lightbox__nav--prev" data-rf-lb-step="-1" aria-label="Previous photo">‹</button>
+    <img data-rf-lb-img alt="Review photo">
+    <button type="button" class="rf-lightbox__nav rf-lightbox__nav--next" data-rf-lb-step="1" aria-label="Next photo">›</button>
+  </div>
+</section>

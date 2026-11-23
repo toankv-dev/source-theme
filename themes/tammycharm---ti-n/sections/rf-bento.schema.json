@@ -1,0 +1,62 @@
+{
+  "name": "RF: use-case tiles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "picture",
+          "label": "Image",
+          "info": "Upload or pick a photo, about 900 x 900 px. It replaces the built-in picture below."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Caption",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "image",
+          "label": "Built-in picture (file in the theme, used until you pick an image above)",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "RF: use-case tiles",
+      "category": "RANGEFORT"
+    }
+  ]
+}

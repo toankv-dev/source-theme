@@ -1,0 +1,20 @@
+{{!-- Promise badges in a row: one "Benefit" block each (icon or own picture + label), added / removed / reordered in
+      the theme editor. --}}
+<section class="b-wrap rf-trust" aria-label="{{#if section.settings.label}}{{section.settings.label}}{{else}}Our promises{{/if}}">
+  <ul class="rf-trust__row">
+    {{#each section.blocks}}
+    <li {{{this.attributes}}}>
+      {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" width="46" height="46" loading="lazy" style="width:46px;height:46px;object-fit:contain;flex:none">
+      {{else}}{{#if (eq this.settings.icon "truck")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><path d="M4 13h24v19H4zM28 19h8l7 8v5H28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="12" cy="34" r="3.6" fill="#fff" stroke="currentColor" stroke-width="2.4"/><circle cx="35" cy="34" r="3.6" fill="#fff" stroke="currentColor" stroke-width="2.4"/></svg>
+      {{else}}{{#if (eq this.settings.icon "lock")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><rect x="5" y="9" width="38" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M5 16h38" stroke="currentColor" stroke-width="2.4"/><rect x="19" y="23" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M21 23v-2.5a3 3 0 0 1 6 0V23" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+      {{else}}{{#if (eq this.settings.icon "shield")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><path d="M24 5 9 11v11c0 9.5 6.3 17.6 15 20 8.700-2.400 15-10.500 15-20V11L24 5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="m17 24 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      {{else}}{{#if (eq this.settings.icon "star")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><path d="m24 6 5.600 11.400L42 19.200l-9 8.800 2.100 12.400L24 34.500 12.900 40.400 15 28 6 19.200l12.400-1.800L24 6Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      {{else}}{{#if (eq this.settings.icon "heart")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><path d="M24 40S7 30 7 18.500A8.500 8.500 0 0 1 24 14a8.500 8.500 0 0 1 17 4.500C41 30 24 40 24 40Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      {{else}}{{#if (eq this.settings.icon "ruler")}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><rect x="4" y="16" width="40" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 16v7M20 16v9M28 16v7M36 16v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+      {{else}}<svg viewBox="0 0 48 48" width="46" height="46" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M24 14v20M29 17.5c-1.2-1.6-3-2.5-5-2.5-2.8 0-5 1.6-5 4s2.2 3.400 5 4 5 1.600 5 4-2.200 4-5 4c-2 0-4-.9-5.200-2.600" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 10l3 5 5-3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
+      <div class="rf-trust__text">{{{this.settings.text}}}</div>
+    </li>
+    {{/each}}
+  </ul>
+</section>

@@ -1,0 +1,21 @@
+{
+  "name": "Quote cards (PeakFlex)",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHAT OUR CUSTOMERS SAY" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "" }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo", "info": "Image, 800 × 800 px (1:1)." },
+        { "type": "text", "id": "title", "label": "Title", "default": "" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "" },
+        { "type": "text", "id": "name", "label": "Name", "default": "" }
+      ]
+    }
+  ],
+  "max_blocks": 8
+}

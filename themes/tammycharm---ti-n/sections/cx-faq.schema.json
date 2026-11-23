@@ -1,0 +1,22 @@
+{
+  "name": "CX: FAQ with tick boxes",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": ""},
+    {"type": "checkbox", "id": "show_icon", "label": "Show the tick-box icon before each question", "default": true},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF"}
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        {"type": "text", "id": "q", "label": "Question", "default": ""},
+        {"type": "richtext", "id": "a", "label": "Answer", "info": "Links: {{ShippingLink}}, {{RefundLink}}, {{ContactLink}}, {{TrackOrderLink}}", "default": ""}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "CX: FAQ with tick boxes", "category": "Tammycharm"}
+  ]
+}

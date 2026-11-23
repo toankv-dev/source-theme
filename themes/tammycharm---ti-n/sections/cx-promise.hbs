@@ -1,0 +1,38 @@
+{{!-- Big highlight line (optional round faces + coloured highlight), a two-tone heading, 2 x 2 benefit cards (one
+      block each, icon drawn in SVG), a button back to the buy box with a small line under it, and a product picture. --}}
+<section class="cx-promise" style="--cx-bg:{{section.settings.bg}};--cx-accent:{{section.settings.accent}};--cx-gold:{{section.settings.highlight_color}}">
+  <div class="b-wrap cx-promise__wrap">
+    <div class="cx-promise__head">
+      <p class="cx-promise__big">
+        {{#if section.settings.face_1}}<span class="cx-promise__faces"><img src="{{section.settings.face_1}}" alt="" width="56" height="56" loading="lazy">{{#if section.settings.face_2}}<img src="{{section.settings.face_2}}" alt="" width="56" height="56" loading="lazy">{{/if}}{{#if section.settings.face_3}}<img src="{{section.settings.face_3}}" alt="" width="56" height="56" loading="lazy">{{/if}}</span>{{/if}}
+        <span class="cx-promise__hl">{{section.settings.highlight}}</span>
+      </p>
+      <h2 class="cx-promise__h">{{section.settings.heading_1}} <em>{{section.settings.heading_em}}</em> {{section.settings.heading_2}}</h2>
+    </div>
+    <div class="cx-promise__grid">
+      <div class="cx-promise__left">
+        <ul class="cx-promise__cards">
+          {{#each section.blocks}}
+          <li class="cx-promise__card" {{{this.attributes}}}>
+            <span class="cx-promise__ic" aria-hidden="true">
+              {{#if (eq this.settings.icon "lines")}}<svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 8c3-3 13-3 16 0M4 12.5c3-3 13-3 16 0M4 17c3-3 13-3 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "heart")}}<svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z" fill="currentColor"/><path d="M6 12h3l1.5-2.5L13 15l1.5-3H18" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "sparkle")}}<svg viewBox="0 0 24 24" width="26" height="26"><path d="M10 4c.6 4 2 5.4 6 6-4 .6-5.4 2-6 6-.6-4-2-5.4-6-6 4-.6 5.4-2 6-6Z" fill="currentColor"/><path d="M18 3v4M16 5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "waist")}}<svg viewBox="0 0 24 24" width="26" height="26"><path d="M6 4h12l-1.5 6 1.5 10h-5l-1-6-1 6H6l1.5-10L6 4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6.6 7h10.8" stroke="currentColor" stroke-width="1.8"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "drop")}}<svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6.3 14h11.4a6 6 0 0 1-11.4 0Z" fill="currentColor"/></svg>{{/if}}
+            </span>
+            <p class="cx-promise__ct">{{this.settings.title}}</p>
+            <p class="cx-promise__cx">{{this.settings.text}}</p>
+          </li>
+          {{/each}}
+        </ul>
+        {{#if section.settings.button}}<a class="cx-promise__btn" href="#MainContent" data-rf-top>{{section.settings.button}}</a>{{/if}}
+        {{#if section.settings.note}}<p class="cx-promise__note"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#00B67A"/><path d="m4.6 8.2 2.2 2.1 4.6-4.6" fill="none" stroke="#fff" stroke-width="1.7"/></svg>{{section.settings.note}}</p>{{/if}}
+      </div>
+      <div class="cx-promise__media">
+        {{#if section.settings.picture}}<img src="{{section.settings.picture}}" alt="{{section.settings.picture_alt}}" width="1000" height="1000" loading="lazy">
+        {{else}}{{#if section.settings.image}}<img src="{{@root.assets_url}}/images/cx/{{section.settings.image}}" alt="{{section.settings.picture_alt}}" width="1000" height="1000" loading="lazy" onerror="this.remove()">{{/if}}{{/if}}
+      </div>
+    </div>
+  </div>
+</section>

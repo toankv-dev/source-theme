@@ -1,0 +1,3 @@
+{{!-- Free HTML / CSS for one-off content the other sections cannot express. Scripts are not run here. --}}
+{{#if section.settings.css}}<style>{{{section.settings.css}}}</style>{{/if}}
+<div class="b-custom-sec{{#if section.settings.contain}} b-wrap{{/if}}" style="padding:{{#if section.settings.padding}}{{section.settings.padding}}{{else}}0{{/if}}px 0">{{{applyTokens section.settings.html}}}</div>

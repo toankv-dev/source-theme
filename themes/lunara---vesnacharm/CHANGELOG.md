@@ -2,6 +2,35 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.23.3 — cart: volume tiers only on the products the discount covers
+### Fixed
+- The cart drawer discounted every line with the store's "Tiered next item" discount, also products the discount does
+  not cover (the "Shipping Protected" line: $4.98 showed as +$4.12 with 3 bodysuits). It now counts only the products
+  the discount covers (`nextItemTierProducts` from the engine, = the checkout), so the protection switch adds its full
+  price when the discount is limited to the products sold. A discount on every product works as before.
+### Admin (no theme change)
+- "3 = $29.99 each, 4 or more = $29.93 each" = tiers `2:24.98, 3:25.03, 4:17.34, 5:16.84` (Buy 3 = $89.97, 4 =
+  $119.72, n = $29.93 × n); the cart lines then show $29.99 / $29.93 each.
+
+## 2026.11.23.2 — shipping protection: only a product named so
+### Fixed
+- Add to cart emptied the cart when a product sold on the store was picked as "Protection product" (vesnacharm.com:
+  the bodysuits and the bra): the drawer took their lines for protection and dropped them. Now only a product NAMED as
+  protection ("Shipping Protected", "Package Protection", "Shipping Insurance"…) is one; any other pick is ignored.
+- A protection product no longer shows in the home grid, search or collections.
+### Changed
+- Theme settings > Cart drawer > "Protection product": the label and help say to pick only the protection product.
+
+## 2026.11.23.1 — cart drawer: pack prices per line, no upsell cards
+### Changed
+- Each cart line shows its share of what the checkout charges: the quantity discount is spread evenly over the lines
+  of the same product, as a Kaching pack is priced (Buy 2 at $62.99 = $31.50 + $31.49, was $35.99 + $27.00). Lines
+  add up to the subtotal to the cent; subtotal, savings row and checkout unchanged.
+- "(You save …)" on a line = percent off its compare-at price (SAVE 74%), as the packs, instead of dollars.
+### Added
+- Theme settings > Cart drawer > "Show the upsell products" (default off): the "Customers also add …" cards only
+  show when it is on (a store's saved picks survive a zip update, a new setting does not).
+
 ## 2026.11.21.2 — "Complete the bundle": SAVE as %, gallery follows the colour
 ### Changed
 - The bar's "SAVE …" now follows the Kaching block's SAVE style setting, as the packs do: "Saving vs compare-at price,

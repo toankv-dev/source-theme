@@ -20,10 +20,18 @@ Online Stores → Themes → open the theme → editor:
 - Example "put Questions? before You Will Also Love": pick the template → drag the FAQ section above Related → publish.
 Nguồn: apps/web/src/features/theme-editor/components/section-outline.tsx, apps/web/src/features/theme-editor/components/section-inspector.tsx
 
+## Theme editor shows only Theme settings (Sections greyed out) — by design
+Since SHOPDY-122 (2026-11-21) a product page belongs to its product: Online Stores → Themes → Customize edits only
+Theme settings (colours, top bar, cart drawer …); the page in the middle is read-only ("The page shown is this product's
+own: its sections are edited from the product"). To change its sections: button "Edit template in product" on the right
+(→ Online Stores → Pages → that page → Template), or Products → the product → Template. "Preview with" picks which
+product's page opens. Not a theme bug: no theme change brings the Sections tab back.
+Nguồn: apps/web/src/features/theme-editor/pages/theme-editor.page.tsx, apps/web/src/features/theme-editor/api/theme-editor.api.ts
+
 ## A product's template
-Products → open the product → its template card ("Page template") → choose the template (e.g. product.triple-zone-bodysuit).
+Products → open the product → tab "Template" → choose the template (e.g. product.triple-zone-bodysuit).
 A theme's extra product templates appear only after its zip is uploaded.
-Nguồn: apps/web/src/features/products/components/product-template-card.tsx, apps/web/src/features/products/components/product-theme-selector-dialog.tsx
+Nguồn: apps/web/src/features/products/components/page-template-overview.tsx, apps/web/src/features/products/components/product-editor.tsx, apps/web/src/features/products/components/product-theme-selector-dialog.tsx
 
 ## Discounts
 Discounts → create. Method: Discount code or Automatic (Automatic needs a Title). Type:
@@ -34,7 +42,31 @@ Discounts → create. Method: Discount code or Automatic (Automatic needs a Titl
   typed `qty:percent`, e.g. `2:10, 3:15, 4:20`.
 - Example "2 for $62.99, 3 for $89.98" on a $39.99 item: 2nd item = 62.99 − 39.99 = 23.00 → −42.5 %; 3rd = 89.98 −
   62.99 = 26.99 → −32.5 % → tiers `2:42.5, 3:32.5`. A Kaching-style theme shows what the checkout will charge.
+- A unit past the last tier takes the last tier's percent. "4+ at the Buy 3 unit price": add a tier for 4 that makes
+  the 4th unit = Buy 3 / 3, e.g. $35.99 with `2:24.98, 3:25.01` → `4:16.67` (4 = $119.97, 5 = $149.96, all SAVE 75 %).
+  Percent rounded per unit to the cent, highest price first.
+- A tier may be LOWER than the one before (each unit takes the highest tier ≤ its position): "3 = $29.99 each, 4+ =
+  $29.93 each" on $35.99 → `2:24.98, 3:25.03, 4:17.34, 5:16.84` (89.97, 119.72, then 29.93 × n). Check the totals
+  with the formula above (per unit, rounded to the cent) before giving a tier list.
+- Discount "Applies to" specific products = only their units take positions and percents (a protection line stays
+  full price); Lunara Vesnacharm's cart follows it since 2026.11.23.3 (`nextItemTierProducts`).
 Nguồn: apps/web/src/features/discounts/pages/discount-edit.page.tsx, apps/web/src/features/discounts/pages/discounts.page.tsx
+
+## Shipping protection (two ways: use ONE, both = the buyer pays twice)
+- Product in the cart drawer (themes with Theme settings › Cart drawer › "Protection product": Lunara, base-theme
+  children): Products → add a product "Shipping Protected" (price, picture, short description = the line under its
+  name; several prices = variants, the buyer picks one) → Online Stores → Themes → Customize → Theme settings → Cart
+  drawer → "Protection product" → "Choose products" → the store domain on the left → tab "On this store" / "All
+  products" → tick it → close → Publish. Shows switched ON above the subtotal once the cart holds a real item, added as
+  a real cart line (charged as any product; any active variant works, no listing needed). Picks are per domain.
+- NEVER pick a product you sell as "Protection product": the theme treats every line of it as protection and empties
+  the cart when only protection is left = Add to cart does nothing (vesnacharm 2026-11-23: the bodysuit and the bra
+  were picked). Only the protection product itself goes there.
+- Checkout add-on: System Settings → Checkout → the layout → order summary → "Shipping protection add-on" (label,
+  amount): a fixed fee, once per order, shown on the checkout page only.
+- A TIERED_NEXT_ITEM discount on all products also discounts the protection line (cheapest unit, last position):
+  limit the discount to the products sold.
+Nguồn: apps/web/src/features/theme-editor/components/store-products-setting.tsx, apps/api/src/features/storefront/application/store-product-settings.ts, apps/web/src/features/checkout-layouts/pages/checkout-layout-editor.page.tsx, apps/api/src/features/storefront/application/cart-pricing.ts
 
 ## Complete the bundle (sold with another product)
 Product editor → "Product sold with this one": the other product, the bundle price, a badge (e.g. Hot Pick), "Show this

@@ -1,0 +1,104 @@
+{
+  "name": "RF: comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "col_1",
+      "label": "Our column",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "col_2",
+      "label": "Column 2",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "col_3",
+      "label": "Column 3",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Feature",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "c1",
+          "label": "Column 1",
+          "default": "yes",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "c2",
+          "label": "Column 2",
+          "default": "yes",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "c3",
+          "label": "Column 3",
+          "default": "yes",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "RF: comparison",
+      "category": "RANGEFORT"
+    }
+  ]
+}

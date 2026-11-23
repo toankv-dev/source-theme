@@ -31,7 +31,8 @@ function offers(s){try{var a=typeof s==='string'?JSON.parse(s||'[]'):s;return Ar
 function tiered(lines,ts){
   if(!ts.length)return null;
   var u=[],per=lines.map(function(){return 0;}),tot=0;
-  lines.forEach(function(l,i){if(l.gift)return;for(var k=0;k<l.qty;k++)u.push({i:i,p:l.price});});
+  var sc=window.LuTierPids,ok=Array.isArray(sc)?sc.map(function(x){return String(x).toLowerCase();}):null;
+  lines.forEach(function(l,i){if(l.gift||(ok&&ok.indexOf(String(l.pid||"").toLowerCase())<0))return;for(var k=0;k<l.qty;k++)u.push({i:i,p:l.price});});
   if(!u.length)return null;
   u.sort(function(a,b){return b.p-a.p;});
   u.forEach(function(x,idx){var pc=0;ts.forEach(function(t){if(idx+1>=t.qty)pc=t.percent;});if(pc<=0)return;var a=r2(x.p*(pc/100));per[x.i]+=a;tot+=a;});
@@ -73,6 +74,7 @@ function best(lines,tierStr,offerStr,offStr){
 window.LuDisc={best:best,tiers:tiers,offers:offers,amountOff:amountOff};
 })();
 </script>
+<script>window.LuTierPids={{json @root.nextItemTierProducts}};</script>
 <script>(function(){
 /* "Complete the bundle" (SHOPDY-127): which units of each cart line an offer prices = the server's rule
    (shopdy-promax storefront/domain/companion-bundles.ts pairCompanionBundles). A line carries the offer key
@@ -86,3 +88,4 @@ function gross(l,u){var q=Math.max(0,parseInt(l.qty,10)||0),b=Math.min(u||0,q);r
 window.LuCB={units:units,gross:gross};
 })();
 </script>
+<script>window.LuProt=function(p){var s=typeof p==="string"?p:p?(p.title||"")+" "+(p.handle||"")+" "+(p.url||""):"";return /(shipping|package|parcel|order|delivery)[\s_-]*(protect|insur)/i.test(s)};</script>

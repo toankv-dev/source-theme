@@ -1,6 +1,6 @@
 # Design map: lunara---vesnacharm
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Lunara Vesnacharm 2026.11.21.2 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
+Lunara Vesnacharm 2026.11.23.3 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
 One part in detail: `node tools/theme-map.js themes/lunara---vesnacharm --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
 README.md: Editor (Themes > Customize) L6 · Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`) L27 · Pages L65 · Hooks kept for pixels L69
 
@@ -60,7 +60,7 @@ Every page (theme.json): theme.css, theme.js
 ## Sections
 | section | lines | blocks | uses | styled in | edited by |
 |---|---|---|---|---|---|
-| cart-drawer | 11 (minified) | — | — | custom.css, base.css, <style> 2.2 KB | patch-vn.js |
+| cart-drawer | 11 (minified) | — | — | custom.css, base.css, <style> 2.2 KB | patch-cart.js, patch-vn.js |
 | custom-html | 15 | — | — | <style> 0.2 KB | — |
 | faq | 3 (minified) | qa | — | base.css, custom.css, <style> 0.6 KB | — |
 | features | 48 | feature | — | <style> 1.0 KB | — |
@@ -84,7 +84,7 @@ Every page (theme.json): theme.css, theme.js
 
 ## Snippets
 - custom-html-block · 11 lines · used by product
-- gs-head · 89 lines · used by index.hbs, page.hbs, product.hbs, theme.hbs, tracking-result.hbs · edited by patch-cb.js, patch-vn.js
+- gs-head · 92 lines · used by index.hbs, page.hbs, product.hbs, theme.hbs, tracking-result.hbs · edited by patch-cart.js, patch-cb.js, patch-vn.js
 - hf-wave-marquee · 35 lines · used by index.hbs · edited by patch-vn.js
 - lu-companion-bar · 14 lines · used by lu-kaching · edited by patch-cb.js
 - lu-kaching-bar · 12 lines · used by lu-kaching · edited by patch-vn.js
@@ -112,13 +112,14 @@ Every page (theme.json): theme.css, theme.js
 - lu-gallery.js 3.3 KB minified · linked by index.hbs, product.hbs, theme.hbs
 - lu-pack-msg.js 1.2 KB minified · linked by theme.hbs
 - sc-product.js 4.3 KB · linked by product, sc-pb-tabs
-- theme.js 111 KB minified · linked by index.hbs, page.hbs, product.hbs, theme.hbs +2
+- theme.js 112 KB minified · linked by index.hbs, page.hbs, product.hbs, theme.hbs +2
 
 ## Sources
 - _src/anim-webp.py: a helper or check, does not edit the theme
 - _src/build-sc.js generates sections/product.schema.json, sections/reviews.schema.json, sections/sc-before-after.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json, sections/sc-reels.schema.json +4 → edit the script, then run it
 - _src/build-vn-settings.js generates config/settings_data.json, config/settings_schema.json → edit the script, then run it
 - _src/compare-copy.js: a helper or check, does not edit the theme
+- _src/patch-cart.js patches assets/js/theme.js, sections/cart-drawer.hbs, snippets/gs-head.hbs (anchored edits) → edit the script, then run it
 - _src/patch-cb.js patches assets/css/lu-companion.css, assets/js/lu-companion.js, assets/js/theme.js, snippets/gs-head.hbs, snippets/lu-companion-bar.hbs, snippets/lu-kaching.hbs (anchored edits) → edit the script, then run it
 - _src/patch-sc.js patches sections/product.hbs, sections/reviews.hbs, snippets/lu-size-finder.hbs (anchored edits) → edit the script, then run it
 - _src/patch-vn.js patches assets/css/base.css, assets/css/custom.css, assets/js/theme.js, layout/theme.hbs, sections/cart-drawer.hbs, sections/footer.hbs +12 (anchored edits) → edit the script, then run it
@@ -140,6 +141,16 @@ Every page (theme.json): theme.css, theme.js
 - Every product template carries every product-page section (user 2026-11-20): `_src/build-sc.js` `carryAll()` adds the section types a `templates/product*.json` lacks, switched off (`disabled`, the editor's eye icon), the before / after slider on (it prints nothing until both photos are set). It never changes a section a template has; a section deleted by hand comes back on the next run: switch it off instead. The map cannot see these writes (file names from a folder listing).
 - Checks: `node <theme>/_src/compare-copy.js <dir>` makes a copy with a bodysuit sample product; `_src/sc-e2e.js <url>` runs on it.
 - Main colour of the theme = setting `highlight` (#790236); `accent`, `page_bg`, `sale` only colour the checkout.
+- vesnacharm.com/checkout is NOT `templates/checkout.hbs`: the store uses shopdy's checkout layout (`ck-*`, shopdy render-checkout.ts). Its lines print the quote's `lineTotal` = catalog price × qty (cart-pricing.ts), the tier discount only in the subtotal (2026-11-23: 3 × $35.99, subtotal $89.98). Line prices there = shopdy code, not the theme.
+<!-- /notes -->
+### cart-drawer
+<!-- notes:cart-drawer -->
+- Run order of the cart patches: patch-vn.js → patch-cb.js → patch-cart.js (patch-cart anchors on patch-cb's text and keeps its "done" markers; `var …,Lt=…,Lt=PA[J]` repeats the name on purpose).
+- Line prices (user 2026-11-23): `PA` in theme.js R() = the discount (`S.per`, LuDisc / tiers) spread per product over its lines by line price, in cents, the last line takes the remainder; gifts, LuUp-hidden lines and "Complete the bundle" lines keep their own. Never change `S.per` / `S.total`: they are what the checkout charges.
+- "Customers also add …" = `cart_body_upsells` behind `vn_cart_upsell_show` (off). A store's saved values win over settings_data.json on a zip update (shopdy merge-theme-settings.ts): to change what a live store shows, add a NEW setting, never edit an old default.
+- Shipping protection = `cart_upsells` ("Protection product") + `LuUp.sync` in theme.js: the same rules as base-theme ui.js (tammycharm, checked 2026-11-23): ON by default (localStorage `lu-up:<pid>`), one real line added while the cart holds a real item, removed when only it is left, hidden from the lines and the count unless "Also list it". Nothing shows until the store picks a product for ITS domain (the picks in settings_data.json are other stores'). Lines are matched to a pick by productId (the `upsell` flag is not saved in localStorage), so a product you SELL picked there was taken for protection and Add to cart emptied the cart (live 2026-11-23, no JS error, drawer at $0.00). Since 2026.11.23.2 only a pick NAMED as protection counts: `window.LuProt` (gs-head, via patch-cart.js) = /(shipping|package|parcel|order|delivery)[\s_-]*(protect|insur)/i on title + handle + url; `LuUp.sync` drops other `[data-lu-up]` first, and `Dt("#ms-products")` + the home-HTML fallback of `ue()` filter it out of the home grid, search and collections. A protection product named otherwise is ignored (fail-safe): widen the regex there.
+- Check without a store: `MSCart.add({productId, variantId, price, compareAt, qty, opts})` + `cart-drawer` `data-tiers` set by hand in an edit-check `--eval` (the preview has tiered discounts off). Set `window.LuTierPids = [ids]` to test a tier discount limited to some products (the preview has none = every product). Read line prices with textContent (the drawer is closed: innerText is empty). Git Bash: `MSYS_NO_PATHCONV=1` or `--page /` becomes a Windows path.
+- Tier scope (2026.11.23.3): `window.LuTierPids` (gs-head, `{{json @root.nextItemTierProducts}}`, null = every product) = the products the TIERED_NEXT_ITEM discount covers; `LuDisc.tiered` skips other lines (no position, no percent), as the checkout's isProductBelongsToX. Protection adds its full price only when the store limits the discount to the products sold.
 <!-- /notes -->
 ### header
 <!-- notes:header -->
@@ -167,5 +178,6 @@ Every page (theme.json): theme.css, theme.js
 - Bodysuit blocks in every look (user 2026-11-20): the section always has `.sc-any`; `assets/css/sc-product.css` styles the blocks (Price + badge, Highlights, Shipping box, Info rows, second button) under `.sc-any` and the look itself (gallery, pickers, packs, Find My Size pill) under `.sc-skin`. Outside the look each block snippet (`sc-pb-*`) and the second button link sc-product.css themselves (`@root.section.settings.skin`); Info rows also links sc-product.js, which then only builds the size chart (runs once: `window.__scProduct`). `--sc-hl` = the look's highlight (inline) else the theme's `--vn-hl`.
 - "Under the buttons" (`snippets/sc-trustbox.hbs`): the safe checkout box, then the money-back guarantee box (as brixpant.com, `vn_mbg_*`; gold seal = inline SVG unless a picture is picked; background + border = an unselected Kaching pack row, from `--sc-hl`: keep them in step if the pack look changes). The delivery estimate + guarantee line box was removed 2026-11-20 at the user's request (its ids stay in build-sc.js OWN_SETTINGS so they are dropped). Always with the bodysuit look, with the Lunara look when `vn_trust_any` is on. The 3 videos under it are a plain "Image / video slider" block (`videos` in the bodysuit template): the platform server turns a video URL into `<video>`, the preview does not (it shows a broken image).
 - Image / video slider on phones (user 2026-11-20, "at most 3 videos like the sample"): block setting On mobile (`mobile_row`, default 3; not set = 3) = only the first N items, in one row (`--pvm` = N, `.lu-ms[data-mr]` hides the rest, arrows stay hidden as nothing overflows); "all" = the old swipe with Items per view on mobile. Desktop always shows them all. Schema hand-edited in sections/product.schema.json (build-sc.js keeps it).
+- Pack prices are never set by the theme: they are the store's live TIERED_NEXT_ITEM tiers (`nextItemTiers`, vesnacharm 2026-11-23: `2:24.98, 3:25.01` = 35.99 / 62.99 / 89.98), the same formula as the cart and checkout. A unit past the last tier takes the last tier's percent (4 units = SAVE 76%); the same unit price as Buy 3 for 4+ = admin tier `4:16.67`. User 2026-11-23: 3 = $29.99 each, 4+ = $29.93 each → `2:24.98, 3:25.03, 4:17.34, 5:16.84` (a tier may be lower than the one before: each unit takes the highest tier ≤ its position). Lines show equal prices only when the total divides by the units: the tiers set that, never the theme.
 - Pack rows (`snippets/lu-kaching.hbs`): Color before Size is visual only (`order: -1` on `select[data-name*="colo" i]`, vn-chrome.css) + the names line printed colour first (patch-vn) with the engine's `isColorGroup`. Never `contains` or any helper outside tools/lib/engine-helpers.js: the engine lacks it and the page is a 500 (2026.11.20.5). Never reorder the selects in the markup: theme.js, sc-product.js (main picker → rows) and the size finders read them by DOM index.
 <!-- /notes -->

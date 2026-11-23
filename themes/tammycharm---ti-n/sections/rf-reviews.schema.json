@@ -1,0 +1,205 @@
+{
+  "name": "RF: imported reviews",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "richtext",
+      "id": "source_note",
+      "label": "Source note",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "Verified AliExpress purchase"
+    },
+    {
+      "type": "text",
+      "id": "average",
+      "label": "Average",
+      "default": "4.6"
+    },
+    {
+      "type": "text",
+      "id": "total",
+      "label": "Total ratings",
+      "default": "122"
+    },
+    {
+      "type": "text",
+      "id": "n_5",
+      "label": "5 star count",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "n_4",
+      "label": "4 star count",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "n_3",
+      "label": "3 star count",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "n_2",
+      "label": "2 star count",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "n_1",
+      "label": "1 star count",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "pct_5",
+      "label": "5 star %",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "pct_4",
+      "label": "4 star %",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "pct_3",
+      "label": "3 star %",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "pct_2",
+      "label": "2 star %",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "pct_1",
+      "label": "1 star %",
+      "default": ""
+    },
+    {
+      "type": "richtext",
+      "id": "tags",
+      "label": "Tags line",
+      "default": ""
+    },
+    {
+      "type": "number",
+      "id": "page_size",
+      "label": "Reviews per page",
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "initial",
+          "label": "Initial",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "country",
+          "label": "Country",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Date",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "date_iso",
+          "label": "Date (YYYY-MM-DD)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "5"
+        },
+        {
+          "type": "text",
+          "id": "variant",
+          "label": "Variant",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "translated",
+          "label": "Translated",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "original",
+          "label": "Original text",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "photo_1",
+          "label": "Photo 1 (assets/images/rf/rv/)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "photo_2",
+          "label": "Photo 2 (assets/images/rf/rv/)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "photo_3",
+          "label": "Photo 3 (assets/images/rf/rv/)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "photo_4",
+          "label": "Photo 4 (assets/images/rf/rv/)",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RF: imported reviews",
+      "category": "Reviews"
+    }
+  ]
+}

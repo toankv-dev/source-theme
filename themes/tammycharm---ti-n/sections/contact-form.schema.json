@@ -1,0 +1,26 @@
+{
+  "name": "Contact form",
+  "tag": "section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact us"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "We reply within one business day."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form",
+      "category": "Content",
+      "description": "Form that emails the store."
+    }
+  ]
+}

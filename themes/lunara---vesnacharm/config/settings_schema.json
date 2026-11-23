@@ -660,8 +660,8 @@
       {
         "type": "store_products",
         "id": "cart_upsells",
-        "label": "Protection product",
-        "info": "Pick per store domain the product you sell as protection (e.g. 'Shipping Protected'). It shows above the subtotal with its description, switched ON: added to the cart as a real item. The buyer can switch it off."
+        "label": "Protection product (only \"Shipping Protected\", never a product you sell)",
+        "info": "Pick ONLY your protection product, e.g. \"Shipping Protected\". Its name must say Shipping / Package Protection or Insurance: any other product picked here is ignored. It shows above the subtotal, switched ON, and is added to the cart as a real item; the buyer can switch it off. Products named so never show in the home grid, search or collections."
       },
       {
         "type": "checkbox",
@@ -697,6 +697,13 @@
       {
         "type": "header",
         "content": "Upsell products (cart body)"
+      },
+      {
+        "type": "checkbox",
+        "id": "vn_cart_upsell_show",
+        "label": "Show the upsell products",
+        "default": false,
+        "info": "The \"Customers also add …\" cards under the cart items (the products picked below). Off = none."
       },
       {
         "type": "store_products",

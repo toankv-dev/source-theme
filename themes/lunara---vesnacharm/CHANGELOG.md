@@ -2,6 +2,120 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.25.8 — Product cards: Add to cart opens the product page at the packs
+### Changed
+- "Add to cart" on a product card (home page grid, "You may also like" on the product page) no longer opens the
+  quick-add window: it opens the product page, already scrolled to the BUY MORE - SAVE MORE packs (below the sticky
+  header; the variant picker or Add to cart button when the product has no packs). The page address stays clean.
+
+## 2026.11.25.7 — Phones: CLAIM OFFER bar from the first screen
+### Changed
+- On phones (under 750 px) the sticky CLAIM OFFER bar shows as soon as the product page opens (was: only after the
+  Add to cart button scrolled out of view). The page gets room under it (body padding = bar height) so it never hides
+  the end of the page. Computers unchanged. The cart drawer and the size finders still open above it.
+
+## 2026.11.25.6 — Cart: Buy X Get Y gifts on top of what the buyer adds
+### Fixed
+- Buying single units gave too few gifts: 3 units = 1 of them free and no gift, 4 units = 1 gift. Gifts now come on
+  top of what the buyer adds, as many as the live offers pay for (at most 2): 2 bought = 1 gift, 3 or more bought =
+  2 gifts. The buyer pays for every unit they added.
+- A gift line of 2 units read "Free gift" (its quantity is hidden): it now reads "2 Free gifts".
+- 6 units (Buy 3 Get 1 twice = Buy 3 Get 2) named the Discounts row "Buy 2, Get 1 Free": two offers worth the same now
+  show the one giving more free units ("Buy 3, Get 2 Free"). Same money.
+### Changed
+- A pack (BUY 2 GET 1 / BUY 3 GET 2) adds its free units as gift lines (2 + 1 gift, 3 + 2 gifts), same price as before.
+- A cart saved before this version is converted once the same way (its free units become gift lines, same money).
+
+## 2026.11.25.5 — Cart: colour / size sheet opens and changes without jumping
+### Fixed
+- Opening the sheet scrolled the whole cart drawer up (≈ 475 px) and back: the cart jumped, and on a computer the sheet
+  looked as if it spilled out of the cart. The sheet now slides in with the cart standing still.
+- A tap on a colour / size redrew the whole sheet: every picture reloaded and blinked. Now only the choice, price,
+  picture and quantity change, in place.
+
+## 2026.11.25.4 — Cart: full width on phones, colour / size sheet
+### Changed
+- Phones: the cart drawer covers the whole screen width (a strip of the page showed on the left).
+- The colour / size box of a line ("White, M ▾") opens a sheet that slides up from the bottom (as Shopee's): picture and
+  price of the chosen variant, a button per colour (with its picture) and per size (sold out = greyed), the quantity,
+  Confirm. X, a tap outside or Esc closes it. Confirm with another colour / size changes the whole line, or only the
+  chosen number of its units when that is fewer (3 White → pick Rose, quantity 1 → 2 White + 1 Rose). This replaces
+  the selects that opened under the line.
+
+## 2026.11.25.3 — Cart: compact, laid out like Shopee's cart
+### Changed
+- Every text in the cart drawer is 1–2 sizes smaller ("Your cart" 22 px, titles 13 px, prices 14 px, subtotal 17 px,
+  checkout button 16 px / 48 px high) and the line under "Your cart" sits close to it.
+- A line = picture 80 px, title, then one row: a small box with its colour and size ("White, M ▾", left) and a small
+  quantity box (− 1 +, 28 px high, right), then the price. No more "Color: …", "Size: …" and "Change" texts: the box
+  opens the colour / size selects (one row per unit when a line holds several), same as Change did.
+- Shipping protection: the description shows on one line ending "…"; a tap on it shows the whole text (tap again to
+  close).
+
+## 2026.11.25.2 — Cart: 2 free gifts kept past 5 units, one "Free gift" label
+### Fixed
+- From 6 units the store's 40 % off (5+ items) beats Buy 3 Get 2, and the cart showed no gift any more. Now the cart
+  still shows 2 units free (the units a Buy X Get Y offer would free, 2 at most) whenever the best discount pays for
+  them; the other units share what is paid. Subtotal and checkout unchanged (6 units: $165.56 with 40 % off).
+- A line with only part of its units free showed a green "1 FREE" beside the pink "Free gift" chip of a whole free line:
+  both are now the same chip, "1 Free gift" / "2 Free gifts".
+- Discounts row: a long offer name ("40% OFF · 5+ ITEMS") no longer pushes the amount out of the drawer at 360 px.
+
+## 2026.11.25.1 — Cart: Change on a line of several units = one row per unit
+### Changed
+- A cart line holding N units of the same colour / size opens, on "Change", N rows (picture 44 px + colour + size), so
+  each unit is changed on its own. Changing a row moves that one unit to a line of its own right under it (N−1 stay),
+  open, so its other option can be set at once; a variant already in the cart takes the unit (merged). A line of 1 unit
+  keeps the selects alone. Phone: the two selects stack, full width, beside the picture.
+- `_src/patch-cart.js`: an edit can `upgrade` its own older output (span from..to replaced) when its `done` changes.
+
+## 2026.11.24.3 — Cart: "Free gift" chip, Change on the option row, selects like the quantity box
+### Changed
+- A gift line shows a small "Free gift" chip (highlight colour, 12 px) at the end of its title; no price on the line.
+- "Change" sits on the colour / size row, on the right (colour and size stack beside it when the line is narrow).
+- The colour / size selects have the quantity box's size and border: 32 px (42 px on phones), 1 px, 6 px corners.
+
+## 2026.11.24.2 — Cart: "Free gift", Size, Change
+### Changed
+- A gift line shows "Free gift" in the highlight colour (setting highlight, --vn-hl) instead of a price.
+- The size option the store named "Side" reads "Size" in the cart (the product data is untouched).
+- Each line shows its colour / size as text (colour first) and a "Change" link in the highlight colour; it opens
+  compact pill selects (34 px, 14 px; 16 px on iOS Safari so the page does not zoom).
+
+## 2026.11.24.1 — Cart: Discounts row, colour / size selects, no "FREE GIFT"
+### Added
+- Cart drawer: a "Discounts" row above the subtotal (as Tammycharm): the best offer's name made from the offer
+  ("Buy 2, Get 1 Free", "Buy 3, Get 2 Free", "40% off · 5+ items") in a grey chip, and the amount it takes off.
+- Each line of a product the drawer knows gets a colour select and a size select (44 px, 16 px, colour first): a change
+  takes that variant's price, compare-at and picture; the same variant on another line = one line; a gift switched to
+  a dearer variant stays and shows only the difference the checkout charges. Another product's variants come from its
+  page, fetched once per visit (sessionStorage).
+### Changed
+- No "FREE GIFT" word on any line: a free line shows $0.00 with its compare-at price struck.
+
+## 2026.11.23.7 — Cart: gifts show $0.00, in the colour / size just chosen
+### Changed
+- Every gift line in the drawer shows $0.00 (was "FREE") with its compare-at price struck, the store's gift offers too.
+  From 6 items (40 % off wins) the 2 gift lines stay at $0.00 and the bought lines carry what is paid (was: the gifts
+  showed a share, e.g. $43.19). Totals unchanged.
+- A gift takes the colour / size the buyer added last (each add stamps its line, a merged line too), else the one
+  before that is free. A cheaper item added later that takes the free unit becomes the gift: the old gift goes.
+
+## 2026.11.23.6 — Cart: at most 2 FREE labels
+### Changed
+- More than 2 free units (10, 15 … items, where Buy 5 Get 2 ties with 40 % off from 5) = no FREE labels: each line
+  shows its share ($21.59 each), as the user asked ("at most 2 gifts, a price for each product").
+
+## 2026.11.23.5 — Cart: Buy X Get Y gifts show and add themselves
+### Added
+- Cart drawer: when one more unit costs nothing (the live Buy X Get Y discounts, same formula as the checkout), the
+  drawer adds it as a FREE GIFT line (same colour / size as the last item, 2 at most): 2 in the cart → a 3rd free, 4 → a
+  5th free. Fewer items = a gift that would cost money goes; a gift the buyer removes is not added back. A pack adds
+  all its units first (no gift inside a BUY 2 GET 1 of 3 colours).
+- Free units of the best Buy X Get Y offer show as FREE GIFT (whole line, FREE + compare-at) or "N FREE" (part of a
+  line); the other lines keep their full price. With another best discount (amount off from 5 units) lines show their
+  share as before. Totals, subtotal and checkout unchanged. Source: `_src/patch-cart.js` item 6.
+
 ## 2026.11.23.4 — Find my size: Band Size + Cup Size for bras
 ### Added
 - Block "Find my size" (sc_fit): a bra chart (first line `SIZE CUP | 34 | 36 …`, one cup per line) now asks Band Size +

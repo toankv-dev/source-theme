@@ -1,18 +1,61 @@
 # Edit log: lunara---vesnacharm (newest first, keep ≤ 30 lines)
 
+2026-11-25 · card Add to cart (home + related) opened the quick-add modal → opens the product page #lu-buy, scrolled to the packs (header kept clear; hash dropped); checked 1440 (packs at 145 = header 133 + 12) / 360 (64 = 51 + 12, whole block above the CLAIM OFFER bar), home click → /product#lu-buy, modal closed, 0 errors on the product page · _src/patch-vn.js, assets/js/theme.js, sections/footer.hbs, sections/product.hbs, theme.json, CHANGELOG.md · card button 38 px high at 360 and pack text 11 px (both older, < phone rules); home preview logs one 404 · not live: upload 2026.11.25.8 (carries .25.1-.25.7) + warm.sh
+
+2026-11-25 · phones: CLAIM OFFER bar only after scrolling → shown from the first screen under 750 px (body padding = bar height), computers unchanged; checked 360 (scroll 0: shown, 60 px, tap 44 px; cart drawer z 1000 covers it) / 1440 (hidden at the top as before), 0 errors · sections/product.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.7 (carries .25.1-.25.6) + warm.sh
+
+2026-11-25 · cart: 4 bought showed 1 gift (it was 2: gift line ×2 with its quantity hidden, row named "Buy 2, Get 1 Free" on a tie) and 3 / 4 singles got 0 / 1 gift → gifts on top of the units bought (≤ 2 while the discount pays them: 2 → +1, 3+ → +2), packs add their free units as gift lines, saved carts converted once (same money), chip "2 Free gifts", tie → "Buy 3, Get 2 Free"; checked singles 1-6, qty 4/5 at once, the screenshot flow, packs 3/5, an old pack-5 cart, on a compare-copy + patch-bogo (offers B3G1 + B5G2, no 40 %) at 360/1440, 0 errors · _src/patch-cart.js, assets/js/theme.js, snippets/gs-head.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.6 (carries .25.1-.25.5) + warm.sh
+
+2026-11-25 · cart sheet jumped / spilled out on PC: focus on the X while it slid in scrolled .drawer__inner 475 px → every focus {preventScroll}; a pick redrew the sheet (pictures reloaded) → built once, luShUpd updates in place; checked 360/1440 with live-like long size labels (scroll 0, pictures kept), 0 errors · _src/patch-cart.js (upgrade.to may be a list), assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.5 + warm.sh
+
+2026-11-25 · cart: drawer 100 % wide under 750 px; colour box opens a bottom sheet (picture, price, colour buttons with pictures, sizes, quantity, Confirm; X / backdrop / Esc close) replacing the inline selects; Confirm = whole line, or n < qty units split off; checked 360/1440 (change line, split, Esc keeps the drawer, backdrop), 0 errors · _src/patch-cart.js, assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.4 + warm.sh; luVC + select handler left unused in theme.js
+
+2026-11-25 · cart compact like Shopee: texts 1-2 sizes down, header tight, line = title / [colour+size box "White, M ▾" | small qty 28 px] / price (no Color / Size / Change texts; box opens the same selects, per-unit rows side by side), protection description 1 line "…" tap to show all; checked 360/1440 local (panel open, desc open, line without selects), 0 errors · _src/patch-cart.js, assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.3 (carries .25.2/.25.1/.24.3) + warm.sh; real protection description not seen (preview has no pick)
+
+2026-11-25 · how-to: end the "5+ items, 40% off each" discount (Set end date = now, or Delete) so 6+ units pay a Buy X Get Y · no theme files (platform-guide: "Turn a discount off") · guide-check still flags Discounts (variant-options-builder.tsx changed: re-check the compare-at bulk line, then --update)
+
+2026-11-25 · cart: 6+ units lost the gifts (40 % off beat Buy 3 Get 2) → 2 units still shown free while the discount pays for them (totals unchanged); "1 FREE" + "Free gift" → one chip "N Free gift(s)"; Discounts row wraps at 360; checked single ×3/4/5/6/7/8/10 + mixed pack 5 → 6 → 7 with the live offers, 0 errors · _src/patch-cart.js, assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.2 (carries .25.1 + .24.3) + warm.sh
+
+2026-11-25 · cart: Change on a line of N same units = N rows (picture + colour + size), a row changed = that unit split to its own line below (open) or merged into the same variant; checked split / merge / size split × 360/1440 local, 0 errors · _src/patch-cart.js (new `upgrade` step), assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · not live: upload 2026.11.25.1 (also carries 2026.11.24.3, never uploaded) + warm.sh
+
+2026-11-24 · live check "no Change in the cart": live theme.js = _work/live-2026-11-23-bogo/v8/live-theme-before.zip byte for byte (= 2026.11.23.7, uploaded 2026-11-23T18:33:34Z, tag @mwtltjjf), not 2026.11.24.3 · no theme files · open: re-upload dist/lunara-vesnacharm-2026.11.24.3.zip + warm.sh, then check markers lu-vchg / data-lu-disc in the live theme.js
+
+2026-11-24 · cart: "Free gift" = small chip after the title (no price), Change on the colour / size row (right, texts stack at 360), selects = quantity box (32 / 42 px, 1 px .55, 6 px); checked 360/1440 local + offer copy (gift + store gift lines) · _src/patch-cart.js, assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md (tools/edit-check.js: --eval prints 1500 chars) · not uploaded live yet
+
+2026-11-24 · cart: gift = "Free gift" in the highlight colour (no price), "Side" shown "Size", colour / size as text + "Change" opening compact selects (34 px, below the 44 px tap rule at the user's request; Change itself 44 px); 20 cases + Change check × 360/1440 local + live · _src/patch-cart.js, assets/js/theme.js, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · LIVE 2026.11.24.2 (warmed; tag changed again ~3 min later, warmed) · v9/ROLLBACK.md
+
+2026-11-24 · cart: Discounts row above the subtotal (offer name chip + amount), colour / size selects on lines (gifts too), no FREE GIFT word; 20 cart cases × 360/1440 local + 19 live · _src/patch-cart.js, assets/js/theme.js, snippets/gs-head.hbs, sections/cart-drawer.hbs, theme.json, CHANGELOG.md · LIVE 2026.11.24.1 after an incident: theme.js stalls 12–60 s at the origin after every upload (cold start, .7 too) → rolled back, re-uploaded + warmed (_work/live-2026-11-23-bogo/warm.sh) · v8/ROLLBACK.md
+
+2026-11-23 · cart: gifts show $0.00 (6+ items too: bought lines carry the total; store gift offers too) + gift = colour / size added last (luAt); 17 cart cases × 360/1440 (new: O re-add a colour, Q cheaper item takes the gift) · _src/patch-cart.js, assets/js/theme.js, theme.json, CHANGELOG.md · LIVE: 2026.11.23.7 uploaded, 16 cases re-run live · rollback: _work/live-2026-11-23-bogo/v7/ROLLBACK.md
+
+2026-11-23 · cart: Buy X Get Y gifts added + shown as FREE GIFT (2 → 3rd free, 4 → 5th free, max 2 labels), 5+ units = 40 % off each; 15 cart cases × 360/1440 local + live; LIVE: zip 2026.11.23.6 uploaded, allow_amount_off on, discount "Vesnacharm: 5+ items, 40% off each" · _src/patch-cart.js, assets/js/theme.js, snippets/gs-head.hbs, theme.json, CHANGELOG.md · checkout (shopdy layout) lists the gift at catalog price, discount in the subtotal; protection line shows after a reload until the next drawer change (old) · rollback: _work/live-2026-11-23-bogo/v5/ROLLBACK.md
+
+2026-11-23 · LIVE (admin, user's session): Buy X Get Y on the 4 products: discounts "Vesnacharm: Buy 2 Get 1 Free" (B3G1) + "Buy 3 Get 2 Free" (B5G2), packs 1/3/5 on the 4 listings, Customize allow_tiered_discount off; checked server cart-totals, pages 360/1440, live cart · no theme files · backups + rollback: _work/live-2026-11-23-bogo/
+
+2026-11-23 · how-to: sell Buy X Get Y like hushflex-jeans (packs 1/3/5, discounts Buy 3 Get 1 + Buy 5 Get 2) → theme already does it, checked in a test copy (packs, cart, mixed colours, 360) · no theme files (tools/edit-check.js: port check fixed) · live: Buy 3 Get 1 / Buy 5 Get 2 point only to product 47f53cd9…, tier discount still on
+
 2026-11-23 · Find my size for bras: Band Size + Cup Size selects (no units, no weight), result at once, cell marked; Auto from the chart (bodysuit unchanged); checked Band 40 + C = XL, 360 px · snippets/sc-fit.hbs, _src/build-sc.js, sections/product.schema.json, theme.json, CHANGELOG.md · none (live bra page needs no admin change)
+
 2026-11-23 · how-to: 2 discounts named bodysuit → the tier one = Type "Next item (progressive)" with tiers 2:24.98, 3:25.03, 4:17.34, 5:16.84; a 2nd live tier discount must be switched off · no theme files · none
+
 2026-11-23 · how-to: bra packs SAVE 70/74/75% like the bodysuit = compare-at $99.98 on every variant + add the bra to the same tier discount (Buy 2 $52.49, Buy 3 $74.97) · no theme files · first fix the bra Buy X Get Y
+
 2026-11-23 · how-to: bra page packs $0 / SAVE 100% = discount c84e49d4 Buy 1 Get 1 FREE with the bra in X and Y (a unit is bought + gift: every bra free, the checkout too); fix in admin: X = bodysuit only, or Buy 2 Get 1 · no theme files · urgent: bras sell at $0 until fixed
+
 2026-11-23 · checkout lines show $35.99 each (3 for $89.98): live checkout = shopdy layout (render-checkout.ts), lineTotal = catalog × qty (cart-pricing.ts), discount only in the subtotal → flow D, waiting for approval · no theme files · amount charged is right ($89.98)
+
 2026-11-23 · cart: Shipping Protected switch (already = tammycharm's b-up) now adds its full price: volume tiers count only the products the discount covers (nextItemTierProducts → window.LuTierPids); prices 3 = $29.99 / 4+ = $29.93 each = admin tiers `2:24.98, 3:25.03, 4:17.34, 5:16.84` (checked in the preview: 89.97 / 119.72 / +4.98) · _src/patch-cart.js, snippets/gs-head.hbs, theme.json, CHANGELOG.md · admin: create "Shipping Protected" + pick it (remove bodysuit + bra), limit the tier discount to the products sold, new tiers
+
 2026-11-23 · shipping protection: only a product NAMED as protection counts (window.LuProt): the live picks (bodysuits + bra) are ignored, Add to cart works; "Shipping Protected" hidden from home grid / search / collections; setting label says pick only it · _src/patch-cart.js, _src/build-vn-settings.js, snippets/gs-head.hbs, assets/js/theme.js, config/settings_schema.json, theme.json, CHANGELOG.md · admin: pick "Shipping Protected" in Protection product (live has none)
+
 2026-11-23 · live bug: Add to cart empties the cart on vesnacharm.com = the bodysuit + the bra picked as "Protection product" (cart_upsells): LuUp.sync takes their lines for protection and drops them; fix in admin (remove the picks), proven by the live page without the block · no theme files · option: theme guard (persist the upsell flag, match protection by it only)
+
 2026-11-23 · how-to: Shipping protection like tammycharm---ti-n → same logic already in the theme (LuUp.sync = base ui.js), checked in the preview; admin only: product + Theme settings › Cart drawer › Protection product (platform-guide) · no theme files · live store has no protection product picked yet
+
 2026-11-23 · cart: lines show the pack price spread per product (Buy 2 = $31.50 + $31.49) + "You save 74%"; "Customers also add" behind new setting Cart drawer > Show the upsell products (off) · _src/patch-cart.js (new), _src/build-vn-settings.js, assets/js/theme.js, sections/cart-drawer.hbs, config/settings_*.json, theme.json, CHANGELOG.md · 4+ items = SAVE 76% until the store adds tier 4:16.67; editor sections locked = shopdy design (sections edited from the product)
+
 2026-11-21 · product: "Complete the bundle" SAVE as % (follows the Kaching SAVE style: compare_pct → SAVE 55%) and the gallery follows the main product's colour in the bundle (__showImage) · _src/cb/lu-companion.js, assets/js/lu-companion.js · none
+
 2026-11-21 · product: "Complete the bundle" rows showed Size before Color (product option order) → colour options first, as the Kaching packs · _src/cb/lu-companion.js, assets/js/lu-companion.js · none
+
 2026-11-20 · home: banner on phones cut the picture (fixed 340 px + cover) → whole picture, box = the picture's shape (new setting Home page > Banner on phone, default Whole picture; Fixed height = old look) · _src/patch-vn.js, _src/build-vn-settings.js, templates/index.hbs, config/settings_schema.json, config/settings_data.json · none
-2026-11-20 · product: Image / video slider on phones = at most 3 in one row (new block setting On mobile, default 3; all = swipe) · snippets/lu-media-slider.hbs, sections/product.schema.json, _src/build-sc.js, templates/product.triple-zone-bodysuit.json · none
-2026-11-20 · home: "Products" heading touched the cards → 40 px under it, as above (centred) · assets/css/vn-chrome.css · none
-2026-11-20 · how-to: home banner picture → product link (admin only: Theme settings > Home page > Banner image link, since 2026.11.20.1) · no files · none

@@ -1,0 +1,2 @@
+2026-11-23 · giỏ hàng: giá từng dòng = giá sau giảm của server (quần 2 món $49.90, áo Duo $70.90), giá gốc gạch · assets/js/ui.js · mở: áo Trio 119.91 do discount 24.87 % → admin đổi sang giảm cố định 9.92/món (119.92)
+2026-11-23 · bundle: chọn màu/size ở từng dòng của gói → ảnh lớn gallery đổi theo ảnh variant (như hushflex) · assets/js/ui.js · mở: 360 px cuộn ngang 8 px; select của dòng gói cao 40 px (< 44)

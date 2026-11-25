@@ -281,6 +281,19 @@ const EDITS = [
     find: '<template data-lu-names-tpl><div class="kaching-bundles__bar-variant-names">{{#each @root.product.variants}}<span>{{name}}</span>{{/each}}</div></template>',
     replace: '<template data-lu-names-tpl><div class="kaching-bundles__bar-variant-names">{{#each @root.product.variants}}{{#if (isColorGroup name)}}<span>{{name}}</span>{{/if}}{{/each}}{{#each @root.product.variants}}{{#unless (isColorGroup name)}}<span>{{name}}</span>{{/unless}}{{/each}}</div></template>',
   },
+  // Card "Add to cart" (home grid + related products, #ms-card-tpl) no longer opens the quick-add modal (user
+  // 2026-11-25: "looks ugly"): it opens the product page at #lu-buy, and the product section's inline script
+  // (sections/product.hbs, after the sticky bar) scrolls to the pack picker. The modal code stays, unreachable.
+  {
+    file: 'assets/js/theme.js', done: 'location.href=c.split("#")[0]+"#lu-buy";return}',
+    find: 'document.addEventListener("click",function(i){var o=i.target.closest("[data-ms-quick-add]");if(o){i.preventDefault();var c=o.getAttribute("data-product-url");',
+    replace: 'document.addEventListener("click",function(i){var o=i.target.closest("[data-ms-quick-add]");if(o){i.preventDefault();var c=o.getAttribute("data-product-url");if(c){location.href=c.split("#")[0]+"#lu-buy";return}',
+  },
+  {
+    file: 'sections/footer.hbs', done: 'button--primary" data-product-url="" data-ms-quick-add>',
+    find: 'button--primary" aria-haspopup="dialog" data-product-url="" data-ms-quick-add>',
+    replace: 'button--primary" data-product-url="" data-ms-quick-add>',
+  },
 ];
 
 let applied = 0;

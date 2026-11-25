@@ -45,10 +45,10 @@ function bxgy(lines,o){
   var max=Math.floor(buy/b)*g,u=[];
   lines.forEach(function(l,i){if(!l.gift&&y.indexOf(l.pid)>-1)for(var k=0;k<l.qty;k++)u.push({i:i,p:l.price});});
   if(!u.length)return null;
-  u.sort(function(a,b){return a.p-b.p;});
+  u.sort(function(a,b){return a.p-b.p||(lines[b.i].luFree?1:0)-(lines[a.i].luFree?1:0)||b.i-a.i;});var fr=lines.map(function(){return 0;});
   var per=lines.map(function(){return 0;}),tot=0;
-  u.slice(0,max).forEach(function(x){var a=0;if(o.type==='FREE')a=x.p;else if(o.type==='PERCENTAGE')a=x.p*(v/100);else if(o.type==='FIXED_AMOUNT')a=Math.min(x.p,v);a=r2(a);per[x.i]+=a;tot+=a;});
-  return {total:r2(tot),per:per};
+  u.slice(0,max).forEach(function(x){var a=0;if(o.type==='FREE')a=x.p;else if(o.type==='PERCENTAGE')a=x.p*(v/100);else if(o.type==='FIXED_AMOUNT')a=Math.min(x.p,v);a=r2(a);per[x.i]+=a;tot+=a;if(x.p>0&&a>=x.p-.005)fr[x.i]++;});
+  return {total:r2(tot),per:per,free:fr};
 }
 /* AMOUNT_OFF_PRODUCTS: % (hoac so tien) moi mon tren cac san pham x, khi du toi thieu (so luong / tien) cua cac san pham do.
    Checkout tinh + lam tron theo tung dong bien the (productId:variantId) -> gom cac don vi cung bien the (vid; chua biet vid -> cung gia). */
@@ -66,12 +66,13 @@ function amountOff(lines,o){
 }
 function best(lines,tierStr,offerStr,offStr){
   var r={total:0,per:lines.map(function(){return 0;})},c=tiered(lines,tiers(tierStr));
-  if(c&&c.total>r.total)r=c;
-  offers(offerStr).forEach(function(o){var d=bxgy(lines,o);if(d&&d.total>r.total)r=d;});
-  offers(offStr).forEach(function(o){var d=amountOff(lines,o);if(d&&d.total>r.total)r=d;});
+  if(c&&c.total>r.total){c.kind="tier";r=c;}
+  offers(offerStr).forEach(function(o){var d=bxgy(lines,o);if(d&&(d.total>r.total||r.kind==="bxgy"&&d.total>=r.total-.005&&(+o.get||1)>(+r.o.get||1))){d.kind="bxgy";d.o=o;r=d;}});
+  offers(offStr).forEach(function(o){var d=amountOff(lines,o);if(d&&d.total>r.total){d.kind="off";d.o=o;r=d;}});
   return r;
 }
-window.LuDisc={best:best,tiers:tiers,offers:offers,amountOff:amountOff};
+function label(S){if(!S||!S.kind)return"";var o=S.o||{};if(S.kind==="bxgy"){var b=+o.buy||1,g=+o.get||1,same=!!o.all||(o.y||[]).some(function(p){return(o.x||[]).indexOf(p)>-1;});return "Buy "+(same&&b>g?b-g:b)+", Get "+g+(o.type==="FREE"?" Free":o.type==="PERCENTAGE"?" "+o.value+"% off":" $"+o.value+" off");}if(S.kind==="off")return(o.type==="PERCENTAGE"?o.value+"% off":"$"+o.value+" off")+(+o.minQty>1?" · "+o.minQty+"+ items":"");return "Volume discount";}
+window.LuDisc={best:best,tiers:tiers,offers:offers,amountOff:amountOff,label:label};
 })();
 </script>
 <script>window.LuTierPids={{json @root.nextItemTierProducts}};</script>

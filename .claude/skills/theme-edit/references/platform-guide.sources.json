@@ -7,6 +7,8 @@
     "apps/web/src/features/theme-editor/components/section-inspector.tsx": "b1869f5a9595009a6cb484147e95116ebf2579f8",
     "apps/web/src/features/theme-editor/pages/theme-editor.page.tsx": "79ea41626580df324b29ae7de87cb07daed72262",
     "apps/web/src/features/theme-editor/api/theme-editor.api.ts": "6e2d214c459190342e7c08a822299287035dfbcd",
+    "apps/api/src/features/templates/templates.routes.ts": "062c12d0443cb8dc7961bc700cfa310828daaa8f",
+    "apps/api/src/features/templates/infrastructure/update-theme-from-zip.ts": "85eda545996e557c8ad3fd16f93c14cacc69be48",
     "apps/web/src/features/products/components/page-template-overview.tsx": "1875f72e868e2ebfd35cc7e538dbd850aa404722",
     "apps/web/src/features/products/components/product-editor.tsx": "bfaea82dd7b9a75e9ca627215b713afa51e16a37",
     "apps/web/src/features/products/components/product-theme-selector-dialog.tsx": "add0b9a49208223d3afe7a384b89ca17484bb653",

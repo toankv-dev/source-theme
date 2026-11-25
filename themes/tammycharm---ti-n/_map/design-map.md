@@ -161,4 +161,10 @@ No build or patch scripts: the theme files are the source.
 <!-- Write what the code does not say (intent, traps, recipes) under "### <part id>", between notes:<id> markers. -->
 ### theme
 <!-- notes:theme -->
+- ui.js is hand-edited (no `_src/`, not synced by sync-core). Bundle per-unit rows: `function ae(` builds each `.b-unit`; its select `change` handler now also swaps `[data-gallery-main]` + active thumb (`Y(...)`, `Ct(...)`) to that unit's variant image (like hushflex). Find it: `grep -o 'h.addEventListener("change",function(){c\[f\]=h.value.\{0,200\}' assets/js/ui.js`.
+- Variant image = `featured_image` in `#sf-variants-data` (core.js maps it to `.image`). The preview's sample product has none, so a test must set `Base.variants.list()[i].featured_image` first.
+- Main picker → gallery only after a user click/change outside the gallery (`window.__luGalOk`), so the first image stays on load.
+- Preview route from Git Bash: prefix `MSYS_NO_PATHCONV=1`, else `/product` becomes a Windows path.
+- Pack / cart prices come from the server (`srv-price.js` → `/api/storefront/cart/price`), so a pack total like 119.91 vs "29.98 × 4" is the discount's setup (percent rounding), not the theme: fix it in Discounts (fixed amount per unit). Cart drawer: after the quote, ui.js puts each line's `lineTotalAfterDiscount` in `.b-line__now` and the pre-discount / compare total in `.b-line__was` (find: `grep -o 'lineTotalAfterDiscount.\{0,200\}' assets/js/ui.js`). Preview has no price API: test by stubbing `Base.cart.quote` then `BaseUI.renderCart()`.
+- Live discounts (2026-11-23): bra Duo −4.45/unit min 2 (70.90), Trio −24.87 % min 4 (119.91); leggings −50 % min 2 (49.90), −54.96 % min 4 (89.90) + Buy 2 Get 1 BOGO.
 <!-- /notes -->

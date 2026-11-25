@@ -54,7 +54,9 @@ async function answers(port) {
 const portFree = (port) => new Promise((ok) => {
   const s = net.createServer();
   s.once('error', () => ok(false));
-  s.listen(port, '127.0.0.1', () => s.close(() => ok(true)));
+  // No host, as preview-server.js listens: on Windows 127.0.0.1 binds even when another server holds 0.0.0.0 / [::] on
+  // that port, so an old preview (another theme) kept answering and the check ran on the wrong files.
+  s.listen(port, () => s.close(() => ok(true)));
 });
 
 async function preview() {
@@ -70,6 +72,7 @@ async function preview() {
   fs.writeFileSync(STATE, JSON.stringify(state, null, 2) + '\n');
   for (let i = 0; i < 80 && !(await answers(port)); i++) await new Promise((r) => setTimeout(r, 250));
   if (!(await answers(port))) throw new Error(`the preview did not start on port ${port}`);
+  if (!pidAlive(child.pid)) { fs.rmSync(STATE, { force: true }); throw new Error(`port ${port} is answered by another server (the new preview exited): stop it or pass --port`); }
   return { ...state, reused: false };
 }
 
@@ -234,7 +237,8 @@ async function main() {
     if (r.overflow && w < 600) problem = true;
     for (const e of r.errors || []) errs.add(e);
     if (r.eval !== undefined) {
-      lines.push(`eval ${String(w).padStart(5)}: ${String(r.eval).slice(0, 300)}`);
+      // 1500: one probe of several elements (e.g. every cart line) fits; a JSON string's \n print as new lines
+      lines.push(`eval ${String(w).padStart(5)}: ${String(r.eval).slice(0, 1500).replace(/\\n/g, '\n       ')}`);
       if (String(r.eval).startsWith('ERROR')) problem = true;
     }
     if (r.ref) {

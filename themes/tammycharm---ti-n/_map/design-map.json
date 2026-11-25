@@ -17,7 +17,7 @@
   "assets/js/rf.js": "bdf12aca82d1d5785f5ca447551b30840946272c",
   "assets/js/srv-price.js": "6370b6d12533db695c1f975e620dc37d5426ac63",
   "assets/js/theme.js": "5450bab52ebee24018d9072b68b21063f6015455",
-  "assets/js/ui.js": "d1ecc7fd3f6742bb66a82005a875c77643e8db61",
+  "assets/js/ui.js": "2461a372411225c6f3ea295d01c9ea97a793485d",
   "config/settings_data.json": "4584356ba220d20a2ad8ca0d9a56aa59de63c13e",
   "config/settings_schema.json": "8e5528787f0337f097d6548b3c1c62c2907b4132",
   "layout/theme.hbs": "0a18d3a1dc5bc0d38d91b0dd38c678d1c14e9849",
@@ -150,7 +150,7 @@
   "theme": {
    "checked": {},
    "flagged": null,
-   "text": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+   "text": "e44d9609b349dd086af7d5e62afe410180632a2e"
   }
  },
  "version": 1

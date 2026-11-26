@@ -1,3 +1,4 @@
+<script>/*lu-cur*/window.LuCur=window.LuCur||(function(){var C={loc:0};function S(){var s=window.SFMoney;return s&&s.currency&&s.currency!=="USD"&&typeof s.convertUsd=="function"?s:null}function n(x){return typeof x=="number"?x:parseFloat(String(x==null?"":x).replace(/[^0-9.]/g,""))||0}function d(x){return"$"+(Math.round((Number(x)||0)*100)/100).toFixed(2)}C.on=function(){return!!S()};C.u=function(x){var s=S();x=n(x);return s?s.convertUsd(x):x};C.f=function(x){var s=S();return s?s.format(Number(x)||0):d(x)};C.fu=function(x){return C.f(C.u(x))};C.dn=function(x){var s=S();x=n(x);return s?Math.floor(x*(s.convertUsd(1e6)/1e6)*100+1e-6)/100:x};C.fx=function(x){return C.loc&&S()?C.dn(x):x};C.lbl=function(v){return S()?C.f(C.dn(v)):"$"+v};C.mk=function(e,x){if(!e)return;x==null||x===""?e.removeAttribute("data-price-usd"):e.setAttribute("data-price-usd",String(n(x)))};C.set=function(e,x,p){if(!e)return;p=p||"";if(x==null){e.textContent="";C.mk(e,null);return}e.textContent=p+C.fu(x)+p;C.mk(e,x)};C.h=function(x){return'<span data-price-usd="'+n(x)+'">'+C.fu(x)+"</span>"};C.cart=function(r){return S()?r.map(function(l){var o={},k;for(k in l)o[k]=l[k];o.price=C.u(l.price);o.compareAt=l.compareAt?C.u(l.compareAt):l.compareAt;o.bundlePrice=l.bundlePrice?C.u(l.bundlePrice):l.bundlePrice;return o}):r};window.addEventListener("sfmoney:change",function(){try{window.LuCartR&&window.LuCartR()}catch(e){}[].forEach.call(document.querySelectorAll("[data-lu-kaching]"),function(o){try{o.__luK&&o.__luK(o.__luA,o.__luP)}catch(e){}});[].forEach.call(document.querySelectorAll("[data-lu-cb-side]"),function(w){var s=w.querySelector("select");try{s&&s.dispatchEvent(new Event("change",{bubbles:true}))}catch(e){}})});return C})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 {{#if brand.favicon}}<link rel="icon" href="{{brand.favicon}}">{{/if}}
@@ -39,7 +40,7 @@ function tiered(lines,ts){
   return tot>0?{total:r2(tot),per:per}:null;
 }
 function bxgy(lines,o){
-  var b=parseInt(o.buy,10)||1,g=parseInt(o.get,10)||1,x=o.x||[],y=o.y||[],v=Number(o.value)||0;
+  var b=parseInt(o.buy,10)||1,g=parseInt(o.get,10)||1,x=o.x||[],y=o.y||[],v=LuCur.fx(Number(o.value)||0);
   var buy=0;lines.forEach(function(l){if(!l.gift&&(o.all||x.indexOf(l.pid)>-1))buy+=l.qty;});
   if(buy<b)return null;
   var max=Math.floor(buy/b)*g,u=[];
@@ -53,11 +54,11 @@ function bxgy(lines,o){
 /* AMOUNT_OFF_PRODUCTS: % (hoac so tien) moi mon tren cac san pham x, khi du toi thieu (so luong / tien) cua cac san pham do.
    Checkout tinh + lam tron theo tung dong bien the (productId:variantId) -> gom cac don vi cung bien the (vid; chua biet vid -> cung gia). */
 function amountOff(lines,o){
-  var v=Number(o.value)||0,x=o.x||[],el=[],q=0,sub=0;
+  var v=LuCur.fx(Number(o.value)||0),x=o.x||[],el=[],q=0,sub=0;
   lines.forEach(function(l,i){if(!l.gift&&(o.all||x.indexOf(l.pid)>-1)){el.push(i);q+=l.qty;sub+=l.price*l.qty;}});
   if(!el.length||v<=0)return null;
   if((Number(o.minQty)||0)>0&&q<Number(o.minQty))return null;
-  if((Number(o.minSubtotal)||0)>0&&sub<Number(o.minSubtotal))return null;
+  if((Number(o.minSubtotal)||0)>0&&sub<LuCur.fx(Number(o.minSubtotal)))return null;
   var g={},ks=[],per=lines.map(function(){return 0;}),tot=0;
   el.forEach(function(i){var l=lines[i],k=l.pid+'|'+(l.vid||('$'+l.price));if(!g[k]){g[k]={p:l.price,q:0,ix:[]};ks.push(k);}g[k].q+=l.qty;g[k].ix.push(i);});
   ks.forEach(function(k){var G=g[k],a=r2(o.type==='FIXED_AMOUNT'?Math.min(G.p,v)*G.q:G.p*(v/100)*G.q),left=a;tot+=a;
@@ -71,7 +72,7 @@ function best(lines,tierStr,offerStr,offStr){
   offers(offStr).forEach(function(o){var d=amountOff(lines,o);if(d&&d.total>r.total){d.kind="off";d.o=o;r=d;}});
   return r;
 }
-function label(S){if(!S||!S.kind)return"";var o=S.o||{};if(S.kind==="bxgy"){var b=+o.buy||1,g=+o.get||1,same=!!o.all||(o.y||[]).some(function(p){return(o.x||[]).indexOf(p)>-1;});return "Buy "+(same&&b>g?b-g:b)+", Get "+g+(o.type==="FREE"?" Free":o.type==="PERCENTAGE"?" "+o.value+"% off":" $"+o.value+" off");}if(S.kind==="off")return(o.type==="PERCENTAGE"?o.value+"% off":"$"+o.value+" off")+(+o.minQty>1?" · "+o.minQty+"+ items":"");return "Volume discount";}
+function label(S){if(!S||!S.kind)return"";var o=S.o||{};if(S.kind==="bxgy"){var b=+o.buy||1,g=+o.get||1,same=!!o.all||(o.y||[]).some(function(p){return(o.x||[]).indexOf(p)>-1;});return "Buy "+(same&&b>g?b-g:b)+", Get "+g+(o.type==="FREE"?" Free":o.type==="PERCENTAGE"?" "+o.value+"% off":" "+LuCur.lbl(o.value)+" off");}if(S.kind==="off")return(o.type==="PERCENTAGE"?o.value+"% off":LuCur.lbl(o.value)+" off")+(+o.minQty>1?" · "+o.minQty+"+ items":"");return "Volume discount";}
 window.LuDisc={best:best,tiers:tiers,offers:offers,amountOff:amountOff,label:label};
 })();
 </script>

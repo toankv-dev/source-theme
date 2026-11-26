@@ -76,9 +76,9 @@ body:has([data-lu-related-grid] > li) .sf-upsell{display:none!important}
         var sp = Number(p.sellingPrice) || 0, cp = Number(p.compareAtPrice) || 0, on = cp > sp, pr = c.querySelector('.price');
         if (pr) {
           pr.classList.toggle('price--on-sale', on);
-          var r = pr.querySelector('.price__regular .price-item--regular'); if (r) r.textContent = ' ' + money(sp) + ' ';
-          var s = pr.querySelector('.price-item--sale'); if (s) s.textContent = ' ' + money(sp) + ' ';
-          var o = pr.querySelector('s.price-item--regular'); if (o) o.textContent = on ? ' ' + money(cp) + ' ' : '';
+          var r = pr.querySelector('.price__regular .price-item--regular'); if (r) LuCur.set(r, sp, ' ');
+          var s = pr.querySelector('.price-item--sale'); if (s) LuCur.set(s, sp, ' ');
+          var o = pr.querySelector('s.price-item--regular'); if (o) LuCur.set(o, on ? cp : null, ' ');
         }
         var pct = p.offPct || (on ? Math.round((1 - sp / cp) * 100) : 0);
         Array.prototype.forEach.call(c.querySelectorAll('[data-ms-badge]'), function (b) { var x = b.querySelector('[data-ms-pct]'); if (pct && x) x.textContent = pct; else b.innerHTML = ''; });

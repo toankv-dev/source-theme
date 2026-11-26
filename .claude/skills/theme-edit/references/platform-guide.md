@@ -56,6 +56,12 @@ Discounts → create. Method: Discount code or Automatic (Automatic needs a Titl
   Buy 3 Get 1 FREE + Buy 5 Get 2 FREE, every BOGO product in X and Y of BOTH (one discount per cart: a pair per product
   = a mixed cart gets one product's deal), Eligibility All customers, no usage limit, products linked directly (a
   collection link, a limit or a customer list = themes do not show it). Tier discount off, or 2 units take its price.
+  Clicks: Discounts → Create discount → "Buy X Get Y" → Method "Automatic discount" + Title → "Customer buys":
+  "Minimum quantity of items", Quantity 3, "Any items from" Specific products → Browse → the product → "Customer
+  gets": Quantity 1, Specific products → Browse → the same product, "At a discounted value": Free → "Customer
+  eligibility" All customers, no "Usage limits" → Create discount; 2nd one 5 / 2. Theme switch Customize → Discounts →
+  "Allow Buy X Get Y discount" on (Lunara Vesnacharm zips: on). Check: POST /api/storefront/cart-totals (3 = pay 2).
+  The Title shows in the checkout / order (English there): name it in the store's language if wanted.
 - Theme switches "Allow tiered / Buy X Get Y discount" gate the checkout (auto-discount-switches.ts) from Themes →
   Customize (Template.dataJson.settings) + the listing's settings bucket ONLY. A store's own theme settings (Online
   Stores → store → theme, storeValues) do not reach the gate: switching a tier off there hides it on the page while the
@@ -119,10 +125,40 @@ Nguồn: origin/SHOPDY-items/SHOPDY-127:apps/web/src/features/products/component
 A review sent from the storefront is saved as pending: not shown. Products → Customer Reviews → "Publish this review?"
 (or Remove). Photos come with the review.
 Nguồn: apps/api/src/features/storefront/storefront.routes.ts, apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx
+Add / edit / remove a review by hand (also the ones on the home page): Products → open the product → its review list
+("All reviews") → **Add review** (avatar, Reviewer name, stars, Review title, text, Date review, Media) → Add review; the
+pencil = **Edit review** → Save changes; the bin = Remove; a pending one = Publish. Lunara home page (theme.js): real
+reviews of up to 8 random products of the home list that have reviews (Theme settings › Home page: Show real reviews of
+random products, Heading, Subheading, Reviews shown); the "Rated x/5 by n" pill = their average and count.
+Nguồn: apps/web/src/features/products/components/product-review-section.tsx, apps/web/src/features/products/components/product-editor.tsx
 
 ## "−xx %" badge, crossed-out price
-The theme shows them from the product's compare-at price: set it above the price on the product / variant. (chưa kiểm:
-the label of that field in the product editor)
+The theme shows them from the product's compare-at price, NOT from a Discount (a Discount only changes the cart /
+checkout total): Products → the product → card Pricing → "Compare-at price" above "Price" → Save; with variants: the
+Variants table, column "Compare at" (all at once: tick the header box → bulk bar "Compare at"). Save % = (compare-at −
+price) / compare-at, e.g. 59.95 / 29.99 → Save 50 %. Empty or ≤ price = no badge, no crossed-out price.
+A store's product has its own copy (Products list: same handle, parent = the master): check ITS variants. Check on the
+live page `https://<domain>/<handle>` (no `/products/`), not in the theme editor: its preview is a sandboxed iframe that
+cannot call the storefront API, so server-priced pack prices stay blank there. A theme may hide the Save row on purpose
+(tammycharm-tien: the packs carry the price) → see the theme's `_map` notes.
+Nguồn: apps/web/src/features/products/components/pricing-section.tsx, apps/web/src/features/products/components/variant-options-builder.tsx
+
+## Store name (footer / header brand, ©, {{StoreName}})
+Themes print `{{brand.name}}` = this domain's Store name; empty → the workspace store name, then the domain name.
+Online Stores → the domain's row → gear "Configure domain settings" → Domain settings → card "Store info" → Store name
+→ Save. Per domain (each subdomain its own); the admin capitalises the first letter. It also changes page titles,
+policies / emails with {{StoreName}}. A theme's footer / header logo image (Customize) hides the name only there.
+Nguồn: apps/web/src/features/stores/pages/domain-settings.page.tsx, apps/web/src/features/stores/components/domain-list.tsx, apps/api/src/features/storefront/application/theme-context.ts
+
+## Local currency (shoppers see and pay in their own currency)
+Online Stores → the domain's row → gear → Domain settings → section "Currency" → switch "Local currency" → Save. Opens
+only when the store's theme.json has `"supportsLocalCurrency": true` AND every payment gateway of its checkout can
+charge a non-USD currency (Stripe: all; Square / OceanPayment: the account's list). Who: the shopper's country
+(cookie `sf_cur` from the presence beat; Norway → NOK), elsewhere USD: testing from Vietnam shows $. Prices: day's rate,
+each unit up to .99; percent / Buy X Get Y on local prices; fixed discounts exact rate down; shipping exact up. Printed
+"NOK 1,289.97" (en-US Intl), not "kr" (a shopdy change). Admin orders stay USD. Merchant texts with "$79" stay as typed.
+A theme must mark every price (`data-price-usd`) and compute per unit (Lunara Vesnacharm: `_src/patch-cur.js`).
+Nguồn: apps/web/src/features/stores/components/domain-settings-modal.tsx, apps/api/src/features/stores/domain/local-currency.ts, apps/api/src/features/storefront/application/theme-capabilities.ts, apps/api/src/features/storefront/application/sf-money-runtime.ts, apps/api/src/features/storefront/application/fx-quote.ts
 
 ## Only the theme can do it (no admin setting)
 New markup, a new block type, animations, phone layout → change the theme (theme-edit flow A).

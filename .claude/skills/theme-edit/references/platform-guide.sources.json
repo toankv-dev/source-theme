@@ -22,6 +22,15 @@
     "apps/api/src/features/storefront/application/cart-pricing.ts": "8ff0a9747da848bde387a11b8e92adcaa03320cb",
     "origin/SHOPDY-items/SHOPDY-127:apps/web/src/features/products/components/companion-bundles-builder.tsx": "98a46ca09574df0bdd011f42ad5700c61d1fbe69",
     "apps/api/src/features/storefront/storefront.routes.ts": "d7244a204029cf12034ec03a17c7c55c1511fecc",
-    "apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx": "0ac21fb8b3ba53c0e7cfa881bb9cf43c2c5aadc0"
+    "apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx": "0ac21fb8b3ba53c0e7cfa881bb9cf43c2c5aadc0",
+    "apps/web/src/features/products/components/pricing-section.tsx": "c5d9575b68740239c567d87a559596fb48a14013",
+    "apps/web/src/features/stores/pages/domain-settings.page.tsx": "2bb22ff2d88bf32985275a4a809ce50dc391276a",
+    "apps/web/src/features/stores/components/domain-list.tsx": "23704320401765c34941db16c4609f6258ba0a86",
+    "apps/api/src/features/storefront/application/theme-context.ts": "5d12062ce8094d523d5b3cffe51f559934a96582",
+    "apps/web/src/features/stores/components/domain-settings-modal.tsx": "ebbd0f8f7fcd192d57819af3ad7bf5ff13b14ccb",
+    "apps/api/src/features/stores/domain/local-currency.ts": "b5aaee04edb2d3fad7de65e535d166b7e9eb89ec",
+    "apps/api/src/features/storefront/application/theme-capabilities.ts": "863b06fa24ba11b1c2f402136f98bb058de877c6",
+    "apps/api/src/features/storefront/application/sf-money-runtime.ts": "18af5a42a426b809500eaee3dd45039689b36fbd",
+    "apps/api/src/features/storefront/application/fx-quote.ts": "f1213d4e4c42410e156db8cb29fc8fc58bb5d7b9"
   }
 }

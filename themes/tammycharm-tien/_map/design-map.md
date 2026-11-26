@@ -1,6 +1,6 @@
 # Design map: tammycharm-tien
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Tammycharm Tien 2026.11.25.r22 · schema v2 · 9 templates · 45 sections · 28 snippets · 12 CSS · 6 JS
+Tammycharm Tien 2026.11.26.r24 · schema v2 · 9 templates · 45 sections · 28 snippets · 12 CSS · 6 JS
 One part in detail: `node tools/theme-map.js themes/tammycharm-tien --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
 README.md: Layers — what a child theme may change L18 · Platform contract (keep in every theme) L31 · JavaScript API (`window.Base`, core.js) L54 · Section catalog (product templates) L62 · Pages L96 · Mobile first L103 · Work on it L112
 
@@ -37,7 +37,7 @@ README.md: Layers — what a child theme may change L18 · Platform contract (ke
 | pf_marq_color | — | PeakFlex – Home top › Text colour | index.hbs |
 | pf_marq_wave | — | PeakFlex – Home top › Wave colour | index.hbs |
 CSS variables: --c-text: #15171c · --c-muted: #5d6270 · --c-line: #e3e5ea · --c-soft: #f4f5f7 · --radius: 12px · --wrap: 1200px · --rf-ink: #3A0A1E · --rf-ink-2: #2A0614 · --rf-olive: #78063A · --rf-olive-2: #5C042C · --rf-khaki: #C98AA6 · --rf-sand: #F8F4F5
-Breakpoints: 749px ×52 · 750px ×36 · 990px ×17 · 900px ×14 · 989px ×7 · 899px ×5 · 600px ×4 · 1200px ×3
+Breakpoints: 749px ×53 · 750px ×36 · 990px ×17 · 900px ×14 · 989px ×7 · 899px ×5 · 600px ×4 · 1200px ×3
 Every page (theme.json): base.css, sections.css, skin.css, core.js, ui.js, theme.js
 
 ## Templates
@@ -162,6 +162,8 @@ No build or patch scripts: the theme files are the source.
 <!-- Write what the code does not say (intent, traps, recipes) under "### <part id>", between notes:<id> markers. -->
 ### theme
 <!-- notes:theme -->
+- "Save X %" = the variant's Compare-at price (not a Discount). Shown: collection card "SAVE 50%", gallery "-50%", pack cards (price + crossed compare × qty; pill "SAVE n%" right after the card title, r24 = Lunara kaching look: `[data-card-save]`, ui.js `bSave()`, hidden by srv-price.js until the server total, block setting `save_label`, missing = "SAVE"). The "$39.95 $79.95 Save 50%" row under the title (`.rf-unit-price`) is hidden ON PURPOSE by zz-custom.css `display:none!important`: the packs carry the price.
+- Pack prices wait for the server (srv-price.js: `.b-srv-wait` = visibility hidden until POST /api/storefront/cart/price answers). The admin theme editor preview is a sandboxed srcdoc iframe that cannot call it → pack prices stay blank there, never a bug: check the live page (`https://<domain>/<handle>`, no `/products/`).
 <!-- /notes -->
 ### cart-drawer
 <!-- notes:cart-drawer -->

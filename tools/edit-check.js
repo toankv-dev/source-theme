@@ -40,7 +40,10 @@ const THEME = path.resolve(dir);
 const STATE = path.join(THEME, '_work', 'preview.json');
 const rel = (f) => path.relative(ROOT, f).replace(/\\/g, '/');
 const SEL = opt('selector');
-const PAGE = opt('page', '/product');
+// Git Bash (MSYS) rewrites an argument "/" or "/pages/x" into "C:/Program Files/Git/…" before node sees it: the check
+// then opened a 404 page with no viewport meta (980 px wide = "SIDEWAYS SCROLL 620px" on the home page). Undo it.
+const unmsys = (p) => p.replace(/^[A-Za-z]:[\\/](?:[^\\/]+[\\/])*?Git[\\/]/, '/').replace(/\\/g, '/');
+const PAGE = unmsys(opt('page', '/product'));
 const WIDTHS = opt('widths', '1440,360').split(',').map(Number).filter(Boolean);
 const slug = (s) => String(s || 'page').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 40).toLowerCase() || 'part';
 

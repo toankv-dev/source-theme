@@ -129,6 +129,8 @@ product.blocks.push(
       { type: 'color', id: 'text_color', label: 'Text colour', default: '', info: 'Empty = the highlight colour (list), dark grey (others).' },
       { type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = none (light grey in the grey box).' },
       { type: 'color', id: 'line_color', label: 'Two columns: line colour', default: '', info: 'Empty = light grey.' },
+      // user 2026-11-26 (wirefree bra): "the 2 lines look ugly". Off by default so saved boxes keep their lines.
+      { type: 'checkbox', id: 'no_lines', label: 'Two columns: hide the lines above and below', default: false },
       ...[1, 2, 3, 4, 5].flatMap((n) => [
         { type: 'header', content: 'Line ' + n },
         { type: 'text', id: 'line_' + n, label: 'Text', default: '' },
@@ -457,7 +459,7 @@ write('sections/sc-reviews.schema.json', {
     { type: 'checkbox', id: 'write_recommend', label: 'Show "I recommend this product"', default: true, info: 'The platform does not store the answer yet.' },
     { type: 'text', id: 'write_submit', label: 'Send button', default: 'Submit review' },
     { type: 'textarea', id: 'write_thanks', label: 'Thank-you message', default: 'Your review will appear here once it has been checked.' },
-    { type: 'color', id: 'star_color', label: 'Star colour', default: '#ffcf2a' },
+    { type: 'color', id: 'star_color', label: 'Star colour', default: '#ffb400' },
     { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 5, unit: 'px', default: 40 },
     { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 5, unit: 'px', default: 50 },
     ...typeSet({ h: 'Heading', s: 'Review titles', t: 'Review text' }, true),
@@ -608,7 +610,7 @@ const sections = {
     trust('support', '24/7 Live Support', '<p>Reach out to our support team via email: <strong>{{CompanyEmail}}</strong></p>'),
   ]),
   // Okendo-style reviews of the original (user 2026-11-19); no review form (reviews are added in the admin)
-  reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, show_photos: true, page_size: 5, star_color: '#ffcf2a', pad_top: 40, pad_bottom: 50 } },
+  reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, show_photos: true, page_size: 5, star_color: '#ffb400', pad_top: 40, pad_bottom: 50 } },
   related: { type: 'related', settings: { heading: 'You Will Also Love', show_quick_add: false } }, // the original's cards have no button
 };
 // ---------------------------------------------------------------------------------------------------------------

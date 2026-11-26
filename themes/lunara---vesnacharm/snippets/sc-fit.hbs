@@ -151,7 +151,8 @@
   var head = lines[0].split('|').map(function (s) { return s.trim(); });
   var rows = lines.slice(1).map(function (l) { return l.split('|').map(function (s) { return s.trim(); }); }).filter(function (r) { return r[0]; });
   var col = function (re) { for (var i = 1; i < head.length; i++) if (re.test(head[i])) return i; return -1; };
-  var C = { w: col(/weight/i), bust: col(/bust|chest/i), waist: col(/waist/i), hip: col(/hip/i) };
+  // column names in EN / DE / FR / NL / SV / NO / FI (language copies by _src/build-lang.js; FR "Taille" alone = size)
+  var C = { w: col(/weight|gewicht|poids|vikt|vekt|paino/i), bust: col(/bust|chest|brust|oberweite|poitrine|borst|byst|bryst|rinta/i), waist: col(/waist|taille\s*\(|tour de taille|midja|\bliv\b|vyötärö/i), hip: col(/hip|hüft|hanche|heup|höft|hofte|lantio/i) };
   var LBS_KG = 0.45359237, IN_CM = 2.54;
   var unit = A('unit', 'imperial') === 'metric' ? 'metric' : 'imperial';
   function range(s) {

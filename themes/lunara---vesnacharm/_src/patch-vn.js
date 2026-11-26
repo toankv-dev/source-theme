@@ -69,6 +69,14 @@ const EDITS = [
     end: '</footer>',
     replace: fs.readFileSync(path.join(__dirname, 'vn-footer.hbs'), 'utf8').trim(),
   },
+  // ---- T5b: the same block rewritten from _src/vn-footer.hbs on EVERY run (T5 only ran once: its done marker is the
+  //      block's first line), so a change of the .hbs reaches the theme (2026-11-26: phone accordion)
+  {
+    file: 'sections/footer.hbs', done: 'class="ft-shell vn-ft"', always: true,
+    start: '<div class="ft-shell vn-ft">',
+    end: '</footer>',
+    replace: fs.readFileSync(path.join(__dirname, 'vn-footer.hbs'), 'utf8').trim(),
+  },
   // ---- T6: "NN% OFF" badge on every product card (#ms-card-tpl: home catalog + related); theme.js and related.hbs
   //      already fill [data-ms-badge] [data-ms-pct] and empty it when there is no compare-at price
   {

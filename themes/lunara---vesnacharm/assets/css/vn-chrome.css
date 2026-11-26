@@ -105,7 +105,7 @@ footer#lu-ft.lu-ft { --ft-bg: var(--vn-footer, var(--vn-hl, #790236)); --ft-fg: 
 .card-wrapper .card__inner > .vn-badge { position: absolute; top: 9px; right: 9px; z-index: 3; display: block; width: auto; height: auto; padding: 4px 7px; background: var(--vn-hl, #790236); color: #fff; font-size: 12px; line-height: 14.4px; font-weight: 700; letter-spacing: .24px; text-transform: uppercase; pointer-events: none; }
 .card-wrapper .card__inner > .vn-badge:empty { display: none; }
 .card-wrapper .price--on-sale .price-item--sale { color: var(--vn-hl, #790236); }
-.lu-card-rating .stars { color: #F9C40F; }
+.lu-card-rating .stars { color: #ffb400; } /* = every star of the theme (user 2026-11-26) */
 
 /* ---- "You Will Also Love" (product-recommendations, probe-1440 top 9104 h710 bg #f8f8f8): full-width #f8f8f8 band,
    heading Montserrat 16px/600 lh36 ls .32px uppercase #232323 → Poppins 16px/700, flat white cards (no radius, no
@@ -205,3 +205,39 @@ footer#lu-ft.lu-ft { --ft-bg: var(--vn-footer, var(--vn-hl, #790236)); --ft-fg: 
    margin; the room under it = the section's top padding (4rem, custom.css .lu-home-products), so the heading sits
    centred between the strip above and the cards. Change both together. */
 .lu-home-products .collection-hero__title { margin-bottom: 4rem; }
+
+/* ---- Phones (< 750 px; user 2026-11-26, "the mobile layout is not tidy") -------------------------------------------
+   Product cards (home grid, /collections): "Add to cart" on one line (letter-spacing 1px made "Legg i handlekurv" wrap),
+   44 px tap, compare-at price + review count 12 px; a last row with one card (1 / 3 / 5 products) is centred, a lone
+   card bigger. Footer: the 3 link columns are an accordion (_src/vn-footer.hbs: heading = button.vn-ft__tg, its script
+   adds .vn-ft--acc only on phones; no JS = lists stay open), bottom bar centred with room for the back-to-top button. */
+#lu-ft .vn-ft__tg { all: unset; display: block; }
+#lu-ft .vn-ft__chev { display: none; }
+@media (max-width: 749px) {
+  .product-grid { justify-content: center; }
+  .product-grid > li:only-child { width: 72%; max-width: 280px; }
+  .product-grid .quick-add__submit { min-height: 44px; height: auto; padding: 0 6px; letter-spacing: 0; font-size: clamp(12px, 3.4vw, 13px); }
+  .product-grid .quick-add__submit .main-atc__label__text { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .product-grid .card-wrapper .price--on-sale .price-item--regular, .product-grid .lu-card-rating-count { font-size: 12px; } /* base.css sets 1rem (10 px) with 4 classes */
+
+  #lu-ft .vn-ft__main { grid-template-columns: minmax(0, 1fr); row-gap: 0; padding: 32px 0 28px; }
+  #lu-ft .vn-ft__brand { padding-bottom: 20px; }
+  #lu-ft .vn-ft__name { font-size: 26px; }
+  #lu-ft .vn-ft__mail { margin-top: 8px; }
+  #lu-ft nav.vn-ft__col { border-top: 1px solid color-mix(in srgb, var(--ft-fg) 20%, transparent); }
+  #lu-ft nav.vn-ft__col .vn-ft__h { margin: 0; font-size: 15px; }
+  #lu-ft .vn-ft__tg { display: flex; align-items: center; justify-content: space-between; gap: 12px; box-sizing: border-box; width: 100%; min-height: 52px; cursor: pointer; }
+  #lu-ft .vn-ft__tg:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  #lu-ft .vn-ft--acc .vn-ft__chev { display: block; flex: none; transition: transform .2s ease; }
+  #lu-ft .vn-ft__col.is-open .vn-ft__chev { transform: rotate(180deg); }
+  #lu-ft .vn-ft--acc nav.vn-ft__col:not(.is-open) .vn-ft__list { display: none; }
+  #lu-ft nav.vn-ft__col .vn-ft__list { padding: 0 0 10px; }
+  #lu-ft .vn-ft__news { padding-top: 24px; border-top: 1px solid color-mix(in srgb, var(--ft-fg) 20%, transparent); }
+  #lu-ft .vn-ft__news .vn-ft__h { margin-bottom: 6px; font-size: 15px; }
+  #lu-ft .vn-ft__p { margin-bottom: 16px; }
+  #lu-ft .vn-ft__btn { flex: 0 0 auto; min-width: 110px; }
+  #lu-ft .vn-ft__bin { align-items: center; gap: 12px; padding-top: 18px; padding-bottom: 76px; text-align: center; }
+  #lu-ft .vn-ft__copy { font-size: 13px; line-height: 20px; }
+  #lu-ft .vn-ft__pay { justify-content: center; gap: 6px; }
+  #lu-ft .vn-ft__pay .ft-pay-icon { height: 22px; }
+}

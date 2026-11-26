@@ -1,7 +1,7 @@
 {{!-- Find my size: theme tu nhan dang kieu size tu option cua san pham (Adlux chi gui ten option + gia tri) -
       bra (34B / Band+Cup / size chu + ten "bra"), quan W-L (W29/L28), size chu XS-5XL (+ Inseam Petite/Regular/Tall).
       Ket qua dien vao bo chon chinh + moi dong Kaching. Bang quy doi (chuan US) sua trong Product section > Size finder. --}}
-<div class="lu-sf" data-lu-sf data-popup="{{#if section.settings.sf_chart_image}}{{#if (eq section.settings.sf_popup "image")}}image{{/if}}{{/if}}" data-mode="{{#if section.settings.sf_mode}}{{section.settings.sf_mode}}{{else}}auto{{/if}}" data-option="{{#if section.settings.sf_option_name}}{{section.settings.sf_option_name}}{{else}}Size{{/if}}" data-bands="{{#if section.settings.sf_bands}}{{section.settings.sf_bands}}{{else}}30, 32, 34, 36, 38, 40, 42, 44, 46, 48{{/if}}" data-cups="{{#if section.settings.sf_cups}}{{section.settings.sf_cups}}{{else}}A, B, C, D, DD/E, DDD/F, G, H/I{{/if}}" hidden><script type="application/json" data-lu-sf-opts>{{{json product.variants}}}</script>
+<div class="lu-sf" data-lu-sf data-popup="{{#if section.settings.sf_chart_image}}{{#if (eq section.settings.sf_popup "image")}}image{{/if}}{{/if}}" data-mode="{{#if section.settings.sf_mode}}{{section.settings.sf_mode}}{{else}}auto{{/if}}" data-option="{{#if section.settings.sf_option_name}}{{section.settings.sf_option_name}}{{else}}Size{{/if}}" data-bands="{{#if section.settings.sf_bands}}{{section.settings.sf_bands}}{{else}}30, 32, 34, 36, 38, 40, 42, 44, 46, 48{{/if}}" data-cups="{{#if section.settings.sf_cups}}{{section.settings.sf_cups}}{{else}}A, B, C, D, DD/E, DDD/F, G, H/I{{/if}}" data-unit="{{#if section.settings.sf_unit}}{{section.settings.sf_unit}}{{else}}in{{/if}}" data-ask="{{#unless (eq section.settings.sf_ask_bust false)}}bust {{/unless}}{{#unless (eq section.settings.sf_ask_waist false)}}waist {{/unless}}{{#unless (eq section.settings.sf_ask_hip false)}}hip{{/unless}}" data-note="{{section.settings.sf_chart_note}}" hidden><script type="application/json" data-lu-sf-opts>{{{json product.variants}}}</script>
 <style>
 .lu-sf{margin:1.2rem 0 .4rem}
 .lu-sf-open{display:inline-flex;align-items:center;gap:6px;padding:0;border:0;background:none;color:rgb(var(--color-foreground));font:inherit;font-size:1.4rem;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
@@ -59,7 +59,7 @@
 .lu-sf-f input:focus,.lu-sf-f select:focus{outline:none;border-color:var(--lu-primary,#790236);box-shadow:0 0 0 3px color-mix(in srgb,var(--lu-primary,#790236) 15%,transparent)}
 .lu-sf-how{margin:10px 0 0;font-size:1.25rem;color:#6b6b6b;line-height:1.5}
 </style>
-<style>.lu-sf-chart{display:block;width:100%;height:auto;margin:0 0 16px}.lu-sf[data-popup=image] .lu-sf-bd>:not(.lu-sf-chart){display:none!important}.lu-sf[data-popup=image] .lu-sf-chart{margin:0}</style><button type="button" class="lu-sf-open" data-lu-sf-open><svg class="lu-ruler" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7.5" width="20" height="9" rx="1.5"/><path d="M6 7.5v3M10 7.5v4.5M14 7.5v3M18 7.5v4.5"/></svg><span>{{#if section.settings.sf_link_label}}{{section.settings.sf_link_label}}{{else}}Size guide{{/if}}</span></button>
+<style>.lu-sf-units[hidden]{display:none}.lu-sf-chart{display:block;width:100%;height:auto;margin:0 0 16px}.lu-sf[data-popup=image] .lu-sf-bd>:not(.lu-sf-chart){display:none!important}.lu-sf[data-popup=image] .lu-sf-chart{margin:0}</style><button type="button" class="lu-sf-open" data-lu-sf-open><svg class="lu-ruler" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7.5" width="20" height="9" rx="1.5"/><path d="M6 7.5v3M10 7.5v4.5M14 7.5v3M18 7.5v4.5"/></svg><span>{{#if section.settings.sf_link_label}}{{section.settings.sf_link_label}}{{else}}Size guide{{/if}}</span></button>
 <dialog class="lu-sf-dlg" aria-labelledby="lu-sf-title">
 <div class="lu-sf-hd"><h2 id="lu-sf-title">{{#if section.settings.sf_title}}{{section.settings.sf_title}}{{else}}Find your perfect size{{/if}}</h2><button type="button" class="lu-sf-x" data-lu-sf-close aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <div class="lu-sf-bd">{{#if section.settings.sf_chart_image}}{{#unless (eq section.settings.sf_popup "finder")}}<img class="lu-sf-chart" src="{{section.settings.sf_chart_image}}" alt="Size chart" loading="lazy">{{/unless}}{{/if}}
@@ -122,6 +122,7 @@ XL: 43, 36, 46
     if(/EXTRAPETITE|XPETITE|XSHORT|EXTRASHORT/.test(n))return 0;if(/PETITE|SHORT/.test(n))return 1;if(/REGULAR|STANDARD|AVERAGE/.test(n))return 2;
     if(/EXTRATALL|XTALL|EXTRALONG|XLONG/.test(n))return 4;if(/TALL|LONG/.test(n))return 3;return null;}
   function all(vals,fn){var ok=vals.filter(function(x){return fn(x)!=null;}).length;return vals.length>0&&ok>=Math.max(1,Math.ceil(vals.length*0.6));}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-lu-sf]:not([data-lu-sf-ready])'),function(root){
     root.setAttribute('data-lu-sf-ready','1');
@@ -159,7 +160,29 @@ XL: 43, 36, 46
     // ---- doc bang (Theme editor)
     function lines(sel){return ((root.querySelector(sel)||{}).textContent||'').split(/\n|<br\s*\/?>/i).map(function(l){return l.trim();}).filter(Boolean);}
     var BRA_MAP={};lines('[data-lu-sf-map]').forEach(function(l){var m=l.split(':');if(m.length>1)BRA_MAP[m[0].trim()]=m.slice(1).join(':').split(',').map(function(x){return x.trim();});});
-    var CHART=[];lines('[data-lu-sf-letters]').forEach(function(l){var m=l.split(':');if(m.length<2)return;var v=m[1].split(',').map(function(x){return parseFloat(x);});var s=letter(m[0]);if(s)CHART.push({size:s,label:m[0].trim(),bust:v[0],waist:v[1],hip:v[2]});});
+    // Bang size chu (Product > Size finder > Letter size chart, user 2026-11-26 "sua tuy y"): dong dau tuy chon "Size: Bust, Waist, EU"
+    // = ten cot, bao nhieu cot cung duoc. Cot ten vong nguc / eo / hong (7 ngon ngu, hoac dung nhan cua o hoi) = so do tinh size + o hoi;
+    // cot khac chi hien trong bang. Khong co dong dau = 3 cot cu bust, waist, hips. O "80-84" = khoang (tinh so lon nhat), "-" = khong gioi han.
+    // So trong bang theo setting Chart unit (in / cm); ben trong van tinh bang inch.
+    var CU=root.getAttribute('data-unit')||'in',CUNIT=/^cm/.test(CU)?'cm':'in',ONLY=/_only$/.test(CU);
+    function fl(k){return ((root.querySelector('[data-lu-sf-field="'+k+'"] .lu-sf-l')||{}).textContent||'').trim();}
+    var MEAS=['bust','waist','hip'],HEAD=false,COLS=null,TH0='<th>Size</th>',CHART=[];
+    function colKey(n){var s=String(n).trim().toLowerCase();if(!s)return null;
+      for(var i=0;i<MEAS.length;i++)if(s===fl(MEAS[i]).toLowerCase())return MEAS[i];
+      if(/under|unter|onder|sous|alarinta|band/.test(s))return null;
+      if(/bust|chest|brust|bryst|byst|rinta|poitrine|borst/.test(s))return 'bust';
+      if(/waist|taille|midje|midja|^liv|vyöt|vyot/.test(s))return 'waist';
+      if(/hip|hüft|huft|hofte|höft|hoft|lantio|hanche|heup/.test(s))return 'hip';
+      return null;}
+    function last(c){var m=String(c).match(/\d+(\.\d+)?/g);return m?parseFloat(m[m.length-1]):null;}
+    lines('[data-lu-sf-letters]').forEach(function(l){var i=l.indexOf(':');if(i<0)return;var k=l.slice(0,i).trim(),cells=l.slice(i+1).split(',').map(function(x){return x.trim();});
+      if(!COLS&&!CHART.length&&!letter(k)&&cells.some(function(c){return /[^\d\s.\-–—"]/.test(c)&&!/^(cm|in)$/i.test(c);})){
+        COLS=cells.map(function(c){return {name:c,key:colKey(c)};});HEAD=true;if(k)TH0='<th>'+esc(k)+'</th>';return;}
+      CHART.push({size:letter(k),label:k,cells:cells});});
+    if(!COLS)COLS=MEAS.map(function(k){return {name:fl(k),key:k};});
+    var COL={};COLS.forEach(function(c,i){if(c.key&&COL[c.key]==null)COL[c.key]=i;});
+    CHART.forEach(function(r){MEAS.forEach(function(k){var v=COL[k]!=null?last(r.cells[COL[k]]||''):null;r[k]=v>0?(CUNIT==='cm'?v/2.54:v):0;});});
+    var ROWS=CHART.filter(function(r){return r.size;});
     var dlg=root.querySelector('dialog'),res=root.querySelector('[data-lu-sf-res]'),sizeEl=root.querySelector('[data-lu-sf-size]'),noteEl=root.querySelector('[data-lu-sf-note]');
     var hint=root.querySelector('[data-lu-sf-hint]'),go=root.querySelector('[data-lu-sf-go]'),tg=root.querySelector('[data-lu-sf-tg]'),tbl=root.querySelector('[data-lu-sf-tbl]');
     var chosen=null,KEY='lu_sf_v3';
@@ -167,8 +190,9 @@ XL: 43, 36, 46
     function save(){try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}}
     function show(sel){Array.prototype.forEach.call(root.querySelectorAll('[data-lu-sf-pane]'),function(p){p.hidden=p.getAttribute('data-lu-sf-pane')!==sel;});}
     function pickVal(g,want){if(!g)return null;for(var i=0;i<g.vals.length;i++)if(norm(g.vals[i])===norm(want))return g.vals[i];return null;}
-    function result(sel,label,note){chosen=sel;hint.hidden=true;res.hidden=false;sizeEl.textContent=label;noteEl.textContent=note||'';go.hidden=!sel;}
-    function empty(){chosen=null;res.hidden=true;hint.hidden=false;}
+    function redraw(){if(kind==='letter'&&tbl&&!tbl.hidden)drawTable();}   // bang dang mo: doi don vi / size chon -> ve lai
+    function result(sel,label,note){chosen=sel;hint.hidden=true;res.hidden=false;sizeEl.textContent=label;noteEl.textContent=note||'';go.hidden=!sel;redraw();}
+    function empty(){chosen=null;res.hidden=true;hint.hidden=false;redraw();}
 
     // ================= BRA: Band + Cup
     var pick={band:saved.band||null,cup:saved.cup||null},bands=[],cups=[];
@@ -192,19 +216,29 @@ XL: 43, 36, 46
       b.addEventListener('click',function(){pick[key]=v;Array.prototype.forEach.call(box.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});braUpdate();});box.appendChild(b);});}
 
     // ================= SO DO CO THE (size chu / W-L)
-    var unit=saved.unit==='cm'?'cm':'in';
-    var need=kind==='wl'?(lenG?['waist','height','inseam']:['waist']):(BOTTOMS?['waist','hip']:['bust','waist','hip']);
-    if(kind==='letter'&&tierG)need.push('height');
-    // so do co the: chon tu danh sach (gia tri luon la inch, nut inch/cm chi doi nhan)
+    // nut inch / cm: lan dau = don vi cua bang; nguoi mua bam doi -> nho (saved.u); "*_only" = an nut
+    var unit=ONLY?CUNIT:(saved.u==='cm'||saved.u==='in'?saved.u:CUNIT);
+    // o hoi = so do co cot trong bang + dang bat (Ask bust / waist / hips); khong con o nao = popup chi hien bang
+    var ASK=root.hasAttribute('data-ask')?root.getAttribute('data-ask').split(/\s+/):MEAS;
+    var need=kind==='wl'?(lenG?['waist','height','inseam']:['waist']):(BOTTOMS?['waist','hip']:['bust','waist','hip']).filter(function(k){return COL[k]!=null&&ASK.indexOf(k)>=0;});
+    var CHARTONLY=kind==='letter'&&!need.length;
+    if(CHARTONLY)unit=CUNIT;
+    if(kind==='letter'&&tierG&&!CHARTONLY)need.push('height');
+    // so do co the: chon tu danh sach (gia tri luon la inch; cm = tung cm, doi don vi giu so gan nhat)
     var RANGE={bust:[28,60],waist:[22,52],hip:[30,62],height:[56,77],inseam:[24,38]};
+    MEAS.forEach(function(k){var a=ROWS.map(function(r){return r[k];}).filter(function(x){return x>0;});if(a.length)RANGE[k]=[Math.min(RANGE[k][0],Math.floor(Math.min.apply(0,a))-2),Math.max(RANGE[k][1],Math.ceil(Math.max.apply(0,a))+2)];});
     function lbl(k,i){if(k==='height')return unit==='cm'?Math.round(i*2.54)+' cm':Math.floor(i/12)+"' "+(i%12)+'"';return unit==='cm'?Math.round(i*2.54)+' cm':i+'"';}
-    function fillAll(){Object.keys(RANGE).forEach(function(k){var el=root.querySelector('[data-lu-sf-in="'+k+'"]');if(!el)return;var cur=el.value;
-      el.innerHTML='<option value="">'+(k==='inseam'?'Not sure':'Select')+'</option>';for(var i=RANGE[k][0];i<=RANGE[k][1];i++){var o=document.createElement('option');o.value=i;o.textContent=lbl(k,i);el.appendChild(o);}el.value=cur;});}
+    function setNear(el,v){var b='',bd=1e9;for(var i=1;i<el.options.length;i++){var d=Math.abs(parseFloat(el.options[i].value)-v);if(d<bd){bd=d;b=el.options[i].value;}}el.value=b;}
+    function fillAll(){Object.keys(RANGE).forEach(function(k){var el=root.querySelector('[data-lu-sf-in="'+k+'"]');if(!el)return;var cur=parseFloat(el.value);
+      el.innerHTML='<option value="">'+(k==='inseam'?'Not sure':'Select')+'</option>';
+      if(unit==='cm'){for(var c=Math.round(RANGE[k][0]*2.54);c<=Math.round(RANGE[k][1]*2.54);c++){var oc=document.createElement('option');oc.value=(c/2.54).toFixed(3);oc.textContent=c+' cm';el.appendChild(oc);}}
+      else for(var i=RANGE[k][0];i<=RANGE[k][1];i++){var o=document.createElement('option');o.value=i;o.textContent=lbl(k,i);el.appendChild(o);}
+      if(cur>0)setNear(el,cur);});}
     function inches(k){var el=root.querySelector('[data-lu-sf-in="'+k+'"]');if(!el||!el.value)return null;var v=parseFloat(el.value);return v>0?v:null;}
     function letterFor(m){       // size nho nhat ma MOI so do deu <= muc toi da cua size (giua 2 size -> size lon hon)
-      var best=-1;['bust','waist','hip'].forEach(function(k){if(m[k]==null)return;var idx=CHART.length-1;
-        for(var i=0;i<CHART.length;i++)if(CHART[i][k]>0&&m[k]<=CHART[i][k]+0.01){idx=i;break;}best=Math.max(best,idx);});
-      return best<0?null:CHART[best];}
+      var best=-1;MEAS.forEach(function(k){if(m[k]==null)return;var idx=ROWS.length-1;
+        for(var i=0;i<ROWS.length;i++)if(ROWS[i][k]>0&&m[k]<=ROWS[i][k]+0.01){idx=i;break;}best=Math.max(best,idx);});
+      return best<0?null:ROWS[best];}
     function nearest(g,want,pre,up){var b=null,bd=1e9;g.vals.forEach(function(v){var n=num(v,pre);if(n==null)return;var d=up?(n>=want-0.25?n-want:1e6+want-n):Math.abs(n-want);if(d<bd){bd=d;b=v;}});return b;}
     function bodyUpdate(){
       need.forEach(function(k){var el=root.querySelector('[data-lu-sf-in="'+k+'"]');saved[k]=el?el.value:'';});saved.unit=unit;save();
@@ -225,11 +259,11 @@ XL: 43, 36, 46
         if(!v)note.push('not available for this item');
       }
       var ok=label.length&&Object.keys(sel).length===label.length;
-      result(ok?sel:null,label.join(' / '),note.join(' · ')||'US standard size chart');
+      result(ok?sel:null,label.join(' / '),note.join(' · ')||(HEAD||CUNIT==='cm'?'':'US standard size chart'));
     }
     function setUnit(u){
       if(u===unit)return;
-      unit=u;Array.prototype.forEach.call(root.querySelectorAll('[data-lu-sf-unit]'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lu-sf-unit')===u?'true':'false');});
+      unit=u;saved.u=u;Array.prototype.forEach.call(root.querySelectorAll('[data-lu-sf-unit]'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lu-sf-unit')===u?'true':'false');});
       fillAll();bodyUpdate();
     }
 
@@ -237,21 +271,26 @@ XL: 43, 36, 46
       var h='';
       if(kind==='braLetter'){h='<table><thead><tr><th>Band</th>'+cups.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>';
         bands.forEach(function(b){h+='<tr><th>'+b+'</th>'+cups.map(function(c){var on=b===pick.band&&c===pick.cup;return '<td'+(on?' class="on"':'')+'>'+(braSize(b,c)||'-')+'</td>';}).join('')+'</tr>';});}
-      else if(kind==='letter'){var f=function(x){return x>0?(unit==='cm'?Math.round(x*2.54):x):'-';};
-        h='<table><thead><tr><th>Size</th><th>Bust</th><th>Waist</th><th>Hips</th></tr></thead><tbody>';
-        CHART.forEach(function(r){var on=chosen&&letter(chosen[letterG.name])===r.size;h+='<tr><th>'+r.label+'</th><td'+(on?' class="on"':'')+'>'+f(r.bust)+'</td><td'+(on?' class="on"':'')+'>'+f(r.waist)+'</td><td'+(on?' class="on"':'')+'>'+f(r.hip)+'</td></tr>';});
-        h+='<tr><td colspan="4">Maximum measurement for each size ('+(unit==='cm'?'cm':'inches')+').</td></tr>';}
+      else if(kind==='letter'){
+        // o cua cot so do doi theo nut inch / cm (moi so trong o, ca khoang 80-84); cot khac in nhu go
+        var cv=function(c,col){if(c==='')return '-';if(!col.key||unit===CUNIT)return c;return c.replace(/\d+(\.\d+)?/g,function(x){x=parseFloat(x);return unit==='cm'?Math.round(x*2.54):Math.round(x/2.54*10)/10;});};
+        h='<table><thead><tr>'+TH0+COLS.map(function(c){return '<th>'+esc(c.name)+'</th>';}).join('')+'</tr></thead><tbody>';
+        CHART.forEach(function(r){var on=chosen&&r.size&&letter(chosen[letterG.name])===r.size?' class="on"':'';h+='<tr><th>'+esc(r.label)+'</th>'+COLS.map(function(c,i){return '<td'+on+'>'+esc(cv(r.cells[i]||'',c))+'</td>';}).join('')+'</tr>';});
+        var nt=(root.getAttribute('data-note')||'').trim();
+        if(nt!=='-')h+='<tr><td colspan="'+(COLS.length+1)+'">'+(nt?esc(nt):'Maximum measurement for each size ('+(unit==='cm'?'cm':'inches')+').')+'</td></tr>';}
       tbl.innerHTML=h+'</tbody></table>';
     }
 
     if(kind==='bra'||kind==='braLetter'){show('bra');pills(root.querySelector('[data-lu-sf-band]'),bands,'band');pills(root.querySelector('[data-lu-sf-cup]'),cups,'cup');}
+    else if(CHARTONLY){show('none');hint.hidden=true;tg.hidden=true;tbl.hidden=false;drawTable();}
     else{show('body');fillAll();
-      need.forEach(function(k){var f=root.querySelector('[data-lu-sf-field="'+k+'"]');if(f)f.hidden=false;var el=root.querySelector('[data-lu-sf-in="'+k+'"]');if(el){if(saved[k])el.value=saved[k];el.addEventListener('input',bodyUpdate);el.addEventListener('change',bodyUpdate);}});
+      var ub=root.querySelector('.lu-sf-units');if(ub){if(ONLY)ub.hidden=true;else if(CUNIT==='cm')ub.appendChild(ub.querySelector('[data-lu-sf-unit="in"]'));}
+      need.forEach(function(k){var f=root.querySelector('[data-lu-sf-field="'+k+'"]');if(f)f.hidden=false;var el=root.querySelector('[data-lu-sf-in="'+k+'"]');if(el){if(parseFloat(saved[k])>0)setNear(el,parseFloat(saved[k]));el.addEventListener('input',bodyUpdate);el.addEventListener('change',bodyUpdate);}});
       Array.prototype.forEach.call(root.querySelectorAll('[data-lu-sf-unit]'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lu-sf-unit')===unit?'true':'false');});
       Array.prototype.forEach.call(root.querySelectorAll('[data-lu-sf-unit]'),function(b){b.addEventListener('click',function(){setUnit(b.getAttribute('data-lu-sf-unit'));});});}
     if(kind==='bra'||kind==='wl')tg.hidden=true;       // gia tri cua san pham la so do that -> khong can bang
     tg.addEventListener('click',function(){var o=tbl.hidden;tbl.hidden=!o;tg.setAttribute('aria-expanded',String(o));tg.textContent=o?'Hide size chart':'View full size chart';if(o)drawTable();});
-    function update(){if(kind==='bra'||kind==='braLetter')braUpdate();else bodyUpdate();}
+    function update(){if(CHARTONLY)return;if(kind==='bra'||kind==='braLetter')braUpdate();else bodyUpdate();}
 
     // ---- dien vao bo chon chinh + moi dong Kaching
     function setSel(s,v){if(s.value!==v){s.value=v;s.dispatchEvent(new Event('change',{bubbles:true}));}}

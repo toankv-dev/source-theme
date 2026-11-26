@@ -192,6 +192,7 @@
 .sc-any .sc-hlbox--grid li { display: flex; align-items: center; gap: 10px; min-height: 24px; font-size: var(--hl-fs, 14px); line-height: 1.4; color: var(--hl-tx, #333); }
 .sc-any .sc-hlbox--grid li > svg, .sc-any .sc-hlbox--grid li > img { width: var(--hl-is, 18px); height: var(--hl-is, 18px); }
 .sc-any .sc-hlbox--grid .sc-ic { stroke-width: 1.6; }
+.sc-any .sc-hlbox--nolines { border-top: 0; border-bottom: 0; } /* setting "hide the lines above and below" */
 .sc-any .sc-hlbox--bg { padding: 14px 15px; border-radius: 10px; }
 @media screen and (max-width: 749px) {
   .sc-any .sc-hlbox--check { padding: 0; }

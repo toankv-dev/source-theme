@@ -1,5 +1,15 @@
 # Tammycharm Tien
 
+2026.11.26.r24: the SAVE % pill moves next to the pack title, Lunara kaching style (user picture: "Single [SAVE 70%]"):
+inline after .b-card__title (option cards get a .b-card__line wrapper), #790236-style sale colour, 11 px bold uppercase,
+3px 7px, radius 4px (12 px on phones). srv-price.js now hides [data-card-save] with the card price until the server
+total is in (replaces r23's CSS sibling rule). Edited by hand: port when rebuilding.
+
+2026.11.26.r23: SAVE % on each pack card (user). A pill "SAVE 50% / 67% / 70%" in the sale colour under the
+crossed-out price: 1 − pack price ÷ (Compare-at price × quantity), the pack price being the server's (srv-price.js); hidden
+while that price is pending and when nothing is saved. New block setting "Saving label on each card" (save_label, default
+"SAVE", empty = off). ui.js bSave() + pack-qcard / pack-cards markup + zz-custom.css. Edited by hand: port when rebuilding.
+
 2026.11.25.r22: lowering the cart to 1 leaves no gift (live bug: bundle of 4, "−" down to 1 kept a "Free gift" line,
 because the gift was its own line without a stepper and the server's "Buy 1, get 1 free" still freed it). New
 BCartSheet.lower(i, q): when "−" or the bin on a paid row takes what is paid for from 2+ to exactly 1, the free units

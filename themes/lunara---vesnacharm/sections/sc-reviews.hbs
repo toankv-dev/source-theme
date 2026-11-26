@@ -8,7 +8,7 @@
       config.reviewsUrl (paged, 50 at a time).
       Own <style> + <script>; id="lu-reviews" keeps the rating link and the testimonials "View All" button working. --}}
 {{> sc-type h=".scr__h" s=".scr__t" t=".scr__c" root=".scr"}}
-<section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-verified="{{#if section.settings.verified_label}}{{section.settings.verified_label}}{{else}}Verified Buyer{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffcf2a{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
+<section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-verified="{{#if section.settings.verified_label}}{{section.settings.verified_label}}{{else}}Verified Buyer{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffb400{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
 <style>
 /* Measured: user's screenshot of shape-curve.com (1511 px) + _work/probe-1440.txt (Okendo). Font = the theme's Poppins. */
 .scr{padding:var(--scr-pt) 0 var(--scr-pb);background:#fff;color:#0b0b0b;font-family:var(--font-body-family,inherit)}
@@ -103,7 +103,7 @@
 .scr__w-stars{display:flex;gap:4px;min-width:0;margin:0;padding:0;border:0}
 .scr__w-stars legend{margin:0 0 4px;padding:0;font-size:14px;font-weight:700}
 .scr__w-stars label{position:relative;display:block;line-height:0;color:#cfd3da;cursor:pointer}
-.scr__w-stars label.is-on{color:var(--scr-star,#ffcf2a)}
+.scr__w-stars label.is-on{color:var(--scr-star,#ffb400)}
 .scr__w-stars svg{display:block;width:34px;height:34px;fill:currentColor}
 .scr__w-stars label:has(input:focus-visible) svg{outline:2px solid var(--vn-hl,#790236);outline-offset:1px;border-radius:4px}
 .scr__sr{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0!important}
@@ -141,6 +141,9 @@
   .scr__drow{min-height:44px}
   .scr__btn,.scr__chip,.scr__sort select{min-height:44px}
   .scr__sort select{font-size:16px} /* under 16 px iOS zooms the page when the field is tapped */
+  /* long option names (DE "Schlechteste Bewertung", language copies) widened the select past 360 px */
+  .scr__sort{gap:8px;min-width:0}
+  .scr__sort select{min-width:0;max-width:100%;flex:0 1 auto;text-overflow:ellipsis}
   .scr__pager{gap:0}
   .scr__pg,.scr__dots{min-width:44px;height:44px;border-radius:22px}
   .scr__photos{max-width:none;margin-top:24px}
@@ -177,7 +180,7 @@
 <div class="scr__w-step" data-scr-wstep>
 <p class="scr__w-pr">{{product.title}}</p>
 <h2 class="scr__w-h" id="scr-w-h">{{#if section.settings.write_title}}{{section.settings.write_title}}{{else}}Write a review{{/if}}</h2>
-<fieldset class="scr__w-stars" data-scr-wstars><legend>Your rating</legend><label><input type="radio" name="rating" value="1" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg><span class="scr__sr">1 star</span></label><label><input type="radio" name="rating" value="2" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg><span class="scr__sr">2 stars</span></label><label><input type="radio" name="rating" value="3" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg><span class="scr__sr">3 stars</span></label><label><input type="radio" name="rating" value="4" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg><span class="scr__sr">4 stars</span></label><label><input type="radio" name="rating" value="5" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg><span class="scr__sr">5 stars</span></label></fieldset>
+<fieldset class="scr__w-stars" data-scr-wstars><legend>Your rating</legend><label><input type="radio" name="rating" value="1" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">1 star</span></label><label><input type="radio" name="rating" value="2" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">2 stars</span></label><label><input type="radio" name="rating" value="3" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">3 stars</span></label><label><input type="radio" name="rating" value="4" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">4 stars</span></label><label><input type="radio" name="rating" value="5" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">5 stars</span></label></fieldset>
 <p class="scr__w-err" data-scr-werr="rating"></p>
 <div class="scr__w-row"><label class="scr__w-f"><span>Name</span><input type="text" name="name" maxlength="255" autocomplete="name" required></label>{{#unless (eq section.settings.write_email false)}}<label class="scr__w-f"><span>Email</span><input type="email" name="email" maxlength="120" autocomplete="email" inputmode="email"></label>{{/unless}}</div>
 <p class="scr__w-err" data-scr-werr="name"></p><p class="scr__w-err" data-scr-werr="email"></p>
@@ -227,11 +230,13 @@
   function ago(d) {
     var t = Date.parse(d); if (!t) return d;
     var days = Math.floor((Date.now() - t) / 864e5);
+    // {n} inside the text: a language copy may put the number anywhere ("vor {n} Tagen", _src/build-lang.js)
+    var ago = function (n, one, many) { return n === 1 ? one : many.replace('{n}', n); };
     if (days < 1) return 'today';
-    if (days < 7) return days === 1 ? '1 day ago' : days + ' days ago';
-    if (days < 30) { var w = Math.floor(days / 7); return w === 1 ? '1 week ago' : w + ' weeks ago'; }
-    if (days < 365) { var m = Math.floor(days / 30); return m === 1 ? '1 month ago' : m + ' months ago'; }
-    var y = Math.floor(days / 365); return y === 1 ? '1 year ago' : y + ' years ago';
+    if (days < 7) return ago(days, '1 day ago', '{n} days ago');
+    if (days < 30) return ago(Math.floor(days / 7), '1 week ago', '{n} weeks ago');
+    if (days < 365) return ago(Math.floor(days / 30), '1 month ago', '{n} months ago');
+    return ago(Math.floor(days / 365), '1 year ago', '{n} years ago');
   }
   function item(r) {
     var a = el('article', 'scr__item' + (r.image ? ' has-photo' : ''));

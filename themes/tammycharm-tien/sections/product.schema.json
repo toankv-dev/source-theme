@@ -468,6 +468,13 @@
           "default": ""
         },
         {
+          "type": "text",
+          "id": "save_label",
+          "label": "Saving label on each card (e.g. SAVE → \"SAVE 67%\"). Empty = hidden",
+          "default": "SAVE",
+          "info": "Percent = 1 − pack price ÷ crossed-out price (Compare-at price × quantity)."
+        },
+        {
           "type": "checkbox",
           "id": "includes_all",
           "label": "Show every pack's \"What's included\" list (not only the chosen one)",

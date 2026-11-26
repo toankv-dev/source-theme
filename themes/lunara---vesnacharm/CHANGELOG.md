@@ -2,6 +2,88 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.26.12 — Highlights box: hide the two-column lines
+### Added
+- Highlights box › "Two columns: hide the lines above and below" (`no_lines`, off by default; _src/build-sc.js →
+  sections/product.schema.json, snippets/sc-pb-highlights.hbs `.sc-hlbox--nolines`, assets/css/sc-product.css). Saved
+  boxes keep their lines until the box is ticked.
+
+## 2026.11.26.11 — tidy phone layout (home cards, home reviews, footer)
+### Changed
+- Product cards on phones (home grid, /collections; assets/css/vn-chrome.css end): "Add to cart" on one line in all 7
+  languages at 360 px (letter-spacing 0, 12-13 px, 44 px high; "Legg i handlekurv" wrapped to 2 lines), compare-at
+  price and review count 12 px (were 10 px), a last row with one card is centred and a lone card is 72 % wide (≤ 280 px)
+  instead of half a row on the left.
+- Home reviews on phones (sections/reviews.hbs, home only): one swipe row of 80 % cards (the next one peeks)
+  instead of two 165 px masonry columns; photos 4:3. Product pages keep their layout.
+- Footer on phones (_src/vn-footer.hbs + vn-chrome.css): Shop By / Information / Customer Service = accordions (tap the
+  heading, 52 px rows with a chevron; computers unchanged), one column, payment icons in one centred row, © centred,
+  76 px under it for the back-to-top button. Home at 375 px: 4654 → 3315 px high, footer 1006 → 688 px.
+- _src/patch-vn.js T5b rewrites the footer from _src/vn-footer.hbs on every run (T5 only ran once).
+### Fixed
+- Language builds: "...Show full review" was left in English (leading dots), review dates printed "October 4, 2026" →
+  page language ("4. oktober 2026"); _src/build-lang.js + 6 dictionaries (587 texts).
+
+## 2026.11.26.10 — one star style everywhere (rounded stars #ffb400, empty part #e6e6e6, cut at the average)
+### Changed
+- Product rating line (`lu_p_rating` in sections/product.hbs, both looks): the Trustpilot boxes and the bodysuit look's
+  pointed stars → 5 rounded stars drawn by a CSS mask (110×22, 100×20 on phones), filled to the average (4.6 = the 5th
+  star part filled).
+- Reviews section (home + Lunara product pages, sections/reviews.hbs): default star colour #03AA6D (green) → #ffb400
+  (schema default + fallbacks; also the pill border, Verified tick and bars, as before = "Star & badge colour"); card /
+  dialog stars use the same rounded shape; the home pill "Rated 4.6/5 by …" fills its stars to the real average (was 5
+  full stars).
+- Product cards (custom.css, vn-chrome.css) and the bodysuit reviews section (sc-reviews: stars, schema default,
+  template values, build-sc.js): same shape and colour.
+
+## 2026.11.26.9 — size finder chart: columns, unit and questions set in the editor
+### Changed
+- `snippets/lu-size-finder.hbs` (Product > Size finder, letter sizes): "Letter size chart" may start with a line of
+  column names (`Size: Bust, Waist, EU size`): any number of columns, added / removed / renamed in the editor. Columns
+  named bust / waist / hips (7 languages, or the question labels) find the size and get their question; other columns
+  only show in the table. A value may be a range (`80-84`, the larger number counts) or `-`. No first line = the old
+  Size / Bust / Waist / Hips chart (unchanged look).
+- New settings: Chart unit (inches / centimetres / cm only / inches only: the popup starts in it, the select lists go
+  1 cm at a time in cm), Ask the bust / waist / hips (Hips off = no Hips select), Note under the table (blank = the old
+  sentence, `-` = none). No question left = the popup shows the table only.
+### Fixed
+- Switching inch / cm with the table open redraws it (it kept the old unit until closed and opened again).
+
+## 2026.11.26.8 — local currency (shopdy SHOPDY-12), switch only in the Norwegian zip
+### Added
+- `_src/patch-cur.js` (after patch-cart.js, before build-lang.js): every price follows shopdy's money runtime when a store
+  shows the shopper's currency. Each UNIT price is converted (`SFMoney.convertUsd`, up to .99), then summed and
+  discounted, as the checkout prices it (fx-quote.ts): product price + compare (`data-price-usd`), variant change,
+  cards, related, upsells, Kaching packs and bar, gift prices, Complete the bundle, cart drawer lines / savings /
+  discount / subtotal, fixed discount values (exact rate, rounded down), filter label. The stored cart stays USD (the
+  drawer renders a converted copy). Redraws on `sfmoney:change` (first visit). No runtime = the same "$" as before.
+- NB build: `theme.json` `"supportsLocalCurrency": true` (`_meta.localCurrency` in `_src/i18n/nb.json`); other builds
+  carry the code without the switch.
+
+## 2026.11.26.7 — SAVE badge in the language zips
+### Fixed
+- Language copies: a pack subtitle "SPAR {save}" (any language's word for "SAVE {save}") was neither highlighted nor
+  hidden when nothing is saved: theme.js finds it with a regex, which the builder never translated. `_src/build-lang.js`
+  now lets that regex match the dictionary's word too (SPAR, SPARE, BESPAAR, SÄÄSTÄ, SPARA, ÉCONOMISEZ; SAVE kept).
+
+## 2026.11.26.6 — Norwegian, Dutch, Finnish, Swedish and French zips
+### Added
+- `_src/i18n/nb.json`, `nl.json`, `fi.json`, `sv.json`, `fr.json`: six language zips now (de, nb, nl, fi, sv, fr).
+### Fixed
+- Language copies: the size finder's "off" setting (and the other code values "off") stayed English; only the
+  spaced words " off", " of ", " from ", " and ", " reviews" are translated (review counter "1 - 5 of 20 reviews",
+  photo labels were half English).
+
+## 2026.11.26.5 — one zip per language (DE first)
+### Added
+- `_src/build-lang.js` + `_src/i18n/<code>.json`: a copy of the theme with every shopper text in one language (header,
+  footer, cart drawer, home, product page, reviews, size finder, tracking page, theme.js messages, section defaults,
+  `<html lang>`), zipped as `lunara-vesnacharm-<code>-<version>.zip`. Same layout and colours. First language: German.
+### Changed
+- Find my size reads the size chart's column names in EN / DE / FR / NL / SV / NO / FI (Gewicht, Brust, Taille (…), Hüfte…).
+- Review dates: "{n} days ago" texts (a language may put the number first or last).
+- Reviews sort box (phones): shrinks with a long option name instead of pushing the page sideways.
+
 ## 2026.11.26.4 — Highlights box: add lines with "Add block > Highlight line"
 ### Changed
 - New block "Highlight line" (text, icon, own picture, like Line 1-5): add as many as you need with the editor's Add

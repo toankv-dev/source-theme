@@ -28,7 +28,9 @@
     });
   }
   function num(v) { var n = parseFloat(v); return isFinite(n) ? n : 0; }
-  function money(n) { return '$' + (Math.round((Number(n) || 0) * 100) / 100).toFixed(2); }
+  function money(n) { return window.LuCur ? LuCur.f(n) : '$' + (Math.round((Number(n) || 0) * 100) / 100).toFixed(2); }
+  /** A USD unit price as the shopper sees it (shopdy local currency, per unit as the checkout). */
+  function LCU(x) { return window.LuCur ? LuCur.u(x) : x; }
   function cents(n) { return Math.round((Number(n) || 0) * 100); }
   function low(v) { return String(v == null ? '' : v).toLowerCase().trim(); }
 
@@ -131,7 +133,7 @@
       var src = v.image || productImage(offer, role);
       if (src) { img.src = src; img.hidden = false; } else img.hidden = true;
     }
-    var bp = num(side.bundlePrice), was = struck(v);
+    var bp = LCU(num(side.bundlePrice)), was = LCU(struck(v));
     q('[data-lu-cb-now]', row).textContent = money(bp);
     q('[data-lu-cb-rwas]', row).textContent = cents(was) > cents(bp) ? money(was) : '';
   }
@@ -145,7 +147,7 @@
   function saveText(bar, total, m, c) {
     var block = bar.closest('.lu-kaching');
     var style = (block && block.getAttribute('data-save-style')) || 'percent';
-    var base = style === 'compare' || style === 'compare_pct' ? struck(m) + struck(c) : num(m.price) + num(c.price);
+    var base = style === 'compare' || style === 'compare_pct' ? LCU(struck(m)) + LCU(struck(c)) : LCU(num(m.price)) + LCU(num(c.price));
     var save = (cents(base) - cents(total)) / 100;
     if (!(save > 0) || !(base > 0)) return '';
     var asPct = style === 'percent' || style === 'compare_pct';
@@ -156,8 +158,8 @@
   function paintTotals(bar) {
     var o = bar.__luCb, m = bar.__luCb_main, c = bar.__luCb_companion;
     if (!m || !c) return;
-    var total = num(o.main.bundlePrice) + num(o.companion.bundlePrice);
-    var was = struck(m) + struck(c);
+    var total = LCU(num(o.main.bundlePrice)) + LCU(num(o.companion.bundlePrice));
+    var was = LCU(struck(m)) + LCU(struck(c));
     q('[data-lu-cb-price]', bar).textContent = money(total);
     q('[data-lu-cb-was]', bar).textContent = cents(was) > cents(total) ? money(was) : '';
     var text = saveText(bar, total, m, c);

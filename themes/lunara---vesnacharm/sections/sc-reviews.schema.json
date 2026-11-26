@@ -143,7 +143,7 @@
       "type": "color",
       "id": "star_color",
       "label": "Star colour",
-      "default": "#ffcf2a"
+      "default": "#ffb400"
     },
     {
       "type": "range",

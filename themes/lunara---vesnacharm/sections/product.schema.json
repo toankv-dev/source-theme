@@ -197,9 +197,60 @@
     {
       "type": "textarea",
       "id": "sf_letter_map",
-      "label": "Letter size chart (size: bust, waist, hips)",
+      "label": "Letter size chart (the table of the popup)",
       "default": "XXS: 31, 24, 34\nXS: 33, 26, 36\nS: 35, 28, 38\nM: 37, 30, 40\nL: 40, 33, 43\nXL: 43, 36, 46\n2XL: 46, 39, 49\n3XL: 49, 42, 52\n4XL: 52, 45, 55\n5XL: 55, 48, 58",
-      "info": "Maximum body measurement in inches for each size, US standard. One size per line, e.g. M: 37, 30, 40."
+      "info": "One size per line: M: 37, 30, 40 (maximum body measurement, in the Chart unit below). Columns: write a first line with their names, e.g. Size: Bust, Waist, EU size - add, remove or rename columns freely, then give each size line the same number of values. Columns named bust / waist / hips (any language) find the size and each gets its question; other columns only show in the table. A value can be a range (80-84: the larger number counts) or - (no limit). No first line = Size, Bust, Waist, Hips."
+    },
+    {
+      "type": "select",
+      "id": "sf_unit",
+      "label": "Chart unit",
+      "default": "in",
+      "options": [
+        {
+          "value": "in",
+          "label": "Inches (buttons inch + cm)"
+        },
+        {
+          "value": "cm",
+          "label": "Centimetres (buttons cm + inch)"
+        },
+        {
+          "value": "cm_only",
+          "label": "Centimetres only (no inch button)"
+        },
+        {
+          "value": "in_only",
+          "label": "Inches only (no cm button)"
+        }
+      ],
+      "info": "The unit of the numbers typed in the chart above. The popup starts in it."
+    },
+    {
+      "type": "checkbox",
+      "id": "sf_ask_bust",
+      "label": "Ask the bust",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sf_ask_waist",
+      "label": "Ask the waist",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sf_ask_hip",
+      "label": "Ask the hips",
+      "default": true,
+      "info": "A question shows only when its column is in the chart. No question left = the popup shows the table only."
+    },
+    {
+      "type": "text",
+      "id": "sf_chart_note",
+      "label": "Note under the table",
+      "default": "",
+      "info": "Blank = \"Maximum measurement for each size (inches / cm).\" A single - hides the note."
     },
     {
       "type": "header",
@@ -1926,6 +1977,12 @@
           "label": "Two columns: line colour",
           "default": "",
           "info": "Empty = light grey."
+        },
+        {
+          "type": "checkbox",
+          "id": "no_lines",
+          "label": "Two columns: hide the lines above and below",
+          "default": false
         },
         {
           "type": "header",

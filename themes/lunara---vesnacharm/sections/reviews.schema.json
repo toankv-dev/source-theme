@@ -27,7 +27,7 @@
       "type": "color",
       "id": "star_color",
       "label": "Star & badge colour",
-      "default": "#03AA6D",
+      "default": "#ffb400",
       "info": "Stars and the Verified purchase tick."
     },
     {

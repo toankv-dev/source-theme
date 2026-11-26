@@ -1,0 +1,8 @@
+{{!-- Animated wave divider (4 layers of one path). over=true lays it over the bottom edge of whatever sits above
+      its positioned parent; flip=true turns it upside down. Colours and speed: CSS variables, see rf-motion.css. --}}
+<div class="rf-waves{{#if over}} rf-waves--over{{/if}}{{#if flip}} rf-waves--flip{{/if}}" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" focusable="false">
+    <defs><path id="rf-wave-p" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs>
+    <g><use href="#rf-wave-p" x="48" y="0"/><use href="#rf-wave-p" x="48" y="3"/><use href="#rf-wave-p" x="48" y="5"/><use href="#rf-wave-p" x="48" y="7"/></g>
+  </svg>
+</div>

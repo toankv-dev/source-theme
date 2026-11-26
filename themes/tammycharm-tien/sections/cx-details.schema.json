@@ -1,0 +1,200 @@
+{
+  "name": "CX: details box",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "offset",
+      "label": "Line up with the buy box column (wide screens)",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "open_bg",
+      "label": "Background of an open row",
+      "default": "#F7F3EE"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Before & after: accent (tab line, banner, title)",
+      "default": "#7A1F45"
+    },
+    {
+      "type": "color",
+      "id": "score_color",
+      "label": "Before & after: score bars",
+      "default": "#00B67A"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text",
+          "info": "Links: {{ShippingLink}}, {{RefundLink}}, {{ContactLink}}, {{TrackOrderLink}}",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open when the page loads",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "photos",
+      "name": "Before & after row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text under the customer tabs (optional)",
+          "default": ""
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open when the page loads",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "ba",
+      "name": "Before & after: customer",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer face (small round picture)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Tab name, e.g. first name and age",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "before",
+          "label": "Before & after picture",
+          "info": "One picture that already shows before and after (it fills the whole box). Or put only the before photo here and the after photo below."
+        },
+        {
+          "type": "image_picker",
+          "id": "after",
+          "label": "After picture (optional)",
+          "info": "Leave empty when the picture above shows both before and after."
+        },
+        {
+          "type": "text",
+          "id": "banner",
+          "label": "Banner under the pictures",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Stars (0 hides them)",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Small badge next to the stars (optional)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review title",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review text (the customer's own words)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "m1_label",
+          "label": "Score 1 label",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "m1_value",
+          "label": "Score 1 (0 = not shown)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "m2_label",
+          "label": "Score 2 label",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "m2_value",
+          "label": "Score 2 (0 = not shown)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "m3_label",
+          "label": "Score 3 label",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "m3_value",
+          "label": "Score 3 (0 = not shown)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CX: details box",
+      "category": "Tammycharm"
+    }
+  ]
+}

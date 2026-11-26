@@ -1,0 +1,16 @@
+{
+  "name": "RF: wave divider (animated)",
+  "tag": "section",
+  "settings": [
+    { "type": "color", "id": "color", "label": "Wave colour", "default": "#C4511A" },
+    { "type": "color", "id": "base", "label": "Colour below", "default": "#000000", "info": "Set it to the background colour of the section under the waves." },
+    { "type": "color", "id": "above", "label": "Colour above", "default": "#FFFFFF", "info": "Background colour of the section over the waves." },
+    { "type": "range", "id": "height", "label": "Height on desktop (px)", "min": 16, "max": 120, "step": 2, "default": 40 },
+    { "type": "range", "id": "height_mobile", "label": "Height on phone (px)", "min": 8, "max": 60, "step": 2, "default": 18 },
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop, lower = faster)", "min": 4, "max": 30, "step": 1, "default": 12 },
+    { "type": "checkbox", "id": "flip", "label": "Flip upside down", "default": false }
+  ],
+  "presets": [
+    { "name": "RF: wave divider (animated)", "category": "Decoration" }
+  ]
+}

@@ -1,0 +1,12 @@
+{{!-- Full-width brand banner: background image (assets/images/rf/), dark gradient on the text side, CTA to the pickers. --}}
+<section class="rf-banner" aria-labelledby="rf-banner-h-{{section.id}}">
+  <img class="rf-banner__img" src="{{#if section.settings.picture}}{{section.settings.picture}}{{else}}{{@root.assets_url}}/images/rf/{{#if section.settings.image}}{{section.settings.image}}{{else}}banner.webp{{/if}}{{/if}}" onerror="this.remove()" alt="" width="1600" height="900" loading="lazy">
+  <div class="b-wrap rf-banner__inner">
+    <div class="rf-banner__copy">
+      {{#if section.settings.eyebrow}}<p class="rf-eyebrow rf-eyebrow--light">{{section.settings.eyebrow}}</p>{{/if}}
+      <h2 class="rf-banner__h" id="rf-banner-h-{{section.id}}">{{section.settings.heading}}</h2>
+      {{#if section.settings.text}}<p class="rf-banner__text">{{section.settings.text}}</p>{{/if}}
+      {{#if section.settings.button}}<a class="rf-btn" href="#MainContent" data-rf-top>{{section.settings.button}}</a>{{/if}}
+    </div>
+  </div>
+</section>

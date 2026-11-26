@@ -1,0 +1,111 @@
+{
+  "name": "Image banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Phone image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small text above",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Big sale – up to 50% off"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Free shipping on every order."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "auto",
+          "label": "Image height"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Text position",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "overlay",
+      "label": "Dark overlay",
+      "min": 0,
+      "max": 0.8,
+      "step": 0.1,
+      "default": 0.2
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image banner",
+      "category": "Media",
+      "description": "Full-width image with a heading, text and button."
+    }
+  ]
+}

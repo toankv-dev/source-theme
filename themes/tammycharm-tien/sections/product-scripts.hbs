@@ -1,0 +1,7 @@
+{{!-- Full variant list (id, option_values, price, compare_at_price, featured_image, available) for core.js.
+      Its presence also marks the page as a product page (ViewContent). --}}
+{{#if product.variants_list}}<script type="application/json" id="sf-variants-data">{{{json product.variants_list}}}</script>{{/if}}
+{{!-- Free-gift tiers of this product (Base.gifts.offers / forCart). --}}
+{{#if product.gift_offers}}<script type="application/json" id="sf-gifts-data">{{{json product.gift_offers}}}</script>{{/if}}{{!-- Option groups (name, values, custom names, swatch pictures) for the cart drawer's colour / size sheet
+      (assets/js/cart-sheet.js); it also reads this from a product page it fetches. --}}
+{{#if product.variants.length}}<script type="application/json" id="sf-options-data">{{{json product.variants}}}</script>{{/if}}

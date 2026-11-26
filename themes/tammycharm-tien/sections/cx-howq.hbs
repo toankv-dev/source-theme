@@ -1,0 +1,38 @@
+{{!-- Chips (block "chip"), a centred two-tone heading and a line, then one white rounded card of questions (block
+      "q": small tag with an icon, question, answer that opens below). --}}
+<section class="cx-howq" style="--cx-bg:{{section.settings.bg}};--cx-accent:{{section.settings.accent}}">
+  <div class="b-wrap cx-howq__wrap">
+    <ul class="cx-howq__chips">
+      {{#each section.blocks}}{{#if (eq this.type "chip")}}
+      <li class="cx-howq__chip" {{{this.attributes}}}>
+        {{#if (eq this.settings.icon "clock")}}<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#00B67A"/><path d="M12 7v5.5l3.5 2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>{{/if}}
+        {{#if (eq this.settings.icon "sparkle")}}<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M10 4c.6 4 2 5.4 6 6-4 .6-5.4 2-6 6-.6-4-2-5.4-6-6 4-.6 5.4-2 6-6Z" fill="#00B67A"/><path d="M18 3v4M16 5h4" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round"/></svg>{{/if}}
+        <span>{{this.settings.text}}</span>
+      </li>
+      {{/if}}{{/each}}
+    </ul>
+    <h2 class="cx-howq__h">{{section.settings.heading_1}} <em>{{section.settings.heading_em}}</em></h2>
+    {{#if section.settings.sub}}<p class="cx-howq__sub">{{section.settings.sub}}</p>{{/if}}
+    <div class="cx-howq__card">
+      {{#each section.blocks}}{{#if (eq this.type "q")}}
+      <details class="cx-howq__item" {{{this.attributes}}}>
+        <summary class="cx-howq__sum">
+          <span class="cx-howq__qwrap">
+            {{#if this.settings.tag}}<span class="cx-howq__tag">
+              {{#if (eq this.settings.icon "ruler")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M2.5 8.5h19v7h-19z M6 8.5v3 M9.5 8.5v2 M13 8.5v3 M16.5 8.5v2 M20 8.5v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "hand")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M8 12V5.5a1.5 1.5 0 0 1 3 0V11m0-1V4.5a1.5 1.5 0 0 1 3 0V11m0-1V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-.5a6 6 0 0 1-5-2.7L3.8 14a1.5 1.5 0 0 1 2.4-1.8L8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "clock")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5.5l3.5 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "eye")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "waist")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M6 4h12l-1.5 6 1.5 10h-5l-1-6-1 6H6l1.5-10L6 4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>{{/if}}
+              {{#if (eq this.settings.icon "info")}}<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v6M12 7.5v.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>{{/if}}
+              {{this.settings.tag}}</span>{{/if}}
+            <span class="cx-howq__q">{{this.settings.question}}</span>
+          </span>
+          <svg class="cx-howq__plus" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </summary>
+        <div class="cx-howq__a">{{{applyTokens this.settings.answer}}}</div>
+      </details>
+      {{/if}}{{/each}}
+    </div>
+  </div>
+</section>

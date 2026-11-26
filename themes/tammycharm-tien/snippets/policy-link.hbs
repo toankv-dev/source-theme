@@ -1,0 +1,4 @@
+{{!-- One footer link: {{> policy-link key="privacy" label="Privacy policy"}}. Shown when policyLinks has the
+      URL and, when the platform says which policies the store has (policies.<key>), that one exists.
+      The platform's own pages pass no `policies`: every link with a URL shows. --}}
+{{#if (lookup @root.policyLinks key)}}{{#if @root.policies}}{{#if (lookup @root.policies key)}}<li><a href="{{lookup @root.policyLinks key}}">{{label}}</a></li>{{/if}}{{else}}<li><a href="{{lookup @root.policyLinks key}}">{{label}}</a></li>{{/if}}{{/if}}

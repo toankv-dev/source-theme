@@ -1,0 +1,711 @@
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "settings": {
+        "gallery_side": "left",
+        "gallery_layout": "thumbs",
+        "show_sale_badge": true,
+        "sticky_atc": true,
+        "sticky_style": "full"
+      },
+      "blocks": {
+        "proof": {
+          "type": "rf_proof",
+          "settings": {
+            "avatar_1": "",
+            "avatar_2": "",
+            "avatar_3": "",
+            "show_third": true,
+            "name": "Dayna Cervantes",
+            "text": "and <b>6+ others</b> love this product.",
+            "bg": "#ECECEC"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "stars": {
+          "type": "rating",
+          "settings": {
+            "label": "reviews"
+          }
+        },
+        "price": {
+          "type": "rf_price",
+          "settings": {}
+        },
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Raised 3D lines that sculpt"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Gentle compression that lifts"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "High waist that does not roll"
+          }
+        },
+        "b4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Opaque, breathable, ultra-soft"
+          }
+        },
+        "picker": {
+          "type": "variant_picker",
+          "settings": {
+            "show": false
+          }
+        },
+        "sizelink": {
+          "type": "rf_sizelink",
+          "settings": {
+            "label": "Size Guide",
+            "subtitle": "Measure your waist and hips, then match the chart.",
+            "set": ""
+          }
+        },
+        "offer": {
+          "type": "rf_heading",
+          "settings": {
+            "text": "Buy more, save more"
+          }
+        },
+        "packs": {
+          "type": "variant_cards",
+          "settings": {
+            "source": "quantity",
+            "selected": "2",
+            "currency_code": false,
+            "card_style": "radio",
+            "unit_pickers": true,
+            "unit_label": "item",
+            "includes_all": false,
+            "card_1_qty": 1,
+            "card_1_title": "Buy 1",
+            "card_1_image": "",
+            "card_1_sub": "1 item",
+            "card_1_badge": "",
+            "card_1_includes": "",
+            "card_2_qty": 2,
+            "card_2_title": "2 Leggings - Get Your 2nd Free",
+            "card_2_image": "",
+            "card_2_sub": "2 items, pay for 1",
+            "card_2_badge": "SAVE 50%",
+            "card_2_includes": "",
+            "card_3_qty": 4,
+            "card_3_title": "Buy 2, Get 2 Free",
+            "card_3_image": "",
+            "card_3_sub": "4 items, lowest price per pair",
+            "card_3_badge": "SAVE 55%",
+            "card_3_includes": "",
+            "card_4_qty": 0,
+            "card_4_title": "",
+            "card_4_image": "",
+            "card_4_sub": "",
+            "card_4_badge": "",
+            "card_4_includes": "",
+            "card_5_qty": 0,
+            "card_5_title": "",
+            "card_5_image": "",
+            "card_5_sub": "",
+            "card_5_badge": "",
+            "card_5_includes": "",
+            "card_6_qty": 0,
+            "card_6_title": "",
+            "card_6_image": "",
+            "card_6_sub": "",
+            "card_6_badge": "",
+            "card_6_includes": ""
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "label": "Add to cart",
+            "mode": "cart",
+            "show_options": false,
+            "show_qty": false,
+            "show_payments": false,
+            "note": ""
+          }
+        },
+        "safe": {
+          "type": "rf_checkout",
+          "settings": {
+            "title": "Guaranteed <em>safe</em> checkout"
+          }
+        },
+        "delivery": {
+          "type": "rf_delivery",
+          "settings": {
+            "min_days": 7,
+            "max_days": 15,
+            "fallback": "Delivered in 7 to 15 days",
+            "line_2": "45-day money-back guarantee. <a href=\"{{RefundLink}}\">Read the policy</a>"
+          }
+        },
+        "desc": {
+          "type": "rf_desc",
+          "settings": {
+            "title": "Description",
+            "open": true,
+            "set": ""
+          }
+        },
+        "sizes": {
+          "type": "rf_sizes",
+          "settings": {
+            "title": "Size Guide",
+            "open": false,
+            "set": ""
+          }
+        }
+      },
+      "blockOrder": [
+        "proof",
+        "title",
+        "stars",
+        "price",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "picker",
+        "sizelink",
+        "offer",
+        "packs",
+        "buy",
+        "safe",
+        "delivery",
+        "desc",
+        "sizes"
+      ]
+    },
+    "details": {
+      "type": "cx-details",
+      "settings": {
+        "offset": true,
+        "bg": "#FFFFFF",
+        "open_bg": "#F7F3EE",
+        "accent": "#78063A",
+        "score_color": "#00B67A"
+      },
+      "blocks": {
+        "p1": {
+          "type": "photos",
+          "settings": {
+            "title": "Before & after from our customers",
+            "body": "",
+            "open": false
+          }
+        },
+        "b2": {
+          "type": "ba",
+          "settings": {
+            "avatar": "",
+            "name": "Customer 1",
+            "before": "",
+            "after": "",
+            "banner": "Transformation",
+            "rating": 0,
+            "badge": "",
+            "title": "Review title",
+            "quote": "Add your customer's own words here.",
+            "m1_label": "Comfort",
+            "m1_value": 0,
+            "m2_label": "Compression",
+            "m2_value": 0,
+            "m3_label": "Results speed",
+            "m3_value": 0
+          }
+        },
+        "b3": {
+          "type": "ba",
+          "settings": {
+            "avatar": "",
+            "name": "Customer 2",
+            "before": "",
+            "after": "",
+            "banner": "Transformation",
+            "rating": 0,
+            "badge": "",
+            "title": "Review title",
+            "quote": "Add your customer's own words here.",
+            "m1_label": "Comfort",
+            "m1_value": 0,
+            "m2_label": "Compression",
+            "m2_value": 0,
+            "m3_label": "Results speed",
+            "m3_value": 0
+          }
+        },
+        "b4": {
+          "type": "ba",
+          "settings": {
+            "avatar": "",
+            "name": "Customer 3",
+            "before": "",
+            "after": "",
+            "banner": "Transformation",
+            "rating": 0,
+            "badge": "",
+            "title": "Review title",
+            "quote": "Add your customer's own words here.",
+            "m1_label": "Comfort",
+            "m1_value": 0,
+            "m2_label": "Compression",
+            "m2_value": 0,
+            "m3_label": "Results speed",
+            "m3_value": 0
+          }
+        },
+        "b5": {
+          "type": "ba",
+          "settings": {
+            "avatar": "",
+            "name": "Customer 4",
+            "before": "",
+            "after": "",
+            "banner": "Transformation",
+            "rating": 0,
+            "badge": "",
+            "title": "Review title",
+            "quote": "Add your customer's own words here.",
+            "m1_label": "Comfort",
+            "m1_value": 0,
+            "m2_label": "Compression",
+            "m2_value": 0,
+            "m3_label": "Results speed",
+            "m3_value": 0
+          }
+        },
+        "t6": {
+          "type": "text",
+          "settings": {
+            "title": "Fabric & fit",
+            "open": false,
+            "body": "<p>Seamless knit in an opaque, stretchy, breathable and ultra-soft fabric. Raised 3D lines run over the hips, glutes and thighs, with gentle compression that lifts and shapes.</p><p>The high waistband does not roll down. Nine sizes, US 2 to US 30+: open the Size Guide above to find yours. Between two sizes? Pick the larger one.</p>"
+          }
+        },
+        "t7": {
+          "type": "text",
+          "settings": {
+            "title": "How to wear it",
+            "open": false,
+            "body": "<p>Made to be worn all day: at home, at work or for a workout.</p><p>Pull them up to your natural waist and smooth the 3D lines over your hips and thighs so they sit where they are knitted. Pair them with a crop top, a sports bra or a long tee.</p>"
+          }
+        },
+        "t8": {
+          "type": "text",
+          "settings": {
+            "title": "Delivery & returns",
+            "open": false,
+            "body": "<p>Delivery takes 7 to 15 days depending on your location. The shipping cost is shown at checkout, before you pay.</p><p>You have 45 days from delivery to return your order for a refund. See our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "p1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "t6",
+        "t7",
+        "t8"
+      ]
+    },
+    "promise": {
+      "type": "cx-promise",
+      "settings": {
+        "face_1": "",
+        "face_2": "",
+        "face_3": "",
+        "highlight": "Buy 1, Get 1 Free",
+        "highlight_color": "#84630E",
+        "heading_1": "leggings that",
+        "heading_em": "lift and shape all day",
+        "heading_2": "without thinking about it",
+        "button": "Get your 2nd pair free",
+        "note": "Try it risk-free for 45 days",
+        "picture": "",
+        "image": "s00.webp",
+        "picture_alt": "Woman wearing the 3D Sculpting Leggings in Black",
+        "bg": "#F7F3EE",
+        "accent": "#78063A"
+      },
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "icon": "lines",
+            "title": "Raised 3D Lines",
+            "text": "Knitted over hips, glutes and thighs to follow your curves."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "title": "Gentle Compression",
+            "text": "Lifts and shapes, soft enough to wear all day."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "icon": "sparkle",
+            "title": "Lift You Can See",
+            "text": "The shape shows the moment you pull them on."
+          }
+        },
+        "c4": {
+          "type": "card",
+          "settings": {
+            "icon": "waist",
+            "title": "Stays Put",
+            "text": "A high waistband that does not roll down."
+          }
+        }
+      },
+      "blockOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "zones": {
+      "type": "cx-zones",
+      "settings": {
+        "picture": "",
+        "image": "s03.webp",
+        "picture_alt": "Back view of the raised 3D lines on the leggings",
+        "heading_1": "Compression that shapes",
+        "heading_2": "where it counts",
+        "sub": "Raised 3D lines on the hips, glutes and thighs, gentle compression from waist to ankle.",
+        "bg": "#FFFFFF",
+        "accent": "#78063A"
+      },
+      "blocks": {
+        "c1": {
+          "type": "chip",
+          "settings": {
+            "icon": "knit",
+            "text": "3D knit"
+          }
+        },
+        "c2": {
+          "type": "chip",
+          "settings": {
+            "icon": "scissors",
+            "text": "Seamless"
+          }
+        },
+        "c3": {
+          "type": "chip",
+          "settings": {
+            "icon": "waist",
+            "text": "High waist"
+          }
+        },
+        "z4": {
+          "type": "zone",
+          "settings": {
+            "thumb": "",
+            "thumb_image": "s01.webp",
+            "focus": "50% 62%",
+            "title": "Every step massages",
+            "tag": "Each stride",
+            "bar": 70,
+            "text": "The textured 3D knit gives a light massaging feel on hips and thighs as you move."
+          }
+        },
+        "z5": {
+          "type": "zone",
+          "settings": {
+            "thumb": "",
+            "thumb_image": "s02.webp",
+            "focus": "50% 35%",
+            "title": "Gentle compression",
+            "tag": "All day",
+            "bar": 90,
+            "text": "Firm enough to lift and shape, soft enough to wear from morning to night."
+          }
+        },
+        "z6": {
+          "type": "zone",
+          "settings": {
+            "thumb": "",
+            "thumb_image": "s04.webp",
+            "focus": "50% 55%",
+            "title": "The lift shows instantly",
+            "tag": "Instantly",
+            "bar": 100,
+            "text": "The compression lifts and shapes the moment you pull them on."
+          }
+        }
+      },
+      "blockOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "z4",
+        "z5",
+        "z6"
+      ]
+    },
+    "howq": {
+      "type": "cx-howq",
+      "settings": {
+        "heading_1": "How our 3D leggings",
+        "heading_em": "work with your body",
+        "sub": "It all happens while you live your normal day.",
+        "bg": "#F7F3EE",
+        "accent": "#78063A"
+      },
+      "blocks": {
+        "c1": {
+          "type": "chip",
+          "settings": {
+            "icon": "clock",
+            "text": "All-day wear"
+          }
+        },
+        "c2": {
+          "type": "chip",
+          "settings": {
+            "icon": "sparkle",
+            "text": "No routine"
+          }
+        },
+        "q3": {
+          "type": "q",
+          "settings": {
+            "icon": "hand",
+            "tag": "How it works",
+            "question": "What do the raised 3D lines actually do?",
+            "answer": "<p>They are knitted into the fabric over the hips, glutes and thighs. Together with the gentle compression they follow your curves, lift and shape, and give a light massaging feel as you move.</p>"
+          }
+        },
+        "q4": {
+          "type": "q",
+          "settings": {
+            "icon": "clock",
+            "tag": "Daily wear",
+            "question": "Can I wear them all day?",
+            "answer": "<p>Yes. The fabric is stretchy, breathable and ultra-soft, made to be worn at home, at work or for a workout.</p>"
+          }
+        },
+        "q5": {
+          "type": "q",
+          "settings": {
+            "icon": "eye",
+            "tag": "Coverage",
+            "question": "Are they see-through when I bend?",
+            "answer": "<p>No. The fabric is opaque, so you can bend and stretch with confidence.</p>"
+          }
+        },
+        "q6": {
+          "type": "q",
+          "settings": {
+            "icon": "waist",
+            "tag": "Waistband",
+            "question": "Will the waistband roll down?",
+            "answer": "<p>No. The high waistband is made to hold in place without rolling down.</p>"
+          }
+        },
+        "q7": {
+          "type": "q",
+          "settings": {
+            "icon": "ruler",
+            "tag": "Fit",
+            "question": "How do I find my size?",
+            "answer": "<p>Measure your waist and hips, then match them to the US chart in the Size Guide (inches and centimeters). Between two sizes? Pick the larger one.</p>"
+          }
+        },
+        "q8": {
+          "type": "q",
+          "settings": {
+            "icon": "info",
+            "tag": "Good to know",
+            "question": "Is this a medical treatment?",
+            "answer": "<p>No. These are shaping leggings: they lift and shape while you wear them. They are not a medical treatment.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "c1",
+        "c2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ]
+    },
+    "reels": {
+      "type": "cx-reels",
+      "settings": {
+        "eyebrow": "Caught on camera",
+        "heading_1": "Don't just take our word for it.",
+        "heading_2": "See them in motion.",
+        "sub": "Short videos from our customers, in their own words.",
+        "sound_label": "Sound",
+        "bg": "#3A0A1E",
+        "accent": "#F1C6D6"
+      },
+      "blocks": {
+        "c1": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        },
+        "c2": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        },
+        "c3": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        },
+        "c4": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        },
+        "c5": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        },
+        "c6": {
+          "type": "clip",
+          "settings": {
+            "media": "",
+            "label": "",
+            "caption": ""
+          }
+        }
+      },
+      "blockOrder": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "write_label": "Write a review",
+        "layout": "grid",
+        "page_size": 12,
+        "show_bottom": false,
+        "show_form": true,
+        "empty_text": "Be the first to review these leggings."
+      }
+    },
+    "faq": {
+      "type": "cx-faq",
+      "settings": {
+        "heading": "Questions? Here Are the Answers",
+        "show_icon": true,
+        "bg": "#FFFFFF"
+      },
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "q": "How long does delivery take?",
+            "a": "<p>Delivery takes 7 to 15 days depending on your location. The shipping cost is worked out from your address and shown at checkout, before you pay. See our <a href=\"{{ShippingLink}}\">Shipping Policy</a>.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "q": "How can I track my order?",
+            "a": "<p>You can check the status of your order any time on our <a href=\"{{TrackOrderLink}}\">Track your order</a> page.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "q": "Which size should I choose for the best fit?",
+            "a": "<p>The leggings come in nine sizes, US 2 to US 30+, and stretch with you. Open the Size Guide next to the bundles to compare your waist and hip with the chart, in inches and centimeters. If you are between two sizes, pick the larger one for a more relaxed fit. Not sure? <a href=\"{{ContactLink}}\">Contact us</a> before you order.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "q": "What is your return and refund policy?",
+            "a": "<p>You have 45 days from delivery to return your order for a refund. Full details are in our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>"
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "q": "How does the Buy 1, Get 1 Free offer work?",
+            "a": "<p>Choose \"2 Leggings - Get Your 2nd Free\" above, pick a size and color for each pair, then add to cart. The free pair is taken off automatically at checkout. Choose \"Buy 2, Get 2 Free\" to get four pairs for $89.90.</p>"
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "q": "How can I reach customer support?",
+            "a": "<p>Send us a message through our <a href=\"{{ContactLink}}\">Contact page</a> and we will get back to you.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "details",
+    "promise",
+    "zones",
+    "howq",
+    "reels",
+    "reviews",
+    "faq"
+  ]
+}

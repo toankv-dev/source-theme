@@ -1,0 +1,8 @@
+{{!-- Newsletter sign-up. The platform has no list endpoint: ui.js checks the email, fires the Lead pixel event
+      and thanks the shopper (same behaviour as the other Adlux themes). --}}
+<form class="b-news" data-newsletter novalidate>
+  <label class="b-sr" for="b-news-{{#if id}}{{id}}{{else}}footer{{/if}}">Email</label>
+  <input class="b-news__input" id="b-news-{{#if id}}{{id}}{{else}}footer{{/if}}" type="email" name="email" placeholder="{{#if @root.settings.newsletter_placeholder}}{{@root.settings.newsletter_placeholder}}{{else}}Your email{{/if}}" autocomplete="email" required>
+  <button class="b-btn b-news__btn" type="submit">{{#if @root.settings.newsletter_button}}{{@root.settings.newsletter_button}}{{else}}Subscribe{{/if}}</button>
+  <p class="b-form-msg" data-newsletter-msg role="status"></p>
+</form>

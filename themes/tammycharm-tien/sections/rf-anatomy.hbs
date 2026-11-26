@@ -1,0 +1,20 @@
+{{!-- Product anatomy: image with numbered markers (block x / y in % of the image) + the same numbers in a list. --}}
+<section class="rf-sec rf-sec--sand rf-anatomy" aria-labelledby="rf-anat-h-{{section.id}}">
+  <div class="b-wrap rf-anatomy__inner">
+    <div class="rf-anatomy__media">
+      <img src="{{#if section.settings.picture}}{{section.settings.picture}}{{else}}{{@root.assets_url}}/images/rf/{{#if section.settings.image}}{{section.settings.image}}{{else}}anatomy.webp{{/if}}{{/if}}" onerror="this.remove()" alt="{{section.settings.image_alt}}" width="900" height="900" loading="lazy">
+      {{#each section.blocks}}
+      <span class="rf-anatomy__pin" style="left:{{this.settings.x}}%;top:{{this.settings.y}}%" aria-hidden="true">{{this.settings.n}}</span>
+      {{/each}}
+    </div>
+    <div class="rf-anatomy__copy">
+      {{#if section.settings.eyebrow}}<p class="rf-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+      <h2 class="rf-h2" id="rf-anat-h-{{section.id}}">{{section.settings.heading}}</h2>
+      <ol class="rf-anatomy__list">
+        {{#each section.blocks}}
+        <li {{{this.attributes}}}><span class="rf-anatomy__n" aria-hidden="true">{{this.settings.n}}</span><div><h3>{{this.settings.title}}</h3><p>{{this.settings.text}}</p></div></li>
+        {{/each}}
+      </ol>
+    </div>
+  </div>
+</section>

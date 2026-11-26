@@ -1,0 +1,7 @@
+<div class="b-newsletter-sec">
+  <div class="b-wrap b-newsletter-sec__inner">
+    {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+    {{#if section.settings.text}}<p class="b-newsletter-sec__text">{{section.settings.text}}</p>{{/if}}
+    {{> newsletter-form id=section.id}}
+  </div>
+</div>

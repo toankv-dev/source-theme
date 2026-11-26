@@ -1,0 +1,22 @@
+{
+  "name": "Tammycharm Tien",
+  "version": "2026.11.25.r22",
+  "author": "Adlux",
+  "engine": "handlebars",
+  "schemaVersion": 2,
+  "entry": "templates/product.hbs",
+  "layout": "layout/theme.hbs",
+  "assets": [
+    "assets/css/base.css",
+    "assets/css/sections.css",
+    "assets/css/skin.css",
+    "assets/js/core.js",
+    "assets/js/ui.js",
+    "assets/js/theme.js"
+  ],
+  "description": "Tammycharm storefront theme (Poppins + Poppins), built with the shopdy-theme skill.",
+  "supports": [
+    "product",
+    "home"
+  ]
+}

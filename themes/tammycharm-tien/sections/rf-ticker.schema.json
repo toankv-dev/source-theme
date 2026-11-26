@@ -1,0 +1,42 @@
+{
+  "name": "RF: scrolling text band",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label (for screen readers)", "default": "Store promises" },
+    { "type": "color", "id": "bg", "label": "Band colour", "default": "#000000" },
+    { "type": "color", "id": "color", "label": "Text colour", "default": "#FFFFFF" },
+    { "type": "range", "id": "size", "label": "Text size (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
+    { "type": "checkbox", "id": "uppercase", "label": "Uppercase text", "default": true },
+    { "type": "header", "content": "Movement" },
+    { "type": "checkbox", "id": "animate", "label": "Move the text", "default": true },
+    { "type": "select", "id": "direction", "label": "Direction", "default": "left", "options": [ { "value": "left", "label": "Right to left" }, { "value": "right", "label": "Left to right" } ] },
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop, lower = faster)", "min": 8, "max": 90, "step": 1, "default": 30 },
+    { "type": "checkbox", "id": "pause_hover", "label": "Pause while the mouse is on the band", "default": true },
+    { "type": "header", "content": "Waves on the top edge" },
+    { "type": "checkbox", "id": "waves", "label": "Show animated waves", "default": true, "info": "The waves lie over the bottom of the section above this band." },
+    { "type": "color", "id": "wave_color", "label": "Wave colour", "default": "#C4511A" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Phrase",
+      "limit": 12,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Free returns for 30 days" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RF: scrolling text band",
+      "category": "Trust",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Top rated products" } },
+        { "type": "item", "settings": { "text": "30-day returns" } },
+        { "type": "item", "settings": { "text": "Secure checkout" } },
+        { "type": "item", "settings": { "text": "Tracked delivery" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "CX: picture + zones",
+  "tag": "section",
+  "settings": [
+    {"type": "image_picker", "id": "video", "label": "Big video (shown instead of the picture)", "info": "Upload or pick an MP4 / WebM. Plays by itself, muted, on a loop, no controls. Square, like the picture. Empty = the picture below."},
+    {"type": "image_picker", "id": "picture", "label": "Big picture", "info": "Square photo, about 1000 x 1000 px. With a video above it is the still shown while the video loads. A video picked here also plays."},
+    {"type": "text", "id": "image", "label": "Built-in big picture (file in the theme, used until you pick one above)", "default": ""},
+    {"type": "text", "id": "picture_alt", "label": "Picture description (alt text)", "default": ""},
+    {"type": "text", "id": "heading_1", "label": "Heading, first line", "default": ""},
+    {"type": "text", "id": "heading_2", "label": "Heading, second line (accent colour)", "default": ""},
+    {"type": "text", "id": "sub", "label": "Line under the heading", "default": ""},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF"},
+    {"type": "color", "id": "accent", "label": "Accent (second line, tags, bars)", "default": "#6B1F3C"}
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Chip",
+      "settings": [
+        {"type": "select", "id": "icon", "label": "Icon", "default": "knit",
+         "options": [{"value": "knit", "label": "Knit"}, {"value": "scissors", "label": "Seamless"}, {"value": "waist", "label": "Waistband"}]},
+        {"type": "text", "id": "text", "label": "Text", "default": ""}
+      ]
+    },
+    {
+      "type": "zone",
+      "name": "Zone row",
+      "settings": [
+        {"type": "image_picker", "id": "thumb", "label": "Small picture", "info": "Square, about 200 x 200 px."},
+        {"type": "text", "id": "thumb_image", "label": "Built-in small picture (file in the theme)", "default": ""},
+        {"type": "text", "id": "focus", "label": "Built-in picture focus (CSS position, e.g. 50% 60%)", "default": "50% 50%"},
+        {"type": "text", "id": "title", "label": "Title", "default": ""},
+        {"type": "text", "id": "tag", "label": "Small tag on the right", "default": ""},
+        {"type": "range", "id": "bar", "label": "Bar length (decoration)", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 60},
+        {"type": "text", "id": "text", "label": "Text", "default": ""}
+      ]
+    },
+    {
+      "type": "custom_html",
+      "name": "Custom HTML",
+      "settings": [
+        {"type": "html", "id": "html", "label": "HTML", "default": "", "info": "Shown in the text column, under the zone rows, in the order of the blocks."}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "CX: picture + zones", "category": "Tammycharm"}
+  ]
+}

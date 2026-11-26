@@ -1,0 +1,22 @@
+{{!-- Comparison table: our column + two others; one row per block (label, ours / col2 / col3 = yes | no). --}}
+<section class="rf-sec rf-compare" aria-labelledby="rf-cmp-h-{{section.id}}">
+  <div class="b-wrap">
+    {{#if section.settings.eyebrow}}<p class="rf-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+    <h2 class="rf-h2" id="rf-cmp-h-{{section.id}}">{{section.settings.heading}}</h2>
+    <div class="rf-compare__scroll">
+      <table class="rf-compare__table">
+        <thead><tr><th scope="col"><span class="b-sr">Feature</span></th><th scope="col" class="rf-compare__ours">{{section.settings.col_1}}</th><th scope="col">{{section.settings.col_2}}</th><th scope="col">{{section.settings.col_3}}</th></tr></thead>
+        <tbody>
+          {{#each section.blocks}}
+          <tr {{{this.attributes}}}>
+            <th scope="row">{{this.settings.label}}</th>
+            <td class="rf-compare__ours">{{#if (eq this.settings.c1 "yes")}}<span class="rf-yes" aria-label="Yes"></span>{{else}}<span class="rf-no" aria-label="No"></span>{{/if}}</td>
+            <td>{{#if (eq this.settings.c2 "yes")}}<span class="rf-yes" aria-label="Yes"></span>{{else}}<span class="rf-no" aria-label="No"></span>{{/if}}</td>
+            <td>{{#if (eq this.settings.c3 "yes")}}<span class="rf-yes" aria-label="Yes"></span>{{else}}<span class="rf-no" aria-label="No"></span>{{/if}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

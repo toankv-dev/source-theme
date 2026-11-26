@@ -1,0 +1,40 @@
+{{!-- Picture on the left; on the right a row of small chips (block "chip"), a two-line heading (second line in the
+      accent colour), a short line, then one row per block "zone": small picture, title, tag on the right, a bar and a text. --}}
+<section class="cx-zones" style="--cx-bg:{{section.settings.bg}};--cx-accent:{{section.settings.accent}}">
+  <div class="b-wrap cx-zones__wrap">
+    <div class="cx-zones__media">
+      {{#if section.settings.video}}<video class="cx-zones__video" src="{{section.settings.video}}"{{#if section.settings.picture}} poster="{{section.settings.picture}}"{{/if}} autoplay muted loop playsinline preload="metadata" disablepictureinpicture aria-label="{{section.settings.picture_alt}}"></video>
+      {{else}}{{#if section.settings.picture}}<img src="{{section.settings.picture}}" alt="{{section.settings.picture_alt}}" width="1000" height="1000" loading="lazy">
+      {{else}}{{#if section.settings.image}}<img src="{{@root.assets_url}}/images/cx/{{section.settings.image}}" alt="{{section.settings.picture_alt}}" width="1000" height="1000" loading="lazy" onerror="this.remove()">{{/if}}{{/if}}{{/if}}
+    </div>
+    <script>(function(m){var i=m&&m.querySelector("img");if(!i||!/\.(mp4|webm|mov|m4v|ogv)(\?|#|$)/i.test(i.getAttribute("src")||""))return;var v=document.createElement("video");v.className="cx-zones__video";v.src=i.getAttribute("src");v.muted=true;v.autoplay=true;v.loop=true;v.playsInline=true;v.setAttribute("muted","");v.setAttribute("playsinline","");v.preload="metadata";i.replaceWith(v);v.play&&v.play().catch(function(){})})(document.currentScript.previousElementSibling);</script>
+    <div class="cx-zones__body">
+      <ul class="cx-zones__chips">
+        {{#each section.blocks}}{{#if (eq this.type "chip")}}
+        <li class="cx-zones__chip" {{{this.attributes}}}>
+          {{#if (eq this.settings.icon "knit")}}<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 4h4M4 4v4M20 4h-4M20 4v4M4 20h4M4 20v-4M20 20h-4M20 20v-4" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8.5" y="8.5" width="7" height="7" fill="currentColor"/></svg>{{/if}}
+          {{#if (eq this.settings.icon "scissors")}}<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="6" cy="7" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="17" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 8.4 20 17M8.2 15.6 20 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>{{/if}}
+          {{#if (eq this.settings.icon "waist")}}<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M6 4h12l-1.5 6 1.5 10h-5l-1-6-1 6H6l1.5-10L6 4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6.6 7h10.8" stroke="currentColor" stroke-width="1.8"/></svg>{{/if}}
+          <span>{{this.settings.text}}</span>
+        </li>
+        {{/if}}{{/each}}
+      </ul>
+      <h2 class="cx-zones__h"><span>{{section.settings.heading_1}}</span> <em>{{section.settings.heading_2}}</em></h2>
+      {{#if section.settings.sub}}<p class="cx-zones__sub">{{section.settings.sub}}</p>{{/if}}
+      <ul class="cx-zones__list">
+        {{#each section.blocks}}{{#if (eq this.type "zone")}}
+        <li class="cx-zones__row" {{{this.attributes}}}>
+          {{#if this.settings.thumb}}<img class="cx-zones__thumb" src="{{this.settings.thumb}}" alt="" width="200" height="200" loading="lazy">
+          {{else}}{{#if this.settings.thumb_image}}<img class="cx-zones__thumb" src="{{@root.assets_url}}/images/cx/{{this.settings.thumb_image}}" alt="" width="200" height="200" loading="lazy" onerror="this.remove()" style="object-position:{{this.settings.focus}}">{{/if}}{{/if}}
+          <div class="cx-zones__txt">
+            <p class="cx-zones__top"><b>{{this.settings.title}}</b><span>{{this.settings.tag}}</span></p>
+            <i class="cx-zones__bar" style="--v:{{this.settings.bar}}"></i>
+            <p class="cx-zones__p">{{this.settings.text}}</p>
+          </div>
+        </li>
+        {{/if}}{{/each}}
+      </ul>
+      {{#each section.blocks}}{{#if (eq this.type "custom_html")}}<div class="b-custom-html" {{{this.attributes}}}>{{{this.settings.html}}}</div>{{/if}}{{/each}}
+    </div>
+  </div>
+</section>

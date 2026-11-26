@@ -1,0 +1,27 @@
+{
+  "name": "CX: customer videos",
+  "tag": "section",
+  "settings": [
+    {"type": "text", "id": "eyebrow", "label": "Small line above the heading", "default": ""},
+    {"type": "text", "id": "heading_1", "label": "Heading, first line", "default": ""},
+    {"type": "text", "id": "heading_2", "label": "Heading, second line (italic, accent colour)", "default": ""},
+    {"type": "text", "id": "sub", "label": "Line under the heading", "default": ""},
+    {"type": "text", "id": "sound_label", "label": "Sound button text (empty hides the button)", "default": ""},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#0E1116"},
+    {"type": "color", "id": "accent", "label": "Accent (second line, eyebrow, dots)", "default": "#C9A86A"}
+  ],
+  "blocks": [
+    {
+      "type": "clip",
+      "name": "Video card",
+      "settings": [
+        {"type": "image_picker", "id": "media", "label": "Video (or picture)", "info": "Your own customer's video, portrait 9:16. Plays muted and loops."},
+        {"type": "text", "id": "label", "label": "Label (bold, with a dot)", "default": ""},
+        {"type": "text", "id": "caption", "label": "Small caption", "default": ""}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "CX: customer videos", "category": "Tammycharm"}
+  ]
+}

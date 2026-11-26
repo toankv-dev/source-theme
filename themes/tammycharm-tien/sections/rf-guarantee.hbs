@@ -1,0 +1,19 @@
+{{!-- Guarantee: round badge (days from the setting) beside heading, text and a link. Badge colours/fonts: rf3.css. --}}
+<section class="rf-sec rf-sec--sand rf-guar" aria-labelledby="rf-guar-h-{{section.id}}">
+  <div class="b-wrap rf-guar__inner">
+    <div class="rf-guar__badge" aria-hidden="true">
+      <svg viewBox="0 0 160 160" width="150" height="150">
+        <circle class="rf-guar__disc" cx="80" cy="80" r="74"/>
+        <circle class="rf-guar__ring" cx="80" cy="80" r="64" fill="none" stroke-width="2" stroke-dasharray="4 5"/>
+        <text class="rf-guar__t1" x="80" y="62" text-anchor="middle">MONEY BACK</text>
+        <text class="rf-guar__t2" x="80" y="106" text-anchor="middle">{{section.settings.days}}</text>
+        <text class="rf-guar__t3" x="80" y="128" text-anchor="middle">DAYS</text>
+      </svg>
+    </div>
+    <div class="rf-guar__copy">
+      {{#if section.settings.eyebrow}}<p class="rf-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+      <h2 class="rf-h2" id="rf-guar-h-{{section.id}}">{{section.settings.heading}}</h2>
+      <div class="rf-guar__text">{{{applyTokens section.settings.text}}}</div>
+    </div>
+  </div>
+</section>

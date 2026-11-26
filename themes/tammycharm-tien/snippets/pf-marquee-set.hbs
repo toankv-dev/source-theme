@@ -1,0 +1,8 @@
+{{!-- One set of the home scrolling band (index.hbs prints it 4 times for a seamless loop): title in big type, the
+      short text after it in small type. Items with an empty title are skipped. --}}
+<ul class="rf-ticker__set"{{#if hidden}} aria-hidden="true"{{/if}}>
+  {{#if @root.settings.pf_marq_1_title}}<li><b>{{@root.settings.pf_marq_1_title}}</b>{{#if @root.settings.pf_marq_1_text}}<small>{{@root.settings.pf_marq_1_text}}</small>{{/if}}</li>{{/if}}
+  {{#if @root.settings.pf_marq_2_title}}<li><b>{{@root.settings.pf_marq_2_title}}</b>{{#if @root.settings.pf_marq_2_text}}<small>{{@root.settings.pf_marq_2_text}}</small>{{/if}}</li>{{/if}}
+  {{#if @root.settings.pf_marq_3_title}}<li><b>{{@root.settings.pf_marq_3_title}}</b>{{#if @root.settings.pf_marq_3_text}}<small>{{@root.settings.pf_marq_3_text}}</small>{{/if}}</li>{{/if}}
+  {{#if @root.settings.pf_marq_4_title}}<li><b>{{@root.settings.pf_marq_4_title}}</b>{{#if @root.settings.pf_marq_4_text}}<small>{{@root.settings.pf_marq_4_text}}</small>{{/if}}</li>{{/if}}
+</ul>

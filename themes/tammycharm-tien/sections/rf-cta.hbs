@@ -1,0 +1,9 @@
+{{!-- Closing call to action on the dark band: heading, line, button back to the pickers, three short promises. --}}
+<section class="rf-sec rf-sec--ink rf-cta" aria-labelledby="rf-cta-h-{{section.id}}">
+  <div class="b-wrap rf-cta__inner">
+    <h2 class="rf-cta__h" id="rf-cta-h-{{section.id}}">{{section.settings.heading}}</h2>
+    {{#if section.settings.text}}<p class="rf-cta__text">{{section.settings.text}}</p>{{/if}}
+    <a class="rf-btn rf-btn--lg" href="#MainContent" data-rf-top>{{section.settings.button}}</a>
+    {{#if section.settings.note}}<p class="rf-cta__note">{{section.settings.note}}</p>{{/if}}
+  </div>
+</section>

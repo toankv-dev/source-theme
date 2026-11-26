@@ -1,0 +1,58 @@
+{
+  "name": "RF: feature grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Intro"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon name (tools/shopdy_theme/icons.py)"
+        },
+        {
+          "type": "textarea",
+          "id": "svg",
+          "label": "Icon SVG (filled by build.py)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "RF: feature grid",
+      "category": "RANGEFORT"
+    }
+  ]
+}

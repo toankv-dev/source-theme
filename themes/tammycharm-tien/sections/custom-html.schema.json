@@ -1,0 +1,40 @@
+{
+  "name": "Custom HTML",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "html",
+      "label": "HTML",
+      "default": "<p>Custom content</p>"
+    },
+    {
+      "type": "css",
+      "id": "css",
+      "label": "CSS"
+    },
+    {
+      "type": "checkbox",
+      "id": "contain",
+      "label": "Keep inside the page width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom HTML",
+      "category": "Content",
+      "description": "Free HTML and CSS."
+    }
+  ]
+}

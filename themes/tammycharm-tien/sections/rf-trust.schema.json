@@ -1,0 +1,60 @@
+{
+  "name": "RF: benefits strip",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label (for screen readers)",
+      "default": "Our promises"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "guarantee",
+          "options": [
+            { "value": "guarantee", "label": "Money-back" },
+            { "value": "truck", "label": "Delivery truck" },
+            { "value": "lock", "label": "Secure checkout" },
+            { "value": "shield", "label": "Shield with check" },
+            { "value": "star", "label": "Star" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "ruler", "label": "Sizes / ruler" }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Own icon (optional)",
+          "info": "Upload or pick a picture to use instead of the icon above. Square, about 96 x 96 px, transparent background."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "30-day<br>money-back guarantee"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RF: benefits strip",
+      "category": "Trust",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "guarantee", "text": "30-day<br>money-back guarantee" } },
+        { "type": "benefit", "settings": { "icon": "truck", "text": "Tracked<br>delivery" } },
+        { "type": "benefit", "settings": { "icon": "lock", "text": "Secure<br>encrypted checkout" } }
+      ]
+    }
+  ]
+}

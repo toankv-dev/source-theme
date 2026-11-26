@@ -1,0 +1,38 @@
+{
+  "name": "CX: promise band",
+  "tag": "section",
+  "settings": [
+    {"type": "header", "content": "Top line"},
+    {"type": "image_picker", "id": "face_1", "label": "Round face 1 (optional, real customers only)"},
+    {"type": "image_picker", "id": "face_2", "label": "Round face 2"},
+    {"type": "image_picker", "id": "face_3", "label": "Round face 3"},
+    {"type": "text", "id": "highlight", "label": "Big highlighted text", "default": ""},
+    {"type": "color", "id": "highlight_color", "label": "Highlight colour", "default": "#C9A23A"},
+    {"type": "text", "id": "heading_1", "label": "Heading, start", "default": ""},
+    {"type": "text", "id": "heading_em", "label": "Heading, coloured words", "default": ""},
+    {"type": "text", "id": "heading_2", "label": "Heading, end", "default": ""},
+    {"type": "header", "content": "Button and picture"},
+    {"type": "text", "id": "button", "label": "Button text (scrolls to the buy box)", "default": ""},
+    {"type": "text", "id": "note", "label": "Small line under the button", "default": ""},
+    {"type": "image_picker", "id": "picture", "label": "Picture", "info": "Square or portrait photo, about 1000 px."},
+    {"type": "text", "id": "image", "label": "Built-in picture (file in the theme, used until you pick one above)", "default": ""},
+    {"type": "text", "id": "picture_alt", "label": "Picture description (alt text)", "default": ""},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#F7F3EE"},
+    {"type": "color", "id": "accent", "label": "Accent (coloured words, card titles, button)", "default": "#6B1F3C"}
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Benefit card",
+      "settings": [
+        {"type": "select", "id": "icon", "label": "Icon", "default": "lines",
+         "options": [{"value": "lines", "label": "3D lines"}, {"value": "heart", "label": "Heart"}, {"value": "sparkle", "label": "Sparkle"}, {"value": "waist", "label": "Waistband"}, {"value": "drop", "label": "Drop"}]},
+        {"type": "text", "id": "title", "label": "Title", "default": ""},
+        {"type": "text", "id": "text", "label": "Text", "default": ""}
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "CX: promise band", "category": "Tammycharm"}
+  ]
+}

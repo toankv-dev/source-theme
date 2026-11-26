@@ -1,0 +1,363 @@
+{
+  "title": "Peakflex Knee Sleeve",
+  "price": "$69.99",
+  "compare_at_price": "$80.00",
+  "off_pct": 12,
+  "meta_description": "Adjustable knee sleeve with a compression dial, patella gel pad and side stabilizers.",
+  "description_html": "<p>The PeakFlex knee sleeve combines customizable compression, lateral stabilization, a patella gel pad and a non-slip grip.</p>",
+  "media": {
+    "main_image": "/assets/sample/peakflex/g01.webp",
+    "gallery": [
+      {
+        "url": "/assets/sample/peakflex/g01.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/peakflex/g02.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/peakflex/g03.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/peakflex/g04.webp",
+        "alt": ""
+      },
+      {
+        "url": "/assets/sample/peakflex/g05.webp",
+        "alt": ""
+      }
+    ]
+  },
+  "variants": [
+    {
+      "name": "Size",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "S (110-130lbs)",
+          "active": true
+        },
+        {
+          "label": "M (131-165lbs)",
+          "active": false
+        },
+        {
+          "label": "L (166-200lbs)",
+          "active": false
+        },
+        {
+          "label": "XL (201-240lbs)",
+          "active": false
+        },
+        {
+          "label": "2XL (240-270lbs)",
+          "active": false
+        },
+        {
+          "label": "3XL (271-300lbs)",
+          "active": false
+        },
+        {
+          "label": "4XL (300lbs+)",
+          "active": false
+        }
+      ]
+    },
+    {
+      "name": "Side",
+      "displayType": "pills",
+      "options": [
+        {
+          "label": "Left",
+          "active": true
+        },
+        {
+          "label": "Right",
+          "active": false
+        }
+      ]
+    }
+  ],
+  "variants_list": [
+    {
+      "id": "v-0-left",
+      "title": "S (110-130lbs) / Left",
+      "option_values": [
+        "S (110-130lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-0-right",
+      "title": "S (110-130lbs) / Right",
+      "option_values": [
+        "S (110-130lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-1-left",
+      "title": "M (131-165lbs) / Left",
+      "option_values": [
+        "M (131-165lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-1-right",
+      "title": "M (131-165lbs) / Right",
+      "option_values": [
+        "M (131-165lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-2-left",
+      "title": "L (166-200lbs) / Left",
+      "option_values": [
+        "L (166-200lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-2-right",
+      "title": "L (166-200lbs) / Right",
+      "option_values": [
+        "L (166-200lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-3-left",
+      "title": "XL (201-240lbs) / Left",
+      "option_values": [
+        "XL (201-240lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-3-right",
+      "title": "XL (201-240lbs) / Right",
+      "option_values": [
+        "XL (201-240lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-4-left",
+      "title": "2XL (240-270lbs) / Left",
+      "option_values": [
+        "2XL (240-270lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-4-right",
+      "title": "2XL (240-270lbs) / Right",
+      "option_values": [
+        "2XL (240-270lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-5-left",
+      "title": "3XL (271-300lbs) / Left",
+      "option_values": [
+        "3XL (271-300lbs)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-5-right",
+      "title": "3XL (271-300lbs) / Right",
+      "option_values": [
+        "3XL (271-300lbs)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-6-left",
+      "title": "4XL (300lbs+) / Left",
+      "option_values": [
+        "4XL (300lbs+)",
+        "Left"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    },
+    {
+      "id": "v-6-right",
+      "title": "4XL (300lbs+) / Right",
+      "option_values": [
+        "4XL (300lbs+)",
+        "Right"
+      ],
+      "price": "$69.99",
+      "compare_at_price": "$80.00",
+      "featured_image": "/assets/sample/peakflex/g01.webp",
+      "available": true
+    }
+  ],
+  "reviews": {
+    "summary": {
+      "average_rating": 4.8,
+      "total_count": 526
+    },
+    "items": [
+      {
+        "name": "Linds",
+        "rating": 2,
+        "title": "",
+        "content": "I cannot figure out the small wheel. It only makes it tighter please advice",
+        "verified": true,
+        "date": "2026-10-23"
+      },
+      {
+        "name": "Bernie Gapinski",
+        "rating": 3,
+        "title": "",
+        "content": "Slips down to my calf. Feels great when it’s on but they don’t stay in place. Tried not tightening it and tightening it all the way it still slips both legs.",
+        "verified": true,
+        "date": "2026-10-22"
+      },
+      {
+        "name": "Catrina",
+        "rating": 1,
+        "title": "",
+        "content": "This knee brace is no better than others I have bought. Would have sent it back but time had expired for me to do so.",
+        "verified": false,
+        "date": "2026-10-21"
+      },
+      {
+        "name": "Jeffdraves",
+        "rating": 1,
+        "title": "",
+        "content": "These knee braces do not work. Mine fell apart the 2nd week I had them.",
+        "verified": false,
+        "date": "2026-10-20"
+      },
+      {
+        "name": "Ghservice",
+        "rating": 4,
+        "title": "",
+        "content": "I really love this product. The one problem I need your help with is when I crank it tight I am not able to loosen it. Can you help me with this. Thanks Don",
+        "verified": false,
+        "date": "2026-10-2-1"
+      }
+    ]
+  },
+  "home_products": [
+    {
+      "id": "p1",
+      "handle": "peakflex-knee-sleeve",
+      "url": "/product",
+      "imageUrl": "/assets/sample/peakflex/g01.webp",
+      "imageWidth": 900,
+      "imageHeight": 900,
+      "title": "Peakflex Knee Sleeve",
+      "sellingPrice": 69.99,
+      "compareAtPrice": 80,
+      "offPct": 13,
+      "rating": 4.8,
+      "reviewCount": 120,
+      "description": "<p><strong>Stable, pain-free steps.</strong> Adjustable compression with a gel pad.</p><ul><li>Dial-in fit</li><li>Side stabilizers</li></ul>"
+    },
+    {
+      "id": "p2",
+      "handle": "triple-method-knee-massager",
+      "url": "/product",
+      "imageUrl": "/assets/sample/peakflex/p2.webp",
+      "imageWidth": 900,
+      "imageHeight": 900,
+      "title": "Triple Method Knee Massager",
+      "sellingPrice": 149.99,
+      "compareAtPrice": 299.99,
+      "offPct": 50,
+      "rating": 4.8,
+      "reviewCount": 120,
+      "description": ""
+    },
+    {
+      "id": "p3",
+      "handle": "orthotal-fussbandage",
+      "url": "/product",
+      "imageUrl": "/assets/sample/peakflex/p3.webp",
+      "imageWidth": 900,
+      "imageHeight": 900,
+      "title": "PeakFlex Footsleeve",
+      "sellingPrice": 39.99,
+      "compareAtPrice": 59.99,
+      "offPct": 33,
+      "rating": 4.8,
+      "reviewCount": 120,
+      "description": ""
+    },
+    {
+      "id": "p4",
+      "handle": "orthobelt-si",
+      "url": "/product",
+      "imageUrl": "/assets/sample/peakflex/p4.webp",
+      "imageWidth": 900,
+      "imageHeight": 900,
+      "title": "Orthobelt",
+      "sellingPrice": 49.99,
+      "compareAtPrice": 54.99,
+      "offPct": 9,
+      "rating": 4.8,
+      "reviewCount": 120,
+      "description": ""
+    }
+  ]
+}

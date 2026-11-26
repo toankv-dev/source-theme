@@ -1,0 +1,131 @@
+{{!-- Sliding review cards on a coloured band: rating badge, heading, then one card per block "review" (photo, name,
+      Verified mark, small line, pill, quote, and one proof box picked per card: before/after, three numbers,
+      a 3-step progress line or a before/now score). The row scrolls sideways: swipe on phones, drag or use the
+      arrows on desktop. All styles are scoped to .cx-rvc and use the theme fonts. --}}
+<section class="cx-rvc" style="--rvc-bg:{{section.settings.bg}};--rvc-text:{{section.settings.text}};--rvc-acc:{{section.settings.accent}};--rvc-soft:{{section.settings.soft}};--rvc-star:{{section.settings.star_bg}};--rvc-w:{{#if section.settings.card_width}}{{section.settings.card_width}}{{else}}310{{/if}}px;--rvc-wm:{{#if section.settings.card_width_mobile}}{{section.settings.card_width_mobile}}{{else}}82{{/if}}%;--rvc-ih:{{#if section.settings.image_height}}{{section.settings.image_height}}{{else}}175{{/if}}px;--rvc-pad:{{#if section.settings.padding}}{{section.settings.padding}}{{else}}0{{/if}}px">
+<style>
+.cx-rvc{background:var(--rvc-bg,#6B1F3C);padding:var(--rvc-pad,60px) 0;overflow:hidden;color:#2b2925}
+.cx-rvc__head{text-align:center;padding:0 16px;margin:0 0 30px}
+.cx-rvc__badge{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:5px 12px;border:1px solid var(--rvc-text,#fff);border-radius:999px;font-size:13px;line-height:1.2;color:var(--rvc-text,#fff)}
+.cx-rvc__stars{display:inline-flex;gap:2px}
+.cx-rvc__stars i{display:grid;place-items:center;width:16px;height:16px;background:var(--rvc-star,#00B67A);color:#fff;font-style:normal;font-size:11px;line-height:1}
+.cx-rvc__badge b{font-weight:700}
+html body .cx-rvc .cx-rvc__h{margin:0;font-size:clamp(30px,3.8vw,50px);line-height:1.1;color:var(--rvc-text,#fff)!important}
+.cx-rvc__h em{font-style:italic;opacity:.8}
+.cx-rvc__sub{margin:10px auto 0;max-width:560px;font-size:15px;line-height:1.55;color:var(--rvc-text,#fff);opacity:.85}
+.cx-rvc__track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 max(16px,calc((100% - 1306px) / 2 + 20px));scroll-padding:0 max(16px,calc((100% - 1306px) / 2 + 20px));cursor:grab}
+.cx-rvc__track::-webkit-scrollbar{display:none}
+.cx-rvc__track.is-drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.cx-rvc__card{flex:0 0 var(--rvc-w,310px);display:flex;flex-direction:column;background:#fff;border-radius:12px;overflow:hidden;scroll-snap-align:start}
+.cx-rvc__img{display:block;width:100%;height:var(--rvc-ih,175px);object-fit:cover;pointer-events:none}
+.cx-rvc__img--ph{background:var(--rvc-soft,#F8ECEF)}
+.cx-rvc__body{display:flex;flex-direction:column;flex:1;padding:14px 14px 16px}
+.cx-rvc__top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding-bottom:10px;border-bottom:1px solid #eee9e4}
+.cx-rvc__name{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0;font-size:13px;font-weight:700;color:#1f1d1a}
+.cx-rvc__ver{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:400;color:#1fa463}
+.cx-rvc__meta{margin:3px 0 0;font-size:11px;color:#5c5852}
+.cx-rvc__tag{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid #d9d4cc;border-radius:999px;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#5c5852;white-space:nowrap}
+.cx-rvc__q{flex:1;margin:12px 0 14px;font-size:14px;font-style:italic;line-height:1.55;color:#2b2925}
+.cx-rvc__ba{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cx-rvc__ba>div{position:relative;padding:16px 12px 10px;border-radius:8px;font-size:14px;line-height:1.45}
+.cx-rvc__ba-b{border:1px dashed #d4cec6;color:#8c877e;text-decoration:line-through}
+.cx-rvc__ba-a{background:var(--rvc-soft,#F8ECEF);color:#1f1d1a}
+.cx-rvc__pill{position:absolute;top:-7px;left:10px;padding:1px 8px;border-radius:999px;font-size:8px;font-weight:700;letter-spacing:.08em;line-height:12px;text-transform:uppercase;text-decoration:none;color:#fff;background:#cfc6bc}
+.cx-rvc__ba-a .cx-rvc__pill{background:var(--rvc-acc,#6B1F3C)}
+.cx-rvc__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cx-rvc__stats>div{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px 8px;border:1px solid #e6e1da;border-radius:8px;text-align:center}
+.cx-rvc__stats>div:last-child{background:var(--rvc-soft,#F8ECEF);border-color:transparent}
+.cx-rvc__stats b{font-size:16px;font-weight:700;color:var(--rvc-acc,#6B1F3C)}
+.cx-rvc__stats span{font-size:11px;line-height:1.3;color:#2b2925}
+.cx-rvc__stats svg{margin-top:4px}
+.cx-rvc__box{padding:10px 10px 8px;border:1px solid #e6e1da;border-radius:8px}
+.cx-rvc__box-t{display:flex;align-items:center;gap:6px;margin:0 0 12px;font-size:11px;color:#5c5852}
+.cx-rvc__box-t b{color:#1f1d1a}
+.cx-rvc__steps{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cx-rvc__steps i{display:block;height:5px;border-radius:999px;background:var(--rvc-acc,#6B1F3C);opacity:.45}
+.cx-rvc__steps div:nth-child(2) i{opacity:.7}
+.cx-rvc__steps div:nth-child(3) i{opacity:1;height:7px;margin-top:-1px}
+.cx-rvc__steps span{display:block;margin-top:6px;font-size:9px;color:#9a8f96}
+.cx-rvc__rate{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:8px;margin:0 0 6px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#9a8f96}
+.cx-rvc__rate:last-child{margin:0;color:#1f1d1a;font-weight:700}
+.cx-rvc__bar{height:4px;border-radius:999px;background:#ece7e9;overflow:hidden}
+.cx-rvc__bar i{display:block;height:100%;width:calc(var(--v,0) * 10%);background:var(--rvc-acc,#6B1F3C);opacity:.45;border-radius:inherit}
+.cx-rvc__rate:last-child .cx-rvc__bar i{opacity:1}
+.cx-rvc__rate em{font-style:normal;font-size:10px;letter-spacing:0;color:var(--rvc-acc,#6B1F3C)}
+.cx-rvc__nav{display:flex;justify-content:center;gap:10px;margin-top:24px}
+.cx-rvc__nav button{display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid var(--rvc-text,#fff);border-radius:50%;background:transparent;color:var(--rvc-text,#fff);cursor:pointer}
+.cx-rvc__nav button:hover{background:var(--rvc-text,#fff);color:var(--rvc-bg,#6B1F3C)}
+@media(max-width:749px){.cx-rvc__head{margin-bottom:22px}.cx-rvc__track{gap:12px}.cx-rvc__card{flex-basis:var(--rvc-wm,82%)}.cx-rvc__nav{display:none}}
+</style>
+  <div class="cx-rvc__head">
+    {{#if section.settings.badge_show}}<p class="cx-rvc__badge"><span class="cx-rvc__stars" aria-hidden="true"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><span><b>{{section.settings.badge_label}}</b> {{section.settings.badge_text}}</span></p>{{/if}}
+    <h2 class="cx-rvc__h">{{section.settings.heading}}{{#if section.settings.heading_accent}} <em>{{section.settings.heading_accent}}</em>{{/if}}</h2>
+    {{#if section.settings.sub}}<p class="cx-rvc__sub">{{section.settings.sub}}</p>{{/if}}
+  </div>
+  <div class="cx-rvc__track" data-rvc-track>
+    {{#each section.blocks}}
+    <article class="cx-rvc__card" {{{this.attributes}}}>
+      {{#if this.settings.image}}<img class="cx-rvc__img" src="{{this.settings.image}}" alt="{{this.settings.name}}" loading="lazy" style="object-position:{{this.settings.image_focus}}" draggable="false">{{else}}<div class="cx-rvc__img cx-rvc__img--ph" aria-hidden="true"></div>{{/if}}
+      <div class="cx-rvc__body">
+        <div class="cx-rvc__top">
+          <div>
+            <p class="cx-rvc__name">{{this.settings.name}}{{#if this.settings.verified}}<span class="cx-rvc__ver"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#1FA463"/><path d="M4.8 8.2l2 2 4-4.2" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>{{this.settings.verified_label}}</span>{{/if}}</p>
+            {{#if this.settings.meta}}<p class="cx-rvc__meta">{{this.settings.meta}}</p>{{/if}}
+          </div>
+          {{#if this.settings.tag}}<span class="cx-rvc__tag"><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M1 1h2v2H1zM5 1h2v2H5zM9 1h2v2H9zM1 5h2v2H1zM5 5h2v2H5zM9 5h2v2H9zM1 9h2v2H1zM5 9h2v2H5z" fill="currentColor"/></svg>{{this.settings.tag}}</span>{{/if}}
+        </div>
+        {{#if this.settings.quote}}<p class="cx-rvc__q">“{{this.settings.quote}}”</p>{{/if}}
+        {{#if (eq this.settings.proof "before_after")}}
+        <div class="cx-rvc__ba">
+          <div class="cx-rvc__ba-b"><span class="cx-rvc__pill">{{this.settings.before_label}}</span>{{this.settings.before_text}}</div>
+          <div class="cx-rvc__ba-a"><span class="cx-rvc__pill">{{this.settings.after_label}}</span>{{this.settings.after_text}}</div>
+        </div>
+        {{/if}}
+        {{#if (eq this.settings.proof "stats")}}
+        <div class="cx-rvc__stats">
+          <div><b>{{this.settings.stat_1_value}}</b><span>{{this.settings.stat_1_label}}</span><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--rvc-acc,#6B1F3C)"/><path d="M8 4.5V8h2.6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div><b>{{this.settings.stat_2_value}}</b><span>{{this.settings.stat_2_label}}</span><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2" fill="var(--rvc-acc,#6B1F3C)"/><path d="M5 1.5v3M11 1.5v3" stroke="var(--rvc-acc,#6B1F3C)" stroke-width="1.5" stroke-linecap="round"/><path d="M4 7h8" stroke="#fff" stroke-width="1.2"/></svg></div>
+          <div><b>{{this.settings.stat_3_value}}</b><span>{{this.settings.stat_3_label}}</span><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="var(--rvc-acc,#6B1F3C)"/><path d="M5.3 9.3c1.4 1.6 4 1.6 5.4 0" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><circle cx="5.9" cy="6.4" r=".9" fill="#fff"/><circle cx="10.1" cy="6.4" r=".9" fill="#fff"/></svg></div>
+        </div>
+        {{/if}}
+        {{#if (eq this.settings.proof "progress")}}
+        <div class="cx-rvc__box">
+          <p class="cx-rvc__box-t"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M1.5 11.5l4-4 3 3 5.5-5.5M10.5 5H14v3.5" fill="none" stroke="#1FA463" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>{{this.settings.progress_title}} <b>{{this.settings.progress_strong}}</b></p>
+          <div class="cx-rvc__steps">
+            <div><i></i><span>{{this.settings.step_1}}</span></div>
+            <div><i></i><span>{{this.settings.step_2}}</span></div>
+            <div><i></i><span>{{this.settings.step_3}}</span></div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq this.settings.proof "rating")}}
+        <div class="cx-rvc__box">
+          <p class="cx-rvc__box-t">{{this.settings.rating_title}} <b>{{this.settings.rating_strong}}</b></p>
+          <div class="cx-rvc__rate"><span>{{this.settings.rating_before_label}}</span><span class="cx-rvc__bar"><i style="--v:{{this.settings.rating_before}}"></i></span><em>{{this.settings.rating_before}}/10</em></div>
+          <div class="cx-rvc__rate"><span>{{this.settings.rating_now_label}}</span><span class="cx-rvc__bar"><i style="--v:{{this.settings.rating_now}}"></i></span><em>{{this.settings.rating_now}}/10</em></div>
+        </div>
+        {{/if}}
+      </div>
+    </article>
+    {{/each}}
+  </div>
+  {{#if section.settings.show_arrows}}<div class="cx-rvc__nav"><button type="button" data-rvc-step="-1" aria-label="Previous review"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-rvc-step="1" aria-label="Next review"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>{{/if}}
+</section>
+<script>
+(function(){
+  document.querySelectorAll('[data-rvc-track]').forEach(function(track){
+    if (track.dataset.rvcReady) return; track.dataset.rvcReady = '1';
+    var sec = track.closest('.cx-rvc');
+    var step = function(){ var c = track.querySelector('.cx-rvc__card'); return c ? c.getBoundingClientRect().width + 20 : 300; };
+    if (sec) sec.querySelectorAll('[data-rvc-step]').forEach(function(b){
+      b.addEventListener('click', function(){ track.scrollBy({left: step() * Number(b.getAttribute('data-rvc-step')), behavior: 'smooth'}); });
+    });
+    // Drag with the mouse on desktop (touch keeps the native swipe).
+    var down = false, moved = false, x0 = 0, s0 = 0;
+    track.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = false; x0 = e.clientX; s0 = track.scrollLeft; });
+    window.addEventListener('pointermove', function(e){ if (!down) return; var dx = e.clientX - x0; if (Math.abs(dx) > 4) { moved = true; track.classList.add('is-drag'); } if (moved) track.scrollLeft = s0 - dx; });
+    window.addEventListener('pointerup', function(){ if (!down) return; down = false; if (moved) { track.classList.remove('is-drag'); var w = step(); track.scrollTo({left: Math.round(track.scrollLeft / w) * w, behavior: 'smooth'}); } });
+    track.addEventListener('click', function(e){ if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  });
+})();
+</script>

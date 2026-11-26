@@ -1,0 +1,88 @@
+{
+  "name": "CX: review cards",
+  "tag": "section",
+  "max_blocks": 20,
+  "settings": [
+    {"type": "header", "content": "Badge above the heading"},
+    {"type": "checkbox", "id": "badge_show", "label": "Show the rating badge", "default": true},
+    {"type": "text", "id": "badge_label", "label": "Badge bold word", "default": "EXCELLENT"},
+    {"type": "text", "id": "badge_text", "label": "Badge text after it", "default": "· Rated 4.9/5"},
+    {"type": "color", "id": "star_bg", "label": "Star squares colour", "default": "#00B67A"},
+    {"type": "header", "content": "Heading"},
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Reviews from women like you"},
+    {"type": "text", "id": "heading_accent", "label": "Heading end (italic, light colour, optional)", "default": ""},
+    {"type": "text", "id": "sub", "label": "Line under the heading (optional)", "default": ""},
+    {"type": "header", "content": "Look"},
+    {"type": "color", "id": "bg", "label": "Background", "default": "#6B1F3C"},
+    {"type": "color", "id": "text", "label": "Heading and badge text", "default": "#FFFFFF"},
+    {"type": "color", "id": "accent", "label": "Accent inside the cards (bars, numbers, badges)", "default": "#6B1F3C"},
+    {"type": "color", "id": "soft", "label": "Soft tint inside the cards", "default": "#F8ECEF"},
+    {"type": "range", "id": "card_width", "label": "Card width (desktop)", "min": 260, "max": 400, "step": 10, "unit": "px", "default": 310},
+    {"type": "range", "id": "card_width_mobile", "label": "Card width (phones, % of the screen)", "min": 60, "max": 95, "step": 5, "unit": "%", "default": 82},
+    {"type": "range", "id": "image_height", "label": "Photo height", "min": 120, "max": 320, "step": 10, "unit": "px", "default": 175},
+    {"type": "range", "id": "padding", "label": "Space above and below", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60},
+    {"type": "checkbox", "id": "show_arrows", "label": "Show arrows under the cards", "default": true}
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review card",
+      "settings": [
+        {"type": "image_picker", "id": "image", "label": "Photo"},
+        {"type": "text", "id": "image_focus", "label": "Photo focus (CSS position, e.g. 50% 30%)", "default": "50% 30%"},
+        {"type": "text", "id": "name", "label": "Name", "default": "Nicole B."},
+        {"type": "checkbox", "id": "verified", "label": "Show the Verified mark", "default": true},
+        {"type": "text", "id": "verified_label", "label": "Verified text", "default": "Verified"},
+        {"type": "text", "id": "meta", "label": "Small line under the name", "default": "Size M · 46 · Austin, TX"},
+        {"type": "text", "id": "tag", "label": "Pill on the right (empty hides it)", "default": "7 weeks"},
+        {"type": "textarea", "id": "quote", "label": "Quote", "default": "Creams, massage, cupping, other leggings, nothing worked. Seven weeks in and my skin genuinely feels smoother."},
+        {"type": "select", "id": "proof", "label": "Box under the quote", "default": "before_after", "options": [
+          {"value": "none", "label": "None"},
+          {"value": "before_after", "label": "Before / after"},
+          {"value": "stats", "label": "Three numbers"},
+          {"value": "progress", "label": "Progress line (3 steps)"},
+          {"value": "rating", "label": "Before / now score"}
+        ]},
+        {"type": "header", "content": "Before / after"},
+        {"type": "text", "id": "before_label", "label": "Before badge", "default": "Before"},
+        {"type": "text", "id": "before_text", "label": "Before text (shown crossed out)", "default": "Hundreds spent on creams"},
+        {"type": "text", "id": "after_label", "label": "After badge", "default": "After"},
+        {"type": "text", "id": "after_text", "label": "After text", "default": "Smoother skin in 7 weeks"},
+        {"type": "header", "content": "Three numbers"},
+        {"type": "text", "id": "stat_1_value", "label": "1st number", "default": "12"},
+        {"type": "text", "id": "stat_1_label", "label": "1st label", "default": "days to see it"},
+        {"type": "text", "id": "stat_2_value", "label": "2nd number", "default": "9"},
+        {"type": "text", "id": "stat_2_label", "label": "2nd label", "default": "weeks worn"},
+        {"type": "text", "id": "stat_3_value", "label": "3rd number (tinted box)", "default": "3h"},
+        {"type": "text", "id": "stat_3_label", "label": "3rd label", "default": "a day"},
+        {"type": "header", "content": "Progress line"},
+        {"type": "text", "id": "progress_title", "label": "Title", "default": "Firmer thighs"},
+        {"type": "text", "id": "progress_strong", "label": "Bold part of the title", "default": "from week 2"},
+        {"type": "text", "id": "step_1", "label": "Step 1 label", "default": "Day 1"},
+        {"type": "text", "id": "step_2", "label": "Step 2 label", "default": "Week 2"},
+        {"type": "text", "id": "step_3", "label": "Step 3 label", "default": "Week 6"},
+        {"type": "header", "content": "Before / now score"},
+        {"type": "text", "id": "rating_title", "label": "Title", "default": "Her own"},
+        {"type": "text", "id": "rating_strong", "label": "Bold part of the title", "default": "lightness rating"},
+        {"type": "text", "id": "rating_before_label", "label": "First row label", "default": "Before"},
+        {"type": "range", "id": "rating_before", "label": "First score", "min": 0, "max": 10, "step": 1, "default": 2},
+        {"type": "text", "id": "rating_now_label", "label": "Second row label", "default": "Now"},
+        {"type": "range", "id": "rating_now", "label": "Second score", "min": 0, "max": 10, "step": 1, "default": 9}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "CX: review cards",
+      "category": "Tammycharm",
+      "description": "Sliding review cards: photo, name, quote and a proof box (before/after, numbers, progress or score).",
+      "blocks": [
+        {"type": "review"},
+        {"type": "review", "settings": {"name": "Natalia A.", "meta": "Size 2XL · 37 · San Antonio, TX", "tag": "9 weeks", "quote": "I had been insecure about my cellulite for years, especially in summer. My skin is smoother and more refined.", "proof": "stats"}},
+        {"type": "review", "settings": {"name": "Hannah P.", "meta": "Size 3XL · 51 · Portland, OR", "tag": "6 weeks", "quote": "I tried so many creams with no real results. These surprised me: my cellulite has reduced and my thighs feel firmer.", "proof": "progress"}},
+        {"type": "review", "settings": {"name": "Priya M.", "meta": "Size XL · 50 · San Jose, CA", "tag": "", "quote": "I ride most evenings and my legs used to feel heavy after. Now they feel lighter and my thighs look smoother.", "proof": "rating"}},
+        {"type": "review", "settings": {"name": "Carolina N.", "meta": "Size L · 48 · Seattle, WA", "tag": "6 weeks", "quote": "I bought them for the color and kept them for the fit. Six weeks later my legs look smoother in the mirror.", "proof": "progress", "progress_title": "Smoother thighs", "progress_strong": "from week 3", "step_2": "Week 3"}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{{!-- Heading + rich text. With no text of its own it lists the listing's guarantees (page.guarantees). --}}
+<div class="b-wrap b-guarantee">
+  {{#if section.settings.eyebrow}}<p class="b-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+  {{#if section.settings.heading}}<h2 class="b-h2" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}
+  {{#if section.settings.body}}<div class="b-rte">{{{applyTokens section.settings.body}}}</div>{{else}}{{#if page.guarantees.length}}
+  <ul class="b-guarantee__list">{{#each page.guarantees}}<li>{{this}}</li>{{/each}}</ul>
+  {{/if}}{{/if}}
+</div>

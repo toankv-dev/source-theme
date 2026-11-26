@@ -1,0 +1,35 @@
+{
+  "name": "RF: closing CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": ""
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button",
+      "label": "Button",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small line",
+      "default": ""
+    }
+  ],
+  "tag": "section",
+  "presets": [
+    {
+      "name": "RF: closing CTA",
+      "category": "RANGEFORT"
+    }
+  ]
+}

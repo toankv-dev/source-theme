@@ -1,0 +1,10 @@
+{
+  "name": "Guarantee / text",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our promise" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try it risk-free for 30 days" },
+    { "type": "richtext", "id": "body", "label": "Text", "default": "<p>If it doesn't make packing easier, send it back within 30 days for a refund. Details in our <a href=\"{{RefundLink}}\">Refund Policy</a>.</p>" }
+  ],
+  "presets": [{ "name": "Guarantee / text", "category": "Text", "description": "A centred eyebrow, heading and paragraph." }]
+}

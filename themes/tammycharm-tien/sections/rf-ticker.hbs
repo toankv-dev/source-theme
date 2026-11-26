@@ -1,0 +1,13 @@
+{{!-- Scrolling text band: one phrase per block, running sideways without end. The phrases are printed 4 times so
+      the CSS loop has no seam. Optional animated waves on the top edge (they lie over the section above). --}}
+<div class="rf-ticker{{#unless (eq section.settings.uppercase false)}} rf-ticker--upper{{/unless}}{{#if (eq section.settings.direction "right")}} rf-ticker--right{{/if}}{{#if (eq section.settings.animate false)}} rf-ticker--still{{/if}}{{#unless (eq section.settings.pause_hover false)}} rf-ticker--pause{{/unless}}" aria-label="{{#if section.settings.label}}{{section.settings.label}}{{else}}Store promises{{/if}}" style="{{#if section.settings.bg}}--tk-bg:{{section.settings.bg}};--wv-base:{{section.settings.bg}};{{/if}}{{#if section.settings.color}}--tk-fg:{{section.settings.color}};{{/if}}{{#if section.settings.wave_color}}--wv:{{section.settings.wave_color}};{{/if}}--tk-speed:{{#if section.settings.speed}}{{section.settings.speed}}{{else}}30{{/if}}s;--tk-size:{{#if section.settings.size}}{{section.settings.size}}{{else}}18{{/if}}px">
+  {{#unless (eq section.settings.waves false)}}{{> rf-waves over=true}}{{/unless}}
+  <div class="rf-ticker__view">
+    <div class="rf-ticker__track">
+      <ul class="rf-ticker__set">{{#each section.blocks}}<li {{{this.attributes}}}>{{this.settings.text}}</li>{{/each}}</ul>
+      <ul class="rf-ticker__set" aria-hidden="true">{{#each section.blocks}}<li>{{this.settings.text}}</li>{{/each}}</ul>
+      <ul class="rf-ticker__set" aria-hidden="true">{{#each section.blocks}}<li>{{this.settings.text}}</li>{{/each}}</ul>
+      <ul class="rf-ticker__set" aria-hidden="true">{{#each section.blocks}}<li>{{this.settings.text}}</li>{{/each}}</ul>
+    </div>
+  </div>
+</div>

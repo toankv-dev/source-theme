@@ -1,0 +1,5 @@
+{
+  "cart": { "title": "Your cart", "subtotal": "Subtotal", "checkout": "Checkout", "empty": "Your cart is empty." },
+  "product": { "add_to_cart": "Add to cart", "in_stock": "In stock — ships in 24h" },
+  "checkout": { "title": "Checkout", "discount_placeholder": "Discount code" }
+}

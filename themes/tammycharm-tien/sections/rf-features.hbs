@@ -1,0 +1,18 @@
+{{!-- Feature grid on the dark band: eyebrow, heading, intro, then one card per block (icon SVG, title, text).
+      `svg` is filled by tools/shopdy_theme/build.py from the icon name in theme.config.json (tools/shopdy_theme/icons.py). --}}
+<section class="rf-sec rf-sec--olive rf-features" aria-labelledby="rf-features-h-{{section.id}}">
+  <div class="b-wrap">
+    {{#if section.settings.eyebrow}}<p class="rf-eyebrow">{{section.settings.eyebrow}}</p>{{/if}}
+    <h2 class="rf-h2" id="rf-features-h-{{section.id}}">{{section.settings.heading}}</h2>
+    {{#if section.settings.text}}<p class="rf-lead">{{section.settings.text}}</p>{{/if}}
+    <ul class="rf-features__grid">
+      {{#each section.blocks}}
+      <li class="rf-feature" {{{this.attributes}}}>
+        <span class="rf-feature__icon" aria-hidden="true">{{{this.settings.svg}}}</span>
+        <h3 class="rf-feature__title">{{this.settings.title}}</h3>
+        <p class="rf-feature__text">{{this.settings.text}}</p>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</section>

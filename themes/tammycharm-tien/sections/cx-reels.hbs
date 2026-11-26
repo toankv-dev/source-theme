@@ -1,0 +1,49 @@
+{{!-- Dark band of customer videos: small eyebrow between two lines, a two-line heading (second line italic, accent
+      colour), a short line, then one tall card per block "clip" (a video or picture picked in the editor, a sound button,
+      a label with a dot and a small caption). An empty card shows a plain frame with a play mark. Videos play muted
+      and loop; the sound button switches the sound of that card on and off. --}}
+<section class="cx-reels" style="--cx-bg:{{section.settings.bg}};--cx-gold:{{section.settings.accent}}">
+  <div class="cx-reels__head b-wrap">
+    {{#if section.settings.eyebrow}}<p class="cx-reels__eyebrow"><span>{{section.settings.eyebrow}}</span></p>{{/if}}
+    <h2 class="cx-reels__h">{{section.settings.heading_1}}{{#if section.settings.heading_2}}<em>{{section.settings.heading_2}}</em>{{/if}}</h2>
+    {{#if section.settings.sub}}<p class="cx-reels__sub">{{section.settings.sub}}</p>{{/if}}
+  </div>
+  <div class="cx-reels__track" data-cx-reels>
+    {{#each section.blocks}}
+    <figure class="cx-reels__card" {{{this.attributes}}}>
+      {{#if this.settings.media}}<img class="cx-reels__media" src="{{this.settings.media}}" alt="{{this.settings.caption}}" width="360" height="640" loading="lazy" data-cx-vid>
+      {{else}}<span class="cx-reels__ph" aria-hidden="true"><svg viewBox="0 0 48 48" width="46" height="46"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19 15.5v17l14-8.5-14-8.5Z" fill="currentColor"/></svg></span>{{/if}}
+      {{#if @root.section.settings.sound_label}}<button type="button" class="cx-reels__sound" data-cx-sound aria-pressed="false"><span class="cx-reels__pill"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>{{@root.section.settings.sound_label}}</span></span></button>{{/if}}
+      <figcaption class="cx-reels__cap">
+        {{#if this.settings.label}}<b>{{this.settings.label}}</b>{{/if}}
+        {{#if this.settings.caption}}<span>{{this.settings.caption}}</span>{{/if}}
+      </figcaption>
+    </figure>
+    {{/each}}
+  </div>
+</section>
+<script>
+(function(){
+  var VID = /\.(mp4|webm|mov|m4v)(\?|#|$)/i;
+  document.querySelectorAll('[data-cx-reels]').forEach(function(track){
+    if (track.dataset.cxReady) return; track.dataset.cxReady = '1';
+    track.querySelectorAll('img[data-cx-vid]').forEach(function(img){
+      if (!VID.test(img.getAttribute('src') || '')) return;
+      var v = document.createElement('video');
+      v.className = img.className; v.src = img.getAttribute('src');
+      v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'metadata';
+      img.replaceWith(v); var p = v.play(); if (p && p.catch) p.catch(function(){});
+    });
+    track.querySelectorAll('[data-cx-sound]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var card = btn.closest('.cx-reels__card'), v = card && card.querySelector('video');
+        if (!v) return;
+        track.querySelectorAll('video').forEach(function(o){ if (o !== v) { o.muted = true; } });
+        track.querySelectorAll('[data-cx-sound]').forEach(function(b){ if (b !== btn) b.setAttribute('aria-pressed', 'false'); });
+        v.muted = !v.muted; if (!v.muted) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+        btn.setAttribute('aria-pressed', v.muted ? 'false' : 'true');
+      });
+    });
+  });
+})();
+</script>

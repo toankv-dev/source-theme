@@ -1,6 +1,7 @@
 {{!-- Details (sections/sc-details.schema.json) — Shapecurve template "Crafted In Every Detail". Heading, a large 4:5 picture
       on the left (desktop only, as on the original) and cards with a round picture whose side alternates. Pictures =
       picked file, else default_image (theme file), else an empty frame (<span>, hint in the editor only). Own <style>. --}}
+{{> sc-type h=".scd__h" s=".scd__t" t=".scd__p"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".scd__t" t=".scd__p"}}{{/each}}
 <style>
   .scd{letter-spacing:normal;--sc-hl:#790236;background:var(--scd-bg,#f6edf1);color:#333}
   .scd__wrap{max-width:1200px;margin:0 auto;padding:0 15px;box-sizing:border-box}

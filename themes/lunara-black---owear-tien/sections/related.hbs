@@ -1,0 +1,113 @@
+{{!-- You may also like (trang san pham): san pham CUNG COLLECTION voi san pham dang xem (backend relatedProducts,
+      related-products.ts; thieu thi bu san pham khac cua cua hang), card = card luoi Products (#ms-card-tpl, nut Add to cart /
+      Choose options). Co khoi nay thi an khoi "You may also like" cu cua backend (.sf-upsell) tren trang san pham. --}}
+{{#if relatedProducts.length}}
+<div class="lu-related" data-lu-related data-limit="{{#if section.settings.limit}}{{section.settings.limit}}{{else}}8{{/if}}" data-quick="{{#if (eq section.settings.show_quick_add false)}}0{{else}}1{{/if}}">
+<style>
+.lu-related{padding:40px 0 50px}
+.lu-related__h{margin:0 0 30px;text-align:center;font-size:clamp(24px,2.6vw,34px);line-height:1.2}
+.lu-related .product-grid{margin:0;padding:0;list-style:none}
+.lu-related .quick-add__submit,
+.lu-related .quick-add__submit:before,
+.lu-related .quick-add__submit:after {
+  border-radius: 40px !important;
+}
+.lu-related .quick-add__submit {
+  --buttons-radius: 40px !important;
+  --buttons-radius-outset: 40px !important;
+}
+@media screen and (max-width:749px){
+  .lu-related{padding:24px 0 32px}
+  .lu-related__h{margin-bottom:16px}
+  .lu-related .page-width{padding-left:8px!important;padding-right:8px!important}
+  .lu-related .product-grid{--grid-mobile-horizontal-spacing:6px!important;--grid-mobile-vertical-spacing:10px!important;column-gap:6px!important;row-gap:10px!important}
+  .lu-related .grid--2-col-tablet-down .grid__item{width:calc(50% - 3px)!important;max-width:calc(50% - 3px)!important;flex-basis:calc(50% - 3px)!important}
+  .lu-related .card__content{padding-left:6px;padding-right:6px}
+}
+body:has([data-lu-related-grid] > li) .sf-upsell{display:none!important}
+.lu-related .product-grid>.grid__item[hidden]{display:none!important}
+.lu-related__more-row{display:flex;justify-content:center;margin-top:28px}
+.lu-related__more{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:200px;padding:0 28px;background:transparent;border:1px solid var(--lu-primary,#000000);border-radius:40px;color:var(--lu-primary,#000000);font:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s ease}
+.lu-related__more:hover{background:color-mix(in srgb,var(--lu-primary,#000000) 8%,transparent)}
+.lu-related__more[hidden]{display:none}
+@media screen and (max-width:749px){.lu-related__more-row{margin-top:18px}.lu-related__more{width:100%;max-width:320px}}
+</style>
+<div class="page-width">
+<h2 class="h1 lu-related__h"><span {{{editable "heading"}}}>{{#if section.settings.heading}}{{section.settings.heading}}{{else}}You may also like{{/if}}</span></h2>
+<ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" data-lu-related-grid></ul>
+<div class="lu-related__more-row"><button type="button" class="lu-related__more" data-lu-related-more hidden>Load more</button></div>
+</div>
+<script type="application/json" data-lu-related-json></script><template data-lu-json="{{lookup (json relatedProducts) "string"}}"></template><script>(function(s){var t=s.previousElementSibling,j=t&&t.previousElementSibling;if(j&&t.hasAttribute("data-lu-json")){j.textContent=t.getAttribute("data-lu-json");t.parentNode.removeChild(t);}})(document.currentScript);</script>
+</div>
+<script>
+(function () {
+  function run() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lu-related]:not([data-lu-ready])'), function (root) {
+      var tpl = document.getElementById('ms-card-tpl'), grid = root.querySelector('[data-lu-related-grid]');
+      if (!tpl || !grid) return;
+      root.setAttribute('data-lu-ready', '1');
+      var list = [];
+      try { list = JSON.parse(root.querySelector('[data-lu-related-json]').textContent || '[]') || []; } catch (e) {}
+      list = list.slice(0, parseInt(root.getAttribute('data-limit'), 10) || 8);
+      if (!list.length) { root.hidden = true; return; }
+      var quick = root.getAttribute('data-quick') !== '0', STEP = 4;
+      function money(n) { return '$' + (Math.round((Number(n) || 0) * 100) / 100).toFixed(2); }
+      function isVideo(u) { return /\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i.test(String(u || '')); }
+      // = buildCard() cua theme.js (card luoi Products), chay doc lap de khong phu thuoc thu tu tai theme.js
+      list.forEach(function (p, i) {
+        var c = tpl.content.cloneNode(true).firstElementChild;
+        Array.prototype.forEach.call(c.querySelectorAll('a.full-unstyled-link'), function (a) { a.setAttribute('href', p.url || '#'); a.textContent = ' ' + (p.title || '') + ' '; });
+        var img = c.querySelector('.card__media img');
+        if (img) {
+          img.setAttribute('src', p.imageUrl || ''); img.setAttribute('alt', p.title || '');
+          if (p.imageWidth) img.setAttribute('width', p.imageWidth);
+          if (p.imageHeight) img.setAttribute('height', p.imageHeight);
+          if (isVideo(p.imageUrl)) {
+            var v = document.createElement('video');
+            v.muted = true; v.defaultMuted = true; v.autoplay = true; v.loop = true; v.playsInline = true;
+            ['muted', 'autoplay', 'loop', 'playsinline', 'webkit-playsinline'].forEach(function (a) { v.setAttribute(a, ''); });
+            v.setAttribute('preload', 'auto');
+            v.className = img.className; if (p.imagePosterUrl) v.poster = p.imagePosterUrl;
+            v.src = p.imageUrl + (p.imagePosterUrl || String(p.imageUrl).indexOf('#') > -1 ? '' : '#t=0.001');
+            img.parentNode.replaceChild(v, img);
+            var vp = v.play(); if (vp && vp.catch) vp.catch(function () {});
+          }
+        }
+        var sp = Number(p.sellingPrice) || 0, cp = Number(p.compareAtPrice) || 0, on = cp > sp, pr = c.querySelector('.price');
+        if (pr) {
+          pr.classList.toggle('price--on-sale', on);
+          var r = pr.querySelector('.price__regular .price-item--regular'); if (r) r.textContent = ' ' + money(sp) + ' ';
+          var s = pr.querySelector('.price-item--sale'); if (s) s.textContent = ' ' + money(sp) + ' ';
+          var o = pr.querySelector('s.price-item--regular'); if (o) o.textContent = on ? ' ' + money(cp) + ' ' : '';
+        }
+        var pct = p.offPct || (on ? Math.round((1 - sp / cp) * 100) : 0);
+        Array.prototype.forEach.call(c.querySelectorAll('[data-ms-badge]'), function (b) { var x = b.querySelector('[data-ms-pct]'); if (pct && x) x.textContent = pct; else b.innerHTML = ''; });
+        var q = c.querySelector('[data-ms-quick-add]');
+        var pUrl = p.url || (p.handle ? ('/products/' + p.handle) : '') || (p.handle ? ('/' + p.handle) : '');
+        if (q) { if (quick) q.setAttribute('data-product-url', pUrl); else q.closest('.quick-add').remove(); }
+        var rv = c.querySelector('[data-ms-card-rv-count]');
+        if (rv) { var cnt = Number(p.reviewCount || p.reviews_count || p.reviewsCount) || 0; rv.textContent = cnt > 0 ? '(' + cnt + ')' : ''; }
+        var lk = c.querySelector('[data-ms-card-link]'); if (lk) lk.setAttribute('aria-label', p.title || '');
+        var li = document.createElement('li'); li.className = 'grid__item'; li.style.setProperty('--index', i); li.appendChild(c);
+        if (i >= STEP) li.hidden = true;
+        grid.appendChild(li);
+      });
+      // hien 4 card, Load more mo them 4
+      var more = root.querySelector('[data-lu-related-more]');
+      if (more && list.length > STEP) {
+        more.hidden = false;
+        more.addEventListener('click', function () {
+          var rest = grid.querySelectorAll(':scope > li[hidden]');
+          for (var k = 0; k < rest.length && k < STEP; k++) rest[k].hidden = false;
+          if (rest.length <= STEP) more.hidden = true;
+        });
+      }
+      // khoi "You may also like" cu cua backend (chen cuoi trang) -> bo tren trang san pham
+      function dropOld() { Array.prototype.forEach.call(document.querySelectorAll('.sf-upsell'), function (e) { e.remove(); }); }
+      dropOld(); document.addEventListener('DOMContentLoaded', dropOld);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();
+</script>
+{{/if}}

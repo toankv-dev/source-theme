@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+window.onerror = function(msg, url, line, col, err) {
+    document.title = "ERR: " + msg + " line " + line + " col " + col;
+};
+</script>
+<script src="theme.js"></script>
+<script>
+if (!document.title.startsWith("ERR:")) {
+    document.title = "NO_SYNTAX_ERROR";
+}
+</script>
+</head>
+<body>
+</body>
+</html>

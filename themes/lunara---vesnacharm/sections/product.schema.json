@@ -2,7 +2,7 @@
   "name": "Product",
   "tag": "div",
   "limit": 1,
-  "max_blocks": 25,
+  "max_blocks": 50,
   "settings": [
     {
       "type": "checkbox",
@@ -315,37 +315,371 @@
       "type": "rating",
       "name": "Star rating",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Rating text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Rating text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Rating text: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "title",
       "name": "Title",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "h_size",
+          "label": "Title: size on computers",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "h_size_m",
+          "label": "Title: size on phones",
+          "min": 0,
+          "max": 44,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "h_color",
+          "label": "Title: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "variant_picker",
       "name": "Variant picker",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Option names: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Option names: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Option names: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Option values: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Option values: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        }
+      ]
     },
     {
       "type": "size_finder",
       "name": "Size finder",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "b_size",
+          "label": "Link: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "b_size_m",
+          "label": "Link: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "b_color",
+          "label": "Link: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "h_size",
+          "label": "Pop-up heading: size on computers",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "h_size_m",
+          "label": "Pop-up heading: size on phones",
+          "min": 0,
+          "max": 44,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "h_color",
+          "label": "Pop-up heading: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Pop-up text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Pop-up text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Pop-up text: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "buy_buttons",
       "name": "Buy buttons",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "b_size",
+          "label": "Button text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "b_size_m",
+          "label": "Button text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "b_color",
+          "label": "Button text: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Box headings (safe checkout, guarantee): size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Box headings (safe checkout, guarantee): size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Box headings (safe checkout, guarantee): colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Box text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Box text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Box text: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "trust",
       "name": "Trust line",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Text: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "payment_badges",
@@ -357,7 +691,42 @@
       "type": "description",
       "name": "Description",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Text: colour",
+          "default": ""
+        }
+      ]
     },
     {
       "type": "kaching",
@@ -668,6 +1037,138 @@
           "id": "pack4_gift_value",
           "label": "Gift line value (crossed out, e.g. $14.98)",
           "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "h_size",
+          "label": "Heading: size on computers",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "h_size_m",
+          "label": "Heading: size on phones",
+          "min": 0,
+          "max": 44,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "h_color",
+          "label": "Heading: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Pack titles: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Pack titles: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Pack titles: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "p_size",
+          "label": "Prices: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "p_size_m",
+          "label": "Prices: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "p_color",
+          "label": "Prices: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Small lines (each, compare-at, gift): size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Small lines (each, compare-at, gift): size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Small lines (each, compare-at, gift): colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "b_size",
+          "label": "Badges (SAVE, label): size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "b_size_m",
+          "label": "Badges (SAVE, label): size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
         }
       ]
     },
@@ -695,6 +1196,40 @@
           "id": "js",
           "label": "JavaScript",
           "info": "Printed in a <script> tag after the block.",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Text: colour",
           "default": ""
         }
       ]
@@ -1038,6 +1573,66 @@
           "id": "a_8",
           "label": "Answer",
           "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Questions: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Questions: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Questions: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Answers: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Answers: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Answers: colour",
+          "default": ""
         }
       ]
     },
@@ -1057,6 +1652,92 @@
           "id": "show_compare",
           "label": "Show the compare-at price",
           "default": true
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "p_size",
+          "label": "Price: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "p_size_m",
+          "label": "Price: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "p_color",
+          "label": "Price: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Compare-at price: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Compare-at price: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Compare-at price: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "b_size",
+          "label": "Badge: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "b_size_m",
+          "label": "Badge: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "b_color",
+          "label": "Badge: colour",
+          "default": ""
         }
       ]
     },
@@ -1067,12 +1748,16 @@
         {
           "type": "select",
           "id": "style",
-          "label": "Look",
+          "label": "Layout",
           "default": "check",
           "options": [
             {
               "value": "check",
-              "label": "Check list (round check icon, highlight colour)"
+              "label": "List, one line per row (icon + text)"
+            },
+            {
+              "value": "grid",
+              "label": "Two columns, thin lines above and below"
             },
             {
               "value": "box",
@@ -1081,38 +1766,724 @@
           ]
         },
         {
+          "type": "select",
+          "id": "mobile_cols",
+          "label": "Two columns: on phones",
+          "default": "2",
+          "options": [
+            {
+              "value": "2",
+              "label": "Two columns"
+            },
+            {
+              "value": "1",
+              "label": "One column"
+            }
+          ]
+        },
+        {
           "type": "paragraph",
-          "content": "Up to 5 short lines. In the check list an emoji at the start of a line is left out."
+          "content": "Line 1 to 5 below. More lines: Add block > Highlight line (as many as you need), anywhere under this box. An emoji at the start of a line is left out (the grey box shows it as the icon)."
+        },
+        {
+          "type": "header",
+          "content": "Icons"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon of every line",
+          "default": "check",
+          "options": [
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ],
+          "info": "A line can take its own icon or picture below."
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 0,
+          "max": 40,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "info": "0 = as designed (22 px list, 18 px two columns)."
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon colour",
+          "default": "",
+          "info": "Empty = the text colour. Not used on pictures."
+        },
+        {
+          "type": "header",
+          "content": "Text and box"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size on computers",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "info": "0 = as designed (16 px list and grey box, 14 px two columns)."
+        },
+        {
+          "type": "range",
+          "id": "text_size_m",
+          "label": "Text size on phones",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "info": "0 = as designed (15 px list, 14 px others). Never under 12 px."
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text colour",
+          "default": "",
+          "info": "Empty = the highlight colour (list), dark grey (others)."
+        },
+        {
+          "type": "color",
+          "id": "bg",
+          "label": "Background",
+          "default": "",
+          "info": "Empty = none (light grey in the grey box)."
+        },
+        {
+          "type": "color",
+          "id": "line_color",
+          "label": "Two columns: line colour",
+          "default": "",
+          "info": "Empty = light grey."
+        },
+        {
+          "type": "header",
+          "content": "Line 1"
         },
         {
           "type": "text",
           "id": "line_1",
-          "label": "Line 1",
+          "label": "Text",
           "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
+        },
+        {
+          "type": "header",
+          "content": "Line 2"
         },
         {
           "type": "text",
           "id": "line_2",
-          "label": "Line 2",
+          "label": "Text",
           "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
+        },
+        {
+          "type": "header",
+          "content": "Line 3"
         },
         {
           "type": "text",
           "id": "line_3",
-          "label": "Line 3",
+          "label": "Text",
           "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
+        },
+        {
+          "type": "header",
+          "content": "Line 4"
         },
         {
           "type": "text",
           "id": "line_4",
-          "label": "Line 4",
+          "label": "Text",
           "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
+        },
+        {
+          "type": "header",
+          "content": "Line 5"
         },
         {
           "type": "text",
           "id": "line_5",
-          "label": "Line 5",
+          "label": "Text",
           "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon_5",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
+        }
+      ]
+    },
+    {
+      "type": "sc_hl_line",
+      "name": "Highlight line",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "One more line of the Highlights box: shown inside the Highlights box above it (anywhere under it, before the next Highlights box), in its layout, size and colours. Add as many as you need."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "New highlight"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "same",
+          "options": [
+            {
+              "value": "same",
+              "label": "Same as every line"
+            },
+            {
+              "value": "check",
+              "label": "Round check (filled)"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "brief",
+              "label": "Briefs"
+            },
+            {
+              "value": "wash",
+              "label": "Wash basin"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud (comfort)"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "none",
+              "label": "No icon"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Own picture instead of the icon",
+          "info": "Square PNG / SVG / WebP, 64 x 64."
         }
       ]
     },
@@ -1143,6 +2514,66 @@
           "id": "item_2",
           "label": "Right line 2 (returns icon)",
           "default": "Easy Returns"
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Title: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Title: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Title: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Small lines: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Small lines: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Small lines: colour",
+          "default": ""
         }
       ]
     },
@@ -1223,6 +2654,66 @@
           "type": "text",
           "id": "chart_note",
           "label": "Line under the table",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Row titles: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Row titles: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Row titles: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Row text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Row text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Row text: colour",
           "default": ""
         }
       ]
@@ -1477,6 +2968,92 @@
           "label": "Chart",
           "default": "Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240",
           "info": "First line = column names, then one size per line; cells split by |. Columns named Weight (lbs), Bust / Waist / Hip (in) drive the finder; any other column (e.g. US) is shown as typed. cm / kg converts them. Bra: first line = SIZE CUP | 34 | 36 … (bands), then one cup per line with the size of each band, e.g. C | M | L | L | XL."
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "b_size",
+          "label": "Button: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "b_size_m",
+          "label": "Button: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "b_color",
+          "label": "Button: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "h_size",
+          "label": "Pop-up headings: size on computers",
+          "min": 0,
+          "max": 60,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "h_size_m",
+          "label": "Pop-up headings: size on phones",
+          "min": 0,
+          "max": 44,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "h_color",
+          "label": "Pop-up headings: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Pop-up text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Pop-up text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Pop-up text: colour",
+          "default": ""
         }
       ]
     }

@@ -59,7 +59,39 @@ product.settings.push(
   { type: 'checkbox', id: 'vn_mbg_shine', label: 'Guarantee: gold shine crossing the box', default: true },
 );
 
-const OWN_BLOCKS = ['sc_price', 'sc_highlights', 'sc_ship', 'sc_tabs', 'sc_fit'];
+// Text sizes and colours (user 2026-11-26: "every part with text"), printed by snippets/sc-type.hbs: sections call it on
+// their first line, section blocks in a {{#each section.blocks}} before the markup, product blocks through
+// snippets/pb-type.hbs (each block type's selectors). parts = { h | s | t | p | b: label or { label, color: false } }
+// (no colour for text whose colour changes with a state). 0 / empty = as designed (no rule). bg = a Background for a
+// section without its own. note = put before the line under the header. Re-run safe: typeOff() drops the old ones first.
+const TYPE_HEAD = 'Text sizes and colours';
+const typeSet = (parts, bg, note) => [
+  { type: 'header', content: TYPE_HEAD },
+  { type: 'paragraph', content: (note ? note + ' ' : '') + 'Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px.' },
+  ...(bg ? [{ type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = white.' }] : []),
+  ...Object.entries(parts).flatMap(([k, v]) => {
+    const name = typeof v === 'string' ? v : v.label;
+    return [
+      { type: 'range', id: k + '_size', label: name + ': size on computers', min: 0, max: k === 'h' ? 60 : 36, step: 1, unit: 'px', default: 0 },
+      { type: 'range', id: k + '_size_m', label: name + ': size on phones', min: 0, max: k === 'h' ? 44 : 28, step: 1, unit: 'px', default: 0 },
+      ...(v.color === false ? [] : [{ type: 'color', id: k + '_color', label: name + ': colour', default: '' }]),
+    ];
+  }),
+];
+const TYPE_ID = /^[hstpb]_(size|size_m|color)$/;
+const typeOff = (list) => list.filter((x) => !(x.id && TYPE_ID.test(x.id)) && x.content !== TYPE_HEAD && !(x.type === 'paragraph' && /Size 0 = as designed/.test(x.content || '')));
+const BLOCK_NOTE = 'Only this one; the section settings apply to all.';
+
+// Line icons of snippets/sc-icon.hbs offered by the Highlights box (check = its own filled round check)
+const HL_ICONS = [
+  { value: 'check', label: 'Round check (filled)' }, { value: 'tick', label: 'Tick' }, { value: 'drop', label: 'Water drop' },
+  { value: 'brief', label: 'Briefs' }, { value: 'wash', label: 'Wash basin' }, { value: 'cloud', label: 'Cloud (comfort)' },
+  { value: 'leaf', label: 'Leaf' }, { value: 'shield', label: 'Shield' }, { value: 'sparkle', label: 'Sparkle' },
+  { value: 'heart', label: 'Heart' }, { value: 'star', label: 'Star' }, { value: 'truck', label: 'Truck' },
+  { value: 'lock', label: 'Lock' }, { value: 'returns', label: 'Returns' }, { value: 'money', label: 'Money back' },
+  { value: 'none', label: 'No icon' },
+];
+const OWN_BLOCKS = ['sc_price', 'sc_highlights', 'sc_hl_line', 'sc_ship', 'sc_tabs', 'sc_fit'];
 product.blocks = product.blocks.filter((b) => !OWN_BLOCKS.includes(b.type));
 const tab = (n) => [
   { type: 'header', content: 'Row ' + n },
@@ -74,12 +106,46 @@ product.blocks.push(
       { type: 'checkbox', id: 'show_compare', label: 'Show the compare-at price', default: true },
     ],
   },
+  // Highlights (user 2026-11-26): an icon per box or per line (snippets/sc-icon.hbs) or an own picture, two-column look
+  // with thin lines (as their picture: "Up to 150ml Protection | Discreet Fit"), text / icon size + colours. Old ids kept
+  // (line_n, style): a saved box keeps its look. 0 / empty = as designed (CSS fallbacks in sc-product.css).
   {
     type: 'sc_highlights', name: 'Highlights box',
     settings: [
-      { type: 'select', id: 'style', label: 'Look', default: 'check', options: [{ value: 'check', label: 'Check list (round check icon, highlight colour)' }, { value: 'box', label: 'Grey box (an emoji at the start of a line is its icon)' }] },
-      { type: 'paragraph', content: 'Up to 5 short lines. In the check list an emoji at the start of a line is left out.' },
-      ...[1, 2, 3, 4, 5].map((n) => ({ type: 'text', id: 'line_' + n, label: 'Line ' + n, default: '' })),
+      { type: 'select', id: 'style', label: 'Layout', default: 'check', options: [
+        { value: 'check', label: 'List, one line per row (icon + text)' },
+        { value: 'grid', label: 'Two columns, thin lines above and below' },
+        { value: 'box', label: 'Grey box (an emoji at the start of a line is its icon)' },
+      ] },
+      { type: 'select', id: 'mobile_cols', label: 'Two columns: on phones', default: '2', options: [{ value: '2', label: 'Two columns' }, { value: '1', label: 'One column' }] },
+      { type: 'paragraph', content: 'Line 1 to 5 below. More lines: Add block > Highlight line (as many as you need), anywhere under this box. An emoji at the start of a line is left out (the grey box shows it as the icon).' },
+      { type: 'header', content: 'Icons' },
+      { type: 'select', id: 'icon', label: 'Icon of every line', default: 'check', options: HL_ICONS, info: 'A line can take its own icon or picture below.' },
+      { type: 'range', id: 'icon_size', label: 'Icon size', min: 0, max: 40, step: 1, unit: 'px', default: 0, info: '0 = as designed (22 px list, 18 px two columns).' },
+      { type: 'color', id: 'icon_color', label: 'Icon colour', default: '', info: 'Empty = the text colour. Not used on pictures.' },
+      { type: 'header', content: 'Text and box' },
+      { type: 'range', id: 'text_size', label: 'Text size on computers', min: 0, max: 28, step: 1, unit: 'px', default: 0, info: '0 = as designed (16 px list and grey box, 14 px two columns).' },
+      { type: 'range', id: 'text_size_m', label: 'Text size on phones', min: 0, max: 24, step: 1, unit: 'px', default: 0, info: '0 = as designed (15 px list, 14 px others). Never under 12 px.' },
+      { type: 'color', id: 'text_color', label: 'Text colour', default: '', info: 'Empty = the highlight colour (list), dark grey (others).' },
+      { type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = none (light grey in the grey box).' },
+      { type: 'color', id: 'line_color', label: 'Two columns: line colour', default: '', info: 'Empty = light grey.' },
+      ...[1, 2, 3, 4, 5].flatMap((n) => [
+        { type: 'header', content: 'Line ' + n },
+        { type: 'text', id: 'line_' + n, label: 'Text', default: '' },
+        { type: 'select', id: 'icon_' + n, label: 'Icon', default: 'same', options: [{ value: 'same', label: 'Same as every line' }, ...HL_ICONS] },
+        { type: 'image_picker', id: 'image_' + n, label: 'Own picture instead of the icon', info: 'Square PNG / SVG / WebP, 64 x 64.' },
+      ]),
+    ],
+  },
+  // One more line of the Highlights box (user 2026-11-26, "a + line button, lines like the default ones"): the editor has
+  // no repeater, so each line is a block; snippets/sc-pb-highlights.hbs prints it inside the box above it.
+  {
+    type: 'sc_hl_line', name: 'Highlight line',
+    settings: [
+      { type: 'paragraph', content: 'One more line of the Highlights box: shown inside the Highlights box above it (anywhere under it, before the next Highlights box), in its layout, size and colours. Add as many as you need.' },
+      { type: 'text', id: 'text', label: 'Text', default: 'New highlight' },
+      { type: 'select', id: 'icon', label: 'Icon', default: 'same', options: [{ value: 'same', label: 'Same as every line' }, ...HL_ICONS] },
+      { type: 'image_picker', id: 'image', label: 'Own picture instead of the icon', info: 'Square PNG / SVG / WebP, 64 x 64.' },
     ],
   },
   {
@@ -149,13 +215,44 @@ product.blocks.push(
 // Lunara's show_variants: say what it does in the bodysuit look (the setting itself is Lunara's)
 const sv = product.settings.find((s) => s.id === 'show_variants');
 if (sv) sv.info = 'With a Kaching bundle block every item gets its own Color / Size pickers inside the selected pack. Bodysuit look: unchecked also hides the Color / Size picker above the packs.';
+// Text settings of every product block with text (snippets/pb-type.hbs has their selectors; Highlights has its own)
+const PB_TYPE = {
+  title: { h: 'Title' },
+  rating: { t: 'Rating text' },
+  sc_price: { p: 'Price', s: 'Compare-at price', b: 'Badge' },
+  variant_picker: { s: 'Option names', t: { label: 'Option values', color: false } },
+  size_finder: { b: 'Link', h: 'Pop-up heading', t: 'Pop-up text' },
+  buy_buttons: { b: 'Button text', s: 'Box headings (safe checkout, guarantee)', t: 'Box text' },
+  trust: { t: 'Text' },
+  description: { t: 'Text' },
+  kaching: { h: 'Heading', s: 'Pack titles', p: 'Prices', t: 'Small lines (each, compare-at, gift)', b: { label: 'Badges (SAVE, label)', color: false } },
+  'custom-html': { t: 'Text' },
+  faq: { s: 'Questions', t: 'Answers' },
+  sc_ship: { s: 'Title', t: 'Small lines' },
+  sc_tabs: { s: 'Row titles', t: 'Row text' },
+  sc_fit: { b: 'Button', h: 'Pop-up headings', t: 'Pop-up text' },
+};
+for (const b of product.blocks) if (PB_TYPE[b.type]) b.settings = [...typeOff(b.settings || []), ...typeSet(PB_TYPE[b.type])];
+product.max_blocks = 50;
 write('sections/product.schema.json', product);
+
+// Lunara sections of the product templates: FAQ, You may also like (Reviews (Lunara): below, with its own edit)
+for (const [file, parts] of [
+  ['sections/faq.schema.json', { h: 'Heading', s: 'Questions', t: 'Answers' }],
+  ['sections/related.schema.json', { h: 'Heading', s: 'Product names', p: 'Prices', b: 'Load more button' }],
+]) {
+  const sc = read(file);
+  sc.settings = [...typeOff(sc.settings || []), ...typeSet(parts)];
+  write(file, sc);
+}
 
 // ---------------------------------------------------------------------------------------------------------------
 // reviews.schema.json — the "Write a review" button can be turned off (no review form on new templates)
 const reviews = read('sections/reviews.schema.json');
 reviews.settings = reviews.settings.filter((s) => s.id !== 'show_write');
+reviews.settings = typeOff(reviews.settings);
 reviews.settings.push({ type: 'checkbox', id: 'show_write', label: 'Show "Write a review"', default: true, info: 'Off = reviews are shown only (they are added in the admin).' });
+reviews.settings.push(...typeSet({ h: 'Heading', s: 'Names and review titles', t: 'Review text' }));
 write('sections/reviews.schema.json', reviews);
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -175,7 +272,7 @@ write('sections/sc-features.schema.json', {
   name: 'Feature cards (picture + text)',
   tag: 'section',
   max_blocks: 8,
-  settings: band.map((s) => (s.id === 'pad_top' ? { ...s, default: 50 } : s.id === 'pad_bottom' ? { ...s, default: 10 } : s)),
+  settings: [...band.map((s) => (s.id === 'pad_top' ? { ...s, default: 50 } : s.id === 'pad_bottom' ? { ...s, default: 10 } : s)), ...typeSet({ h: 'Tags', s: 'Card headings', t: 'Card text' })],
   blocks: [{
     type: 'card', name: 'Card',
     settings: [
@@ -183,6 +280,7 @@ write('sections/sc-features.schema.json', {
       { type: 'text', id: 'tag', label: 'Tag', default: 'Feature' },
       { type: 'text', id: 'heading', label: 'Heading', default: 'Feature heading' },
       { type: 'richtext', id: 'body', label: 'Text', default: '<p>Describe the benefit in one or two sentences.</p>' },
+      ...typeSet({ h: 'Tag', s: 'Heading', t: 'Text' }, false, BLOCK_NOTE),
     ],
   }],
   presets: [{ name: 'Feature cards', category: 'Content', description: 'White cards on a tinted band: picture one side, tag + heading + text the other.' }],
@@ -196,6 +294,7 @@ write('sections/sc-details.schema.json', {
     { type: 'text', id: 'heading', label: 'Heading', default: 'Crafted In Every Detail' },
     ...pic('image', 'Large picture (desktop only)', '4:5, 1050 x 1312 recommended. Hidden on phones, as on the original.'),
     ...band,
+    ...typeSet({ h: 'Heading', s: 'Card titles', t: 'Card text' }),
   ],
   blocks: [{
     type: 'item', name: 'Detail',
@@ -203,6 +302,7 @@ write('sections/sc-details.schema.json', {
       ...pic('image', 'Round picture', 'Square, 304 x 304 recommended (shown as a circle).'),
       { type: 'text', id: 'title', label: 'Title', default: 'Detail' },
       { type: 'textarea', id: 'text', label: 'Text', default: 'One sentence about this detail.' },
+      ...typeSet({ s: 'Title', t: 'Text' }, false, BLOCK_NOTE),
     ],
   }],
   presets: [{ name: 'Details', category: 'Content', description: 'Heading, a large picture and cards with a round picture, alternating sides.' }],
@@ -258,6 +358,7 @@ write('sections/sc-before-after.schema.json', {
       options: [{ value: 'gradient', label: 'Soft gradient of the highlight colour' }, { value: 'solid', label: 'One colour (below)' }],
     },
     ...band.map((s) => (s.id === 'bg' ? { ...s, label: 'Background colour (one colour)' } : s.id === 'pad_top' || s.id === 'pad_bottom' ? { ...s, default: 36 } : s)),
+    ...typeSet({ h: 'Heading', s: 'Review card title', t: 'Text and quote' }),
   ],
   presets: [{ name: 'Before / after slider', category: 'Content', description: 'Two photos with a line shoppers drag to compare them, beside a heading, a check list and a review card.' }],
 });
@@ -272,6 +373,7 @@ write('sections/sc-testimonials.schema.json', {
     { type: 'text', id: 'button_link', label: 'Button link', default: '#lu-reviews', info: '#lu-reviews = the reviews of this page.' },
     { type: 'color', id: 'star', label: 'Star colour', default: '#F5A623' },
     ...band,
+    ...typeSet({ h: 'Heading', s: 'Names', t: 'Quotes' }),
   ],
   blocks: [{
     type: 'quote', name: 'Testimonial',
@@ -281,6 +383,7 @@ write('sections/sc-testimonials.schema.json', {
       { type: 'checkbox', id: 'verified', label: 'Verified tick', default: true },
       { type: 'range', id: 'rating', label: 'Stars', min: 1, max: 5, step: 1, default: 5 },
       { type: 'textarea', id: 'text', label: 'Text', default: 'What the customer said.' },
+      ...typeSet({ s: 'Name', t: 'Quote' }, false, BLOCK_NOTE),
     ],
   }],
   presets: [{ name: 'Photo testimonials', category: 'Reviews', description: 'Swipeable cards: photo, name, stars, short quote, and a button to the reviews.' }],
@@ -307,6 +410,7 @@ write('sections/sc-reels.schema.json', {
     { type: 'color', id: 'accent', label: 'Accent (second line, dots, Sound on)', default: '#F1C6D6' },
     { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 4, unit: 'px', default: 56 },
     { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 4, unit: 'px', default: 64 },
+    ...typeSet({ h: 'Heading', t: 'Line under the heading' }),
   ],
   blocks: [{
     type: 'clip', name: 'Video',
@@ -317,6 +421,7 @@ write('sections/sc-reels.schema.json', {
       { type: 'text', id: 'caption', label: 'Line under the name (optional)', default: '' },
       { type: 'text', id: 'alt', label: 'Description for screen readers', default: '' },
       { type: 'text', id: 'default_video', label: 'Theme file while empty', default: '', info: 'Path inside assets/, e.g. videos/clip.mp4. Played until a file is picked above.' },
+      ...typeSet({ s: 'Name', t: 'Line under the name' }, false, BLOCK_NOTE),
     ],
   }],
   // 6 empty Video slots on "Add section", so the editor shows where to upload (a band with no slot would be empty)
@@ -355,6 +460,7 @@ write('sections/sc-reviews.schema.json', {
     { type: 'color', id: 'star_color', label: 'Star colour', default: '#ffcf2a' },
     { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 5, unit: 'px', default: 40 },
     { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 5, unit: 'px', default: 50 },
+    ...typeSet({ h: 'Heading', s: 'Review titles', t: 'Review text' }, true),
   ],
   presets: [{ name: 'Reviews (Okendo style)', category: 'Reviews', description: 'Average, star bars, customer photos, filters, sort and the review list, as shape-curve.com.' }],
 });
@@ -363,12 +469,14 @@ const ICONS = [
   { value: 'truck', label: 'Truck' }, { value: 'money', label: 'Money back' }, { value: 'card', label: 'Card' },
   { value: 'support', label: 'Support (phone)' }, { value: 'lock', label: 'Lock' }, { value: 'returns', label: 'Returns' },
   { value: 'heart', label: 'Heart' }, { value: 'star', label: 'Star' },
+  { value: 'shield', label: 'Shield' }, { value: 'leaf', label: 'Leaf' }, { value: 'drop', label: 'Water drop' },
+  { value: 'cloud', label: 'Cloud' }, { value: 'sparkle', label: 'Sparkle' }, { value: 'tick', label: 'Tick' },
 ];
 write('sections/sc-trust.schema.json', {
   name: 'Trust badges card',
   tag: 'section',
   max_blocks: 6,
-  settings: band,
+  settings: [...band, ...typeSet({ s: 'Titles', t: 'Text' })],
   blocks: [{
     type: 'item', name: 'Badge',
     settings: [
@@ -376,6 +484,7 @@ write('sections/sc-trust.schema.json', {
       { type: 'image_picker', id: 'image', label: 'Own icon (optional)', info: 'Replaces the icon above. Square PNG / SVG, 96 x 96.' },
       { type: 'text', id: 'title', label: 'Title', default: 'Free Shipping' },
       { type: 'richtext', id: 'text', label: 'Text', default: '<p>Short line about it.</p>' },
+      ...typeSet({ s: 'Title', t: 'Text' }, false, BLOCK_NOTE),
     ],
   }],
   presets: [{ name: 'Trust badges', category: 'Content', description: 'A white card with 4 round icons, titles and short lines.' }],

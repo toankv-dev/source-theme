@@ -1,0 +1,99 @@
+{
+  "name": "Bundle (Kaching)",
+  "description": "Lunara product page with the Kaching bundle: every item picks its own Color / Size.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "show_size_finder": false
+      },
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_finder": {
+          "type": "size_finder",
+          "settings": {}
+        },
+        "kaching": {
+          "type": "kaching",
+          "settings": {
+            "heading": "",
+            "selected": 2,
+            "pack1_qty": 1,
+            "pack1_title": "3 Pack",
+            "pack1_subtitle": "SAVE {save}",
+            "pack1_badge": "",
+            "pack2_qty": 1,
+            "pack2_title": "6 Pack",
+            "pack2_subtitle": "SAVE {save}",
+            "pack2_badge": "BEST SELLER",
+            "pack3_qty": 1,
+            "pack3_title": "9 Pack",
+            "pack3_subtitle": "SAVE {save}",
+            "pack3_badge": "BEST VALUE",
+            "pack4_qty": 0,
+            "pack4_title": "",
+            "pack4_subtitle": "SAVE {save}",
+            "pack4_badge": "",
+            "pack_option": "Packs",
+            "save_style": "compare_pct",
+            "pack1_value": "3 Pack",
+            "pack2_value": "6 Pack",
+            "pack3_value": "9 Pack",
+            "pack4_value": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "guarantee_box": {
+          "type": "guarantee_box",
+          "settings": {}
+        },
+        "payment_badges": {
+          "type": "payment_badges",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "variant_picker",
+        "size_finder",
+        "kaching",
+        "buy_buttons",
+        "payment_badges",
+        "guarantee_box",
+        "description"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq"
+  ]
+}

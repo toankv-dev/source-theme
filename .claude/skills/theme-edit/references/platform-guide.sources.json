@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "checked": "2026-11-23",
+  "checked": "2026-11-26",
   "sources": {
-    "apps/web/src/components/app-sidebar.tsx": "7f06a2fc66c0b60768ffea69c35664989ca2d617",
+    "apps/web/src/components/app-sidebar.tsx": "f9130b691085c1d5ae74c3baa0aee9a09a0a086a",
     "apps/web/src/features/theme-editor/components/section-outline.tsx": "23509d9c4e9caa43f2746f05a471cf306da549c8",
     "apps/web/src/features/theme-editor/components/section-inspector.tsx": "b1869f5a9595009a6cb484147e95116ebf2579f8",
     "apps/web/src/features/theme-editor/pages/theme-editor.page.tsx": "79ea41626580df324b29ae7de87cb07daed72262",
@@ -10,18 +10,18 @@
     "apps/api/src/features/templates/templates.routes.ts": "062c12d0443cb8dc7961bc700cfa310828daaa8f",
     "apps/api/src/features/templates/infrastructure/update-theme-from-zip.ts": "85eda545996e557c8ad3fd16f93c14cacc69be48",
     "apps/web/src/features/products/components/page-template-overview.tsx": "1875f72e868e2ebfd35cc7e538dbd850aa404722",
-    "apps/web/src/features/products/components/product-editor.tsx": "bfaea82dd7b9a75e9ca627215b713afa51e16a37",
+    "apps/web/src/features/products/components/product-editor.tsx": "8c6779e441608aab1ca9c4d887492b7925e0a9bc",
     "apps/web/src/features/products/components/product-theme-selector-dialog.tsx": "add0b9a49208223d3afe7a384b89ca17484bb653",
     "apps/web/src/features/discounts/pages/discount-edit.page.tsx": "a7ac875ed130c423758322420abb33010ae6c87a",
     "apps/web/src/features/discounts/pages/discounts.page.tsx": "a9896e16837c15a43bd2eb850a8f0f80fde11c5c",
     "apps/api/src/features/discounts/discount-engine.ts": "1906d6eef54ae6ef37364d3f531ade7fb9eae60d",
-    "apps/web/src/features/products/components/variant-options-builder.tsx": "5e44a4b7c25f143046a436b450793dd013e62700",
+    "apps/web/src/features/products/components/variant-options-builder.tsx": "288be344dd073b3676e46e580ee9855365f66857",
     "apps/web/src/features/theme-editor/components/store-products-setting.tsx": "c6c0e1cfdda87c658049942096fdac6d63b791aa",
     "apps/api/src/features/storefront/application/store-product-settings.ts": "2d9c1be4173573496e9d18a80696cb757902db57",
     "apps/web/src/features/checkout-layouts/pages/checkout-layout-editor.page.tsx": "9d9697c7c64fc50abb0b00dbfd8bb3ea815741db",
     "apps/api/src/features/storefront/application/cart-pricing.ts": "8ff0a9747da848bde387a11b8e92adcaa03320cb",
     "origin/SHOPDY-items/SHOPDY-127:apps/web/src/features/products/components/companion-bundles-builder.tsx": "98a46ca09574df0bdd011f42ad5700c61d1fbe69",
     "apps/api/src/features/storefront/storefront.routes.ts": "d7244a204029cf12034ec03a17c7c55c1511fecc",
-    "apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx": "c70355b506d1b8b237f7578e044c3520d104d952"
+    "apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx": "0ac21fb8b3ba53c0e7cfa881bb9cf43c2c5aadc0"
   }
 }

@@ -1,0 +1,24 @@
+{{!-- 1 goi cua block Kaching (snippets/lu-kaching.hbs). Hash: n, qty (0 = an), title, sub, badge, gift, gift_img, gift_value, p (tien to id setting).
+      cards = kieu o card (Kaching bars--horizontal, nhu trang GHOST-GS Faraday Bag): img (anh goi, rong = anh chinh SP), corner (vong tron goc phai, vd "2x").
+      list = kieu Stack: anh goi ben trai (img rong = anh bien the dang chon), gia "/ each" (each_label), badge = dai mau tren dau goi.
+      Kieu card: badge = nhan ngang tren dau card (nhu "MOST POPULAR" trang GUARD-S1 Water Filter). --}}
+{{#if qty}}
+<div class="kaching-bundles__bar" data-lu-bar data-lu-qty="{{qty}}"{{#if pack}}{{#if pv}} data-lu-pack="{{pv}}"{{/if}}{{/if}} data-n="{{n}}" tabindex="0" role="radio">
+<input type="radio" name="lu-deal-{{@root.section.id}}" value="{{qty}}" tabindex="-1" aria-hidden="true">
+<div class="kaching-bundles__bar-container" style="--badge-border-thickness: 22px; --badge-border-gap: 0px; --badge-border-gap-border: none;">
+{{#if list}}
+{{#if badge}}<div class="lu-kl-strip">{{badge}}</div>{{/if}}
+<div class="kaching-bundles__bar-wrapper"><div class="kaching-bundles__bar-main"><img class="kaching-bundles__bar-image lu-kl-img" alt="" width="44" height="44" loading="lazy" src="{{#if img}}{{img}}{{else}}{{@root.product.media.main_image}}{{/if}}"{{#unless img}} data-lu-kl-vimg{{/unless}}><div class="kaching-bundles__bar-content"><div class="kaching-bundles__bar-content-left"><div class="kaching-bundles__bar-first-line"><span class="kaching-bundles__bar-title">{{title}}</span></div>{{#if sub}}<div class="kaching-bundles__bar-second-line"><div class="kaching-bundles__bar-subtitle" data-lu-sub="{{sub}}"></div></div>{{/if}}</div><div class="kaching-bundles__bar-pricing"><div class="kaching-bundles__bar-price" data-a11y-label="Price:" data-lu-price></div><div class="kaching-bundles__bar-full-price" data-a11y-label="Original price:" data-lu-was></div><div class="lu-kl-each"><b data-lu-kl-each></b> <span>{{#if each_label}}{{each_label}}{{else}}/ each{{/if}}</span></div><s class="lu-kl-was" data-lu-kl-was></s></div></div></div>
+<div class="lu-kl-mix" data-lu-kl-mix hidden></div>
+<div class="kaching-bundles__bar-variants" data-lu-units></div></div>
+{{else}}{{#if cards}}
+<div class="kaching-bundles__bar-wrapper"><div class="kaching-bundles__bar-main">{{#if corner}}<span class="lu-k-corner">{{corner}}</span>{{/if}}<img class="kaching-bundles__bar-image" alt="" loading="lazy" src="{{#if img}}{{img}}{{else}}{{@root.product.media.main_image}}{{/if}}"><div class="kaching-bundles__bar-content"><div class="kaching-bundles__bar-content-left"><div class="kaching-bundles__bar-first-line"><span class="kaching-bundles__bar-title">{{title}}</span>{{#if badge}} <span class="kaching-bundles__bar-label">{{badge}}</span>{{/if}}</div>{{#if sub}}<div class="kaching-bundles__bar-second-line"><div class="kaching-bundles__bar-subtitle" data-lu-sub="{{sub}}"></div></div>{{/if}}</div><div class="kaching-bundles__bar-pricing"><div class="kaching-bundles__bar-price" data-a11y-label="Price:" data-lu-price></div><div class="kaching-bundles__bar-full-price" data-a11y-label="Original price:" data-lu-was></div></div></div></div>
+<div class="kaching-bundles__bar-variants" data-lu-units></div></div>
+{{else}}
+{{#if badge}}<div class="kaching-bundles__bar-most-popular kaching-bundles__bar-most-popular--simple" style="--bar-most-popular-background-color: var(--lu-k-accent); --bar-most-popular-color: var(--lu-k-badge-text); --badge-text-size: 13px;"><div class="kaching-bundles__bar-most-popular__content">{{badge}}</div></div>{{/if}}
+<div class="kaching-bundles__bar-wrapper"><div class="kaching-bundles__bar-main"><div class="kaching-bundles__bar-radio"></div><div class="kaching-bundles__bar-content"><div class="kaching-bundles__bar-content-left"><div class="kaching-bundles__bar-first-line"><span class="kaching-bundles__bar-title">{{title}}</span></div>{{#if sub}}<div class="kaching-bundles__bar-second-line"><div class="kaching-bundles__bar-subtitle" data-lu-sub="{{sub}}"></div></div>{{/if}}</div><div class="kaching-bundles__bar-pricing"><div class="kaching-bundles__bar-price" data-a11y-label="Price:" data-lu-price></div><div class="kaching-bundles__bar-full-price" data-a11y-label="Original price:" data-lu-was></div></div></div></div>
+<div class="kaching-bundles__bar-variants" data-lu-units></div></div>
+{{/if}}{{/if}}
+{{!-- Qua tang (backend Adlux gift_offers) - theme.js do anh + "+ FREE ..." + gia goc; gift_img / gift_value cua goi (neu co) duoc uu tien. --}}<div class="kaching-bundles__free-gift" data-lu-free-gift data-img="{{gift_img}}" data-value="{{gift_value}}" style="display:none !important;"></div>
+</div></div>
+{{/if}}

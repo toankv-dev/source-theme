@@ -1,0 +1,3 @@
+{{!-- Block "Checkbox offer" (sections/product.schema.json): dashed box with a checkbox, title, subtitle. Display only:
+      it does not change the cart or the price. --}}
+<label class="lu-optin" {{{attributes}}}><input type="checkbox" class="lu-optin__cb"><span class="lu-optin__box" aria-hidden="true"></span><span class="lu-optin__txt"><b {{{editable "title"}}}>{{settings.title}}</b>{{#if settings.subtitle}}<small {{{editable "subtitle"}}}>{{settings.subtitle}}</small>{{/if}}</span></label>

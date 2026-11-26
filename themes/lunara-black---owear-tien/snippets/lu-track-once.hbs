@@ -1,0 +1,4 @@
+{{!-- One AddToCart per add: wraps window.__adluxTrack (the platform's pixel + server-side sender) so an AddToCart with the
+      same variant, value and item count sent again within 2 s is dropped (two handlers reacting to the same tap).
+      Every other event and every real second add (after 2 s, or another variant / pack) passes unchanged. --}}
+<script>(function(){function wrap(){var f=window.__adluxTrack;if(typeof f!=="function")return false;if(f.__luOnce)return true;var last={};var g=function(e,p){if(e==="AddToCart"){var k=JSON.stringify([p&&p.variant_id,p&&p.value,p&&p.num_items,p&&p.content_ids]),now=Date.now();if(last[k]&&now-last[k]<2000)return;last[k]=now}return f.apply(this,arguments)};g.__luOnce=1;for(var x in f)try{g[x]=f[x]}catch(_){}window.__adluxTrack=g;return true}if(!wrap()){var n=0,t=setInterval(function(){if(wrap()||++n>60)clearInterval(t)},200);document.addEventListener("DOMContentLoaded",wrap)}})();</script>

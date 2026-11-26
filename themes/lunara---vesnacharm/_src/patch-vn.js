@@ -191,6 +191,23 @@ const EDITS = [
     find: '{{#if (eq section.settings.show_variants false)}}[data-section-id="{{section.id}}"] .lu-variants{display:none!important}{{/if}}',
     replace: '{{#if (eq section.settings.show_variants false)}}[data-section-id="{{section.id}}"] .lu-variants,.sc-skin.sc-skin.sc-skin [data-ms-pdp] .lu-variants{display:none!important}{{/if}}',
   },
+  // ---- text sizes and colours (user 2026-11-26, "every part with text"): every product block's rules (snippets/pb-type.hbs)
+  //      before the section's markup; FAQ is hand-written (its own call); settings from _src/build-sc.js typeSet()
+  {
+    file: 'sections/product.hbs', done: '{{> pb-type this}}',
+    find: '<section id="shopify-section-template--28236351668559__main" class="shopify-section section sc-any',
+    replace: '{{#each section.blocks}}{{> pb-type this}}{{/each}}<section id="shopify-section-template--28236351668559__main" class="shopify-section section sc-any',
+  },
+  {
+    file: 'sections/related.hbs', done: '{{> sc-type',
+    find: '<div class="lu-related" data-lu-related',
+    replace: '{{> sc-type h=".lu-related__h,.lu-related__h span" s=".card__heading,.card__heading a" p=".price-item" b=".lu-related__more"}}<div class="lu-related" data-lu-related',
+  },
+  {
+    file: 'sections/reviews.hbs', done: '{{> sc-type',
+    find: '<section class="shopify-section section lu-reviews-section">',
+    replace: '{{> sc-type h=".ttAllT" s=".ttdName,.ttdTitle" t=".ttdText"}}<section class="shopify-section section lu-reviews-section">',
+  },
   // ---- footer colour: Theme settings > Colors > Footer background (vn_footer_bg, empty = the highlight); user 2026-11-19
   {
     file: 'snippets/gs-head.hbs', done: '--vn-footer:',

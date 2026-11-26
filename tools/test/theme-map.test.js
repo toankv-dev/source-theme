@@ -216,6 +216,22 @@ test('a loose source file in _src/ is listed with the scripts that read it, and 
   assert.match(md, /- _src\/notes\.txt: not read by any script/);
 });
 
+test('a _src/*.js a patch script reads is a source file, and the files its JSON edits name are its targets', () => {
+  const d = copyTheme();
+  fs.mkdirSync(path.join(d, '_src'));
+  write(path.join(d, '_src', 'patch-w.js'), "const p = require('path'); require('fs').readFileSync(p.join(__dirname, 'mod-w.js')); require('./edits-w.json');\n");
+  write(path.join(d, '_src', 'mod-w.js'), '(function(){})()\n');
+  write(path.join(d, '_src', 'edits-w.json'), '[{"file": "sections/banner.hbs", "find": "a", "replace": "b"}]\n');
+  write(path.join(d, '_src', 'scan-w.js'), "// a check nobody reads\n");
+  const m = M.scan(d);
+  assert.deepEqual(m.srcFiles.map((s) => [s.file, s.readBy]), [
+    ['_src/edits-w.json', ['_src/patch-w.js']],
+    ['_src/mod-w.js', ['_src/patch-w.js']],
+  ]);
+  assert.deepEqual(m.sources.filter((s) => s.committed).map((s) => [s.file, s.kind]), [['_src/patch-w.js', 'patches'], ['_src/scan-w.js', 'reads']]);
+  assert.ok(m.sources[0].targets.includes("sections/banner.hbs"), 'target named in the JSON edits');
+});
+
 test('a path named only in a script comment is not a target of that script (a URL is not a comment)', () => {
   const d = copyTheme();
   fs.mkdirSync(path.join(d, '_src'));

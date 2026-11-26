@@ -1,6 +1,7 @@
 {{!-- Trust badges card (sections/sc-trust.schema.json) — Shapecurve template. One white card with up to 6 badges: a round
       icon on a gradient of the highlight colour (built-in line icon, or an own picture), a title and a short rich text
       ({{CompanyEmail}} … tokens work). 4 columns on desktop, one under the other on phones. Own <style>. --}}
+{{> sc-type s=".sctr__t" t=".sctr__p"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".sctr__t" t=".sctr__p"}}{{/each}}
 <style>
   .sctr{letter-spacing:normal;--sc-hl:#790236;--sc-grad:linear-gradient(120deg,#f6edf1 0,#e4ccd7 20%,#efdde5 80%,#f2e6eb 100%);background:var(--sctr-bg,#f6edf1);color:#333}
   @supports (background:color-mix(in srgb,red 50%,#fff)){.sctr{--sc-grad:linear-gradient(120deg,color-mix(in srgb,var(--sc-hl) 7%,#fff) 0,color-mix(in srgb,var(--sc-hl) 20%,#fff) 20%,color-mix(in srgb,var(--sc-hl) 13%,#fff) 80%,color-mix(in srgb,var(--sc-hl) 10%,#fff) 100%)}}

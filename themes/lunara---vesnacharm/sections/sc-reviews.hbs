@@ -7,6 +7,7 @@
       publishes it; nothing sent is shown on the page. Data: product.reviews (server-rendered first page, read back from the escaped HTML) + GET
       config.reviewsUrl (paged, 50 at a time).
       Own <style> + <script>; id="lu-reviews" keeps the rating link and the testimonials "View All" button working. --}}
+{{> sc-type h=".scr__h" s=".scr__t" t=".scr__c" root=".scr"}}
 <section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-verified="{{#if section.settings.verified_label}}{{section.settings.verified_label}}{{else}}Verified Buyer{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffcf2a{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
 <style>
 /* Measured: user's screenshot of shape-curve.com (1511 px) + _work/probe-1440.txt (Okendo). Font = the theme's Poppins. */

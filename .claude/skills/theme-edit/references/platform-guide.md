@@ -7,7 +7,8 @@ those). A theme's own settings and blocks (Kaching packs, top bar text, colours�
 
 ## Admin menu
 Dashboard · Analytics · Orders · Products (Product Catalog, Collections, Inventory, Customer Reviews) · Online Stores
-(Pages, Themes) · Discounts · Media · Settings (Shipping, Policy, Cookie banner) · Payment Gateway.
+(Pages, Themes) · Discounts · Media · Settings (Shipping, Policy, Cookie banner) · Payment Gateway. The code also has
+Ad Spend, AI Agent, Team, Email Marketing, Tags, Abandoned checkouts, System Settings (some only for some roles).
 Nguồn: apps/web/src/components/app-sidebar.tsx
 
 ## Change a page's layout (theme editor)
@@ -73,7 +74,9 @@ Discounts → create. Method: Discount code or Automatic (Automatic needs a Titl
   Variant compare-at for all at once: Variants table → tick the header box → bulk bar "Compare at" → apply → Save.
 - Free shipping.
 - Tiered next item ("Next-item discount tiers"): the 1st item full price, each extra item discounted by its tier,
-  typed `qty:percent`, e.g. `2:10, 3:15, 4:20`.
+  typed `qty:percent`, e.g. `2:10, 3:15, 4:20`. Clicks: Discounts → "Create discount" → "Next item discount
+  (progressive)" → Method "Automatic discount" + Title → card "Next-item discount tiers": "Tiers" field (chips
+  "item #2: −x%" check it), "Applies to" (Specific products or collections → Browse products) → "Create discount" (top).
 - Example "2 for $62.99, 3 for $89.98" on a $39.99 item: 2nd item = 62.99 − 39.99 = 23.00 → −42.5 %; 3rd = 89.98 −
   62.99 = 26.99 → −32.5 % → tiers `2:42.5, 3:32.5`. A Kaching-style theme shows what the checkout will charge.
 - A unit past the last tier takes the last tier's percent. "4+ at the Buy 3 unit price": add a tier for 4 that makes
@@ -82,6 +85,11 @@ Discounts → create. Method: Discount code or Automatic (Automatic needs a Titl
 - A tier may be LOWER than the one before (each unit takes the highest tier ≤ its position): "3 = $29.99 each, 4+ =
   $29.93 each" on $35.99 → `2:24.98, 3:25.03, 4:17.34, 5:16.84` (89.97, 119.72, then 29.93 × n). Check the totals
   with the formula above (per unit, rounded to the cent) before giving a tier list.
+- Packs priced as N × a base pack (owear 2026-11-26: 3 / 6 / 9 Pack = 59.95 / 99.95 / 129.95, 4+ units = 129.95 / 3
+  each, + in the cart follows): Kaching block in "Pack variant" mode, quantities 1 / 2 / 3, every "Pack option value" =
+  "3 Pack" (6 Pack = two 3-pack rows); remove the 6 / 9 Pack variants (a 9 Pack line would take the 3-pack percents:
+  2 × 9 Pack = $216.65); tiers `2:33.28, 3:49.96, 4:27.74, 5:27.76, 6:27.74, 8:27.76, 9:27.74, 11:27.76, 12:27.74` =
+  exact to 13 units (`4:27.74` alone drifts 1¢ every 3 units). The create form starts with a 10-tier ladder: replace it.
 - Discount "Applies to" specific products = only their units take positions and percents (a protection line stays
   full price); Lunara Vesnacharm's cart follows it since 2026.11.23.3 (`nextItemTierProducts`).
 Nguồn: apps/web/src/features/discounts/pages/discount-edit.page.tsx, apps/web/src/features/discounts/pages/discounts.page.tsx, apps/api/src/features/discounts/discount-engine.ts, apps/web/src/features/products/components/variant-options-builder.tsx

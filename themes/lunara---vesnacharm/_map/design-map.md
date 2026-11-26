@@ -1,6 +1,6 @@
 # Design map: lunara---vesnacharm
 <!-- Written by tools/theme-map.js from the theme's files. Edit only inside the notes blocks at the end; run the tool after every change. -->
-Lunara Vesnacharm 2026.11.25.8 · schema v2 · 11 templates · 21 sections · 17 snippets · 6 CSS · 5 JS
+Lunara Vesnacharm 2026.11.26.4 · schema v2 · 11 templates · 21 sections · 19 snippets · 6 CSS · 5 JS
 One part in detail: `node tools/theme-map.js themes/lunara---vesnacharm --part <id>` (a section, snippet, template or asset file name, `design`, `sources`).
 README.md: Editor (Themes > Customize) L6 · Template "Triple-Zone Drop-Seat Bodysuit" (`templates/product.triple-zone-bodysuit.json`) L27 · Pages L65 · Hooks kept for pixels L69
 
@@ -62,7 +62,7 @@ Every page (theme.json): theme.css, theme.js
 |---|---|---|---|---|---|
 | cart-drawer | 11 (minified) | — | — | custom.css, base.css, <style> 11 KB | patch-cart.js, patch-vn.js |
 | custom-html | 15 | — | — | <style> 0.2 KB | — |
-| faq | 3 (minified) | qa | — | base.css, custom.css, <style> 0.6 KB | — |
+| faq | 3 (minified) | qa | sc-type | base.css, custom.css, <style> 0.6 KB | build-sc.js (schema) |
 | features | 48 | feature | — | <style> 1.0 KB | — |
 | footer | 95 | — | — | base.css, vn-chrome.css, custom.css, <style> 7.5 KB | patch-vn.js |
 | guarantee | 21 | item | — | <style> 0.6 KB | — |
@@ -70,17 +70,17 @@ Every page (theme.json): theme.css, theme.js
 | image-banner | 23 | — | — | <style> 0.8 KB | — |
 | marquee | 17 | item | — | <style> 0.6 KB | — |
 | product-scripts | 120 | — | — | — | — |
-| product | 3 (minified) | rating, title, variant_picker, size_finder, buy_buttons, trust +11 | lu-size-finder, sc-trustbox, lu-kaching, custom-html-block, lu-media-slider +8 | base.css, custom.css, sc-product.css, <style> 4.6 KB | patch-sc.js, patch-vn.js, build-sc.js (schema) |
-| related | 114 | — | — | vn-chrome.css, custom.css, <style> 1.8 KB | patch-vn.js |
-| reviews | 207 | — | — | <style> 38 KB | patch-sc.js, patch-vn.js, build-sc.js (schema) |
+| product | 3 (minified) | rating, title, variant_picker, size_finder, buy_buttons, trust +11 | pb-type, lu-size-finder, sc-trustbox, lu-kaching, custom-html-block +9 | base.css, custom.css, sc-product.css, <style> 4.6 KB | patch-sc.js, patch-vn.js, build-sc.js (schema) |
+| related | 114 | — | sc-type | vn-chrome.css, custom.css, <style> 1.8 KB | patch-vn.js, build-sc.js (schema) |
+| reviews | 207 | — | sc-type | <style> 38 KB | patch-sc.js, patch-vn.js, build-sc.js (schema) |
 | rich-text | 13 | — | — | <style> 0.4 KB | — |
-| sc-before-after | 171 | — | — | <style> 5.2 KB | build-sc.js (schema) |
-| sc-details | 49 | item | — | <style> 2.2 KB | build-sc.js (schema) |
-| sc-features | 41 | card | — | <style> 2.1 KB | build-sc.js (schema) |
-| sc-reels | 177 | clip | — | custom.css, <style> 5.9 KB | build-sc.js (schema) |
-| sc-reviews | 514 | — | — | <style> 14 KB | build-sc.js (schema) |
-| sc-testimonials | 78 | quote | sc-icon, sc-stars | <style> 3.2 KB | build-sc.js (schema) |
-| sc-trust | 35 | item | sc-icon | <style> 1.5 KB | build-sc.js (schema) |
+| sc-before-after | 172 | — | sc-type | <style> 5.2 KB | build-sc.js (schema) |
+| sc-details | 50 | item | sc-type | <style> 2.4 KB | build-sc.js (schema) |
+| sc-features | 42 | card | sc-type | <style> 2.3 KB | build-sc.js (schema) |
+| sc-reels | 178 | clip | sc-type | custom.css, <style> 6.0 KB | build-sc.js (schema) |
+| sc-reviews | 515 | — | sc-type | <style> 14 KB | build-sc.js (schema) |
+| sc-testimonials | 79 | quote | sc-type, sc-icon, sc-stars | <style> 3.4 KB | build-sc.js (schema) |
+| sc-trust | 36 | item | sc-type, sc-icon | <style> 1.7 KB | build-sc.js (schema) |
 
 ## Snippets
 - custom-html-block · 11 lines · used by product
@@ -92,20 +92,22 @@ Every page (theme.json): theme.css, theme.js
 - lu-media-slider · 3 lines · used by product
 - lu-pi-faq · 3 lines · used by product
 - lu-size-finder · 279 lines · used by product · edited by patch-sc.js, patch-vn.js
+- pb-type · 19 lines · used by product
 - sc-fit · 327 lines · used by product
-- sc-icon · 4 lines · used by sc-pb-ship, sc-pb-tabs, sc-testimonials, sc-trust
-- sc-pb-highlights · 8 lines · used by product
+- sc-icon · 5 lines · used by sc-pb-highlights, sc-pb-ship, sc-pb-tabs, sc-testimonials, sc-trust
+- sc-pb-highlights · 22 lines · used by product
 - sc-pb-price · 6 lines · used by product
 - sc-pb-ship · 5 lines · used by product
 - sc-pb-tabs · 7 lines · used by product
 - sc-stars · 3 lines · used by sc-testimonials
 - sc-trustbox · 42 lines · used by product
+- sc-type · 16 lines · used by faq, pb-type, related, reviews, sc-before-after +6
 
 ## Assets
 - base.css 524 KB minified · linked by checkout.hbs, gs-head
 - custom.css 56 KB minified · linked by gs-head
 - lu-companion.css 1.5 KB · linked by lu-kaching
-- sc-product.css 16 KB · linked by product, sc-pb-highlights, sc-pb-price, sc-pb-ship +1
+- sc-product.css 18 KB · linked by product, sc-pb-highlights, sc-pb-price, sc-pb-ship +1
 - theme.css 0.1 KB · linked by theme.json
 - vn-chrome.css 19 KB · linked by gs-head
 - lu-companion.js 15 KB · linked by lu-kaching
@@ -116,7 +118,7 @@ Every page (theme.json): theme.css, theme.js
 
 ## Sources
 - _src/anim-webp.py: a helper or check, does not edit the theme
-- _src/build-sc.js generates sections/product.schema.json, sections/reviews.schema.json, sections/sc-before-after.schema.json, sections/sc-details.schema.json, sections/sc-features.schema.json, sections/sc-reels.schema.json +4 → edit the script, then run it
+- _src/build-sc.js generates sections/faq.schema.json, sections/product.schema.json, sections/related.schema.json, sections/reviews.schema.json, sections/sc-before-after.schema.json, sections/sc-details.schema.json +6 → edit the script, then run it
 - _src/build-vn-settings.js generates config/settings_data.json, config/settings_schema.json → edit the script, then run it
 - _src/compare-copy.js: a helper or check, does not edit the theme
 - _src/patch-cart.js patches assets/js/theme.js, sections/cart-drawer.hbs, snippets/gs-head.hbs (anchored edits) → edit the script, then run it
@@ -136,6 +138,7 @@ Every page (theme.json): theme.css, theme.js
 <!-- Write what the code does not say (intent, traps, recipes) under "### <part id>", between notes:<id> markers. -->
 ### theme
 <!-- notes:theme -->
+- Text sizes / colours on every part with text (2026.11.26.1-.2): settings = `typeSet()` in _src/build-sc.js (groups h / s / t / p / b + _size, _size_m, _color; `typeOff()` drops them before re-adding = re-run safe; PB_TYPE = product blocks, Lunara faq / related / reviews schemas edited there too), CSS = snippets/sc-type.hbs. Calls: sc-*.hbs + faq.hbs first line (section) + `{{#each section.blocks}}` (blocks, outside the card list: a <style> between cards breaks :nth-child); product blocks = snippets/pb-type.hbs (selectors per block type), printed before product.hbs's <section> and related / reviews calls, all three by _src/patch-vn.js. Scope `[data-section-id]` / `[data-block-id]` (platform wrappers) + `:not(#_t):not(#_t)` (2 ids) + !important beats Lunara's #MainProduct rules. A new text class = add it to that call's selectors. Test: compare-copy, set h_size / s_color … in the copy's template, edit-check --eval (query inside `[data-section-id=faq]`: the product page has other .accordion__title).
 - Lunara rules win with `#MainProduct-…` ids + `!important` (gallery 530 px, thumbs, ATC radius): override with the same prefix.
 - A Lunara file listed under Sources is changed through its script (`_src/patch-*.js` anchored edits, `_src/build-sc.js` schemas + template): edit the script, run it, check the other templates render the same.
 - Every product template carries every product-page section (user 2026-11-20): `_src/build-sc.js` `carryAll()` adds the section types a `templates/product*.json` lacks, switched off (`disabled`, the editor's eye icon), the before / after slider on (it prints nothing until both photos are set). It never changes a section a template has; a section deleted by hand comes back on the next run: switch it off instead. The map cannot see these writes (file names from a folder listing).
@@ -185,6 +188,8 @@ Every page (theme.json): theme.css, theme.js
 <!-- /notes -->
 ### product
 <!-- notes:product -->
+- Highlights box lines 6+ (2026.11.26.4) = blocks `sc_hl_line` "Highlight line" (no repeater setting in shopdy's editor, a block holds no blocks; "Add block" appends at the end). The box's `hl_more` prints every line block after it (@index of product.hbs's block loop, `@../index` inside its each) and wraps a line in `<template>` once per LATER box before it (inert = belongs to that box). The <li> carries the line's {{{attributes}}} and comes first in the page, so the editor selects it; the line's own `.lu-pb` wrapper is an empty div (base.css div:empty). Product section max_blocks 50 (build-sc.js). Test: compare-copy + line blocks in blockOrder (before any box, between two boxes, empty text).
+- Highlights box (2026.11.26.1, snippets/sc-pb-highlights.hbs): Layout check (list) / grid (two columns + lines, user's picture) / box (grey, emoji icons, no icon settings). Icon: `image_n` wins, then `icon_n` ("same" or unset = the box's `icon`), "check" = the block's own filled 22 px svg, other names = snippets/sc-icon.hbs (grid thins their stroke to 1.6 by CSS). Sizes / colours = `--hl-*` variables printed on the <ul> only when set; sc-product.css fallbacks = the old look (16/22 px, 15/21 px phones, highlight colour).
 - Card "Add to cart" → product page at `#lu-buy` (user 2026-11-25, the quick-add modal "looks ugly"; theme.js click handler of `[data-ms-quick-add]` via `_src/patch-vn.js`, home grid + related products, both `#ms-card-tpl`). The product section's inline script (start of the sticky-bar `<script>` in sections/product.hbs, hand-written) scrolls to the first visible `[data-lu-kaching]` (else `.ms-variant-group`, else `#addToCart`) minus a sticky header + 12 px, at once, on DOMContentLoaded and on load (+300 ms) unless the buyer has scrolled / touched, and drops the hash (replaceState). The modal markup and code stay (unreachable). Test: edit-check `--page "/?…"` + Navigation API `navigate` listener (preventDefault) to read the target without leaving.
 - Sticky CLAIM OFFER bar (`#stickyAddToCart`, inline script `initStickyClaimOffer` at the end of sections/product.hbs, hand-written, no _src script): computers show it once `#addToCart` is above the screen; phones (< 750 px, `luMq`) always, from the first screen (user 2026-11-25), with `body` padding-bottom = its height (`luPad`). z-index 990: the cart drawer (1000) and the size finders (`<dialog>`) open above it.
 - Bodysuit blocks in every look (user 2026-11-20): the section always has `.sc-any`; `assets/css/sc-product.css` styles the blocks (Price + badge, Highlights, Shipping box, Info rows, second button) under `.sc-any` and the look itself (gallery, pickers, packs, Find My Size pill) under `.sc-skin`. Outside the look each block snippet (`sc-pb-*`) and the second button link sc-product.css themselves (`@root.section.settings.skin`); Info rows also links sc-product.js, which then only builds the size chart (runs once: `window.__scProduct`). `--sc-hl` = the look's highlight (inline) else the theme's `--vn-hl`.

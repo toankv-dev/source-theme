@@ -1,0 +1,137 @@
+{
+  "name": "Default",
+  "description": "Product types merged into one page (gallery of every type, Type + Color + Size picker) + Kaching bundle (Bars, every item picks Type / options, synced with the picker); stock bar, Add to cart.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {
+        "variant_style": "default",
+        "opt1_display": "text",
+        "opt2_display": "text",
+        "opt3_display": "text",
+        "show_size_finder": true,
+        "merge_types": true,
+        "merge_type_label": "Type",
+        "merge_type_display": "image"
+      },
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "kaching": {
+          "type": "kaching",
+          "settings": {
+            "heading": "",
+            "layout": "bars",
+            "selected": 2,
+            "save_style": "compare_pct",
+            "pack1_qty": 1,
+            "pack1_title": "3 Pack",
+            "pack1_subtitle": "SAVE {save}",
+            "pack1_badge": "",
+            "pack2_qty": 1,
+            "pack2_title": "6 Pack",
+            "pack2_subtitle": "SAVE {save}",
+            "pack2_badge": "BEST SELLER",
+            "pack3_qty": 1,
+            "pack3_title": "9 Pack",
+            "pack3_subtitle": "SAVE {save}",
+            "pack3_badge": "BEST VALUE",
+            "pack4_qty": 0,
+            "pack4_title": "",
+            "pack4_subtitle": "SAVE {save}",
+            "pack4_badge": "",
+            "accent": "",
+            "price_color": "",
+            "bar_bg": "#EDEDED",
+            "selected_bg": "#FFFFFF",
+            "title_color": "#000000",
+            "badge_text_color": "#FFFFFF",
+            "show_picker": false,
+            "type_pick": true,
+            "type_label": "Type",
+            "pack_option": "Packs",
+            "pack1_value": "3 Pack",
+            "pack2_value": "6 Pack",
+            "pack3_value": "9 Pack",
+            "pack4_value": ""
+          }
+        },
+        "stock_bar": {
+          "type": "stock_bar",
+          "settings": {
+            "before": "Only",
+            "count": 39,
+            "after": "underwear left",
+            "fill": 10,
+            "color": "#000000"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "guarantee_box": {
+          "type": "guarantee_box",
+          "settings": {}
+        },
+        "payment_badges": {
+          "type": "payment_badges",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "size_finder": {
+          "type": "size_finder",
+          "settings": {}
+        },
+        "photo_upload": {
+          "type": "photo_upload",
+          "settings": {}
+        },
+        "sticky_atc": {
+          "type": "sticky_atc",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "variant_picker",
+        "size_finder",
+        "kaching",
+        "stock_bar",
+        "photo_upload",
+        "buy_buttons",
+        "payment_badges",
+        "guarantee_box",
+        "description",
+        "sticky_atc"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    }
+  },
+  "order": [
+    "product",
+    "reviews",
+    "faq"
+  ]
+}

@@ -1,0 +1,27 @@
+{{!-- Merged product types (section setting merge_types): the images of the OTHER types (Theme settings > Product types:
+      product image + every variant image) join this product's gallery. Rendered right after the thumbnail list; the
+      inline script copies the last slide / dot / thumbnail for each image before theme.js (defer) builds the slider, so
+      the gallery is complete from its first paint. Duplicates (same URL) are skipped. --}}
+{{#with @root.settings as |ts|}}<template data-lu-merge-imgs>{{#each ts.ptype_1_product}}{{#if @first}}{{#unless (eq productId @root.config.productId)}}<i data-src="{{image}}"></i>{{#each variants}}{{#if image}}<i data-src="{{image}}"></i>{{/if}}{{/each}}{{/unless}}{{/if}}{{/each}}{{#each ts.ptype_2_product}}{{#if @first}}{{#unless (eq productId @root.config.productId)}}<i data-src="{{image}}"></i>{{#each variants}}{{#if image}}<i data-src="{{image}}"></i>{{/if}}{{/each}}{{/unless}}{{/if}}{{/each}}{{#each ts.ptype_3_product}}{{#if @first}}{{#unless (eq productId @root.config.productId)}}<i data-src="{{image}}"></i>{{#each variants}}{{#if image}}<i data-src="{{image}}"></i>{{/if}}{{/each}}{{/unless}}{{/if}}{{/each}}{{#each ts.ptype_4_product}}{{#if @first}}{{#unless (eq productId @root.config.productId)}}<i data-src="{{image}}"></i>{{#each variants}}{{#if image}}<i data-src="{{image}}"></i>{{/if}}{{/each}}{{/unless}}{{/if}}{{/each}}</template>{{/with}}
+<script>(function(){try{
+var s=document.currentScript,t=s.previousElementSibling,root=s.closest('[data-ms-pdp]')||s.closest('section')||document;
+if(!t||!t.hasAttribute('data-lu-merge-imgs'))return;
+var main=root.querySelector('.product__media-list'),thumbs=root.querySelector('.thumbnail-list'),dots=root.querySelector('.slider-counter__links, .slider-counter');
+if(!main)return;
+var slides=[].slice.call(main.querySelectorAll(':scope > li'));if(!slides.length)return;
+var have={};slides.forEach(function(li){var im=li.querySelector('img,video');if(im)have[im.getAttribute('src')]=1;});var VID=/\.(mp4|webm|ogg|mov)(?:$|[?#])/i;function lu_media(old,u,thumb){if(!old)return;var el;if(VID.test(u)){el=document.createElement('video');el.setAttribute('src',u);el.muted=true;el.setAttribute('muted','');el.setAttribute('playsinline','');el.setAttribute('preload','metadata');el.setAttribute('disablepictureinpicture','');if(!thumb){el.setAttribute('autoplay','');el.setAttribute('loop','');el.autoplay=true;el.loop=true;}el.setAttribute('style',thumb?'width:100%;height:100%;object-fit:cover;pointer-events:none;background:transparent':'max-width:100%;width:100%;height:auto;background:transparent');}else{el=document.createElement('img');el.setAttribute('src',u);el.setAttribute('alt',old.getAttribute('alt')||'');el.setAttribute('loading','lazy');['width','height','class'].forEach(function(a){var v=old.getAttribute(a);v&&el.setAttribute(a,v);});}old.parentNode.replaceChild(el,old);}
+var srcs=[];[].forEach.call(t.content.querySelectorAll('i[data-src]'),function(i){var u=i.getAttribute('data-src');if(u&&!have[u]){have[u]=1;srcs.push(u);}});
+if(!srcs.length)return;
+var lastS=slides[slides.length-1],tl=thumbs?[].slice.call(thumbs.querySelectorAll(':scope > li')):[],lastT=tl[tl.length-1];
+var dl=dots?[].slice.call(dots.querySelectorAll('.slider-counter__link')):[],lastD=dl[dl.length-1];
+var n=slides.length;
+srcs.forEach(function(u,k){var i=n+k;
+var li=lastS.cloneNode(true);li.id='Slide-ms-'+i;li.classList.remove('is-active');li.setAttribute('data-media-id','ms-'+i);li.setAttribute('data-index',i);
+[].forEach.call(li.querySelectorAll('img,video'),function(im){lu_media(im,u,false);});
+[].forEach.call(li.querySelectorAll('[data-media-id]'),function(x){x.setAttribute('data-media-id','ms-'+i);});
+main.appendChild(li);
+if(lastT){var th=lastT.cloneNode(true);th.setAttribute('data-target','ms-'+i);th.setAttribute('data-index',i);var b=th.querySelector('button');b&&b.removeAttribute('aria-current');var ti=th.querySelector('img,video');lu_media(ti,u,true);lastT.parentNode.appendChild(th);}
+if(lastD){var d=lastD.cloneNode(true);d.classList.remove('slider-counter__link--active');d.setAttribute('data-index',i);d.setAttribute('aria-label','Load slide '+i);lastD.parentNode.appendChild(d);}
+});
+}catch(e){}})();</script>
+{{#with @root.settings as |ts|}}<div hidden data-lu-types>{{#if ts.ptype_1_name}}<template data-name="{{ts.ptype_1_name}}" data-img="{{ts.ptype_1_image}}" data-json="{{lookup (json ts.ptype_1_product) "string"}}"></template>{{/if}}{{#if ts.ptype_2_name}}<template data-name="{{ts.ptype_2_name}}" data-img="{{ts.ptype_2_image}}" data-json="{{lookup (json ts.ptype_2_product) "string"}}"></template>{{/if}}{{#if ts.ptype_3_name}}<template data-name="{{ts.ptype_3_name}}" data-img="{{ts.ptype_3_image}}" data-json="{{lookup (json ts.ptype_3_product) "string"}}"></template>{{/if}}{{#if ts.ptype_4_name}}<template data-name="{{ts.ptype_4_name}}" data-img="{{ts.ptype_4_image}}" data-json="{{lookup (json ts.ptype_4_product) "string"}}"></template>{{/if}}</div>{{/with}}

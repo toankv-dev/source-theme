@@ -3,6 +3,7 @@
       text. A swipeable row (scroll-snap) with one dot per screenful and a button to the reviews (#lu-reviews). Photos =
       picked file, else default_image (theme file), else an empty frame. Own <style> + <script>; the script wires every
       row once (data-ok), so the editor's section swap re-runs it safely. --}}
+{{> sc-type h=".sct__h" s=".sct__name" t=".sct__q"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".sct__name" t=".sct__q"}}{{/each}}
 <style>
   .sct{letter-spacing:normal;--sc-hl:#790236;background:var(--sct-bg,#f6edf1);color:#333}
   .sct__wrap{max-width:1200px;margin:0 auto;padding:0 15px;box-sizing:border-box}

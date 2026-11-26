@@ -1,0 +1,2595 @@
+{
+  "name": "Product",
+  "tag": "div",
+  "limit": 1,
+  "max_blocks": 25,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Benefits with icons (under the title)"
+    },
+    {
+      "type": "checkbox",
+      "id": "bnf_show",
+      "label": "Show benefits",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Up to 6 lines in two columns. Each line: a theme icon, or an own picture in its place. Empty text = line hidden."
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_1",
+      "label": "Line 1: text",
+      "default": "Light Leak Protection"
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_1",
+      "label": "Line 1: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "drop"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_1",
+      "label": "Line 1: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_2",
+      "label": "Line 2: text",
+      "default": "Discreet Fit"
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_2",
+      "label": "Line 2: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "underwear"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_2",
+      "label": "Line 2: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_3",
+      "label": "Line 3: text",
+      "default": "Wash & Reuse"
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_3",
+      "label": "Line 3: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "wash"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_3",
+      "label": "Line 3: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_4",
+      "label": "Line 4: text",
+      "default": "Everyday Comfort"
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_4",
+      "label": "Line 4: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "cloud"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_4",
+      "label": "Line 4: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_5",
+      "label": "Line 5: text",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_5",
+      "label": "Line 5: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "check"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_5",
+      "label": "Line 5: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "bnf_text_6",
+      "label": "Line 6: text",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "bnf_icon_6",
+      "label": "Line 6: icon",
+      "options": [
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "underwear",
+          "label": "Underwear"
+        },
+        {
+          "value": "wash",
+          "label": "Wash"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud (soft / comfort)"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "feather",
+          "label": "Feather (light)"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "wind",
+          "label": "Wind (breathable)"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "reuse",
+          "label": "Reuse"
+        },
+        {
+          "value": "none",
+          "label": "No icon"
+        }
+      ],
+      "default": "check"
+    },
+    {
+      "type": "image_picker",
+      "id": "bnf_image_6",
+      "label": "Line 6: own picture (replaces the icon)",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "USP box (under the benefits)"
+    },
+    {
+      "type": "checkbox",
+      "id": "usp_show",
+      "label": "Show USP box",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "usp_image",
+      "label": "Round picture",
+      "default": "",
+      "info": "Empty = the fabric picture that comes with the theme (assets/images/lu-usp.webp)."
+    },
+    {
+      "type": "text",
+      "id": "usp_title",
+      "label": "Title (bold)",
+      "default": "Everyday Leak Protection"
+    },
+    {
+      "type": "textarea",
+      "id": "usp_text",
+      "label": "Text",
+      "default": "An absorbent layer helps manage small leaks, with a familiar underwear feel."
+    },
+    {
+      "type": "color",
+      "id": "usp_bg",
+      "label": "Background",
+      "default": "#EEEEEE"
+    },
+    {
+      "type": "color",
+      "id": "usp_border",
+      "label": "Border",
+      "default": "#D9D9D9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating (real reviews)",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Rating label",
+      "default": "Excellent",
+      "info": "Shown before the average, e.g. Excellent 4.8 | 1368 reviews."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust",
+      "label": "Show trust line under Add to cart",
+      "default": false,
+      "info": "Off by default: the Money back guarantee block replaces it."
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust item 1",
+      "default": "60 Day Fit Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust item 2",
+      "default": "Easy Returns & Exchanges"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust item 3",
+      "default": "",
+      "info": "Optional third item (empty = hidden)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variants",
+      "label": "Show variant pickers (no Kaching bundle, or Kaching in Cards style)",
+      "default": true,
+      "info": "Kaching Bars style: every item gets its own Color / Size pickers inside the selected pack (this picker is always hidden). Kaching Cards style: this picker is shown and the whole pack follows it; untick to hide it, every item is then the default variant."
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Product title size on mobile (px)",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "default": 20,
+      "info": "Phones only (under 750 px). Desktop keeps the theme heading size."
+    },
+    {
+      "type": "range",
+      "id": "title_size_tablet",
+      "label": "Product title size on tablet (px)",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "default": 24,
+      "info": "Tablets and small laptops (750 to 1199 px), where the product column is narrow. Wider screens keep the theme heading size."
+    },
+    {
+      "type": "select",
+      "id": "title_align_mobile",
+      "label": "Product title alignment on mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "title_align_desktop",
+      "label": "Product title alignment on desktop",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "info": "Screens 750 px and wider."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price under the title",
+      "default": true,
+      "info": "Price + compare-at price under the product name; follows the chosen variant. Hidden automatically when the page has a Kaching bundle (the packs show the prices)."
+    },
+    {
+      "type": "select",
+      "id": "variant_style",
+      "label": "Variant picker style",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Lunara pills"
+        },
+        {
+          "value": "walmart",
+          "label": "Tiles (Walmart)"
+        },
+        {
+          "value": "shapermint",
+          "label": "Size buttons (Shapermint)"
+        },
+        {
+          "value": "boxes",
+          "label": "Boxes (size boxes + variant image tiles)"
+        }
+      ],
+      "info": "Look of the Color / Size choices. The templates 'Variant tiles (Walmart)' and 'Size buttons (Shapermint)' set this for you."
+    },
+    {
+      "type": "select",
+      "id": "opt1_display",
+      "label": "Option 1 shows as",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto (images when every value has its own variant image)"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "image",
+          "label": "Variant image"
+        }
+      ],
+      "info": "Option 1 / 2 / 3 = the product options in their order (e.g. Size, Color). Variant image = the image of the variant with that value; a value without an image stays text."
+    },
+    {
+      "type": "select",
+      "id": "opt2_display",
+      "label": "Option 2 shows as",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto (images when every value has its own variant image)"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "image",
+          "label": "Variant image"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "opt3_display",
+      "label": "Option 3 shows as",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto (images when every value has its own variant image)"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "image",
+          "label": "Variant image"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Product types as one product"
+    },
+    {
+      "type": "checkbox",
+      "id": "merge_types",
+      "label": "Merge the product types into this page",
+      "default": false,
+      "info": "Types = Theme settings > Product types. The gallery shows the images of every type, the variant picker gets a Type choice (Briefs / Boxer) next to Color / Size, and the bundle items follow it. No page change."
+    },
+    {
+      "type": "text",
+      "id": "merge_type_label",
+      "label": "Type option name",
+      "default": "Type"
+    },
+    {
+      "type": "select",
+      "id": "merge_type_display",
+      "label": "Type shows as",
+      "default": "image",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image + name"
+        },
+        {
+          "value": "image_only",
+          "label": "Image only"
+        },
+        {
+          "value": "text",
+          "label": "Name only"
+        }
+      ],
+      "info": "Image = Tile image of Theme settings > Product types, else the product image. A type without any image shows its name."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show product description",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Size finder"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_finder",
+      "label": "Show \"Find my size\"",
+      "default": true,
+      "info": "Appears only when the product has a size it can recognise: bra (34B, Band + Cup), pants W29 / L28, or letter sizes XS-5XL (with Petite / Regular / Tall inseam). Every Size guide / Color guide setting is on the Size finder block (click it in the sidebar)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "rating",
+      "name": "Star rating",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "size_finder",
+      "name": "Size finder",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "sf_mode",
+          "label": "Size finder type",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Automatic (from the product options)"
+            },
+            {
+              "value": "bra",
+              "label": "Bra (Band + Cup)"
+            },
+            {
+              "value": "bottoms",
+              "label": "Pants / bottoms (waist, hips, W-L)"
+            },
+            {
+              "value": "tops",
+              "label": "Tops / dresses (bust, waist, hips)"
+            },
+            {
+              "value": "off",
+              "label": "Off"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "sf_popup",
+          "label": "Popup content",
+          "default": "table",
+          "options": [
+            {
+              "value": "table",
+              "label": "Size chart table (edit below)"
+            },
+            {
+              "value": "finder",
+              "label": "Size finder (questions + recommended size)"
+            },
+            {
+              "value": "image",
+              "label": "Size chart image only"
+            },
+            {
+              "value": "both",
+              "label": "Size chart image + size finder"
+            }
+          ],
+          "info": "Table / image only: the link shows on every product with sizes and the popup shows just the chart."
+        },
+        {
+          "type": "image_picker",
+          "id": "sf_chart_image",
+          "label": "Size chart image",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Size chart table"
+        },
+        {
+          "type": "text",
+          "id": "sf_tbl_sub",
+          "label": "Subtitle under the title",
+          "default": "Size Charts"
+        },
+        {
+          "type": "textarea",
+          "id": "sf_tbl",
+          "label": "Table",
+          "default": "SIZE | WAIST (INCHES) | WAIST (CM)\nM | 28\" - 30\" | 71 - 76\nL | 30\" - 34\" | 76 - 86\nXL | 34\" - 36\" | 86 - 91\nXXL | 36\" - 38\" | 91 - 97\nXXXL | 38\" - 40\" | 97 - 102\n4XL | 40\" - 43\" | 102 - 109\n5XL | 43\" - 45\" | 109 - 114\n6XL | 45\" - 47\" | 114 - 119\n7XL | 47\" - 50\" | 119 - 127",
+          "info": "One row per line, cells split by |. First line = column titles (start with | to leave the corner empty). First column = size."
+        },
+        {
+          "type": "textarea",
+          "id": "sf_tbl_after",
+          "label": "Text under the table",
+          "default": "In between sizes? We recommend sizing down for a more secure leakproof fit."
+        },
+        {
+          "type": "richtext",
+          "id": "sf_tbl_more",
+          "label": "More content under the table",
+          "default": "<p>Still unsure which size to order? There's two ways we can help you!</p><p>1. Email us at <a href=\"mailto:support@shopcare.net\">support@shopcare.net</a> and we'll be more than happy to help you find your size</p><p>OR</p><p>2. Order whichever size you think is best and, if it doesn't fit properly, we'll send you a replacement 100% FREE (we'll even cover shipping)</p><ul><li>Orders arrive within 7-15 days</li><li>If your order doesn't fit properly, we'll send you the right size 100% FREE</li><li>You're protected by our 30-day 100% money-back guarantee</li><li>Completely leakproof, comfy &amp; discreet</li></ul><p><strong>Have any other questions? Feel free to contact us by <a href=\"https://owearfit.com/contact\">clicking here</a>.</strong></p>",
+          "info": "Shown under the text above (Size chart table only): help options, delivery notes, contact link. Empty = nothing."
+        },
+        {
+          "type": "text",
+          "id": "sf_option_name",
+          "label": "Preferred size option name",
+          "default": "Size",
+          "info": "Used first when a product has several letter-size options. Other names (Sizes, Waist, Length, Inseam, Band, Cup...) are recognised automatically."
+        },
+        {
+          "type": "text",
+          "id": "sf_link_label",
+          "label": "Link text",
+          "default": "Size Guide"
+        },
+        {
+          "type": "range",
+          "id": "sf_link_size",
+          "label": "Size guide link text size (px)",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "default": 16
+        },
+        {
+          "type": "select",
+          "id": "sf_link_align",
+          "label": "Size guide link alignment",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Left on desktop, centered on mobile"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "text",
+          "id": "sf_title",
+          "label": "Popup title",
+          "default": "Size guide"
+        },
+        {
+          "type": "richtext",
+          "id": "sf_intro",
+          "label": "Content under the title",
+          "default": "",
+          "info": "Free text shown at the top of the popup (also with \"Size chart image only\"): measuring guide, fit notes, links. Empty = nothing."
+        },
+        {
+          "type": "header",
+          "content": "Color guide (tab in the same popup)"
+        },
+        {
+          "type": "checkbox",
+          "id": "cg_enabled",
+          "label": "Show the Color guide tab",
+          "default": true,
+          "info": "Adds two tabs at the top of the Size guide popup: Size guide | Color guide."
+        },
+        {
+          "type": "text",
+          "id": "cg_tab_size",
+          "label": "Size tab label",
+          "default": "Size guide"
+        },
+        {
+          "type": "text",
+          "id": "cg_tab_color",
+          "label": "Color tab label",
+          "default": "Color guide"
+        },
+        {
+          "type": "text",
+          "id": "cg_title",
+          "label": "Color guide title",
+          "default": "Multi-color pack"
+        },
+        {
+          "type": "richtext",
+          "id": "cg_text",
+          "label": "Color guide text",
+          "default": "<p>Multi-color includes 3 colors: Black, Gray, Navy Blue.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 1"
+        },
+        {
+          "type": "text",
+          "id": "cg_c1_name",
+          "label": "Colour name",
+          "default": "Black",
+          "info": "Empty name = this colour is not shown."
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c1_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c1_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#111111"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 2"
+        },
+        {
+          "type": "text",
+          "id": "cg_c2_name",
+          "label": "Colour name",
+          "default": "Gray"
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c2_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c2_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#8E8E8E"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 3"
+        },
+        {
+          "type": "text",
+          "id": "cg_c3_name",
+          "label": "Colour name",
+          "default": "Navy Blue"
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c3_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c3_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#1F2A4D"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 4"
+        },
+        {
+          "type": "text",
+          "id": "cg_c4_name",
+          "label": "Colour name",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c4_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c4_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#CCCCCC"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 5"
+        },
+        {
+          "type": "text",
+          "id": "cg_c5_name",
+          "label": "Colour name",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c5_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c5_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#CCCCCC"
+        },
+        {
+          "type": "header",
+          "content": "Color guide - colour 6"
+        },
+        {
+          "type": "text",
+          "id": "cg_c6_name",
+          "label": "Colour name",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_c6_image",
+          "label": "Product image in this colour",
+          "default": ""
+        },
+        {
+          "type": "color",
+          "id": "cg_c6_color",
+          "label": "Colour (used when there is no image)",
+          "default": "#CCCCCC"
+        },
+        {
+          "type": "image_picker",
+          "id": "cg_image",
+          "label": "Color guide image",
+          "default": "",
+          "info": "Optional, shown under the colours."
+        },
+        {
+          "type": "text",
+          "id": "sf_band_label",
+          "label": "Band question",
+          "default": "What is your closest Band Size?"
+        },
+        {
+          "type": "text",
+          "id": "sf_cup_label",
+          "label": "Cup question",
+          "default": "What is your closest Cup Size?"
+        },
+        {
+          "type": "paragraph",
+          "content": "Popup texts: empty = the English text shown in the field."
+        },
+        {
+          "type": "text",
+          "id": "sf_meas_label",
+          "label": "Measurements heading",
+          "default": "Your measurements"
+        },
+        {
+          "type": "text",
+          "id": "sf_bust_label",
+          "label": "Bust label",
+          "default": "Bust"
+        },
+        {
+          "type": "text",
+          "id": "sf_bust_hint",
+          "label": "Bust hint",
+          "default": "Fullest part of the chest"
+        },
+        {
+          "type": "text",
+          "id": "sf_waist_label",
+          "label": "Waist label",
+          "default": "Waist"
+        },
+        {
+          "type": "text",
+          "id": "sf_waist_hint",
+          "label": "Waist hint",
+          "default": "Narrowest part, above the belly button"
+        },
+        {
+          "type": "text",
+          "id": "sf_hip_label",
+          "label": "Hips label",
+          "default": "Hips"
+        },
+        {
+          "type": "text",
+          "id": "sf_hip_hint",
+          "label": "Hips hint",
+          "default": "Fullest part of the hips"
+        },
+        {
+          "type": "text",
+          "id": "sf_height_label",
+          "label": "Height label",
+          "default": "Height"
+        },
+        {
+          "type": "text",
+          "id": "sf_height_hint",
+          "label": "Height hint",
+          "default": "Without shoes"
+        },
+        {
+          "type": "text",
+          "id": "sf_inseam_label",
+          "label": "Inseam label",
+          "default": "Inseam"
+        },
+        {
+          "type": "text",
+          "id": "sf_inseam_hint",
+          "label": "Inseam hint",
+          "default": "Optional - crotch to ankle"
+        },
+        {
+          "type": "text",
+          "id": "sf_select_text",
+          "label": "Empty choice in the lists",
+          "default": "Select"
+        },
+        {
+          "type": "text",
+          "id": "sf_notsure_text",
+          "label": "Empty choice in the Inseam list",
+          "default": "Not sure"
+        },
+        {
+          "type": "textarea",
+          "id": "sf_how",
+          "label": "Measuring tip",
+          "default": "Measure over light clothing with a soft tape. Between two sizes? Choose the larger one."
+        },
+        {
+          "type": "text",
+          "id": "sf_hint",
+          "label": "Text before an answer",
+          "default": "Answer the questions above - we will match you instantly."
+        },
+        {
+          "type": "text",
+          "id": "sf_result_label",
+          "label": "Result heading",
+          "default": "Your recommended size"
+        },
+        {
+          "type": "text",
+          "id": "sf_result_note",
+          "label": "Result note (letter sizes)",
+          "default": "US standard size chart"
+        },
+        {
+          "type": "text",
+          "id": "sf_go_label",
+          "label": "Result button",
+          "default": "Select this size"
+        },
+        {
+          "type": "text",
+          "id": "sf_chart_show",
+          "label": "Show chart link",
+          "default": "View full size chart"
+        },
+        {
+          "type": "text",
+          "id": "sf_chart_hide",
+          "label": "Hide chart link",
+          "default": "Hide size chart"
+        },
+        {
+          "type": "text",
+          "id": "sf_bands",
+          "label": "Band sizes",
+          "default": "30, 32, 34, 36, 38, 40, 42, 44, 46, 48",
+          "info": "Comma separated."
+        },
+        {
+          "type": "text",
+          "id": "sf_cups",
+          "label": "Cup sizes",
+          "default": "A, B, C, D, DD/E, DDD/F, G, H/I",
+          "info": "Comma separated, same order as the columns of the chart."
+        },
+        {
+          "type": "textarea",
+          "id": "sf_map",
+          "label": "Bra chart for letter sizes (band: size per cup)",
+          "default": "30: S, S, S, S, M, M, L, L\n32: S, S, S, M, M, L, L, XL\n34: S, M, M, M, L, L, XL, XL\n36: M, M, L, L, L, XL, XL, XXL\n38: L, L, L, XL, XL, XL, XXL, XXL\n40: XL, XL, XL, XL, XXL, XXL, XXL, XXL\n42: XL, XXL, XXL, XXL, XXL, XXL, XXL, XXL\n44: XXL, XXL, XXL, XXL, XXL, XXL, XXL, XXL\n46: XXL, XXL, XXL, XXL, XXL, XXL, XXL, XXL\n48: XXL, XXL, XXL, XXL, XXL, XXL, XXL, XXL",
+          "info": "One line per band: 34: S, M, M, M, L, L, XL, XL - one size per cup, in the cup order above. Sizes must match the product's size values (XXL = 2XL)."
+        },
+        {
+          "type": "textarea",
+          "id": "sf_letter_map",
+          "label": "Letter size chart (size: bust, waist, hips)",
+          "default": "XXS: 31, 24, 34\nXS: 33, 26, 36\nS: 35, 28, 38\nM: 37, 30, 40\nL: 40, 33, 43\nXL: 43, 36, 46\n2XL: 46, 39, 49\n3XL: 49, 42, 52\n4XL: 52, 45, 55\n5XL: 55, 48, 58",
+          "info": "Maximum body measurement in inches for each size, US standard. One size per line, e.g. M: 37, 30, 40."
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "trust",
+      "name": "Trust line",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "guarantee_box",
+      "name": "Money back guarantee",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Badge image",
+          "default": "",
+          "info": "Empty = the gold seal drawn by the theme with the number below."
+        },
+        {
+          "type": "text",
+          "id": "badge_number",
+          "label": "Seal number",
+          "default": "45"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "45-Day Money Back Guarantee"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Less than 1% of customers have used our Money Back Guarantee"
+        },
+        {
+          "type": "color",
+          "id": "bg",
+          "label": "Background",
+          "default": "#F2F2F2"
+        },
+        {
+          "type": "color",
+          "id": "border",
+          "label": "Dashed border",
+          "default": "#8A8A8A"
+        }
+      ]
+    },
+    {
+      "type": "payment_badges",
+      "name": "Payment icons",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "kaching",
+      "name": "Kaching bundle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Bundle display style",
+          "default": "bars",
+          "options": [
+            {
+              "value": "bars",
+              "label": "Bars (one pack per row)"
+            },
+            {
+              "value": "cards",
+              "label": "Cards (packs side by side, image on top)"
+            },
+            {
+              "value": "list",
+              "label": "Stack (pack image, price / each, badge strip on top)"
+            }
+          ],
+          "info": "Cards = rectangle cards like Kaching horizontal layout. In Cards, the pack Badge shows as a strip across the top of the card (e.g. MOST POPULAR) and Corner badge as a circle on the top right (e.g. 2x). Stack = one pack per row with its image on the left and the price per item; the variant picker above stays visible and every item of the pack follows it."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_picker",
+          "label": "Bars: show the variant picker above the packs",
+          "default": false,
+          "info": "The picker sets every item of the selected pack; changing one item inside the pack lights that value up in the picker."
+        },
+        {
+          "type": "checkbox",
+          "id": "type_pick",
+          "label": "Bars: every item can pick its type (Briefs / Boxer)",
+          "default": false,
+          "info": "Adds a Type select to every item of the pack, with the types of Theme settings > Product types (shown when this product is one of them). An item of another type gets that product's options and price; Add to cart adds each item as its own product."
+        },
+        {
+          "type": "text",
+          "id": "type_label",
+          "label": "Type column name",
+          "default": "Type"
+        },
+        {
+          "type": "text",
+          "id": "each_label",
+          "label": "Per-item label (Stack)",
+          "default": "/ each"
+        },
+        {
+          "type": "color",
+          "id": "strip_bg",
+          "label": "Badge strip colour (Stack)",
+          "default": "#FCF571"
+        },
+        {
+          "type": "color",
+          "id": "strip_text",
+          "label": "Badge strip text colour (Stack)",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "mix_option",
+          "label": "Pick quantity per option inside the pack (Stack)",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "Off (whole pack = the chosen variant)"
+            },
+            {
+              "value": "auto",
+              "label": "Auto (the Color option)"
+            },
+            {
+              "value": "1",
+              "label": "Option 1"
+            },
+            {
+              "value": "2",
+              "label": "Option 2"
+            },
+            {
+              "value": "3",
+              "label": "Option 3"
+            }
+          ],
+          "info": "The selected pack lists every value of that option (e.g. each colour) with - / + buttons; the counts add up to the pack quantity. That option is then hidden from the variant picker above."
+        },
+        {
+          "type": "text",
+          "id": "mix_left",
+          "label": "Text when items are missing",
+          "default": "{left} left to choose",
+          "info": "{left} = items still to pick, {qty} = pack quantity."
+        },
+        {
+          "type": "text",
+          "id": "mix_na",
+          "label": "Sold out label",
+          "default": "Sold out"
+        },
+        {
+          "type": "select",
+          "id": "cards_per_row",
+          "label": "Cards per row",
+          "default": "3",
+          "options": [
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4 (2 on phones)"
+            }
+          ]
+        },
+        {
+          "type": "number",
+          "id": "card_image_size",
+          "label": "Card image size (px)",
+          "min": 40,
+          "max": 160,
+          "default": 80
+        },
+        {
+          "type": "number",
+          "id": "selected",
+          "label": "Pack selected at first",
+          "min": 1,
+          "max": 4,
+          "default": 2
+        },
+        {
+          "type": "select",
+          "id": "save_style",
+          "label": "SAVE style",
+          "default": "percent",
+          "options": [
+            {
+              "value": "percent",
+              "label": "Discount % (SAVE 10%)"
+            },
+            {
+              "value": "amount",
+              "label": "Discount amount (SAVE $10.50)"
+            },
+            {
+              "value": "compare",
+              "label": "Saving vs compare-at price (SAVE $85.00)"
+            },
+            {
+              "value": "compare_pct",
+              "label": "Saving vs compare-at price, as % (SAVE 70%)"
+            }
+          ],
+          "info": "What {save} prints in a pack subtitle. Compare-at styles = compare-at price minus pack price ($ or % of the compare-at price). % and amount come from the live Adlux discount the pack gets (Theme settings > Discounts picks which types count); hidden when the pack gets none."
+        },
+        {
+          "type": "checkbox",
+          "id": "theme_colors",
+          "label": "Use the theme colours",
+          "default": true,
+          "info": "On: border, radio, badges, heading, prices and SAVE badge use the theme primary colour (Theme settings > Colors), whatever is set below. Off: the colours below."
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent colour (border, radio, badge, heading)",
+          "default": "",
+          "info": "Empty = the theme primary colour."
+        },
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Price colour",
+          "default": "",
+          "info": "Empty = accent colour."
+        },
+        {
+          "type": "color",
+          "id": "bar_bg",
+          "label": "Pack background",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "selected_bg",
+          "label": "Selected pack background",
+          "default": "#EEEEEE"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Pack title colour",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "badge_text_color",
+          "label": "Badge text colour",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "color",
+          "id": "corner_bg",
+          "label": "Corner badge colour (Cards)",
+          "default": "#D7262C"
+        },
+        {
+          "type": "color",
+          "id": "corner_text_color",
+          "label": "Corner badge text colour (Cards)",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_option_names",
+          "label": "Show option names above the selects",
+          "default": false,
+          "info": "The small line like \"Type, Size, Color Bundle\" in the selected pack. Off = hidden."
+        },
+        {
+          "type": "header",
+          "content": "Inline colour note"
+        },
+        {
+          "type": "text",
+          "id": "mc_value",
+          "label": "Show for colour",
+          "default": "",
+          "info": "Optional inline note under the selected pack while an item has this colour (e.g. Multi-color). Empty (default) = off: the Color guide lives in the Size guide popup (Product section > Color guide)."
+        },
+        {
+          "type": "text",
+          "id": "mc_text",
+          "label": "Note",
+          "default": "Multi-color includes 3 colors: Black, Gray, Navy Blue"
+        },
+        {
+          "type": "text",
+          "id": "mc_swatches",
+          "label": "Colour dots",
+          "default": "Black:#111111, Gray:#8E8E8E, Navy Blue:#1F2A4D",
+          "info": "Name:#hex, separated by commas. Empty = no dots."
+        },
+        {
+          "type": "header",
+          "content": "Pack variant"
+        },
+        {
+          "type": "text",
+          "id": "pack_option",
+          "label": "Pack option name",
+          "default": "",
+          "info": "Name of the product option that holds the packs, e.g. \"Packs\". When set, each pack below adds ONE item of the variant whose option = its \"Pack option value\" (e.g. \"3 Pack\"): one Type / Size / Color row per pack, the pack option itself is hidden. Set every pack quantity to 1. Empty = classic bundle (quantity = number of items)."
+        },
+        {
+          "type": "header",
+          "content": "Pack 1"
+        },
+        {
+          "type": "number",
+          "id": "pack1_qty",
+          "label": "Quantity (0 hides the pack)",
+          "info": "Total items = Buy + Get (e.g. Buy 3, get 2 FREE = 5; Buy 5, get 5 FREE = 10).",
+          "min": 0,
+          "max": 20,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "pack1_value",
+          "label": "Pack option value",
+          "default": "",
+          "info": "Used only when \"Pack option name\" is set, e.g. \"3 Pack\". Must match the variant value exactly."
+        },
+        {
+          "type": "text",
+          "id": "pack1_title",
+          "label": "Title",
+          "default": "Buy 1"
+        },
+        {
+          "type": "text",
+          "id": "pack1_subtitle",
+          "label": "Subtitle",
+          "default": "SAVE {save}",
+          "info": "{each} = price per item, {total} = pack price, {save} = the saving in the SAVE style above (\"SAVE {save}\" is highlighted and hidden when nothing is saved), {qty} = quantity (prices from your Adlux discount)."
+        },
+        {
+          "type": "text",
+          "id": "pack1_badge",
+          "label": "Badge (ribbon on the top right)",
+          "default": "",
+          "info": "Bars: ribbon on the top right. Cards: strip across the top of the card (e.g. MOST POPULAR). Empty = none."
+        },
+        {
+          "type": "text",
+          "id": "pack1_corner",
+          "label": "Corner badge (Cards, circle top right, e.g. 2x)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack1_image",
+          "label": "Pack image (Cards / Stack; empty = product / chosen variant image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack1_gift",
+          "label": "Gift line (optional, display only)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack1_gift_image",
+          "label": "Gift line image",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack1_gift_value",
+          "label": "Gift line value (crossed out, e.g. $14.98)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Pack 2"
+        },
+        {
+          "type": "number",
+          "id": "pack2_qty",
+          "label": "Quantity (0 hides the pack)",
+          "info": "Total items = Buy + Get (e.g. Buy 3, get 2 FREE = 5; Buy 5, get 5 FREE = 10).",
+          "min": 0,
+          "max": 20,
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "pack2_value",
+          "label": "Pack option value",
+          "default": "",
+          "info": "Used only when \"Pack option name\" is set, e.g. \"3 Pack\". Must match the variant value exactly."
+        },
+        {
+          "type": "text",
+          "id": "pack2_title",
+          "label": "Title",
+          "default": "Buy 2, get 1 FREE"
+        },
+        {
+          "type": "text",
+          "id": "pack2_subtitle",
+          "label": "Subtitle",
+          "default": "SAVE {save}",
+          "info": "{each} = price per item, {total} = pack price, {save} = the saving in the SAVE style above (\"SAVE {save}\" is highlighted and hidden when nothing is saved), {qty} = quantity (prices from your Adlux discount)."
+        },
+        {
+          "type": "text",
+          "id": "pack2_badge",
+          "label": "Badge (ribbon on the top right)",
+          "default": "60% OFF + FREE SHIPPING",
+          "info": "Bars: ribbon on the top right. Cards: strip across the top of the card (e.g. MOST POPULAR). Empty = none."
+        },
+        {
+          "type": "text",
+          "id": "pack2_corner",
+          "label": "Corner badge (Cards, circle top right, e.g. 2x)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack2_image",
+          "label": "Pack image (Cards / Stack; empty = product / chosen variant image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack2_gift",
+          "label": "Gift line (optional, display only)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack2_gift_image",
+          "label": "Gift line image",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack2_gift_value",
+          "label": "Gift line value (crossed out, e.g. $14.98)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Pack 3"
+        },
+        {
+          "type": "number",
+          "id": "pack3_qty",
+          "label": "Quantity (0 hides the pack)",
+          "info": "Total items = Buy + Get (e.g. Buy 3, get 2 FREE = 5; Buy 5, get 5 FREE = 10).",
+          "min": 0,
+          "max": 20,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "pack3_value",
+          "label": "Pack option value",
+          "default": "",
+          "info": "Used only when \"Pack option name\" is set, e.g. \"3 Pack\". Must match the variant value exactly."
+        },
+        {
+          "type": "text",
+          "id": "pack3_title",
+          "label": "Title",
+          "default": "Buy 3, get 2 FREE"
+        },
+        {
+          "type": "text",
+          "id": "pack3_subtitle",
+          "label": "Subtitle",
+          "default": "SAVE {save}",
+          "info": "{each} = price per item, {total} = pack price, {save} = the saving in the SAVE style above (\"SAVE {save}\" is highlighted and hidden when nothing is saved), {qty} = quantity (prices from your Adlux discount)."
+        },
+        {
+          "type": "text",
+          "id": "pack3_badge",
+          "label": "Badge (ribbon on the top right)",
+          "default": "70% OFF + FREE SHIPPING",
+          "info": "Bars: ribbon on the top right. Cards: strip across the top of the card (e.g. MOST POPULAR). Empty = none."
+        },
+        {
+          "type": "text",
+          "id": "pack3_corner",
+          "label": "Corner badge (Cards, circle top right, e.g. 2x)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack3_image",
+          "label": "Pack image (Cards / Stack; empty = product / chosen variant image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack3_gift",
+          "label": "Gift line (optional, display only)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack3_gift_image",
+          "label": "Gift line image",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack3_gift_value",
+          "label": "Gift line value (crossed out, e.g. $14.98)",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Pack 4"
+        },
+        {
+          "type": "number",
+          "id": "pack4_qty",
+          "label": "Quantity (0 hides the pack)",
+          "info": "Total items = Buy + Get (e.g. Buy 3, get 2 FREE = 5; Buy 5, get 5 FREE = 10).",
+          "min": 0,
+          "max": 20,
+          "default": 0
+        },
+        {
+          "type": "text",
+          "id": "pack4_value",
+          "label": "Pack option value",
+          "default": "",
+          "info": "Used only when \"Pack option name\" is set, e.g. \"3 Pack\". Must match the variant value exactly."
+        },
+        {
+          "type": "text",
+          "id": "pack4_title",
+          "label": "Title",
+          "default": "Buy 5, get 5 FREE"
+        },
+        {
+          "type": "text",
+          "id": "pack4_subtitle",
+          "label": "Subtitle",
+          "default": "SAVE {save}",
+          "info": "{each} = price per item, {total} = pack price, {save} = the saving in the SAVE style above (\"SAVE {save}\" is highlighted and hidden when nothing is saved), {qty} = quantity (prices from your Adlux discount)."
+        },
+        {
+          "type": "text",
+          "id": "pack4_badge",
+          "label": "Badge (ribbon on the top right)",
+          "default": "",
+          "info": "Bars: ribbon on the top right. Cards: strip across the top of the card (e.g. MOST POPULAR). Empty = none."
+        },
+        {
+          "type": "text",
+          "id": "pack4_corner",
+          "label": "Corner badge (Cards, circle top right, e.g. 2x)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack4_image",
+          "label": "Pack image (Cards / Stack; empty = product / chosen variant image)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack4_gift",
+          "label": "Gift line (optional, display only)",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "pack4_gift_image",
+          "label": "Gift line image",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "pack4_gift_value",
+          "label": "Gift line value (crossed out, e.g. $14.98)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "custom-html",
+      "name": "Custom HTML",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML",
+          "info": "Printed as is where the block sits in the product column (drag it in the outline). Store tokens such as {{CompanyEmail}} or {{ShippingInfo}} are filled in.",
+          "default": "<p style=\"text-align:center\">Your HTML here</p>"
+        },
+        {
+          "type": "css",
+          "id": "css",
+          "label": "CSS",
+          "info": "Printed in a <style> tag with the block. Prefix selectors with .pd-custom-html to keep them to it.",
+          "default": ""
+        },
+        {
+          "type": "javascript",
+          "id": "js",
+          "label": "JavaScript",
+          "info": "Printed in a <script> tag after the block.",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "media_slider",
+      "name": "Image / video slider",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading (optional)",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "per_view",
+          "label": "Items per view on desktop",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 3,
+          "info": "More items than this = horizontal slider with arrows."
+        },
+        {
+          "type": "select",
+          "id": "per_view_mobile_v2",
+          "label": "Items per view on mobile",
+          "default": "3",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "1.2",
+              "label": "1.2 (peek next)"
+            },
+            {
+              "value": "1.5",
+              "label": "1.5 (peek next)"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "2.5",
+              "label": "2.5"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Shape",
+          "default": "9/16",
+          "options": [
+            {
+              "value": "9/16",
+              "label": "Portrait 9:16 (Reels / TikTok)"
+            },
+            {
+              "value": "3/4",
+              "label": "Portrait 3:4"
+            },
+            {
+              "value": "4/5",
+              "label": "Portrait 4:5"
+            },
+            {
+              "value": "1/1",
+              "label": "Square"
+            },
+            {
+              "value": "16/9",
+              "label": "Landscape 16:9"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "gap",
+          "label": "Space between items (px)",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "radius",
+          "label": "Corner radius (px)",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "type": "checkbox",
+          "id": "show_arrows",
+          "label": "Show arrows",
+          "default": true
+        },
+        {
+          "type": "paragraph",
+          "content": "Pick an image or a video (mp4, webm, mov) in each slot. Videos play muted and loop; a tap turns the sound on or off."
+        },
+        {
+          "type": "image_picker",
+          "id": "media_1",
+          "label": "Image or video 1",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_2",
+          "label": "Image or video 2",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_3",
+          "label": "Image or video 3",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_4",
+          "label": "Image or video 4",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_5",
+          "label": "Image or video 5",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_6",
+          "label": "Image or video 6",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_7",
+          "label": "Image or video 7",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_8",
+          "label": "Image or video 8",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_9",
+          "label": "Image or video 9",
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "media_10",
+          "label": "Image or video 10",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading (optional)",
+          "default": ""
+        },
+        {
+          "type": "paragraph",
+          "content": "Leave question 1 empty to show the product's own FAQ, else the FAQ in Theme settings."
+        },
+        {
+          "type": "header",
+          "content": "Question 1"
+        },
+        {
+          "type": "text",
+          "id": "q_1",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_1",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 2"
+        },
+        {
+          "type": "text",
+          "id": "q_2",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_2",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 3"
+        },
+        {
+          "type": "text",
+          "id": "q_3",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_3",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 4"
+        },
+        {
+          "type": "text",
+          "id": "q_4",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_4",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 5"
+        },
+        {
+          "type": "text",
+          "id": "q_5",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_5",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 6"
+        },
+        {
+          "type": "text",
+          "id": "q_6",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_6",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 7"
+        },
+        {
+          "type": "text",
+          "id": "q_7",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_7",
+          "label": "Answer",
+          "default": ""
+        },
+        {
+          "type": "header",
+          "content": "Question 8"
+        },
+        {
+          "type": "text",
+          "id": "q_8",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "richtext",
+          "id": "a_8",
+          "label": "Answer",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "stock_bar",
+      "name": "Stock bar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "before",
+          "label": "Text before the number",
+          "default": "Only"
+        },
+        {
+          "type": "number",
+          "id": "count",
+          "label": "Items left",
+          "min": 1,
+          "max": 999,
+          "default": 39
+        },
+        {
+          "type": "text",
+          "id": "after",
+          "label": "Text after the number",
+          "default": "left"
+        },
+        {
+          "type": "range",
+          "id": "fill",
+          "label": "Bar filled (%)",
+          "min": 2,
+          "max": 100,
+          "step": 1,
+          "default": 10
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Bar colour",
+          "default": "#000000"
+        },
+        {
+          "type": "checkbox",
+          "id": "urgent",
+          "label": "Blink in red",
+          "default": true,
+          "info": "Text, dot and bar blink in the colour below to push the shopper. Off: the bar colour above, no blink."
+        },
+        {
+          "type": "color",
+          "id": "urgent_color",
+          "label": "Blink colour",
+          "default": "#E0242B"
+        }
+      ]
+    },
+    {
+      "type": "optin",
+      "name": "Checkbox offer (display only)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Preferred – Save up to 20% more"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Delivered every 1, 3 or 6 months"
+        },
+        {
+          "type": "paragraph",
+          "content": "Display only: ticking it does not change the cart or the price. Only promise what your store really gives."
+        }
+      ]
+    },
+    {
+      "type": "product_switch",
+      "name": "Product type switch",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Type names and products are edited in Theme settings: click the gear icon (top of the left panel, next to the outline icon) > Product types."
+        }
+      ]
+    },
+    {
+      "type": "photo_upload",
+      "name": "Upload image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shopper uploads a photo; the image link is saved on every cart line the Add to cart adds (the order shows it in the variant text). Needs Theme settings > Photo upload (Cloudinary)."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Upload your photo"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button text (clicked to choose a file)",
+          "default": "Upload image"
+        },
+        {
+          "type": "text",
+          "id": "change_label",
+          "label": "Button text after an upload",
+          "default": "Change image"
+        },
+        {
+          "type": "text",
+          "id": "busy_label",
+          "label": "Text while uploading",
+          "default": "Uploading..."
+        },
+        {
+          "type": "text",
+          "id": "done_label",
+          "label": "Text when uploaded",
+          "default": "Image uploaded"
+        },
+        {
+          "type": "text",
+          "id": "remove_label",
+          "label": "Remove button (screen readers)",
+          "default": "Remove image"
+        },
+        {
+          "type": "text",
+          "id": "help",
+          "label": "Help text",
+          "default": "JPG, PNG or HEIC, up to 10 MB"
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "Name on the order line",
+          "default": "Photo",
+          "info": "The line shows \"<name>: <image link>\"."
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Photo required before Add to cart",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "max_mb",
+          "label": "Largest file (MB)",
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "Messages"
+        },
+        {
+          "type": "text",
+          "id": "required_msg",
+          "label": "No photo yet",
+          "default": "Please upload your image first."
+        },
+        {
+          "type": "text",
+          "id": "wait_msg",
+          "label": "Still uploading",
+          "default": "Your image is still uploading..."
+        },
+        {
+          "type": "text",
+          "id": "size_msg",
+          "label": "File too large",
+          "default": "This file is too large."
+        },
+        {
+          "type": "text",
+          "id": "fail_msg",
+          "label": "Upload failed",
+          "default": "Upload failed, please try again."
+        }
+      ]
+    },
+    {
+      "type": "sticky_atc",
+      "name": "Sticky add to cart",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Fixed at the bottom of the screen. Button only (default): one full-width rounded CLAIM OFFER button. Bar: product image, title (+ selected pack), prices and the button. Colours and button follow the theme (Theme settings > Colors)."
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "default": "button",
+          "options": [
+            {
+              "value": "button",
+              "label": "Button only"
+            },
+            {
+              "value": "bar",
+              "label": "Bar (image, title, price + button)"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "mobile_only",
+          "label": "Show on mobile only",
+          "default": true,
+          "info": "Hidden on screens 750 px and wider. In the editor, switch the preview to Mobile to see it."
+        },
+        {
+          "type": "checkbox",
+          "id": "always_show",
+          "label": "Always show",
+          "default": false,
+          "info": "Off (default): hidden while the main Add to cart form is on or near the screen; shown once it is scrolled past, and above it when the form is still far down the page (landing pages). On: always shown."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title",
+          "default": "",
+          "info": "Name shown on the bar. Empty = the product name."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button text",
+          "default": "GET 70% OFF NOW"
+        },
+        {
+          "type": "select",
+          "id": "action",
+          "label": "Button click",
+          "default": "scroll",
+          "options": [
+            {
+              "value": "scroll",
+              "label": "Scroll back to the form"
+            },
+            {
+              "value": "add",
+              "label": "Add the current choice to the cart"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "Show product image",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Show price",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_compare",
+          "label": "Show compare-at price",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_mobile_title",
+          "label": "Show title on phones",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        {
+          "type": "rating"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "size_finder"
+        },
+        {
+          "type": "buy_buttons"
+        },
+        {
+          "type": "payment_badges"
+        },
+        {
+          "type": "guarantee_box"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ]
+}

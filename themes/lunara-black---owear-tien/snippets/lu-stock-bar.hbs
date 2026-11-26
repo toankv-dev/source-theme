@@ -1,0 +1,6 @@
+{{!-- Block "Stock bar" (sections/product.schema.json): dot + "ONLY 39 UNDERWEAR LEFT" + thin bar. Display only.
+      Blink in red (default on): text, dot and bar in the blink colour, pulsing (off with reduced motion). --}}
+<div class="lu-stock{{#unless (eq settings.urgent false)}} lu-stock--urgent{{/unless}}" {{{attributes}}} style="--lu-stock-u:{{#if settings.urgent_color}}{{settings.urgent_color}}{{else}}#E0242B{{/if}};--lu-stock-c:{{#if settings.color}}{{settings.color}}{{else}}#000000{{/if}};--lu-stock-w:{{#if settings.fill}}{{settings.fill}}{{else}}10{{/if}}%">
+<p class="lu-stock__t"><span class="lu-stock__dot" aria-hidden="true"></span><span>{{settings.before}} {{settings.count}} {{settings.after}}</span></p>
+<div class="lu-stock__track" aria-hidden="true"><span></span></div>
+</div>

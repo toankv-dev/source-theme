@@ -2,6 +2,7 @@
       (animated GIF / WebP plays) on one side, tag + heading + rich text on the other; cards alternate sides on desktop and
       stack on phones. Picture = picked file, else the theme file in default_image, else an empty frame (hint in the editor
       only; a <span>, because base.css hides empty <div>s). Tag gradient = tints of the highlight colour. Own <style>. --}}
+{{> sc-type h=".sc-tag" s=".scf__h" t=".scf__body"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings h=".sc-tag" s=".scf__h" t=".scf__body"}}{{/each}}
 <style>
   .scf{letter-spacing:normal;--sc-hl:#790236;--sc-grad:linear-gradient(120deg,#f6edf1 0,#e4ccd7 20%,#efdde5 80%,#f2e6eb 100%);background:var(--scf-bg,#f6edf1);color:#333}
   @supports (background:color-mix(in srgb,red 50%,#fff)){.scf{--sc-grad:linear-gradient(120deg,color-mix(in srgb,var(--sc-hl) 7%,#fff) 0,color-mix(in srgb,var(--sc-hl) 20%,#fff) 20%,color-mix(in srgb,var(--sc-hl) 13%,#fff) 80%,color-mix(in srgb,var(--sc-hl) 10%,#fff) 100%)}}

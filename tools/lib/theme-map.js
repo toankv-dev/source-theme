@@ -164,11 +164,17 @@ function scan(dir) {
       if (/\.(js|py)$/.test(name) && fs.statSync(path.join(T, d, name)).isFile()) scripts.push(`${d}/${name}`);
     }
   }
+  // A _src/*.js that is not build-* / patch-* but that such a script reads by name is data (e.g. a JS module a patch
+  // pastes into a theme file): a source file, not a helper.
+  const runs = (f) => /^(build|patch)[-_]/i.test(base(f));
+  const dataJs = scripts.filter((s) => s.startsWith('_src/') && s.endsWith('.js') && !runs(s)
+    && scripts.some((o) => o !== s && runs(o) && read(o).includes(base(s))));
+  for (const s of dataJs) scripts.splice(scripts.indexOf(s), 1);
   const srcFolders = has('_src') ? fs.readdirSync(path.join(T, '_src')).sort()
     .filter((n) => fs.statSync(path.join(T, '_src', n)).isDirectory()).map((n) => ({ dir: `_src/${n}`, files: walk(T, `_src/${n}`, []).length })) : [];
   // Loose source files next to the scripts (e.g. a markup block a patch script pastes in): listed with their readers.
   const srcFiles = has('_src') ? fs.readdirSync(path.join(T, '_src')).sort()
-    .filter((n) => !/\.(js|py)$/.test(n) && fs.statSync(path.join(T, '_src', n)).isFile())
+    .filter((n) => (!/\.(js|py)$/.test(n) || dataJs.includes(`_src/${n}`)) && fs.statSync(path.join(T, '_src', n)).isFile())
     .map((n) => ({ file: `_src/${n}`, readBy: scripts.filter((s) => read(s).includes(n)) })) : [];
   const shas = {};
   for (const f of [...files, ...scripts, ...srcFiles.map((s) => s.file), ...srcFolders.flatMap((s) => walk(T, s.dir, []))].sort()) shas[f] = sha1(read(f));
@@ -183,6 +189,8 @@ function scan(dir) {
     const src = file.endsWith('.js') ? stripComments(read(file)) : read(file);
     const found = new Set([...src.matchAll(TARGET)].map((m) => m[0]));
     for (const m of src.matchAll(TARGET_PARTS)) found.add(m[1] + '/' + m[2].split(/\s*,\s*/).map((x) => x.slice(1, -1)).join('/'));
+    // the theme files a source file it reads names (e.g. a JSON list of anchored edits) are written by this script too
+    for (const sf of srcFiles) if (sf.readBy.includes(file)) for (const m of read(sf.file).matchAll(TARGET)) found.add(m[0]);
     const targets = [...found].filter((t) => has(t)).sort();
     const name = base(file).toLowerCase();
     // Only build-* and patch-* scripts edit the theme; the others are helpers and checks (a copy, a test, a scan).

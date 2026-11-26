@@ -1,0 +1,12 @@
+{{!-- Rich text — schema v2 section (sections/rich-text.schema.json). A heading plus
+      an HTML body; the body is richtext so it is printed raw through applyTokens
+      (store tokens such as {{RefundLink}} resolve per store). Self-contained styles. --}}
+<style>
+  .rt{margin:0 auto;padding:40px 16px;font-family:var(--font,inherit);color:#444;font-size:16px;line-height:1.6}
+  .rt-heading{font-size:24px;font-weight:700;line-height:1.25;margin:0 0 16px;color:var(--ink,#000000)}
+  .rt-body p{margin:0 0 1em}
+  .rt-body p:last-child{margin-bottom:0}
+  .rt-body a{color:var(--ink,#000000);text-decoration:underline}
+  .rt-body img{max-width:100%;height:auto;border-radius:8px}
+</style>
+<div class="rt" style="max-width:{{section.settings.max_width}}px;text-align:{{section.settings.align}}">{{#if section.settings.heading}}<h2 class="rt-heading" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{/if}}<div class="rt-body" {{{editable "body"}}}>{{{applyTokens section.settings.body}}}</div></div>

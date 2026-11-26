@@ -7,6 +7,7 @@
       CSP blocks YouTube / Vimeo frames); a picked picture shows as a still. Clips without a video are left out of the
       store (shown as an empty frame in the editor); with none the band is hidden. Own <style> + <script>; the script
       wires each band once (data-ok), so the editor's section swap re-runs it safely. --}}
+{{> sc-type h=".scv__h" t=".scv__sub"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".scv__cap b" t=".scv__cap span,.scv__cap"}}{{/each}}
 <style>
   .scv{--scv-bg:color-mix(in srgb,var(--vn-hl,#790236) 48%,#000);--scv-accent:#F1C6D6;padding:var(--scv-pt,56px) 0 var(--scv-pb,64px);letter-spacing:normal;background:var(--scv-bg);color:#fff;overflow:hidden}
   .scv:not(.scv--edit):not(:has(.scv__card:not([hidden]))){display:none}

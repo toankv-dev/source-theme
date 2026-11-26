@@ -1,0 +1,12 @@
+{{!-- Block "Sticky add to cart" (sections/product.schema.json). Style Button only (default, .lu-satc--btn): just the
+      full-width rounded button; Show on mobile only (default, .lu-satc--mob): hidden from 750 px. Style Bar: bar fixed at the bottom of the screen - once the main Add to
+      cart has scrolled out of view (default), or always (setting Always show) - product image, title (setting Product title, else the product name; + selected Kaching pack), compare price, price and a
+      button. The button scrolls back to the bundle / form (default) or adds the current choice (clicks the main Add to cart). Colours and button = the theme (Theme settings > Colors, the Add to cart button style). Price and
+      pack follow the page live (assets/js/lu-atc-extras.js). It replaces the section's old "CLAIM OFFER" bar. --}}
+<div class="lu-satc{{#unless (eq settings.style "bar")}} lu-satc--btn{{/unless}}{{#unless (eq settings.mobile_only false)}} lu-satc--mob{{/unless}}" data-lu-satc data-action="{{#if settings.action}}{{settings.action}}{{else}}scroll{{/if}}"{{#if @root.__designMode}} data-always{{else}}{{#if settings.always_show}} data-always{{/if}}{{/if}}{{#if (eq settings.show_mobile_title false)}} data-no-mtitle{{/if}} aria-hidden="true">
+<div class="lu-satc__in">
+{{#unless (eq settings.show_image false)}}<img class="lu-satc__img" src="{{@root.product.media.main_image}}" alt="" width="56" height="56" loading="lazy" decoding="async" data-lu-satc-img>{{/unless}}
+<div class="lu-satc__info"><p class="lu-satc__t"><span>{{#if settings.title}}{{settings.title}}{{else}}{{@root.product.title}}{{/if}}</span><span data-lu-satc-pack></span></p>{{#unless (eq settings.show_price false)}}<p class="lu-satc__p">{{#unless (eq settings.show_compare false)}}<s data-lu-satc-was>{{#if @root.product.compare_at_price}}{{@root.product.compare_at_price}}{{/if}}</s> {{/unless}}<span data-lu-satc-price>{{@root.product.price}}</span></p>{{/unless}}</div>
+<button type="button" class="lu-satc__btn button button--full-width" data-lu-satc-btn tabindex="-1">{{#if settings.button_label}}{{settings.button_label}}{{else}}GET 70% OFF NOW{{/if}}</button>
+</div>
+</div>

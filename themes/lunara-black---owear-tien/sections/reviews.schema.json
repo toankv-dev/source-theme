@@ -1,0 +1,65 @@
+{
+  "name": "Reviews",
+  "tag": "div",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small title",
+      "default": "Customer reviews",
+      "info": "Home page only."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What Our Customers Say",
+      "info": "Home page and product page (title above the reviews)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show average rating",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star colour",
+      "default": "#FFB400",
+      "info": "Stars only; the Verified purchase tick stays green."
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size (each review)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "info": "Stars on every review card; the review popup uses 2 px more."
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button colour",
+      "default": "",
+      "info": "Empty = the theme primary colour."
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button text colour",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "category": "Trust",
+      "description": "Star rating summary, real reviews and a Write a review form."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{{!-- Block "Product type switch" (sections/product.schema.json). Names + products come from Theme settings > Product
+      types (ptype_N_name, ptype_N_product = store_products picked in the editor, the first one is used, ptype_N_image).
+      Each tile links to its product; the tile of the product on screen is marked (productId = config.productId).
+      ptype_only_listed (default on): the whole switch shows only on one of the picked products (CSS .has-on). --}}
+{{#with @root.settings as |ts|}}
+<div class="lu-switch{{#unless (eq ts.ptype_only_listed false)}} lu-switch--only{{/unless}}{{#if @root.__designMode}} has-on{{/if}}{{#each ts.ptype_1_product}}{{#if @first}}{{#if (eq productId @root.config.productId)}} has-on{{/if}}{{/if}}{{/each}}{{#each ts.ptype_2_product}}{{#if @first}}{{#if (eq productId @root.config.productId)}} has-on{{/if}}{{/if}}{{/each}}{{#each ts.ptype_3_product}}{{#if @first}}{{#if (eq productId @root.config.productId)}} has-on{{/if}}{{/if}}{{/each}}{{#each ts.ptype_4_product}}{{#if @first}}{{#if (eq productId @root.config.productId)}} has-on{{/if}}{{/if}}{{/each}}" data-lu-switch>
+{{#if ts.ptype_heading}}<p class="lu-switch__h">{{ts.ptype_heading}}</p>{{/if}}
+<div class="lu-switch__row">
+{{#if ts.ptype_1_name}}{{#each ts.ptype_1_product}}{{#if @first}}<a class="lu-switch__i{{#if (eq productId @root.config.productId)}} is-on{{/if}}" href="{{#if url}}{{url}}{{else}}/{{handle}}{{/if}}"{{#if (eq productId @root.config.productId)}} aria-current="page"{{/if}}><img src="{{#if ts.ptype_1_image}}{{ts.ptype_1_image}}{{else}}{{image}}{{/if}}" alt="" width="64" height="64"><span>{{ts.ptype_1_name}}</span></a>{{/if}}{{/each}}{{/if}}
+{{#if ts.ptype_2_name}}{{#each ts.ptype_2_product}}{{#if @first}}<a class="lu-switch__i{{#if (eq productId @root.config.productId)}} is-on{{/if}}" href="{{#if url}}{{url}}{{else}}/{{handle}}{{/if}}"{{#if (eq productId @root.config.productId)}} aria-current="page"{{/if}}><img src="{{#if ts.ptype_2_image}}{{ts.ptype_2_image}}{{else}}{{image}}{{/if}}" alt="" width="64" height="64"><span>{{ts.ptype_2_name}}</span></a>{{/if}}{{/each}}{{/if}}
+{{#if ts.ptype_3_name}}{{#each ts.ptype_3_product}}{{#if @first}}<a class="lu-switch__i{{#if (eq productId @root.config.productId)}} is-on{{/if}}" href="{{#if url}}{{url}}{{else}}/{{handle}}{{/if}}"{{#if (eq productId @root.config.productId)}} aria-current="page"{{/if}}><img src="{{#if ts.ptype_3_image}}{{ts.ptype_3_image}}{{else}}{{image}}{{/if}}" alt="" width="64" height="64"><span>{{ts.ptype_3_name}}</span></a>{{/if}}{{/each}}{{/if}}
+{{#if ts.ptype_4_name}}{{#each ts.ptype_4_product}}{{#if @first}}<a class="lu-switch__i{{#if (eq productId @root.config.productId)}} is-on{{/if}}" href="{{#if url}}{{url}}{{else}}/{{handle}}{{/if}}"{{#if (eq productId @root.config.productId)}} aria-current="page"{{/if}}><img src="{{#if ts.ptype_4_image}}{{ts.ptype_4_image}}{{else}}{{image}}{{/if}}" alt="" width="64" height="64"><span>{{ts.ptype_4_name}}</span></a>{{/if}}{{/each}}{{/if}}
+</div>
+</div>
+{{/with}}
+{{!-- Same place on screen after switching type: the click (assets/js/lu-form.js) saved where the switch was in the
+      viewport; this runs as soon as the switch exists on the new page (before it is painted) and scrolls so the switch
+      sits at that same place, again when the page and its images are in. Only for the page the click went to, within 15 s. --}}
+<script>(function(){try{var d=JSON.parse(sessionStorage.getItem('lu-sw-pos')||'null');if(!d||Date.now()-d.t>15000)return;
+var here=location.pathname.replace(/\/+$/,''),to=String(d.to||'').replace(/\/+$/,'');if(here!==to){sessionStorage.removeItem('lu-sw-pos');return;}
+var s=document.currentScript,sw=s&&s.previousElementSibling;while(sw&&!sw.hasAttribute('data-lu-switch'))sw=sw.previousElementSibling;if(!sw)return;
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+var stop=0;['wheel','touchmove','keydown'].forEach(function(n){window.addEventListener(n,function(){stop=1;},{passive:true,once:true});});
+var go=function(){if(stop)return;var y=sw.getBoundingClientRect().top-d.top;if(Math.abs(y)>1)window.scrollTo({top:window.pageYOffset+y,left:0,behavior:'instant'});};
+go();document.addEventListener('DOMContentLoaded',go);window.addEventListener('load',function(){go();sessionStorage.removeItem('lu-sw-pos');});}catch(e){}})();</script>
+{{!-- No white flash when switching type: the other product's HTML is prefetched on hover / touch (prefetch only - no
+      script runs, so no pixel fires), and assets/js/lu-form.js + custom.css cross-fade this navigation (View Transitions). --}}
+<style>@view-transition{navigation:auto}::view-transition-old(root),::view-transition-new(root){animation-duration:.2s}@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}</style>
+<script type="speculationrules">{"prefetch":[{"where":{"selector_matches":".lu-switch__i:not(.is-on)"},"eagerness":"moderate"}]}</script>

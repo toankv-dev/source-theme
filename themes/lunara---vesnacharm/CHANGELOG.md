@@ -2,6 +2,40 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.26.4 — Highlights box: add lines with "Add block > Highlight line"
+### Changed
+- New block "Highlight line" (text, icon, own picture, like Line 1-5): add as many as you need with the editor's Add
+  block; each one shows inside the Highlights box above it (anywhere under it, before the next Highlights box), in its
+  layout, size and colours. The product section takes up to 50 blocks (was 25).
+### Removed
+- "More lines" (textarea of 2026.11.26.3).
+
+## 2026.11.26.3 — Highlights box: as many lines as you need
+### Added
+- Highlights box: "More lines" at the end of the block, one line per row, no limit, shown after Line 5 in the same
+  layout with the icon of every line; "[drop] text" gives one line its own icon ([none] = no icon).
+
+## 2026.11.26.2 — Text size and colour on every part with text
+### Added
+- "Text sizes and colours" (size on computers, size on phones, colour; 0 / empty = as designed, phones never under
+  12 px) on every product block with text: Title, Star rating, Price + badge, Variant picker (option names; values:
+  size only), Kaching bundle (heading, pack titles, prices, small lines, SAVE / label badges: size only), Buy buttons
+  (button text, safe checkout + guarantee boxes), Trust line, Description, Size finder, Find my size, Shipping box, Info
+  rows, FAQ, Custom HTML.
+- The same on each Card / Detail / Testimonial / Badge / Video block (only that one; wins over the section's) and on
+  the FAQ, You may also like and Reviews (Lunara) sections. Feature cards: tags too.
+
+## 2026.11.26.1 — Highlights box icons + two columns; text sizes and colours of the content sections
+### Added
+- Highlights box (product page): Layout "Two columns, thin lines above and below" (the 2nd picture; one or two columns on
+  phones), an icon for every line (round check, tick, water drop, briefs, wash basin, cloud, leaf, shield, sparkle,
+  heart, star, truck, lock, returns, money back, none), each line its own icon or own picture, icon size + colour, text
+  size (computers / phones) + colour, background, line colour. A box saved before looks the same.
+- Feature cards, Details, Before / after, Photo testimonials, Customer videos, Reviews (Okendo style), Trust badges:
+  "Text sizes and colours" = heading / titles / text size on computers and on phones (0 = as designed, phones never
+  under 12 px) and colour (empty = as designed); Reviews (Okendo style) also gets a Background.
+- Trust badges: icons Shield, Leaf, Water drop, Cloud, Sparkle, Tick.
+
 ## 2026.11.25.8 — Product cards: Add to cart opens the product page at the packs
 ### Changed
 - "Add to cart" on a product card (home page grid, "You may also like" on the product page) no longer opens the

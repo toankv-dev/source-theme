@@ -71,9 +71,9 @@
 .sc-any .sc-price__badge{margin-left:20px;padding:5px 10px;border-radius:5px;background:var(--sc-hl-20);box-shadow:1px 1px 0 rgba(0,0,0,.25);font-size:13px;line-height:16px;font-weight:700;letter-spacing:1px!important;color:#333}
 
 /* Highlights box */
-.sc-any .sc-hlbox{margin:20px 0 0;padding:14px 15px;border-radius:10px;background:#f2f2f2;list-style:none}
+.sc-any .sc-hlbox{margin:20px 0 0;padding:14px 15px;border-radius:10px;background:var(--hl-bg,#f2f2f2);list-style:none}
 .sc-any .sc-hlbox:empty{display:none}
-.sc-any .sc-hlbox li{margin:0;font-size:16px;line-height:28px;color:#333}
+.sc-any .sc-hlbox li{margin:0;font-size:var(--hl-fs,16px);line-height:max(28px,1.5em);color:var(--hl-tx,#333)}
 
 /* Variant picker: shown here (Lunara hides it next to the packs), "Color" / "Size" labels without the value,
    picture tiles for the option whose values have their own variant pictures (sc-product.js), pills for the others */
@@ -159,7 +159,7 @@
   .sc-any .sc-chart table{min-width:0;font-size:12px}
   .sc-any .sc-chart th,.sc-any .sc-chart td{padding:6px 2px}
   .sc-any .sc-hlbox{padding:12px 12px}
-  .sc-any .sc-hlbox li{font-size:14px;line-height:28px}
+  .sc-any .sc-hlbox li{font-size:max(12px,var(--hl-fsm,14px));line-height:max(28px,1.5em)}
   .sc-skin .lu-variants .ms-variant-group input[type=radio]+label{padding:8px 16px}
   .sc-any .sc-buynow{min-height:46px;padding:14px 0;font-size:14px!important;line-height:14px}
   .sc-skin .kaching-bundles__bar-title,.sc-skin .kaching-bundles__bar-price{font-size:18px!important}
@@ -179,11 +179,26 @@
 .sc-skin .lu-sticky-bar .lu-sticky-bar__btn { background: var(--vn-hl, #790236) !important; color: #fff !important; }
 /* Pack rows: no "Size, Color" line above the per-item pickers. */
 .sc-skin .kaching-bundles__bar-variant-names { display: none; }
-/* Highlights as a check list: round 22 px check, 12 px gap, 32 px rows, 16 px text, all in the highlight colour. */
-.sc-any .sc-hlbox--check { margin: 16px 0 0; padding: 0; border-radius: 0; background: none; }
-.sc-any .sc-hlbox--check li { display: flex; align-items: center; gap: 12px; min-height: 32px; font-size: 16px; line-height: 22px; color: var(--sc-hl, #790236); }
-.sc-any .sc-hlbox__ic { flex: none; width: 22px; height: 22px; }
+/* Highlights as a check list: round 22 px check, 12 px gap, 32 px rows, 16 px text, all in the highlight colour.
+   Settings (user 2026-11-26) = variables set on the <ul> only when set: --hl-tx text, --hl-fs / --hl-fsm size computers /
+   phones, --hl-ic icon colour, --hl-is icon size, --hl-bg background, --hl-ln grid lines. Fallbacks = the look as designed. */
+.sc-any .sc-hlbox--check { margin: 16px 0 0; padding: 0; border-radius: 0; background: var(--hl-bg, none); }
+.sc-any .sc-hlbox--check li { display: flex; align-items: center; gap: 12px; min-height: 32px; font-size: var(--hl-fs, 16px); line-height: 1.375; color: var(--hl-tx, var(--sc-hl, #790236)); }
+.sc-any .sc-hlbox__ic, .sc-any .sc-hlbox li > svg { flex: none; width: var(--hl-is, 22px); height: var(--hl-is, 22px); color: var(--hl-ic, currentColor); }
+.sc-any img.sc-hlbox__ic { object-fit: contain; }
+/* Two columns (their picture: "Up to 150ml Protection | Discreet Fit"): thin grey lines above and below, dark grey 14 px
+   text, 18 px thin line icons. */
+.sc-any .sc-hlbox--grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; margin: 16px 0 0; padding: 14px 0; border-radius: 0; background: var(--hl-bg, none); border-top: 1px solid var(--hl-ln, #e3e3e3); border-bottom: 1px solid var(--hl-ln, #e3e3e3); }
+.sc-any .sc-hlbox--grid li { display: flex; align-items: center; gap: 10px; min-height: 24px; font-size: var(--hl-fs, 14px); line-height: 1.4; color: var(--hl-tx, #333); }
+.sc-any .sc-hlbox--grid li > svg, .sc-any .sc-hlbox--grid li > img { width: var(--hl-is, 18px); height: var(--hl-is, 18px); }
+.sc-any .sc-hlbox--grid .sc-ic { stroke-width: 1.6; }
+.sc-any .sc-hlbox--bg { padding: 14px 15px; border-radius: 10px; }
 @media screen and (max-width: 749px) {
   .sc-any .sc-hlbox--check { padding: 0; }
-  .sc-any .sc-hlbox--check li { font-size: 15px; line-height: 21px; }
+  .sc-any .sc-hlbox--check li { font-size: max(12px, var(--hl-fsm, 15px)); line-height: 1.4; }
+  .sc-any .sc-hlbox--grid { gap: 10px 14px; padding: 12px 0; }
+  .sc-any .sc-hlbox--grid li { font-size: max(12px, var(--hl-fsm, 14px)); gap: 8px; }
+  .sc-any .sc-hlbox--m1 { grid-template-columns: minmax(0, 1fr); }
+  .sc-any .sc-hlbox--bg { padding: 12px; }
 }
+

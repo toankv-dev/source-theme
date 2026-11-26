@@ -2,7 +2,7 @@
       related-products.ts; thieu thi bu san pham khac cua cua hang), card = card luoi Products (#ms-card-tpl, nut Add to cart /
       Choose options). Co khoi nay thi an khoi "You may also like" cu cua backend (.sf-upsell) tren trang san pham. --}}
 {{#if relatedProducts.length}}
-<div class="lu-related" data-lu-related data-limit="{{#if section.settings.limit}}{{section.settings.limit}}{{else}}8{{/if}}" data-quick="{{#if (eq section.settings.show_quick_add false)}}0{{else}}1{{/if}}">
+{{> sc-type h=".lu-related__h,.lu-related__h span" s=".card__heading,.card__heading a" p=".price-item" b=".lu-related__more"}}<div class="lu-related" data-lu-related data-limit="{{#if section.settings.limit}}{{section.settings.limit}}{{else}}8{{/if}}" data-quick="{{#if (eq section.settings.show_quick_add false)}}0{{else}}1{{/if}}">
 <style>
 .lu-related{padding:40px 0 50px}
 .lu-related__h{margin:0 0 30px;text-align:center;font-size:clamp(24px,2.6vw,34px);line-height:1.2}

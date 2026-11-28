@@ -1,0 +1,177 @@
+{{!-- Customer videos (sections/sc-reels.schema.json) — user 2026-11-19: "many videos, as the 'Don't just take our word
+      for it. See them in motion.' section of tammycharm.com". A dark band in the main colour: eyebrow between two lines,
+      a two-line heading (the second line italic, in the accent), a short line, then portrait 9:16 videos side by side
+      that scroll sideways (phones: the next one peeks in, or one per screen). Each video plays muted and looped while
+      it is on screen and pauses off screen (downloads only then: preload none); "Sound" turns the sound on for that
+      video only; a tap pauses / resumes. Videos are uploaded files (the media picker takes MP4 / WebM; the storefront
+      CSP blocks YouTube / Vimeo frames); a picked picture shows as a still. Clips without a video are left out of the
+      store (shown as an empty frame in the editor); with none the band is hidden. Own <style> + <script>; the script
+      wires each band once (data-ok), so the editor's section swap re-runs it safely. --}}
+{{> sc-type h=".scv__h" t=".scv__sub"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".scv__cap b" t=".scv__cap span,.scv__cap"}}{{/each}}
+<style>
+  .scv{--scv-bg:color-mix(in srgb,var(--vn-hl,#790236) 48%,#000);--scv-accent:#F1C6D6;padding:var(--scv-pt,56px) 0 var(--scv-pb,64px);letter-spacing:normal;background:var(--scv-bg);color:#fff;overflow:hidden}
+  .scv:not(.scv--edit):not(:has(.scv__card:not([hidden]))){display:none}
+  .scv__hint{margin:0 auto;padding:40px 16px;text-align:center;font-size:14px;color:rgba(255,255,255,.75)}
+  .scv__head{max-width:900px;margin:0 auto 40px;padding:0 16px;text-align:center}
+  .scv__eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 10px;font-size:12px;line-height:19px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--scv-accent)}
+  .scv__eyebrow:before,.scv__eyebrow:after{content:"";flex:none;width:28px;height:1px;background:currentColor}
+  .scv .scv__h{margin:0 0 14px;padding:0;font-family:inherit;font-size:clamp(30px,3.6vw,48px);line-height:1.12;font-weight:600;letter-spacing:-.01em;text-transform:none;color:#fff}
+  .scv .scv__h em{display:block;font-style:italic;color:var(--scv-accent)}
+  .scv__sub{max-width:480px;margin:0 auto;font-size:15px;line-height:1.55;color:rgba(255,255,255,.86)}
+  .scv__body{position:relative}
+  .scv__track{overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:0 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .scv__track::-webkit-scrollbar{display:none}
+  .scv__row{display:flex;gap:20px;width:max-content;margin:0 auto;padding:0;list-style:none}
+  .scv__card{position:relative;flex:0 0 auto;width:var(--scv-w,clamp(200px,calc((100vw - 140px) / 6),270px));margin:0;aspect-ratio:9/16;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.08);scroll-snap-align:start}
+  .scv__card[hidden]{display:none}
+  /* loading: a light sweep over the card + a spinner in the accent until the first frame (and again while it stalls) */
+  .scv__card.is-loading{background:linear-gradient(100deg,rgba(255,255,255,.07) 30%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.07) 70%) 0 0/300% 100% rgba(255,255,255,.08);animation:scv-sweep 1.4s linear infinite}
+  .scv__card.is-loading:after{content:"";position:absolute;top:50%;left:50%;z-index:1;width:40px;height:40px;margin:-20px 0 0 -20px;box-sizing:border-box;border:3px solid rgba(255,255,255,.28);border-top-color:var(--scv-accent);border-radius:50%;animation:scv-spin .8s linear infinite;pointer-events:none}
+  .scv__card.is-loading.is-paused:after{display:none}
+  @keyframes scv-sweep{from{background-position:100% 0}to{background-position:0 0}}
+  @keyframes scv-spin{to{transform:rotate(360deg)}}
+  .scv__media{position:absolute!important;top:0;left:0;width:100%!important;height:100%!important;max-width:none!important;margin:0;display:block;object-fit:cover;background:transparent;cursor:pointer}
+  .scv__ph~.scv__sound,.scv__ph~.scv__play{display:none!important}
+  .scv__ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;font-size:13px;line-height:1.4;text-align:center;color:rgba(255,255,255,.6)}
+  .scv__sound{position:absolute;top:4px;right:4px;z-index:2;display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin:0;padding:0 8px;border:0;background:none;color:#fff;font:inherit;cursor:pointer}
+  .scv__pill{display:flex;align-items:center;gap:5px;height:28px;padding:0 10px;border-radius:999px;background:color-mix(in srgb,var(--scv-bg) 78%,transparent);font-size:11px;line-height:1;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:background-color .2s,color .2s}
+  .scv__sound svg{display:block;flex:none}
+  .scv__sound .scv__on,.scv__sound[aria-pressed="true"] .scv__off{display:none}
+  .scv__sound[aria-pressed="true"] .scv__on{display:block}
+  .scv__sound[aria-pressed="true"] .scv__pill{background:var(--scv-accent);color:var(--scv-bg)}
+  .scv__sound:focus-visible{outline:none}
+  .scv__sound:focus-visible .scv__pill{box-shadow:0 0 0 2px #fff}
+  .scv__play{position:absolute;top:50%;left:50%;z-index:2;display:none;align-items:center;justify-content:center;width:56px;height:56px;margin:-28px 0 0 -28px;padding:0;border:0;border-radius:50%;background:color-mix(in srgb,var(--scv-bg) 70%,transparent);color:#fff;cursor:pointer}
+  .scv__card.is-paused .scv__play{display:flex}
+  .scv__play:focus-visible{outline:2px solid #fff;outline-offset:2px}
+  .scv__cap{position:absolute;left:0;right:0;bottom:0;z-index:1;display:flex;flex-direction:column;gap:2px;margin:0;padding:40px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.72));pointer-events:none}
+  .scv__cap b{display:flex;align-items:center;gap:7px;font-size:13px;line-height:1.4;font-weight:700;color:#fff}
+  .scv__cap b:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--scv-accent)}
+  .scv__cap span{font-size:12px;line-height:1.4;color:rgba(255,255,255,.85)}
+  .scv__nav{position:absolute;top:50%;z-index:3;display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:-22px;padding:0;border:0;border-radius:50%;background:#fff;color:var(--vn-hl,#790236);box-shadow:0 2px 10px rgba(0,0,0,.25);cursor:pointer;transition:background-color .2s,opacity .2s}
+  .scv__nav--prev{left:8px}
+  .scv__nav--next{right:8px}
+  .scv__nav:hover{background:var(--scv-accent)}
+  .scv__nav:disabled{opacity:0;pointer-events:none}
+  .scv__nav[hidden]{display:none}
+  @media (hover:none),(max-width:749px){.scv__nav{display:none!important}}
+  @media (max-width:749px){
+    .scv{padding:calc(var(--scv-pt,56px) * .8) 0 calc(var(--scv-pb,64px) * .75)}
+    .scv__head{margin-bottom:26px}
+    .scv__track{padding:0 16px;scroll-padding:0 16px}
+    .scv__row{gap:12px}
+    .scv__card{width:calc((100vw - 32px) * .62)}
+    .scv--one .scv__card{width:calc(100vw - 32px);scroll-snap-align:center;scroll-snap-stop:always}
+  }
+</style>
+<div class="scv{{#if (eq section.settings.mobile_layout "one")}} scv--one{{/if}}{{#if @root.__designMode}} scv--edit{{/if}}" style="{{#if section.settings.bg}}--scv-bg:{{section.settings.bg}};{{/if}}{{#if section.settings.accent}}--scv-accent:{{section.settings.accent}};{{/if}}--scv-pt:{{#if section}}{{section.settings.pad_top}}{{else}}56{{/if}}px;--scv-pb:{{#if section}}{{section.settings.pad_bottom}}{{else}}64{{/if}}px" data-scv>
+  <div class="scv__head">
+    {{#if section.settings.eyebrow}}<p class="scv__eyebrow"><span {{{editable "eyebrow"}}}>{{section.settings.eyebrow}}</span></p>{{/if}}
+    {{#if section.settings.heading}}<h2 class="scv__h"><span {{{editable "heading"}}}>{{section.settings.heading}}</span>{{#if section.settings.heading_em}}<em {{{editable "heading_em"}}}>{{section.settings.heading_em}}</em>{{/if}}</h2>{{else if section.settings.heading_em}}<h2 class="scv__h"><em {{{editable "heading_em"}}}>{{section.settings.heading_em}}</em></h2>{{/if}}
+    {{#if section.settings.subheading}}<p class="scv__sub" {{{editable "subheading"}}}>{{section.settings.subheading}}</p>{{/if}}
+  </div>
+  <div class="scv__body">
+    <div class="scv__track" data-scv-track>
+      <ul class="scv__row">
+        {{#each section.blocks}}
+        <li class="scv__card{{#if this.settings.video}} is-loading{{else if this.settings.default_video}} is-loading{{/if}}" {{{this.attributes}}}{{#unless this.settings.video}}{{#unless this.settings.default_video}}{{#unless @root.__designMode}} hidden{{/unless}}{{/unless}}{{/unless}}>
+          {{#if this.settings.video}}<video class="scv__media" data-scv-video src="{{this.settings.video}}"{{#if this.settings.poster}} poster="{{this.settings.poster}}"{{/if}} muted loop playsinline preload="none" disablepictureinpicture aria-label="{{#if this.settings.alt}}{{this.settings.alt}}{{else if this.settings.name}}Video from {{this.settings.name}}{{else}}Customer video{{/if}}"></video>{{else if this.settings.default_video}}<video class="scv__media" data-scv-video src="{{@root.assets_url}}/{{this.settings.default_video}}"{{#if this.settings.poster}} poster="{{this.settings.poster}}"{{/if}} muted loop playsinline preload="none" disablepictureinpicture aria-label="{{#if this.settings.alt}}{{this.settings.alt}}{{else if this.settings.name}}Video from {{this.settings.name}}{{else}}Customer video{{/if}}"></video>{{else}}<span class="scv__ph">Upload a portrait video (MP4) for this slot</span>{{/if}}
+          <button type="button" class="scv__sound" data-scv-sound aria-pressed="false" aria-label="Turn sound on"><span class="scv__pill"><svg class="scv__off" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 4.5V4.5L7 9z"/><path d="M16 9.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="scv__on" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 4.5V4.5L7 9z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>{{#if ../section.settings.sound_label}}{{../section.settings.sound_label}}{{else}}Sound{{/if}}</span></span></button><button type="button" class="scv__play" data-scv-play aria-label="Play video"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+          {{#if this.settings.name}}<p class="scv__cap"><b>{{this.settings.name}}</b>{{#if this.settings.caption}}<span>{{this.settings.caption}}</span>{{/if}}</p>{{else if this.settings.caption}}<p class="scv__cap"><span>{{this.settings.caption}}</span></p>{{/if}}
+        </li>
+        {{/each}}
+      </ul>
+      {{#if @root.__designMode}}{{#unless section.blocks.length}}<p class="scv__hint">Add a Video block, then upload a portrait MP4 in it.</p>{{/unless}}{{/if}}
+    </div>
+    <button type="button" class="scv__nav scv__nav--prev" data-scv-step="-1" aria-label="Previous videos" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button type="button" class="scv__nav scv__nav--next" data-scv-step="1" aria-label="Next videos" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+<script>(function () {
+  // Play what is on screen (muted, looped), pause the rest; Sound = sound on for ONE video on the page (every band);
+  // tap = pause / resume. Always autoplays (user 2026-11-19: also with "reduce motion" on, which newer phones and
+  // Windows 11 often have). While a video has no frame yet, or stalls, its card shimmers with a spinner (is-loading).
+  // A browser that refuses autoplay (iPhone Low Power Mode, data saver) gets a play button, and the first tap anywhere
+  // on the page starts the videos on screen.
+  var VID = /\.(mp4|webm|ogg|ogv|mov|m4v)(\?|#|$)/i;
+  var ALL = window.__scvAll = window.__scvAll || [];
+  function soundOff(v) {
+    v.muted = true;
+    var b = v.parentNode && v.parentNode.querySelector('[data-scv-sound]');
+    if (b) { b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Turn sound on'); }
+  }
+  function kick(e) { // a tap is the gesture a browser that blocked autoplay waits for
+    ALL.forEach(function (v) {
+      if (!v._scvBlocked || !v._scvSeen || v._scvUser || !v.paused) return;
+      if (e && e.target && e.target.closest && e.target.closest('.scv__card') === v.parentNode) return; // its own tap toggles it
+      v._scvPlay();
+    });
+  }
+  if (!window.__scvKick) { window.__scvKick = 1; document.addEventListener('touchend', kick, { passive: true }); document.addEventListener('click', kick, true); }
+  function wire(sec) {
+    if (sec.getAttribute('data-ok')) return; sec.setAttribute('data-ok', '1');
+    var track = sec.querySelector('[data-scv-track]'); if (!track) return;
+    var vids = [];
+    Array.prototype.forEach.call(sec.querySelectorAll('video[data-scv-video]'), function (v) {
+      var card = v.parentNode, src = v.getAttribute('src') || '';
+      if (src && !VID.test(src)) { // a picture picked in the video slot: show it as a still
+        var img = document.createElement('img'); img.className = v.className; img.src = src; img.alt = v.getAttribute('aria-label') || ''; img.loading = 'lazy';
+        v.parentNode.replaceChild(img, v); card.classList.remove('is-loading');
+        Array.prototype.forEach.call(card.querySelectorAll('[data-scv-sound],[data-scv-play]'), function (b) { b.parentNode.removeChild(b); });
+        return;
+      }
+      v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.playsInline = true; vids.push(v); ALL.push(v);
+      var loading = function (on) { card.classList.toggle('is-loading', !!on); };
+      var play = function () {
+        if (v.readyState < 3) loading(true);
+        var p = v.play();
+        if (p && p.then) p.then(function () { v._scvBlocked = false; }, function () { v._scvBlocked = true; loading(false); card.classList.add('is-paused'); });
+      };
+      v._scvPlay = play;
+      v.addEventListener('playing', function () { loading(false); card.classList.remove('is-paused'); });
+      v.addEventListener('play', function () { card.classList.remove('is-paused'); });
+      v.addEventListener('waiting', function () { if (!v.paused) loading(true); });
+      v.addEventListener('canplay', function () { if (v.paused) loading(false); });
+      v.addEventListener('error', function () { loading(false); });
+      v.addEventListener('pause', function () { if (v._scvSeen) { loading(false); card.classList.add('is-paused'); } });
+      var toggle = function () { if (v.paused) { v._scvUser = false; play(); } else { v._scvUser = true; v.pause(); } };
+      v.addEventListener('click', toggle);
+      var pb = card.querySelector('[data-scv-play]'); if (pb) pb.addEventListener('click', toggle);
+      var sb = card.querySelector('[data-scv-sound]');
+      if (sb) sb.addEventListener('click', function () {
+        var on = v.muted;
+        ALL.forEach(function (o) { if (o !== v && !o.muted) soundOff(o); }); // only one video with sound
+        if (!on) { soundOff(v); return; }
+        v.muted = false; v._scvUser = false; play();
+        sb.setAttribute('aria-pressed', 'true'); sb.setAttribute('aria-label', 'Turn sound off');
+      });
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          var v = e.target, seen = e.intersectionRatio >= 0.25;
+          if (e.isIntersecting && v.preload === 'none') v.preload = 'auto'; // start fetching as it comes in
+          v._scvSeen = seen;
+          if (seen) { if (v._scvUser) v.parentNode.classList.add('is-paused'); else if (v.paused) v._scvPlay(); }
+          else if (!v.paused) v.pause();
+        });
+      }, { threshold: [0, 0.25] });
+      vids.forEach(function (v) { io.observe(v); });
+    } else vids.forEach(function (v) { v._scvSeen = true; v._scvPlay(); });
+    // Desktop arrows: only while the row is wider than the screen.
+    var prev = sec.querySelector('[data-scv-step="-1"]'), next = sec.querySelector('[data-scv-step="1"]');
+    var nav = function () {
+      var over = track.scrollWidth - track.clientWidth, show = over > 60;
+      [prev, next].forEach(function (b) { if (b) b.hidden = !show; });
+      if (prev) prev.disabled = track.scrollLeft < 4;
+      if (next) next.disabled = track.scrollLeft > over - 4;
+    };
+    [prev, next].forEach(function (b) {
+      if (b) b.addEventListener('click', function () { track.scrollBy({ left: +b.getAttribute('data-scv-step') * Math.max(200, track.clientWidth - 160), behavior: 'smooth' }); });
+    });
+    var t = 0; track.addEventListener('scroll', function () { if (!t) t = requestAnimationFrame(function () { t = 0; nav(); }); }, { passive: true });
+    addEventListener('resize', nav); nav();
+  }
+  function run() { Array.prototype.forEach.call(document.querySelectorAll('[data-scv]'), wire); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+})();</script>

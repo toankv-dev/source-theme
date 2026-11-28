@@ -1,0 +1,15 @@
+{{!-- Text sizes and colours (user 2026-11-26: every part with text): settings from _src/build-sc.js typeSet(), groups
+      h / s / t / p / b (their labels are per section / block): <g>_size (computers, ≥ 750 px), <g>_size_m (phones, never
+      under 12 px), <g>_color; bg = background of `root` (only for a section without its own Background).
+      Params: h / s / t / p / b / root = CSS selectors of each group inside the part.
+      Section: {{> sc-type h=".scd__h" s=".scd__t" t=".scd__p"}} (first line of the section; reads section.settings).
+      Block:   {{> sc-type bid=this.id st=this.settings s="…"}} in a {{#each section.blocks}} printed BEFORE the markup
+               (never inside a list: a <style> between cards breaks :nth-child), scoped to the block's data-block-id
+               (its {{{this.attributes}}}); printed after the section's rules, so a block wins over its section.
+      0 / empty = no rule (as designed). :not(#_t):not(#_t) = 2 ids of specificity + !important: beats the theme's own
+      rules (Lunara #MainProduct-… !important, phone rules). s / t / p / b also reach their p, li, td, th (rich text).
+      A heading's <em> keeps its own colour (highlighted end). Never write a CSS "{" right before a mustache ("{{{"). --}}
+{{#*inline "sc_q"}}{{#if bid}}[data-block-id="{{bid}}"]{{else}}[data-section-id="{{section.id}}"]{{/if}}:not(#_t):not(#_t) :is({{{sel}}}){{#if deep}},{{#if bid}}[data-block-id="{{bid}}"]{{else}}[data-section-id="{{section.id}}"]{{/if}}:not(#_t):not(#_t) :is({{{sel}}}) :is(p,li,td,th){{/if}}{{/inline}}
+{{#*inline "sc_ty"}}{{#if c}}{{> sc_q}}{color:{{c}}!important}{{/if}}{{#if d}}@media (min-width:750px){ {{> sc_q}}{font-size:{{d}}px!important;line-height:{{lh}}!important}}{{/if}}{{#if m}}@media (max-width:749px){ {{> sc_q}}{font-size:max(12px,{{m}}px)!important;line-height:{{lh}}!important}}{{/if}}{{/inline}}
+{{#*inline "sc_all"}}<style>{{#if root}}{{#if st.bg}}{{> sc_q sel=root}}{background:{{st.bg}}!important}{{/if}}{{/if}}{{#if h}}{{> sc_ty sel=h c=st.h_color d=st.h_size m=st.h_size_m lh="1.25"}}{{/if}}{{#if s}}{{> sc_ty sel=s deep=1 c=st.s_color d=st.s_size m=st.s_size_m lh="1.35"}}{{/if}}{{#if p}}{{> sc_ty sel=p c=st.p_color d=st.p_size m=st.p_size_m lh="1.3"}}{{/if}}{{#if b}}{{> sc_ty sel=b c=st.b_color d=st.b_size m=st.b_size_m lh="1.3"}}{{/if}}{{#if t}}{{> sc_ty sel=t deep=1 c=st.t_color d=st.t_size m=st.t_size_m lh="1.55"}}{{/if}}</style>{{/inline}}
+{{#if bid}}{{#if st}}{{> sc_all}}{{/if}}{{else if section}}{{> sc_all st=section.settings}}{{/if}}

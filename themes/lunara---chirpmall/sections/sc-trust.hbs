@@ -1,0 +1,35 @@
+{{!-- Trust badges card (sections/sc-trust.schema.json) — Shapecurve template. One white card with up to 6 badges: a round
+      icon on a gradient of the highlight colour (built-in line icon, or an own picture), a title and a short rich text
+      ({{CompanyEmail}} … tokens work). 4 columns on desktop, one under the other on phones. Own <style>. --}}
+{{> sc-type s=".sctr__t" t=".sctr__p"}}{{#each section.blocks}}{{> sc-type bid=this.id st=this.settings s=".sctr__t" t=".sctr__p"}}{{/each}}
+<style>
+  .sctr{letter-spacing:normal;--sc-hl:#790236;--sc-grad:linear-gradient(120deg,#f6edf1 0,#e4ccd7 20%,#efdde5 80%,#f2e6eb 100%);background:var(--sctr-bg,#f6edf1);color:#333}
+  @supports (background:color-mix(in srgb,red 50%,#fff)){.sctr{--sc-grad:linear-gradient(120deg,color-mix(in srgb,var(--sc-hl) 7%,#fff) 0,color-mix(in srgb,var(--sc-hl) 20%,#fff) 20%,color-mix(in srgb,var(--sc-hl) 13%,#fff) 80%,color-mix(in srgb,var(--sc-hl) 10%,#fff) 100%)}}
+  .sctr__wrap{max-width:1200px;margin:0 auto;padding:0 15px;box-sizing:border-box}
+  .sctr__card{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));padding:10px;border-radius:20px;background:rgba(255,255,255,.8)}
+  .sctr__item{padding:30px 15px 25px;text-align:center}
+  .sctr__icon{display:flex;align-items:center;justify-content:center;width:80px;height:80px;margin:0 auto 16px;border-radius:50%;background:var(--sc-grad);color:#333}
+  .sctr__icon .sc-ic{width:40px;height:40px;stroke-width:1.8}
+  .sctr__icon img{display:block;width:48px;height:48px;object-fit:contain}
+  .sctr__t{margin:0 0 8px;font-size:24px;line-height:36px;font-weight:700;color:#333}
+  .sctr__p{font-size:15px;line-height:22.5px;color:#333}
+  .sctr__p p{margin:0}
+  .sctr__p strong{font-weight:700;word-break:break-word}
+  .sctr__p a{display:inline-block;padding:12px 0;margin:-12px 0;color:inherit}
+  @media (max-width:749px){
+    .sctr__card{grid-template-columns:minmax(0,1fr);padding:10px 0}
+    .sctr__item{padding:20px 15px}
+    .sctr__t{margin-bottom:4px;font-size:20px;line-height:30px}
+  }
+</style>
+<div class="sctr" style="--sctr-bg:{{#if section.settings.bg}}{{section.settings.bg}}{{else}}#F6EDF1{{/if}};--sc-hl:{{#if section.settings.highlight}}{{section.settings.highlight}}{{else}}#790236{{/if}};padding-top:{{#if section}}{{section.settings.pad_top}}{{else}}20{{/if}}px;padding-bottom:{{#if section}}{{section.settings.pad_bottom}}{{else}}35{{/if}}px">
+  <div class="sctr__wrap"><div class="sctr__card">
+    {{#each section.blocks}}
+    <div class="sctr__item" {{{this.attributes}}}>
+      <span class="sctr__icon">{{#if this.settings.image}}<img src="{{this.settings.image}}" alt="" width="48" height="48" loading="lazy">{{else}}{{> sc-icon name=this.settings.icon}}{{/if}}</span>
+      {{#if this.settings.title}}<h3 class="sctr__t">{{this.settings.title}}</h3>{{/if}}
+      {{#if this.settings.text}}<div class="sctr__p">{{{applyTokens this.settings.text}}}</div>{{/if}}
+    </div>
+    {{/each}}
+  </div></div>
+</div>

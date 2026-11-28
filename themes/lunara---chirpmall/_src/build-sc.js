@@ -1,0 +1,695 @@
+#!/usr/bin/env node
+/*
+ * Template "Triple-Zone Drop-Seat Bodysuit" (templates/product.triple-zone-bodysuit.json), from
+ * https://shape-curve.com/products/triple-zone-compression-drop-seat-full-body-shaping-bodysuit (downloaded 2026-11-19).
+ * Writes every JSON of the template; run again after editing, it replaces only what it owns:
+ *   sections/product.schema.json   + settings skin / skin_highlight / buy_now_label, + blocks sc_price, sc_highlights,
+ *                                   sc_ship, sc_tabs (other settings / blocks untouched)
+ *   sections/reviews.schema.json   + show_write (default on = old templates unchanged)
+ *   sections/sc-*.schema.json      the 4 content sections + sc-reviews (Okendo-style reviews, user 2026-11-19)
+ *   templates/product.triple-zone-bodysuit.json
+ *   templates/product*.json        every product template gets the product-page sections it lacks (added, never changed)
+ * Fonts: the theme's Poppins (user's choice). Highlight: #790236 (user's choice) and tints of it.
+ *
+ *   node themes/lunara---vesnacharm/_src/build-sc.js
+ */
+'use strict';
+const fs = require('fs');
+const path = require('path');
+
+const THEME = path.resolve(__dirname, '..');
+const read = (f) => JSON.parse(fs.readFileSync(path.join(THEME, f), 'utf8'));
+const write = (f, o) => { fs.writeFileSync(path.join(THEME, f), JSON.stringify(o, null, 2) + '\n'); console.log('wrote', f); };
+
+const HL = '#790236';          // highlight (user)
+const BAND = '#F6EDF1';        // 7 % of HL on white — the original's #eaeaf5 band
+const IMG = 'images/sc-sections/';
+
+// ---------------------------------------------------------------------------------------------------------------
+// product.schema.json
+const product = read('sections/product.schema.json');
+const OWN_SETTINGS = ['sc_header', 'skin', 'skin_highlight', 'buy_now_label', 'vn_trust_any', 'vn_safe_show', 'vn_safe_before', 'vn_safe_em', 'vn_safe_after', 'vn_mbg_show', 'vn_mbg_title', 'vn_mbg_text', 'vn_mbg_days', 'vn_mbg_badge', 'vn_mbg_shine',
+  // removed 2026-11-20 (user: "remove Order today… and 45-day money-back guarantee. Read the policy"): kept here so a run drops them
+  'vn_eta_show', 'vn_eta_min', 'vn_eta_max', 'vn_eta_text', 'vn_guarantee_show', 'vn_guarantee_text', 'vn_guarantee_link_label', 'vn_guarantee_link',
+  'rating_look', 'rating_sold', 'rating_sold_label'];
+product.settings = product.settings.filter((s) => !OWN_SETTINGS.includes(s.id) && s.content !== 'Template look' && s.content !== 'Under the buttons (bodysuit look)' && s.content !== 'Under the buttons');
+// Star rating line, as Shopee (user 2026-11-27: "4.6 ★★★★★ | 1,7k Đánh Giá | Đã Bán 10k+"): real average + count, the
+// sold number typed in (the platform keeps no sales count); markup = patch-sc.js 'rating compact'. Right after "Rating label".
+product.settings.splice(product.settings.findIndex((s) => s.id === 'rating_label') + 1, 0,
+  { type: 'select', id: 'rating_look', label: 'Star rating line', default: 'compact', options: [{ value: 'compact', label: 'Compact: 4.8 ★★★★★ | 2498 Reviews | 10k+ Sold' }, { value: 'classic', label: 'Classic: ★★★★★ Excellent 4.8 | 2498 reviews' }], info: 'Average and number of reviews = the product\'s real published reviews. Put the Star rating block under the Title block to show it under the product name.' },
+  { type: 'text', id: 'rating_sold', label: 'Compact: sold', default: '', info: 'Typed by you, e.g. 10k+ or 2,500. Empty = not shown.' },
+  { type: 'text', id: 'rating_sold_label', label: 'Compact: word after the sold number', default: 'Sold' });
+product.settings.push(
+  { type: 'header', content: 'Template look' },
+  {
+    type: 'select', id: 'skin', label: 'Look of this product section', default: 'lunara',
+    options: [{ value: 'lunara', label: 'Lunara (default)' }, { value: 'shapecurve', label: 'Bodysuit (picture colour tiles, size pills, soft cards)' }],
+    info: 'Bodysuit loads assets/css/sc-product.css and assets/js/sc-product.js for this section only.'
+  },
+  { type: 'color', id: 'skin_highlight', label: 'Bodysuit look: highlight colour', default: HL, info: 'Radio, selected pack frame, badges, Find My Size, tinted backgrounds.' },
+  { type: 'text', id: 'buy_now_label', label: 'Second button (straight to checkout)', default: '', info: 'e.g. Express checkout now. Empty = no second button. Adds the same items as Add to cart, then opens the checkout.' },
+  // Under the Add to cart of the bodysuit look (snippets/sc-trustbox.hbs; user 2026-11-19, as tammycharm.com)
+  { type: 'header', content: 'Under the buttons' },
+  // in the bodysuit look always; in the Lunara look when switched on (user 2026-11-20: "every feature in every template")
+  { type: 'checkbox', id: 'vn_trust_any', label: 'Show them in the Lunara look too', default: false, info: 'The bodysuit look always shows them (each one has its own switch below). On = also with the Lunara look, right under the Buy buttons block.' },
+  { type: 'checkbox', id: 'vn_safe_show', label: 'Show the "Guaranteed safe checkout" box', default: true, info: 'The payment icons under a heading; the middle word in the main colour.' },
+  { type: 'text', id: 'vn_safe_before', label: 'Heading: first words', default: 'Guaranteed' },
+  { type: 'text', id: 'vn_safe_em', label: 'Heading: highlighted word', default: 'safe' },
+  { type: 'text', id: 'vn_safe_after', label: 'Heading: last words', default: 'checkout' },
+  // money-back guarantee box as brixpant.com/compression-tank (user 2026-11-20), in place of the delivery estimate +
+  // guarantee line; the 3 videos under it are the "Image / video slider" block (media_slider) of the template
+  { type: 'checkbox', id: 'vn_mbg_show', label: 'Show the money-back guarantee box', default: true, info: 'Grey box with a dashed border: a seal, a bold title and a short line.' },
+  { type: 'text', id: 'vn_mbg_title', label: 'Guarantee: title', default: '45-Day Money Back Guarantee' },
+  { type: 'text', id: 'vn_mbg_text', label: 'Guarantee: line under it', default: 'Less than 1% of customers have used our Money Back Guarantee' },
+  { type: 'number', id: 'vn_mbg_days', label: 'Guarantee: days on the seal', default: 45 },
+  { type: 'image_picker', id: 'vn_mbg_badge', label: 'Guarantee: seal picture', info: 'Empty = the gold seal with the days above. Square, at least 96 x 96.' },
+  { type: 'checkbox', id: 'vn_mbg_shine', label: 'Guarantee: gold shine crossing the box', default: true },
+);
+
+// Text sizes and colours (user 2026-11-26: "every part with text"), printed by snippets/sc-type.hbs: sections call it on
+// their first line, section blocks in a {{#each section.blocks}} before the markup, product blocks through
+// snippets/pb-type.hbs (each block type's selectors). parts = { h | s | t | p | b: label or { label, color: false } }
+// (no colour for text whose colour changes with a state). 0 / empty = as designed (no rule). bg = a Background for a
+// section without its own. note = put before the line under the header. Re-run safe: typeOff() drops the old ones first.
+const TYPE_HEAD = 'Text sizes and colours';
+const typeSet = (parts, bg, note) => [
+  { type: 'header', content: TYPE_HEAD },
+  { type: 'paragraph', content: (note ? note + ' ' : '') + 'Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px.' },
+  ...(bg ? [{ type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = white.' }] : []),
+  ...Object.entries(parts).flatMap(([k, v]) => {
+    const name = typeof v === 'string' ? v : v.label;
+    return [
+      { type: 'range', id: k + '_size', label: name + ': size on computers', min: 0, max: k === 'h' ? 60 : 36, step: 1, unit: 'px', default: 0 },
+      { type: 'range', id: k + '_size_m', label: name + ': size on phones', min: 0, max: k === 'h' ? 44 : 28, step: 1, unit: 'px', default: 0 },
+      ...(v.color === false ? [] : [{ type: 'color', id: k + '_color', label: name + ': colour', default: '' }]),
+    ];
+  }),
+];
+const TYPE_ID = /^[hstpb]_(size|size_m|color)$/;
+const typeOff = (list) => list.filter((x) => !(x.id && TYPE_ID.test(x.id)) && x.content !== TYPE_HEAD && !(x.type === 'paragraph' && /Size 0 = as designed/.test(x.content || '')));
+const BLOCK_NOTE = 'Only this one; the section settings apply to all.';
+
+// Line icons of snippets/sc-icon.hbs offered by the Highlights box (check = its own filled round check)
+const HL_ICONS = [
+  { value: 'check', label: 'Round check (filled)' }, { value: 'tick', label: 'Tick' }, { value: 'drop', label: 'Water drop' },
+  { value: 'brief', label: 'Briefs' }, { value: 'wash', label: 'Wash basin' }, { value: 'cloud', label: 'Cloud (comfort)' },
+  { value: 'leaf', label: 'Leaf' }, { value: 'shield', label: 'Shield' }, { value: 'sparkle', label: 'Sparkle' },
+  { value: 'heart', label: 'Heart' }, { value: 'star', label: 'Star' }, { value: 'truck', label: 'Truck' },
+  { value: 'lock', label: 'Lock' }, { value: 'returns', label: 'Returns' }, { value: 'money', label: 'Money back' },
+  { value: 'none', label: 'No icon' },
+];
+const GAP_OPTIONS = [{ value: 'auto', label: 'Theme default' }, ...[0, 4, 8, 12, 16, 20, 24, 32, 40, 48].map(n => ({ value: n + 'px', label: n + ' px' }))];
+const OWN_BLOCKS = ['sc_price','sc_highlights', 'sc_hl_line', 'sc_ship', 'sc_tabs', 'sc_fit'];
+product.blocks = product.blocks.filter((b) => !OWN_BLOCKS.includes(b.type));
+const tab = (n) => [
+  { type: 'header', content: 'Row ' + n },
+  { type: 'text', id: 'tab_' + n + '_title', label: 'Title', default: '' },
+  { type: 'richtext', id: 'tab_' + n + '_body', label: 'Text', default: '' },
+];
+product.blocks.push(
+  {
+    type: 'sc_price', name: 'Price + badge',
+    settings: [
+      { type: 'text', id: 'badge', label: 'Badge next to the price', default: 'Buy More Save More', info: 'Empty = no badge.' },
+      { type: 'checkbox', id: 'show_compare', label: 'Show the compare-at price', default: true },
+    ],
+  },
+  // Highlights (user 2026-11-26): an icon per box or per line (snippets/sc-icon.hbs) or an own picture, two-column look
+  // with thin lines (as their picture: "Up to 150ml Protection | Discreet Fit"), text / icon size + colours. Old ids kept
+  // (line_n, style): a saved box keeps its look. 0 / empty = as designed (CSS fallbacks in sc-product.css).
+  {
+    type: 'sc_highlights', name: 'Highlights box',
+    settings: [
+      { type: 'select', id: 'style', label: 'Layout', default: 'check', options: [
+        { value: 'check', label: 'List, one line per row (icon + text)' },
+        { value: 'grid', label: 'Two columns, thin lines above and below' },
+        { value: 'box', label: 'Grey box (an emoji at the start of a line is its icon)' },
+      ] },
+      { type: 'select', id: 'mobile_cols', label: 'Two columns: on phones', default: '2', options: [{ value: '2', label: 'Two columns' }, { value: '1', label: 'One column' }] },
+      { type: 'paragraph', content: 'Line 1 to 5 below. More lines: Add block > Highlight line (as many as you need), anywhere under this box. An emoji at the start of a line is left out (the grey box shows it as the icon).' },
+      { type: 'header', content: 'Icons' },
+      { type: 'select', id: 'icon', label: 'Icon of every line', default: 'check', options: HL_ICONS, info: 'A line can take its own icon or picture below.' },
+      { type: 'range', id: 'icon_size', label: 'Icon size', min: 0, max: 40, step: 1, unit: 'px', default: 0, info: '0 = as designed (22 px list, 18 px two columns).' },
+      { type: 'color', id: 'icon_color', label: 'Icon colour', default: '', info: 'Empty = the text colour. Not used on pictures.' },
+      { type: 'header', content: 'Text and box' },
+      { type: 'range', id: 'text_size', label: 'Text size on computers', min: 0, max: 28, step: 1, unit: 'px', default: 0, info: '0 = as designed (16 px list and grey box, 14 px two columns).' },
+      { type: 'range', id: 'text_size_m', label: 'Text size on phones', min: 0, max: 24, step: 1, unit: 'px', default: 0, info: '0 = as designed (15 px list, 14 px others). Never under 12 px.' },
+      { type: 'color', id: 'text_color', label: 'Text colour', default: '', info: 'Empty = the highlight colour (list), dark grey (others).' },
+      { type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = none (light grey in the grey box).' },
+      { type: 'color', id: 'line_color', label: 'Two columns: line colour', default: '', info: 'Empty = light grey.' },
+      // user 2026-11-26 (wirefree bra): "the 2 lines look ugly". Off by default so saved boxes keep their lines.
+      { type: 'checkbox', id: 'no_lines', label: 'Two columns: hide the lines above and below', default: false },
+      ...[1, 2, 3, 4, 5].flatMap((n) => [
+        { type: 'header', content: 'Line ' + n },
+        { type: 'text', id: 'line_' + n, label: 'Text', default: '' },
+        { type: 'select', id: 'icon_' + n, label: 'Icon', default: 'same', options: [{ value: 'same', label: 'Same as every line' }, ...HL_ICONS] },
+        { type: 'image_picker', id: 'image_' + n, label: 'Own picture instead of the icon', info: 'Square PNG / SVG / WebP, 64 x 64.' },
+      ]),
+    ],
+  },
+  // One more line of the Highlights box (user 2026-11-26, "a + line button, lines like the default ones"): the editor has
+  // no repeater, so each line is a block; snippets/sc-pb-highlights.hbs prints it inside the box above it.
+  {
+    type: 'sc_hl_line', name: 'Highlight line',
+    settings: [
+      { type: 'paragraph', content: 'One more line of the Highlights box: shown inside the Highlights box above it (anywhere under it, before the next Highlights box), in its layout, size and colours. Add as many as you need.' },
+      { type: 'text', id: 'text', label: 'Text', default: 'New highlight' },
+      { type: 'select', id: 'icon', label: 'Icon', default: 'same', options: [{ value: 'same', label: 'Same as every line' }, ...HL_ICONS] },
+      { type: 'image_picker', id: 'image', label: 'Own picture instead of the icon', info: 'Square PNG / SVG / WebP, 64 x 64.' },
+    ],
+  },
+  {
+    type: 'sc_ship', name: 'Shipping box',
+    settings: [
+      { type: 'text', id: 'title', label: 'Title (truck icon)', default: 'Free Shipping Over $79' },
+      { type: 'text', id: 'note', label: 'Small line', default: '*Same-Day Shipping— for Orders Before 12pm PST' },
+      { type: 'text', id: 'item_1', label: 'Right line 1 (lock icon)', default: 'Secure Checkout' },
+      { type: 'text', id: 'item_2', label: 'Right line 2 (returns icon)', default: 'Easy Returns' },
+    ],
+  },
+  {
+    type: 'sc_tabs', name: 'Info rows (accordion)',
+    settings: [
+      { type: 'paragraph', content: 'Grey rows that open on tap. A row without a title is hidden.' },
+      ...tab(1), ...tab(2), ...tab(3),
+      { type: 'header', content: 'Size chart row' },
+      { type: 'text', id: 'chart_title', label: 'Title', default: 'Size Chart' },
+      { type: 'textarea', id: 'chart', label: 'Size chart table', default: '', info: 'One row per line, cells split by |. The first line is the header. Empty = no size chart row.' },
+      { type: 'text', id: 'chart_note', label: 'Line under the table', default: '' },
+    ],
+  },
+  {
+    type: 'sc_fit', name: 'Find my size',
+    settings: [
+      { type: 'paragraph', content: 'A button that opens a size recommender (as shape-curve.com): Weight (required) and Bust / Waist / Hips (optional) in in / lbs or cm / kg; "Find My Size" shows the size (with measurements: the one that fits the largest), "Select M" sets it in the main picker and every pack row; the complete size chart below. Works in any product template.' },
+      { type: 'text', id: 'button_label', label: 'Button', default: 'Find my size' },
+      { type: 'text', id: 'option_name', label: 'Size option name', default: 'Size', info: 'The option the result picks; when no option has this name, the one whose values match the chart sizes. A value like "M (125-140 lbs)" matches the chart size "M"; XXL = 2XL.' },
+      { type: 'select', id: 'units', label: 'Units shown first', default: 'us', options: [{ value: 'us', label: 'in / lbs' }, { value: 'metric', label: 'cm / kg' }] },
+      { type: 'select', id: 'finder', label: 'Finder type', default: 'auto', options: [{ value: 'auto', label: 'Auto (from the chart)' }, { value: 'body', label: 'Weight + measurements (bodysuit, shapewear)' }, { value: 'bra', label: 'Band Size + Cup Size (bra)' }], info: 'Auto: a chart whose first line is band sizes (SIZE CUP | 34 | 36 …) and whose first column is cup sizes (B, C, D …) asks Band Size + Cup Size, without in / lbs and without the weight line; any other chart asks Weight + measurements.' },
+      // space around the button (user 2026-11-27, wirefree bra: Highlights box → Find my size → Kaching too far apart);
+      // 'auto' = the old look (saved blocks have no key), a size = the whole gap (snippets/sc-fit.hbs)
+      { type: 'header', content: 'Space around the button' },
+      { type: 'select', id: 'gap_top', label: 'Space above', default: 'auto', options: GAP_OPTIONS, info: 'From the block above (e.g. the Highlights box) to the button, on computers and phones. Theme default = as before.' },
+      { type: 'select', id: 'gap_bottom', label: 'Space below', default: 'auto', options: GAP_OPTIONS, info: 'From the button to the block below (e.g. the Kaching bundle).' },
+      { type: 'header', content: 'Pop-up' },
+      { type: 'text', id: 'rec_eyebrow', label: 'Small line on top', default: 'Size recommender' },
+      { type: 'text', id: 'rec_title', label: 'Title', default: 'Find Your Best Size' },
+      { type: 'text', id: 'rec_required', label: 'Line under the title: bold part', default: 'Weight is required.' },
+      { type: 'text', id: 'rec_optional', label: 'Line under the title: rest', default: 'Other measurements are optional.' },
+      { type: 'text', id: 'rec_weight', label: 'Weight label', default: 'Weight' },
+      { type: 'text', id: 'rec_bust', label: 'Bust label', default: 'Bust', info: 'Shown when the chart has a Bust column; Waist and Hips the same.' },
+      { type: 'text', id: 'rec_waist', label: 'Waist label', default: 'Waist' },
+      { type: 'text', id: 'rec_hips', label: 'Hips label', default: 'Hips' },
+      { type: 'text', id: 'rec_badge_req', label: '"Required"', default: 'Required' },
+      { type: 'text', id: 'rec_badge_opt', label: '"Optional"', default: 'Optional' },
+      { type: 'text', id: 'rec_button', label: 'Button in the pop-up', default: 'Find My Size' },
+      { type: 'text', id: 'rec_error', label: 'No weight typed', default: 'Enter your weight to find your size.' },
+      { type: 'header', content: 'Result' },
+      { type: 'text', id: 'rec_kicker', label: 'Small title', default: 'Your recommended size' },
+      { type: 'text', id: 'rec_l_one', label: 'Line: one size', default: '{size} fits your {measures}.', info: '{size} = the size, {measures} = what was typed (weight, bust …).' },
+      { type: 'text', id: 'rec_l_two', label: 'Line: between two sizes', default: 'You land between {a} and {b}: {a} fits snug, {b} gives more room.', info: 'Weight only, on the line between two sizes. {a} = the smaller, {b} = the larger.' },
+      { type: 'text', id: 'rec_l_edge', label: 'Line: outside the chart', default: 'Your {measure} is outside our chart, so {size} is the closest size.' },
+      { type: 'text', id: 'rec_select', label: 'Pick button', default: 'Select {size}' },
+      { type: 'header', content: 'Bra: Band Size + Cup Size' },
+      { type: 'paragraph', content: 'Used when the finder asks Band + Cup (see Finder type). The size shows as soon as both are picked and its cell is marked in the chart.' },
+      { type: 'text', id: 'bra_sub', label: 'Line under the title', default: 'Pick your usual band and cup size.' },
+      { type: 'text', id: 'bra_band', label: 'Band label', default: 'Band Size' },
+      { type: 'text', id: 'bra_cup', label: 'Cup label', default: 'Cup Size' },
+      { type: 'text', id: 'bra_pick', label: 'Empty choice', default: 'Select' },
+      { type: 'text', id: 'bra_kicker', label: 'Result: small title', default: 'Recommended size' },
+      { type: 'text', id: 'bra_line', label: 'Result: line', default: 'Band {band} · Cup {cup}, from our size chart.', info: '{band}, {cup}, {size} = the picks and the size.' },
+      { type: 'text', id: 'bra_none', label: 'Result: empty cell', default: 'This band and cup are not in our size chart.' },
+      // country tabs (user 2026-11-27: sells in US / UK / EU, one tab each with its own chart, as their picture 2)
+      { type: 'header', content: 'Bra: country tabs (EU / US / UK)' },
+      { type: 'paragraph', content: 'One bra chart per country, each in its own tab above Band Size + Cup Size. A tab shows only when its chart is filled; one filled chart = no tabs. Filled charts replace "Chart" below for the bra finder (not with Finder type = Weight + measurements). Same shape in every tab (same number of bands and cups) → the result lists every country, e.g. "EU 85C · US 38C · UK 38C", and switching tabs keeps the band and cup picked.' },
+      { type: 'text', id: 'bra_tab1', label: 'Tab 1: name', default: 'EU', info: 'Tab 1 is open first.' },
+      { type: 'textarea', id: 'bra_chart1', label: 'Tab 1: chart', default: '', info: 'First line = a name (e.g. EU) | the band sizes: EU | 75 | 80 | 85 …; then one line per cup with the size for each band: CUP A | S | S | M … ("CUP " is dropped in the picker). Cells split by |. More lines of band numbers right under the first (US/UK | 34 | 36 …) show as extra header rows. Empty = no tab.' },
+      { type: 'text', id: 'bra_tab2', label: 'Tab 2: name', default: 'US' },
+      { type: 'textarea', id: 'bra_chart2', label: 'Tab 2: chart', default: '', info: 'As tab 1, e.g. US | 34 | 36 | 38 … then CUP A | S | S | M …' },
+      { type: 'text', id: 'bra_tab3', label: 'Tab 3: name', default: 'UK' },
+      { type: 'textarea', id: 'bra_chart3', label: 'Tab 3: chart', default: '', info: 'As tab 1.' },
+      { type: 'header', content: 'Size chart' },
+      { type: 'text', id: 'rec_chart_eyebrow', label: 'Small line', default: 'Body measurements' },
+      { type: 'text', id: 'rec_chart_title', label: 'Title', default: 'Complete Size Chart' },
+      { type: 'text', id: 'rec_swipe', label: 'Hint on the right', default: 'Swipe to view' },
+      { type: 'textarea', id: 'rec_chart', label: 'Chart', default: ['Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)', 'XS | 0 | 32-34 | 25-27 | 35-37 | 95-110', 'S | 2-4 | 35-37 | 28-30 | 38-40 | 110-125', 'M | 6-8 | 38-40 | 31-33 | 41-43 | 125-140', 'L | 10-12 | 41-43 | 34-36 | 44-46 | 140-160', 'XL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180', '2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205', '3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240'].join('\n'), info: 'First line = column names, then one size per line; cells split by |. Columns named Weight (lbs), Bust / Waist / Hip (in) drive the finder; any other column (e.g. US) is shown as typed. cm / kg converts them. Bra: first line = SIZE CUP | 34 | 36 … (bands), then one cup per line with the size of each band, e.g. C | M | L | L | XL.' },
+    ],
+  }
+);
+// Lunara's show_variants: say what it does in the bodysuit look (the setting itself is Lunara's)
+const sv = product.settings.find((s) => s.id === 'show_variants');
+if (sv) sv.info = 'With a Kaching bundle block every item gets its own Color / Size pickers inside the selected pack. Bodysuit look: unchecked also hides the Color / Size picker above the packs.';
+// Text settings of every product block with text (snippets/pb-type.hbs has their selectors; Highlights has its own)
+const PB_TYPE = {
+  title: { h: 'Title' },
+  rating: { t: 'Rating text' },
+  sc_price: { p: 'Price', s: 'Compare-at price', b: 'Badge' },
+  variant_picker: { s: 'Option names', t: { label: 'Option values', color: false } },
+  size_finder: { b: 'Link', h: 'Pop-up heading', t: 'Pop-up text' },
+  buy_buttons: { b: 'Button text', s: 'Box headings (safe checkout, guarantee)', t: 'Box text' },
+  trust: { t: 'Text' },
+  description: { t: 'Text' },
+  kaching: { h: 'Heading', s: 'Pack titles', p: 'Prices', t: 'Small lines (each, compare-at, gift)', b: { label: 'Badges (SAVE, label)', color: false } },
+  'custom-html': { t: 'Text' },
+  faq: { s: 'Questions', t: 'Answers' },
+  sc_ship: { s: 'Title', t: 'Small lines' },
+  sc_tabs: { s: 'Row titles', t: 'Row text' },
+  sc_fit: { b: 'Button', h: 'Pop-up headings', t: 'Pop-up text' },
+};
+for (const b of product.blocks) if (PB_TYPE[b.type]) b.settings = [...typeOff(b.settings || []), ...typeSet(PB_TYPE[b.type])];
+product.max_blocks = 50;
+write('sections/product.schema.json', product);
+
+// Lunara sections of the product templates: FAQ, You may also like (Reviews (Lunara): below, with its own edit)
+for (const [file, parts] of [
+  ['sections/faq.schema.json', { h: 'Heading', s: 'Questions', t: 'Answers' }],
+  ['sections/related.schema.json', { h: 'Heading', s: 'Product names', p: 'Prices', b: 'Load more button' }],
+]) {
+  const sc = read(file);
+  sc.settings = [...typeOff(sc.settings || []), ...typeSet(parts)];
+  write(file, sc);
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// reviews.schema.json — the "Write a review" button can be turned off (no review form on new templates)
+const reviews = read('sections/reviews.schema.json');
+reviews.settings = reviews.settings.filter((s) => s.id !== 'show_write');
+reviews.settings = typeOff(reviews.settings);
+reviews.settings.push({ type: 'checkbox', id: 'show_write', label: 'Show "Write a review"', default: true, info: 'Off = reviews are shown only (they are added in the admin).' });
+reviews.settings.push(...typeSet({ h: 'Heading', s: 'Names and review titles', t: 'Review text' }));
+write('sections/reviews.schema.json', reviews);
+
+// ---------------------------------------------------------------------------------------------------------------
+// Content sections
+const band = [
+  { type: 'color', id: 'bg', label: 'Background', default: BAND },
+  { type: 'color', id: 'highlight', label: 'Highlight colour', default: HL, info: 'Tag / icon gradients are tints of it.' },
+  { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 5, unit: 'px', default: 20 },
+  { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 5, unit: 'px', default: 20 },
+];
+const pic = (id, label, info) => [
+  { type: 'image_picker', id, label, info },
+  { type: 'text', id: 'default_' + id, label: 'Theme file while empty', info: 'Path inside assets/, e.g. ' + IMG + 'photo.webp. Shown until a file is picked above.' },
+];
+
+write('sections/sc-features.schema.json', {
+  name: 'Feature cards (picture + text)',
+  tag: 'section',
+  max_blocks: 8,
+  settings: [...band.map((s) => (s.id === 'pad_top' ? { ...s, default: 50 } : s.id === 'pad_bottom' ? { ...s, default: 10 } : s)), ...typeSet({ h: 'Tags', s: 'Card headings', t: 'Card text' })],
+  blocks: [{
+    type: 'card', name: 'Card',
+    settings: [
+      ...pic('image', 'Picture or GIF', 'Square, 1110 x 1110 recommended. Animated GIF / WebP plays. Cards alternate sides on desktop.'),
+      { type: 'text', id: 'tag', label: 'Tag', default: 'Feature' },
+      { type: 'text', id: 'heading', label: 'Heading', default: 'Feature heading' },
+      { type: 'richtext', id: 'body', label: 'Text', default: '<p>Describe the benefit in one or two sentences.</p>' },
+      ...typeSet({ h: 'Tag', s: 'Heading', t: 'Text' }, false, BLOCK_NOTE),
+    ],
+  }],
+  presets: [{ name: 'Feature cards', category: 'Content', description: 'White cards on a tinted band: picture one side, tag + heading + text the other.' }],
+});
+
+write('sections/sc-details.schema.json', {
+  name: 'Details (picture + round cards)',
+  tag: 'section',
+  max_blocks: 6,
+  settings: [
+    { type: 'text', id: 'heading', label: 'Heading', default: 'Crafted In Every Detail' },
+    ...pic('image', 'Large picture (desktop only)', '4:5, 1050 x 1312 recommended. Hidden on phones, as on the original.'),
+    ...band,
+    ...typeSet({ h: 'Heading', s: 'Card titles', t: 'Card text' }),
+  ],
+  blocks: [{
+    type: 'item', name: 'Detail',
+    settings: [
+      ...pic('image', 'Round picture', 'Square, 304 x 304 recommended (shown as a circle).'),
+      { type: 'text', id: 'title', label: 'Title', default: 'Detail' },
+      { type: 'textarea', id: 'text', label: 'Text', default: 'One sentence about this detail.' },
+      ...typeSet({ s: 'Title', t: 'Text' }, false, BLOCK_NOTE),
+    ],
+  }],
+  presets: [{ name: 'Details', category: 'Content', description: 'Heading, a large picture and cards with a round picture, alternating sides.' }],
+});
+
+// Before / after slider (user 2026-11-20: "as shape-curve.com's 'Sculpt Your Curves Without the Struggle'", a page that
+// could not be downloaded). Hidden on the live store until both pictures are set (sections/sc-before-after.hbs).
+// As shape-curve.com's "Sculpt Your Curves Without the Struggle" (cooling bodysuit page, downloaded 2026-11-20): 4:3 photos,
+// heading with a highlighted end, italic check list, a white review card with green star boxes, soft gradient band.
+write('sections/sc-before-after.schema.json', {
+  name: 'Before / after slider',
+  tag: 'section',
+  settings: [
+    { type: 'header', content: 'Pictures' },
+    { type: 'paragraph', content: 'Two photos of the same pose and framing, same size (e.g. 1200 x 900). Shoppers drag the line between them. The section shows on the store once both photos are set.' },
+    ...pic('before_image', 'Before photo (left side)', 'Shown on the left of the line.'),
+    ...pic('after_image', 'After photo (right side)', 'Shown on the right of the line.'),
+    { type: 'text', id: 'before_label', label: 'Label on the before side', default: 'Before', info: 'White capitals in the bottom corner. Empty = no label.' },
+    { type: 'text', id: 'after_label', label: 'Label on the after side', default: 'After', info: 'Empty = no label.' },
+    { type: 'range', id: 'start', label: 'Line starts at', min: 5, max: 95, step: 5, unit: '%', default: 50 },
+    {
+      type: 'select', id: 'ratio', label: 'Photo frame', default: '4/3',
+      options: [
+        { value: '4/3', label: 'Landscape (4:3)' }, { value: '1/1', label: 'Square' }, { value: '4/5', label: 'Portrait (4:5)' },
+        { value: 'natural', label: 'Same shape as the after photo' },
+      ],
+      info: 'Landscape, square and portrait crop the photos to fill the frame.',
+    },
+    { type: 'color', id: 'line_color', label: 'Line and handle colour', default: '#ffffff' },
+    { type: 'header', content: 'Text' },
+    {
+      type: 'select', id: 'image_side', label: 'Photos side (computer)', default: 'left',
+      options: [{ value: 'left', label: 'Left' }, { value: 'right', label: 'Right' }],
+      info: 'On phones: photos, then the heading, text and review.',
+    },
+    { type: 'text', id: 'heading', label: 'Heading', default: 'Sculpt Your Curves' },
+    { type: 'text', id: 'heading_em', label: 'Heading: highlighted end', default: 'Without the Struggle', info: 'Right after the heading, in the highlight colour. Empty = none.' },
+    {
+      type: 'richtext', id: 'body', label: 'Text',
+      default: '<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>',
+      info: 'A bulleted list = the check list (italic, round checks in the highlight colour). Bold words are in the highlight colour. Put the review in the card below, not here.',
+    },
+    { type: 'header', content: 'Review card' },
+    { type: 'paragraph', content: 'A white card under the text: stars, a short title, the quote and the name. Shows when the title or the quote is filled in. Use a real review of this product.' },
+    { type: 'range', id: 'review_rating', label: 'Stars', min: 0, max: 5, step: 1, default: 5, info: '0 = no stars.' },
+    { type: 'color', id: 'review_star_color', label: 'Star boxes colour', default: '#00b67a' },
+    { type: 'text', id: 'review_title', label: 'Title', default: '', info: 'e.g. Still Comfortable Hours Later' },
+    { type: 'textarea', id: 'review_text', label: 'Quote', default: '', info: 'The review text, with its quotation marks.' },
+    { type: 'text', id: 'review_author', label: 'Name', default: '', info: 'e.g. Penny L. – Verified Buyer' },
+    { type: 'header', content: 'Band' },
+    {
+      type: 'select', id: 'bg_style', label: 'Background', default: 'gradient',
+      options: [{ value: 'gradient', label: 'Soft gradient of the highlight colour' }, { value: 'solid', label: 'One colour (below)' }],
+    },
+    ...band.map((s) => (s.id === 'bg' ? { ...s, label: 'Background colour (one colour)' } : s.id === 'pad_top' || s.id === 'pad_bottom' ? { ...s, default: 36 } : s)),
+    ...typeSet({ h: 'Heading', s: 'Review card title', t: 'Text and quote' }),
+  ],
+  presets: [{ name: 'Before / after slider', category: 'Content', description: 'Two photos with a line shoppers drag to compare them, beside a heading, a check list and a review card.' }],
+});
+
+write('sections/sc-testimonials.schema.json', {
+  name: 'Photo testimonials',
+  tag: 'section',
+  max_blocks: 12,
+  settings: [
+    { type: 'text', id: 'heading', label: 'Heading', default: 'Loved By 12,000+ Ladies Worldwide' },
+    { type: 'text', id: 'button_label', label: 'Button', default: 'View All', info: 'Empty = no button.' },
+    { type: 'text', id: 'button_link', label: 'Button link', default: '#lu-reviews', info: '#lu-reviews = the reviews of this page.' },
+    { type: 'color', id: 'star', label: 'Star colour', default: '#F5A623' },
+    ...band,
+    ...typeSet({ h: 'Heading', s: 'Names', t: 'Quotes' }),
+  ],
+  blocks: [{
+    type: 'quote', name: 'Testimonial',
+    settings: [
+      ...pic('image', 'Photo', '3:4, 546 x 728 recommended.'),
+      { type: 'text', id: 'name', label: 'Name', default: 'Customer name' },
+      { type: 'checkbox', id: 'verified', label: 'Verified tick', default: true },
+      { type: 'range', id: 'rating', label: 'Stars', min: 1, max: 5, step: 1, default: 5 },
+      { type: 'textarea', id: 'text', label: 'Text', default: 'What the customer said.' },
+      ...typeSet({ s: 'Name', t: 'Quote' }, false, BLOCK_NOTE),
+    ],
+  }],
+  presets: [{ name: 'Photo testimonials', category: 'Reviews', description: 'Swipeable cards: photo, name, stars, short quote, and a button to the reviews.' }],
+});
+
+// Customer videos (user 2026-11-19: "many videos, as 'Don't just take our word for it. See them in motion.' on
+// tammycharm.com"); replaces the photo testimonials on the bodysuit page. Clips without a video are left out of the store.
+write('sections/sc-reels.schema.json', {
+  name: 'Customer videos',
+  tag: 'section',
+  max_blocks: 12,
+  settings: [
+    { type: 'paragraph', content: 'Portrait 9:16 videos side by side (swipe on phones). Each one plays muted and looped while on screen; "Sound" turns its sound on; a tap pauses it. Videos without a file are not shown on the store; with none, the whole band is hidden.' },
+    { type: 'text', id: 'eyebrow', label: 'Small line above', default: 'Caught on camera', info: 'Empty = none.' },
+    { type: 'text', id: 'heading', label: 'Heading', default: 'Don\'t just take our word for it.' },
+    { type: 'text', id: 'heading_em', label: 'Heading, second line (italic, accent colour)', default: 'See them in motion.' },
+    { type: 'text', id: 'subheading', label: 'Line under the heading', default: 'Short videos from our customers, in their own words.' },
+    { type: 'text', id: 'sound_label', label: 'Sound button', default: 'Sound' },
+    { type: 'select', id: 'mobile_layout', label: 'On phones', default: 'peek', options: [
+      { value: 'peek', label: 'Next video peeks in (as tammycharm.com)' },
+      { value: 'one', label: 'One video per screen' },
+    ] },
+    { type: 'color', id: 'bg', label: 'Background', default: '', info: 'Empty = the main colour, darkened.' },
+    { type: 'color', id: 'accent', label: 'Accent (second line, dots, Sound on)', default: '#F1C6D6' },
+    { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 4, unit: 'px', default: 56 },
+    { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 4, unit: 'px', default: 64 },
+    ...typeSet({ h: 'Heading', t: 'Line under the heading' }),
+  ],
+  blocks: [{
+    type: 'clip', name: 'Video',
+    settings: [
+      { type: 'image_picker', id: 'video', label: 'Video (MP4 / WebM)', info: 'Upload the file in the media picker. Portrait 9:16 (e.g. 720 x 1280) looks best; short clips (under 20 s, a few MB) load fast. YouTube / Vimeo links are not supported.' },
+      { type: 'image_picker', id: 'poster', label: 'Cover picture (optional)', info: 'Shown until the video starts.' },
+      { type: 'text', id: 'name', label: 'Name (optional)', default: '', info: 'Shown at the bottom of the video.' },
+      { type: 'text', id: 'caption', label: 'Line under the name (optional)', default: '' },
+      { type: 'text', id: 'alt', label: 'Description for screen readers', default: '' },
+      { type: 'text', id: 'default_video', label: 'Theme file while empty', default: '', info: 'Path inside assets/, e.g. videos/clip.mp4. Played until a file is picked above.' },
+      ...typeSet({ s: 'Name', t: 'Line under the name' }, false, BLOCK_NOTE),
+    ],
+  }],
+  // 6 empty Video slots on "Add section", so the editor shows where to upload (a band with no slot would be empty)
+  presets: [{ name: 'Customer videos', category: 'Reviews', description: 'A dark band with portrait videos side by side: play muted on screen, Sound button, swipe on phones (as tammycharm.com).', blocks: [1, 2, 3, 4, 5, 6].map(() => ({ type: 'clip' })) }],
+});
+
+write('sections/sc-reviews.schema.json', {
+  name: 'Reviews (Okendo style)',
+  tag: 'section',
+  limit: 1,
+  settings: [
+    { type: 'paragraph', content: 'The product\'s published reviews: average, filter buttons with counts (always open, as Shopee), Sort, the list (name + stars, title, text with Read More, every photo under it) and numbered pages. "Write a review" opens a form; what shoppers send waits in the product\'s Reviews tab (admin) until you publish it.' },
+    { type: 'text', id: 'heading', label: 'Heading', default: '', info: 'Empty = no heading (as the original).' },
+    { type: 'text', id: 'based_label', label: '"Based on"', default: 'Based on' },
+    { type: 'text', id: 'reviews_label', label: '"reviews"', default: 'reviews' },
+    { type: 'checkbox', id: 'show_recommend', label: 'Show the "would recommend" share', default: true, info: 'The share of 4- and 5-star reviews (the platform has no separate "would recommend" answer).' },
+    { type: 'text', id: 'recommend_label', label: 'Text after the share', default: 'would recommend these products' },
+    // user 2026-11-27: star bars, photo strip and the Filters button gone (filter buttons always open, with counts);
+    // the strip got a new key so a saved show_photos: true does not bring it back
+    { type: 'checkbox', id: 'show_dist', label: 'Show the star bars (5 ★ … 1 ★)', default: false },
+    { type: 'checkbox', id: 'photo_strip', label: 'Show the customer photo strip', default: false },
+    { type: 'text', id: 'sort_label', label: '"Sort"', default: 'Sort' },
+    { type: 'text', id: 'read_more_label', label: '"Read More"', default: 'Read More' },
+    { type: 'text', id: 'read_less_label', label: '"Read Less"', default: 'Read Less' },
+    { type: 'range', id: 'page_size', label: 'Reviews per page', min: 3, max: 10, step: 1, default: 5 },
+    // Write a review (user 2026-11-19, as tammycharm.com): a form in a pop-up, sent to the platform as a pending review.
+    // New ids, on by default: the button also shows on a template saved before.
+    { type: 'header', content: 'Write a review' },
+    { type: 'checkbox', id: 'write_show', label: 'Show the "Write a review" button', default: true, info: 'Sent reviews are not shown until you publish them in the product\'s Reviews tab. One photo, up to 5 MB; at most 5 reviews an hour from one visitor.' },
+    { type: 'text', id: 'write_label', label: 'Button', default: 'Write a review' },
+    { type: 'text', id: 'write_title', label: 'Form heading', default: 'Write a review' },
+    { type: 'checkbox', id: 'write_email', label: 'Ask for the email', default: true, info: 'Optional field, as on tammycharm.com. The platform does not store it yet.' },
+    { type: 'checkbox', id: 'write_photo', label: 'Let shoppers add a photo', default: true },
+    { type: 'checkbox', id: 'write_recommend', label: 'Show "I recommend this product"', default: true, info: 'The platform does not store the answer yet.' },
+    { type: 'text', id: 'write_submit', label: 'Send button', default: 'Submit review' },
+    { type: 'textarea', id: 'write_thanks', label: 'Thank-you message', default: 'Your review will appear here once it has been checked.' },
+    { type: 'color', id: 'star_color', label: 'Star colour', default: '#ffb400' },
+    { type: 'range', id: 'pad_top', label: 'Space above', min: 0, max: 100, step: 5, unit: 'px', default: 40 },
+    { type: 'range', id: 'pad_bottom', label: 'Space below', min: 0, max: 100, step: 5, unit: 'px', default: 50 },
+    ...typeSet({ h: 'Heading', s: 'Review titles', t: 'Review text' }, true),
+  ],
+  presets: [{ name: 'Reviews (Okendo style)', category: 'Reviews', description: 'Average, star bars, customer photos, filters, sort and the review list, as shape-curve.com.' }],
+});
+
+const ICONS = [
+  { value: 'truck', label: 'Truck' }, { value: 'money', label: 'Money back' }, { value: 'card', label: 'Card' },
+  { value: 'support', label: 'Support (phone)' }, { value: 'lock', label: 'Lock' }, { value: 'returns', label: 'Returns' },
+  { value: 'heart', label: 'Heart' }, { value: 'star', label: 'Star' },
+  { value: 'shield', label: 'Shield' }, { value: 'leaf', label: 'Leaf' }, { value: 'drop', label: 'Water drop' },
+  { value: 'cloud', label: 'Cloud' }, { value: 'sparkle', label: 'Sparkle' }, { value: 'tick', label: 'Tick' },
+];
+write('sections/sc-trust.schema.json', {
+  name: 'Trust badges card',
+  tag: 'section',
+  max_blocks: 6,
+  settings: [...band, ...typeSet({ s: 'Titles', t: 'Text' })],
+  blocks: [{
+    type: 'item', name: 'Badge',
+    settings: [
+      { type: 'select', id: 'icon', label: 'Icon', default: 'truck', options: ICONS },
+      { type: 'image_picker', id: 'image', label: 'Own icon (optional)', info: 'Replaces the icon above. Square PNG / SVG, 96 x 96.' },
+      { type: 'text', id: 'title', label: 'Title', default: 'Free Shipping' },
+      { type: 'richtext', id: 'text', label: 'Text', default: '<p>Short line about it.</p>' },
+      ...typeSet({ s: 'Title', t: 'Text' }, false, BLOCK_NOTE),
+    ],
+  }],
+  presets: [{ name: 'Trust badges', category: 'Content', description: 'A white card with 4 round icons, titles and short lines.' }],
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// The template
+const blocks = {};
+const order = [];
+const add = (id, type, settings = {}) => { blocks[id] = { type, settings }; order.push(id); };
+add('title', 'title');
+add('rating', 'rating');
+add('price', 'sc_price', { badge: 'Buy More Save More', show_compare: true });
+add('highlights', 'sc_highlights', { line_1: '✨ Smooth All Over, Instantly', line_2: '💦 Bathroom Breaks Made Easy', line_3: '🤍 Held In, Never Squeezed' });
+add('variant_picker', 'variant_picker');
+// Find my size as shape-curve.com's size recommender, with the bodysuit's chart (weight, US, bust / waist / hip)
+add('fit', 'sc_fit', {
+  button_label: 'Find my size', option_name: 'Size', units: 'us',
+  rec_eyebrow: 'Size recommender', rec_title: 'Find Your Best Size', rec_required: 'Weight is required.', rec_optional: 'Other measurements are optional.',
+  rec_button: 'Find My Size', rec_kicker: 'Your recommended size', rec_chart_eyebrow: 'Body measurements', rec_chart_title: 'Complete Size Chart',
+  rec_chart: ['Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)', 'XS | 0 | 32-34 | 25-27 | 35-37 | 95-110', 'S | 2-4 | 35-37 | 28-30 | 38-40 | 110-125', 'M | 6-8 | 38-40 | 31-33 | 41-43 | 125-140', 'L | 10-12 | 41-43 | 34-36 | 44-46 | 140-160', 'XL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180', '2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205', '3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240'].join('\n'),
+});
+add('kaching', 'kaching', {
+  heading: 'BUY MORE - SAVE MORE', selected: 2, save_style: 'compare_pct', // "SAVE xx%" vs the compare-at price, after the title (user 2026-11-19)
+  accent: HL, price_color: '#000000', bar_bg: '#F8F2F5', selected_bg: '#FFFFFF', title_color: '#000000', badge_text_color: '#FFFFFF',
+  pack1_qty: 1, pack1_title: 'Buy 1', pack1_subtitle: 'SAVE {save}', pack1_badge: '',
+  pack2_qty: 2, pack2_title: 'Buy 2-Better Deal Unlocked', pack2_subtitle: 'SAVE {save} {each} Each', pack2_badge: 'Flash Sale⚡',
+  pack3_qty: 3, pack3_title: 'Buy 3-Maximum Savings', pack3_subtitle: 'SAVE {save} {each} Each', pack3_badge: 'Free Shipping🚚',
+  pack4_qty: 0, pack4_title: '', pack4_subtitle: '', pack4_badge: '',
+});
+add('buy_buttons', 'buy_buttons');
+// 3 portrait videos side by side under the guarantee box, as brixpant.com/compression-tank (user 2026-11-20). Empty: the
+// store shows nothing until videos are picked (vn-chrome.css hides an empty slider); the server turns a video into <video>.
+add('videos', 'media_slider', {
+  heading: '', per_view: 3, mobile_row: '3', per_view_mobile: '3', ratio: '9/16', gap: 12, radius: 0, show_arrows: true,
+  media_1: '', media_2: '', media_3: '', media_4: '', media_5: '', media_6: '', media_7: '', media_8: '', media_9: '', media_10: '',
+});
+add('ship', 'sc_ship', {
+  title: 'Free Shipping Over $79', note: '*Same-Day Shipping— for Orders Before 12pm PST', item_1: 'Secure Checkout', item_2: 'Easy Returns',
+});
+add('tabs', 'sc_tabs', {
+  tab_1_title: 'Shipping & Return',
+  tab_1_body: '<p><strong>Shipping Policy</strong></p><p>We offer <strong>FREE</strong> worldwide shipping for <strong>orders over $79 USD.</strong> For in-stock items, your order will be processed and <strong>shipped within 3-5 business days</strong> after order verification, depending on the shipping method you select. Depending on your location, delivery typically takes approximately <strong>7-14 business days.</strong> You can track your order directly from the "<strong>Track My Order</strong>" menu.</p><p><strong>Return/Exchange Policy</strong></p><p>If you\'re not satisfied with your purchase, you may return them for a <strong>refund within 30 days of delivery.</strong></p>',
+  tab_2_title: 'Care Guide',
+  tab_2_body: '<p><strong>Hand Wash or Use a Delicate Cycle:</strong> To keep our products looking great, handle them with care. Hand washing is the gentlest method, but if you use a washing machine, be sure to use the delicate cycle.</p><p><strong>Use Mild Detergent:</strong> Gentle detergents are best for our delicate fabrics. Avoid using fabric softeners and bleach, as they can damage the material.</p><p><strong>Air Dry:</strong> After washing, avoid the dryer. Instead, lay your product flat or hang it to air dry. Keep it out of direct sunlight to prevent fading.</p><p><strong>Store Carefully:</strong> To avoid stretching, fold your product neatly and store it in a drawer or hang it up. Keep it out of direct sunlight and humid places.</p><p><strong>Replace When Necessary:</strong> Our products are designed to support and contour your body, but over time, they might lose some elasticity. Replace your item when it doesn\'t provide the same support or shows signs of wear.</p>',
+  tab_3_title: '', tab_3_body: '',
+  chart_title: 'Size Chart',
+  chart: ['Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)', 'XS | 0 | 32–34 | 25–27 | 35–37 | 95–110', 'S | 2–4 | 35–37 | 28–30 | 38–40 | 110–125',
+    'M | 6–8 | 38–40 | 31–33 | 41–43 | 125–140', 'L | 10–12 | 41–43 | 34–36 | 44–46 | 140–160', 'XL | 14–16 | 44–46 | 37–39 | 47–49 | 160–180',
+    '2XL | 18–20 | 47–49 | 40–42 | 50–52 | 180–205', '3XL | 22–24 | 50–52 | 43–45 | 53–55 | 205–240'].join('\n'),
+  chart_note: '',
+});
+
+const card = (img, tag, heading, body) => ({ type: 'card', settings: { image: '', default_image: IMG + img, tag, heading, body } });
+const item = (img, title, text) => ({ type: 'item', settings: { image: '', default_image: IMG + img, title, text } });
+const quote = (img, name, text) => ({ type: 'quote', settings: { image: '', default_image: IMG + img, name, verified: true, rating: 5, text } });
+const trust = (icon, title, text) => ({ type: 'item', settings: { icon, image: '', title, text } });
+const withBlocks = (type, settings, list) => {
+  const b = {}; const o = [];
+  list.forEach((x, i) => { const id = x.type + '_' + (i + 1); b[id] = x; o.push(id); });
+  return { type, settings, blocks: b, blockOrder: o };
+};
+
+const sections = {
+  product: {
+    type: 'product',
+    settings: {
+      skin: 'shapecurve', skin_highlight: HL, buy_now_label: '', // no second button (user 2026-11-19)
+      show_rating: true, show_variants: false, show_description: false, show_trust: false, // no main picker: each pack row has its own (user 2026-11-19)
+      show_size_finder: false,
+    },
+    blocks,
+    blockOrder: order,
+  },
+  features: withBlocks('sc-features', { bg: BAND, highlight: HL, pad_top: 50, pad_bottom: 10 }, [
+    card('0806.webp', 'Easy-Slide Drop Seat', 'Bathroom Breaks, Made Easy', '<p>No more struggling with your shapewear. The easy-slide drop seat design makes <strong>bathroom breaks quicker and more convenient</strong>, so you can stay shaped, supported, and comfortable throughout the day.</p>'),
+    card('0806-2.webp', 'Full-Body Sculpting Fit', 'Sleek From Every Angle', '<p>Designed to <strong>shape the waist, tummy, hips, and thighs</strong>, this bodysuit creates a smoother line under clothes. It helps your favorite dresses, pants, and fitted outfits look cleaner and more flattering.</p>'),
+    card('3_zone_compression.webp', 'Zoned Smart Compression', 'Smooth Where It Matters', '<p>Different compression levels target different areas, <strong>giving your body the right support where it needs it most.</strong> It helps smooth bumps, refine your shape, and create a more confident, sculpted look.</p>'),
+    card('fabric_b9f16534-5521-4906-91b3-33c7b30bb3a7.webp', 'Seamless Stretch Fabric', 'Held In, Not Held Back', '<p>Made with flexible, skin-friendly fabric, this shapewear moves with your body while maintaining a smooth fit. Enjoy <strong>breathable comfort and confident support</strong> whether you’re dressing up or wearing it daily.</p>'),
+  ]),
+  details: withBlocks('sc-details', {
+    heading: 'Crafted In Every Detail', image: '', default_image: IMG + 'model_a2dd1128-20e3-4f0b-a45f-2be6713e6296.webp',
+    bg: BAND, highlight: HL, pad_top: 20, pad_bottom: 20,
+  }, [
+    item('bust.webp', 'Wavy Bust Lifting Band', 'Gently lifts and supports the bust for a naturally fuller, more flattering shape.'),
+    item('easy_off.webp', 'Drop-Seat Design', 'Makes bathroom breaks easier without having to fully remove your shapewear.'),
+    item('butt.webp', 'Wavy Hip-Shaping Band', 'Helps lift and contour the hips for a smoother, more sculpted curve.'),
+    item('fabric1.webp', 'Stretchy Skin-Friendly Fabric', 'Feels soft, breathable, and flexible for comfortable all-day wear.'),
+  ]),
+  // Before / after slider (user 2026-11-20): photos empty = hidden on the store until both are picked in the editor
+  before_after: {
+    type: 'sc-before-after',
+    settings: {
+      before_image: '', default_before_image: '', after_image: '', default_after_image: '', before_label: 'Before', after_label: 'After',
+      start: 50, ratio: '4/3', line_color: '#ffffff', image_side: 'left', heading: 'Sculpt Your Curves', heading_em: 'Without the Struggle',
+      body: '<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>',
+      // review card empty: fill it with a real review of the product (no made-up quote in the theme)
+      review_rating: 5, review_star_color: '#00b67a', review_title: '', review_text: '', review_author: '',
+      bg_style: 'gradient', bg: BAND, highlight: HL, pad_top: 36, pad_bottom: 36,
+    },
+  },
+  testimonials: { disabled: true, ...withBlocks('sc-testimonials', {
+    heading: 'Loved By 12,000+ Ladies Worldwide', button_label: 'View All', button_link: '#lu-reviews', star: '#F5A623',
+    bg: BAND, highlight: HL, pad_top: 20, pad_bottom: 20,
+  }, [
+    quote('sha58_buyer_2.webp', 'Samantha R.', 'Wow, this bodysuit really surprised me. It smooths my tummy and thighs nicely, but still feels breathable enough to wear for hours.'),
+    quote('sha58_buyer_4.webp', 'Kayla M.', 'Honestly, I love this shapewear. The drop-seat design is such a relief, and I didn’t have to fight with it in the restroom.'),
+    quote('sha58_buyer_3.webp', 'Brianna Hayes', 'Oh my gosh, this body shaper gives such a clean look under dresses. It holds me in without feeling stiff or painful.'),
+    quote('sha58_buyer_1.webp', 'Danielle P.', 'So happy with this bodysuit. The compression feels smart, not harsh, and my waist, hips, and thighs look smoother right away.'),
+  ]) },
+  // Customer videos in place of the photo testimonials (user 2026-11-19); 6 empty slots to fill in the editor.
+  reels: withBlocks('sc-reels', {
+    eyebrow: 'Caught on camera', heading: 'Don\'t just take our word for it.', heading_em: 'See them in motion.',
+    subheading: 'Short videos from our customers, in their own words.', sound_label: 'Sound', mobile_layout: 'peek',
+    bg: '', accent: '#F1C6D6', pad_top: 56, pad_bottom: 64,
+  }, [1, 2, 3, 4, 5, 6].map(() => ({ type: 'clip', settings: { video: '', poster: '', name: '', caption: '', alt: '', default_video: '' } }))),
+  trust: withBlocks('sc-trust', { bg: BAND, highlight: HL, pad_top: 20, pad_bottom: 35 }, [
+    trust('truck', 'Free Shipping', '<p>Enjoy free shipping on all orders over $79 USD</p>'),
+    trust('money', '100% Money Back', '<p>Free returns within the first 30 days after purchasing</p>'),
+    trust('card', 'Secure Checkout', '<p>Payment from the most popular &amp; secure payment methods</p>'),
+    trust('support', '24/7 Live Support', '<p>Reach out to our support team via email: <strong>{{CompanyEmail}}</strong></p>'),
+  ]),
+  // Okendo-style reviews of the original (user 2026-11-19); no review form (reviews are added in the admin)
+  reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, page_size: 5, star_color: '#ffb400', pad_top: 40, pad_bottom: 50 } },
+  related: { type: 'related', settings: { heading: 'You Will Also Love', show_quick_add: false } }, // the original's cards have no button
+};
+// ---------------------------------------------------------------------------------------------------------------
+// Every product template carries every product-page section of the theme (user 2026-11-20: "the before / after slider
+// for every template, not only the bodysuit one; the same for the other features"). A section type a template lacks
+// is added at its place in PAGE (after the nearest section before it that the template has), switched OFF (the
+// editor's eye icon turns it on) with the bodysuit template's content to start from. The before / after slider is
+// added ON: it stays hidden on the store until both photos are picked. A section a template has is never changed, so
+// running again adds nothing; a section deleted from a template comes back on the next run (switch it off instead).
+const PAGE = [ // [id, id when taken, section] in page order
+  ['features', 'features_2', sections.features],
+  ['details', 'details_2', sections.details],
+  ['before_after', 'before_after_2', sections.before_after],
+  ['reels', 'reels_2', sections.reels],
+  ['testimonials', 'testimonials_2', sections.testimonials],
+  ['trust', 'trust_2', sections.trust],
+  ['reviews_okendo', 'reviews_okendo_2', sections.reviews],
+  ['reviews', 'reviews_lunara', { type: 'reviews', settings: { show_write: false } }], // Lunara's reviews; no review form
+  ['faq', 'faq_2', { type: 'faq', settings: {} }],                                    // blocks empty = listing / Theme FAQ
+  ['related', 'related_2', sections.related],
+];
+function carryAll(t) {
+  const added = [];
+  let prev = 'product';
+  for (const [id, alt, sec] of PAGE) {
+    const own = t.order.find((k) => t.sections[k] && t.sections[k].type === sec.type);
+    if (own) { prev = own; continue; }
+    const nid = t.sections[id] ? alt : id;
+    if (t.sections[nid]) throw new Error('no free id for ' + sec.type);
+    const copy = JSON.parse(JSON.stringify(sec));
+    if (sec.type === 'sc-before-after') delete copy.disabled; else copy.disabled = true;
+    t.sections[nid] = copy;
+    t.order.splice(t.order.indexOf(prev) + 1, 0, nid);
+    prev = nid;
+    added.push(nid);
+  }
+  return added;
+}
+
+const triple = {
+  name: 'Triple-Zone Drop-Seat Bodysuit',
+  description: 'Triple-Zone Compression Drop-Seat bodysuit page: picture colour tiles + size pills, Find My Size, Buy 1 / 2 / 3 packs, shipping box, info rows, feature cards, details, customer videos, trust badges, reviews, related products. Highlight #790236, Poppins.',
+  sections,
+  // the photo testimonials stay, hidden (disabled), right after the videos: the editor's eye icon brings them back
+  order: ['product', 'features', 'details', 'before_after', 'reels', 'testimonials', 'trust', 'reviews', 'related'],
+};
+carryAll(triple);
+write('templates/product.triple-zone-bodysuit.json', triple);
+
+for (const file of fs.readdirSync(path.join(THEME, 'templates')).filter((x) => /^product\..*json$/.test(x))) {
+  if (file === 'product.triple-zone-bodysuit.json') continue;
+  const p = path.join(THEME, 'templates', file);
+  const src = fs.readFileSync(p, 'utf8');
+  const t = JSON.parse(src);
+  const added = carryAll(t);
+  if (!added.length) continue;
+  fs.writeFileSync(p, JSON.stringify(t, null, 2) + (src.endsWith('\n') ? '\n' : ''));
+  console.log('added to templates/' + file + ': ' + added.join(', '));
+}

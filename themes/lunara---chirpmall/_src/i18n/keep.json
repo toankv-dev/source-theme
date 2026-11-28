@@ -1,0 +1,10 @@
+[
+  "use strict", "Enter", "Escape", "Tab", "End", "Home", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
+  "AddToCart", "InitiateCheckout", "ViewContent", "Search", "Lead", "Newsletter", "Contact form", "DOMContentLoaded",
+  "IntersectionObserver", "USD", "UTC", "POST", "Accept", "LABEL", "IMG", "VIDEO", "SELECT",
+  "(prefers-reduced-motion: reduce)", "(min-width: 750px)", "(max-width: 990px)", "(max-width: 749px)",
+  "footer strong", "0px 0px -40px 0px", "300px 0px", "600px 0px", "36px 0", "1px solid #c3f0d7", "1px solid #ffd8d8",
+  "Default Title", "Default", "One", "Yes", "FREE", "PERCENTAGE", "United States",
+  "XXXS", "XXS", "XS", "XL", "XXL", "XXXL", "XXXXL", "XXXXXL", "XXXXXXL", "In", "Lbs", "Kg", "Cm",
+  "snippets/sc-fit.hbs|Size", "snippets/lu-size-finder.hbs|Size"
+]

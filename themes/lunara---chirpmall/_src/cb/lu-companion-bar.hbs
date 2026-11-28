@@ -1,0 +1,13 @@
+{{!-- "Complete the bundle" (SHOPDY-127): this product + one other product, each at the offer's fixed bundle price.
+      One bar per live offer of product.companion_bundles (the backend sends only the live ones). Same look as a
+      Kaching pack bar, but NOT a pack: no data-lu-bar, so the Kaching script leaves it alone. assets/js/lu-companion.js
+      fills the prices from #sf-config (config.companionBundles, matched by key), draws one row per product (picture,
+      name, one select per option, bundle price + struck price) and adds both lines on Add to cart, each carrying the
+      offer key. Copied from _work/cb/ by _work/patch-cb.js — edit it there. --}}
+<div class="kaching-bundles__bar lu-cb-bar" data-lu-cb="{{key}}" tabindex="0" role="radio" aria-checked="false">
+<input type="radio" name="lu-deal-{{@root.section.id}}" value="cb" tabindex="-1" aria-hidden="true">
+<div class="kaching-bundles__bar-container">
+{{#if badge}}<div class="kaching-bundles__bar-most-popular kaching-bundles__bar-most-popular--simple" style="--bar-most-popular-background-color: var(--lu-k-accent); --bar-most-popular-color: var(--lu-k-badge-text); --badge-text-size: 13px;"><div class="kaching-bundles__bar-most-popular__content">{{badge}}</div></div>{{/if}}
+<div class="kaching-bundles__bar-wrapper"><div class="kaching-bundles__bar-main"><div class="kaching-bundles__bar-radio"></div><div class="kaching-bundles__bar-content"><div class="kaching-bundles__bar-content-left"><div class="kaching-bundles__bar-first-line"><span class="kaching-bundles__bar-title">{{title}}</span></div><div class="kaching-bundles__bar-second-line" data-lu-cb-save-line hidden><div class="kaching-bundles__bar-subtitle"><span class="lu-k-save" data-lu-cb-save></span></div></div></div><div class="kaching-bundles__bar-pricing"><div class="kaching-bundles__bar-price" data-a11y-label="Price:" data-lu-cb-price></div><div class="kaching-bundles__bar-full-price" data-a11y-label="Original price:" data-lu-cb-was></div></div></div></div>
+<div class="lu-cb-rows" data-lu-cb-rows hidden></div></div>
+</div></div>

@@ -1,0 +1,18 @@
+{{!-- Text sizes and colours of one product block (user 2026-11-26): the CSS selectors of each text group, by block type;
+      the settings come from PB_TYPE in _src/build-sc.js (same keys). Printed at the top of sections/product.hbs by
+      {{#each section.blocks}}{{> pb-type this}}{{/each}} (patch in _src/patch-vn.js), outside the block list.
+      A block's markup changed (a new class) = change its selectors here. Highlights box has its own settings. --}}
+{{#if (eq type "title")}}{{> sc-type bid=id st=settings h="h1,h2,.product__title"}}{{/if}}
+{{#if (eq type "rating")}}{{> sc-type bid=id st=settings t=".trustpilot-rating-text"}}{{/if}}
+{{#if (eq type "sc_price")}}{{> sc-type bid=id st=settings p=".sc-price__now" s=".sc-price__was" b=".sc-price__badge"}}{{/if}}
+{{#if (eq type "variant_picker")}}{{> sc-type bid=id st=settings s=".form__label-text,.form__label" t="label:not(.sc-swimg):not(.form__label)"}}{{/if}}
+{{#if (eq type "size_finder")}}{{> sc-type bid=id st=settings b=".lu-sf-open" h=".lu-sf-hd,.lu-sf-hd h2" t=".lu-sf-q,.lu-sf-l,.lu-sf-how,.lu-sf-hint,.lu-sf-res"}}{{/if}}
+{{#if (eq type "buy_buttons")}}{{> sc-type bid=id st=settings b=".main-atc__label__text,.sc-buynow" s=".sc-safe legend,.sc-mbg__h" t=".sc-mbg__p"}}{{/if}}
+{{#if (eq type "trust")}}{{> sc-type bid=id st=settings t=".pdg-trust,.pdg-trust span"}}{{/if}}
+{{#if (eq type "description")}}{{> sc-type bid=id st=settings t=".product__description,.tt-description,.elementor-widget-container"}}{{/if}}
+{{#if (eq type "kaching")}}{{> sc-type bid=id st=settings h=".kaching-bundles__block-title,.kaching-bundles__block-title span" s=".kaching-bundles__bar-title" p=".kaching-bundles__bar-price" t=".kaching-bundles__bar-subtitle,.kaching-bundles__bar-full-price,.kaching-bundles__free-gift__text,.kaching-bundles__free-gift__full-price" b=".lu-k-save,.kaching-bundles__bar-most-popular__content"}}{{/if}}
+{{#if (eq type "custom-html")}}{{> sc-type bid=id st=settings t=".pd-custom-html"}}{{/if}}
+{{#if (eq type "faq")}}{{> sc-type bid=id st=settings s=".lu-pf__q" t=".lu-pf__a"}}{{/if}}
+{{#if (eq type "sc_ship")}}{{> sc-type bid=id st=settings s=".sc-ship__title" t=".sc-ship__note,.sc-ship__side"}}{{/if}}
+{{#if (eq type "sc_tabs")}}{{> sc-type bid=id st=settings s="summary" t=".sc-tab__body"}}{{/if}}
+{{#if (eq type "sc_fit")}}{{> sc-type bid=id st=settings b=".scfit__open-in,.scfit__open-in span" h=".scfit__title,.scfit__ctitle" t=".scfit__sub,.scfit__lab"}}{{/if}}

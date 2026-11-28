@@ -127,9 +127,12 @@ A review sent from the storefront is saved as pending: not shown. Products → C
 Nguồn: apps/api/src/features/storefront/storefront.routes.ts, apps/web/src/features/customer-reviews/pages/customer-reviews.page.tsx
 Add / edit / remove a review by hand (also the ones on the home page): Products → open the product → its review list
 ("All reviews") → **Add review** (avatar, Reviewer name, stars, Review title, text, Date review, Media) → Add review; the
-pencil = **Edit review** → Save changes; the bin = Remove; a pending one = Publish. Lunara home page (theme.js): real
-reviews of up to 8 random products of the home list that have reviews (Theme settings › Home page: Show real reviews of
-random products, Heading, Subheading, Reviews shown); the "Rated x/5 by n" pill = their average and count.
+pencil = **Edit review** → Save changes; the bin = Remove; a pending one = Publish. Lunara home page: which reviews
+depends on the theme's theme.js — read it, never assume. Home holding `<lu-reviews data-home>` (e.g. lunara---chirpmall):
+first 10 products of `#ms-products` × 20 reviews each, kept in product order, then reviews with a photo first; 12 shown,
+"more" = next 12; NOT random, "Reviews shown" (home_reviews_limit) unused, only Heading / Subheading / on-off apply. So a
+1st product with ≥ 12 photo reviews fills the whole first screen. Home with a `#lu-rv-card` template: up to 8 random
+products with reviews, shuffled, "Reviews shown" applies; the "Rated x/5 by n" pill = their average and count.
 Nguồn: apps/web/src/features/products/components/product-review-section.tsx, apps/web/src/features/products/components/product-editor.tsx
 
 ## "−xx %" badge, crossed-out price

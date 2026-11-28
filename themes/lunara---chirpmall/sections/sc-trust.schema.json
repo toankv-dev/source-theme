@@ -1,0 +1,257 @@
+{
+  "name": "Trust badges card",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Text sizes and colours"
+    },
+    {
+      "type": "paragraph",
+      "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+    },
+    {
+      "type": "range",
+      "id": "s_size",
+      "label": "Titles: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "s_size_m",
+      "label": "Titles: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "s_color",
+      "label": "Titles: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "t_size",
+      "label": "Text: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "t_size_m",
+      "label": "Text: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "t_color",
+      "label": "Text: colour",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "truck",
+          "options": [
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "money",
+              "label": "Money back"
+            },
+            {
+              "value": "card",
+              "label": "Card"
+            },
+            {
+              "value": "support",
+              "label": "Support (phone)"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "returns",
+              "label": "Returns"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "drop",
+              "label": "Water drop"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "tick",
+              "label": "Tick"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Own icon (optional)",
+          "info": "Replaces the icon above. Square PNG / SVG, 96 x 96."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Short line about it.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Only this one; the section settings apply to all. Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Title: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Title: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Title: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Text: colour",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust badges",
+      "category": "Content",
+      "description": "A white card with 4 round icons, titles and short lines."
+    }
+  ]
+}

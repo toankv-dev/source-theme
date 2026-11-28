@@ -1,0 +1,47 @@
+{{!-- Image with text list — schema v2 section (sections/features.schema.json).
+      Heading/intro come from the section settings and fall back to the listing
+      page.heroTitle / page.intro; rows come from "feature" blocks and fall back to
+      page.features so a legacy render is unchanged. Styles are self-contained:
+      the shared css bundle has no .feature rules. --}}
+<style>
+  .ft-section{max-width:1030px;margin:0 auto;padding:40px 16px;font-family:var(--font,inherit)}
+  .ft-section .section-title{font-size:24px;font-weight:700;text-align:center;margin:0 0 12px;color:var(--ink,#1b1b1b)}
+  .ft-section .section-sub{font-size:16px;line-height:1.6;color:#444;text-align:center;margin:0 0 32px}
+  .ft-list .feature{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin:0 0 32px}
+  .ft-list .feature:last-child{margin-bottom:0}
+  .ft-list .feature img{display:block;width:100%;height:auto;aspect-ratio:4 / 3;object-fit:cover;border-radius:8px}
+  .ft-list .feature h3{font-size:20px;font-weight:700;margin:0 0 8px;color:var(--ink,#1b1b1b)}
+  .ft-list .feature p{font-size:16px;line-height:1.6;color:#444;margin:0}
+  @media (min-width:768px){
+    .ft-list .feature{grid-template-columns:1fr 1fr;gap:40px;margin-bottom:48px}
+    .ft-list .feature:nth-child(even) img{order:2}
+    .ft-list .feature > .feature-body:only-child{grid-column:1 / -1}
+  }
+</style>
+<div class="ft-section">
+  {{#if section.settings.heading}}<h2 class="section-title" {{{editable "heading"}}}>{{section.settings.heading}}</h2>{{else}}{{#if page.heroTitle}}<h2 class="section-title">{{page.heroTitle}}</h2>{{/if}}{{/if}}
+  {{#if section.settings.intro}}<p class="section-sub" {{{editable "intro"}}}>{{section.settings.intro}}</p>{{else}}{{#if page.intro}}<p class="section-sub">{{page.intro}}</p>{{/if}}{{/if}}
+  <div class="ft-list">
+    {{#if section.blocks.length}}
+    {{#each section.blocks}}
+    <article class="feature" {{{this.attributes}}}>
+      {{#if this.settings.image}}<img src="{{this.settings.image}}" alt="{{this.settings.title}}" loading="lazy" />{{/if}}
+      <div class="feature-body">
+        <h3 {{{editable "title"}}}>{{this.settings.title}}</h3>
+        <p {{{editable "body"}}}>{{this.settings.body}}</p>
+      </div>
+    </article>
+    {{/each}}
+    {{else}}
+    {{#each page.features}}
+    <article class="feature">
+      {{#if this.image}}<img src="{{this.image}}" alt="{{this.title}}" loading="lazy" />{{/if}}
+      <div class="feature-body">
+        <h3>{{this.title}}</h3>
+        <p>{{this.body}}</p>
+      </div>
+    </article>
+    {{/each}}
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,40 @@
+{
+  "orderNumber": "#1024",
+  "currency": "USD",
+  "status": {
+    "label": "In Transit",
+    "steps": [
+      { "label": "Order Placed", "state": "done" },
+      { "label": "Processing", "state": "done" },
+      { "label": "In Transit", "state": "current" },
+      { "label": "Delivered", "state": "todo" }
+    ]
+  },
+  "shipment": {
+    "carrier": "YunExpress",
+    "trackingNumber": "YT2615900710290424",
+    "trackUrl": null,
+    "events": []
+  },
+  "products": [
+    { "name": "Classic Crew T-Shirt", "variant": "Black / M", "qty": 2, "price": "39.98" },
+    { "name": "Ceramic Coffee Mug", "variant": null, "qty": 1, "price": "12.50" }
+  ],
+  "totals": {
+    "subtotal": "52.48",
+    "shipping": "5.00",
+    "tax": "4.20",
+    "total": "61.68"
+  },
+  "customer": {
+    "email": "kimvantoan2k3@gmail.com",
+    "phone": "0398085671",
+    "payment": { "provider": "stripe", "status": "paid" },
+    "shippingAddress": {
+      "name": "Kim Van Toan",
+      "line1": "221B Baker Street",
+      "line2": "San Francisco, CA 94105",
+      "country": "USA"
+    }
+  }
+}

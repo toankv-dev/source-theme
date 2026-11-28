@@ -1,0 +1,266 @@
+{
+  "name": "Photo testimonials",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved By 12,000+ Ladies Worldwide"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button",
+      "default": "View All",
+      "info": "Empty = no button."
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "#lu-reviews",
+      "info": "#lu-reviews = the reviews of this page."
+    },
+    {
+      "type": "color",
+      "id": "star",
+      "label": "Star colour",
+      "default": "#F5A623"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Text sizes and colours"
+    },
+    {
+      "type": "paragraph",
+      "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+    },
+    {
+      "type": "range",
+      "id": "h_size",
+      "label": "Heading: size on computers",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "h_size_m",
+      "label": "Heading: size on phones",
+      "min": 0,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "h_color",
+      "label": "Heading: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "s_size",
+      "label": "Names: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "s_size_m",
+      "label": "Names: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "s_color",
+      "label": "Names: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "t_size",
+      "label": "Quotes: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "t_size_m",
+      "label": "Quotes: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "t_color",
+      "label": "Quotes: colour",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "3:4, 546 x 728 recommended."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Customer name"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified tick",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "What the customer said."
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Only this one; the section settings apply to all. Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Name: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Name: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Name: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Quote: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Quote: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Quote: colour",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Photo testimonials",
+      "category": "Reviews",
+      "description": "Swipeable cards: photo, name, stars, short quote, and a button to the reviews."
+    }
+  ]
+}

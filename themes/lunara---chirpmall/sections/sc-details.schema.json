@@ -1,0 +1,243 @@
+{
+  "name": "Details (picture + round cards)",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Crafted In Every Detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Large picture (desktop only)",
+      "info": "4:5, 1050 x 1312 recommended. Hidden on phones, as on the original."
+    },
+    {
+      "type": "text",
+      "id": "default_image",
+      "label": "Theme file while empty",
+      "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "#F6EDF1"
+    },
+    {
+      "type": "color",
+      "id": "highlight",
+      "label": "Highlight colour",
+      "default": "#790236",
+      "info": "Tag / icon gradients are tints of it."
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Text sizes and colours"
+    },
+    {
+      "type": "paragraph",
+      "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+    },
+    {
+      "type": "range",
+      "id": "h_size",
+      "label": "Heading: size on computers",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "h_size_m",
+      "label": "Heading: size on phones",
+      "min": 0,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "h_color",
+      "label": "Heading: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "s_size",
+      "label": "Card titles: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "s_size_m",
+      "label": "Card titles: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "s_color",
+      "label": "Card titles: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "t_size",
+      "label": "Card text: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "t_size_m",
+      "label": "Card text: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "t_color",
+      "label": "Card text: colour",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Detail",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Round picture",
+          "info": "Square, 304 x 304 recommended (shown as a circle)."
+        },
+        {
+          "type": "text",
+          "id": "default_image",
+          "label": "Theme file while empty",
+          "info": "Path inside assets/, e.g. images/sc-sections/photo.webp. Shown until a file is picked above."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Detail"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "One sentence about this detail."
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Only this one; the section settings apply to all. Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Title: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Title: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Title: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Text: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Text: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Text: colour",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Details",
+      "category": "Content",
+      "description": "Heading, a large picture and cards with a round picture, alternating sides."
+    }
+  ]
+}

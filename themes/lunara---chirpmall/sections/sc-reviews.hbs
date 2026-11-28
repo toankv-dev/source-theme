@@ -1,0 +1,534 @@
+{{!-- Reviews in the look of shape-curve.com's Okendo widget (vesnacharm, user 2026-11-19; docs/SPEC-lunara-vesnacharm.md):
+      average + stars + "Based on N reviews", "NN% would recommend" (= share of 4-5 star reviews), star bars with counts
+      (click = filter), customer photo strip, Filters, "N reviews" + Sort, review list (initial avatar, Verified Buyer,
+      relative date, stars, title, text with Read More, photo on the right), numbered pages (user 2026-11-19). "Write a review" (user 2026-11-19,
+      as tammycharm.com; settings write_*): a pop-up form (stars, name, email, title, review, one photo, "I recommend")
+      posted as multipart to config.reviewsUrl, where the platform keeps it as a pending review until the merchant
+      publishes it; nothing sent is shown on the page. Data: product.reviews (server-rendered first page, read back from the escaped HTML) + GET
+      config.reviewsUrl (paged, 50 at a time).
+      Own <style> + <script>; id="lu-reviews" keeps the rating link and the testimonials "View All" button working. --}}
+{{> sc-type h=".scr__h" s=".scr__t" t=".scr__c" root=".scr"}}
+<section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffb400{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
+<style>
+/* Measured: user's screenshot of shape-curve.com (1511 px) + _work/probe-1440.txt (Okendo). Font = the theme's Poppins. */
+.scr{padding:var(--scr-pt) 0 var(--scr-pb);background:#fff;color:#0b0b0b;font-family:var(--font-body-family,inherit)}
+.scr *{box-sizing:border-box;letter-spacing:0}
+.scr__in{max-width:1140px;margin:0 auto}
+.scr__h{margin:0 0 24px;font-size:24px;line-height:1.3;font-weight:700;text-align:center;color:#232323}
+.scr__stars{--sz:20px;display:inline-block;flex:none;width:calc(var(--sz) * 5);height:var(--sz);background:linear-gradient(90deg,var(--scr-star) calc(var(--r,5) / 5 * 100%),#e3e3e3 0);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L1.2 7.6l6.1-.8z'/%3E%3C/svg%3E") 0 0/var(--sz) var(--sz) repeat-x;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L1.2 7.6l6.1-.8z'/%3E%3C/svg%3E") 0 0/var(--sz) var(--sz) repeat-x}
+.scr__top{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.scr__avgrow{display:flex;align-items:center;flex-wrap:wrap;gap:6px 16px;margin-bottom:21px}
+.scr__avg{font-size:20px;line-height:32px;font-weight:600;color:#0b0b0b}
+.scr__avgrow .scr__stars{margin-left:-6px}
+.scr__based{font-size:12px;line-height:19px;color:#878787}
+.scr__dist{display:flex;flex-direction:column;max-width:360px}
+.scr__drow{display:grid;grid-template-columns:28px 1fr 40px;align-items:center;gap:8px;width:100%;min-height:24px;padding:0;border:0;background:none;color:#0b0b0b;font:inherit;font-size:12px;text-align:left;cursor:pointer}
+.scr__drow:disabled{cursor:default}
+.scr__drow[aria-pressed="true"] .scr__dl{font-weight:700}
+.scr__dl{display:inline-flex;align-items:center;gap:3px}
+.scr__dl .scr__stars{--sz:12px;--r:5;width:12px}
+.scr__track{position:relative;display:block;height:6px;border-radius:3px;background:color-mix(in srgb,var(--vn-hl,#790236) 8%,#fff);overflow:hidden}
+.scr__track i{position:absolute;inset:0 auto 0 0;width:0;border-radius:3px;background:var(--vn-hl,#790236);transition:width .3s}
+.scr__dc{color:#878787;text-align:right}
+.scr__rec{align-self:start;display:flex;align-items:baseline;gap:10px;margin:0}
+.scr__rec[hidden]{display:none}
+.scr__rec strong{font-size:20px;line-height:32px;font-weight:700;color:#0b0b0b}
+.scr__rec span{font-size:14px;line-height:22px;color:#878787}
+.scr__photos{display:flex;gap:4px;margin:23px 0 0;overflow-x:auto;scrollbar-width:none;max-width:546px}
+.scr__photos::-webkit-scrollbar{display:none}
+.scr__photos[hidden]{display:none}
+.scr__thumb{flex:0 0 120px;width:120px;height:120px;padding:0;border:0;background:#f5f5f5;cursor:pointer;overflow:hidden}
+.scr__thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.scr__tools{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.scr__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 24px;border:1px solid var(--vn-hl,#790236);border-radius:4px;background:var(--vn-hl,#790236);color:#fff;font:inherit;font-size:14px;font-weight:700;line-height:14px;cursor:pointer}
+.scr__btn:hover{background:color-mix(in srgb,var(--vn-hl,#790236) 85%,#000)}
+.scr__panel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.scr__panel[hidden]{display:none}
+.scr__chip{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:0 14px;border:1px solid var(--vn-hl,#790236);border-radius:18px;background:#fff;color:var(--vn-hl,#790236);font:inherit;font-size:13px;cursor:pointer}
+.scr__chip[aria-pressed="true"]{border-color:var(--vn-hl,#790236);background:var(--vn-hl,#790236);color:#fff}
+.scr__chip:disabled{opacity:.45;cursor:default}
+.scr__n:empty{display:none}
+.scr__head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:33px;padding-bottom:2px;border-bottom:1px solid #b6b6b6}
+.scr__count{font-size:14px;line-height:22px;color:#878787}
+.scr__sort{display:flex;align-items:center;gap:20px;font-size:16px;font-weight:600;color:#262626}
+.scr__sort select{min-height:36px;padding:0 24px 0 8px;border:0;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23262626'/%3E%3C/svg%3E") right 4px center no-repeat;-webkit-appearance:none;appearance:none;color:#262626;font:inherit;font-size:14px;font-weight:400;cursor:pointer}
+.scr__item{display:block;padding:24px 0;border-bottom:1px solid #ececec}
+/* Shopee card (user 2026-11-27): stars under the name, title / text / photos under it, lined up with the name */
+.scr__main{margin-top:10px;padding-left:64px}
+.scr__meta{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.scr__who{display:flex;align-items:center;gap:18px}
+.scr__av{display:flex;align-items:center;justify-content:center;flex:none;width:46px;height:46px;border-radius:50%;background:color-mix(in srgb,var(--vn-hl,#790236) 10%,#fff);color:var(--vn-hl,#790236);font-size:13px;font-weight:700;text-transform:uppercase}
+.scr__name{display:block;font-size:13px;line-height:19px;font-weight:700;color:#0b0b0b}
+.scr__ver svg{color:var(--vn-hl,#790236)}
+.scr__ver{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:19px;font-weight:600;color:#262626}
+.scr__date{font-size:12px;line-height:19px;color:#878787;white-space:nowrap}
+.scr__item .scr__stars{--sz:15px;display:block;margin:3px 0 0 -1px}
+.scr__t{margin:0 0 6px;font-size:14px;line-height:22.4px;font-weight:600;color:#0b0b0b}
+.scr__c{margin:0;font-size:14px;line-height:25.2px;color:#0b0b0b;white-space:pre-line;overflow-wrap:anywhere}
+.scr__rm{display:inline;padding:0;border:0;background:none;color:#0b0b0b;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer}
+.scr__phs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.scr__ph{flex:none;padding:0;border:0;border-radius:4px;background:#f5f5f5;cursor:pointer;overflow:hidden}
+.scr__ph img{display:block;width:80px;height:80px;object-fit:cover}
+/* Pages (user's screenshot): 36 px buttons on a 40 px pitch, current page in a #e1e1e2 circle, 14 px #1a1a1a, "…", chevrons (faded when not usable) */
+.scr__pager{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:28px}
+.scr__pager[hidden]{display:none}
+.scr__pg,.scr__dots{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 6px;border:0;border-radius:18px;background:none;color:#1a1a1a;font:inherit;font-size:14px;line-height:1}
+.scr__pg{cursor:pointer}
+.scr__pg:hover{background:color-mix(in srgb,var(--vn-hl,#790236) 6%,#fff)}
+.scr__pg[aria-current="page"]{background:color-mix(in srgb,var(--vn-hl,#790236) 12%,#fff);color:var(--vn-hl,#790236);font-weight:600;cursor:default}
+.scr__pg:disabled{opacity:.35;background:none;cursor:default}
+.scr__list[aria-busy="true"]{opacity:.5}
+.scr__head{scroll-margin-top:150px}
+.scr__empty{padding:24px 0;color:#878787;font-size:14px}
+.scr__dlg{width:min(92vw,720px);max-height:90vh;padding:0;border:0;border-radius:6px;overflow:auto}
+.scr__dlg::backdrop{background:rgb(0 0 0 / .6)}
+.scr__dlg-in{display:grid;grid-template-columns:1fr 1fr}
+.scr__dlg-in img{display:block;width:100%;height:100%;max-height:90vh;object-fit:cover}
+.scr__dlg-body{padding:28px 24px}
+.scr__dlg-thumbs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.scr__dlg-thumbs button{width:56px;height:56px;padding:0;border:2px solid transparent;border-radius:4px;background:#f5f5f5;cursor:pointer;overflow:hidden}
+.scr__dlg-thumbs button[aria-current="true"]{border-color:var(--vn-hl,#790236)}
+.scr__dlg-thumbs img{display:block;width:100%;height:100%;object-fit:cover}
+.scr__x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;border-radius:50%;background:rgb(255 255 255 / .9);color:#262626;font-size:24px;line-height:1;cursor:pointer}
+/* Write a review: outlined button top right; pop-up form (as tammycharm.com), main colour, no visible scrollbar */
+.scr__side{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px 24px}
+.scr__write{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;margin-left:auto;padding:0 22px;border:1px solid var(--vn-hl,#790236);border-radius:10px;background:#fff;color:var(--vn-hl,#790236);font:inherit;font-size:15px;line-height:1;font-weight:700;cursor:pointer;transition:background-color .15s}
+.scr__write:hover{background:color-mix(in srgb,var(--vn-hl,#790236) 8%,#fff)}
+.scr__write:focus-visible,.scr__w-submit:focus-visible,.scr__wx:focus-visible{outline:2px solid var(--vn-hl,#790236);outline-offset:2px}
+.scr__write svg{flex:none;display:block}
+.scr__wdlg{width:min(560px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;border:0;border-radius:12px;background:#fff;color:#15171c;overflow:auto;scrollbar-width:none;overscroll-behavior:contain}
+.scr__wdlg::-webkit-scrollbar{display:none}
+.scr__wdlg::backdrop{background:rgb(15 17 22 / .6)}
+.scr__wf{position:relative;display:grid;gap:6px;margin:0;padding:32px 28px 28px;text-align:left}
+.scr__wx{position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;color:#15171c;font-size:22px;line-height:1;cursor:pointer}
+.scr__w-pr{margin:0;padding-right:40px;font-size:13px;line-height:1.4;color:#6b6b6b}
+.scr__w-h{margin:0 0 8px;font-size:26px;line-height:1.25;font-weight:700;color:#15171c}
+.scr__w-stars{display:flex;gap:4px;min-width:0;margin:0;padding:0;border:0}
+.scr__w-stars legend{margin:0 0 4px;padding:0;font-size:14px;font-weight:700}
+.scr__w-stars label{position:relative;display:block;line-height:0;color:#cfd3da;cursor:pointer}
+.scr__w-stars label.is-on{color:var(--scr-star,#ffb400)}
+.scr__w-stars svg{display:block;width:34px;height:34px;fill:currentColor}
+.scr__w-stars label:has(input:focus-visible) svg{outline:2px solid var(--vn-hl,#790236);outline-offset:1px;border-radius:4px}
+.scr__sr{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0!important}
+.scr__w-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scr__w-f{display:grid;gap:4px;margin:0;font-size:14px;font-weight:700;color:#15171c}
+.scr__w-f input,.scr__w-f textarea{width:100%;min-height:46px;margin:0;padding:11px 12px;border:1px solid #d9d9de;border-radius:8px;background:#fff;color:#15171c;font:inherit;font-size:16px;font-weight:400;line-height:1.4;box-shadow:none;outline:none}
+.scr__w-f textarea{min-height:120px;resize:vertical}
+.scr__w-f input:focus,.scr__w-f textarea:focus{border-color:var(--vn-hl,#790236);box-shadow:0 0 0 2px color-mix(in srgb,var(--vn-hl,#790236) 22%,transparent)}
+.scr__w-f [aria-invalid="true"]{border-color:#c62828}
+.scr__w-file{display:grid;gap:6px;margin:4px 0 0;font-size:14px;font-weight:500;color:#15171c}
+.scr__w-file input{max-width:100%;font:inherit;font-size:14px}
+.scr__w-file input::file-selector-button{margin-right:10px;padding:8px 14px;border:1px solid var(--vn-hl,#790236);border-radius:6px;background:#fff;color:var(--vn-hl,#790236);font:inherit;font-weight:600;cursor:pointer}
+.scr__w-check{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;font-size:14px;font-weight:500;color:#15171c;cursor:pointer}
+.scr__w-check input{flex:none;width:18px;height:18px;margin:0;accent-color:var(--vn-hl,#790236)}
+.scr__w-err,.scr__w-msg{margin:0;font-size:13px;line-height:1.4;color:#c62828}
+.scr__w-err:empty,.scr__w-msg:empty{display:none}
+.scr__w-submit{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin-top:10px;padding:0 20px;border:1px solid var(--vn-hl,#790236);border-radius:10px;background:var(--vn-hl,#790236);color:#fff;font:inherit;font-size:16px;line-height:1;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.scr__w-submit:hover{background:color-mix(in srgb,var(--vn-hl,#790236) 85%,#000)}
+.scr__w-submit:disabled{opacity:.6;cursor:wait}
+.scr__w-done{display:grid;justify-items:center;gap:8px;padding:8px 0 0;text-align:center}
+.scr__w-done[hidden],.scr__w-step[hidden]{display:none}
+.scr__w-done svg{color:var(--vn-hl,#790236)}
+.scr__w-done p{margin:0;font-size:15px;line-height:1.5;color:#444}
+.scr__w-step{display:grid;gap:6px}
+@media screen and (max-width:560px){
+  .scr__w-row{grid-template-columns:1fr}
+  .scr__wf{padding:28px 18px 22px}
+  .scr__w-h{font-size:22px}
+}
+@media screen and (max-width:749px){
+  .scr__top{grid-template-columns:1fr;gap:16px}
+  .scr__side{flex-direction:column;align-items:stretch}
+  .scr__write{width:100%;margin-left:0}
+  .scr__dist{max-width:none}
+  .scr__drow{min-height:44px}
+  .scr__btn,.scr__chip,.scr__sort select{min-height:44px}
+  .scr__sort select{font-size:16px} /* under 16 px iOS zooms the page when the field is tapped */
+  /* long option names (DE "Schlechteste Bewertung", language copies) widened the select past 360 px */
+  .scr__sort{gap:8px;min-width:0}
+  .scr__sort select{min-width:0;max-width:100%;flex:0 1 auto;text-overflow:ellipsis}
+  .scr__pager{gap:0}
+  .scr__pg,.scr__dots{min-width:44px;height:44px;border-radius:22px}
+  .scr__photos{max-width:none;margin-top:24px}
+  .scr__thumb{flex-basis:96px;width:96px;height:96px}
+  .scr__head{margin-top:28px}
+  .scr__main{padding-left:0;margin-top:12px}
+  .scr__ph img{width:72px;height:72px}
+  .scr__dlg-in{grid-template-columns:1fr}
+  .scr__dlg-in img{height:auto;max-height:60vh}
+}
+</style>
+<div class="page-width"><div class="scr__in">
+{{#if section.settings.heading}}<h2 class="scr__h">{{section.settings.heading}}</h2>{{/if}}
+<div class="scr__top">
+<div class="scr__sum">
+<div class="scr__avgrow"><span class="scr__avg" data-scr-avg>{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}}</span><span class="scr__stars" data-scr-avg-stars style="--r:{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}}" role="img" aria-label="{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}} out of 5 stars"></span><span class="scr__based">{{#if section.settings.based_label}}{{section.settings.based_label}}{{else}}Based on{{/if}} <span data-scr-total>{{#if product.reviews.summary.total_count}}{{product.reviews.summary.total_count}}{{else}}0{{/if}}</span> {{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}</span></div>
+{{#if section.settings.show_dist}}<div class="scr__dist" role="group" aria-label="Filter by rating"><button type="button" class="scr__drow" data-scr-star="5" aria-pressed="false"><span class="scr__dl">5<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="5"></i></span><span class="scr__dc" data-scr-count="5">0</span></button><button type="button" class="scr__drow" data-scr-star="4" aria-pressed="false"><span class="scr__dl">4<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="4"></i></span><span class="scr__dc" data-scr-count="4">0</span></button><button type="button" class="scr__drow" data-scr-star="3" aria-pressed="false"><span class="scr__dl">3<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="3"></i></span><span class="scr__dc" data-scr-count="3">0</span></button><button type="button" class="scr__drow" data-scr-star="2" aria-pressed="false"><span class="scr__dl">2<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="2"></i></span><span class="scr__dc" data-scr-count="2">0</span></button><button type="button" class="scr__drow" data-scr-star="1" aria-pressed="false"><span class="scr__dl">1<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="1"></i></span><span class="scr__dc" data-scr-count="1">0</span></button></div>{{/if}}
+</div>
+<div class="scr__side">
+{{#unless (eq section.settings.show_recommend false)}}<p class="scr__rec" data-scr-rec hidden><strong data-scr-rec-pct></strong><span>{{#if section.settings.recommend_label}}{{section.settings.recommend_label}}{{else}}would recommend these products{{/if}}</span></p>{{/unless}}
+{{#unless (eq section.settings.write_show false)}}<button type="button" class="scr__write" data-scr-write aria-haspopup="dialog"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="m10.63.995 4.375 4.375.441.442-.441.443-8.438 8.437-.183.183H1.125V9.616l.183-.183L9.745.995l.443-.441.442.441Zm-8.255 9.14v3.49h3.49l5.938-5.938-3.49-3.49-5.938 5.938Zm6.822-6.822 3.49 3.49.99-.99-3.49-3.49-.99.99Z"/></svg><span>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</span></button>{{/unless}}
+</div>
+</div>
+{{#if section.settings.photo_strip}}<div class="scr__photos" data-scr-photos role="list" aria-label="Customer photos" hidden></div>{{/if}}
+<div class="scr__panel" id="scr-panel" data-scr-panel role="group" aria-label="Filter reviews"><button type="button" class="scr__chip" data-scr-chip="0" aria-pressed="true">All <span class="scr__n" data-scr-n="all"></span></button><button type="button" class="scr__chip" data-scr-chip="5" aria-pressed="false">5 ★ <span class="scr__n" data-scr-n="5"></span></button><button type="button" class="scr__chip" data-scr-chip="4" aria-pressed="false">4 ★ <span class="scr__n" data-scr-n="4"></span></button><button type="button" class="scr__chip" data-scr-chip="3" aria-pressed="false">3 ★ <span class="scr__n" data-scr-n="3"></span></button><button type="button" class="scr__chip" data-scr-chip="2" aria-pressed="false">2 ★ <span class="scr__n" data-scr-n="2"></span></button><button type="button" class="scr__chip" data-scr-chip="1" aria-pressed="false">1 ★ <span class="scr__n" data-scr-n="1"></span></button><button type="button" class="scr__chip" data-scr-photo-only aria-pressed="false">With photos <span class="scr__n" data-scr-n="photo"></span></button></div>
+<div class="scr__head"><span class="scr__count"><span data-scr-shown-total>{{#if product.reviews.summary.total_count}}{{product.reviews.summary.total_count}}{{else}}0{{/if}}</span> {{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}</span><label class="scr__sort"><span>{{#if section.settings.sort_label}}{{section.settings.sort_label}}{{else}}Sort{{/if}}</span><select data-scr-sort aria-label="Sort reviews"><option value="photos">Photos &amp; Videos</option><option value="recent">Most Recent</option><option value="oldest">Oldest</option><option value="high">Highest Rating</option><option value="low">Lowest Rating</option></select></label></div>
+<div class="scr__list" data-scr-list>{{#each product.reviews.items}}<article class="scr__item{{#if image}} has-photo{{else if images}} has-photo{{/if}}" data-rating="{{rating}}"><div class="scr__meta"><div class="scr__who"><span class="scr__av" aria-hidden="true"></span><div><strong class="scr__name">{{name}}</strong><span class="scr__stars" style="--r:{{rating}}" role="img" aria-label="{{rating}} out of 5 stars"></span></div></div><time class="scr__date" datetime="{{date}}">{{date}}</time></div><div class="scr__main">{{#if title}}<h3 class="scr__t">{{title}}</h3>{{/if}}<p class="scr__c">{{content}}</p>{{#if images}}<div class="scr__phs">{{#each images}}<div class="scr__ph"><img src="{{this}}" alt="Photo from {{../name}}" loading="lazy" width="80" height="80"></div>{{/each}}</div>{{else if image}}<div class="scr__phs"><div class="scr__ph"><img src="{{image}}" alt="Photo from {{name}}" loading="lazy" width="80" height="80"></div></div>{{/if}}</div></article>{{/each}}</div>
+<nav class="scr__pager" data-scr-pager aria-label="Review pages" hidden></nav>
+<dialog class="scr__dlg" data-scr-dlg aria-label="Customer review"><button type="button" class="scr__x" data-scr-close aria-label="Close">&times;</button><div class="scr__dlg-in" data-scr-dlg-in></div></dialog>
+{{#unless (eq section.settings.write_show false)}}<dialog class="scr__wdlg" data-scr-wdlg aria-labelledby="scr-w-h"><form class="scr__wf" data-scr-wform novalidate>
+<button type="button" class="scr__wx" data-scr-wclose aria-label="Close">&times;</button>
+<div class="scr__w-step" data-scr-wstep>
+<p class="scr__w-pr">{{product.title}}</p>
+<h2 class="scr__w-h" id="scr-w-h">{{#if section.settings.write_title}}{{section.settings.write_title}}{{else}}Write a review{{/if}}</h2>
+<fieldset class="scr__w-stars" data-scr-wstars><legend>Your rating</legend><label><input type="radio" name="rating" value="1" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">1 star</span></label><label><input type="radio" name="rating" value="2" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">2 stars</span></label><label><input type="radio" name="rating" value="3" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">3 stars</span></label><label><input type="radio" name="rating" value="4" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">4 stars</span></label><label><input type="radio" name="rating" value="5" class="scr__sr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/></svg><span class="scr__sr">5 stars</span></label></fieldset>
+<p class="scr__w-err" data-scr-werr="rating"></p>
+<div class="scr__w-row"><label class="scr__w-f"><span>Name</span><input type="text" name="name" maxlength="255" autocomplete="name" required></label>{{#unless (eq section.settings.write_email false)}}<label class="scr__w-f"><span>Email</span><input type="email" name="email" maxlength="120" autocomplete="email" inputmode="email"></label>{{/unless}}</div>
+<p class="scr__w-err" data-scr-werr="name"></p><p class="scr__w-err" data-scr-werr="email"></p>
+<label class="scr__w-f"><span>Review title</span><input type="text" name="title" maxlength="200"></label>
+<p class="scr__w-err" data-scr-werr="title"></p>
+<label class="scr__w-f"><span>Your review</span><textarea name="body" rows="5" maxlength="5000" required></textarea></label>
+<p class="scr__w-err" data-scr-werr="body"></p>
+{{#unless (eq section.settings.write_photo false)}}<label class="scr__w-file"><span>Add a photo (optional)</span><input type="file" name="photo" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,image/heic,image/heif"></label>
+<p class="scr__w-err" data-scr-werr="photo"></p>{{/unless}}
+{{#unless (eq section.settings.write_recommend false)}}<label class="scr__w-check"><input type="checkbox" name="recommend" value="1" checked><span>I recommend this product</span></label>{{/unless}}
+<p class="scr__w-msg" data-scr-wmsg role="alert"></p>
+<button type="submit" class="scr__w-submit" data-scr-wsubmit>{{#if section.settings.write_submit}}{{section.settings.write_submit}}{{else}}Submit review{{/if}}</button>
+</div>
+<div class="scr__w-done" data-scr-wdone hidden><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6"/></svg><h2 class="scr__w-h" tabindex="-1" data-scr-wdone-h>Thank you!</h2><p>{{#if section.settings.write_thanks}}{{section.settings.write_thanks}}{{else}}Your review will appear here once it has been checked.{{/if}}</p><button type="button" class="scr__w-submit" data-scr-wclose>Close</button></div>
+</form></dialog>{{/unless}}
+</div></div>
+<script>
+(function () {
+  var root = document.currentScript && document.currentScript.closest('[data-sc-reviews]');
+  if (!root || root.__scr) return;
+  root.__scr = 1;
+  var $ = function (s, el) { return (el || root).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || root).querySelectorAll(s)); };
+  var cfg = {};
+  try { cfg = JSON.parse(document.getElementById('sf-config').textContent) || {}; } catch (e) {}
+  // First page as the server rendered it (escaped HTML, so review text never sits in a <script>); the API replaces it.
+  var ssr = $$('[data-scr-list] > article').map(function (a) {
+    var t = function (s) { var e = a.querySelector(s); return e ? e.textContent : ''; }, tm = a.querySelector('time');
+    var imgs = Array.prototype.map.call(a.querySelectorAll('.scr__ph img'), function (i) { return i.getAttribute('src'); });
+    return { name: t('.scr__name'), rating: a.getAttribute('data-rating'), title: t('.scr__t'), content: t('.scr__c'), images: imgs, verified: !!a.querySelector('.scr__ver'), date: tm ? tm.getAttribute('datetime') : '' };
+  });
+  var PAGE = Math.max(1, parseInt(root.getAttribute('data-page'), 10) || 5), BATCH = 50, MAX_LOAD = 500;
+  var MORE = root.getAttribute('data-read-more'), LESS = root.getAttribute('data-read-less');
+  var all = ssr.map(norm), total = parseInt($('[data-scr-total]').textContent, 10) || all.length;
+  var pageNo = 1, sort = 'photos', star = 0, photoOnly = false, dist = null, loading = null, complete = false;
+  var list = $('[data-scr-list]'), pager = $('[data-scr-pager]'), dlg = $('[data-scr-dlg]'), head = $('.scr__head');
+
+  function norm(r) {
+    // every photo: images[] (platform), media[] (strings or { url }), then the single image; no duplicates
+    var imgs = [].concat(Array.isArray(r.images) ? r.images : [], Array.isArray(r.media) ? r.media : [], r.image || r.photo || [])
+      .map(function (x) { return typeof x === 'string' ? x : (x && (x.url || x.src)) || ''; })
+      .filter(function (x, i, l) { return x && l.indexOf(x) === i; });
+    return { name: String(r.name || ''), rating: Math.max(0, Math.min(5, Number(r.rating) || 0)), title: String(r.title || ''), content: String(r.content || r.body || ''), images: imgs, image: imgs[0] || '', verified: r.verified !== false, date: String(r.date || '') };
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function stars(r, label) { var s = el('span', 'scr__stars'); s.style.setProperty('--r', r); s.setAttribute('role', 'img'); s.setAttribute('aria-label', (label || r) + ' out of 5 stars'); return s; }
+  function ago(d) {
+    var t = Date.parse(d); if (!t) return d;
+    var days = Math.floor((Date.now() - t) / 864e5);
+    // {n} inside the text: a language copy may put the number anywhere ("vor {n} Tagen", _src/build-lang.js)
+    var ago = function (n, one, many) { return n === 1 ? one : many.replace('{n}', n); };
+    if (days < 1) return 'today';
+    if (days < 7) return ago(days, '1 day ago', '{n} days ago');
+    if (days < 30) return ago(Math.floor(days / 7), '1 week ago', '{n} weeks ago');
+    if (days < 365) return ago(Math.floor(days / 30), '1 month ago', '{n} months ago');
+    return ago(Math.floor(days / 365), '1 year ago', '{n} years ago');
+  }
+  function item(r) {
+    // As Shopee (user 2026-11-27): name with the stars under it (no "Verified Buyer"), then title, text and every photo
+    // in a row of small squares under the text (no photo column on the right). Same markup as the server-rendered list.
+    var a = el('article', 'scr__item' + (r.image ? ' has-photo' : ''));
+    var main = el('div', 'scr__main'), meta = el('div', 'scr__meta'), who = el('div', 'scr__who');
+    var av = el('span', 'scr__av', r.name.trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase() || '?'); av.setAttribute('aria-hidden', 'true');
+    var nb = el('div'); nb.appendChild(el('strong', 'scr__name', r.name)); nb.appendChild(stars(r.rating));
+    who.appendChild(av); who.appendChild(nb); meta.appendChild(who);
+    var tm = el('time', 'scr__date', ago(r.date)); if (r.date) tm.setAttribute('datetime', r.date); meta.appendChild(tm);
+    a.appendChild(meta);
+    if (r.title) main.appendChild(el('h3', 'scr__t', r.title));
+    var c = el('p', 'scr__c');
+    if (r.content.length > 300) {
+      var cut = r.content.slice(0, 280).replace(/\s+\S*$/, '') + '… ', b = el('button', 'scr__rm', MORE), open = false;
+      b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+      var txt = document.createTextNode(cut); c.appendChild(txt); c.appendChild(b);
+      b.addEventListener('click', function () { open = !open; txt.nodeValue = open ? r.content + ' ' : cut; b.textContent = open ? LESS : MORE; b.setAttribute('aria-expanded', String(open)); });
+    } else c.textContent = r.content;
+    main.appendChild(c);
+    if (r.images.length) {
+      var phs = el('div', 'scr__phs');
+      r.images.forEach(function (src, k) {
+        var ph = el('button', 'scr__ph'); ph.type = 'button'; ph.setAttribute('aria-label', 'Open photo ' + (k + 1) + ' of ' + r.images.length + ' from ' + r.name);
+        var img = el('img'); img.src = src; img.alt = 'Photo from ' + r.name; img.loading = 'lazy'; img.width = 80; img.height = 80;
+        ph.appendChild(img); ph.addEventListener('click', function () { show(r, k); }); phs.appendChild(ph);
+      });
+      main.appendChild(phs);
+    }
+    a.appendChild(main);
+    return a;
+  }
+  function show(r, at) {
+    if (!dlg || !dlg.showModal) return;
+    var box = $('[data-scr-dlg-in]'); box.innerHTML = '';
+    var big = null, k = Math.max(0, Math.min(r.images.length - 1, at || 0));
+    if (r.images.length) { big = el('img'); big.src = r.images[k]; big.alt = 'Photo ' + (k + 1) + ' from ' + r.name; box.appendChild(big); }
+    var b = el('div', 'scr__dlg-body');
+    if (r.images.length > 1) { // thumbnails: switch between the review's photos
+      var th = el('div', 'scr__dlg-thumbs'); th.setAttribute('role', 'group'); th.setAttribute('aria-label', 'Photos in this review');
+      r.images.forEach(function (src, j) {
+        var tb = el('button'); tb.type = 'button'; tb.setAttribute('aria-label', 'Photo ' + (j + 1)); tb.setAttribute('aria-current', String(j === k));
+        var ti = el('img'); ti.src = src; ti.alt = ''; tb.appendChild(ti);
+        tb.addEventListener('click', function () {
+          big.src = src; big.alt = 'Photo ' + (j + 1) + ' from ' + r.name;
+          Array.prototype.forEach.call(th.children, function (x, n) { x.setAttribute('aria-current', String(n === j)); });
+        });
+        th.appendChild(tb);
+      });
+      b.appendChild(th);
+    }
+    b.appendChild(el('strong', 'scr__name', r.name)); b.appendChild(stars(r.rating));
+    if (r.title) b.appendChild(el('h3', 'scr__t', r.title));
+    b.appendChild(el('p', 'scr__c', r.content)); box.appendChild(b);
+    dlg.showModal();
+  }
+  if (dlg) {
+    $('[data-scr-close]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  }
+  function filtered() {
+    var l = all.filter(function (r) { return (!star || Math.round(r.rating) === star) && (!photoOnly || r.image); });
+    var byDate = function (a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); };
+    if (sort === 'recent') l.sort(byDate);
+    else if (sort === 'oldest') l.sort(function (a, b) { return byDate(b, a); });
+    else if (sort === 'high') l.sort(function (a, b) { return b.rating - a.rating || byDate(a, b); });
+    else if (sort === 'low') l.sort(function (a, b) { return a.rating - b.rating || byDate(a, b); });
+    else l.sort(function (a, b) { return (b.image ? 1 : 0) - (a.image ? 1 : 0) || byDate(a, b); });
+    return l;
+  }
+  // Pages: from the loaded reviews once every page is in; before that, from the totals the API reported.
+  function pages(l) {
+    var n = l.length;
+    if (!complete) {
+      if (star && dist) n = Math.max(n, Math.min(dist[star] || 0, MAX_LOAD));
+      else if (!star && !photoOnly) n = Math.max(n, Math.min(total, MAX_LOAD));
+    }
+    return Math.max(1, Math.ceil(n / PAGE));
+  }
+  function count(l) {
+    if (star && dist) return dist[star] || 0;
+    if (star || photoOnly) return l.length + (complete ? '' : '+');
+    return total;
+  }
+  // Page numbers shown: all when few; else the ends, the current page and its neighbours, "…" between
+  // (phone: 1 … p … n, so every button keeps a 44 px tap).
+  function numbers(p, n) {
+    var compact = window.matchMedia && window.matchMedia('(max-width: 749px)').matches, r = [], i;
+    if (n <= (compact ? 5 : 7)) { for (i = 1; i <= n; i++) r.push(i); return r; }
+    if (compact) return p <= 3 ? [1, 2, 3, '…', n] : p >= n - 2 ? [1, '…', n - 2, n - 1, n] : [1, '…', p, '…', n];
+    if (p <= 4) return [1, 2, 3, 4, 5, '…', n];
+    if (p >= n - 3) return [1, '…', n - 4, n - 3, n - 2, n - 1, n];
+    return [1, '…', p - 1, p, p + 1, '…', n];
+  }
+  var CHEV = function (d) { return '<svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>'; };
+  function pg(to, label, html, current, disabled) {
+    var b = el('button', 'scr__pg'); b.type = 'button'; b.setAttribute('data-scr-page', to); b.setAttribute('aria-label', label);
+    b.innerHTML = html; if (current) b.setAttribute('aria-current', 'page'); b.disabled = !!disabled;
+    b.addEventListener('click', function () { go(to); });
+    return b;
+  }
+  function drawPager(n) {
+    pager.innerHTML = ''; pager.hidden = n <= 1;
+    if (n <= 1) return;
+    pager.appendChild(pg(pageNo - 1, 'Previous page', CHEV('M7 1 1 7l6 6'), false, pageNo <= 1));
+    numbers(pageNo, n).forEach(function (x) {
+      if (x === '…') { var d = el('span', 'scr__dots', '…'); d.setAttribute('aria-hidden', 'true'); pager.appendChild(d); }
+      else pager.appendChild(pg(x, 'Page ' + x, String(x), x === pageNo, false));
+    });
+    pager.appendChild(pg(pageNo + 1, 'Next page', CHEV('m1 1 6 6-6 6'), false, pageNo >= n));
+  }
+  function render() {
+    var l = filtered(), n = pages(l);
+    if (pageNo > n) pageNo = n;
+    list.innerHTML = '';
+    l.slice((pageNo - 1) * PAGE, pageNo * PAGE).forEach(function (r) { list.appendChild(item(r)); });
+    if (!l.length && complete) list.appendChild(el('p', 'scr__empty', 'No reviews match this filter yet.'));
+    drawPager(n);
+    chips();
+    $('[data-scr-shown-total]').textContent = count(l);
+    var ph = $('[data-scr-photos]');
+    if (ph) {
+      var pics = [];
+      all.forEach(function (r) { r.images.forEach(function (src, k) { pics.push({ r: r, src: src, k: k }); }); });
+      pics = pics.slice(0, 24);
+      ph.innerHTML = '';
+      pics.forEach(function (x) {
+        var b = el('button', 'scr__thumb'); b.type = 'button'; b.setAttribute('role', 'listitem'); b.setAttribute('aria-label', 'Open the photo from ' + x.r.name);
+        var i = el('img'); i.src = x.src; i.alt = ''; i.loading = 'lazy'; i.width = 120; i.height = 120; b.appendChild(i);
+        b.addEventListener('click', function () { show(x.r, x.k); }); ph.appendChild(b);
+      });
+      ph.hidden = !pics.length;
+    }
+  }
+  // Counts on the filter chips, always open (user 2026-11-27, as Shopee "5 Sao (1,4k)"): stars from the API's
+  // distribution, else from the loaded reviews once all are in; photos from the loaded reviews ("+" when the API has
+  // more than MAX_LOAD). Unknown yet = no count. A chip with 0 reviews is disabled.
+  function kfmt(n) { return n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : String(n); }
+  function chips() {
+    var by = dist;
+    if (!by && complete) { by = {}; all.forEach(function (r) { var s = Math.round(r.rating); by[s] = (by[s] || 0) + 1; }); }
+    $$('[data-scr-n]').forEach(function (s) {
+      var key = s.getAttribute('data-scr-n'), n = null, more = false;
+      if (key === 'all') n = total;
+      else if (key === 'photo') { if (complete) { n = all.filter(function (r) { return r.images.length; }).length; more = all.length < total; } }
+      else if (by) n = by[key] || 0;
+      s.textContent = n == null ? '' : '(' + kfmt(n) + (more ? '+' : '') + ')';
+      if (key !== 'all') s.parentNode.disabled = n === 0;
+    });
+  }
+  function go(p) {
+    if (p < 1) return;
+    var top = function () { if (head && head.getBoundingClientRect().top < 0) head.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    if (!complete && filtered().length < p * PAGE) {
+      list.setAttribute('aria-busy', 'true');
+      loadAll().then(function () { list.removeAttribute('aria-busy'); pageNo = p; render(); top(); });
+      return;
+    }
+    pageNo = p; render(); top();
+  }
+  function summary(d) {
+    if (d.avg_rating != null) {
+      var avg = Number(d.avg_rating) || 0;
+      $('[data-scr-avg]').textContent = avg.toFixed(1);
+      var s = $('[data-scr-avg-stars]'); s.style.setProperty('--r', avg); s.setAttribute('aria-label', avg.toFixed(1) + ' out of 5 stars');
+    }
+    if (d.count != null) { total = Number(d.count) || 0; $('[data-scr-total]').textContent = total; }
+    if (!Array.isArray(d.distribution)) return;
+    dist = {}; var sum = 0;
+    d.distribution.forEach(function (x) { dist[x.star] = Number(x.count) || 0; sum += dist[x.star]; });
+    [5, 4, 3, 2, 1].forEach(function (n) {
+      var c = dist[n] || 0, bar = $('[data-scr-bar="' + n + '"]');
+      if (!bar) return; // star bars off (setting show_dist)
+      bar.style.width = (sum ? c / sum * 100 : 0) + '%';
+      $('[data-scr-count="' + n + '"]').textContent = c;
+      $('[data-scr-star="' + n + '"]').disabled = !c;
+    });
+    var rec = $('[data-scr-rec]');
+    if (rec && sum) { $('[data-scr-rec-pct]').textContent = Math.round(((dist[5] || 0) + (dist[4] || 0)) / sum * 100) + '%'; rec.hidden = false; }
+  }
+  // Every review (BATCH at a time, up to MAX_LOAD), once; page 1 shows as soon as the first batch is in. Sort, filters
+  // and page numbers then work on the whole list. No API (editor without it, offline): the server-rendered page stays.
+  function loadAll() {
+    if (loading) return loading;
+    if (!cfg.reviewsUrl || !cfg.productId) { complete = true; return (loading = Promise.resolve()); }
+    var acc = [], offset = 0;
+    function next() {
+      var u = cfg.reviewsUrl + (cfg.reviewsUrl.indexOf('?') > -1 ? '&' : '?') + 'productId=' + encodeURIComponent(cfg.productId) + '&domain=' + encodeURIComponent(cfg.domain || '') + '&offset=' + offset + '&limit=' + BATCH;
+      return fetch(u, { headers: { Accept: 'application/json' } }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        if (!d || !Array.isArray(d.reviews)) return;
+        // an API review without photos keeps the photos the server rendered for it (same name, title, date)
+        var batch = d.reviews.map(norm).map(function (r) {
+          if (r.images.length) return r;
+          var k = r.name + '|' + r.title + '|' + r.date, hit = null;
+          all.forEach(function (x) { if (!hit && x.images.length && x.name + '|' + x.title + '|' + x.date === k) hit = x; });
+          if (hit) { r.images = hit.images.slice(); r.image = r.images[0]; }
+          return r;
+        });
+        if (offset === 0) { summary(d); all = batch; render(); }
+        acc = acc.concat(batch); offset += batch.length;
+        if (d.has_more && batch.length && offset < MAX_LOAD) return next();
+      });
+    }
+    loading = next().catch(function () {}).then(function () { if (acc.length) all = acc; complete = true; render(); });
+    return loading;
+  }
+  function setStar(n) {
+    star = star === n ? 0 : n; pageNo = 1;
+    $$('[data-scr-star]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-scr-star') === star)); });
+    $$('[data-scr-chip]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-scr-chip') === star)); });
+    render();
+  }
+  $$('[data-scr-star]').forEach(function (b) { b.addEventListener('click', function () { setStar(+b.getAttribute('data-scr-star')); }); });
+  $$('[data-scr-chip]').forEach(function (b) { b.addEventListener('click', function () { var n = +b.getAttribute('data-scr-chip'); if (n === 0) { if (star) setStar(star); } else setStar(n); }); });
+  var po = $('[data-scr-photo-only]');
+  po.addEventListener('click', function () { photoOnly = !photoOnly; po.setAttribute('aria-pressed', String(photoOnly)); pageNo = 1; render(); });
+  $('[data-scr-sort]').addEventListener('change', function (e) { sort = e.target.value; pageNo = 1; render(); });
+  // ---- Write a review (user 2026-11-19, as tammycharm.com). The platform's POST /api/storefront/reviews takes
+  //      multipart productId / domain / rating / name / title / body / photo, answers 201 { success, pending } or
+  //      400 { errors: { field: [msg] } } / 429 { error }, and keeps the review pending until the merchant publishes it.
+  (function () {
+    var wb = $('[data-scr-write]'), wd = $('[data-scr-wdlg]');
+    if (!wb || !wd) return;
+    var form = $('[data-scr-wform]', wd), step = $('[data-scr-wstep]', wd), done = $('[data-scr-wdone]', wd);
+    var msg = $('[data-scr-wmsg]', wd), send = $('[data-scr-wsubmit]', wd), photo = form.elements.photo;
+    var stars = $$('[data-scr-wstars] label', wd), rating = 0, MAXB = 5 * 1024 * 1024, keep = '';
+    var FAIL = 'Something went wrong. Please try again.';
+    function paint(n) { stars.forEach(function (l, i) { l.classList.toggle('is-on', i < n); }); }
+    function err(k, t) {
+      var p = $('[data-scr-werr="' + k + '"]', wd); if (p) p.textContent = t || '';
+      var f = k === 'rating' ? null : form.elements[k];
+      if (f && f.setAttribute) { if (t) f.setAttribute('aria-invalid', 'true'); else f.removeAttribute('aria-invalid'); }
+    }
+    stars.forEach(function (l, i) {
+      l.querySelector('input').addEventListener('change', function () { rating = i + 1; paint(rating); err('rating', ''); });
+      l.addEventListener('mouseenter', function () { paint(i + 1); });
+      l.addEventListener('mouseleave', function () { paint(rating); });
+    });
+    function open() {
+      step.hidden = false; done.hidden = true; msg.textContent = '';
+      keep = document.documentElement.style.overflow; document.documentElement.style.overflow = 'hidden';
+      if (wd.showModal) wd.showModal(); else wd.setAttribute('open', '');
+    }
+    function shut() { if (wd.close) wd.close(); else { wd.removeAttribute('open'); closed(); } }
+    function closed() { document.documentElement.style.overflow = keep; wb.focus(); }
+    wd.addEventListener('close', closed);
+    wb.addEventListener('click', open);
+    $$('[data-scr-wclose]', wd).forEach(function (b) { b.addEventListener('click', shut); });
+    wd.addEventListener('click', function (e) { if (e.target === wd) shut(); });
+    if (photo) photo.addEventListener('change', function () { var f = photo.files && photo.files[0]; err('photo', f && f.size > MAXB ? 'Photo must be 5 MB or less.' : ''); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = function (n) { return form.elements[n] ? String(form.elements[n].value || '').trim() : ''; };
+      var name = v('name'), email = v('email'), title = v('title'), body = v('body'), pic = photo && photo.files && photo.files[0], ok = true;
+      err('rating', rating ? '' : 'Please select a rating.'); ok = ok && !!rating;
+      err('name', name ? '' : 'Name is required.'); ok = ok && !!name;
+      var badMail = email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      err('email', badMail ? 'Please enter a valid email address.' : ''); ok = ok && !badMail;
+      err('body', body.length >= 10 ? '' : 'Review must be at least 10 characters.'); ok = ok && body.length >= 10;
+      var big = pic && pic.size > MAXB; err('photo', big ? 'Photo must be 5 MB or less.' : ''); ok = ok && !big;
+      err('title', '');
+      if (!ok) { var first = wd.querySelector('[aria-invalid="true"]') || (rating ? null : stars[0] && stars[0].querySelector('input')); if (first) first.focus(); return; }
+      // the platform wants a title: without one, the start of the review
+      if (!title) title = body.length > 60 ? body.slice(0, 57).replace(/\s+\S*$/, '') + '...' : body;
+      var fd = new FormData();
+      if (cfg.productId) fd.append('productId', cfg.productId);
+      if (cfg.domain) fd.append('domain', cfg.domain);
+      fd.append('rating', String(rating)); fd.append('name', name); fd.append('title', title); fd.append('body', body);
+      if (pic) fd.append('photo', pic);
+      send.disabled = true; msg.textContent = '';
+      fetch(cfg.reviewsUrl || '/api/storefront/reviews', { method: 'POST', headers: { Accept: 'application/json' }, body: fd })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (d) {
+          send.disabled = false;
+          if (d && d.success) {
+            form.reset(); rating = 0; paint(0); step.hidden = true; done.hidden = false;
+            var h = $('[data-scr-wdone-h]', wd); if (h) h.focus();
+            return;
+          }
+          if (d && d.errors) Object.keys(d.errors).forEach(function (k) { err(k, [].concat(d.errors[k])[0]); });
+          msg.textContent = d && typeof d.error === 'string' && d.error ? d.error : d && d.errors ? 'Please check the fields above.' : FAIL;
+        })
+        .catch(function () { send.disabled = false; msg.textContent = FAIL; });
+    });
+  })();
+  render();
+  // Load the reviews when the section comes near the screen (not on page load).
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); loadAll(); } }, { rootMargin: '600px 0px' });
+    io.observe(root);
+  } else loadAll();
+})();
+</script>
+</section>

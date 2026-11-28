@@ -1,0 +1,263 @@
+{
+  "name": "Reviews (Okendo style)",
+  "tag": "section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "The product's published reviews: average, filter buttons with counts (always open, as Shopee), Sort, the list (name + stars, title, text with Read More, every photo under it) and numbered pages. \"Write a review\" opens a form; what shoppers send waits in the product's Reviews tab (admin) until you publish it."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "",
+      "info": "Empty = no heading (as the original)."
+    },
+    {
+      "type": "text",
+      "id": "based_label",
+      "label": "\"Based on\"",
+      "default": "Based on"
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "\"reviews\"",
+      "default": "reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_recommend",
+      "label": "Show the \"would recommend\" share",
+      "default": true,
+      "info": "The share of 4- and 5-star reviews (the platform has no separate \"would recommend\" answer)."
+    },
+    {
+      "type": "text",
+      "id": "recommend_label",
+      "label": "Text after the share",
+      "default": "would recommend these products"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dist",
+      "label": "Show the star bars (5 ★ … 1 ★)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "photo_strip",
+      "label": "Show the customer photo strip",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sort_label",
+      "label": "\"Sort\"",
+      "default": "Sort"
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "\"Read More\"",
+      "default": "Read More"
+    },
+    {
+      "type": "text",
+      "id": "read_less_label",
+      "label": "\"Read Less\"",
+      "default": "Read Less"
+    },
+    {
+      "type": "range",
+      "id": "page_size",
+      "label": "Reviews per page",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Write a review"
+    },
+    {
+      "type": "checkbox",
+      "id": "write_show",
+      "label": "Show the \"Write a review\" button",
+      "default": true,
+      "info": "Sent reviews are not shown until you publish them in the product's Reviews tab. One photo, up to 5 MB; at most 5 reviews an hour from one visitor."
+    },
+    {
+      "type": "text",
+      "id": "write_label",
+      "label": "Button",
+      "default": "Write a review"
+    },
+    {
+      "type": "text",
+      "id": "write_title",
+      "label": "Form heading",
+      "default": "Write a review"
+    },
+    {
+      "type": "checkbox",
+      "id": "write_email",
+      "label": "Ask for the email",
+      "default": true,
+      "info": "Optional field, as on tammycharm.com. The platform does not store it yet."
+    },
+    {
+      "type": "checkbox",
+      "id": "write_photo",
+      "label": "Let shoppers add a photo",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "write_recommend",
+      "label": "Show \"I recommend this product\"",
+      "default": true,
+      "info": "The platform does not store the answer yet."
+    },
+    {
+      "type": "text",
+      "id": "write_submit",
+      "label": "Send button",
+      "default": "Submit review"
+    },
+    {
+      "type": "textarea",
+      "id": "write_thanks",
+      "label": "Thank-you message",
+      "default": "Your review will appear here once it has been checked."
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star colour",
+      "default": "#ffb400"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Text sizes and colours"
+    },
+    {
+      "type": "paragraph",
+      "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "",
+      "info": "Empty = white."
+    },
+    {
+      "type": "range",
+      "id": "h_size",
+      "label": "Heading: size on computers",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "h_size_m",
+      "label": "Heading: size on phones",
+      "min": 0,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "h_color",
+      "label": "Heading: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "s_size",
+      "label": "Review titles: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "s_size_m",
+      "label": "Review titles: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "s_color",
+      "label": "Review titles: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "t_size",
+      "label": "Review text: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "t_size_m",
+      "label": "Review text: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "t_color",
+      "label": "Review text: colour",
+      "default": ""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews (Okendo style)",
+      "category": "Reviews",
+      "description": "Average, star bars, customer photos, filters, sort and the review list, as shape-curve.com."
+    }
+  ]
+}

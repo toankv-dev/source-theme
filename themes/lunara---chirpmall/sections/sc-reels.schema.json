@@ -1,0 +1,284 @@
+{
+  "name": "Customer videos",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Portrait 9:16 videos side by side (swipe on phones). Each one plays muted and looped while on screen; \"Sound\" turns its sound on; a tap pauses it. Videos without a file are not shown on the store; with none, the whole band is hidden."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "Caught on camera",
+      "info": "Empty = none."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Don't just take our word for it."
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading, second line (italic, accent colour)",
+      "default": "See them in motion."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Line under the heading",
+      "default": "Short videos from our customers, in their own words."
+    },
+    {
+      "type": "text",
+      "id": "sound_label",
+      "label": "Sound button",
+      "default": "Sound"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "On phones",
+      "default": "peek",
+      "options": [
+        {
+          "value": "peek",
+          "label": "Next video peeks in (as tammycharm.com)"
+        },
+        {
+          "value": "one",
+          "label": "One video per screen"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background",
+      "default": "",
+      "info": "Empty = the main colour, darkened."
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent (second line, dots, Sound on)",
+      "default": "#F1C6D6"
+    },
+    {
+      "type": "range",
+      "id": "pad_top",
+      "label": "Space above",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pad_bottom",
+      "label": "Space below",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Text sizes and colours"
+    },
+    {
+      "type": "paragraph",
+      "content": "Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+    },
+    {
+      "type": "range",
+      "id": "h_size",
+      "label": "Heading: size on computers",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "h_size_m",
+      "label": "Heading: size on phones",
+      "min": 0,
+      "max": 44,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "h_color",
+      "label": "Heading: colour",
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "t_size",
+      "label": "Line under the heading: size on computers",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "t_size_m",
+      "label": "Line under the heading: size on phones",
+      "min": 0,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "t_color",
+      "label": "Line under the heading: colour",
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "clip",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "video",
+          "label": "Video (MP4 / WebM)",
+          "info": "Upload the file in the media picker. Portrait 9:16 (e.g. 720 x 1280) looks best; short clips (under 20 s, a few MB) load fast. YouTube / Vimeo links are not supported."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Cover picture (optional)",
+          "info": "Shown until the video starts."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (optional)",
+          "default": "",
+          "info": "Shown at the bottom of the video."
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Line under the name (optional)",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Description for screen readers",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "default_video",
+          "label": "Theme file while empty",
+          "default": "",
+          "info": "Path inside assets/, e.g. videos/clip.mp4. Played until a file is picked above."
+        },
+        {
+          "type": "header",
+          "content": "Text sizes and colours"
+        },
+        {
+          "type": "paragraph",
+          "content": "Only this one; the section settings apply to all. Size 0 = as designed, empty colour = as designed. On phones a size never goes under 12 px."
+        },
+        {
+          "type": "range",
+          "id": "s_size",
+          "label": "Name: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "s_size_m",
+          "label": "Name: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "s_color",
+          "label": "Name: colour",
+          "default": ""
+        },
+        {
+          "type": "range",
+          "id": "t_size",
+          "label": "Line under the name: size on computers",
+          "min": 0,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "t_size_m",
+          "label": "Line under the name: size on phones",
+          "min": 0,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "t_color",
+          "label": "Line under the name: colour",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer videos",
+      "category": "Reviews",
+      "description": "A dark band with portrait videos side by side: play muted on screen, Sound button, swipe on phones (as tammycharm.com).",
+      "blocks": [
+        {
+          "type": "clip"
+        },
+        {
+          "type": "clip"
+        },
+        {
+          "type": "clip"
+        },
+        {
+          "type": "clip"
+        },
+        {
+          "type": "clip"
+        },
+        {
+          "type": "clip"
+        }
+      ]
+    }
+  ]
+}

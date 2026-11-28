@@ -1,0 +1,451 @@
+{
+  "name": "Default",
+  "description": "Variant pickers and one Add to cart. Pick the Bundle (Kaching) template for packs.",
+  "sections": {
+    "product": {
+      "type": "product",
+      "settings": {},
+      "blocks": {
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {}
+        },
+        "size_finder": {
+          "type": "size_finder",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {}
+        },
+        "trust": {
+          "type": "trust",
+          "settings": {}
+        },
+        "payment_badges": {
+          "type": "payment_badges",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "blockOrder": [
+        "rating",
+        "title",
+        "variant_picker",
+        "size_finder",
+        "buy_buttons",
+        "trust",
+        "payment_badges",
+        "description"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "features": {
+      "type": "sc-features",
+      "settings": {
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 50,
+        "pad_bottom": 10
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/0806.webp",
+            "tag": "Easy-Slide Drop Seat",
+            "heading": "Bathroom Breaks, Made Easy",
+            "body": "<p>No more struggling with your shapewear. The easy-slide drop seat design makes <strong>bathroom breaks quicker and more convenient</strong>, so you can stay shaped, supported, and comfortable throughout the day.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/0806-2.webp",
+            "tag": "Full-Body Sculpting Fit",
+            "heading": "Sleek From Every Angle",
+            "body": "<p>Designed to <strong>shape the waist, tummy, hips, and thighs</strong>, this bodysuit creates a smoother line under clothes. It helps your favorite dresses, pants, and fitted outfits look cleaner and more flattering.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/3_zone_compression.webp",
+            "tag": "Zoned Smart Compression",
+            "heading": "Smooth Where It Matters",
+            "body": "<p>Different compression levels target different areas, <strong>giving your body the right support where it needs it most.</strong> It helps smooth bumps, refine your shape, and create a more confident, sculpted look.</p>"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/fabric_b9f16534-5521-4906-91b3-33c7b30bb3a7.webp",
+            "tag": "Seamless Stretch Fabric",
+            "heading": "Held In, Not Held Back",
+            "body": "<p>Made with flexible, skin-friendly fabric, this shapewear moves with your body while maintaining a smooth fit. Enjoy <strong>breathable comfort and confident support</strong> whether you’re dressing up or wearing it daily.</p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "disabled": true
+    },
+    "details": {
+      "type": "sc-details",
+      "settings": {
+        "heading": "Crafted In Every Detail",
+        "image": "",
+        "default_image": "images/sc-sections/model_a2dd1128-20e3-4f0b-a45f-2be6713e6296.webp",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 20
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/bust.webp",
+            "title": "Wavy Bust Lifting Band",
+            "text": "Gently lifts and supports the bust for a naturally fuller, more flattering shape."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/easy_off.webp",
+            "title": "Drop-Seat Design",
+            "text": "Makes bathroom breaks easier without having to fully remove your shapewear."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/butt.webp",
+            "title": "Wavy Hip-Shaping Band",
+            "text": "Helps lift and contour the hips for a smoother, more sculpted curve."
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/fabric1.webp",
+            "title": "Stretchy Skin-Friendly Fabric",
+            "text": "Feels soft, breathable, and flexible for comfortable all-day wear."
+          }
+        }
+      },
+      "blockOrder": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "disabled": true
+    },
+    "reels": {
+      "type": "sc-reels",
+      "settings": {
+        "eyebrow": "Caught on camera",
+        "heading": "Don't just take our word for it.",
+        "heading_em": "See them in motion.",
+        "subheading": "Short videos from our customers, in their own words.",
+        "sound_label": "Sound",
+        "mobile_layout": "peek",
+        "bg": "",
+        "accent": "#F1C6D6",
+        "pad_top": 56,
+        "pad_bottom": 64
+      },
+      "blocks": {
+        "clip_1": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        },
+        "clip_2": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        },
+        "clip_3": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        },
+        "clip_4": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        },
+        "clip_5": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        },
+        "clip_6": {
+          "type": "clip",
+          "settings": {
+            "video": "",
+            "poster": "",
+            "name": "",
+            "caption": "",
+            "alt": "",
+            "default_video": ""
+          }
+        }
+      },
+      "blockOrder": [
+        "clip_1",
+        "clip_2",
+        "clip_3",
+        "clip_4",
+        "clip_5",
+        "clip_6"
+      ],
+      "disabled": true
+    },
+    "testimonials": {
+      "disabled": true,
+      "type": "sc-testimonials",
+      "settings": {
+        "heading": "Loved By 12,000+ Ladies Worldwide",
+        "button_label": "View All",
+        "button_link": "#lu-reviews",
+        "star": "#F5A623",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 20
+      },
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_2.webp",
+            "name": "Samantha R.",
+            "verified": true,
+            "rating": 5,
+            "text": "Wow, this bodysuit really surprised me. It smooths my tummy and thighs nicely, but still feels breathable enough to wear for hours."
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_4.webp",
+            "name": "Kayla M.",
+            "verified": true,
+            "rating": 5,
+            "text": "Honestly, I love this shapewear. The drop-seat design is such a relief, and I didn’t have to fight with it in the restroom."
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_3.webp",
+            "name": "Brianna Hayes",
+            "verified": true,
+            "rating": 5,
+            "text": "Oh my gosh, this body shaper gives such a clean look under dresses. It holds me in without feeling stiff or painful."
+          }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "image": "",
+            "default_image": "images/sc-sections/sha58_buyer_1.webp",
+            "name": "Danielle P.",
+            "verified": true,
+            "rating": 5,
+            "text": "So happy with this bodysuit. The compression feels smart, not harsh, and my waist, hips, and thighs look smoother right away."
+          }
+        }
+      },
+      "blockOrder": [
+        "quote_1",
+        "quote_2",
+        "quote_3",
+        "quote_4"
+      ]
+    },
+    "trust": {
+      "type": "sc-trust",
+      "settings": {
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 20,
+        "pad_bottom": 35
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "image": "",
+            "title": "Free Shipping",
+            "text": "<p>Enjoy free shipping on all orders over $79 USD</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "money",
+            "image": "",
+            "title": "100% Money Back",
+            "text": "<p>Free returns within the first 30 days after purchasing</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "card",
+            "image": "",
+            "title": "Secure Checkout",
+            "text": "<p>Payment from the most popular &amp; secure payment methods</p>"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "support",
+            "image": "",
+            "title": "24/7 Live Support",
+            "text": "<p>Reach out to our support team via email: <strong>{{CompanyEmail}}</strong></p>"
+          }
+        }
+      },
+      "blockOrder": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "disabled": true
+    },
+    "reviews_okendo": {
+      "type": "sc-reviews",
+      "settings": {
+        "heading": "",
+        "show_recommend": true,
+        "show_photos": true,
+        "page_size": 5,
+        "star_color": "#ffb400",
+        "pad_top": 40,
+        "pad_bottom": 50
+      },
+      "disabled": true
+    },
+    "related": {
+      "type": "related",
+      "settings": {
+        "heading": "You Will Also Love",
+        "show_quick_add": false
+      },
+      "disabled": true
+    },
+    "before_after": {
+      "type": "sc-before-after",
+      "settings": {
+        "before_image": "",
+        "default_before_image": "",
+        "after_image": "",
+        "default_after_image": "",
+        "before_label": "Before",
+        "after_label": "After",
+        "start": 50,
+        "ratio": "4/3",
+        "line_color": "#ffffff",
+        "image_side": "left",
+        "heading": "Sculpt Your Curves",
+        "heading_em": "Without the Struggle",
+        "body": "<ul><li>Flattens the tummy and smooths the waist</li><li>Lifts and rounds the butt</li><li>Invisible under fitted dresses and pants</li></ul>",
+        "review_rating": 5,
+        "review_star_color": "#00b67a",
+        "review_title": "",
+        "review_text": "",
+        "review_author": "",
+        "bg_style": "gradient",
+        "bg": "#F6EDF1",
+        "highlight": "#790236",
+        "pad_top": 36,
+        "pad_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "product",
+    "features",
+    "details",
+    "before_after",
+    "reels",
+    "testimonials",
+    "trust",
+    "reviews_okendo",
+    "reviews",
+    "faq",
+    "related"
+  ]
+}

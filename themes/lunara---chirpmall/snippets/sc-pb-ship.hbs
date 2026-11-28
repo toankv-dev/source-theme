@@ -1,0 +1,4 @@
+{{!-- Block "Shipping box" of the product section (Shapecurve look): truck + title and a small line on the left, two
+      short lines with icons on the right (stacked under it on phones).
+      Any look: outside the bodysuit look the block links sc-product.css itself (rules under .sc-any; user 2026-11-20). --}}
+{{#unless (eq @root.section.settings.skin "shapecurve")}}<link rel="stylesheet" href="{{@root.assets_url}}/css/sc-product.css">{{/unless}}<div class="sc-ship"><div class="sc-ship__main">{{#if settings.title}}<p class="sc-ship__title">{{> sc-icon name="truck"}}<span>{{settings.title}}</span></p>{{/if}}{{#if settings.note}}<p class="sc-ship__note">{{settings.note}}</p>{{/if}}</div><div class="sc-ship__side">{{#if settings.item_1}}<p>{{> sc-icon name="lock"}}<span>{{settings.item_1}}</span></p>{{/if}}{{#if settings.item_2}}<p>{{> sc-icon name="returns"}}<span>{{settings.item_2}}</span></p>{{/if}}</div></div>

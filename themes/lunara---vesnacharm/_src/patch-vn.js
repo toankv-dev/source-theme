@@ -75,7 +75,9 @@ const EDITS = [
     file: 'sections/footer.hbs', done: 'class="ft-shell vn-ft"', always: true,
     start: '<div class="ft-shell vn-ft">',
     end: '</footer>',
-    replace: fs.readFileSync(path.join(__dirname, 'vn-footer.hbs'), 'utf8').trim(),
+    replace: fs.readFileSync(path.join(__dirname, 'vn-footer.hbs'), 'utf8').trim()
+      // without the file's leading {{!-- --}}: it sits above the start anchor, so every run added one more copy (2026-11-27)
+      .replace(/^\{\{!--[\s\S]*?--\}\}\s*/, ''),
   },
   // ---- T6: "NN% OFF" badge on every product card (#ms-card-tpl: home catalog + related); theme.js and related.hbs
   //      already fill [data-ms-badge] [data-ms-pct] and empty it when there is no compare-at price
@@ -318,6 +320,19 @@ const EDITS = [
     file: 'sections/footer.hbs', done: 'button--primary" data-product-url="" data-ms-quick-add>',
     find: 'button--primary" aria-haspopup="dialog" data-product-url="" data-ms-quick-add>',
     replace: 'button--primary" data-product-url="" data-ms-quick-add>',
+  },
+  // Star rating line "Compact" (user 2026-11-27, as Shopee "4.6 ★★★★★ | 1,7k Đánh Giá | Đã Bán 10k+"): avg ★★★★★ | N Reviews |
+  // 10k+ Sold, the default (setting rating_look; "classic" keeps the old <a>). Real average + count; the sold number is
+  // typed in (rating_sold). Stars = the lu-stars5 masks of the old line (same .trustpilot-stars span, smaller; --rating on the div).
+  {
+    file: 'sections/product.hbs', done: "class=\"lu-rate2\"",
+    find: "<a href=\"#lu-reviews\"><span class=\"trustpilot-stars\" role=\"img\"",
+    replace: "{{#unless (eq section.settings.rating_look \"classic\")}}<a href=\"#lu-reviews\" class=\"lu-rate2\" aria-label=\"{{product.reviews.summary.average_rating}} out of 5 stars, {{product.reviews.summary.total_count}} reviews{{#if section.settings.rating_sold}}, {{section.settings.rating_sold}} {{#if section.settings.rating_sold_label}}{{section.settings.rating_sold_label}}{{else}}Sold{{/if}}{{/if}}\"><style>.trustpilot-rating a.lu-rate2{flex-wrap:wrap;gap:4px 0;font-size:1.4rem;line-height:2rem;color:rgb(var(--color-foreground))}.lu-rate2__avg,.lu-rate2__n{font-weight:600;text-decoration:underline;text-underline-offset:3px}.lu-rate2__avg{margin-right:6px;font-size:1.6rem;color:var(--sc-hl,var(--vn-hl,#790236))}.trustpilot-rating a.lu-rate2 .trustpilot-stars{width:85px!important;height:17px!important}.lu-rate2__sep{flex:none;width:1px;height:16px;margin:0 12px;background:rgba(var(--color-foreground),.2)}.lu-rate2__l{margin-left:5px;color:rgba(var(--color-foreground),.65)}@media (max-width:749px){.trustpilot-rating a.lu-rate2{font-size:1.3rem;padding:12px 0;margin:-12px 0}.lu-rate2__sep{margin:0 9px}.trustpilot-rating a.lu-rate2 .trustpilot-stars{width:75px!important;height:15px!important}}</style><span class=\"lu-rate2__avg\">{{product.reviews.summary.average_rating}}</span><span class=\"trustpilot-stars\" aria-hidden=\"true\"></span><span class=\"lu-rate2__sep\" aria-hidden=\"true\"></span><span class=\"lu-rate2__n\">{{product.reviews.summary.total_count}}</span><span class=\"lu-rate2__l\">Reviews</span>{{#if section.settings.rating_sold}}<span class=\"lu-rate2__sep\" aria-hidden=\"true\"></span><span class=\"lu-rate2__n\">{{section.settings.rating_sold}}</span><span class=\"lu-rate2__l\">{{#if section.settings.rating_sold_label}}{{section.settings.rating_sold_label}}{{else}}Sold{{/if}}</span>{{/if}}</a>{{else}}<a href=\"#lu-reviews\"><span class=\"trustpilot-stars\" role=\"img\"",
+  },
+  {
+    file: 'sections/product.hbs', done: "</a>{{/unless}}</div>{{/if}}{{/unless}}{{/inline}}{{#*inline \"lu_p_title\"}}",
+    find: "</a></div>{{/if}}{{/unless}}{{/inline}}{{#*inline \"lu_p_title\"}}",
+    replace: "</a>{{/unless}}</div>{{/if}}{{/unless}}{{/inline}}{{#*inline \"lu_p_title\"}}",
   },
 ];
 

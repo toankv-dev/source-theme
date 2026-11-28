@@ -22,5 +22,8 @@
  "in / lbs",
  "cm / kg",
  "Lbs",
- "In"
+ "In",
+ "EU",
+ "US",
+ "UK"
 ]

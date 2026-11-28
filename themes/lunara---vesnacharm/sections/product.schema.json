@@ -18,6 +18,36 @@
       "info": "Shown before the average, e.g. Excellent 4.8 | 1368 reviews."
     },
     {
+      "type": "select",
+      "id": "rating_look",
+      "label": "Star rating line",
+      "default": "compact",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Compact: 4.8 ★★★★★ | 2498 Reviews | 10k+ Sold"
+        },
+        {
+          "value": "classic",
+          "label": "Classic: ★★★★★ Excellent 4.8 | 2498 reviews"
+        }
+      ],
+      "info": "Average and number of reviews = the product's real published reviews. Put the Star rating block under the Title block to show it under the product name."
+    },
+    {
+      "type": "text",
+      "id": "rating_sold",
+      "label": "Compact: sold",
+      "default": "",
+      "info": "Typed by you, e.g. 10k+ or 2,500. Empty = not shown."
+    },
+    {
+      "type": "text",
+      "id": "rating_sold_label",
+      "label": "Compact: word after the sold number",
+      "default": "Sold"
+    },
+    {
       "type": "checkbox",
       "id": "show_trust",
       "label": "Show trust line under Add to cart",
@@ -2835,6 +2865,116 @@
         },
         {
           "type": "header",
+          "content": "Space around the button"
+        },
+        {
+          "type": "select",
+          "id": "gap_top",
+          "label": "Space above",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Theme default"
+            },
+            {
+              "value": "0px",
+              "label": "0 px"
+            },
+            {
+              "value": "4px",
+              "label": "4 px"
+            },
+            {
+              "value": "8px",
+              "label": "8 px"
+            },
+            {
+              "value": "12px",
+              "label": "12 px"
+            },
+            {
+              "value": "16px",
+              "label": "16 px"
+            },
+            {
+              "value": "20px",
+              "label": "20 px"
+            },
+            {
+              "value": "24px",
+              "label": "24 px"
+            },
+            {
+              "value": "32px",
+              "label": "32 px"
+            },
+            {
+              "value": "40px",
+              "label": "40 px"
+            },
+            {
+              "value": "48px",
+              "label": "48 px"
+            }
+          ],
+          "info": "From the block above (e.g. the Highlights box) to the button, on computers and phones. Theme default = as before."
+        },
+        {
+          "type": "select",
+          "id": "gap_bottom",
+          "label": "Space below",
+          "default": "auto",
+          "options": [
+            {
+              "value": "auto",
+              "label": "Theme default"
+            },
+            {
+              "value": "0px",
+              "label": "0 px"
+            },
+            {
+              "value": "4px",
+              "label": "4 px"
+            },
+            {
+              "value": "8px",
+              "label": "8 px"
+            },
+            {
+              "value": "12px",
+              "label": "12 px"
+            },
+            {
+              "value": "16px",
+              "label": "16 px"
+            },
+            {
+              "value": "20px",
+              "label": "20 px"
+            },
+            {
+              "value": "24px",
+              "label": "24 px"
+            },
+            {
+              "value": "32px",
+              "label": "32 px"
+            },
+            {
+              "value": "40px",
+              "label": "40 px"
+            },
+            {
+              "value": "48px",
+              "label": "48 px"
+            }
+          ],
+          "info": "From the button to the block below (e.g. the Kaching bundle)."
+        },
+        {
+          "type": "header",
           "content": "Pop-up"
         },
         {
@@ -2996,6 +3136,54 @@
           "id": "bra_none",
           "label": "Result: empty cell",
           "default": "This band and cup are not in our size chart."
+        },
+        {
+          "type": "header",
+          "content": "Bra: country tabs (EU / US / UK)"
+        },
+        {
+          "type": "paragraph",
+          "content": "One bra chart per country, each in its own tab above Band Size + Cup Size. A tab shows only when its chart is filled; one filled chart = no tabs. Filled charts replace \"Chart\" below for the bra finder (not with Finder type = Weight + measurements). Same shape in every tab (same number of bands and cups) → the result lists every country, e.g. \"EU 85C · US 38C · UK 38C\", and switching tabs keeps the band and cup picked."
+        },
+        {
+          "type": "text",
+          "id": "bra_tab1",
+          "label": "Tab 1: name",
+          "default": "EU",
+          "info": "Tab 1 is open first."
+        },
+        {
+          "type": "textarea",
+          "id": "bra_chart1",
+          "label": "Tab 1: chart",
+          "default": "",
+          "info": "First line = a name (e.g. EU) | the band sizes: EU | 75 | 80 | 85 …; then one line per cup with the size for each band: CUP A | S | S | M … (\"CUP \" is dropped in the picker). Cells split by |. More lines of band numbers right under the first (US/UK | 34 | 36 …) show as extra header rows. Empty = no tab."
+        },
+        {
+          "type": "text",
+          "id": "bra_tab2",
+          "label": "Tab 2: name",
+          "default": "US"
+        },
+        {
+          "type": "textarea",
+          "id": "bra_chart2",
+          "label": "Tab 2: chart",
+          "default": "",
+          "info": "As tab 1, e.g. US | 34 | 36 | 38 … then CUP A | S | S | M …"
+        },
+        {
+          "type": "text",
+          "id": "bra_tab3",
+          "label": "Tab 3: name",
+          "default": "UK"
+        },
+        {
+          "type": "textarea",
+          "id": "bra_chart3",
+          "label": "Tab 3: chart",
+          "default": "",
+          "info": "As tab 1."
         },
         {
           "type": "header",

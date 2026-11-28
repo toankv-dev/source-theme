@@ -5,7 +5,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "The product's published reviews: average, star bars (tap one to filter), customer photos, Filters, Sort, the list with Read More and numbered pages. \"Write a review\" opens a form; what shoppers send waits in the product's Reviews tab (admin) until you publish it."
+      "content": "The product's published reviews: average, filter buttons with counts (always open, as Shopee), Sort, the list (name + stars, title, text with Read More, every photo under it) and numbered pages. \"Write a review\" opens a form; what shoppers send waits in the product's Reviews tab (admin) until you publish it."
     },
     {
       "type": "text",
@@ -41,27 +41,21 @@
     },
     {
       "type": "checkbox",
-      "id": "show_photos",
-      "label": "Show the customer photo strip",
-      "default": true
+      "id": "show_dist",
+      "label": "Show the star bars (5 ★ … 1 ★)",
+      "default": false
     },
     {
-      "type": "text",
-      "id": "filters_label",
-      "label": "Filters button",
-      "default": "Filters"
+      "type": "checkbox",
+      "id": "photo_strip",
+      "label": "Show the customer photo strip",
+      "default": false
     },
     {
       "type": "text",
       "id": "sort_label",
       "label": "\"Sort\"",
       "default": "Sort"
-    },
-    {
-      "type": "text",
-      "id": "verified_label",
-      "label": "Verified line",
-      "default": "Verified Buyer"
     },
     {
       "type": "text",

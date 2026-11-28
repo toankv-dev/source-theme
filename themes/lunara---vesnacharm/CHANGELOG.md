@@ -2,6 +2,46 @@
 
 Built from `themes/lunara---hushflex` 2026.11.19.2 (docs/SPEC-lunara-vesnacharm.md). The hushflex history follows below.
 
+## 2026.11.27.3 — Reviews and the star rating line as Shopee
+### Changed
+- Reviews (Okendo style), user's pictures 1-3: the star bars, the customer photo strip and the Filters button are gone;
+  the filter buttons are always open with counts ("All (587)", "5 ★ (572)" … "With photos (262)": stars from the API's
+  distribution, photos from the loaded reviews, "+" past 500; 0 = disabled). New boxes "Show the star bars" and "Show the
+  customer photo strip" (both off; the strip has a new key `photo_strip`, so a saved `show_photos: true` no longer
+  shows it); settings "Filters button" and "Verified line" removed.
+- Review card as Shopee: name with the stars under it (no "Verified Buyer"), then title, text and every photo of the
+  review in a row of 80 px squares (72 px on phones) under the text, lined up with the name on computers; tap = the
+  photo viewer as before (sections/sc-reviews.hbs, _src/build-sc.js → sections/sc-reviews.schema.json).
+- Star rating line (product section › "Star rating line", default Compact): "4.8 ★★★★★ | 2498 Reviews | 10k+ Sold" =
+  real average + real number of reviews, the sold number typed in ("Compact: sold", empty = hidden; "Compact: word after
+  the sold number" = Sold). "Classic" keeps "★★★★★ Excellent 4.8 | 2498 reviews" (_src/patch-vn.js 'rating compact',
+  _src/build-sc.js). Under the title = the Star rating block moved under the Title block (admin).
+### Fixed
+- _src/patch-vn.js T5b added one more copy of vn-footer.hbs's leading comment to sections/footer.hbs on every run.
+
+## 2026.11.27.2 — Find my size: space above / below the button
+### Added
+- Block "Find my size" › "Space around the button": Space above / Space below (Theme default, 0–48 px), the same on
+  computers and phones (user: wirefree bra, Highlights box → button → Kaching too far apart). Theme default = as before
+  (24 + 15 px with the Lunara look, 4 + 18 px with the bodysuit look); a size = the whole gap: a hidden Variant picker
+  block right above (Kaching shows the pickers, its wrapper kept 24 px) and the next block's top margin (Kaching:
+  `.lu-kaching` and `.kaching-bundles__block`, 15 / 18 px) step aside (snippets/sc-fit.hbs, _src/build-sc.js →
+  sections/product.schema.json).
+
+## 2026.11.27.1 — Find my size: bra charts per country (EU / US / UK tabs)
+### Added
+- Block "Find my size" › "Bra: country tabs": up to 3 tabs (name + chart each: `bra_tab1..3`, `bra_chart1..3`, defaults
+  EU / US / UK, charts empty = nothing changes). 2+ filled charts = pill tabs above Band Size + Cup Size; filled charts
+  replace "Chart" for the bra finder. Same shape in every tab → result line "EU 85C · US 38C · UK 38C" and a tab switch
+  keeps the band / cup picked (snippets/sc-fit.hbs, _src/build-sc.js → sections/product.schema.json).
+- Bra charts: more lines of band numbers under the first (`US/UK | 34 …` then `EU | 75 …`) = extra header rows (and the
+  result line lists both); chart look as the user's picture: solid first header row, lighter extra rows, tinted cup
+  column, zebra rows; the cup column stays while the chart swipes on phones. "CUP C" shows as "C" in the picker; "S*"
+  matches the size S (pick button "Select S").
+### Fixed
+- _src/sc-e2e.js counted the hidden bra fields as weight fields ("Weight + Bust / Waist / Hips fields" failed since
+  2026.11.23).
+
 ## 2026.11.26.12 — Highlights box: hide the two-column lines
 ### Added
 - Highlights box › "Two columns: hide the lines above and below" (`no_lines`, off by default; _src/build-sc.js →

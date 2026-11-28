@@ -30,8 +30,15 @@ const IMG = 'images/sc-sections/';
 const product = read('sections/product.schema.json');
 const OWN_SETTINGS = ['sc_header', 'skin', 'skin_highlight', 'buy_now_label', 'vn_trust_any', 'vn_safe_show', 'vn_safe_before', 'vn_safe_em', 'vn_safe_after', 'vn_mbg_show', 'vn_mbg_title', 'vn_mbg_text', 'vn_mbg_days', 'vn_mbg_badge', 'vn_mbg_shine',
   // removed 2026-11-20 (user: "remove Order today… and 45-day money-back guarantee. Read the policy"): kept here so a run drops them
-  'vn_eta_show', 'vn_eta_min', 'vn_eta_max', 'vn_eta_text', 'vn_guarantee_show', 'vn_guarantee_text', 'vn_guarantee_link_label', 'vn_guarantee_link'];
+  'vn_eta_show', 'vn_eta_min', 'vn_eta_max', 'vn_eta_text', 'vn_guarantee_show', 'vn_guarantee_text', 'vn_guarantee_link_label', 'vn_guarantee_link',
+  'rating_look', 'rating_sold', 'rating_sold_label'];
 product.settings = product.settings.filter((s) => !OWN_SETTINGS.includes(s.id) && s.content !== 'Template look' && s.content !== 'Under the buttons (bodysuit look)' && s.content !== 'Under the buttons');
+// Star rating line, as Shopee (user 2026-11-27: "4.6 ★★★★★ | 1,7k Đánh Giá | Đã Bán 10k+"): real average + count, the
+// sold number typed in (the platform keeps no sales count); markup = patch-sc.js 'rating compact'. Right after "Rating label".
+product.settings.splice(product.settings.findIndex((s) => s.id === 'rating_label') + 1, 0,
+  { type: 'select', id: 'rating_look', label: 'Star rating line', default: 'compact', options: [{ value: 'compact', label: 'Compact: 4.8 ★★★★★ | 2498 Reviews | 10k+ Sold' }, { value: 'classic', label: 'Classic: ★★★★★ Excellent 4.8 | 2498 reviews' }], info: 'Average and number of reviews = the product\'s real published reviews. Put the Star rating block under the Title block to show it under the product name.' },
+  { type: 'text', id: 'rating_sold', label: 'Compact: sold', default: '', info: 'Typed by you, e.g. 10k+ or 2,500. Empty = not shown.' },
+  { type: 'text', id: 'rating_sold_label', label: 'Compact: word after the sold number', default: 'Sold' });
 product.settings.push(
   { type: 'header', content: 'Template look' },
   {
@@ -91,7 +98,8 @@ const HL_ICONS = [
   { value: 'lock', label: 'Lock' }, { value: 'returns', label: 'Returns' }, { value: 'money', label: 'Money back' },
   { value: 'none', label: 'No icon' },
 ];
-const OWN_BLOCKS = ['sc_price', 'sc_highlights', 'sc_hl_line', 'sc_ship', 'sc_tabs', 'sc_fit'];
+const GAP_OPTIONS = [{ value: 'auto', label: 'Theme default' }, ...[0, 4, 8, 12, 16, 20, 24, 32, 40, 48].map(n => ({ value: n + 'px', label: n + ' px' }))];
+const OWN_BLOCKS = ['sc_price','sc_highlights', 'sc_hl_line', 'sc_ship', 'sc_tabs', 'sc_fit'];
 product.blocks = product.blocks.filter((b) => !OWN_BLOCKS.includes(b.type));
 const tab = (n) => [
   { type: 'header', content: 'Row ' + n },
@@ -178,6 +186,11 @@ product.blocks.push(
       { type: 'text', id: 'option_name', label: 'Size option name', default: 'Size', info: 'The option the result picks; when no option has this name, the one whose values match the chart sizes. A value like "M (125-140 lbs)" matches the chart size "M"; XXL = 2XL.' },
       { type: 'select', id: 'units', label: 'Units shown first', default: 'us', options: [{ value: 'us', label: 'in / lbs' }, { value: 'metric', label: 'cm / kg' }] },
       { type: 'select', id: 'finder', label: 'Finder type', default: 'auto', options: [{ value: 'auto', label: 'Auto (from the chart)' }, { value: 'body', label: 'Weight + measurements (bodysuit, shapewear)' }, { value: 'bra', label: 'Band Size + Cup Size (bra)' }], info: 'Auto: a chart whose first line is band sizes (SIZE CUP | 34 | 36 …) and whose first column is cup sizes (B, C, D …) asks Band Size + Cup Size, without in / lbs and without the weight line; any other chart asks Weight + measurements.' },
+      // space around the button (user 2026-11-27, wirefree bra: Highlights box → Find my size → Kaching too far apart);
+      // 'auto' = the old look (saved blocks have no key), a size = the whole gap (snippets/sc-fit.hbs)
+      { type: 'header', content: 'Space around the button' },
+      { type: 'select', id: 'gap_top', label: 'Space above', default: 'auto', options: GAP_OPTIONS, info: 'From the block above (e.g. the Highlights box) to the button, on computers and phones. Theme default = as before.' },
+      { type: 'select', id: 'gap_bottom', label: 'Space below', default: 'auto', options: GAP_OPTIONS, info: 'From the button to the block below (e.g. the Kaching bundle).' },
       { type: 'header', content: 'Pop-up' },
       { type: 'text', id: 'rec_eyebrow', label: 'Small line on top', default: 'Size recommender' },
       { type: 'text', id: 'rec_title', label: 'Title', default: 'Find Your Best Size' },
@@ -206,6 +219,15 @@ product.blocks.push(
       { type: 'text', id: 'bra_kicker', label: 'Result: small title', default: 'Recommended size' },
       { type: 'text', id: 'bra_line', label: 'Result: line', default: 'Band {band} · Cup {cup}, from our size chart.', info: '{band}, {cup}, {size} = the picks and the size.' },
       { type: 'text', id: 'bra_none', label: 'Result: empty cell', default: 'This band and cup are not in our size chart.' },
+      // country tabs (user 2026-11-27: sells in US / UK / EU, one tab each with its own chart, as their picture 2)
+      { type: 'header', content: 'Bra: country tabs (EU / US / UK)' },
+      { type: 'paragraph', content: 'One bra chart per country, each in its own tab above Band Size + Cup Size. A tab shows only when its chart is filled; one filled chart = no tabs. Filled charts replace "Chart" below for the bra finder (not with Finder type = Weight + measurements). Same shape in every tab (same number of bands and cups) → the result lists every country, e.g. "EU 85C · US 38C · UK 38C", and switching tabs keeps the band and cup picked.' },
+      { type: 'text', id: 'bra_tab1', label: 'Tab 1: name', default: 'EU', info: 'Tab 1 is open first.' },
+      { type: 'textarea', id: 'bra_chart1', label: 'Tab 1: chart', default: '', info: 'First line = a name (e.g. EU) | the band sizes: EU | 75 | 80 | 85 …; then one line per cup with the size for each band: CUP A | S | S | M … ("CUP " is dropped in the picker). Cells split by |. More lines of band numbers right under the first (US/UK | 34 | 36 …) show as extra header rows. Empty = no tab.' },
+      { type: 'text', id: 'bra_tab2', label: 'Tab 2: name', default: 'US' },
+      { type: 'textarea', id: 'bra_chart2', label: 'Tab 2: chart', default: '', info: 'As tab 1, e.g. US | 34 | 36 | 38 … then CUP A | S | S | M …' },
+      { type: 'text', id: 'bra_tab3', label: 'Tab 3: name', default: 'UK' },
+      { type: 'textarea', id: 'bra_chart3', label: 'Tab 3: chart', default: '', info: 'As tab 1.' },
       { type: 'header', content: 'Size chart' },
       { type: 'text', id: 'rec_chart_eyebrow', label: 'Small line', default: 'Body measurements' },
       { type: 'text', id: 'rec_chart_title', label: 'Title', default: 'Complete Size Chart' },
@@ -435,16 +457,17 @@ write('sections/sc-reviews.schema.json', {
   tag: 'section',
   limit: 1,
   settings: [
-    { type: 'paragraph', content: 'The product\'s published reviews: average, star bars (tap one to filter), customer photos, Filters, Sort, the list with Read More and numbered pages. "Write a review" opens a form; what shoppers send waits in the product\'s Reviews tab (admin) until you publish it.' },
+    { type: 'paragraph', content: 'The product\'s published reviews: average, filter buttons with counts (always open, as Shopee), Sort, the list (name + stars, title, text with Read More, every photo under it) and numbered pages. "Write a review" opens a form; what shoppers send waits in the product\'s Reviews tab (admin) until you publish it.' },
     { type: 'text', id: 'heading', label: 'Heading', default: '', info: 'Empty = no heading (as the original).' },
     { type: 'text', id: 'based_label', label: '"Based on"', default: 'Based on' },
     { type: 'text', id: 'reviews_label', label: '"reviews"', default: 'reviews' },
     { type: 'checkbox', id: 'show_recommend', label: 'Show the "would recommend" share', default: true, info: 'The share of 4- and 5-star reviews (the platform has no separate "would recommend" answer).' },
     { type: 'text', id: 'recommend_label', label: 'Text after the share', default: 'would recommend these products' },
-    { type: 'checkbox', id: 'show_photos', label: 'Show the customer photo strip', default: true },
-    { type: 'text', id: 'filters_label', label: 'Filters button', default: 'Filters' },
+    // user 2026-11-27: star bars, photo strip and the Filters button gone (filter buttons always open, with counts);
+    // the strip got a new key so a saved show_photos: true does not bring it back
+    { type: 'checkbox', id: 'show_dist', label: 'Show the star bars (5 ★ … 1 ★)', default: false },
+    { type: 'checkbox', id: 'photo_strip', label: 'Show the customer photo strip', default: false },
     { type: 'text', id: 'sort_label', label: '"Sort"', default: 'Sort' },
-    { type: 'text', id: 'verified_label', label: 'Verified line', default: 'Verified Buyer' },
     { type: 'text', id: 'read_more_label', label: '"Read More"', default: 'Read More' },
     { type: 'text', id: 'read_less_label', label: '"Read Less"', default: 'Read Less' },
     { type: 'range', id: 'page_size', label: 'Reviews per page', min: 3, max: 10, step: 1, default: 5 },
@@ -610,7 +633,7 @@ const sections = {
     trust('support', '24/7 Live Support', '<p>Reach out to our support team via email: <strong>{{CompanyEmail}}</strong></p>'),
   ]),
   // Okendo-style reviews of the original (user 2026-11-19); no review form (reviews are added in the admin)
-  reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, show_photos: true, page_size: 5, star_color: '#ffb400', pad_top: 40, pad_bottom: 50 } },
+  reviews: { type: 'sc-reviews', settings: { heading: '', show_recommend: true, page_size: 5, star_color: '#ffb400', pad_top: 40, pad_bottom: 50 } },
   related: { type: 'related', settings: { heading: 'You Will Also Love', show_quick_add: false } }, // the original's cards have no button
 };
 // ---------------------------------------------------------------------------------------------------------------

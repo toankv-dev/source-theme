@@ -8,7 +8,7 @@
       config.reviewsUrl (paged, 50 at a time).
       Own <style> + <script>; id="lu-reviews" keeps the rating link and the testimonials "View All" button working. --}}
 {{> sc-type h=".scr__h" s=".scr__t" t=".scr__c" root=".scr"}}
-<section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-verified="{{#if section.settings.verified_label}}{{section.settings.verified_label}}{{else}}Verified Buyer{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffb400{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
+<section id="lu-reviews" class="scr" data-sc-reviews data-page="{{#if section.settings.page_size}}{{section.settings.page_size}}{{else}}5{{/if}}" data-read-more="{{#if section.settings.read_more_label}}{{section.settings.read_more_label}}{{else}}Read More{{/if}}" data-read-less="{{#if section.settings.read_less_label}}{{section.settings.read_less_label}}{{else}}Read Less{{/if}}" data-reviews-word="{{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}" style="--scr-star:{{#if section.settings.star_color}}{{section.settings.star_color}}{{else}}#ffb400{{/if}};--scr-pt:{{#if section.settings.pad_top}}{{section.settings.pad_top}}{{else}}40{{/if}}px;--scr-pb:{{#if section.settings.pad_bottom}}{{section.settings.pad_bottom}}{{else}}50{{/if}}px;">
 <style>
 /* Measured: user's screenshot of shape-curve.com (1511 px) + _work/probe-1440.txt (Okendo). Font = the theme's Poppins. */
 .scr{padding:var(--scr-pt) 0 var(--scr-pb);background:#fff;color:#0b0b0b;font-family:var(--font-body-family,inherit)}
@@ -46,12 +46,15 @@
 .scr__panel[hidden]{display:none}
 .scr__chip{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:0 14px;border:1px solid var(--vn-hl,#790236);border-radius:18px;background:#fff;color:var(--vn-hl,#790236);font:inherit;font-size:13px;cursor:pointer}
 .scr__chip[aria-pressed="true"]{border-color:var(--vn-hl,#790236);background:var(--vn-hl,#790236);color:#fff}
+.scr__chip:disabled{opacity:.45;cursor:default}
+.scr__n:empty{display:none}
 .scr__head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:33px;padding-bottom:2px;border-bottom:1px solid #b6b6b6}
 .scr__count{font-size:14px;line-height:22px;color:#878787}
 .scr__sort{display:flex;align-items:center;gap:20px;font-size:16px;font-weight:600;color:#262626}
 .scr__sort select{min-height:36px;padding:0 24px 0 8px;border:0;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23262626'/%3E%3C/svg%3E") right 4px center no-repeat;-webkit-appearance:none;appearance:none;color:#262626;font:inherit;font-size:14px;font-weight:400;cursor:pointer}
-.scr__item{display:grid;grid-template-columns:1fr 200px;gap:0 49px;padding:24px 0;border-bottom:1px solid #ececec}
-.scr__item:not(.has-photo){grid-template-columns:1fr}
+.scr__item{display:block;padding:24px 0;border-bottom:1px solid #ececec}
+/* Shopee card (user 2026-11-27): stars under the name, title / text / photos under it, lined up with the name */
+.scr__main{margin-top:10px;padding-left:64px}
 .scr__meta{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .scr__who{display:flex;align-items:center;gap:18px}
 .scr__av{display:flex;align-items:center;justify-content:center;flex:none;width:46px;height:46px;border-radius:50%;background:color-mix(in srgb,var(--vn-hl,#790236) 10%,#fff);color:var(--vn-hl,#790236);font-size:13px;font-weight:700;text-transform:uppercase}
@@ -59,13 +62,13 @@
 .scr__ver svg{color:var(--vn-hl,#790236)}
 .scr__ver{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:19px;font-weight:600;color:#262626}
 .scr__date{font-size:12px;line-height:19px;color:#878787;white-space:nowrap}
-.scr__item .scr__stars{margin:24px 0 8px -2px}
+.scr__item .scr__stars{--sz:15px;display:block;margin:3px 0 0 -1px}
 .scr__t{margin:0 0 6px;font-size:14px;line-height:22.4px;font-weight:600;color:#0b0b0b}
 .scr__c{margin:0;font-size:14px;line-height:25.2px;color:#0b0b0b;white-space:pre-line;overflow-wrap:anywhere}
 .scr__rm{display:inline;padding:0;border:0;background:none;color:#0b0b0b;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer}
-.scr__phs{display:flex;flex-direction:column;gap:8px;align-self:start}
-.scr__ph{padding:0;border:0;background:none;cursor:pointer;align-self:start}
-.scr__ph img{display:block;width:200px;height:130px;object-fit:cover}
+.scr__phs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.scr__ph{flex:none;padding:0;border:0;border-radius:4px;background:#f5f5f5;cursor:pointer;overflow:hidden}
+.scr__ph img{display:block;width:80px;height:80px;object-fit:cover}
 /* Pages (user's screenshot): 36 px buttons on a 40 px pitch, current page in a #e1e1e2 circle, 14 px #1a1a1a, "…", chevrons (faded when not usable) */
 .scr__pager{display:flex;justify-content:center;align-items:center;gap:4px;margin-top:28px}
 .scr__pager[hidden]{display:none}
@@ -149,9 +152,8 @@
   .scr__photos{max-width:none;margin-top:24px}
   .scr__thumb{flex-basis:96px;width:96px;height:96px}
   .scr__head{margin-top:28px}
-  .scr__item,.scr__item:not(.has-photo){grid-template-columns:1fr}
-  .scr__phs{flex-direction:row;flex-wrap:wrap;margin-top:14px}
-  .scr__ph img{width:120px;height:120px}
+  .scr__main{padding-left:0;margin-top:12px}
+  .scr__ph img{width:72px;height:72px}
   .scr__dlg-in{grid-template-columns:1fr}
   .scr__dlg-in img{height:auto;max-height:60vh}
 }
@@ -161,18 +163,17 @@
 <div class="scr__top">
 <div class="scr__sum">
 <div class="scr__avgrow"><span class="scr__avg" data-scr-avg>{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}}</span><span class="scr__stars" data-scr-avg-stars style="--r:{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}}" role="img" aria-label="{{#if product.reviews.summary.average_rating}}{{product.reviews.summary.average_rating}}{{else}}0{{/if}} out of 5 stars"></span><span class="scr__based">{{#if section.settings.based_label}}{{section.settings.based_label}}{{else}}Based on{{/if}} <span data-scr-total>{{#if product.reviews.summary.total_count}}{{product.reviews.summary.total_count}}{{else}}0{{/if}}</span> {{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}</span></div>
-<div class="scr__dist" role="group" aria-label="Filter by rating"><button type="button" class="scr__drow" data-scr-star="5" aria-pressed="false"><span class="scr__dl">5<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="5"></i></span><span class="scr__dc" data-scr-count="5">0</span></button><button type="button" class="scr__drow" data-scr-star="4" aria-pressed="false"><span class="scr__dl">4<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="4"></i></span><span class="scr__dc" data-scr-count="4">0</span></button><button type="button" class="scr__drow" data-scr-star="3" aria-pressed="false"><span class="scr__dl">3<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="3"></i></span><span class="scr__dc" data-scr-count="3">0</span></button><button type="button" class="scr__drow" data-scr-star="2" aria-pressed="false"><span class="scr__dl">2<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="2"></i></span><span class="scr__dc" data-scr-count="2">0</span></button><button type="button" class="scr__drow" data-scr-star="1" aria-pressed="false"><span class="scr__dl">1<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="1"></i></span><span class="scr__dc" data-scr-count="1">0</span></button></div>
+{{#if section.settings.show_dist}}<div class="scr__dist" role="group" aria-label="Filter by rating"><button type="button" class="scr__drow" data-scr-star="5" aria-pressed="false"><span class="scr__dl">5<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="5"></i></span><span class="scr__dc" data-scr-count="5">0</span></button><button type="button" class="scr__drow" data-scr-star="4" aria-pressed="false"><span class="scr__dl">4<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="4"></i></span><span class="scr__dc" data-scr-count="4">0</span></button><button type="button" class="scr__drow" data-scr-star="3" aria-pressed="false"><span class="scr__dl">3<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="3"></i></span><span class="scr__dc" data-scr-count="3">0</span></button><button type="button" class="scr__drow" data-scr-star="2" aria-pressed="false"><span class="scr__dl">2<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="2"></i></span><span class="scr__dc" data-scr-count="2">0</span></button><button type="button" class="scr__drow" data-scr-star="1" aria-pressed="false"><span class="scr__dl">1<span class="scr__stars" aria-hidden="true"></span></span><span class="scr__track"><i data-scr-bar="1"></i></span><span class="scr__dc" data-scr-count="1">0</span></button></div>{{/if}}
 </div>
 <div class="scr__side">
 {{#unless (eq section.settings.show_recommend false)}}<p class="scr__rec" data-scr-rec hidden><strong data-scr-rec-pct></strong><span>{{#if section.settings.recommend_label}}{{section.settings.recommend_label}}{{else}}would recommend these products{{/if}}</span></p>{{/unless}}
 {{#unless (eq section.settings.write_show false)}}<button type="button" class="scr__write" data-scr-write aria-haspopup="dialog"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="m10.63.995 4.375 4.375.441.442-.441.443-8.438 8.437-.183.183H1.125V9.616l.183-.183L9.745.995l.443-.441.442.441Zm-8.255 9.14v3.49h3.49l5.938-5.938-3.49-3.49-5.938 5.938Zm6.822-6.822 3.49 3.49.99-.99-3.49-3.49-.99.99Z"/></svg><span>{{#if section.settings.write_label}}{{section.settings.write_label}}{{else}}Write a review{{/if}}</span></button>{{/unless}}
 </div>
 </div>
-{{#unless (eq section.settings.show_photos false)}}<div class="scr__photos" data-scr-photos role="list" aria-label="Customer photos" hidden></div>{{/unless}}
-<div class="scr__tools"><button type="button" class="scr__btn" data-scr-filters aria-expanded="false" aria-controls="scr-panel"><svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor" aria-hidden="true"><rect width="14" height="1.6" rx=".8"/><rect x="2.5" y="4.2" width="9" height="1.6" rx=".8"/><rect x="5" y="8.4" width="4" height="1.6" rx=".8"/></svg>{{#if section.settings.filters_label}}{{section.settings.filters_label}}{{else}}Filters{{/if}}</button></div>
-<div class="scr__panel" id="scr-panel" data-scr-panel hidden><button type="button" class="scr__chip" data-scr-chip="0" aria-pressed="true">All</button><button type="button" class="scr__chip" data-scr-chip="5" aria-pressed="false">5 ★</button><button type="button" class="scr__chip" data-scr-chip="4" aria-pressed="false">4 ★</button><button type="button" class="scr__chip" data-scr-chip="3" aria-pressed="false">3 ★</button><button type="button" class="scr__chip" data-scr-chip="2" aria-pressed="false">2 ★</button><button type="button" class="scr__chip" data-scr-chip="1" aria-pressed="false">1 ★</button><button type="button" class="scr__chip" data-scr-photo-only aria-pressed="false">With photos</button></div>
+{{#if section.settings.photo_strip}}<div class="scr__photos" data-scr-photos role="list" aria-label="Customer photos" hidden></div>{{/if}}
+<div class="scr__panel" id="scr-panel" data-scr-panel role="group" aria-label="Filter reviews"><button type="button" class="scr__chip" data-scr-chip="0" aria-pressed="true">All <span class="scr__n" data-scr-n="all"></span></button><button type="button" class="scr__chip" data-scr-chip="5" aria-pressed="false">5 ★ <span class="scr__n" data-scr-n="5"></span></button><button type="button" class="scr__chip" data-scr-chip="4" aria-pressed="false">4 ★ <span class="scr__n" data-scr-n="4"></span></button><button type="button" class="scr__chip" data-scr-chip="3" aria-pressed="false">3 ★ <span class="scr__n" data-scr-n="3"></span></button><button type="button" class="scr__chip" data-scr-chip="2" aria-pressed="false">2 ★ <span class="scr__n" data-scr-n="2"></span></button><button type="button" class="scr__chip" data-scr-chip="1" aria-pressed="false">1 ★ <span class="scr__n" data-scr-n="1"></span></button><button type="button" class="scr__chip" data-scr-photo-only aria-pressed="false">With photos <span class="scr__n" data-scr-n="photo"></span></button></div>
 <div class="scr__head"><span class="scr__count"><span data-scr-shown-total>{{#if product.reviews.summary.total_count}}{{product.reviews.summary.total_count}}{{else}}0{{/if}}</span> {{#if section.settings.reviews_label}}{{section.settings.reviews_label}}{{else}}reviews{{/if}}</span><label class="scr__sort"><span>{{#if section.settings.sort_label}}{{section.settings.sort_label}}{{else}}Sort{{/if}}</span><select data-scr-sort aria-label="Sort reviews"><option value="photos">Photos &amp; Videos</option><option value="recent">Most Recent</option><option value="oldest">Oldest</option><option value="high">Highest Rating</option><option value="low">Lowest Rating</option></select></label></div>
-<div class="scr__list" data-scr-list>{{#each product.reviews.items}}<article class="scr__item{{#if image}} has-photo{{else if images}} has-photo{{/if}}" data-rating="{{rating}}"><div class="scr__main"><div class="scr__meta"><div class="scr__who"><span class="scr__av" aria-hidden="true"></span><div><strong class="scr__name">{{name}}</strong>{{#unless (eq verified false)}}<span class="scr__ver">Verified Buyer</span>{{/unless}}</div></div><time class="scr__date" datetime="{{date}}">{{date}}</time></div><span class="scr__stars" style="--r:{{rating}}" role="img" aria-label="{{rating}} out of 5 stars"></span>{{#if title}}<h3 class="scr__t">{{title}}</h3>{{/if}}<p class="scr__c">{{content}}</p></div>{{#if images}}<div class="scr__phs">{{#each images}}<div class="scr__ph"><img src="{{this}}" alt="Photo from {{../name}}" loading="lazy" width="200" height="130"></div>{{/each}}</div>{{else if image}}<div class="scr__phs"><div class="scr__ph"><img src="{{image}}" alt="Photo from {{name}}" loading="lazy" width="200" height="130"></div></div>{{/if}}</article>{{/each}}</div>
+<div class="scr__list" data-scr-list>{{#each product.reviews.items}}<article class="scr__item{{#if image}} has-photo{{else if images}} has-photo{{/if}}" data-rating="{{rating}}"><div class="scr__meta"><div class="scr__who"><span class="scr__av" aria-hidden="true"></span><div><strong class="scr__name">{{name}}</strong><span class="scr__stars" style="--r:{{rating}}" role="img" aria-label="{{rating}} out of 5 stars"></span></div></div><time class="scr__date" datetime="{{date}}">{{date}}</time></div><div class="scr__main">{{#if title}}<h3 class="scr__t">{{title}}</h3>{{/if}}<p class="scr__c">{{content}}</p>{{#if images}}<div class="scr__phs">{{#each images}}<div class="scr__ph"><img src="{{this}}" alt="Photo from {{../name}}" loading="lazy" width="80" height="80"></div>{{/each}}</div>{{else if image}}<div class="scr__phs"><div class="scr__ph"><img src="{{image}}" alt="Photo from {{name}}" loading="lazy" width="80" height="80"></div></div>{{/if}}</div></article>{{/each}}</div>
 <nav class="scr__pager" data-scr-pager aria-label="Review pages" hidden></nav>
 <dialog class="scr__dlg" data-scr-dlg aria-label="Customer review"><button type="button" class="scr__x" data-scr-close aria-label="Close">&times;</button><div class="scr__dlg-in" data-scr-dlg-in></div></dialog>
 {{#unless (eq section.settings.write_show false)}}<dialog class="scr__wdlg" data-scr-wdlg aria-labelledby="scr-w-h"><form class="scr__wf" data-scr-wform novalidate>
@@ -213,7 +214,7 @@
     return { name: t('.scr__name'), rating: a.getAttribute('data-rating'), title: t('.scr__t'), content: t('.scr__c'), images: imgs, verified: !!a.querySelector('.scr__ver'), date: tm ? tm.getAttribute('datetime') : '' };
   });
   var PAGE = Math.max(1, parseInt(root.getAttribute('data-page'), 10) || 5), BATCH = 50, MAX_LOAD = 500;
-  var VERIFIED = root.getAttribute('data-verified'), MORE = root.getAttribute('data-read-more'), LESS = root.getAttribute('data-read-less');
+  var MORE = root.getAttribute('data-read-more'), LESS = root.getAttribute('data-read-less');
   var all = ssr.map(norm), total = parseInt($('[data-scr-total]').textContent, 10) || all.length;
   var pageNo = 1, sort = 'photos', star = 0, photoOnly = false, dist = null, loading = null, complete = false;
   var list = $('[data-scr-list]'), pager = $('[data-scr-pager]'), dlg = $('[data-scr-dlg]'), head = $('.scr__head');
@@ -239,18 +240,15 @@
     return ago(Math.floor(days / 365), '1 year ago', '{n} years ago');
   }
   function item(r) {
+    // As Shopee (user 2026-11-27): name with the stars under it (no "Verified Buyer"), then title, text and every photo
+    // in a row of small squares under the text (no photo column on the right). Same markup as the server-rendered list.
     var a = el('article', 'scr__item' + (r.image ? ' has-photo' : ''));
     var main = el('div', 'scr__main'), meta = el('div', 'scr__meta'), who = el('div', 'scr__who');
     var av = el('span', 'scr__av', r.name.trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase() || '?'); av.setAttribute('aria-hidden', 'true');
-    var nb = el('div'); nb.appendChild(el('strong', 'scr__name', r.name));
-    if (r.verified) {
-      var v = el('span', 'scr__ver');
-      v.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.6 8.2l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      v.appendChild(document.createTextNode(VERIFIED)); nb.appendChild(v);
-    }
+    var nb = el('div'); nb.appendChild(el('strong', 'scr__name', r.name)); nb.appendChild(stars(r.rating));
     who.appendChild(av); who.appendChild(nb); meta.appendChild(who);
     var tm = el('time', 'scr__date', ago(r.date)); if (r.date) tm.setAttribute('datetime', r.date); meta.appendChild(tm);
-    main.appendChild(meta); main.appendChild(stars(r.rating));
+    a.appendChild(meta);
     if (r.title) main.appendChild(el('h3', 'scr__t', r.title));
     var c = el('p', 'scr__c');
     if (r.content.length > 300) {
@@ -259,16 +257,17 @@
       var txt = document.createTextNode(cut); c.appendChild(txt); c.appendChild(b);
       b.addEventListener('click', function () { open = !open; txt.nodeValue = open ? r.content + ' ' : cut; b.textContent = open ? LESS : MORE; b.setAttribute('aria-expanded', String(open)); });
     } else c.textContent = r.content;
-    main.appendChild(c); a.appendChild(main);
+    main.appendChild(c);
     if (r.images.length) {
       var phs = el('div', 'scr__phs');
       r.images.forEach(function (src, k) {
         var ph = el('button', 'scr__ph'); ph.type = 'button'; ph.setAttribute('aria-label', 'Open photo ' + (k + 1) + ' of ' + r.images.length + ' from ' + r.name);
-        var img = el('img'); img.src = src; img.alt = 'Photo from ' + r.name; img.loading = 'lazy'; img.width = 200; img.height = 130;
+        var img = el('img'); img.src = src; img.alt = 'Photo from ' + r.name; img.loading = 'lazy'; img.width = 80; img.height = 80;
         ph.appendChild(img); ph.addEventListener('click', function () { show(r, k); }); phs.appendChild(ph);
       });
-      a.appendChild(phs);
+      main.appendChild(phs);
     }
+    a.appendChild(main);
     return a;
   }
   function show(r, at) {
@@ -357,6 +356,7 @@
     l.slice((pageNo - 1) * PAGE, pageNo * PAGE).forEach(function (r) { list.appendChild(item(r)); });
     if (!l.length && complete) list.appendChild(el('p', 'scr__empty', 'No reviews match this filter yet.'));
     drawPager(n);
+    chips();
     $('[data-scr-shown-total]').textContent = count(l);
     var ph = $('[data-scr-photos]');
     if (ph) {
@@ -371,6 +371,22 @@
       });
       ph.hidden = !pics.length;
     }
+  }
+  // Counts on the filter chips, always open (user 2026-11-27, as Shopee "5 Sao (1,4k)"): stars from the API's
+  // distribution, else from the loaded reviews once all are in; photos from the loaded reviews ("+" when the API has
+  // more than MAX_LOAD). Unknown yet = no count. A chip with 0 reviews is disabled.
+  function kfmt(n) { return n >= 1000 ? (Math.round(n / 100) / 10) + 'k' : String(n); }
+  function chips() {
+    var by = dist;
+    if (!by && complete) { by = {}; all.forEach(function (r) { var s = Math.round(r.rating); by[s] = (by[s] || 0) + 1; }); }
+    $$('[data-scr-n]').forEach(function (s) {
+      var key = s.getAttribute('data-scr-n'), n = null, more = false;
+      if (key === 'all') n = total;
+      else if (key === 'photo') { if (complete) { n = all.filter(function (r) { return r.images.length; }).length; more = all.length < total; } }
+      else if (by) n = by[key] || 0;
+      s.textContent = n == null ? '' : '(' + kfmt(n) + (more ? '+' : '') + ')';
+      if (key !== 'all') s.parentNode.disabled = n === 0;
+    });
   }
   function go(p) {
     if (p < 1) return;
@@ -393,8 +409,9 @@
     dist = {}; var sum = 0;
     d.distribution.forEach(function (x) { dist[x.star] = Number(x.count) || 0; sum += dist[x.star]; });
     [5, 4, 3, 2, 1].forEach(function (n) {
-      var c = dist[n] || 0;
-      $('[data-scr-bar="' + n + '"]').style.width = (sum ? c / sum * 100 : 0) + '%';
+      var c = dist[n] || 0, bar = $('[data-scr-bar="' + n + '"]');
+      if (!bar) return; // star bars off (setting show_dist)
+      bar.style.width = (sum ? c / sum * 100 : 0) + '%';
       $('[data-scr-count="' + n + '"]').textContent = c;
       $('[data-scr-star="' + n + '"]').disabled = !c;
     });
@@ -437,8 +454,6 @@
   $$('[data-scr-chip]').forEach(function (b) { b.addEventListener('click', function () { var n = +b.getAttribute('data-scr-chip'); if (n === 0) { if (star) setStar(star); } else setStar(n); }); });
   var po = $('[data-scr-photo-only]');
   po.addEventListener('click', function () { photoOnly = !photoOnly; po.setAttribute('aria-pressed', String(photoOnly)); pageNo = 1; render(); });
-  var fb = $('[data-scr-filters]'), panel = $('[data-scr-panel]');
-  fb.addEventListener('click', function () { panel.hidden = !panel.hidden; fb.setAttribute('aria-expanded', String(!panel.hidden)); });
   $('[data-scr-sort]').addEventListener('change', function (e) { sort = e.target.value; pageNo = 1; render(); });
   // ---- Write a review (user 2026-11-19, as tammycharm.com). The platform's POST /api/storefront/reviews takes
   //      multipart productId / domain / rating / name / title / body / photo, answers 201 { success, pending } or

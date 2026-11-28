@@ -510,7 +510,6 @@
       "settings": {
         "heading": "",
         "show_recommend": true,
-        "show_photos": true,
         "page_size": 5,
         "star_color": "#ffb400",
         "pad_top": 40,

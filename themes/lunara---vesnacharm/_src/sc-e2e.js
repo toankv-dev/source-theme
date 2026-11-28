@@ -70,7 +70,7 @@ async function run(browser, width) {
   const go = async () => { await page.locator('[data-scfit-go]').click(); await page.waitForTimeout(100); };
   await page.locator('.scfit__open').click();
   ok(await dlg.isVisible(), 'Find my size opens');
-  ok((await page.locator('.scfit__f:not([hidden])').count()) === 4, 'Weight + Bust / Waist / Hips fields');
+  ok((await page.locator('[data-scfit-only="body"] .scfit__f:not([hidden])').count()) === 4, 'Weight + Bust / Waist / Hips fields');
   ok((await page.locator('[data-scfit-t] tbody tr').count()) === 7 && (await page.locator('[data-scfit-t] thead th').count()) === 6, 'complete size chart: 7 sizes x 6 columns');
   await go();
   ok(await page.locator('[data-scfit-err]').isVisible() && (await page.getAttribute('[data-scfit-w]', 'aria-invalid')) === 'true', 'no weight → asks for it');

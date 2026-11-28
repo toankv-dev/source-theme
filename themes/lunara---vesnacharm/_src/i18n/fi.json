@@ -277,6 +277,7 @@
   "Body measurements": "Vartalon mitat",
   "Complete Size Chart": "Täydellinen kokotaulukko",
   "Swipe to view": "Pyyhkäise nähdäksesi",
+  "Size system": "Kokojärjestelmä",
   "Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240": "Koko | US | Rinta (in) | Vyötärö (in) | Lantio (in) | Paino (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240",
   "Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32–34 | 25–27 | 35–37 | 95–110\nS | 2–4 | 35–37 | 28–30 | 38–40 | 110–125\nM | 6–8 | 38–40 | 31–33 | 41–43 | 125–140\nL | 10–12 | 41–43 | 34–36 | 44–46 | 140–160\nXL | 14–16 | 44–46 | 37–39 | 47–49 | 160–180\n2XL | 18–20 | 47–49 | 40–42 | 50–52 | 180–205\n3XL | 22–24 | 50–52 | 43–45 | 53–55 | 205–240": "Koko | US | Rinta (in) | Vyötärö (in) | Lantio (in) | Paino (lbs)\nXS | 0 | 32–34 | 25–27 | 35–37 | 95–110\nS | 2–4 | 35–37 | 28–30 | 38–40 | 110–125\nM | 6–8 | 38–40 | 31–33 | 41–43 | 125–140\nL | 10–12 | 41–43 | 34–36 | 44–46 | 140–160\nXL | 14–16 | 44–46 | 37–39 | 47–49 | 160–180\n2XL | 18–20 | 47–49 | 40–42 | 50–52 | 180–205\n3XL | 22–24 | 50–52 | 43–45 | 53–55 | 205–240",
   "Load more": "Lataa lisää",
@@ -568,5 +569,9 @@
   "We couldn't find an order with those details. Please check the link and try again.": "Emme löytäneet tilausta näillä tiedoilla. Tarkista linkki ja yritä uudelleen.",
   "Something went wrong. Please try again in a moment.": "Jokin meni pieleen. Yritä hetken kuluttua uudelleen.",
   "Network error. Please check your connection and try again.": "Verkkovirhe. Tarkista yhteytesi ja yritä uudelleen.",
-  "Show full review": "Näytä koko arvostelu"
+  "Show full review": "Näytä koko arvostelu",
+  "{{product.reviews.summary.average_rating}} out of 5 stars, {{product.reviews.summary.total_count}} reviews{{#if section.settings.rating_sold}}, {{section.settings.rating_sold}} {{#if section.settings.rating_sold_label}}{{section.settings.rating_sold_label}}{{else}}Sold{{/if}}{{/if}}": "{{product.reviews.summary.average_rating}} / 5 tähteä, {{product.reviews.summary.total_count}} arvostelua{{#if section.settings.rating_sold}}, {{section.settings.rating_sold}} {{#if section.settings.rating_sold_label}}{{section.settings.rating_sold_label}}{{else}}myyty{{/if}}{{/if}}",
+  "Reviews": "arvostelua",
+  "Sold": "myyty",
+  "Filter reviews": "Suodata arvostelut"
 }

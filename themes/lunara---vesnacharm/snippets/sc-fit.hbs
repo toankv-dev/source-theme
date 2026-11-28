@@ -10,14 +10,27 @@
       Bra (user 2026-11-23): setting "finder" = auto | body | bra. Auto: a chart whose header after the first cell is band
       numbers (SIZE CUP | 34 | 36 …) and whose first column is cups (B, C, D …) asks Band Size + Cup Size (2 selects, no
       units, no weight line), shows the size of that cell at once and marks it in the chart; any other chart = weight finder.
-      Elements marked data-scfit-only="body|bra" belong to one finder only (JS hides the other). --}}
-<div class="scfit" data-scfit data-mode="{{#if settings.finder}}{{settings.finder}}{{else}}auto{{/if}}" data-b-line="{{#if settings.bra_line}}{{settings.bra_line}}{{else}}Band {band} · Cup {cup}, from our size chart.{{/if}}" data-b-none="{{#if settings.bra_none}}{{settings.bra_none}}{{else}}This band and cup are not in our size chart.{{/if}}" data-unit="{{#if (eq settings.units "metric")}}metric{{else}}imperial{{/if}}" data-option="{{#if settings.option_name}}{{settings.option_name}}{{else}}Size{{/if}}" data-chart="{{settings.rec_chart}}" data-l-weight="{{#if settings.rec_weight}}{{settings.rec_weight}}{{else}}Weight{{/if}}" data-l-bust="{{#if settings.rec_bust}}{{settings.rec_bust}}{{else}}Bust{{/if}}" data-l-waist="{{#if settings.rec_waist}}{{settings.rec_waist}}{{else}}Waist{{/if}}" data-l-hip="{{#if settings.rec_hips}}{{settings.rec_hips}}{{else}}Hips{{/if}}" data-select="{{#if settings.rec_select}}{{settings.rec_select}}{{else}}Select {size}{{/if}}" data-one="{{#if settings.rec_l_one}}{{settings.rec_l_one}}{{else}}{size} fits your {measures}.{{/if}}" data-two="{{#if settings.rec_l_two}}{{settings.rec_l_two}}{{else}}You land between {a} and {b}: {a} fits snug, {b} gives more room.{{/if}}" data-edge="{{#if settings.rec_l_edge}}{{settings.rec_l_edge}}{{else}}Your {measure} is outside our chart, so {size} is the closest size.{{/if}}">
+      Elements marked data-scfit-only="body|bra" belong to one finder only (JS hides the other).
+      Country tabs (user 2026-11-27): settings bra_tab1..3 + bra_chart1..3 (data-t1..3 / data-c1..3) = one bra chart per
+      country; filled ones become tabs (2+) above the selects and replace rec_chart for the bra finder. Lines of band numbers
+      under a chart's first line (EU | 75 | 80 …) = extra header rows (the user's picture 1). Same shape in every tab → the
+      result line lists them all ("EU 85C · US 38C · UK 38C") and a tab switch keeps the band / cup position. --}}
+<div class="scfit" data-scfit{{#if settings.gap_top}}{{#unless (eq settings.gap_top "auto")}} data-gt{{/unless}}{{/if}}{{#if settings.gap_bottom}}{{#unless (eq settings.gap_bottom "auto")}} data-gb{{/unless}}{{/if}} style="--scfit-gt:{{settings.gap_top}};--scfit-gb:{{settings.gap_bottom}}" data-t1="{{#if settings.bra_tab1}}{{settings.bra_tab1}}{{else}}EU{{/if}}" data-c1="{{settings.bra_chart1}}" data-t2="{{#if settings.bra_tab2}}{{settings.bra_tab2}}{{else}}US{{/if}}" data-c2="{{settings.bra_chart2}}" data-t3="{{#if settings.bra_tab3}}{{settings.bra_tab3}}{{else}}UK{{/if}}" data-c3="{{settings.bra_chart3}}" data-mode="{{#if settings.finder}}{{settings.finder}}{{else}}auto{{/if}}" data-b-line="{{#if settings.bra_line}}{{settings.bra_line}}{{else}}Band {band} · Cup {cup}, from our size chart.{{/if}}" data-b-none="{{#if settings.bra_none}}{{settings.bra_none}}{{else}}This band and cup are not in our size chart.{{/if}}" data-unit="{{#if (eq settings.units "metric")}}metric{{else}}imperial{{/if}}" data-option="{{#if settings.option_name}}{{settings.option_name}}{{else}}Size{{/if}}" data-chart="{{settings.rec_chart}}" data-l-weight="{{#if settings.rec_weight}}{{settings.rec_weight}}{{else}}Weight{{/if}}" data-l-bust="{{#if settings.rec_bust}}{{settings.rec_bust}}{{else}}Bust{{/if}}" data-l-waist="{{#if settings.rec_waist}}{{settings.rec_waist}}{{else}}Waist{{/if}}" data-l-hip="{{#if settings.rec_hips}}{{settings.rec_hips}}{{else}}Hips{{/if}}" data-select="{{#if settings.rec_select}}{{settings.rec_select}}{{else}}Select {size}{{/if}}" data-one="{{#if settings.rec_l_one}}{{settings.rec_l_one}}{{else}}{size} fits your {measures}.{{/if}}" data-two="{{#if settings.rec_l_two}}{{settings.rec_l_two}}{{else}}You land between {a} and {b}: {a} fits snug, {b} gives more room.{{/if}}" data-edge="{{#if settings.rec_l_edge}}{{settings.rec_l_edge}}{{else}}Your {measure} is outside our chart, so {size} is the closest size.{{/if}}">
 <style>
   /* Measured on the user's screenshot of shape-curve.com's size recommender (1566 px): dialog 980 px, r24; eyebrow 11px/700
      ls 1.5px; title ~36px/800; toggle 214 x 40; fields 320 x 47 r8 on a 2-column grid; button 656 x 50 r8 #8061c4; chart
      card r12 border #ddd3f2; table head #a98ae8 with the first cell #8061c4, rows ~36 px. Violets → the main colour and
      tints of it; font = the theme's Poppins. */
   .scfit{--fit-hl:var(--sc-hl,#790236);--fit-ink:#1f1a22;--fit-mute:#77727c;--fit-t3:#fdfafb;--fit-t10:#f2e6eb;--fit-t18:#ead3dd;--fit-head:#9b4268;--fit-bg:#fbf7f9;--fit-glow:#f0c6d8;margin:4px 0 0;letter-spacing:normal}
+  /* Space above / below (settings gap_top / gap_bottom, user 2026-11-27): "auto" prints no data-gt / data-gb = the old look.
+     A size = the whole gap: a hidden Variant picker block right above (Kaching shows the pickers; its wrapper keeps
+     --margin-top 2.4rem from product.hbs) and the next block's top margin step aside (Kaching: .lu-kaching 15 / 18 px AND
+     .kaching-bundles__block 15 px, which collapses out through its parents: both must go). */
+  .scfit[data-gt]{margin-top:var(--scfit-gt)}
+  .scfit[data-gb]{margin-bottom:var(--scfit-gb)}
+  [data-ms-pdp]:has([data-lu-kaching]) .product__info-container>.lu-pb--variant_picker:has(+.lu-pb--sc_fit>.scfit[data-gt]),.sc-skin [data-ms-pdp] .product__info-container>.lu-pb--variant_picker:has(+.lu-pb--sc_fit>.scfit[data-gt]){--margin-top:0}
+  .product__info-container>.lu-pb--sc_fit:has(>.scfit[data-gb])+.lu-pb{--margin-top:0}
+  .lu-pb--sc_fit:has(>.scfit[data-gb])+.lu-pb>:first-child,.lu-pb--sc_fit:has(>.scfit[data-gb])+.lu-pb :is(.lu-kaching,.kaching-bundles__block){margin-top:0!important}
   @supports (background:color-mix(in srgb,red 50%,#fff)){.scfit{--fit-t3:color-mix(in srgb,var(--fit-hl) 2%,#fff);--fit-t10:color-mix(in srgb,var(--fit-hl) 10%,#fff);--fit-t18:color-mix(in srgb,var(--fit-hl) 18%,#fff);--fit-head:color-mix(in srgb,var(--fit-hl) 75%,#fff);--fit-bg:color-mix(in srgb,var(--fit-hl) 3%,#fff);--fit-glow:color-mix(in srgb,var(--fit-hl) 25%,#fff)}}
   .scfit,.scfit *{box-sizing:border-box}
   .scfit [hidden]{display:none!important}
@@ -93,6 +106,27 @@
   .scfit__chev{position:absolute;top:50%;right:14px;width:16px;height:16px;transform:translateY(-50%);color:var(--fit-hl);pointer-events:none}
   .scfit tr.is-hit td.is-on{background:var(--fit-hl);color:#fff}
   .scfit th.is-on{background:var(--fit-hl)}
+  /* country tabs (user's picture 2: pills on the left above the selects, the open one tinted) */
+  .scfit__tabs{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 0}
+  .scfit__tab{min-width:56px;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:none;color:var(--fit-mute);font:inherit;font-size:14px;font-weight:700;letter-spacing:.3px;cursor:pointer;transition:background .2s,color .2s}
+  .scfit__tab:hover{color:var(--fit-ink)}
+  .scfit__tab[aria-pressed="true"]{background:var(--fit-t10);color:var(--fit-ink)}
+  .scfit__tab:focus-visible{outline:2px solid var(--fit-hl);outline-offset:2px}
+  .scfit__tabs:not([hidden]) + .scfit__grid--bra{margin-top:12px}
+  /* bra chart as the user's picture 1: first header row solid, extra header rows (EU …) lighter, cup column tinted,
+     zebra rows; the picked cell solid, its column head underlined */
+  .scfit[data-bra] table{font-size:14px;line-height:18px}
+  .scfit[data-bra] thead tr:first-child th{background:var(--fit-hl)}
+  .scfit[data-bra] tr.scfit__h2 > th{background:var(--fit-head);border-top:1px solid rgba(255,255,255,.25)}
+  .scfit[data-bra] th{padding:12px 8px;font-size:15px}
+  .scfit[data-bra] td{padding:12px 8px}
+  .scfit[data-bra] tr:nth-child(even) > td{background:var(--fit-bg)}
+  .scfit[data-bra] tr > td:first-child{background:var(--fit-t10);color:var(--fit-hl);font-weight:700}
+  .scfit[data-bra] th.is-on{box-shadow:inset 0 -3px 0 rgba(255,255,255,.9)}
+  .scfit[data-bra] tr.is-hit > td{background:var(--fit-t18);color:var(--fit-hl);font-weight:700}
+  .scfit[data-bra] tr.is-hit > td.is-on{background:var(--fit-hl);color:#fff}
+  /* the cup column stays while the chart swipes on phones */
+  .scfit[data-bra] tr > :first-child{position:sticky;left:0;z-index:1}
   @media (max-width:749px){
     .scfit__open{display:flex;width:100%}
     .scfit__open-in{width:100%}
@@ -116,6 +150,7 @@
       <h2 class="scfit__title" id="scfit-title">{{#if settings.rec_title}}{{settings.rec_title}}{{else}}Find Your Best Size{{/if}}</h2>
       <p class="scfit__sub" data-scfit-only="body"><strong>{{#if settings.rec_required}}{{settings.rec_required}}{{else}}Weight is required.{{/if}}</strong> {{#if settings.rec_optional}}{{settings.rec_optional}}{{else}}Other measurements are optional.{{/if}}</p>
       <p class="scfit__sub" data-scfit-only="bra" hidden>{{#if settings.bra_sub}}{{settings.bra_sub}}{{else}}Pick your usual band and cup size.{{/if}}</p>
+      <div class="scfit__tabs" role="group" aria-label="Size system" data-scfit-tabs hidden></div>
       <div class="scfit__grid scfit__grid--bra" data-scfit-only="bra" hidden>
         <label class="scfit__f"><span class="scfit__lab"><span>{{#if settings.bra_band}}{{settings.bra_band}}{{else}}Band Size{{/if}}</span></span><span class="scfit__box"><select class="scfit__in scfit__sel" data-scfit-band><option value="">{{#if settings.bra_pick}}{{settings.bra_pick}}{{else}}Select{{/if}}</option></select><svg class="scfit__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></label>
         <label class="scfit__f"><span class="scfit__lab"><span>{{#if settings.bra_cup}}{{settings.bra_cup}}{{else}}Cup Size{{/if}}</span></span><span class="scfit__box"><select class="scfit__in scfit__sel" data-scfit-cup><option value="">{{#if settings.bra_pick}}{{settings.bra_pick}}{{else}}Select{{/if}}</option></select><svg class="scfit__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></label>
@@ -147,9 +182,22 @@
   var A = function (k, d) { var v = root.getAttribute('data-' + k); return v == null || v === '' ? d : v; };
   var dlg = q('dialog'), scope = root.closest('[data-ms-pdp]') || root.closest('section') || document;
   var DEF = 'Size | US | Bust (in) | Waist (in) | Hip (in) | Weight (lbs)\nXS | 0 | 32-34 | 25-27 | 35-37 | 95-110\nS | 2-4 | 35-37 | 28-30 | 38-40 | 110-125\nM | 6-8 | 38-40 | 31-33 | 41-43 | 125-140\nL | 10-12 | 41-43 | 34-36 | 44-46 | 140-160\nXL | 14-16 | 44-46 | 37-39 | 47-49 | 160-180\n2XL | 18-20 | 47-49 | 40-42 | 50-52 | 180-205\n3XL | 22-24 | 50-52 | 43-45 | 53-55 | 205-240';
-  var lines = A('chart', DEF).split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
-  var head = lines[0].split('|').map(function (s) { return s.trim(); });
-  var rows = lines.slice(1).map(function (l) { return l.split('|').map(function (s) { return s.trim(); }); }).filter(function (r) { return r[0]; });
+  // a chart: first line = column names, then one row per line; under a first line of band numbers, more lines of band
+  // numbers only (EU | 75 | 80 …) = extra header rows (one chart for two countries)
+  var BAND = /^(?:band\s*)?\d{2,3}\b/i;
+  function parse(txt) {
+    var ls = String(txt || '').split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+    if (!ls.length) return null;
+    var sp = function (l) { return l.split('|').map(function (s) { return s.trim(); }); };
+    var h = sp(ls[0]), ex = [], i = 1, bc = [];
+    for (var c = 1; c < h.length; c++) if (BAND.test(h[c])) bc.push(c);
+    while (bc.length && i < ls.length) { var r = sp(ls[i]); if (r.length > 1 && r.slice(1).every(function (x) { return !x || /^\d{2,3}$/.test(x); })) { ex.push(r); i++; } else break; }
+    return { head: h, extra: ex, bands: bc, rows: ls.slice(i).map(sp).filter(function (r) { return r[0]; }) };
+  }
+  var MODE = A('mode', 'auto'), TABS = [], tab = 0;
+  if (MODE !== 'body') for (var ti = 1; ti <= 3; ti++) { var pt = parse(A('c' + ti, '')); if (pt && pt.bands.length && pt.rows.length) { pt.name = A('t' + ti, ''); TABS.push(pt); } }
+  var P = TABS.length ? TABS[0] : parse(A('chart', DEF)) || parse(DEF);
+  var head = P.head, rows = P.rows, extra = P.extra;
   var col = function (re) { for (var i = 1; i < head.length; i++) if (re.test(head[i])) return i; return -1; };
   // column names in EN / DE / FR / NL / SV / NO / FI (language copies by _src/build-lang.js; FR "Taille" alone = size)
   var C = { w: col(/weight|gewicht|poids|vikt|vekt|paino/i), bust: col(/bust|chest|brust|oberweite|poitrine|borst|byst|bryst|rinta/i), waist: col(/waist|taille\s*\(|tour de taille|midja|\bliv\b|vyötärö/i), hip: col(/hip|hüft|hanche|heup|höft|hofte|lantio/i) };
@@ -160,14 +208,19 @@
     if (m) return [+m[1], +m[2]];
     var n = parseFloat(s); return isNaN(n) ? null : [n, n];
   }
-  function key(v) { var t = String(v).trim().toUpperCase().split(/[\s(\/,]/)[0]; return t === 'XXL' ? '2XL' : t === 'XXXL' ? '3XL' : t === 'XXXXL' ? '4XL' : t; }
-  // ---- which finder: bra = Band (header columns) x Cup (first column); auto = no Weight column and >= 2 band numbers
-  var MODE = A('mode', 'auto'), bandCols = [];
-  for (var bi = 1; bi < head.length; bi++) if (MODE === 'bra' || /^(?:band\s*)?\d{2,3}\b/i.test(head[bi])) bandCols.push(bi);
-  var BRA = MODE === 'bra' ? bandCols.length > 0 : MODE !== 'body' && C.w < 0 && bandCols.length >= 2;
+  // "S*" (a chart's footnote mark) = S
+  function key(v) { var t = String(v).trim().toUpperCase().split(/[\s(\/,*]/)[0]; return t === 'XXL' ? '2XL' : t === 'XXXL' ? '3XL' : t === 'XXXXL' ? '4XL' : t; }
+  // ---- which finder: bra = Band (header columns) x Cup (first column); auto = no Weight column and >= 2 band numbers;
+  //      filled country tabs = bra
+  var bandCols = [];
+  if (TABS.length) bandCols = P.bands.slice();
+  else for (var bi = 1; bi < head.length; bi++) if (MODE === 'bra' || BAND.test(head[bi])) bandCols.push(bi);
+  var BRA = TABS.length ? true : MODE === 'bra' ? bandCols.length > 0 : MODE !== 'body' && C.w < 0 && bandCols.length >= 2;
+  if (!BRA) extra = [];
   qa('[data-scfit-only]').forEach(function (el) { el.hidden = el.getAttribute('data-scfit-only') !== (BRA ? 'bra' : 'body'); });
+  if (BRA) root.setAttribute('data-bra', '');
   var SIZES = BRA ? [] : rows.map(function (r) { return key(r[0]); });
-  if (BRA) rows.forEach(function (r) { bandCols.forEach(function (c) { var k = key(r[c] == null ? '' : r[c]); if (k && !/^[-–]$/.test(k) && SIZES.indexOf(k) < 0) SIZES.push(k); }); });
+  if (BRA) (TABS.length ? TABS : [{ rows: rows, bands: bandCols }]).forEach(function (p) { p.rows.forEach(function (r) { p.bands.forEach(function (c) { var k = key(r[c] == null ? '' : r[c]); if (k && !/^[-–]$/.test(k) && SIZES.indexOf(k) < 0) SIZES.push(k); }); }); });
   var hitCol = -1;
   // fields without a chart column are hidden (Weight is always there)
   ['bust', 'waist', 'hip'].forEach(function (k) { if (C[k] < 0) { var f = q('[data-scfit-f="' + k + '"]'); if (f) f.hidden = true; } });
@@ -188,7 +241,9 @@
   var hits = [];
   function drawChart() {
     var on = ' class="is-on"';
-    var t = '<table><thead><tr>' + head.map(function (h, c) { return '<th scope="col"' + (c === hitCol ? on : '') + '>' + esc(title(h, c)) + '</th>'; }).join('') + '</tr></thead><tbody>'
+    var t = '<table><thead><tr>' + head.map(function (h, c) { return '<th scope="col"' + (c === hitCol ? on : '') + '>' + esc(title(h, c)) + '</th>'; }).join('') + '</tr>'
+      + extra.map(function (r) { return '<tr class="scfit__h2">' + head.map(function (h, c) { return '<th scope="col"' + (c === hitCol ? on : '') + '>' + esc(r[c] == null ? '' : r[c]) + '</th>'; }).join('') + '</tr>'; }).join('')
+      + '</thead><tbody>'
       + rows.map(function (r, i) { var hit = hits.indexOf(i) > -1; return '<tr' + (hit ? ' class="is-hit"' : '') + '>' + head.map(function (h, c) { return '<td' + (hit && c === hitCol ? on : '') + '>' + esc(cell(r[c] == null ? '' : r[c], c)) + '</td>'; }).join('') + '</tr>'; }).join('')
       + '</tbody></table>';
     q('[data-scfit-t]').innerHTML = t;
@@ -252,11 +307,12 @@
     var c = +bandEl.value, r = +cupEl.value, v = String(rows[r][c] == null ? '' : rows[r][c]).trim(), ok = !!v && !/^[-–]$/.test(v);
     hits = [r]; hitCol = c;
     q('[data-scfit-size]').textContent = ok ? v : '–';
-    q('[data-scfit-line]').textContent = A(ok ? 'b-line' : 'b-none', '').replace(/\{band\}/g, head[c]).replace(/\{cup\}/g, rows[r][0]).replace(/\{size\}/g, v);
+    var eq = ok ? same(c, r) : '';
+    q('[data-scfit-line]').textContent = eq || A(ok ? 'b-line' : 'b-none', '').replace(/\{band\}/g, head[c]).replace(/\{cup\}/g, cupName(rows[r][0])).replace(/\{size\}/g, v);
     var box = q('[data-scfit-picks]'), name = optionName(); box.innerHTML = '';
     // the pick button only when the product sells that size (else it would do nothing)
     if (ok && name && (options()[name] || []).some(function (x) { return key(x) === key(v); })) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'scfit__pick'; b.textContent = A('select', 'Select {size}').replace(/\{size\}/g, v);
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'scfit__pick'; b.textContent = A('select', 'Select {size}').replace(/\{size\}/g, v.replace(/\s*\*+$/, ''));
       b.addEventListener('click', function () { apply(key(v)); if (dlg.open) dlg.close(); });
       box.appendChild(b);
     }
@@ -265,10 +321,43 @@
     var tw = q('[data-scfit-t]'), td = tw.querySelector('td.is-on');
     if (td && tw.scrollWidth > tw.clientWidth) tw.scrollLeft = Math.max(0, td.offsetLeft - (tw.clientWidth - td.offsetWidth) / 2);
   }
-  if (BRA) {
+  // "CUP C" → "C" in the picker and the lines
+  function cupName(s) { return String(s).replace(/^cups?\s*/i, '') || String(s); }
+  // the same band / cup in every country: tabs of the same shape, else the chart's extra header rows (US/UK 38C · EU 85C)
+  function same(c, r) {
+    var bi = bandCols.indexOf(c), out = [];
+    if (TABS.length > 1) TABS.forEach(function (p) { if (p.bands.length === bandCols.length && p.rows.length === rows.length) out.push((p.name ? p.name + ' ' : '') + p.head[p.bands[bi]] + cupName(p.rows[r][0])); });
+    else if (extra.length) [head].concat(extra).forEach(function (h) { if (h[c]) out.push((h[0] ? h[0] + ' ' : '') + h[c] + cupName(rows[r][0])); });
+    return out.length > 1 ? out.join(' · ') : '';
+  }
+  function fillBra() {
+    [bandEl, cupEl].forEach(function (s) { while (s.options.length > 1) s.remove(1); });
     fill(bandEl, bandCols.map(function (c) { return { v: c, t: head[c] }; }));
-    fill(cupEl, rows.map(function (r, i) { return { v: i, t: r[0] }; }));
+    fill(cupEl, rows.map(function (r, i) { return { v: i, t: cupName(r[0]) }; }));
+  }
+  // a tab = that country's chart; the band / cup keep their position when the new chart has it
+  function setTab(i) {
+    if (i === tab) return;
+    var ob = bandEl.value === '' ? -1 : bandCols.indexOf(+bandEl.value), oc = cupEl.value === '' ? -1 : +cupEl.value;
+    tab = i; head = TABS[i].head; rows = TABS[i].rows; extra = TABS[i].extra; bandCols = TABS[i].bands.slice();
+    fillBra();
+    if (ob > -1 && ob < bandCols.length) bandEl.value = String(bandCols[ob]);
+    if (oc > -1 && oc < rows.length) cupEl.value = String(oc);
+    qa('.scfit__tab').forEach(function (b, j) { b.setAttribute('aria-pressed', String(j === i)); });
+    braFind();
+  }
+  if (BRA) {
+    fillBra();
     bandEl.addEventListener('change', braFind); cupEl.addEventListener('change', braFind);
+    var tabsEl = q('[data-scfit-tabs]');
+    if (TABS.length > 1) {
+      TABS.forEach(function (p, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'scfit__tab'; b.textContent = p.name || String(i + 1);
+        b.setAttribute('aria-pressed', String(i === 0)); b.addEventListener('click', function () { setTab(i); });
+        tabsEl.appendChild(b);
+      });
+      tabsEl.hidden = false;
+    }
   }
 
   // ---- the size option: the setting's name, else the option whose values match the chart's sizes
